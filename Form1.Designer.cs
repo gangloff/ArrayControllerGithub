@@ -432,10 +432,6 @@
             this.label48 = new System.Windows.Forms.Label();
             this.PMTcountGraphClearButton = new System.Windows.Forms.Button();
             this.label49 = new System.Windows.Forms.Label();
-            this.groupBox33 = new System.Windows.Forms.GroupBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.PMTBackgroundAvgTextBox = new System.Windows.Forms.TextBox();
-            this.PMTBackgroundButton = new System.Windows.Forms.Button();
             this.CavityScanStart = new System.Windows.Forms.Button();
             this.BfieldScanStart = new System.Windows.Forms.Button();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -449,7 +445,6 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor1 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.TickleScanStart = new System.Windows.Forms.Button();
-            this.GPIBClearCheck = new System.Windows.Forms.CheckBox();
             this.instrumentControlStrip1 = new NationalInstruments.UI.WindowsForms.InstrumentControlStrip();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor6 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
@@ -563,7 +558,6 @@
             this.groupBox48.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PMTcountGraph)).BeginInit();
-            this.groupBox33.SuspendLayout();
             this.instrumentControlStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrAmpLog)).BeginInit();
@@ -2631,7 +2625,8 @@
             "PMT",
             "Camera",
             "PMT & Camera",
-            "Dev3AI2"});
+            "Dev3AI2",
+            "Correlator:Sum"});
             this.TickleScanComboBox.Location = new System.Drawing.Point(10, 19);
             this.TickleScanComboBox.Name = "TickleScanComboBox";
             this.TickleScanComboBox.Size = new System.Drawing.Size(121, 21);
@@ -4736,7 +4731,7 @@
             this.label48.AutoSize = true;
             this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label48.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label48.Location = new System.Drawing.Point(187, 463);
+            this.label48.Location = new System.Drawing.Point(256, 467);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(131, 24);
             this.label48.TabIndex = 143;
@@ -4764,47 +4759,6 @@
             this.label49.Size = new System.Drawing.Size(168, 24);
             this.label49.TabIndex = 149;
             this.label49.Text = "PMT Live Counts";
-            // 
-            // groupBox33
-            // 
-            this.groupBox33.Controls.Add(this.label44);
-            this.groupBox33.Controls.Add(this.PMTBackgroundAvgTextBox);
-            this.groupBox33.Controls.Add(this.PMTBackgroundButton);
-            this.groupBox33.Location = new System.Drawing.Point(300, 446);
-            this.groupBox33.Name = "groupBox33";
-            this.groupBox33.Size = new System.Drawing.Size(193, 47);
-            this.groupBox33.TabIndex = 150;
-            this.groupBox33.TabStop = false;
-            this.groupBox33.Text = "Background Counts";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label44.Location = new System.Drawing.Point(95, 11);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(87, 13);
-            this.label44.TabIndex = 142;
-            this.label44.Text = "Avg Background";
-            // 
-            // PMTBackgroundAvgTextBox
-            // 
-            this.PMTBackgroundAvgTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.PMTBackgroundAvgTextBox.Location = new System.Drawing.Point(122, 19);
-            this.PMTBackgroundAvgTextBox.Name = "PMTBackgroundAvgTextBox";
-            this.PMTBackgroundAvgTextBox.ReadOnly = true;
-            this.PMTBackgroundAvgTextBox.Size = new System.Drawing.Size(60, 20);
-            this.PMTBackgroundAvgTextBox.TabIndex = 142;
-            // 
-            // PMTBackgroundButton
-            // 
-            this.PMTBackgroundButton.Location = new System.Drawing.Point(6, 14);
-            this.PMTBackgroundButton.Name = "PMTBackgroundButton";
-            this.PMTBackgroundButton.Size = new System.Drawing.Size(107, 29);
-            this.PMTBackgroundButton.TabIndex = 142;
-            this.PMTBackgroundButton.Text = "Background Scan";
-            this.PMTBackgroundButton.UseVisualStyleBackColor = true;
-            this.PMTBackgroundButton.Click += new System.EventHandler(this.PMTBackgroundButton_Click);
             // 
             // CavityScanStart
             // 
@@ -4906,16 +4860,6 @@
             this.TickleScanStart.Text = "Start *Tickle* Scan";
             this.TickleScanStart.UseVisualStyleBackColor = false;
             this.TickleScanStart.Click += new System.EventHandler(this.TickleScanStart_Click);
-            // 
-            // GPIBClearCheck
-            // 
-            this.GPIBClearCheck.AutoSize = true;
-            this.GPIBClearCheck.Location = new System.Drawing.Point(405, 14);
-            this.GPIBClearCheck.Name = "GPIBClearCheck";
-            this.GPIBClearCheck.Size = new System.Drawing.Size(112, 17);
-            this.GPIBClearCheck.TabIndex = 154;
-            this.GPIBClearCheck.Text = "Send GPIB Clear?";
-            this.GPIBClearCheck.UseVisualStyleBackColor = true;
             // 
             // instrumentControlStrip1
             // 
@@ -5114,11 +5058,9 @@
             this.Controls.Add(this.corrMuLog);
             this.Controls.Add(this.clrCorrLog);
             this.Controls.Add(this.clearScanButton);
-            this.Controls.Add(this.GPIBClearCheck);
             this.Controls.Add(this.TickleScanStart);
             this.Controls.Add(this.BfieldScanStart);
             this.Controls.Add(this.CavityScanStart);
-            this.Controls.Add(this.groupBox33);
             this.Controls.Add(this.label49);
             this.Controls.Add(this.PMTcountGraphClearButton);
             this.Controls.Add(this.label48);
@@ -5285,8 +5227,6 @@
             this.groupBox48.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PMTcountGraph)).EndInit();
-            this.groupBox33.ResumeLayout(false);
-            this.groupBox33.PerformLayout();
             this.instrumentControlStrip1.ResumeLayout(false);
             this.instrumentControlStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).EndInit();
@@ -5439,10 +5379,6 @@
         private System.Windows.Forms.Button PMTcountGraphClearButton;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.TabPage CavityScan;
-        private System.Windows.Forms.GroupBox groupBox33;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.TextBox PMTBackgroundAvgTextBox;
-        private System.Windows.Forms.Button PMTBackgroundButton;
         private System.Windows.Forms.GroupBox groupBox35;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label51;
@@ -5634,7 +5570,6 @@
         private System.Windows.Forms.Label label115;
         private System.Windows.Forms.TextBox correlatorBound2text;
         private System.Windows.Forms.Label label116;
-        private System.Windows.Forms.CheckBox GPIBClearCheck;
         private System.Windows.Forms.CheckBox TickleScanCheckbox;
         private NationalInstruments.UI.ScatterPlot scatterPlot2;
         private System.Windows.Forms.Label label117;

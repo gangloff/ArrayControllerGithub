@@ -13,6 +13,7 @@ namespace ArrayDACControl
     {
         //Thread
         public Thread theThread;
+        public string threadName;
         //helper variables for scans
         public int index;
         public int direction;
@@ -40,7 +41,7 @@ namespace ArrayDACControl
         public double Background;
 
         //constructor
-        public ThreadHelperClass()
+        public ThreadHelperClass(string theName)
         {
             index = 0;
             IsRunningFlag = false;
@@ -48,6 +49,7 @@ namespace ArrayDACControl
             flag = false;
             max = new double[1];
             min = new double[1];
+            threadName = theName;
         }
 
         //initialization methods for data variables

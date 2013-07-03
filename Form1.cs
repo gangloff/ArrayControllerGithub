@@ -48,7 +48,7 @@ namespace ArrayDACControl
         //thread definitions
         Thread CameraFormThread;
         //thread helper classes
-        ThreadHelperClass RepumperScanThreadHelper, BfieldScanThreadHelper, CavityScanThreadHelper, PMTBackgroundThreadHelper, ElectrodeScanThreadHelper, TickleScanThreadHelper;
+        ThreadHelperClass RepumperScanThreadHelper, BfieldScanThreadHelper, CavityScanThreadHelper, ElectrodeScanThreadHelper, TickleScanThreadHelper;
         ThreadHelperClass CameraThreadHelper, CameraTimeOutThreadHelper, IntensityGraphUpdateThreadHelper;
         ThreadHelperClass CorrelatorThreadHelper, SinglePMTReadThreadHelper, FluorLogThreadHelper;
         ThreadHelperClass ChopThreadHelper;
@@ -256,19 +256,18 @@ namespace ArrayDACControl
             theCorrelator = new Correlator();
 
             //ThreadHelper classes
-            RepumperScanThreadHelper = new ThreadHelperClass();
-            CameraThreadHelper = new ThreadHelperClass();
-            CameraTimeOutThreadHelper = new ThreadHelperClass();
-            BfieldScanThreadHelper = new ThreadHelperClass();
-            TickleScanThreadHelper = new ThreadHelperClass();
-            SinglePMTReadThreadHelper = new ThreadHelperClass();
-            CavityScanThreadHelper = new ThreadHelperClass();
-            PMTBackgroundThreadHelper = new ThreadHelperClass();
-            ElectrodeScanThreadHelper = new ThreadHelperClass();
-            IntensityGraphUpdateThreadHelper = new ThreadHelperClass();
-            CorrelatorThreadHelper = new ThreadHelperClass();
-            ChopThreadHelper = new ThreadHelperClass();
-            FluorLogThreadHelper = new ThreadHelperClass();
+            RepumperScanThreadHelper = new ThreadHelperClass("RepumperScan");
+            CameraThreadHelper = new ThreadHelperClass("Camera");
+            CameraTimeOutThreadHelper = new ThreadHelperClass("CameraTimeOut");
+            BfieldScanThreadHelper = new ThreadHelperClass("BfieldScan");
+            TickleScanThreadHelper = new ThreadHelperClass("TickleScan");
+            SinglePMTReadThreadHelper = new ThreadHelperClass("SinglePMTRead");
+            CavityScanThreadHelper = new ThreadHelperClass("CavityScan");
+            ElectrodeScanThreadHelper = new ThreadHelperClass("ElectrodeScan");
+            IntensityGraphUpdateThreadHelper = new ThreadHelperClass("IntensityGraphUpdate");
+            CorrelatorThreadHelper = new ThreadHelperClass("CorrelatorThread");
+            ChopThreadHelper = new ThreadHelperClass("ChopThread");
+            FluorLogThreadHelper = new ThreadHelperClass("FluorLog");
 
             stopwatch = new Stopwatch();
         }
@@ -914,7 +913,126 @@ namespace ArrayDACControl
             return theString;
         }
 
+        //Method to save scan data
+        private void SaveScanData(ThreadHelperClass threadHelper)
+        {
+            try
+            {
+                //get filename from control parameters tab
+                string[] filename = GetDataFilename(1);
 
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+
+                tw.WriteLine("Electrodes Settings");
+
+                for (int i = 0; i < DCrows; i++)
+                    tw.WriteLine("DC" + i + "\t" + DCsliders[i].Value);
+                tw.WriteLine("DX tot" + "\t" + DXSlider.Value);
+                tw.WriteLine("Array tot" + "\t" + ArrayTotalSlider.Value);
+                tw.WriteLine("DC vert dipole" + "\t" + DCVertDipoleSlider.Value);
+                tw.WriteLine("DC quad" + "\t" + DCVertQuadSlider.Value);
+                tw.WriteLine("Bias tot" + "\t" + TotalBiasSlider.Value);
+                tw.WriteLine("Trap Height" + "\t" + TrapHeightSlider.Value);
+                tw.WriteLine("Quadrupole Tilt" + "\t" + QuadrupoleTilt.Value);
+                tw.WriteLine("Quad Tilt Ratio" + "\t" + QuadTiltRatioSlider.Value);
+                tw.WriteLine("Transfer Cavity" + "\t" + TransferCavity.Value);
+                tw.WriteLine("Snake Inner Ratio" + "\t" + RatioSlider.Value);
+                for (int i = 0; i < DCrows; i++)
+                    tw.WriteLine("DC dx" + i + "\t" + DCslidersDx[i].Value);
+                for (int i = 0; i < DCrows; i++)
+                    tw.WriteLine("DC left" + i + "\t" + DCslidersLeft[i].Value);
+                for (int i = 0; i < DCrows; i++)
+                    tw.WriteLine("DC right" + i + "\t" + DCslidersRight[i].Value);
+
+                tw.WriteLine("Tickle Scan Parameters");
+                tw.WriteLine("Tickle Start Value" + "\t" + TickleScanStartValueTextbox.Text);
+                tw.WriteLine("Tickle End Value" + "\t" + TickleScanEndValueTextbox.Text);
+                tw.WriteLine("Number of Points" + "\t" + TickleScanNumPointsTextbox.Text);
+                tw.WriteLine("PMT Averaging" + "\t" + TickleScanPMTAveragingTextbox.Text);
+
+                tw.Close();
+
+                if (threadHelper.message == "PMT" || threadHelper.message == "PMT & Camera")
+                {
+                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " PMT Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+
+                    if (TickleScanCheckbox.Checked)
+                    {
+                        for (int i = 0; i < threadHelper.numPoints; i++)
+                            tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i] + "\t" + threadHelper.DoubleData[1, i] + "\t" + threadHelper.DoubleData[2, i]);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < threadHelper.numPoints; i++)
+                            tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i] + "\t" + threadHelper.DoubleData[1, i]);
+                    }
+
+                    tw.Close();
+                }
+
+                if (threadHelper.message == "Dev3AI2")
+                {
+                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " AI Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+
+                    for (int i = 0; i < threadHelper.numPoints; i++)
+                        tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i]);
+
+                    tw.Close();
+                }
+
+                if (threadHelper.message == "Camera" || threadHelper.message == "PMT & Camera")
+                {
+                    //Save fluorescence data
+                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " Fluorescence Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+
+                    //Write scan variable first
+                    for (int j = 0; j < threadHelper.numPoints - 1; j++)
+                    {
+                        tw.Write(threadHelper.DoubleScanVariable[0, j] + ",");
+                    }
+                    tw.WriteLine(threadHelper.DoubleScanVariable[0, threadHelper.numPoints - 1]);
+
+                    int NumPlot = CameraForm.FluorescenceGraph.Plots.Count;
+                    double[] data;
+                    for (int i = 0; i < NumPlot; i++)
+                    {
+                        data = CameraForm.FluorescenceGraph.Plots[i].GetYData();
+                        for (int j = 0; j < data.Length - 1; j++)
+                        {
+                            tw.Write(data[j] + ",");
+                        }
+                        tw.WriteLine(data[data.Length - 1]);
+                    }
+
+                    tw.Close();
+
+                    //Save position data
+
+                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " Position Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+
+                    //Write scan variable first
+                    for (int j = 0; j < threadHelper.numPoints - 1; j++)
+                    {
+                        tw.Write(threadHelper.DoubleScanVariable[0, j] + ",");
+                    }
+                    tw.WriteLine(threadHelper.DoubleScanVariable[0, threadHelper.numPoints - 1]);
+
+                    NumPlot = CameraForm.PositionGraph.Plots.Count;
+                    for (int i = 0; i < NumPlot; i++)
+                    {
+                        data = CameraForm.PositionGraph.Plots[i].GetYData();
+                        for (int j = 0; j < data.Length - 1; j++)
+                        {
+                            tw.Write(data[j] + ",");
+                        }
+                        tw.WriteLine(data[data.Length - 1]);
+                    }
+
+                    tw.Close();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
 
         //
         // FORM EVENTS, BUTTON CLICKS ETC.
@@ -1214,12 +1332,6 @@ namespace ArrayDACControl
                     this.Invoke(new MyDelegate(SinglePMTReadExecuteFrmCallback));
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                //if doing channel A x B on HP5316, need to send a reset command
-                if(GPIBClearCheck.Checked)
-                {
-                    gpibdevice.Clear();
-                }
             }
         }
 
@@ -1257,91 +1369,14 @@ namespace ArrayDACControl
         }
 
         //
-        //
-        // PMT BACKGROUND NEW
-        //
-        //
-
-        private void PMTBackgroundExecute()
-        {
-            while (PMTBackgroundThreadHelper.index < PMTBackgroundThreadHelper.numAverage && PMTBackgroundThreadHelper.IsRunningFlag)
-            {
-                //get reading from GPIB counter
-                gpibdevice.simpleRead(21);
-                //threading structure that tries to pass a message to the main thread
-                try
-                {
-                    this.Invoke(new MyDelegate(PMTBackgroundFrmCallback));
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                PMTBackgroundThreadHelper.index++;
-            }
-            //calculate average
-            PMTBackgroundThreadHelper.SingleDouble = PMTBackgroundThreadHelper.SingleDouble / PMTBackgroundThreadHelper.numAverage;
-            //update textbox
-            try
-            {
-                this.Invoke(new MyDelegate(PMTBackgroundFrmCallback2));
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
-
-        private void PMTBackgroundFrmCallback()
-        {
-            double display = gpibDoubleResult();
-            //display count
-            PMTcountBox.Text = display.ToString();
-            //update variable
-            PMTBackgroundThreadHelper.SingleDouble += display;
-        }
-        private void PMTBackgroundFrmCallback2()
-        {
-            //display count
-            PMTBackgroundAvgTextBox.Text = PMTBackgroundThreadHelper.SingleDouble.ToString();
-        }
-
-
-        private void PMTBackgroundButton_Click(object sender, EventArgs e)
-        {
-            if (!PMTBackgroundThreadHelper.IsRunningFlag)
-            {
-                PMTBackgroundThreadHelper.IsRunningFlag = true;
-                PMTBackgroundThreadHelper.theThread = new Thread(new ThreadStart(PMTBackgroundExecute));
-                PMTBackgroundThreadHelper.theThread.Name = "PMT Background thread";
-                PMTBackgroundThreadHelper.theThread.Priority = ThreadPriority.Normal;
-                PMTBackgroundButton.BackColor = System.Drawing.Color.Green;
-                //Define number of counts to average for background
-                PMTBackgroundThreadHelper.numAverage = 10;
-                //Set useful variables to 0
-                PMTBackgroundThreadHelper.index = 0;
-                PMTBackgroundThreadHelper.SingleDouble = 0;
-                //start scan thread
-                try
-                {
-                    PMTBackgroundThreadHelper.theThread.Start();
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-            }
-            else
-            {
-                PMTBackgroundThreadHelper.IsRunningFlag = false;
-                PMTBackgroundButton.BackColor = System.Drawing.Color.Gray;
-            }
-        }
-
-
-        //
         //CORRELATOR
         //
 
-        private void CorrelatorExecute()
+        private bool CorrelatorParameterInit()
         {
-
-
             //Initialize Correlator Parameters
             //theCorrelator = new Correlator();
-            if(chooseCode.Value)
+            if (chooseCode.Value)
             { theCorrelator.ok.P = int.Parse(correlatorPtext.Text); }
             else
             { theCorrelator.ok.P = int.Parse(correlatorPtextB.Text); };
@@ -1369,17 +1404,25 @@ namespace ArrayDACControl
                 { theCorrelator.ClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2B.Text) - 1, 0)); }
             }
 
+            theCorrelator.bound1 = int.Parse(correlatorBound1text.Text);
+            theCorrelator.bound2 = int.Parse(correlatorBound2text.Text);
 
             //Attempt Initialize
             bool auxInitBool = true;
-            if(chooseCode.Value)
+            if (chooseCode.Value)
             { auxInitBool = theCorrelator.Init(correlatorBitFilePath.Text); }
             else
             { auxInitBool = theCorrelator.Init(correlatorBitFilePathB.Text); }
 
-            if (auxInitBool)
-            {
+            //return status of init
+            return auxInitBool;
+        }
 
+        private void CorrelatorExecute()
+        {
+            //initialize parameters and attempt init, continue only if init returns true
+            if (CorrelatorParameterInit())
+            {
                 //post ID, errors
                 //post frequencies
                 try
@@ -1390,8 +1433,6 @@ namespace ArrayDACControl
 
                 while (CorrelatorThreadHelper.IsRunningFlag)
                 {
-                    theCorrelator.bound1 = int.Parse(correlatorBound1text.Text);
-                    theCorrelator.bound2 = int.Parse(correlatorBound2text.Text);
                     //get reading from Correlator FPGA
                     theCorrelator.GetResults();
 
@@ -1896,7 +1937,7 @@ namespace ArrayDACControl
             if (ElectrodeScanThreadHelper.IsRunningFlag)
             {
                 //save Scan Data
-                SaveElectrodeScanData();
+                SaveScanData(ElectrodeScanThreadHelper);
                 //go back to initial value
                 try
                 {
@@ -2344,7 +2385,6 @@ namespace ArrayDACControl
                 tw.WriteLine("End Value" + "\t" + CavityScanEndValueTextbox.Text);
                 tw.WriteLine("Number of Points" + "\t" + CavityScanNumPointsTextbox.Text);
                 tw.WriteLine("PMT Averaging" + "\t" + CavityScanPMTAveragingTextbox.Text);
-                tw.WriteLine("PMT Average Background" + "\t" + PMTBackgroundAvgTextBox.Text);
 
                 tw.Close();
 
@@ -2500,7 +2540,7 @@ namespace ArrayDACControl
             if (BfieldScanThreadHelper.IsRunningFlag)
             {
                 //save Scan Data
-                SaveBfieldScanData();
+                SaveScanData(BfieldScanThreadHelper);
             }
             //go back to initial value
             //reset button
@@ -2577,7 +2617,6 @@ namespace ArrayDACControl
                 tw.WriteLine("B field End Value" + "\t" + BfieldScanEndValueTextbox.Text);
                 tw.WriteLine("Number of Points" + "\t" + BfieldScanNumPointsTextbox.Text);
                 tw.WriteLine("PMT Averaging" + "\t" + BfieldScanPMTAveragingTextbox.Text);
-                tw.WriteLine("PMT Average Background" + "\t" + PMTBackgroundAvgTextBox.Text);
 
                 tw.Close();
 
@@ -2970,6 +3009,20 @@ namespace ArrayDACControl
                     CameraInitializeHelper();
                 }
             }
+
+            if (TickleScanThreadHelper.message == "Correlator:Sum")
+            {
+                //Initialize parameters to values entered under "Correlator" Tab  
+                //if correlator returns false for init, abort scan
+                if (!CorrelatorParameterInit())
+                {
+                    //end scan
+                    TickleScanThreadHelper.IsRunningFlag = false;
+                    //show message
+                    MessageBox.Show("Correlator Init returned false");
+                }
+            }
+
             //run scans
             while (TickleScanThreadHelper.index < (TickleScanThreadHelper.numPoints) && TickleScanThreadHelper.IsRunningFlag)
             {
@@ -3001,15 +3054,19 @@ namespace ArrayDACControl
                     //finalize single point average and standard deviation
                     TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index] = TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index] / TickleScanThreadHelper.numAverage;
                     TickleScanThreadHelper.DoubleData[1, TickleScanThreadHelper.index] = Math.Sqrt(TickleScanThreadHelper.DoubleData[1, TickleScanThreadHelper.index] / TickleScanThreadHelper.numAverage - Math.Pow(TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index], 2));
-                    //plot
-                    scatterGraph3.Plots[0].PlotXYAppend(TickleScanThreadHelper.DoubleScanVariable[0, TickleScanThreadHelper.index], TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index]);
-                    //display count
-                    try
+
+                    lock (TickleScanThreadHelper)
                     {
-                        this.Invoke(new MyDelegate(TickleScanFrmCallback4));
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(TickleScanFrmCallback4));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(TickleScanThreadHelper);
                     }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
                     //increase index
+                    TickleScanThreadHelper.index++;
 
                     //If the "interlock repumper" checkbox is checked, get background, turn off repumper, and take background
                     if (TickleScanCheckbox.Checked)
@@ -3043,20 +3100,42 @@ namespace ArrayDACControl
                 if (TickleScanThreadHelper.message == "Camera" || TickleScanThreadHelper.message == "PMT & Camera")
                 {
                     CameraAcquisitionHelper();
+                    //increase index
+                    TickleScanThreadHelper.index++;
                 }
 
                 // if AI selected, get reading from NI card
                 if (TickleScanThreadHelper.message == "Dev3AI2")
                 {
                     TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index] = Dev3AI2.ReadAnalogValue();
+                    //increase index
+                    TickleScanThreadHelper.index++;
                 }
 
-                TickleScanThreadHelper.index++;
+                // if Correlator:Sum selected, get reading from correlator, and sum bins
+                if (TickleScanThreadHelper.message == "Correlator:Sum")
+                {
+                    //Raise wire to tell FPGA to start collecting data
+
+                    //get reading from Correlator FPGA
+                    //Wait for Ch1 and Ch2 flags to be raised
+                    theCorrelator.GetResults();
+                    while (!(theCorrelator.feedflagCh1 && theCorrelator.feedflagCh2))
+                    {
+                        theCorrelator.GetResults();
+                    }
+                    //Lower wire to stop FPGA acquiring
+
+                    //Put sum of two channels data in Thread array
+                    TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+                    //increase index
+                    TickleScanThreadHelper.index++;
+                } 
             }
             if (TickleScanThreadHelper.IsRunningFlag)
             {
                 //save Scan Data
-                SaveTickleScanData();
+                SaveScanData(TickleScanThreadHelper);
             }
             //go back to initial value
             //reset button
@@ -3095,8 +3174,19 @@ namespace ArrayDACControl
         }
         private void TickleScanFrmCallback4()
         {
-            TickleScanLiveAverageTextbox.Text = TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index].ToString();
-            TickleScanLiveStdTextbox.Text = TickleScanThreadHelper.DoubleData[1, TickleScanThreadHelper.index].ToString();
+            lock (TickleScanThreadHelper)
+            {
+                try
+                {
+                    TickleScanLiveAverageTextbox.Text = TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index].ToString();
+                    TickleScanLiveStdTextbox.Text = TickleScanThreadHelper.DoubleData[1, TickleScanThreadHelper.index].ToString();
+                    //plot
+                    scatterGraph3.PlotXYAppend(TickleScanThreadHelper.DoubleScanVariable[0, TickleScanThreadHelper.index], TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                Monitor.PulseAll(TickleScanThreadHelper);
+            }
         }
         private void TickleScanFrmCallback5()
         {
@@ -3141,7 +3231,6 @@ namespace ArrayDACControl
                 tw.WriteLine("Tickle End Value" + "\t" + TickleScanEndValueTextbox.Text);
                 tw.WriteLine("Number of Points" + "\t" + TickleScanNumPointsTextbox.Text);
                 tw.WriteLine("PMT Averaging" + "\t" + TickleScanPMTAveragingTextbox.Text);
-                tw.WriteLine("PMT Average Background" + "\t" + PMTBackgroundAvgTextBox.Text);
 
                 tw.Close();
 
@@ -3938,6 +4027,7 @@ namespace ArrayDACControl
             }
 
         }
+
 
         //
         // CAMERA FORM THREAD
