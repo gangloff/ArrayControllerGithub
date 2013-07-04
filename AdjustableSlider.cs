@@ -79,7 +79,7 @@ namespace ArrayDACControl
                  {
                      min = System.Convert.ToDouble(textBox1.Text);
                  }
-                 catch (Exception ex) { MessageBox.Show(ex.Message); }
+                 catch (Exception ex) {MessageBox.Show(ex.Message); }
                  return min;
              }
              set

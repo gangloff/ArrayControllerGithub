@@ -33,9 +33,9 @@ namespace ArrayDACControl
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +56,7 @@ namespace ArrayDACControl
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(46, 20);
             this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "0";
             this.textBox1.LostFocus += new System.EventHandler(this.textBox_Enter);
             // 
             // textBox2
@@ -64,6 +65,7 @@ namespace ArrayDACControl
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(43, 20);
             this.textBox2.TabIndex = 3;
+            this.textBox2.Text = "0";
             this.textBox2.LostFocus += new System.EventHandler(this.textBox_Enter);
             // 
             // groupBox1
@@ -81,14 +83,16 @@ namespace ArrayDACControl
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
-            // textBox3
+            // label2
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.Info;
-            this.textBox3.Location = new System.Drawing.Point(315, 16);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(43, 20);
-            this.textBox3.TabIndex = 4;
-            this.textBox3.LostFocus += new System.EventHandler(this.textBox3_TextChanged);
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Firebrick;
+            this.label2.Location = new System.Drawing.Point(266, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "label2";
             // 
             // label1
             // 
@@ -101,16 +105,15 @@ namespace ArrayDACControl
             this.label1.TabIndex = 5;
             this.label1.Text = "label1";
             // 
-            // label2
+            // textBox3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Firebrick;
-            this.label2.Location = new System.Drawing.Point(266, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "label2";
+            this.textBox3.BackColor = System.Drawing.SystemColors.Info;
+            this.textBox3.Location = new System.Drawing.Point(315, 16);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(43, 20);
+            this.textBox3.TabIndex = 4;
+            this.textBox3.Text = "0";
+            this.textBox3.LostFocus += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // AdjustableSlider
             // 
