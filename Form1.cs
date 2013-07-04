@@ -943,29 +943,15 @@ namespace ArrayDACControl
                     tw.WriteLine("DC left" + i + "\t" + DCslidersLeft[i].Value);
                 for (int i = 0; i < DCrows; i++)
                     tw.WriteLine("DC right" + i + "\t" + DCslidersRight[i].Value);
-
-                tw.WriteLine("Tickle Scan Parameters");
-                tw.WriteLine("Tickle Start Value" + "\t" + TickleScanStartValueTextbox.Text);
-                tw.WriteLine("Tickle End Value" + "\t" + TickleScanEndValueTextbox.Text);
-                tw.WriteLine("Number of Points" + "\t" + TickleScanNumPointsTextbox.Text);
-                tw.WriteLine("PMT Averaging" + "\t" + TickleScanPMTAveragingTextbox.Text);
-
                 tw.Close();
+
 
                 if (threadHelper.message == "PMT" || threadHelper.message == "PMT & Camera")
                 {
                     tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " PMT Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
-                    if (TickleScanCheckbox.Checked)
-                    {
-                        for (int i = 0; i < threadHelper.numPoints; i++)
-                            tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i] + "\t" + threadHelper.DoubleData[1, i] + "\t" + threadHelper.DoubleData[2, i]);
-                    }
-                    else
-                    {
-                        for (int i = 0; i < threadHelper.numPoints; i++)
-                            tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i] + "\t" + threadHelper.DoubleData[1, i]);
-                    }
+                    for (int i = 0; i < threadHelper.numPoints; i++)
+                        tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i] + "\t" + threadHelper.DoubleData[1, i]);
 
                     tw.Close();
                 }
@@ -973,6 +959,16 @@ namespace ArrayDACControl
                 if (threadHelper.message == "Dev3AI2")
                 {
                     tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " AI Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+
+                    for (int i = 0; i < threadHelper.numPoints; i++)
+                        tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i]);
+
+                    tw.Close();
+                }
+
+                if (threadHelper.message == "Correlator:Sum")
+                {
+                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " CorrelatorSum Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
                     for (int i = 0; i < threadHelper.numPoints; i++)
                         tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i]);
@@ -1861,6 +1857,19 @@ namespace ArrayDACControl
                     CameraInitializeHelper();
                 }
             }
+
+            if (ElectrodeScanThreadHelper.message == "Correlator:Sum")
+            {
+                //Initialize parameters to values entered under "Correlator" Tab  
+                //if correlator returns false for init, abort scan
+                if (!CorrelatorParameterInit())
+                {
+                    //end scan
+                    ElectrodeScanThreadHelper.IsRunningFlag = false;
+                    //show message
+                    MessageBox.Show("Correlator Init returned false");
+                }
+            }
             //run scans
             while (ElectrodeScanThreadHelper.index < (ElectrodeScanThreadHelper.numPoints) && ElectrodeScanThreadHelper.IsRunningFlag)
             {
@@ -1923,15 +1932,36 @@ namespace ArrayDACControl
                     ElectrodeScanThreadHelper.index++;
                 }
 
-                //If Camera Trigger is on, pulse camera given parameters
-                if (CameraTriggerCheck.Checked == true)
+                // if Correlator:Sum selected, get reading from correlator, and sum bins
+                if (ElectrodeScanThreadHelper.message == "Correlator:Sum")
                 {
-                    //delay before triggering
-                    Thread.Sleep(int.Parse(CameraTriggerDelay.Text));
-                    //trigger
-                    Dev2DO7.OutputDigitalValue(true);
-                    Thread.Sleep(int.Parse(CameraTriggerIntegration.Text));
-                    Dev2DO7.OutputDigitalValue(false);
+                    //Raise wire to tell FPGA to start collecting data
+
+                    //get reading from Correlator FPGA
+                    //Wait for Ch1 and Ch2 flags to be raised
+                    theCorrelator.GetResults();
+                    while (!(theCorrelator.feedflagCh1 && theCorrelator.feedflagCh2))
+                    {
+                        theCorrelator.GetResults();
+                    }
+                    //Lower wire to stop FPGA acquiring
+
+                    //Put sum of two channels data in Thread array
+                    ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+
+                    //plot
+                    lock (ElectrodeScanThreadHelper)
+                    {
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(ElectrodeScanFrmCallback5));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(ElectrodeScanThreadHelper);
+                    }
+                    //increase index
+                    ElectrodeScanThreadHelper.index++;
                 }
             }
             if (ElectrodeScanThreadHelper.IsRunningFlag)
@@ -1941,7 +1971,7 @@ namespace ArrayDACControl
                 //go back to initial value
                 try
                 {
-                    this.BeginInvoke(new MyDelegate(ElectrodeScanFrmCallback5));
+                    this.BeginInvoke(new MyDelegate(ElectrodeScanFrmCallback6));
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -1993,7 +2023,23 @@ namespace ArrayDACControl
                 Monitor.PulseAll(ElectrodeScanThreadHelper);
             }
         }
+
         private void ElectrodeScanFrmCallback5()
+        {
+            lock (ElectrodeScanThreadHelper)
+            {
+                try
+                {
+                    //plot
+                    scatterGraph3.PlotXYAppend(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.index], ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                Monitor.PulseAll(ElectrodeScanThreadHelper);
+            }
+        }
+
+        private void ElectrodeScanFrmCallback6()
         {
             //reset to original values
             this.DCsliders[int.Parse(ElectrodeScanDC1TextBox.Text)].Value = ElectrodeScanThreadHelper.min[0];
@@ -2001,122 +2047,7 @@ namespace ArrayDACControl
             //update DAC
             compensationAdjustedHelper();
         }
-        private void SaveElectrodeScanData()
-        {
-            try
-            {
-                //get filename from control parameters tab
-                string[] filename = GetDataFilename(1);
-
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "Electrode Scan Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                tw.WriteLine("Electrodes Settings");
-
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC" + i + "\t" + DCsliders[i].Value);
-                tw.WriteLine("DX tot" + "\t" + DXSlider.Value);
-                tw.WriteLine("Array tot" + "\t" + ArrayTotalSlider.Value);
-                tw.WriteLine("DC vert dipole" + "\t" + DCVertDipoleSlider.Value);
-                tw.WriteLine("DC quad" + "\t" + DCVertQuadSlider.Value);
-                tw.WriteLine("Bias tot" + "\t" + TotalBiasSlider.Value);
-                tw.WriteLine("Trap Height" + "\t" + TrapHeightSlider.Value);
-                tw.WriteLine("Quadrupole Tilt" + "\t" + QuadrupoleTilt.Value);
-                tw.WriteLine("Quad Tilt Ratio" + "\t" + QuadTiltRatioSlider.Value);
-                tw.WriteLine("Transfer Cavity" + "\t" + TransferCavity.Value);
-                tw.WriteLine("Snake Inner Ratio" + "\t" + RatioSlider.Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC dx" + i + "\t" + DCslidersDx[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC left" + i + "\t" + DCslidersLeft[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC right" + i + "\t" + DCslidersRight[i].Value);
-
-                tw.WriteLine("Electrode Scan Parameters");
-                tw.WriteLine("DC1 Start Value" + "\t" + ElectrodeScanStartValue1Textbox.Text);
-                tw.WriteLine("DC1 End Value" + "\t" + ElectrodeScanEndValue1Textbox.Text);
-                tw.WriteLine("DC2 Start Value" + "\t" + ElectrodeScanStartValue2Textbox.Text);
-                tw.WriteLine("DC2 End Value" + "\t" + ElectrodeScanEndValue2Textbox.Text);
-                tw.WriteLine("Number of Points" + "\t" + ElectrodeScanNumPointsTextbox.Text);
-                tw.WriteLine("PMT Averaging" + "\t" + ElectrodeScanPMTAveragingTextbox.Text);
-                //tw.WriteLine("PMT Average Background" + "\t" + PMTBackgroundAvgTextBox.Text);
-
-                tw.Close();
-
-                if (ElectrodeScanThreadHelper.message == "PMT" || ElectrodeScanThreadHelper.message == "PMT & Camera")
-                {
-                    tw = new System.IO.StreamWriter(filename[0] + "Electrode Scan PMT Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    for (int i = 0; i < ElectrodeScanThreadHelper.numPoints; i++)
-                        tw.WriteLine(ElectrodeScanThreadHelper.DoubleScanVariable[0, i] + "\t" + ElectrodeScanThreadHelper.DoubleData[0, i] + "\t" + ElectrodeScanThreadHelper.DoubleData[1, i]);
-
-                    tw.Close();
-                }
-
-                if (ElectrodeScanThreadHelper.message == "Dev3AI2")
-                {
-                    tw = new System.IO.StreamWriter(filename[0] + "Electrode Scan AI Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    for (int i = 0; i < ElectrodeScanThreadHelper.numPoints; i++)
-                        tw.WriteLine(ElectrodeScanThreadHelper.DoubleScanVariable[0, i] + "\t" + ElectrodeScanThreadHelper.DoubleData[0, i]);
-
-                    tw.Close();
-                }
-
-                if (ElectrodeScanThreadHelper.message == "Camera" || ElectrodeScanThreadHelper.message == "PMT & Camera")
-                {
-                    //Save fluorescence data
-                    tw = new System.IO.StreamWriter(filename[0] + "Electrode Scan Fluorescence Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    //Write scan variable first
-                    for (int j = 0; j < ElectrodeScanThreadHelper.numPoints - 1; j++)
-                    {
-                        tw.Write(ElectrodeScanThreadHelper.DoubleScanVariable[0, j] + ",");
-                    }
-                    tw.WriteLine(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.numPoints - 1]);
-
-                    int NumPlot = CameraForm.FluorescenceGraph.Plots.Count;
-                    double[] data;
-                    for (int i = 0; i < NumPlot; i++)
-                    {
-                        data = CameraForm.FluorescenceGraph.Plots[i].GetYData();
-                        for (int j = 0; j < data.Length - 1; j++)
-                        {
-                            tw.Write(data[j] + ",");
-                        }
-                        tw.WriteLine(data[data.Length - 1]);
-                    }
-
-                    tw.Close();
-
-                    //Save position data
-
-                    tw = new System.IO.StreamWriter(filename[0] + "Electrode Scan Position Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    //Write scan variable first
-                    for (int j = 0; j < ElectrodeScanThreadHelper.numPoints - 1; j++)
-                    {
-                        tw.Write(ElectrodeScanThreadHelper.DoubleScanVariable[0, j] + ",");
-                    }
-                    tw.WriteLine(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.numPoints - 1]);
-
-                    NumPlot = CameraForm.PositionGraph.Plots.Count;
-                    for (int i = 0; i < NumPlot; i++)
-                    {
-                        data = CameraForm.PositionGraph.Plots[i].GetYData();
-                        for (int j = 0; j < data.Length - 1; j++)
-                        {
-                            tw.Write(data[j] + ",");
-                        }
-                        tw.WriteLine(data[data.Length - 1]);
-                    }
-
-                    tw.Close();
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-        }
-
+        
         //
         // LATTICE CHOP THREAD
         //
@@ -2308,7 +2239,7 @@ namespace ArrayDACControl
             if (CavityScanThreadHelper.IsRunningFlag)
             {
                 //save Scan Data
-                SaveCavityScanData();
+                SaveScanData(CavityScanThreadHelper);
             }
             //go back to initial value
             //reset button
@@ -2349,54 +2280,6 @@ namespace ArrayDACControl
         {
             CavityScanLiveAverageTextbox.Text = CavityScanThreadHelper.DoubleData[0, CavityScanThreadHelper.index].ToString();
             CavityScanLiveStdTextbox.Text = CavityScanThreadHelper.DoubleData[1, CavityScanThreadHelper.index].ToString();
-        }
-        private void SaveCavityScanData()
-        {
-            try
-            {
-                //get filename from control parameters tab
-                string[] filename = GetDataFilename(1);
-
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "CavityScan Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                tw.WriteLine("Electrodes Settings");
-
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC" + i + "\t" + DCsliders[i].Value);
-                tw.WriteLine("DX tot" + "\t" + DXSlider.Value);
-                tw.WriteLine("Array tot" + "\t" + ArrayTotalSlider.Value);
-                tw.WriteLine("DC vert dipole" + "\t" + DCVertDipoleSlider.Value);
-                tw.WriteLine("DC quad" + "\t" + DCVertQuadSlider.Value);
-                tw.WriteLine("Bias tot" + "\t" + TotalBiasSlider.Value);
-                tw.WriteLine("Trap Height" + "\t" + TrapHeightSlider.Value);
-                tw.WriteLine("Quadrupole Tilt" + "\t" + QuadrupoleTilt.Value);
-                tw.WriteLine("Quad Tilt Ratio" + "\t" + QuadTiltRatioSlider.Value);
-                tw.WriteLine("Transfer Cavity" + "\t" + TransferCavity.Value);
-                tw.WriteLine("Snake Inner Ratio" + "\t" + RatioSlider.Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC dx" + i + "\t" + DCslidersDx[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC left" + i + "\t" + DCslidersLeft[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC right" + i + "\t" + DCslidersRight[i].Value);
-
-                tw.WriteLine("Cavity Scan Parameters");
-                tw.WriteLine("Start Value" + "\t" + CavityScanStartValueTextbox.Text);
-                tw.WriteLine("End Value" + "\t" + CavityScanEndValueTextbox.Text);
-                tw.WriteLine("Number of Points" + "\t" + CavityScanNumPointsTextbox.Text);
-                tw.WriteLine("PMT Averaging" + "\t" + CavityScanPMTAveragingTextbox.Text);
-
-                tw.Close();
-
-                tw = new System.IO.StreamWriter(filename[0] + "CavityScan PMT Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                for (int i = 0; i < CavityScanThreadHelper.numPoints; i++)
-                    tw.WriteLine(CavityScanThreadHelper.DoubleScanVariable[0,i] + "\t" + CavityScanThreadHelper.DoubleData[0, i] + "\t" + CavityScanThreadHelper.DoubleData[1, i]);
-
-                tw.Close();
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-
         }
 
         //
@@ -2482,6 +2365,20 @@ namespace ArrayDACControl
                     CameraInitializeHelper();
                 }
             }
+
+            if (BfieldScanThreadHelper.message == "Correlator:Sum")
+            {
+                //Initialize parameters to values entered under "Correlator" Tab  
+                //if correlator returns false for init, abort scan
+                if (!CorrelatorParameterInit())
+                {
+                    //end scan
+                    BfieldScanThreadHelper.IsRunningFlag = false;
+                    //show message
+                    MessageBox.Show("Correlator Init returned false");
+                }
+            }
+            
             //run scans
             while (BfieldScanThreadHelper.index < (BfieldScanThreadHelper.numPoints) && BfieldScanThreadHelper.IsRunningFlag)
             {
@@ -2513,29 +2410,65 @@ namespace ArrayDACControl
                     //finalize single point average and standard deviation
                     BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index] = BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index] / BfieldScanThreadHelper.numAverage;
                     BfieldScanThreadHelper.DoubleData[1, BfieldScanThreadHelper.index] = Math.Sqrt(BfieldScanThreadHelper.DoubleData[1, BfieldScanThreadHelper.index] / BfieldScanThreadHelper.numAverage - Math.Pow(BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index], 2));
-                    //plot
-                    scatterGraph3.PlotXYAppend(BfieldScanThreadHelper.DoubleScanVariable[0, BfieldScanThreadHelper.index], BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index]);
-                    //display count
-                    try
+                    
+                    lock (BfieldScanThreadHelper)
                     {
-                        this.Invoke(new MyDelegate(BfieldScanFrmCallback4));
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(BfieldScanFrmCallback4));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(BfieldScanThreadHelper);
                     }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
                     //increase index
+                    BfieldScanThreadHelper.index++;
                 }
                 // if Camera selected run Camera acquisition
                 if (BfieldScanThreadHelper.message == "Camera" || BfieldScanThreadHelper.message == "PMT & Camera")
                 {
                     CameraAcquisitionHelper();
+                    BfieldScanThreadHelper.index++;
                 }
 
                 // if AI selected, get reading from NI card
                 if (BfieldScanThreadHelper.message == "Dev3AI2")
                 {
                     BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index] = Dev3AI2.ReadAnalogValue();
+                    BfieldScanThreadHelper.index++;
                 }
 
-                BfieldScanThreadHelper.index++;
+                // if Correlator:Sum selected, get reading from correlator, and sum bins
+                if (BfieldScanThreadHelper.message == "Correlator:Sum")
+                {
+                    //Raise wire to tell FPGA to start collecting data
+
+                    //get reading from Correlator FPGA
+                    //Wait for Ch1 and Ch2 flags to be raised
+                    theCorrelator.GetResults();
+                    while (!(theCorrelator.feedflagCh1 && theCorrelator.feedflagCh2))
+                    {
+                        theCorrelator.GetResults();
+                    }
+                    //Lower wire to stop FPGA acquiring
+
+                    //Put sum of two channels data in Thread array
+                    BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+
+                    //plot
+                    lock (BfieldScanThreadHelper)
+                    {
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(BfieldScanFrmCallback5));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(BfieldScanThreadHelper);
+                    }
+                    //increase index
+                    BfieldScanThreadHelper.index++;
+                }
             }
             if (BfieldScanThreadHelper.IsRunningFlag)
             {
@@ -2579,120 +2512,34 @@ namespace ArrayDACControl
         }
         private void BfieldScanFrmCallback4()
         {
-            BfieldScanLiveAverageTextbox.Text = BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index].ToString();
-            BfieldScanLiveStdTextbox.Text = BfieldScanThreadHelper.DoubleData[1, BfieldScanThreadHelper.index].ToString();
-        }
-        private void SaveBfieldScanData()
-        {
-            try
+            lock (BfieldScanThreadHelper)
             {
-                //get filename from control parameters tab
-                string[] filename = GetDataFilename(1);
-
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "BfieldScan Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                tw.WriteLine("Electrodes Settings");
-
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC" + i + "\t" + DCsliders[i].Value);
-                tw.WriteLine("DX tot" + "\t" + DXSlider.Value);
-                tw.WriteLine("Array tot" + "\t" + ArrayTotalSlider.Value);
-                tw.WriteLine("DC vert dipole" + "\t" + DCVertDipoleSlider.Value);
-                tw.WriteLine("DC quad" + "\t" + DCVertQuadSlider.Value);
-                tw.WriteLine("Bias tot" + "\t" + TotalBiasSlider.Value);
-                tw.WriteLine("Trap Height" + "\t" + TrapHeightSlider.Value);
-                tw.WriteLine("Quadrupole Tilt" + "\t" + QuadrupoleTilt.Value);
-                tw.WriteLine("Quad Tilt Ratio" + "\t" + QuadTiltRatioSlider.Value);
-                tw.WriteLine("Transfer Cavity" + "\t" + TransferCavity.Value);
-                tw.WriteLine("Snake Inner Ratio" + "\t" + RatioSlider.Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC dx" + i + "\t" + DCslidersDx[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC left" + i + "\t" + DCslidersLeft[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC right" + i + "\t" + DCslidersRight[i].Value);
-
-                tw.WriteLine("B field Scan Parameters");
-                tw.WriteLine("B field Start Value" + "\t" + BfieldScanStartValueTextbox.Text);
-                tw.WriteLine("B field End Value" + "\t" + BfieldScanEndValueTextbox.Text);
-                tw.WriteLine("Number of Points" + "\t" + BfieldScanNumPointsTextbox.Text);
-                tw.WriteLine("PMT Averaging" + "\t" + BfieldScanPMTAveragingTextbox.Text);
-
-                tw.Close();
-
-                if (BfieldScanThreadHelper.message == "PMT" || BfieldScanThreadHelper.message == "PMT & Camera")
+                try
                 {
-                    tw = new System.IO.StreamWriter(filename[0] + "BfieldScan PMT Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    for (int i = 0; i < BfieldScanThreadHelper.numPoints; i++)
-                        tw.WriteLine(BfieldScanThreadHelper.DoubleScanVariable[0, i] + "\t" + BfieldScanThreadHelper.DoubleData[0, i] + "\t" + BfieldScanThreadHelper.DoubleData[1, i]);
-                    
-                    tw.Close();
+                    BfieldScanLiveAverageTextbox.Text = BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index].ToString();
+                    BfieldScanLiveStdTextbox.Text = BfieldScanThreadHelper.DoubleData[1, BfieldScanThreadHelper.index].ToString();
+                    //plot
+                    scatterGraph3.PlotXYAppend(BfieldScanThreadHelper.DoubleScanVariable[0, BfieldScanThreadHelper.index], BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index]);
                 }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-                if (BfieldScanThreadHelper.message == "Dev3AI2")
-                {
-                    tw = new System.IO.StreamWriter(filename[0] + "BfieldScan AI Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    for (int i = 0; i < BfieldScanThreadHelper.numPoints; i++)
-                        tw.WriteLine(BfieldScanThreadHelper.DoubleScanVariable[0, i] + "\t" + BfieldScanThreadHelper.DoubleData[0, i]);
-
-                    tw.Close();
-                }
-
-                if (BfieldScanThreadHelper.message == "Camera" || BfieldScanThreadHelper.message == "PMT & Camera")
-                {
-                    //Save fluorescence data
-                    tw = new System.IO.StreamWriter(filename[0] + "BfieldScan Fluorescence Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    //Write scan variable first
-                    for (int j = 0; j < BfieldScanThreadHelper.numPoints - 1; j++)
-                    {
-                        tw.Write(BfieldScanThreadHelper.DoubleScanVariable[0, j] + ",");
-                    }
-                    tw.WriteLine(BfieldScanThreadHelper.DoubleScanVariable[0, BfieldScanThreadHelper.numPoints - 1]);
-
-                    int NumPlot = CameraForm.FluorescenceGraph.Plots.Count;
-                    double[] data;
-                    for (int i = 0; i < NumPlot; i++)
-                    {
-                        data = CameraForm.FluorescenceGraph.Plots[i].GetYData();
-                        for (int j = 0; j < data.Length-1; j++)
-                        {
-                            tw.Write(data[j] + ",");
-                        }
-                        tw.WriteLine(data[data.Length - 1]);
-                    }
-
-                    tw.Close();
-
-                    //Save position data
-
-                    tw = new System.IO.StreamWriter(filename[0] + "BfieldScan Position Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    //Write scan variable first
-                    for (int j = 0; j < BfieldScanThreadHelper.numPoints - 1; j++)
-                    {
-                        tw.Write(BfieldScanThreadHelper.DoubleScanVariable[0, j] + ",");
-                    }
-                    tw.WriteLine(BfieldScanThreadHelper.DoubleScanVariable[0, BfieldScanThreadHelper.numPoints - 1]);
-
-                    NumPlot = CameraForm.PositionGraph.Plots.Count;
-                    for (int i = 0; i < NumPlot; i++)
-                    {
-                        data = CameraForm.PositionGraph.Plots[i].GetYData();
-                        for (int j = 0; j < data.Length - 1; j++)
-                        {
-                            tw.Write(data[j] + ",");
-                        }
-                        tw.WriteLine(data[data.Length - 1]);
-                    }
-
-                    tw.Close();
-                }
+                Monitor.PulseAll(BfieldScanThreadHelper);
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
 
+        private void BfieldScanFrmCallback5()
+        {
+            lock (BfieldScanThreadHelper)
+            {
+                try
+                {
+                    //plot
+                    scatterGraph3.PlotXYAppend(BfieldScanThreadHelper.DoubleScanVariable[0, BfieldScanThreadHelper.index], BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                Monitor.PulseAll(BfieldScanThreadHelper);
+            }
         }
 
         //
@@ -2806,7 +2653,7 @@ namespace ArrayDACControl
             if (FluorLogThreadHelper.IsRunningFlag)
             {
                 //save Scan Data
-                SaveFluorLogData();
+                SaveScanData(FluorLogThreadHelper);
             }
             //calculate mean and standard error on the mean for the data
             try
@@ -2859,71 +2706,6 @@ namespace ArrayDACControl
 
             FluorLogLiveAverageTextbox.Text = mean.ToString("F1");
             FluorLogLiveStdTextbox.Text = std.ToString("F1");
-        }
-        private void SaveFluorLogData()
-        {
-            try
-            {
-                //get filename from control parameters tab
-                string[] filename = GetDataFilename(1);
-
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "FluorLog Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                tw.WriteLine("Electrodes Settings");
-
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC" + i + "\t" + DCsliders[i].Value);
-                tw.WriteLine("DX tot" + "\t" + DXSlider.Value);
-                tw.WriteLine("Array tot" + "\t" + ArrayTotalSlider.Value);
-                tw.WriteLine("DC vert dipole" + "\t" + DCVertDipoleSlider.Value);
-                tw.WriteLine("DC quad" + "\t" + DCVertQuadSlider.Value);
-                tw.WriteLine("Bias tot" + "\t" + TotalBiasSlider.Value);
-                tw.WriteLine("Trap Height" + "\t" + TrapHeightSlider.Value);
-                tw.WriteLine("Quadrupole Tilt" + "\t" + QuadrupoleTilt.Value);
-                tw.WriteLine("Quad Tilt Ratio" + "\t" + QuadTiltRatioSlider.Value);
-                tw.WriteLine("Transfer Cavity" + "\t" + TransferCavity.Value);
-                tw.WriteLine("Snake Inner Ratio" + "\t" + RatioSlider.Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC dx" + i + "\t" + DCslidersDx[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC left" + i + "\t" + DCslidersLeft[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC right" + i + "\t" + DCslidersRight[i].Value);
-
-                tw.Close();
-
-                if (FluorLogThreadHelper.message == "PMT")
-                {
-                    tw = new System.IO.StreamWriter(filename[0] + "FluorLog PMT Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    for (int i = 0; i < FluorLogThreadHelper.numPoints; i++)
-                        tw.WriteLine(FluorLogThreadHelper.DoubleData[0, i] + "\t" + FluorLogThreadHelper.DoubleData[1, i]);
-
-                    tw.Close();
-                }
-
-                if (FluorLogThreadHelper.message == "Camera")
-                {
-                    //Save fluorescence data
-                    tw = new System.IO.StreamWriter(filename[0] + "FluorLog Fluorescence Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    int NumPlot = CameraForm.FluorescenceGraph.Plots.Count;
-                    double[] data;
-                    for (int i = 0; i < NumPlot; i++)
-                    {
-                        data = CameraForm.FluorescenceGraph.Plots[i].GetYData();
-                        for (int j = 0; j < data.Length - 1; j++)
-                        {
-                            tw.Write(data[j] + ",");
-                        }
-                        tw.WriteLine(data[data.Length - 1]);
-                    }
-
-                    tw.Close();
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-
         }
 
         //
@@ -3067,34 +2849,6 @@ namespace ArrayDACControl
                     }
                     //increase index
                     TickleScanThreadHelper.index++;
-
-                    //If the "interlock repumper" checkbox is checked, get background, turn off repumper, and take background
-                    if (TickleScanCheckbox.Checked)
-                    {
-                        //Turn off repumper
-                        try
-                        {
-                            this.Invoke(new MyDelegate(TickleScanFrmCallback5));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        RepumperPowerSliderOutHelper();
-                        //get reading from GPIB counter
-                        gpibdevice.simpleRead(21);
-                        //get decimal number
-                        TickleScanThreadHelper.SingleDouble = gpibDoubleResult();
-                        //load result in array
-                        TickleScanThreadHelper.DoubleData[2, TickleScanThreadHelper.index] += TickleScanThreadHelper.SingleDouble;
-                        //plot
-                        scatterGraph3.Plots[1].PlotXYAppend(TickleScanThreadHelper.DoubleScanVariable[0, TickleScanThreadHelper.index], TickleScanThreadHelper.DoubleData[2, TickleScanThreadHelper.index]);
-                        //Turn on repumper
-                        try
-                        {
-                            this.Invoke(new MyDelegate(TickleScanFrmCallback6));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        RepumperPowerSliderOutHelper();
-                    }
-
                 }
                 // if Camera selected run Camera acquisition
                 if (TickleScanThreadHelper.message == "Camera" || TickleScanThreadHelper.message == "PMT & Camera")
@@ -3128,6 +2882,18 @@ namespace ArrayDACControl
 
                     //Put sum of two channels data in Thread array
                     TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+                    
+                    //plot
+                    lock (TickleScanThreadHelper)
+                    {
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(TickleScanFrmCallback5));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(TickleScanThreadHelper);
+                    }
                     //increase index
                     TickleScanThreadHelper.index++;
                 } 
@@ -3190,135 +2956,18 @@ namespace ArrayDACControl
         }
         private void TickleScanFrmCallback5()
         {
-            RepumperPowerSlider.Value = 0;
-        }
-        private void TickleScanFrmCallback6()
-        {
-            RepumperPowerSlider.Value = 10;
-        }
-        private void SaveTickleScanData()
-        {
-            try
+            lock (TickleScanThreadHelper)
             {
-                //get filename from control parameters tab
-                string[] filename = GetDataFilename(1);
-
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "TickleScan Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                tw.WriteLine("Electrodes Settings");
-
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC" + i + "\t" + DCsliders[i].Value);
-                tw.WriteLine("DX tot" + "\t" + DXSlider.Value);
-                tw.WriteLine("Array tot" + "\t" + ArrayTotalSlider.Value);
-                tw.WriteLine("DC vert dipole" + "\t" + DCVertDipoleSlider.Value);
-                tw.WriteLine("DC quad" + "\t" + DCVertQuadSlider.Value);
-                tw.WriteLine("Bias tot" + "\t" + TotalBiasSlider.Value);
-                tw.WriteLine("Trap Height" + "\t" + TrapHeightSlider.Value);
-                tw.WriteLine("Quadrupole Tilt" + "\t" + QuadrupoleTilt.Value);
-                tw.WriteLine("Quad Tilt Ratio" + "\t" + QuadTiltRatioSlider.Value);
-                tw.WriteLine("Transfer Cavity" + "\t" + TransferCavity.Value);
-                tw.WriteLine("Snake Inner Ratio" + "\t" + RatioSlider.Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC dx" + i + "\t" + DCslidersDx[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC left" + i + "\t" + DCslidersLeft[i].Value);
-                for (int i = 0; i < DCrows; i++)
-                    tw.WriteLine("DC right" + i + "\t" + DCslidersRight[i].Value);
-
-                tw.WriteLine("Tickle Scan Parameters");
-                tw.WriteLine("Tickle Start Value" + "\t" + TickleScanStartValueTextbox.Text);
-                tw.WriteLine("Tickle End Value" + "\t" + TickleScanEndValueTextbox.Text);
-                tw.WriteLine("Number of Points" + "\t" + TickleScanNumPointsTextbox.Text);
-                tw.WriteLine("PMT Averaging" + "\t" + TickleScanPMTAveragingTextbox.Text);
-
-                tw.Close();
-
-                if (TickleScanThreadHelper.message == "PMT" || TickleScanThreadHelper.message == "PMT & Camera")
+                try
                 {
-                    tw = new System.IO.StreamWriter(filename[0] + "TickleScan PMT Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    if (TickleScanCheckbox.Checked)
-                    {
-                        for (int i = 0; i < TickleScanThreadHelper.numPoints; i++)
-                            tw.WriteLine(TickleScanThreadHelper.DoubleScanVariable[0, i] + "\t" + TickleScanThreadHelper.DoubleData[0, i] + "\t" + TickleScanThreadHelper.DoubleData[1, i] + "\t" + TickleScanThreadHelper.DoubleData[2, i]);
-                    }
-                    else
-                    {
-                        for (int i = 0; i < TickleScanThreadHelper.numPoints; i++)
-                            tw.WriteLine(TickleScanThreadHelper.DoubleScanVariable[0, i] + "\t" + TickleScanThreadHelper.DoubleData[0, i] + "\t" + TickleScanThreadHelper.DoubleData[1, i]);
-                    }
-
-                    tw.Close();
+                    //plot
+                    scatterGraph3.PlotXYAppend(TickleScanThreadHelper.DoubleScanVariable[0, TickleScanThreadHelper.index], TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index]);
                 }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-                if (TickleScanThreadHelper.message == "Dev3AI2")
-                {
-                    tw = new System.IO.StreamWriter(filename[0] + "TickleScan AI Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    for (int i = 0; i < TickleScanThreadHelper.numPoints; i++)
-                        tw.WriteLine(TickleScanThreadHelper.DoubleScanVariable[0, i] + "\t" + TickleScanThreadHelper.DoubleData[0, i]);
-
-                    tw.Close();
-                }
-
-                if (TickleScanThreadHelper.message == "Camera" || TickleScanThreadHelper.message == "PMT & Camera")
-                {
-                    //Save fluorescence data
-                    tw = new System.IO.StreamWriter(filename[0] + "TickleScan Fluorescence Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    //Write scan variable first
-                    for (int j = 0; j < TickleScanThreadHelper.numPoints - 1; j++)
-                    {
-                        tw.Write(TickleScanThreadHelper.DoubleScanVariable[0, j] + ",");
-                    }
-                    tw.WriteLine(TickleScanThreadHelper.DoubleScanVariable[0, TickleScanThreadHelper.numPoints - 1]);
-
-                    int NumPlot = CameraForm.FluorescenceGraph.Plots.Count;
-                    double[] data;
-                    for (int i = 0; i < NumPlot; i++)
-                    {
-                        data = CameraForm.FluorescenceGraph.Plots[i].GetYData();
-                        for (int j = 0; j < data.Length - 1; j++)
-                        {
-                            tw.Write(data[j] + ",");
-                        }
-                        tw.WriteLine(data[data.Length - 1]);
-                    }
-
-                    tw.Close();
-
-                    //Save position data
-
-                    tw = new System.IO.StreamWriter(filename[0] + "TickleScan Position Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                    //Write scan variable first
-                    for (int j = 0; j < TickleScanThreadHelper.numPoints - 1; j++)
-                    {
-                        tw.Write(TickleScanThreadHelper.DoubleScanVariable[0, j] + ",");
-                    }
-                    tw.WriteLine(TickleScanThreadHelper.DoubleScanVariable[0, TickleScanThreadHelper.numPoints - 1]);
-
-                    NumPlot = CameraForm.PositionGraph.Plots.Count;
-                    for (int i = 0; i < NumPlot; i++)
-                    {
-                        data = CameraForm.PositionGraph.Plots[i].GetYData();
-                        for (int j = 0; j < data.Length - 1; j++)
-                        {
-                            tw.Write(data[j] + ",");
-                        }
-                        tw.WriteLine(data[data.Length - 1]);
-                    }
-
-                    tw.Close();
-                }
+                Monitor.PulseAll(TickleScanThreadHelper);
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-
         }
-
-
-
         //
         //
         // REPUMPER SCAN
@@ -4027,6 +3676,7 @@ namespace ArrayDACControl
             }
 
         }
+
 
 
         //

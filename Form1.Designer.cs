@@ -142,12 +142,6 @@
             this.LeftFingersSlider = new ArrayDACControl.AdjustableSlider();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.groupBox50 = new System.Windows.Forms.GroupBox();
-            this.CameraTriggerCheck = new System.Windows.Forms.CheckBox();
-            this.label96 = new System.Windows.Forms.Label();
-            this.label97 = new System.Windows.Forms.Label();
-            this.CameraTriggerIntegration = new System.Windows.Forms.TextBox();
-            this.CameraTriggerDelay = new System.Windows.Forms.TextBox();
             this.groupBox41 = new System.Windows.Forms.GroupBox();
             this.ElectrodeScanComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox34 = new System.Windows.Forms.GroupBox();
@@ -219,7 +213,6 @@
             this.label126 = new System.Windows.Forms.Label();
             this.FluorLogNumPointsTextbox = new System.Windows.Forms.TextBox();
             this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.TickleScanCheckbox = new System.Windows.Forms.CheckBox();
             this.groupBox56 = new System.Windows.Forms.GroupBox();
             this.TickleScanComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox55 = new System.Windows.Forms.GroupBox();
@@ -510,7 +503,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.CurrentFeedforward370Offset)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            this.groupBox50.SuspendLayout();
             this.groupBox41.SuspendLayout();
             this.groupBox34.SuspendLayout();
             this.groupBox29.SuspendLayout();
@@ -1781,7 +1773,6 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.groupBox50);
             this.tabPage6.Controls.Add(this.groupBox41);
             this.tabPage6.Controls.Add(this.groupBox34);
             this.tabPage6.Controls.Add(this.groupBox29);
@@ -1792,66 +1783,6 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Electrode Scan";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // groupBox50
-            // 
-            this.groupBox50.Controls.Add(this.CameraTriggerCheck);
-            this.groupBox50.Controls.Add(this.label96);
-            this.groupBox50.Controls.Add(this.label97);
-            this.groupBox50.Controls.Add(this.CameraTriggerIntegration);
-            this.groupBox50.Controls.Add(this.CameraTriggerDelay);
-            this.groupBox50.Location = new System.Drawing.Point(18, 345);
-            this.groupBox50.Name = "groupBox50";
-            this.groupBox50.Size = new System.Drawing.Size(187, 108);
-            this.groupBox50.TabIndex = 147;
-            this.groupBox50.TabStop = false;
-            this.groupBox50.Text = "External Camera Trigger";
-            // 
-            // CameraTriggerCheck
-            // 
-            this.CameraTriggerCheck.AutoSize = true;
-            this.CameraTriggerCheck.Location = new System.Drawing.Point(20, 29);
-            this.CameraTriggerCheck.Name = "CameraTriggerCheck";
-            this.CameraTriggerCheck.Size = new System.Drawing.Size(104, 17);
-            this.CameraTriggerCheck.TabIndex = 147;
-            this.CameraTriggerCheck.Text = "Trigger Camera?";
-            this.CameraTriggerCheck.UseVisualStyleBackColor = true;
-            // 
-            // label96
-            // 
-            this.label96.AutoSize = true;
-            this.label96.ForeColor = System.Drawing.Color.Red;
-            this.label96.Location = new System.Drawing.Point(93, 62);
-            this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(79, 13);
-            this.label96.TabIndex = 138;
-            this.label96.Text = "Integration (ms)";
-            // 
-            // label97
-            // 
-            this.label97.AutoSize = true;
-            this.label97.ForeColor = System.Drawing.Color.Red;
-            this.label97.Location = new System.Drawing.Point(14, 62);
-            this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(56, 13);
-            this.label97.TabIndex = 137;
-            this.label97.Text = "Delay (ms)";
-            // 
-            // CameraTriggerIntegration
-            // 
-            this.CameraTriggerIntegration.Location = new System.Drawing.Point(112, 78);
-            this.CameraTriggerIntegration.Name = "CameraTriggerIntegration";
-            this.CameraTriggerIntegration.Size = new System.Drawing.Size(43, 20);
-            this.CameraTriggerIntegration.TabIndex = 136;
-            this.CameraTriggerIntegration.Text = "2";
-            // 
-            // CameraTriggerDelay
-            // 
-            this.CameraTriggerDelay.Location = new System.Drawing.Point(19, 78);
-            this.CameraTriggerDelay.Name = "CameraTriggerDelay";
-            this.CameraTriggerDelay.Size = new System.Drawing.Size(43, 20);
-            this.CameraTriggerDelay.TabIndex = 135;
-            this.CameraTriggerDelay.Text = "1";
             // 
             // groupBox41
             // 
@@ -1870,7 +1801,8 @@
             "PMT",
             "Camera",
             "PMT & Camera",
-            "Dev3AI2"});
+            "Dev3AI2",
+            "Correlator:Sum"});
             this.ElectrodeScanComboBox.Location = new System.Drawing.Point(10, 19);
             this.ElectrodeScanComboBox.Name = "ElectrodeScanComboBox";
             this.ElectrodeScanComboBox.Size = new System.Drawing.Size(121, 21);
@@ -2296,7 +2228,8 @@
             "PMT",
             "Camera",
             "PMT & Camera",
-            "Dev3AI2"});
+            "Dev3AI2",
+            "Correlator:Sum"});
             this.BfieldScanComboBox.Location = new System.Drawing.Point(10, 19);
             this.BfieldScanComboBox.Name = "BfieldScanComboBox";
             this.BfieldScanComboBox.Size = new System.Drawing.Size(121, 21);
@@ -2585,7 +2518,6 @@
             // 
             // tabPage11
             // 
-            this.tabPage11.Controls.Add(this.TickleScanCheckbox);
             this.tabPage11.Controls.Add(this.groupBox56);
             this.tabPage11.Controls.Add(this.groupBox55);
             this.tabPage11.Controls.Add(this.groupBox54);
@@ -2597,16 +2529,6 @@
             this.tabPage11.TabIndex = 13;
             this.tabPage11.Text = "Tickle spectrum";
             this.tabPage11.UseVisualStyleBackColor = true;
-            // 
-            // TickleScanCheckbox
-            // 
-            this.TickleScanCheckbox.AutoSize = true;
-            this.TickleScanCheckbox.Location = new System.Drawing.Point(383, 130);
-            this.TickleScanCheckbox.Name = "TickleScanCheckbox";
-            this.TickleScanCheckbox.Size = new System.Drawing.Size(237, 17);
-            this.TickleScanCheckbox.TabIndex = 160;
-            this.TickleScanCheckbox.Text = "Take Background? (i.e. Repumper Interlock)";
-            this.TickleScanCheckbox.UseVisualStyleBackColor = true;
             // 
             // groupBox56
             // 
@@ -5151,8 +5073,6 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage6.ResumeLayout(false);
-            this.groupBox50.ResumeLayout(false);
-            this.groupBox50.PerformLayout();
             this.groupBox41.ResumeLayout(false);
             this.groupBox34.ResumeLayout(false);
             this.groupBox34.PerformLayout();
@@ -5176,7 +5096,6 @@
             this.groupBox37.ResumeLayout(false);
             this.groupBox37.PerformLayout();
             this.tabPage11.ResumeLayout(false);
-            this.tabPage11.PerformLayout();
             this.groupBox56.ResumeLayout(false);
             this.groupBox55.ResumeLayout(false);
             this.groupBox55.PerformLayout();
@@ -5506,12 +5425,6 @@
         private System.Windows.Forms.TextBox LatticeDepthTextbox;
         private System.Windows.Forms.CheckBox DebugCheckbox;
         private System.Windows.Forms.TextBox stopwatchTextbox;
-        private System.Windows.Forms.GroupBox groupBox50;
-        private System.Windows.Forms.CheckBox CameraTriggerCheck;
-        private System.Windows.Forms.Label label96;
-        private System.Windows.Forms.Label label97;
-        private System.Windows.Forms.TextBox CameraTriggerIntegration;
-        private System.Windows.Forms.TextBox CameraTriggerDelay;
         public NationalInstruments.UI.WindowsForms.WaveformGraph PMTcountGraph;
         private AdjustableSlider RamanSlider;
         private System.Windows.Forms.TabPage tabPage10;
@@ -5570,7 +5483,6 @@
         private System.Windows.Forms.Label label115;
         private System.Windows.Forms.TextBox correlatorBound2text;
         private System.Windows.Forms.Label label116;
-        private System.Windows.Forms.CheckBox TickleScanCheckbox;
         private NationalInstruments.UI.ScatterPlot scatterPlot2;
         private System.Windows.Forms.Label label117;
         private System.Windows.Forms.TextBox LockInFreqtext1;
