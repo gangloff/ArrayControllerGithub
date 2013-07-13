@@ -30,9 +30,15 @@ namespace ArrayDACControl
         //Integration time
         public int IntTime;
 
+        //Collect all the time boolean (follow duty cyle or not)
+        public bool collectDutyCycle;
 
         //Shift register clock divisor
         public int ClkDiv;
+
+        // Pulsed output signal characteristics
+        public int PulseClkDiv;
+        public int PulseWidthDiv;
 
         //Figure of merit for compensation
         public int bound1;
@@ -112,6 +118,18 @@ namespace ArrayDACControl
                 ok.SetWire(1, valueClkDiv >> 16);
                 ok.UpdateAllWires();
                 ok.SetTrigger(0x40, 4);   // Trigger 4 updates the clock divisor
+
+                //set pulsed output frequency and duty cycle
+                uint valuePulsedClkDiv = (uint)(PulseClkDiv);
+                uint valuePulseWidthDiv = (uint)(PulseWidthDiv);
+                ok.SetWire(0, valuePulsedClkDiv);
+                ok.SetWire(1, valuePulseWidthDiv);
+                //selects whether to collect according to duty cycle of probe
+                //if collectDutyCycle is true, collect according to duty cycle
+                if (collectDutyCycle) { ok.SetWire(2, 1); }
+                else{ok.SetWire(2,0);}
+                ok.UpdateAllWires();
+                ok.SetTrigger(0x40, 6);   // Trigger 6 updates pulsed output signal characteristics
                 
                 
                 return true;
@@ -157,6 +175,14 @@ namespace ArrayDACControl
                    ok.SetWire(1, valueClkDiv >> 16);
                    ok.UpdateAllWires();
                    ok.SetTrigger(0x40, 4);   // Trigger 4 updates the clock divisor
+
+                   //set pulsed output frequency and duty cycle
+                   uint valuePulsedClkDiv = (uint)(PulseClkDiv);
+                   uint valuePulseWidthDiv = (uint)(PulseWidthDiv);
+                   ok.SetWire(0, valuePulsedClkDiv);
+                   ok.SetWire(1, valuePulseWidthDiv);
+                   ok.UpdateAllWires();
+                   ok.SetTrigger(0x40, 6);   // Trigger 6 updates pulsed output signal characteristics
                                
                    
                     //define results array

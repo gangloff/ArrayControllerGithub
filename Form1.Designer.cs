@@ -231,6 +231,14 @@
             this.TickleScanStartValueTextbox = new System.Windows.Forms.TextBox();
             this.TickleSlider = new ArrayDACControl.AdjustableSlider();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.label142 = new System.Windows.Forms.Label();
+            this.label141 = new System.Windows.Forms.Label();
+            this.label97 = new System.Windows.Forms.Label();
+            this.label96 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.pulsedDutyText = new System.Windows.Forms.TextBox();
+            this.pulseFreqText = new System.Windows.Forms.TextBox();
+            this.PulsedProbeSwitch = new NationalInstruments.UI.WindowsForms.Switch();
             this.label136 = new System.Windows.Forms.Label();
             this.label135 = new System.Windows.Forms.Label();
             this.correlatorBitFilePathB = new System.Windows.Forms.TextBox();
@@ -253,7 +261,7 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.groupBox58 = new System.Windows.Forms.GroupBox();
             this.label121 = new System.Windows.Forms.Label();
-            this.DataFilenameCommonRootCorr = new System.Windows.Forms.TextBox();
+            this.DataFilenameCommonRoot1Corr = new System.Windows.Forms.TextBox();
             this.label122 = new System.Windows.Forms.Label();
             this.DataFilenameFolderPathCorr = new System.Windows.Forms.TextBox();
             this.label120 = new System.Windows.Forms.Label();
@@ -378,8 +386,10 @@
             this.CameraStartButton = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox49 = new System.Windows.Forms.GroupBox();
+            this.label143 = new System.Windows.Forms.Label();
+            this.DataFilenameCommonRoot2 = new System.Windows.Forms.TextBox();
             this.label94 = new System.Windows.Forms.Label();
-            this.DataFilenameCommonRoot = new System.Windows.Forms.TextBox();
+            this.DataFilenameCommonRoot1 = new System.Windows.Forms.TextBox();
             this.label93 = new System.Windows.Forms.Label();
             this.DataFilenameFolderPath = new System.Windows.Forms.TextBox();
             this.groupBox48 = new System.Windows.Forms.GroupBox();
@@ -522,6 +532,7 @@
             this.groupBox55.SuspendLayout();
             this.groupBox54.SuspendLayout();
             this.tabPage10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PulsedProbeSwitch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.switchDisplayBases)).BeginInit();
@@ -2710,6 +2721,14 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.label142);
+            this.tabPage10.Controls.Add(this.label141);
+            this.tabPage10.Controls.Add(this.label97);
+            this.tabPage10.Controls.Add(this.label96);
+            this.tabPage10.Controls.Add(this.label44);
+            this.tabPage10.Controls.Add(this.pulsedDutyText);
+            this.tabPage10.Controls.Add(this.pulseFreqText);
+            this.tabPage10.Controls.Add(this.PulsedProbeSwitch);
             this.tabPage10.Controls.Add(this.label136);
             this.tabPage10.Controls.Add(this.label135);
             this.tabPage10.Controls.Add(this.correlatorBitFilePathB);
@@ -2767,6 +2786,81 @@
             this.tabPage10.Text = "Correlator";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // label142
+            // 
+            this.label142.AutoSize = true;
+            this.label142.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label142.Location = new System.Drawing.Point(166, 218);
+            this.label142.Name = "label142";
+            this.label142.Size = new System.Drawing.Size(55, 13);
+            this.label142.TabIndex = 201;
+            this.label142.Text = "duty cycle";
+            // 
+            // label141
+            // 
+            this.label141.AutoSize = true;
+            this.label141.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label141.Location = new System.Drawing.Point(166, 178);
+            this.label141.Name = "label141";
+            this.label141.Size = new System.Drawing.Size(53, 13);
+            this.label141.TabIndex = 200;
+            this.label141.Text = "freq (kHz)";
+            // 
+            // label97
+            // 
+            this.label97.AutoSize = true;
+            this.label97.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label97.Location = new System.Drawing.Point(286, 262);
+            this.label97.Name = "label97";
+            this.label97.Size = new System.Drawing.Size(27, 13);
+            this.label97.TabIndex = 199;
+            this.label97.Text = "OFF";
+            // 
+            // label96
+            // 
+            this.label96.AutoSize = true;
+            this.label96.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label96.Location = new System.Drawing.Point(290, 185);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(23, 13);
+            this.label96.TabIndex = 198;
+            this.label96.Text = "ON";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.Location = new System.Drawing.Point(231, 162);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(82, 13);
+            this.label44.TabIndex = 197;
+            this.label44.Text = "Pulsed Probe";
+            // 
+            // pulsedDutyText
+            // 
+            this.pulsedDutyText.Location = new System.Drawing.Point(205, 234);
+            this.pulsedDutyText.Name = "pulsedDutyText";
+            this.pulsedDutyText.Size = new System.Drawing.Size(57, 20);
+            this.pulsedDutyText.TabIndex = 196;
+            this.pulsedDutyText.Text = "0.1";
+            // 
+            // pulseFreqText
+            // 
+            this.pulseFreqText.Location = new System.Drawing.Point(205, 194);
+            this.pulseFreqText.Name = "pulseFreqText";
+            this.pulseFreqText.Size = new System.Drawing.Size(57, 20);
+            this.pulseFreqText.TabIndex = 195;
+            this.pulseFreqText.Text = "200";
+            // 
+            // PulsedProbeSwitch
+            // 
+            this.PulsedProbeSwitch.Location = new System.Drawing.Point(268, 188);
+            this.PulsedProbeSwitch.Name = "PulsedProbeSwitch";
+            this.PulsedProbeSwitch.Size = new System.Drawing.Size(64, 96);
+            this.PulsedProbeSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.PulsedProbeSwitch.TabIndex = 194;
+            this.PulsedProbeSwitch.Value = true;
+            // 
             // label136
             // 
             this.label136.AutoSize = true;
@@ -2793,7 +2887,7 @@
             this.correlatorBitFilePathB.Name = "correlatorBitFilePathB";
             this.correlatorBitFilePathB.Size = new System.Drawing.Size(456, 20);
             this.correlatorBitFilePathB.TabIndex = 191;
-            this.correlatorBitFilePathB.Text = "F:\\VIs\\VV_Photonpy\\ArrayCorrelator_XEM6001_devel_02_09_2013\\photoncounter.bit";
+            this.correlatorBitFilePathB.Text = "F:\\VIs\\VV_Photonpy\\FastBalancedCorrelatorGitHub\\photoncounter.bit";
             // 
             // label132
             // 
@@ -2875,7 +2969,7 @@
             // 
             this.label128.AutoSize = true;
             this.label128.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label128.Location = new System.Drawing.Point(166, 342);
+            this.label128.Location = new System.Drawing.Point(166, 393);
             this.label128.Name = "label128";
             this.label128.Size = new System.Drawing.Size(116, 13);
             this.label128.TabIndex = 183;
@@ -2885,7 +2979,7 @@
             // 
             this.label127.AutoSize = true;
             this.label127.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label127.Location = new System.Drawing.Point(185, 259);
+            this.label127.Location = new System.Drawing.Point(185, 310);
             this.label127.Name = "label127";
             this.label127.Size = new System.Drawing.Size(69, 13);
             this.label127.TabIndex = 182;
@@ -2895,7 +2989,7 @@
             // 
             this.label125.AutoSize = true;
             this.label125.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label125.Location = new System.Drawing.Point(204, 225);
+            this.label125.Location = new System.Drawing.Point(204, 286);
             this.label125.Name = "label125";
             this.label125.Size = new System.Drawing.Size(36, 13);
             this.label125.TabIndex = 181;
@@ -2903,7 +2997,7 @@
             // 
             // switchDisplayBases
             // 
-            this.switchDisplayBases.Location = new System.Drawing.Point(188, 259);
+            this.switchDisplayBases.Location = new System.Drawing.Point(188, 310);
             this.switchDisplayBases.Name = "switchDisplayBases";
             this.switchDisplayBases.Size = new System.Drawing.Size(64, 96);
             this.switchDisplayBases.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -2935,7 +3029,7 @@
             // groupBox58
             // 
             this.groupBox58.Controls.Add(this.label121);
-            this.groupBox58.Controls.Add(this.DataFilenameCommonRootCorr);
+            this.groupBox58.Controls.Add(this.DataFilenameCommonRoot1Corr);
             this.groupBox58.Controls.Add(this.label122);
             this.groupBox58.Controls.Add(this.DataFilenameFolderPathCorr);
             this.groupBox58.Location = new System.Drawing.Point(624, 422);
@@ -2955,12 +3049,12 @@
             this.label121.TabIndex = 22;
             this.label121.Text = "Common Filename";
             // 
-            // DataFilenameCommonRootCorr
+            // DataFilenameCommonRoot1Corr
             // 
-            this.DataFilenameCommonRootCorr.Location = new System.Drawing.Point(6, 90);
-            this.DataFilenameCommonRootCorr.Name = "DataFilenameCommonRootCorr";
-            this.DataFilenameCommonRootCorr.Size = new System.Drawing.Size(305, 20);
-            this.DataFilenameCommonRootCorr.TabIndex = 21;
+            this.DataFilenameCommonRoot1Corr.Location = new System.Drawing.Point(6, 90);
+            this.DataFilenameCommonRoot1Corr.Name = "DataFilenameCommonRoot1Corr";
+            this.DataFilenameCommonRoot1Corr.Size = new System.Drawing.Size(305, 20);
+            this.DataFilenameCommonRoot1Corr.TabIndex = 21;
             // 
             // label122
             // 
@@ -4207,16 +4301,35 @@
             // 
             // groupBox49
             // 
+            this.groupBox49.Controls.Add(this.label143);
+            this.groupBox49.Controls.Add(this.DataFilenameCommonRoot2);
             this.groupBox49.Controls.Add(this.label94);
-            this.groupBox49.Controls.Add(this.DataFilenameCommonRoot);
+            this.groupBox49.Controls.Add(this.DataFilenameCommonRoot1);
             this.groupBox49.Controls.Add(this.label93);
             this.groupBox49.Controls.Add(this.DataFilenameFolderPath);
-            this.groupBox49.Location = new System.Drawing.Point(404, 28);
+            this.groupBox49.Location = new System.Drawing.Point(512, 28);
             this.groupBox49.Name = "groupBox49";
-            this.groupBox49.Size = new System.Drawing.Size(325, 117);
+            this.groupBox49.Size = new System.Drawing.Size(325, 169);
             this.groupBox49.TabIndex = 21;
             this.groupBox49.TabStop = false;
             this.groupBox49.Text = "Root";
+            // 
+            // label143
+            // 
+            this.label143.AutoSize = true;
+            this.label143.ForeColor = System.Drawing.Color.Coral;
+            this.label143.Location = new System.Drawing.Point(6, 127);
+            this.label143.Name = "label143";
+            this.label143.Size = new System.Drawing.Size(102, 13);
+            this.label143.TabIndex = 24;
+            this.label143.Text = "Common Filename 2";
+            // 
+            // DataFilenameCommonRoot2
+            // 
+            this.DataFilenameCommonRoot2.Location = new System.Drawing.Point(6, 143);
+            this.DataFilenameCommonRoot2.Name = "DataFilenameCommonRoot2";
+            this.DataFilenameCommonRoot2.Size = new System.Drawing.Size(305, 20);
+            this.DataFilenameCommonRoot2.TabIndex = 23;
             // 
             // label94
             // 
@@ -4224,16 +4337,16 @@
             this.label94.ForeColor = System.Drawing.Color.Coral;
             this.label94.Location = new System.Drawing.Point(6, 74);
             this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(93, 13);
+            this.label94.Size = new System.Drawing.Size(102, 13);
             this.label94.TabIndex = 22;
-            this.label94.Text = "Common Filename";
+            this.label94.Text = "Common Filename 1";
             // 
-            // DataFilenameCommonRoot
+            // DataFilenameCommonRoot1
             // 
-            this.DataFilenameCommonRoot.Location = new System.Drawing.Point(6, 90);
-            this.DataFilenameCommonRoot.Name = "DataFilenameCommonRoot";
-            this.DataFilenameCommonRoot.Size = new System.Drawing.Size(305, 20);
-            this.DataFilenameCommonRoot.TabIndex = 21;
+            this.DataFilenameCommonRoot1.Location = new System.Drawing.Point(6, 90);
+            this.DataFilenameCommonRoot1.Name = "DataFilenameCommonRoot1";
+            this.DataFilenameCommonRoot1.Size = new System.Drawing.Size(305, 20);
+            this.DataFilenameCommonRoot1.TabIndex = 21;
             // 
             // label93
             // 
@@ -4275,7 +4388,7 @@
             this.groupBox48.Controls.Add(this.CavityPowerTextbox);
             this.groupBox48.Controls.Add(this.Doppler35Textbox);
             this.groupBox48.Controls.Add(this.label88);
-            this.groupBox48.Location = new System.Drawing.Point(184, 28);
+            this.groupBox48.Location = new System.Drawing.Point(292, 28);
             this.groupBox48.Name = "groupBox48";
             this.groupBox48.Size = new System.Drawing.Size(182, 297);
             this.groupBox48.TabIndex = 20;
@@ -4455,9 +4568,12 @@
             // 
             this.DataFilenameChecklist.FormattingEnabled = true;
             this.DataFilenameChecklist.Items.AddRange(new object[] {
-            "Detuning",
-            "Integration Time",
+            "Integration Time (Camera)",
             "EM Gain",
+            "Integration Time (Correlator)",
+            "Pulse Probe Duty Cycle",
+            "Pulse Probe Clock Frequency",
+            "Detuning",
             "Sigma1 Power",
             "Sigma2 Power",
             "Pi Power",
@@ -4476,7 +4592,7 @@
             "Array Ratio"});
             this.DataFilenameChecklist.Location = new System.Drawing.Point(30, 48);
             this.DataFilenameChecklist.Name = "DataFilenameChecklist";
-            this.DataFilenameChecklist.Size = new System.Drawing.Size(120, 289);
+            this.DataFilenameChecklist.Size = new System.Drawing.Size(166, 334);
             this.DataFilenameChecklist.TabIndex = 0;
             // 
             // ElectrodeScanStart
@@ -5103,6 +5219,7 @@
             this.groupBox54.PerformLayout();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PulsedProbeSwitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.switchDisplayBases)).EndInit();
@@ -5418,7 +5535,7 @@
         private System.Windows.Forms.Label label88;
         private System.Windows.Forms.GroupBox groupBox49;
         private System.Windows.Forms.Label label94;
-        private System.Windows.Forms.TextBox DataFilenameCommonRoot;
+        private System.Windows.Forms.TextBox DataFilenameCommonRoot1;
         private System.Windows.Forms.Label label93;
         private System.Windows.Forms.TextBox DataFilenameFolderPath;
         private System.Windows.Forms.Label label95;
@@ -5515,7 +5632,7 @@
         private System.Windows.Forms.Label label120;
         private System.Windows.Forms.GroupBox groupBox58;
         private System.Windows.Forms.Label label121;
-        private System.Windows.Forms.TextBox DataFilenameCommonRootCorr;
+        private System.Windows.Forms.TextBox DataFilenameCommonRoot1Corr;
         private System.Windows.Forms.Label label122;
         private System.Windows.Forms.TextBox DataFilenameFolderPathCorr;
         private System.Windows.Forms.TextBox correlatorCLKDIVISORtext;
@@ -5588,6 +5705,16 @@
         private System.Windows.Forms.Label label137;
         private System.Windows.Forms.Label label140;
         private System.Windows.Forms.Label label139;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox pulsedDutyText;
+        private System.Windows.Forms.TextBox pulseFreqText;
+        private NationalInstruments.UI.WindowsForms.Switch PulsedProbeSwitch;
+        private System.Windows.Forms.Label label97;
+        private System.Windows.Forms.Label label96;
+        private System.Windows.Forms.Label label141;
+        private System.Windows.Forms.Label label142;
+        private System.Windows.Forms.Label label143;
+        private System.Windows.Forms.TextBox DataFilenameCommonRoot2;
     }
 }
 

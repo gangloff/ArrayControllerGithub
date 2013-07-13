@@ -838,12 +838,12 @@ namespace ArrayDACControl
             if (what == 1)
             {
                 theString[0] = DataFilenameFolderPath.Text;
-                theString[1] = DataFilenameCommonRoot.Text + " ";
+                theString[1] = DataFilenameCommonRoot1.Text + " ";
             }
             else if (what == 2)
             {
                 theString[0] = DataFilenameFolderPathCorr.Text;
-                theString[1] = DataFilenameCommonRootCorr.Text + " ";
+                theString[1] = DataFilenameCommonRoot1Corr.Text + " ";
             }
 
             for (int i = 0; i < DataFilenameChecklist.CheckedIndices.Count; i++)
@@ -1400,8 +1400,17 @@ namespace ArrayDACControl
                 { theCorrelator.ClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2B.Text) - 1, 0)); }
             }
 
+            theCorrelator.PulseClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / double.Parse(pulseFreqText.Text) - 1, 0));
+            theCorrelator.PulseWidthDiv = (int)(Math.Round(theCorrelator.PulseClkDiv * double.Parse(pulsedDutyText.Text)));
+
             theCorrelator.bound1 = int.Parse(correlatorBound1text.Text);
             theCorrelator.bound2 = int.Parse(correlatorBound2text.Text);
+
+            //Set boolean in correlator for data collection according to duty cycle or not
+            //pulseprobe ON means boolean is true
+            if (PulsedProbeSwitch.Value) { theCorrelator.collectDutyCycle = true; }
+            else { theCorrelator.collectDutyCycle = false; }
+            
 
             //Attempt Initialize
             bool auxInitBool = true;
@@ -1416,6 +1425,8 @@ namespace ArrayDACControl
 
         private void CorrelatorExecute()
         {
+            //clear graph
+            scatterGraph3.ClearData();
             //initialize parameters and attempt init, continue only if init returns true
             if (CorrelatorParameterInit())
             {
@@ -1490,13 +1501,6 @@ namespace ArrayDACControl
 
             //((IDisposable)theCorrelator).Dispose();
         }
-
-
-
-
-
-
-
 
 
         private void CorrelatorExecuteFrmCallbackCh1()
