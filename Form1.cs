@@ -838,7 +838,8 @@ namespace ArrayDACControl
             if (what == 1)
             {
                 theString[0] = DataFilenameFolderPath.Text;
-                theString[1] = DataFilenameCommonRoot1.Text + " ";
+                if (CommonFilenameSwitch.Value) { theString[1] = DataFilenameCommonRoot1.Text + " "; }
+                else { theString[1] = DataFilenameCommonRoot2.Text + " "; }
             }
             else if (what == 2)
             {
@@ -851,60 +852,70 @@ namespace ArrayDACControl
                 switch (DataFilenameChecklist.CheckedIndices[i])
                 {
                     case 0:
-                        theString[1] += "det=" + DetuningTextbox.Text + " ";
+                        theString[1] += "camdt=" + CameraExposure.Text + "s ";
                         break;
                     case 1:
-                        theString[1] += "dt=" + CameraExposure.Text + "s ";
-                        break;
-                    case 2:
                         theString[1] += "EM=" + CameraEMGain.Text + " ";
                         break;
+                    case 2:
+                        if (intTselector.Value) { theString[1] += "corrdt=" + correlatorIntTimetext1.Text + "ms "; }
+                        else { theString[1] += "corrdt=" + correlatorIntTimetext2.Text + "ms "; }
+                        break;
                     case 3:
-                        theString[1] += "sig1=" + S1PowerTextbox.Text + " ";
+                        theString[1] += "ppdc=" + pulsedDutyText.Text + " ";
                         break;
                     case 4:
-                        theString[1] += "sig2=" + S2PowerTextbox.Text + " ";
+                        theString[1] += "ppdf=" + pulseFreqText.Text + "kHz ";
                         break;
                     case 5:
-                        theString[1] += "pi=" + PiPowerTextbox.Text + " ";
+                        theString[1] += "det=" + DetuningTextbox.Text + " ";
                         break;
                     case 6:
-                        theString[1] += "dop35=" + Doppler35Textbox.Text + " ";
+                        theString[1] += "sig1=" + S1PowerTextbox.Text + " ";
                         break;
                     case 7:
-                        theString[1] += "cav=" + CavityPowerTextbox.Text + " ";
+                        theString[1] += "sig2=" + S2PowerTextbox.Text + " ";
                         break;
                     case 8:
-                        theString[1] += "Bx=" + BxTextbox.Text + " ";
+                        theString[1] += "pi=" + PiPowerTextbox.Text + " ";
                         break;
                     case 9:
-                        theString[1] += "By=" + ByTextbox.Text + " ";
+                        theString[1] += "dop35=" + Doppler35Textbox.Text + " ";
                         break;
                     case 10:
-                        theString[1] += "Bz=" + BzTextbox.Text + " ";
+                        theString[1] += "cav=" + CavityPowerTextbox.Text + " ";
                         break;
                     case 11:
-                        theString[1] += "Ulatt=" + LatticeDepthTextbox.Text + " ";
+                        theString[1] += "Bx=" + BxTextbox.Text + " ";
                         break;
                     case 12:
-                        theString[1] += "array=" + ArrayTotalSlider.Value.ToString("F2") + " ";
+                        theString[1] += "By=" + ByTextbox.Text + " ";
                         break;
                     case 13:
-                        theString[1] += "DY=" + TotalBiasSlider.Value.ToString("F2") + " ";
+                        theString[1] += "Bz=" + BzTextbox.Text + " ";
                         break;
                     case 14:
-                        theString[1] += "DCQuad=" + DCVertQuadSlider.Value.ToString("F2") + " ";
+                        theString[1] += "Ulatt=" + LatticeDepthTextbox.Text + " ";
                         break;
                     case 15:
-                        theString[1] += "DX=" + DXSlider.Value.ToString("F3") + " ";
+                        theString[1] += "array=" + ArrayTotalSlider.Value.ToString("F2") + " ";
                         break;
                     case 16:
-                        theString[1] += "QuadTilt=" + QuadrupoleTilt.Value.ToString("F2") + " ";
+                        theString[1] += "DY=" + TotalBiasSlider.Value.ToString("F2") + " ";
                         break;
                     case 17:
-                        theString[1] += "QuadRatio=" + QuadTiltRatioSlider.Value.ToString("F2") + " ";
+                        theString[1] += "DCQuad=" + DCVertQuadSlider.Value.ToString("F2") + " ";
                         break;
                     case 18:
+                        theString[1] += "DX=" + DXSlider.Value.ToString("F3") + " ";
+                        break;
+                    case 19:
+                        theString[1] += "QuadTilt=" + QuadrupoleTilt.Value.ToString("F2") + " ";
+                        break;
+                    case 20:
+                        theString[1] += "QuadRatio=" + QuadTiltRatioSlider.Value.ToString("F2") + " ";
+                        break;
+                    case 21:
                         theString[1] += "ArrayRatio=" + RatioSlider.Value.ToString("F2") + " ";
                         break;
 
@@ -1368,6 +1379,43 @@ namespace ArrayDACControl
         //CORRELATOR
         //
 
+        private void CorrelatorGetResultsHelper()
+        {
+            //Raise wire to tell FPGA to start collecting data
+
+            //get reading from Correlator FPGA
+            //Wait for Ch1 and Ch2 flags to be raised
+            theCorrelator.GetResults();
+            while (!(theCorrelator.feedflagCh1 && theCorrelator.feedflagCh2))
+            {
+                theCorrelator.GetResults();
+            }
+            //Lower wire to stop FPGA acquiring
+
+            //If array reset checked, lower array to 0 and back to initial value
+            if (ArrayReset.Checked)
+            {
+                try
+                {
+                    this.Invoke(new MyDelegate(CorrelatorArrayResetFormCallback));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+        }
+
+        private void CorrelatorArrayResetFormCallback()
+        {
+            double initialValue = ArrayTotalSlider.Value;
+            //reset
+            ArrayTotalSlider.Value = 0;
+            //wait for low pass
+            Thread.Sleep(int.Parse(ArrayResetDelayText.Text));
+            //go back
+            ArrayTotalSlider.Value = initialValue;
+            //wait for low pass
+            Thread.Sleep(int.Parse(ArrayResetDelayText.Text));
+        }    
+
         private bool CorrelatorParameterInit()
         {
             //Initialize Correlator Parameters
@@ -1441,22 +1489,14 @@ namespace ArrayDACControl
                 while (CorrelatorThreadHelper.IsRunningFlag)
                 {
                     //get reading from Correlator FPGA
-                    theCorrelator.GetResults();
+                    CorrelatorGetResultsHelper();
 
-                    //MessageBox.Show("here");
-
-                    if (theCorrelator.feedflagCh1 && theCorrelator.feedflagCh2)
+                    //Correlator Plots
+                    try
                     {
-                        //threading structure that tries to pass a message to the main thread
-                        try
-                        {
-                            this.Invoke(new MyDelegate(CorrelatorExecuteFrmCallbackCh1));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                        //wait
-                        //Thread.Sleep(int.Parse(correlatorIntTimetext.Text));
+                        this.Invoke(new MyDelegate(CorrelatorExecuteFrmCallbackCh1));
                     }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
 
                     /*
                     if (theCorrelator.feedflagCh1)
@@ -1939,16 +1979,8 @@ namespace ArrayDACControl
                 // if Correlator:Sum selected, get reading from correlator, and sum bins
                 if (ElectrodeScanThreadHelper.message == "Correlator:Sum")
                 {
-                    //Raise wire to tell FPGA to start collecting data
-
-                    //get reading from Correlator FPGA
-                    //Wait for Ch1 and Ch2 flags to be raised
-                    theCorrelator.GetResults();
-                    while (!(theCorrelator.feedflagCh1 && theCorrelator.feedflagCh2))
-                    {
-                        theCorrelator.GetResults();
-                    }
-                    //Lower wire to stop FPGA acquiring
+                    //Get results into correlator object
+                    CorrelatorGetResultsHelper();
 
                     //Put sum of two channels data in Thread array
                     ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
@@ -2445,16 +2477,8 @@ namespace ArrayDACControl
                 // if Correlator:Sum selected, get reading from correlator, and sum bins
                 if (BfieldScanThreadHelper.message == "Correlator:Sum")
                 {
-                    //Raise wire to tell FPGA to start collecting data
-
-                    //get reading from Correlator FPGA
-                    //Wait for Ch1 and Ch2 flags to be raised
-                    theCorrelator.GetResults();
-                    while (!(theCorrelator.feedflagCh1 && theCorrelator.feedflagCh2))
-                    {
-                        theCorrelator.GetResults();
-                    }
-                    //Lower wire to stop FPGA acquiring
+                    //Get results into correlator object
+                    CorrelatorGetResultsHelper();
 
                     //Put sum of two channels data in Thread array
                     BfieldScanThreadHelper.DoubleData[0, BfieldScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
@@ -2873,16 +2897,8 @@ namespace ArrayDACControl
                 // if Correlator:Sum selected, get reading from correlator, and sum bins
                 if (TickleScanThreadHelper.message == "Correlator:Sum")
                 {
-                    //Raise wire to tell FPGA to start collecting data
-
-                    //get reading from Correlator FPGA
-                    //Wait for Ch1 and Ch2 flags to be raised
-                    theCorrelator.GetResults();
-                    while (!(theCorrelator.feedflagCh1 && theCorrelator.feedflagCh2))
-                    {
-                        theCorrelator.GetResults();
-                    }
-                    //Lower wire to stop FPGA acquiring
+                    //Get results into correlator object
+                    CorrelatorGetResultsHelper();
 
                     //Put sum of two channels data in Thread array
                     TickleScanThreadHelper.DoubleData[0, TickleScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
@@ -3680,8 +3696,6 @@ namespace ArrayDACControl
             }
 
         }
-
-
 
         //
         // CAMERA FORM THREAD

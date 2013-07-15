@@ -231,6 +231,10 @@
             this.TickleScanStartValueTextbox = new System.Windows.Forms.TextBox();
             this.TickleSlider = new ArrayDACControl.AdjustableSlider();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.ArrayResetBox = new System.Windows.Forms.GroupBox();
+            this.ArrayReset = new System.Windows.Forms.CheckBox();
+            this.ArrayResetDelayLabel = new System.Windows.Forms.Label();
+            this.ArrayResetDelayText = new System.Windows.Forms.TextBox();
             this.label142 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
             this.label97 = new System.Windows.Forms.Label();
@@ -386,6 +390,7 @@
             this.CameraStartButton = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox49 = new System.Windows.Forms.GroupBox();
+            this.CommonFilenameSwitch = new NationalInstruments.UI.WindowsForms.Switch();
             this.label143 = new System.Windows.Forms.Label();
             this.DataFilenameCommonRoot2 = new System.Windows.Forms.TextBox();
             this.label94 = new System.Windows.Forms.Label();
@@ -532,6 +537,7 @@
             this.groupBox55.SuspendLayout();
             this.groupBox54.SuspendLayout();
             this.tabPage10.SuspendLayout();
+            this.ArrayResetBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PulsedProbeSwitch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).BeginInit();
@@ -558,6 +564,7 @@
             this.groupBox42.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.groupBox49.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CommonFilenameSwitch)).BeginInit();
             this.groupBox48.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PMTcountGraph)).BeginInit();
@@ -2721,6 +2728,7 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.ArrayResetBox);
             this.tabPage10.Controls.Add(this.label142);
             this.tabPage10.Controls.Add(this.label141);
             this.tabPage10.Controls.Add(this.label97);
@@ -2786,11 +2794,51 @@
             this.tabPage10.Text = "Correlator";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // ArrayResetBox
+            // 
+            this.ArrayResetBox.Controls.Add(this.ArrayReset);
+            this.ArrayResetBox.Controls.Add(this.ArrayResetDelayLabel);
+            this.ArrayResetBox.Controls.Add(this.ArrayResetDelayText);
+            this.ArrayResetBox.Location = new System.Drawing.Point(310, 290);
+            this.ArrayResetBox.Name = "ArrayResetBox";
+            this.ArrayResetBox.Size = new System.Drawing.Size(96, 93);
+            this.ArrayResetBox.TabIndex = 205;
+            this.ArrayResetBox.TabStop = false;
+            this.ArrayResetBox.Text = "Array Reset";
+            // 
+            // ArrayReset
+            // 
+            this.ArrayReset.AutoSize = true;
+            this.ArrayReset.Location = new System.Drawing.Point(6, 19);
+            this.ArrayReset.Name = "ArrayReset";
+            this.ArrayReset.Size = new System.Drawing.Size(87, 17);
+            this.ArrayReset.TabIndex = 202;
+            this.ArrayReset.Text = "Reset Array?";
+            this.ArrayReset.UseVisualStyleBackColor = true;
+            // 
+            // ArrayResetDelayLabel
+            // 
+            this.ArrayResetDelayLabel.AutoSize = true;
+            this.ArrayResetDelayLabel.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.ArrayResetDelayLabel.Location = new System.Drawing.Point(6, 47);
+            this.ArrayResetDelayLabel.Name = "ArrayResetDelayLabel";
+            this.ArrayResetDelayLabel.Size = new System.Drawing.Size(56, 13);
+            this.ArrayResetDelayLabel.TabIndex = 204;
+            this.ArrayResetDelayLabel.Text = "Delay (ms)";
+            // 
+            // ArrayResetDelayText
+            // 
+            this.ArrayResetDelayText.Location = new System.Drawing.Point(6, 63);
+            this.ArrayResetDelayText.Name = "ArrayResetDelayText";
+            this.ArrayResetDelayText.Size = new System.Drawing.Size(57, 20);
+            this.ArrayResetDelayText.TabIndex = 203;
+            this.ArrayResetDelayText.Text = "20";
+            // 
             // label142
             // 
             this.label142.AutoSize = true;
             this.label142.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label142.Location = new System.Drawing.Point(166, 218);
+            this.label142.Location = new System.Drawing.Point(187, 218);
             this.label142.Name = "label142";
             this.label142.Size = new System.Drawing.Size(55, 13);
             this.label142.TabIndex = 201;
@@ -2800,7 +2848,7 @@
             // 
             this.label141.AutoSize = true;
             this.label141.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label141.Location = new System.Drawing.Point(166, 178);
+            this.label141.Location = new System.Drawing.Point(187, 178);
             this.label141.Name = "label141";
             this.label141.Size = new System.Drawing.Size(53, 13);
             this.label141.TabIndex = 200;
@@ -2810,7 +2858,7 @@
             // 
             this.label97.AutoSize = true;
             this.label97.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label97.Location = new System.Drawing.Point(286, 262);
+            this.label97.Location = new System.Drawing.Point(307, 262);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(27, 13);
             this.label97.TabIndex = 199;
@@ -2820,7 +2868,7 @@
             // 
             this.label96.AutoSize = true;
             this.label96.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label96.Location = new System.Drawing.Point(290, 185);
+            this.label96.Location = new System.Drawing.Point(311, 185);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(23, 13);
             this.label96.TabIndex = 198;
@@ -2830,7 +2878,7 @@
             // 
             this.label44.AutoSize = true;
             this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.Location = new System.Drawing.Point(231, 162);
+            this.label44.Location = new System.Drawing.Point(252, 162);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(82, 13);
             this.label44.TabIndex = 197;
@@ -2838,7 +2886,7 @@
             // 
             // pulsedDutyText
             // 
-            this.pulsedDutyText.Location = new System.Drawing.Point(205, 234);
+            this.pulsedDutyText.Location = new System.Drawing.Point(226, 234);
             this.pulsedDutyText.Name = "pulsedDutyText";
             this.pulsedDutyText.Size = new System.Drawing.Size(57, 20);
             this.pulsedDutyText.TabIndex = 196;
@@ -2846,7 +2894,7 @@
             // 
             // pulseFreqText
             // 
-            this.pulseFreqText.Location = new System.Drawing.Point(205, 194);
+            this.pulseFreqText.Location = new System.Drawing.Point(226, 194);
             this.pulseFreqText.Name = "pulseFreqText";
             this.pulseFreqText.Size = new System.Drawing.Size(57, 20);
             this.pulseFreqText.TabIndex = 195;
@@ -2854,7 +2902,7 @@
             // 
             // PulsedProbeSwitch
             // 
-            this.PulsedProbeSwitch.Location = new System.Drawing.Point(268, 188);
+            this.PulsedProbeSwitch.Location = new System.Drawing.Point(289, 188);
             this.PulsedProbeSwitch.Name = "PulsedProbeSwitch";
             this.PulsedProbeSwitch.Size = new System.Drawing.Size(64, 96);
             this.PulsedProbeSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -2865,7 +2913,7 @@
             // 
             this.label136.AutoSize = true;
             this.label136.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label136.Location = new System.Drawing.Point(545, 51);
+            this.label136.Location = new System.Drawing.Point(559, 51);
             this.label136.Name = "label136";
             this.label136.Size = new System.Drawing.Size(14, 13);
             this.label136.TabIndex = 193;
@@ -2875,7 +2923,7 @@
             // 
             this.label135.AutoSize = true;
             this.label135.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label135.Location = new System.Drawing.Point(545, 29);
+            this.label135.Location = new System.Drawing.Point(559, 29);
             this.label135.Name = "label135";
             this.label135.Size = new System.Drawing.Size(14, 13);
             this.label135.TabIndex = 192;
@@ -2883,7 +2931,7 @@
             // 
             // correlatorBitFilePathB
             // 
-            this.correlatorBitFilePathB.Location = new System.Drawing.Point(565, 48);
+            this.correlatorBitFilePathB.Location = new System.Drawing.Point(579, 48);
             this.correlatorBitFilePathB.Name = "correlatorBitFilePathB";
             this.correlatorBitFilePathB.Size = new System.Drawing.Size(456, 20);
             this.correlatorBitFilePathB.TabIndex = 191;
@@ -2893,7 +2941,7 @@
             // 
             this.label132.AutoSize = true;
             this.label132.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label132.Location = new System.Drawing.Point(868, 208);
+            this.label132.Location = new System.Drawing.Point(882, 208);
             this.label132.Name = "label132";
             this.label132.Size = new System.Drawing.Size(90, 13);
             this.label132.TabIndex = 190;
@@ -2903,7 +2951,7 @@
             // 
             this.label133.AutoSize = true;
             this.label133.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label133.Location = new System.Drawing.Point(869, 120);
+            this.label133.Location = new System.Drawing.Point(883, 120);
             this.label133.Name = "label133";
             this.label133.Size = new System.Drawing.Size(86, 13);
             this.label133.TabIndex = 189;
@@ -2913,7 +2961,7 @@
             // 
             this.label134.AutoSize = true;
             this.label134.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label134.Location = new System.Drawing.Point(868, 98);
+            this.label134.Location = new System.Drawing.Point(882, 98);
             this.label134.Name = "label134";
             this.label134.Size = new System.Drawing.Size(86, 13);
             this.label134.TabIndex = 188;
@@ -2921,7 +2969,7 @@
             // 
             // chooseCode
             // 
-            this.chooseCode.Location = new System.Drawing.Point(871, 125);
+            this.chooseCode.Location = new System.Drawing.Point(885, 125);
             this.chooseCode.Name = "chooseCode";
             this.chooseCode.Size = new System.Drawing.Size(64, 96);
             this.chooseCode.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -2969,7 +3017,7 @@
             // 
             this.label128.AutoSize = true;
             this.label128.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label128.Location = new System.Drawing.Point(166, 393);
+            this.label128.Location = new System.Drawing.Point(187, 393);
             this.label128.Name = "label128";
             this.label128.Size = new System.Drawing.Size(116, 13);
             this.label128.TabIndex = 183;
@@ -2979,7 +3027,7 @@
             // 
             this.label127.AutoSize = true;
             this.label127.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label127.Location = new System.Drawing.Point(185, 310);
+            this.label127.Location = new System.Drawing.Point(206, 310);
             this.label127.Name = "label127";
             this.label127.Size = new System.Drawing.Size(69, 13);
             this.label127.TabIndex = 182;
@@ -2989,7 +3037,7 @@
             // 
             this.label125.AutoSize = true;
             this.label125.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label125.Location = new System.Drawing.Point(204, 286);
+            this.label125.Location = new System.Drawing.Point(225, 286);
             this.label125.Name = "label125";
             this.label125.Size = new System.Drawing.Size(36, 13);
             this.label125.TabIndex = 181;
@@ -2997,7 +3045,7 @@
             // 
             // switchDisplayBases
             // 
-            this.switchDisplayBases.Location = new System.Drawing.Point(188, 310);
+            this.switchDisplayBases.Location = new System.Drawing.Point(209, 310);
             this.switchDisplayBases.Name = "switchDisplayBases";
             this.switchDisplayBases.Size = new System.Drawing.Size(64, 96);
             this.switchDisplayBases.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -3007,21 +3055,21 @@
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(389, 218);
+            this.textBox10.Location = new System.Drawing.Point(410, 218);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(108, 20);
             this.textBox10.TabIndex = 176;
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(389, 201);
+            this.textBox9.Location = new System.Drawing.Point(410, 201);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(108, 20);
             this.textBox9.TabIndex = 175;
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(389, 182);
+            this.textBox7.Location = new System.Drawing.Point(410, 182);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(108, 20);
             this.textBox7.TabIndex = 173;
@@ -3273,7 +3321,7 @@
             // label117
             // 
             this.label117.AutoSize = true;
-            this.label117.Location = new System.Drawing.Point(175, 39);
+            this.label117.Location = new System.Drawing.Point(196, 39);
             this.label117.Name = "label117";
             this.label117.Size = new System.Drawing.Size(160, 104);
             this.label117.TabIndex = 164;
@@ -3400,7 +3448,7 @@
             // 
             this.label106.AutoSize = true;
             this.label106.ForeColor = System.Drawing.Color.Coral;
-            this.label106.Location = new System.Drawing.Point(542, 10);
+            this.label106.Location = new System.Drawing.Point(556, 10);
             this.label106.Name = "label106";
             this.label106.Size = new System.Drawing.Size(60, 13);
             this.label106.TabIndex = 155;
@@ -3408,7 +3456,7 @@
             // 
             // correlatorBitFilePath
             // 
-            this.correlatorBitFilePath.Location = new System.Drawing.Point(565, 26);
+            this.correlatorBitFilePath.Location = new System.Drawing.Point(579, 26);
             this.correlatorBitFilePath.Name = "correlatorBitFilePath";
             this.correlatorBitFilePath.Size = new System.Drawing.Size(456, 20);
             this.correlatorBitFilePath.TabIndex = 154;
@@ -3419,7 +3467,7 @@
             // 
             this.CorrelatorButton.BackColor = System.Drawing.Color.Gray;
             this.CorrelatorButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.CorrelatorButton.Location = new System.Drawing.Point(354, 259);
+            this.CorrelatorButton.Location = new System.Drawing.Point(562, 316);
             this.CorrelatorButton.Name = "CorrelatorButton";
             this.CorrelatorButton.Size = new System.Drawing.Size(142, 66);
             this.CorrelatorButton.TabIndex = 153;
@@ -3452,7 +3500,7 @@
             // label103
             // 
             this.label103.AutoSize = true;
-            this.label103.Location = new System.Drawing.Point(542, 162);
+            this.label103.Location = new System.Drawing.Point(556, 162);
             this.label103.Name = "label103";
             this.label103.Size = new System.Drawing.Size(80, 13);
             this.label103.TabIndex = 23;
@@ -3463,7 +3511,7 @@
             this.correlatorErrorMessages.BackColor = System.Drawing.SystemColors.Window;
             this.correlatorErrorMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.correlatorErrorMessages.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.correlatorErrorMessages.Location = new System.Drawing.Point(545, 178);
+            this.correlatorErrorMessages.Location = new System.Drawing.Point(559, 178);
             this.correlatorErrorMessages.Name = "correlatorErrorMessages";
             this.correlatorErrorMessages.ReadOnly = true;
             this.correlatorErrorMessages.Size = new System.Drawing.Size(204, 114);
@@ -3473,7 +3521,7 @@
             // label102
             // 
             this.label102.AutoSize = true;
-            this.label102.Location = new System.Drawing.Point(542, 75);
+            this.label102.Location = new System.Drawing.Point(556, 75);
             this.label102.Name = "label102";
             this.label102.Size = new System.Drawing.Size(122, 13);
             this.label102.TabIndex = 10;
@@ -3484,7 +3532,7 @@
             this.correlatorID.BackColor = System.Drawing.SystemColors.Window;
             this.correlatorID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.correlatorID.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.correlatorID.Location = new System.Drawing.Point(545, 91);
+            this.correlatorID.Location = new System.Drawing.Point(559, 91);
             this.correlatorID.Name = "correlatorID";
             this.correlatorID.ReadOnly = true;
             this.correlatorID.Size = new System.Drawing.Size(242, 69);
@@ -3501,7 +3549,7 @@
             this.groupBox52.Controls.Add(this.correlatorRefFreqtext);
             this.groupBox52.Controls.Add(this.label100);
             this.groupBox52.Controls.Add(this.correlatorVCOFreqtext);
-            this.groupBox52.Location = new System.Drawing.Point(354, 39);
+            this.groupBox52.Location = new System.Drawing.Point(375, 39);
             this.groupBox52.Name = "groupBox52";
             this.groupBox52.Size = new System.Drawing.Size(154, 136);
             this.groupBox52.TabIndex = 22;
@@ -3602,7 +3650,7 @@
             this.groupBox51.Controls.Add(this.LockinFrequencySwitch);
             this.groupBox51.Location = new System.Drawing.Point(19, 22);
             this.groupBox51.Name = "groupBox51";
-            this.groupBox51.Size = new System.Drawing.Size(141, 386);
+            this.groupBox51.Size = new System.Drawing.Size(156, 386);
             this.groupBox51.TabIndex = 21;
             this.groupBox51.TabStop = false;
             this.groupBox51.Text = "Parameter Values";
@@ -3640,7 +3688,7 @@
             // 
             this.label138.AutoSize = true;
             this.label138.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label138.Location = new System.Drawing.Point(122, 358);
+            this.label138.Location = new System.Drawing.Point(128, 358);
             this.label138.Name = "label138";
             this.label138.Size = new System.Drawing.Size(14, 13);
             this.label138.TabIndex = 195;
@@ -3650,7 +3698,7 @@
             // 
             this.label137.AutoSize = true;
             this.label137.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label137.Location = new System.Drawing.Point(122, 332);
+            this.label137.Location = new System.Drawing.Point(128, 332);
             this.label137.Name = "label137";
             this.label137.Size = new System.Drawing.Size(14, 13);
             this.label137.TabIndex = 194;
@@ -3658,7 +3706,7 @@
             // 
             // LockInFreqtext2B
             // 
-            this.LockInFreqtext2B.Location = new System.Drawing.Point(65, 355);
+            this.LockInFreqtext2B.Location = new System.Drawing.Point(71, 355);
             this.LockInFreqtext2B.Name = "LockInFreqtext2B";
             this.LockInFreqtext2B.Size = new System.Drawing.Size(57, 20);
             this.LockInFreqtext2B.TabIndex = 194;
@@ -3668,7 +3716,7 @@
             // 
             this.label62.AutoSize = true;
             this.label62.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label62.Location = new System.Drawing.Point(-1, 248);
+            this.label62.Location = new System.Drawing.Point(6, 240);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(57, 13);
             this.label62.TabIndex = 176;
@@ -3676,7 +3724,7 @@
             // 
             // LockInFreqtext2
             // 
-            this.LockInFreqtext2.Location = new System.Drawing.Point(65, 329);
+            this.LockInFreqtext2.Location = new System.Drawing.Point(71, 329);
             this.LockInFreqtext2.Name = "LockInFreqtext2";
             this.LockInFreqtext2.Size = new System.Drawing.Size(57, 20);
             this.LockInFreqtext2.TabIndex = 175;
@@ -3692,7 +3740,7 @@
             // 
             // LockInFreqtext1
             // 
-            this.LockInFreqtext1.Location = new System.Drawing.Point(65, 245);
+            this.LockInFreqtext1.Location = new System.Drawing.Point(72, 237);
             this.LockInFreqtext1.Name = "LockInFreqtext1";
             this.LockInFreqtext1.Size = new System.Drawing.Size(57, 20);
             this.LockInFreqtext1.TabIndex = 13;
@@ -3702,7 +3750,7 @@
             // 
             this.label118.AutoSize = true;
             this.label118.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label118.Location = new System.Drawing.Point(-3, 220);
+            this.label118.Location = new System.Drawing.Point(4, 210);
             this.label118.Name = "label118";
             this.label118.Size = new System.Drawing.Size(144, 13);
             this.label118.TabIndex = 12;
@@ -3757,7 +3805,7 @@
             // 
             this.label63.AutoSize = true;
             this.label63.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label63.Location = new System.Drawing.Point(-1, 332);
+            this.label63.Location = new System.Drawing.Point(5, 332);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(64, 13);
             this.label63.TabIndex = 177;
@@ -3766,7 +3814,7 @@
             // LockinFrequencySwitch
             // 
             this.LockinFrequencySwitch.Cursor = System.Windows.Forms.Cursors.Default;
-            this.LockinFrequencySwitch.Location = new System.Drawing.Point(67, 240);
+            this.LockinFrequencySwitch.Location = new System.Drawing.Point(67, 247);
             this.LockinFrequencySwitch.Name = "LockinFrequencySwitch";
             this.LockinFrequencySwitch.Size = new System.Drawing.Size(52, 89);
             this.LockinFrequencySwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -4301,18 +4349,28 @@
             // 
             // groupBox49
             // 
+            this.groupBox49.Controls.Add(this.CommonFilenameSwitch);
             this.groupBox49.Controls.Add(this.label143);
             this.groupBox49.Controls.Add(this.DataFilenameCommonRoot2);
             this.groupBox49.Controls.Add(this.label94);
             this.groupBox49.Controls.Add(this.DataFilenameCommonRoot1);
             this.groupBox49.Controls.Add(this.label93);
             this.groupBox49.Controls.Add(this.DataFilenameFolderPath);
-            this.groupBox49.Location = new System.Drawing.Point(512, 28);
+            this.groupBox49.Location = new System.Drawing.Point(479, 28);
             this.groupBox49.Name = "groupBox49";
-            this.groupBox49.Size = new System.Drawing.Size(325, 169);
+            this.groupBox49.Size = new System.Drawing.Size(391, 169);
             this.groupBox49.TabIndex = 21;
             this.groupBox49.TabStop = false;
             this.groupBox49.Text = "Root";
+            // 
+            // CommonFilenameSwitch
+            // 
+            this.CommonFilenameSwitch.Location = new System.Drawing.Point(317, 78);
+            this.CommonFilenameSwitch.Name = "CommonFilenameSwitch";
+            this.CommonFilenameSwitch.Size = new System.Drawing.Size(64, 96);
+            this.CommonFilenameSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.CommonFilenameSwitch.TabIndex = 195;
+            this.CommonFilenameSwitch.Value = true;
             // 
             // label143
             // 
@@ -4388,7 +4446,7 @@
             this.groupBox48.Controls.Add(this.CavityPowerTextbox);
             this.groupBox48.Controls.Add(this.Doppler35Textbox);
             this.groupBox48.Controls.Add(this.label88);
-            this.groupBox48.Location = new System.Drawing.Point(292, 28);
+            this.groupBox48.Location = new System.Drawing.Point(246, 28);
             this.groupBox48.Name = "groupBox48";
             this.groupBox48.Size = new System.Drawing.Size(182, 297);
             this.groupBox48.TabIndex = 20;
@@ -5219,6 +5277,8 @@
             this.groupBox54.PerformLayout();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
+            this.ArrayResetBox.ResumeLayout(false);
+            this.ArrayResetBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PulsedProbeSwitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).EndInit();
@@ -5259,6 +5319,7 @@
             this.tabPage5.PerformLayout();
             this.groupBox49.ResumeLayout(false);
             this.groupBox49.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CommonFilenameSwitch)).EndInit();
             this.groupBox48.ResumeLayout(false);
             this.groupBox48.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).EndInit();
@@ -5715,6 +5776,11 @@
         private System.Windows.Forms.Label label142;
         private System.Windows.Forms.Label label143;
         private System.Windows.Forms.TextBox DataFilenameCommonRoot2;
+        private NationalInstruments.UI.WindowsForms.Switch CommonFilenameSwitch;
+        private System.Windows.Forms.CheckBox ArrayReset;
+        private System.Windows.Forms.GroupBox ArrayResetBox;
+        private System.Windows.Forms.Label ArrayResetDelayLabel;
+        private System.Windows.Forms.TextBox ArrayResetDelayText;
     }
 }
 
