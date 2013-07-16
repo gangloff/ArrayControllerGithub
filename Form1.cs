@@ -1399,6 +1399,15 @@ namespace ArrayDACControl
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
+            //If array reset checked, lower array to 0 and back to initial value
+            if (TickleReset.Checked)
+            {
+                try
+                {
+                    this.Invoke(new MyDelegate(CorrelatorTickleResetFormCallback));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
         }
 
         private void CorrelatorArrayResetFormCallback()
@@ -1416,7 +1425,17 @@ namespace ArrayDACControl
             compensationAdjustedHelper();
             //wait for low pass
             Thread.Sleep(int.Parse(ArrayResetDelayText.Text));
-        }    
+        }
+
+        private void CorrelatorTickleResetFormCallback()
+        {
+            //turn off tickle via RF switch, (TTL high selects RFOUT2)
+            Dev2DO5.OutputDigitalValue(true);
+            //wait
+            Thread.Sleep(int.Parse(TickleResetDelayText.Text));
+            //turn on tickle again
+            Dev2DO5.OutputDigitalValue(false);
+        }   
 
         private bool CorrelatorParameterInit()
         {

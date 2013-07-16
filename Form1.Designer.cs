@@ -461,6 +461,10 @@
             this.yAxis6 = new NationalInstruments.UI.YAxis();
             this.corrRecToggle = new NationalInstruments.UI.WindowsForms.Switch();
             this.testlbl = new System.Windows.Forms.Label();
+            this.TickleResetBox = new System.Windows.Forms.GroupBox();
+            this.TickleReset = new System.Windows.Forms.CheckBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.TickleResetDelayText = new System.Windows.Forms.TextBox();
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox14.SuspendLayout();
@@ -557,6 +561,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrAmpLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).BeginInit();
+            this.TickleResetBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // label29
@@ -2712,6 +2717,7 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.TickleResetBox);
             this.tabPage10.Controls.Add(this.ArrayResetBox);
             this.tabPage10.Controls.Add(this.label142);
             this.tabPage10.Controls.Add(this.label141);
@@ -4993,6 +4999,46 @@
             this.testlbl.TabIndex = 164;
             this.testlbl.Text = "0";
             // 
+            // TickleResetBox
+            // 
+            this.TickleResetBox.Controls.Add(this.TickleReset);
+            this.TickleResetBox.Controls.Add(this.label47);
+            this.TickleResetBox.Controls.Add(this.TickleResetDelayText);
+            this.TickleResetBox.Location = new System.Drawing.Point(412, 290);
+            this.TickleResetBox.Name = "TickleResetBox";
+            this.TickleResetBox.Size = new System.Drawing.Size(96, 93);
+            this.TickleResetBox.TabIndex = 206;
+            this.TickleResetBox.TabStop = false;
+            this.TickleResetBox.Text = "Tickle Reset";
+            // 
+            // TickleReset
+            // 
+            this.TickleReset.AutoSize = true;
+            this.TickleReset.Location = new System.Drawing.Point(6, 19);
+            this.TickleReset.Name = "TickleReset";
+            this.TickleReset.Size = new System.Drawing.Size(92, 17);
+            this.TickleReset.TabIndex = 202;
+            this.TickleReset.Text = "Reset Tickle?";
+            this.TickleReset.UseVisualStyleBackColor = true;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label47.Location = new System.Drawing.Point(6, 47);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(56, 13);
+            this.label47.TabIndex = 204;
+            this.label47.Text = "Delay (ms)";
+            // 
+            // TickleResetDelayText
+            // 
+            this.TickleResetDelayText.Location = new System.Drawing.Point(6, 63);
+            this.TickleResetDelayText.Name = "TickleResetDelayText";
+            this.TickleResetDelayText.Size = new System.Drawing.Size(57, 20);
+            this.TickleResetDelayText.TabIndex = 203;
+            this.TickleResetDelayText.Text = "20";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5176,6 +5222,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrAmpLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).EndInit();
+            this.TickleResetBox.ResumeLayout(false);
+            this.TickleResetBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5615,6 +5663,10 @@
         private System.Windows.Forms.GroupBox ArrayResetBox;
         private System.Windows.Forms.Label ArrayResetDelayLabel;
         private System.Windows.Forms.TextBox ArrayResetDelayText;
+        private System.Windows.Forms.GroupBox TickleResetBox;
+        private System.Windows.Forms.CheckBox TickleReset;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox TickleResetDelayText;
     }
 }
 
