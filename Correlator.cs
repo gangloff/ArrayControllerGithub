@@ -181,6 +181,10 @@ namespace ArrayDACControl
                    uint valuePulseWidthDiv = (uint)(PulseWidthDiv);
                    ok.SetWire(0, valuePulsedClkDiv);
                    ok.SetWire(1, valuePulseWidthDiv);
+                   //selects whether to collect according to duty cycle of probe
+                   //if collectDutyCycle is true, collect according to duty cycle
+                   if (collectDutyCycle) { ok.SetWire(2, 1); }
+                   else { ok.SetWire(2, 0); }
                    ok.UpdateAllWires();
                    ok.SetTrigger(0x40, 6);   // Trigger 6 updates pulsed output signal characteristics
                                

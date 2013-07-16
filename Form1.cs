@@ -51,7 +51,6 @@ namespace ArrayDACControl
         ThreadHelperClass RepumperScanThreadHelper, BfieldScanThreadHelper, CavityScanThreadHelper, ElectrodeScanThreadHelper, TickleScanThreadHelper;
         ThreadHelperClass CameraThreadHelper, CameraTimeOutThreadHelper, IntensityGraphUpdateThreadHelper;
         ThreadHelperClass CorrelatorThreadHelper, SinglePMTReadThreadHelper, FluorLogThreadHelper;
-        ThreadHelperClass ChopThreadHelper;
         delegate void MyDelegate();
 
         double BL, BR, TL, TR, midL, midR;
@@ -205,13 +204,13 @@ namespace ArrayDACControl
             // Repumper RF Broaden Switch
             Dev2DO2 = new NICardController();
             Dev2DO2.InitDigitalOutput("Dev2/port2/line2");
-            // Lattice chop
+            // Lattice switch
             Dev2DO3 = new NICardController();
             Dev2DO3.InitDigitalOutput("Dev2/port2/line3");
             // Correlator Lock-In frequency switch
             Dev2DO4 = new NICardController();
             Dev2DO4.InitDigitalOutput("Dev2/port2/line4");
-            // Cooling chop
+            // Lattice Tickle Switch
             Dev2DO5 = new NICardController();
             Dev2DO5.InitDigitalOutput("Dev2/port2/line5");
             // 638 Shutter
@@ -266,7 +265,6 @@ namespace ArrayDACControl
             ElectrodeScanThreadHelper = new ThreadHelperClass("ElectrodeScan");
             IntensityGraphUpdateThreadHelper = new ThreadHelperClass("IntensityGraphUpdate");
             CorrelatorThreadHelper = new ThreadHelperClass("CorrelatorThread");
-            ChopThreadHelper = new ThreadHelperClass("ChopThread");
             FluorLogThreadHelper = new ThreadHelperClass("FluorLog");
 
             stopwatch = new Stopwatch();
@@ -1408,10 +1406,14 @@ namespace ArrayDACControl
             double initialValue = ArrayTotalSlider.Value;
             //reset
             ArrayTotalSlider.Value = 0;
+            //update DAC
+            compensationAdjustedHelper();
             //wait for low pass
             Thread.Sleep(int.Parse(ArrayResetDelayText.Text));
             //go back
             ArrayTotalSlider.Value = initialValue;
+            //update DAC
+            compensationAdjustedHelper();
             //wait for low pass
             Thread.Sleep(int.Parse(ArrayResetDelayText.Text));
         }    
@@ -2083,103 +2085,7 @@ namespace ArrayDACControl
             //update DAC
             compensationAdjustedHelper();
         }
-        
-        //
-        // LATTICE CHOP THREAD
-        //
-        // The following event triggers a thread to chop the lattice and cooling light intermittently (and optionally push the ion with a DC electrode pair)
 
-        private void ChopStartButton_Click(object sender, EventArgs e)
-        {
-            if (!ChopThreadHelper.IsRunningFlag)
-            {
-                ChopThreadHelper.IsRunningFlag = true;
-                ChopThreadHelper.theThread = new Thread(new ThreadStart(chopExecute));
-                ChopThreadHelper.theThread.Name = "Chop thread";
-                ChopThreadHelper.theThread.Priority = ThreadPriority.BelowNormal;
-                //update button
-                ChopStartButton.BackColor = System.Drawing.Color.Red;
-                ChopStartButton.Text = "Stop Chopping";
-                //start chop thread
-                try
-                {
-                    ChopThreadHelper.theThread.Start();
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-            }
-            else
-            {
-                ChopThreadHelper.IsRunningFlag = false;
-                ChopStartButton.BackColor = System.Drawing.Color.Gainsboro;
-                ChopStartButton.Text = "Start Chopping";
-                // Reset to cooling with no lattice:
-                Dev2DO3.OutputDigitalValue(false);
-                Dev2DO5.OutputDigitalValue(false);
-            }
-        }
-
-        private void chopExecute()
-        {
-            double cycleT = double.Parse(textBox6.Text) * 100;
-            
-            //run through scans
-
-            while (ChopThreadHelper.IsRunningFlag)
-            {
-                // Output digital edge out of NI card to RF switch in order to turn on the lattice and turn off the cooling
-                Dev2DO3.OutputDigitalValue(true);
-                Dev2DO5.OutputDigitalValue(true);
-
-                // If the Force switch is enabled, change DC pair voltage to final value, which applies force
-                if (switch1.Value == true)
-                {
-                    //Access main thread to update the DC pair value:
-                    try
-                    {
-                        this.Invoke(new MyDelegate(chopFrmCallbackFinV));
-                    }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
-                }
-
-                // Keep the settings for 1 cylce duration
-                DAC.Wait(ref cycleT);
-
-                //Access main thread to update the DC pair value:
-                try
-                {
-                    this.Invoke(new MyDelegate(chopFrmCallbackInitV));
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                // Another digital edge this time to turn off the lattice and turn on the cooling
-                Dev2DO3.OutputDigitalValue(false);
-                Dev2DO5.OutputDigitalValue(false);
-
-                // Wait for another cycle duration:
-                DAC.Wait(ref cycleT);
-
-            }
-        }
-
-        private void chopFrmCallbackInitV()
-        {
-            int DCpair = int.Parse(textBox3.Text);
-            double initV = double.Parse(textBox4.Text);
-            //update DC pair register with new value:
-            this.DCsliders[DCpair].Value = initV;
-            //update DAC:
-            compensationAdjustedHelper();
-        }
-
-        private void chopFrmCallbackFinV()
-        {
-            int DCpair = int.Parse(textBox3.Text);
-            double finV = double.Parse(textBox5.Text);
-            //update DC pair register with new value:
-            this.DCsliders[DCpair].Value = finV;
-            //update DAC:
-            compensationAdjustedHelper();
-        }
 
         //
         //
@@ -3694,6 +3600,11 @@ namespace ArrayDACControl
                 CorrelatorGraph.Plots[2].Visible = true;
                 CorrelatorGraph.Plots[3].Visible = true;
             }
+
+        }
+
+        private void label96_Click(object sender, EventArgs e)
+        {
 
         }
 

@@ -341,19 +341,6 @@
             this.label63 = new System.Windows.Forms.Label();
             this.LockinFrequencySwitch = new NationalInstruments.UI.WindowsForms.Switch();
             this.CorrelatorBinningPhaseSlider = new ArrayDACControl.AdjustableSlider();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.label61 = new System.Windows.Forms.Label();
-            this.switch1 = new NationalInstruments.UI.WindowsForms.Switch();
-            this.label60 = new System.Windows.Forms.Label();
-            this.ChopStartButton = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label59 = new System.Windows.Forms.Label();
-            this.label58 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.readWaveformButton = new System.Windows.Forms.Button();
             this.readWaveformTextbox = new System.Windows.Forms.TextBox();
@@ -553,8 +540,6 @@
             this.groupBox51.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intTselector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LockinFrequencySwitch)).BeginInit();
-            this.tabPage7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.switch1)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.groupBox46.SuspendLayout();
@@ -1126,7 +1111,6 @@
             this.tabControl1.Controls.Add(this.FluorLog);
             this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Controls.Add(this.tabPage10);
-            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage9);
             this.tabControl1.Controls.Add(this.tabPage5);
@@ -2858,21 +2842,22 @@
             // 
             this.label97.AutoSize = true;
             this.label97.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label97.Location = new System.Drawing.Point(307, 262);
+            this.label97.Location = new System.Drawing.Point(298, 259);
             this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(27, 13);
+            this.label97.Size = new System.Drawing.Size(74, 13);
             this.label97.TabIndex = 199;
-            this.label97.Text = "OFF";
+            this.label97.Text = "Collect always";
             // 
             // label96
             // 
             this.label96.AutoSize = true;
             this.label96.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label96.Location = new System.Drawing.Point(311, 185);
+            this.label96.Location = new System.Drawing.Point(298, 185);
             this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(23, 13);
+            this.label96.Size = new System.Drawing.Size(87, 13);
             this.label96.TabIndex = 198;
-            this.label96.Text = "ON";
+            this.label96.Text = "Pulsed collection";
+            this.label96.Click += new System.EventHandler(this.label96_Click);
             // 
             // label44
             // 
@@ -3834,141 +3819,6 @@
             this.CorrelatorBinningPhaseSlider.SliderLabel = "Binning Phase";
             this.CorrelatorBinningPhaseSlider.TabIndex = 165;
             this.CorrelatorBinningPhaseSlider.Value = 13;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.label61);
-            this.tabPage7.Controls.Add(this.switch1);
-            this.tabPage7.Controls.Add(this.label60);
-            this.tabPage7.Controls.Add(this.ChopStartButton);
-            this.tabPage7.Controls.Add(this.textBox6);
-            this.tabPage7.Controls.Add(this.textBox5);
-            this.tabPage7.Controls.Add(this.textBox4);
-            this.tabPage7.Controls.Add(this.textBox3);
-            this.tabPage7.Controls.Add(this.label59);
-            this.tabPage7.Controls.Add(this.label58);
-            this.tabPage7.Controls.Add(this.label54);
-            this.tabPage7.Controls.Add(this.label47);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1215, 979);
-            this.tabPage7.TabIndex = 8;
-            this.tabPage7.Text = "Chopped Trapping";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // label61
-            // 
-            this.label61.AutoSize = true;
-            this.label61.ForeColor = System.Drawing.Color.Red;
-            this.label61.Location = new System.Drawing.Point(266, 350);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(98, 13);
-            this.label61.TabIndex = 157;
-            this.label61.Text = "Pushing Force OFF";
-            // 
-            // switch1
-            // 
-            this.switch1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.switch1.Location = new System.Drawing.Point(284, 246);
-            this.switch1.Name = "switch1";
-            this.switch1.Size = new System.Drawing.Size(52, 89);
-            this.switch1.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.switch1.TabIndex = 114;
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.ForeColor = System.Drawing.Color.Red;
-            this.label60.Location = new System.Drawing.Point(266, 230);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(94, 13);
-            this.label60.TabIndex = 156;
-            this.label60.Text = "Pushing Force ON";
-            // 
-            // ChopStartButton
-            // 
-            this.ChopStartButton.BackColor = System.Drawing.Color.Gainsboro;
-            this.ChopStartButton.Location = new System.Drawing.Point(45, 263);
-            this.ChopStartButton.Name = "ChopStartButton";
-            this.ChopStartButton.Size = new System.Drawing.Size(113, 31);
-            this.ChopStartButton.TabIndex = 154;
-            this.ChopStartButton.Text = "Start chopping";
-            this.ChopStartButton.UseVisualStyleBackColor = false;
-            this.ChopStartButton.Click += new System.EventHandler(this.ChopStartButton_Click);
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(78, 157);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(43, 20);
-            this.textBox6.TabIndex = 153;
-            this.textBox6.Text = "1";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(269, 48);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(43, 20);
-            this.textBox5.TabIndex = 152;
-            this.textBox5.Text = "1";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(169, 48);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(43, 20);
-            this.textBox4.TabIndex = 151;
-            this.textBox4.Text = "1";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(50, 48);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(43, 20);
-            this.textBox3.TabIndex = 150;
-            this.textBox3.Text = "1";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.ForeColor = System.Drawing.Color.Red;
-            this.label59.Location = new System.Drawing.Point(166, 22);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(30, 13);
-            this.label59.TabIndex = 149;
-            this.label59.Text = "V init";
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.ForeColor = System.Drawing.Color.Red;
-            this.label58.Location = new System.Drawing.Point(266, 22);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(28, 13);
-            this.label58.TabIndex = 148;
-            this.label58.Text = "V fin";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.ForeColor = System.Drawing.Color.Red;
-            this.label54.Location = new System.Drawing.Point(47, 22);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(42, 13);
-            this.label54.TabIndex = 147;
-            this.label54.Text = "DC pair";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label47.ForeColor = System.Drawing.Color.Red;
-            this.label47.Location = new System.Drawing.Point(47, 124);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(111, 16);
-            this.label47.TabIndex = 146;
-            this.label47.Text = "Cycle duration [s]";
             // 
             // tabPage4
             // 
@@ -5298,9 +5148,6 @@
             this.groupBox51.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intTselector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LockinFrequencySwitch)).EndInit();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.switch1)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage9.ResumeLayout(false);
@@ -5444,7 +5291,6 @@
         private System.Windows.Forms.Button SinglePMTReadButton;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TextBox ElectrodeScanNumPointsTextbox;
         private System.Windows.Forms.TextBox ElectrodeScanEndValue1Textbox;
         private System.Windows.Forms.TextBox ElectrodeScanStartValue1Textbox;
@@ -5468,7 +5314,6 @@
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.TextBox ElectrodeScanLiveStdTextbox;
         private System.Windows.Forms.TextBox ElectrodeScanLiveAverageTextbox;
-        private System.Windows.Forms.Label label47;
         private NationalInstruments.UI.WaveformPlot waveformPlot1;
         private NationalInstruments.UI.XAxis xAxis4;
         private NationalInstruments.UI.YAxis yAxis4;
@@ -5492,17 +5337,6 @@
         private System.Windows.Forms.TextBox CavityScanStartValueTextbox;
         private System.Windows.Forms.Button CavityScanStart;
         private AdjustableSlider Sideband402Control;
-        private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button ChopStartButton;
-        private System.Windows.Forms.Label label60;
-        private NationalInstruments.UI.WindowsForms.Switch switch1;
-        private System.Windows.Forms.Label label61;
         private System.Windows.Forms.GroupBox groupBox31;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label39;
