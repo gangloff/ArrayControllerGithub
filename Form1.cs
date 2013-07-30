@@ -1457,20 +1457,40 @@ namespace ArrayDACControl
             {
                 theCorrelator.IntTime = int.Parse(correlatorIntTimetext2.Text);
             }
-            if (LockinFrequencySwitch.Value)
+
+            if (syncSrcSw.Value)
             {
-                theCorrelator.ClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0));
+                if (LockinFrequencySwitch.Value)
+                {
+                    theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0));
+                }
+                else
+                {
+                    if (chooseCode.Value)
+                    { theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2.Text) - 1, 0)); }
+                    else
+                    { theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2B.Text) - 1, 0)); }
+                }
             }
             else
             {
-                if (chooseCode.Value)
-                { theCorrelator.ClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2.Text) - 1, 0)); }
-                else
-                { theCorrelator.ClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2B.Text) - 1, 0)); }
+                theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(pulsePeriodText.Text) / ncorrbins, 0));
             }
+            
+            theCorrelator.PulseClkDiv = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(pulsePeriodText.Text), 0));
 
-            theCorrelator.PulseClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / double.Parse(pulseFreqText.Text) - 1, 0));
-            theCorrelator.PulseWidthDiv = (int)(Math.Round(theCorrelator.PulseClkDiv * double.Parse(pulsedDutyText.Text)));
+            theCorrelator.onTimeOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1OnTimeText.Text), 0));
+            theCorrelator.onTimeOut[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out2OnTimeText.Text), 0));
+            theCorrelator.delayOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1DelayText.Text), 0));
+            theCorrelator.delayOut[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out2DelayText.Text), 0));
+
+            theCorrelator.onTimeIn[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in1OnTimeText.Text), 0));
+            theCorrelator.onTimeIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2OnTimeText.Text), 0));
+            theCorrelator.delayIn[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in1DelayText.Text), 0));
+            theCorrelator.delayIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2DelayText.Text), 0));
+
+            //theCorrelator.PulseClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / double.Parse(pulseFreqText.Text) - 1, 0));
+            //theCorrelator.PulseWidthDiv = (int)(Math.Round(theCorrelator.PulseClkDiv * double.Parse(pulsedDutyText.Text)));
 
             theCorrelator.bound1 = int.Parse(correlatorBound1text.Text);
             theCorrelator.bound2 = int.Parse(correlatorBound2text.Text);
@@ -1479,6 +1499,8 @@ namespace ArrayDACControl
             //pulseprobe ON means boolean is true
             if (PulsedProbeSwitch.Value) { theCorrelator.collectDutyCycle = true; }
             else { theCorrelator.collectDutyCycle = false; }
+            if (syncSrcSw.Value) { theCorrelator.syncSrcChoose = true; }
+            else { theCorrelator.syncSrcChoose = false; }
             
 
             //Attempt Initialize
@@ -1747,9 +1769,9 @@ namespace ArrayDACControl
             correlatorRefFreqtext.Text = theCorrelator.ok.RefFreq.ToString();
             correlatorVCOFreqtext.Text = theCorrelator.ok.VCOFreq.ToString();
             correlatorCLKDIVISORtext.Text = Convert.ToString(Math.Round( theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0));
-            textBox7.Text = Convert.ToString((uint)Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0), 2);
-            textBox9.Text = Convert.ToString((UInt16)Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0), 2);
-            textBox10.Text = Convert.ToString((UInt16)(((uint)Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0))>>16), 2);
+            //textBox7.Text = Convert.ToString((uint)Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0), 2);
+            //textBox9.Text = Convert.ToString((UInt16)Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0), 2);
+            //textBox10.Text = Convert.ToString((UInt16)(((uint)Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0))>>16), 2);
         }
 
 
@@ -3622,10 +3644,72 @@ namespace ArrayDACControl
 
         }
 
-        private void label96_Click(object sender, EventArgs e)
-        {
 
+
+
+        // Re: Correlator integration time parameter selector updated
+        // Event that responds to a change of the correlator integration time selector switch to call for update of integration time via OK wires through the correlator object
+        private void intTselector_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
+        {
+            if (intTselector.Value)
+            {
+                theCorrelator.IntTime = int.Parse(correlatorIntTimetext1.Text);
+            }
+            else
+            {
+                theCorrelator.IntTime = int.Parse(correlatorIntTimetext2.Text);
+            }
+            theCorrelator.updateCorrIntTimeLive();
         }
+
+        // Re: Correlator integration time input 1 updated
+        // Event that responds to a change of the correlator integration time in input box 1 to call for update via OK wires through the correlator object
+        private void correlatorIntTimetext1_TextChanged(object sender, EventArgs e)
+        {
+            if (intTselector.Value)
+            {
+                theCorrelator.IntTime = int.Parse(correlatorIntTimetext1.Text);
+                theCorrelator.updateCorrIntTimeLive();
+            }
+        }
+
+        // Re: Correlator integration time input 2 updated
+        // Event that responds to a change of the correlator integration time in input box 2 to call for update via OK wires through the correlator object
+        private void correlatorIntTimetext2_TextChanged(object sender, EventArgs e)
+        {
+            if (!intTselector.Value)
+            {
+                theCorrelator.IntTime = int.Parse(correlatorIntTimetext2.Text);
+                theCorrelator.updateCorrIntTimeLive();
+            }
+        }
+
+        private void pulsePeriodText_TextChanged(object sender, EventArgs e)
+        {
+            double pulsePeriodVal = Double.Parse(pulsePeriodText.Text); // in microseconds
+            double pulseFreqVal = 1/pulsePeriodVal*1000; // in kHz
+            pulseFreqLabel.Text = pulseFreqVal.ToString();
+            //theCorrelator.PulseClkDiv = (int)(Math.Round(theCorrelator.ok.P * pulsePeriodVal, 0));
+            //theCorrelator.updateCorrPulseClkDivLive();
+        }
+
+        private void updateAllSignalsButton_Click(object sender, EventArgs e)
+        {
+            theCorrelator.PulseClkDiv = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(pulsePeriodText.Text), 0));
+
+            theCorrelator.onTimeOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1OnTimeText.Text), 0));
+            theCorrelator.onTimeOut[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out2OnTimeText.Text), 0));
+            theCorrelator.delayOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1DelayText.Text), 0));
+            theCorrelator.delayOut[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out2DelayText.Text), 0));
+
+            theCorrelator.onTimeIn[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in1OnTimeText.Text), 0));
+            theCorrelator.onTimeIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2OnTimeText.Text), 0));
+            theCorrelator.delayIn[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in1DelayText.Text), 0));
+            theCorrelator.delayIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2DelayText.Text), 0));
+
+            theCorrelator.updateAllSignalsLive();
+        }
+
 
         //
         // CAMERA FORM THREAD

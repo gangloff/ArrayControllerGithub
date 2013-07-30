@@ -32,13 +32,17 @@ namespace ArrayDACControl
 
         //Collect all the time boolean (follow duty cyle or not)
         public bool collectDutyCycle;
+        public bool syncSrcChoose;
 
         //Shift register clock divisor
-        public int ClkDiv;
+        public uint ClkDiv;
 
         // Pulsed output signal characteristics
-        public int PulseClkDiv;
-        public int PulseWidthDiv;
+        public uint PulseClkDiv;
+        public uint[] onTimeOut = new uint[2];
+        public uint[] onTimeIn = new uint[2];
+        public uint[] delayOut = new uint[2];
+        public uint[] delayIn = new uint[2];
 
         //Figure of merit for compensation
         public int bound1;
@@ -90,47 +94,44 @@ namespace ArrayDACControl
                 ok.GetFrequencies();
                 //set configuration to EEPROM
                 ok.SetPLLConfig();
-
+                // Configure the FPGA with the bitfile
                 ok.ConfigFPGA(BitFile);
+                //Reset the FPGA (trigger 0)
+                ok.SetTrigger(0x40, 0);
                 
-                /*
-                //set integration time
-                uint value = (uint)(IntTime * ok.OutFreq / 4.096);
-                //ok.SetWire(0, value, 0xff);
-                ok.SetWire(0, value);
-                //Activate Trigger (magic numbers from labview code)
-                ok.SetTrigger(0x40, 1);
-                */
-
-                
-                ok.SetTrigger(0x40, 0);   // Trigger 1 resets the FPGA
-                
-                //set integration time
-                uint valueIntTime = (uint)(IntTime*ok.OutFreq * 1000 / 65536);   // // 0.0153 = 10^3/2^16
-                ok.SetWire(0, valueIntTime);
-                ok.UpdateAllWires();
-                ok.SetTrigger(0x40, 1);   // Trigger 1 updates the integration time
-
+                // Set integration time via OK wires
+                updateCorrIntTimeExecute();
                 
                 //set shift register clock division
-                uint valueClkDiv = (uint)(ClkDiv);
-                ok.SetWire(0, valueClkDiv);
-                ok.SetWire(1, valueClkDiv >> 16);
+                //uint valueClkDiv = (uint)(ClkDiv);
+                ok.SetWire(0, ClkDiv);
+                ok.SetWire(1, ClkDiv >> 16);
                 ok.UpdateAllWires();
-                ok.SetTrigger(0x40, 4);   // Trigger 4 updates the clock divisor
+                ok.SetTrigger(0x40, 2);   // Trigger 4 updates the clock divisor
 
                 //set pulsed output frequency and duty cycle
-                uint valuePulsedClkDiv = (uint)(PulseClkDiv);
+                updateAllSignalsExecute();
+
+                /*
+                //uint valuePulsedClkDiv = (uint)(PulseClkDiv);
                 uint valuePulseWidthDiv = (uint)(PulseWidthDiv);
-                ok.SetWire(0, valuePulsedClkDiv);
+                //ok.SetWire(0, valuePulsedClkDiv);
                 ok.SetWire(1, valuePulseWidthDiv);
                 //selects whether to collect according to duty cycle of probe
                 //if collectDutyCycle is true, collect according to duty cycle
-                if (collectDutyCycle) { ok.SetWire(2, 1); }
-                else{ok.SetWire(2,0);}
+                if (collectDutyCycle)
+                {
+                    if (syncSrcChoose) ok.SetWire(2, 3);  //binary 11
+                    else ok.SetWire(2, 1);  //binary 01
+                }
+                else
+                {
+                    if (syncSrcChoose) ok.SetWire(2, 2);  //binary 10
+                    else ok.SetWire(2, 0);  //binary 00
+                }
                 ok.UpdateAllWires();
                 ok.SetTrigger(0x40, 6);   // Trigger 6 updates pulsed output signal characteristics
-                
+                */
                 
                 return true;
             }
@@ -149,45 +150,42 @@ namespace ArrayDACControl
                     ok.SetPLLConfig();
                     //upload bit file to FPGA
                     ok.ConfigFPGA(BitFile);
-
-                    /*
-                    //set integration time
-                    uint value = (uint)(IntTime * ok.OutFreq / 4.096);
-                    //ok.SetWire(0, value, 0xff);
-                    ok.SetWire(0, value);
-                    //Activate Trigger (magic numbers from labview code)
-                    ok.SetTrigger(0x40, 1);
-                    */
-
-                    
-                   ok.SetTrigger(0x40, 0);   // Trigger 1 resets the FPGA
-                
-                   //set integration time
-                   uint valueIntTime = (uint)(IntTime*ok.OutFreq * 1000 / 65536);   // 0.0153 = 10^3/2^16
-                   ok.SetWire(0, valueIntTime);
-                   ok.UpdateAllWires();
-                   ok.SetTrigger(0x40, 1);   // Trigger 1 updates the integration time
+                    //Reset the FPGA (trigger 0)
+                    ok.SetTrigger(0x40, 0);
+                    // Set integration time via OK wires
+                    updateCorrIntTimeExecute();
 
 
                    //set shift register clock division
-                   uint valueClkDiv = (uint)(ClkDiv);
-                   ok.SetWire(0, valueClkDiv);
-                   ok.SetWire(1, valueClkDiv >> 16);
+                   //uint valueClkDiv = (uint)(ClkDiv);
+                   ok.SetWire(0, ClkDiv);
+                   ok.SetWire(1, ClkDiv >> 16);
                    ok.UpdateAllWires();
-                   ok.SetTrigger(0x40, 4);   // Trigger 4 updates the clock divisor
+                   ok.SetTrigger(0x40, 2);   // Trigger 4 updates the clock divisor
 
                    //set pulsed output frequency and duty cycle
-                   uint valuePulsedClkDiv = (uint)(PulseClkDiv);
+                   updateAllSignalsExecute();
+
+                /*
+                   //uint valuePulsedClkDiv = (uint)(PulseClkDiv);
                    uint valuePulseWidthDiv = (uint)(PulseWidthDiv);
-                   ok.SetWire(0, valuePulsedClkDiv);
-                   ok.SetWire(1, valuePulseWidthDiv);
+                   //ok.SetWire(0, valuePulsedClkDiv);
+                   //ok.SetWire(1, valuePulseWidthDiv);
                    //selects whether to collect according to duty cycle of probe
                    //if collectDutyCycle is true, collect according to duty cycle
-                   if (collectDutyCycle) { ok.SetWire(2, 1); }
-                   else { ok.SetWire(2, 0); }
+                   if (collectDutyCycle)
+                   {
+                       if (syncSrcChoose) ok.SetWire(2, 3);  //binary 11
+                       else ok.SetWire(2, 1);  //binary 01
+                   }
+                   else
+                   {
+                       if (syncSrcChoose) ok.SetWire(2, 2);  //binary 10
+                       else ok.SetWire(2, 0);  //binary 00
+                   }
                    ok.UpdateAllWires();
                    ok.SetTrigger(0x40, 6);   // Trigger 6 updates pulsed output signal characteristics
-                               
+                  */             
                    
                     //define results array
                     //bytearray = new byte[lshiftreg * 4 + 2];
@@ -209,7 +207,100 @@ namespace ArrayDACControl
              }
              else return false;
          }
-        
+
+        /////////////////////////////////////////////////////////
+        public void updateCorrIntTimeLive()
+        {
+            if (ok.checkIfOpen())
+            { updateCorrIntTimeExecute(); }
+        }
+
+        private void updateCorrIntTimeExecute()
+        {
+            //set integration time
+            uint valueIntTime = (uint)(IntTime * ok.OutFreq * 1000 / 65536);   // // 0.0153 = 10^3/2^16
+            ok.SetWire(0, valueIntTime);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x40, 1);   // Trigger 1 signals update of integration time
+        }
+        //////////////////////////////////////////////////////////
+        /*
+        public void updateCorrPulseClkDivLive()
+        {
+            if (ok.checkIfOpen())
+            { updateCorrPulseClkDivExecute(); }
+        }
+
+        public void updateCorrPulseClkDivExecute()
+        {
+            uint valuePulsedClkDiv = (uint)(PulseClkDiv);
+            uint valuePulseWidthDiv = (uint)(PulseWidthDiv);
+            ok.SetWire(0, valuePulsedClkDiv);
+            ok.SetWire(1, valuePulseWidthDiv);
+            //selects whether to collect according to duty cycle of probe
+            //if collectDutyCycle is true, collect according to duty cycle
+            if (collectDutyCycle)
+            {
+                if (syncSrcChoose) ok.SetWire(2, 3);  //binary 11
+                else ok.SetWire(2, 1);  //binary 01
+            }
+            else
+            {
+                if (syncSrcChoose) ok.SetWire(2, 2);  //binary 10
+                else ok.SetWire(2, 0);  //binary 00
+            }
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x40, 6);   // Trigger 6 updates pulsed output signal characteristics
+        }
+         */
+        //////////////////////////////////////////////////
+
+        public void updateAllSignalsLive()
+        {
+            if (ok.checkIfOpen())
+            { updateAllSignalsExecute(); }
+        }
+
+        public void updateAllSignalsExecute()
+        {
+            ok.SetWire(0, PulseClkDiv);
+            ok.SetWire(1, PulseClkDiv >> 16);
+            ok.SetWire(2, onTimeOut[0]);
+            ok.SetWire(3, onTimeOut[0] >> 16);
+            ok.SetWire(4, delayOut[0]);
+            ok.SetWire(5, delayOut[0] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x40, 5);   // Trigger 5 updates output channel 1
+
+            ok.SetWire(0, PulseClkDiv);
+            ok.SetWire(1, PulseClkDiv >> 16);
+            ok.SetWire(2, onTimeOut[1]);
+            ok.SetWire(3, onTimeOut[1] >> 16);
+            ok.SetWire(4, delayOut[1]);
+            ok.SetWire(5, delayOut[1] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x40, 6);   // Trigger 6 updates output channel 2
+
+            ok.SetWire(0, PulseClkDiv);
+            ok.SetWire(1, PulseClkDiv >> 16);
+            ok.SetWire(2, onTimeIn[0]);
+            ok.SetWire(3, onTimeIn[0] >> 16);
+            ok.SetWire(4, delayIn[0]);
+            ok.SetWire(5, delayIn[0] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x40, 7);   // Trigger 7 updates input channel 1
+
+            ok.SetWire(0, PulseClkDiv);
+            ok.SetWire(1, PulseClkDiv >> 16);
+            ok.SetWire(2, onTimeIn[1]);
+            ok.SetWire(3, onTimeIn[1] >> 16);
+            ok.SetWire(4, delayIn[1]);
+            ok.SetWire(5, delayIn[1] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x40, 8);   // Trigger 8 updates input channel 2
+
+        }
+        //////////////////////////////////////////////////
 
         public void GetResults()
         {
