@@ -22,6 +22,7 @@ namespace ArrayDACControl
         public int numPoints;
         public int numAverage;
         public int delay;
+        public bool ShouldBeRunningFlag;
         public bool IsRunningFlag;
         public bool flag;
         public double ScanVariableBefore;
@@ -44,7 +45,7 @@ namespace ArrayDACControl
         public ThreadHelperClass(string theName)
         {
             index = 0;
-            IsRunningFlag = false;
+            ShouldBeRunningFlag = false;
             direction = 0;
             flag = false;
             max = new double[1];

@@ -419,7 +419,7 @@ namespace ArrayDACControl
                 DCsliders[i].AbsMax = 20;
                 DCsliders[i].Value = 0;
                 this.Controls.Add(DCsliders[i]);
-                this.tabPage2.Controls.Add(this.DCsliders[i]);
+                this.CoupledDCTab.Controls.Add(this.DCsliders[i]);
             }
 
             for (int i = 0; i < DCrows; i++)
@@ -436,7 +436,7 @@ namespace ArrayDACControl
                 DCslidersDx[i].AbsMax = 20;
                 DCslidersDx[i].Value = 0;
                 this.Controls.Add(DCslidersDx[i]);
-                this.tabPage3.Controls.Add(this.DCslidersDx[i]);
+                this.IndividualDCTab.Controls.Add(this.DCslidersDx[i]);
             }
 
             for (int i = 0; i < DCrows; i++)
@@ -453,7 +453,7 @@ namespace ArrayDACControl
                 DCslidersLeft[i].AbsMax = 20;
                 DCslidersLeft[i].Value = 0;
                 this.Controls.Add(DCslidersLeft[i]);
-                this.tabPage3.Controls.Add(this.DCslidersLeft[i]);
+                this.IndividualDCTab.Controls.Add(this.DCslidersLeft[i]);
             }
 
             for (int i = 0; i < DCrows; i++)
@@ -470,7 +470,7 @@ namespace ArrayDACControl
                 DCslidersRight[i].AbsMax = +20;
                 DCslidersRight[i].Value = 0;
                 this.Controls.Add(DCslidersRight[i]);
-                this.tabPage3.Controls.Add(this.DCslidersRight[i]);
+                this.IndividualDCTab.Controls.Add(this.DCslidersRight[i]);
             }
 
             this.DXSlider.SliderAdjusted += this.compensationAdjusted;
@@ -1101,51 +1101,6 @@ namespace ArrayDACControl
             RepumperSliderOutHelper();
         }
 
-        private void RampArray_Click(object sender, EventArgs e)
-        {
-            if (System.Convert.ToInt16(this.numRampsTextBox.Text) < 0)
-                throw new Exception("Number of ramps requested is negative!");
-
-            if (System.Convert.ToInt16(this.numRampsTextBox.Text) > 150)
-                throw new Exception("Number of ramps requested too large!");
-
-            for (int i = 0; i < System.Convert.ToInt16(this.numRampsTextBox.Text); i++)
-                RampArrayAux();
-        }
-
-        private void readWaveformButton_Click(object sender, EventArgs e)
-        {
-            FileStream fs = new FileStream(this.readWaveformTextbox.Text, System.IO.FileMode.Open);
-            StreamReader sr = new StreamReader(fs);
-
-            String firstLine = sr.ReadLine();
-            int nElectrodes = firstLine.Split('\t').Length - 1;
-            int nLines = 1;
-            while (!sr.EndOfStream)
-            {
-                sr.ReadLine();
-                nLines++;
-            }
-            fs.Seek(0, SeekOrigin.Begin);
-            sr.DiscardBufferedData();
-
-            danceWaveform = new double[nLines, nElectrodes];
-            for (int i = 0; i < nLines; i++)
-            {
-                string[] line = sr.ReadLine().Split('\t');
-                for (int j = 0; j < nElectrodes; j++)
-                {
-                    danceWaveform[i, j] = Double.Parse(line[j]);
-                }
-                danceWaveform[i, 0] = -3 * danceWaveform[i, 0] + this.innerL;
-                danceWaveform[i, 1] = -3 * danceWaveform[i, 1] + this.innerC;
-                danceWaveform[i, 2] = -3 * danceWaveform[i, 2] + this.innerR;
-                double tmp1 = 0.07 * danceWaveform[i, 3] + this.DCvalues[danceDCrow];
-                danceWaveform[i, 3] = tmp1;
-                danceWaveform[i, 4] = tmp1;
-            }
-        }
-
         private void SaveElectrodeConfig_Click_1(object sender, EventArgs e)
         {
             SaveConfigurationFile(textBox1.Text);
@@ -1327,7 +1282,7 @@ namespace ArrayDACControl
             //reset device before starting
             gpibdevice.Reset();
 
-            while (SinglePMTReadThreadHelper.IsRunningFlag)
+            while (SinglePMTReadThreadHelper.ShouldBeRunningFlag)
             {
                 //get reading from GPIB counter
                 gpibdevice.simpleRead(21);
@@ -1352,9 +1307,9 @@ namespace ArrayDACControl
 
         private void SinglePMTReadButton_Click(object sender, EventArgs e)
         {
-            if (!SinglePMTReadThreadHelper.IsRunningFlag)
+            if (!SinglePMTReadThreadHelper.ShouldBeRunningFlag)
             {
-                SinglePMTReadThreadHelper.IsRunningFlag = true;
+                SinglePMTReadThreadHelper.ShouldBeRunningFlag = true;
                 SinglePMTReadThreadHelper.theThread = new Thread(new ThreadStart(SinglePMTReadExecute));
                 SinglePMTReadThreadHelper.theThread.Name = "Single PMT Read thread";
                 SinglePMTReadThreadHelper.theThread.Priority = ThreadPriority.Normal;
@@ -1368,7 +1323,7 @@ namespace ArrayDACControl
             }
             else
             {
-                SinglePMTReadThreadHelper.IsRunningFlag = false;
+                SinglePMTReadThreadHelper.ShouldBeRunningFlag = false;
                 SinglePMTReadButton.BackColor = System.Drawing.Color.Gray;
             }
         }
@@ -1529,7 +1484,7 @@ namespace ArrayDACControl
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-                while (CorrelatorThreadHelper.IsRunningFlag)
+                while (CorrelatorThreadHelper.ShouldBeRunningFlag)
                 {
                     //get reading from Correlator FPGA
                     CorrelatorGetResultsHelper();
@@ -1573,7 +1528,7 @@ namespace ArrayDACControl
             }
 
             //Thread finishes
-            CorrelatorThreadHelper.IsRunningFlag = false;
+            CorrelatorThreadHelper.ShouldBeRunningFlag = false;
 
             //Update button
             try
@@ -1636,7 +1591,12 @@ namespace ArrayDACControl
             PMTcountGraph.Plots[2].PlotYAppend((theCorrelator.totalCountsCh1 - theCorrelator.totalCountsCh2) / theCorrelator.IntTime * 1000);
             PMTcountGraph.Plots[3].PlotYAppend(ctot / theCorrelator.IntTime * 1000);
             
+            //Display total counts in correlator tab
             correlatorTotalCounts.Text = ctot.ToString();
+            //Display counts/s above Graph
+            double ctotn = ctot / theCorrelator.IntTime * 1000;
+            PMTcountBox.Text = ctotn.ToString();
+            //Display compensation merit value
             correlatorDecompMerit.Text = theCorrelator.decompMerit.ToString() + "+/-" + theCorrelator.decompMeritErr.ToString() + " %";
 
             // plot the averaged correlator data
@@ -1777,9 +1737,9 @@ namespace ArrayDACControl
 
         private void CorrelatorButton_Click(object sender, EventArgs e)
         {
-            if (!CorrelatorThreadHelper.IsRunningFlag)
+            if (!CorrelatorThreadHelper.ShouldBeRunningFlag)
             {
-                CorrelatorThreadHelper.IsRunningFlag = true;
+                CorrelatorThreadHelper.ShouldBeRunningFlag = true;
                 CorrelatorThreadHelper.theThread = new Thread(new ThreadStart(CorrelatorExecute));
                 CorrelatorThreadHelper.theThread.Name = "Correlator thread";
                 CorrelatorThreadHelper.theThread.Priority = ThreadPriority.BelowNormal;
@@ -1793,8 +1753,13 @@ namespace ArrayDACControl
             }
             else
             {
-                CorrelatorThreadHelper.IsRunningFlag = false;
+                CorrelatorThreadHelper.ShouldBeRunningFlag = false;
                 CorrelatorButton.BackColor = System.Drawing.Color.Gray;
+                try
+                {
+                    CorrelatorThreadHelper.theThread.Abort();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }                
             }
         }
 
@@ -1866,9 +1831,9 @@ namespace ArrayDACControl
 
         private void ElectrodeScanStart_Click(object sender, EventArgs e)
         {
-            if (!ElectrodeScanThreadHelper.IsRunningFlag)
+            if (!ElectrodeScanThreadHelper.ShouldBeRunningFlag)
             {
-                ElectrodeScanThreadHelper.IsRunningFlag = true;
+                ElectrodeScanThreadHelper.ShouldBeRunningFlag = true;
                 ElectrodeScanThreadHelper.theThread = new Thread(new ThreadStart(ElectrodeScanExecute));
                 ElectrodeScanThreadHelper.theThread.Name = "Electrode Scan thread";
                 ElectrodeScanThreadHelper.theThread.Priority = ThreadPriority.Normal;
@@ -1896,7 +1861,7 @@ namespace ArrayDACControl
                 {
                     ElectrodeScanThreadHelper.initDoubleData(ElectrodeScanThreadHelper.numPoints, 3, 2);
                     // if camera is running stop it
-                    if (CameraThreadHelper.IsRunningFlag)
+                    if (CameraThreadHelper.ShouldBeRunningFlag)
                     {
                         StopCameraThread();
                     }
@@ -1909,7 +1874,7 @@ namespace ArrayDACControl
                 {
                     ElectrodeScanThreadHelper.initDoubleData(ElectrodeScanThreadHelper.numPoints, 1, 2);
                     // if camera is running stop it
-                    if (CameraThreadHelper.IsRunningFlag)
+                    if (CameraThreadHelper.ShouldBeRunningFlag)
                     {
                         StopCameraThread();
                     }
@@ -1924,7 +1889,7 @@ namespace ArrayDACControl
             }
             else
             {
-                ElectrodeScanThreadHelper.IsRunningFlag = false;
+                ElectrodeScanThreadHelper.ShouldBeRunningFlag = false;
             }
         }
         private void ElectrodeScanExecute()
@@ -1952,13 +1917,13 @@ namespace ArrayDACControl
                 if (!CorrelatorParameterInit())
                 {
                     //end scan
-                    ElectrodeScanThreadHelper.IsRunningFlag = false;
+                    ElectrodeScanThreadHelper.ShouldBeRunningFlag = false;
                     //show message
                     MessageBox.Show("Correlator Init returned false");
                 }
             }
             //run scans
-            while (ElectrodeScanThreadHelper.index < (ElectrodeScanThreadHelper.numPoints) && ElectrodeScanThreadHelper.IsRunningFlag)
+            while (ElectrodeScanThreadHelper.index < (ElectrodeScanThreadHelper.numPoints) && ElectrodeScanThreadHelper.ShouldBeRunningFlag)
             {
                 //Compute new field values
                 ElectrodeScanThreadHelper.DoubleScanVariable[0,ElectrodeScanThreadHelper.index] = (double)(ElectrodeScanThreadHelper.min[0] + (ElectrodeScanThreadHelper.max[0] - ElectrodeScanThreadHelper.min[0]) * ElectrodeScanThreadHelper.index / (ElectrodeScanThreadHelper.numPoints - 1));
@@ -2043,7 +2008,7 @@ namespace ArrayDACControl
                     ElectrodeScanThreadHelper.index++;
                 }
             }
-            if (ElectrodeScanThreadHelper.IsRunningFlag)
+            if (ElectrodeScanThreadHelper.ShouldBeRunningFlag)
             {
                 //save Scan Data
                 SaveScanData(ElectrodeScanThreadHelper);
@@ -2062,7 +2027,7 @@ namespace ArrayDACControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             //reset scan boolean
-            ElectrodeScanThreadHelper.IsRunningFlag = false;
+            ElectrodeScanThreadHelper.ShouldBeRunningFlag = false;
         }
         private void ElectrodeScanFrmCallback()
         {
@@ -2136,9 +2101,9 @@ namespace ArrayDACControl
 
         private void CavityScanStart_Click(object sender, EventArgs e)
         {
-            if (!CavityScanThreadHelper.IsRunningFlag)
+            if (!CavityScanThreadHelper.ShouldBeRunningFlag)
             {
-                CavityScanThreadHelper.IsRunningFlag = true;
+                CavityScanThreadHelper.ShouldBeRunningFlag = true;
                 CavityScanThreadHelper.theThread = new Thread(new ThreadStart(CavityScanExecute));
                 CavityScanThreadHelper.theThread.Name = "Cavity Scan thread";
                 CavityScanThreadHelper.theThread.Priority = ThreadPriority.Normal;
@@ -2164,7 +2129,7 @@ namespace ArrayDACControl
             }
             else
             {
-                CavityScanThreadHelper.IsRunningFlag = false;
+                CavityScanThreadHelper.ShouldBeRunningFlag = false;
                 CavityScanStart.BackColor = System.Drawing.Color.WhiteSmoke;
                 CavityScanStart.Text = "Start *Cavity* Scan";
             }
@@ -2179,7 +2144,7 @@ namespace ArrayDACControl
             CavityScanThreadHelper.ScanVariableBefore = Sideband402Control.Value;
             Smooth402SidebandTuning(CavityScanThreadHelper.ScanVariableBefore, CavityScanThreadHelper.min[0]);
             //run scans
-            while (CavityScanThreadHelper.index < (CavityScanThreadHelper.numPoints) && CavityScanThreadHelper.IsRunningFlag)
+            while (CavityScanThreadHelper.index < (CavityScanThreadHelper.numPoints) && CavityScanThreadHelper.ShouldBeRunningFlag)
             {
                 //Compute new field values
                 CavityScanThreadHelper.DoubleScanVariable[0,CavityScanThreadHelper.index] = (double)(CavityScanThreadHelper.min[0] + (CavityScanThreadHelper.max[0] - CavityScanThreadHelper.min[0]) * CavityScanThreadHelper.index / (CavityScanThreadHelper.numPoints - 1));
@@ -2219,7 +2184,7 @@ namespace ArrayDACControl
                 //increase index
                 CavityScanThreadHelper.index++;
             }
-            if (CavityScanThreadHelper.IsRunningFlag)
+            if (CavityScanThreadHelper.ShouldBeRunningFlag)
             {
                 //save Scan Data
                 SaveScanData(CavityScanThreadHelper);
@@ -2232,7 +2197,7 @@ namespace ArrayDACControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             //reset scan boolean
-            CavityScanThreadHelper.IsRunningFlag = false;
+            CavityScanThreadHelper.ShouldBeRunningFlag = false;
         }
         private void CavityScanFrmCallback()
         {
@@ -2272,9 +2237,9 @@ namespace ArrayDACControl
         //
         private void BfieldScanStart_Click(object sender, EventArgs e)
         {
-            if (!BfieldScanThreadHelper.IsRunningFlag)
+            if (!BfieldScanThreadHelper.ShouldBeRunningFlag)
             {
-                BfieldScanThreadHelper.IsRunningFlag = true;
+                BfieldScanThreadHelper.ShouldBeRunningFlag = true;
                 BfieldScanThreadHelper.theThread = new Thread(new ThreadStart(BfieldScanExecute));
                 BfieldScanThreadHelper.theThread.Name = "B field Scan thread";
                 BfieldScanThreadHelper.theThread.Priority = ThreadPriority.Normal;
@@ -2300,9 +2265,9 @@ namespace ArrayDACControl
                 {
                     BfieldScanThreadHelper.initDoubleData(BfieldScanThreadHelper.numPoints, 3, 1);
                     // if camera is running stop it
-                    if (CameraThreadHelper.IsRunningFlag)
+                    if (CameraThreadHelper.ShouldBeRunningFlag)
                     {
-                        CameraThreadHelper.IsRunningFlag = false;
+                        CameraThreadHelper.ShouldBeRunningFlag = false;
                     }
                 }
                 else if (BfieldScanThreadHelper.message == "PMT")
@@ -2313,9 +2278,9 @@ namespace ArrayDACControl
                 {
                     BfieldScanThreadHelper.initDoubleData(BfieldScanThreadHelper.numPoints, 1, 1);
                     // if camera is running stop it
-                    if (CameraThreadHelper.IsRunningFlag)
+                    if (CameraThreadHelper.ShouldBeRunningFlag)
                     {
-                        CameraThreadHelper.IsRunningFlag = false;
+                        CameraThreadHelper.ShouldBeRunningFlag = false;
                     }
                 }
 
@@ -2328,7 +2293,7 @@ namespace ArrayDACControl
             }
             else
             {
-                BfieldScanThreadHelper.IsRunningFlag = false;
+                BfieldScanThreadHelper.ShouldBeRunningFlag = false;
             }
         }
         private void BfieldScanExecute()
@@ -2356,14 +2321,14 @@ namespace ArrayDACControl
                 if (!CorrelatorParameterInit())
                 {
                     //end scan
-                    BfieldScanThreadHelper.IsRunningFlag = false;
+                    BfieldScanThreadHelper.ShouldBeRunningFlag = false;
                     //show message
                     MessageBox.Show("Correlator Init returned false");
                 }
             }
             
             //run scans
-            while (BfieldScanThreadHelper.index < (BfieldScanThreadHelper.numPoints) && BfieldScanThreadHelper.IsRunningFlag)
+            while (BfieldScanThreadHelper.index < (BfieldScanThreadHelper.numPoints) && BfieldScanThreadHelper.ShouldBeRunningFlag)
             {
                 //Compute new field values
                 BfieldScanThreadHelper.DoubleScanVariable[0, BfieldScanThreadHelper.index] = (double)(BfieldScanThreadHelper.min[0] + (BfieldScanThreadHelper.max[0] - BfieldScanThreadHelper.min[0]) * BfieldScanThreadHelper.index / (BfieldScanThreadHelper.numPoints - 1));
@@ -2445,7 +2410,7 @@ namespace ArrayDACControl
                     BfieldScanThreadHelper.index++;
                 }
             }
-            if (BfieldScanThreadHelper.IsRunningFlag)
+            if (BfieldScanThreadHelper.ShouldBeRunningFlag)
             {
                 //save Scan Data
                 SaveScanData(BfieldScanThreadHelper);
@@ -2458,7 +2423,7 @@ namespace ArrayDACControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             //reset scan boolean
-            BfieldScanThreadHelper.IsRunningFlag = false;
+            BfieldScanThreadHelper.ShouldBeRunningFlag = false;
         }
         private void BfieldScanFrmCallback()
         {
@@ -2524,9 +2489,9 @@ namespace ArrayDACControl
         //
         private void FluorLogStart_Click(object sender, EventArgs e)
         {
-            if (!FluorLogThreadHelper.IsRunningFlag)
+            if (!FluorLogThreadHelper.ShouldBeRunningFlag)
             {
-                FluorLogThreadHelper.IsRunningFlag = true;
+                FluorLogThreadHelper.ShouldBeRunningFlag = true;
                 FluorLogThreadHelper.theThread = new Thread(new ThreadStart(FluorLogExecute));
                 FluorLogThreadHelper.theThread.Name = "Fluor Log thread";
                 FluorLogThreadHelper.theThread.Priority = ThreadPriority.Normal;
@@ -2551,9 +2516,9 @@ namespace ArrayDACControl
                 {
                     FluorLogThreadHelper.initDoubleData(FluorLogThreadHelper.numPoints, 1, 1);
                     // if camera is running stop it
-                    if (CameraThreadHelper.IsRunningFlag)
+                    if (CameraThreadHelper.ShouldBeRunningFlag)
                     {
-                        CameraThreadHelper.IsRunningFlag = false;
+                        CameraThreadHelper.ShouldBeRunningFlag = false;
                     }
                 }
 
@@ -2566,7 +2531,7 @@ namespace ArrayDACControl
             }
             else
             {
-                FluorLogThreadHelper.IsRunningFlag = false;
+                FluorLogThreadHelper.ShouldBeRunningFlag = false;
             }
         }
         private void FluorLogExecute()
@@ -2587,7 +2552,7 @@ namespace ArrayDACControl
                 }
             }
             //run scans
-            while (FluorLogThreadHelper.index < (FluorLogThreadHelper.numPoints) && FluorLogThreadHelper.IsRunningFlag)
+            while (FluorLogThreadHelper.index < (FluorLogThreadHelper.numPoints) && FluorLogThreadHelper.ShouldBeRunningFlag)
             {
                 //call to change button
                 try
@@ -2625,7 +2590,7 @@ namespace ArrayDACControl
 
                 FluorLogThreadHelper.index++;
             }
-            if (FluorLogThreadHelper.IsRunningFlag)
+            if (FluorLogThreadHelper.ShouldBeRunningFlag)
             {
                 //save Scan Data
                 SaveScanData(FluorLogThreadHelper);
@@ -2644,7 +2609,7 @@ namespace ArrayDACControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             //reset scan boolean
-            FluorLogThreadHelper.IsRunningFlag = false;
+            FluorLogThreadHelper.ShouldBeRunningFlag = false;
         }
         private void FluorLogFrmCallback()
         {
@@ -2690,9 +2655,9 @@ namespace ArrayDACControl
         //
         private void TickleScanStart_Click(object sender, EventArgs e)
         {
-            if (!TickleScanThreadHelper.IsRunningFlag)
+            if (!TickleScanThreadHelper.ShouldBeRunningFlag)
             {
-                TickleScanThreadHelper.IsRunningFlag = true;
+                TickleScanThreadHelper.ShouldBeRunningFlag = true;
                 TickleScanThreadHelper.theThread = new Thread(new ThreadStart(TickleScanExecute));
                 TickleScanThreadHelper.theThread.Name = "Tickle Scan thread";
                 TickleScanThreadHelper.theThread.Priority = ThreadPriority.Normal;
@@ -2718,9 +2683,9 @@ namespace ArrayDACControl
                 {
                     TickleScanThreadHelper.initDoubleData(TickleScanThreadHelper.numPoints, 3, 1);
                     // if camera is running stop it
-                    if (CameraThreadHelper.IsRunningFlag)
+                    if (CameraThreadHelper.ShouldBeRunningFlag)
                     {
-                        CameraThreadHelper.IsRunningFlag = false;
+                        CameraThreadHelper.ShouldBeRunningFlag = false;
                     }
                 }
                 else if (TickleScanThreadHelper.message == "PMT")
@@ -2731,9 +2696,9 @@ namespace ArrayDACControl
                 {
                     TickleScanThreadHelper.initDoubleData(TickleScanThreadHelper.numPoints, 1, 1);
                     // if camera is running stop it
-                    if (CameraThreadHelper.IsRunningFlag)
+                    if (CameraThreadHelper.ShouldBeRunningFlag)
                     {
-                        CameraThreadHelper.IsRunningFlag = false;
+                        CameraThreadHelper.ShouldBeRunningFlag = false;
                     }
                 }
 
@@ -2746,7 +2711,7 @@ namespace ArrayDACControl
             }
             else
             {
-                TickleScanThreadHelper.IsRunningFlag = false;
+                TickleScanThreadHelper.ShouldBeRunningFlag = false;
             }
         }
         private void TickleScanExecute()
@@ -2774,14 +2739,14 @@ namespace ArrayDACControl
                 if (!CorrelatorParameterInit())
                 {
                     //end scan
-                    TickleScanThreadHelper.IsRunningFlag = false;
+                    TickleScanThreadHelper.ShouldBeRunningFlag = false;
                     //show message
                     MessageBox.Show("Correlator Init returned false");
                 }
             }
 
             //run scans
-            while (TickleScanThreadHelper.index < (TickleScanThreadHelper.numPoints) && TickleScanThreadHelper.IsRunningFlag)
+            while (TickleScanThreadHelper.index < (TickleScanThreadHelper.numPoints) && TickleScanThreadHelper.ShouldBeRunningFlag)
             {
                 //Compute new field values
                 TickleScanThreadHelper.DoubleScanVariable[0, TickleScanThreadHelper.index] = (double)(TickleScanThreadHelper.min[0] + (TickleScanThreadHelper.max[0] - TickleScanThreadHelper.min[0]) * TickleScanThreadHelper.index / (TickleScanThreadHelper.numPoints - 1));
@@ -2865,7 +2830,7 @@ namespace ArrayDACControl
                     TickleScanThreadHelper.index++;
                 } 
             }
-            if (TickleScanThreadHelper.IsRunningFlag)
+            if (TickleScanThreadHelper.ShouldBeRunningFlag)
             {
                 //save Scan Data
                 SaveScanData(TickleScanThreadHelper);
@@ -2878,7 +2843,7 @@ namespace ArrayDACControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             //reset scan boolean
-            TickleScanThreadHelper.IsRunningFlag = false;
+            TickleScanThreadHelper.ShouldBeRunningFlag = false;
         }
         private void TickleScanFrmCallback()
         {
@@ -2943,9 +2908,9 @@ namespace ArrayDACControl
 
         private void RepumperScanButton_Click(object sender, EventArgs e)
         {
-            if (!RepumperScanThreadHelper.IsRunningFlag)
+            if (!RepumperScanThreadHelper.ShouldBeRunningFlag)
             {
-                RepumperScanThreadHelper.IsRunningFlag = true;
+                RepumperScanThreadHelper.ShouldBeRunningFlag = true;
                 RepumperScanThreadHelper.theThread = new Thread(new ThreadStart(RepumperScanExecute));
                 RepumperScanThreadHelper.theThread.Name = "Repumper Scan thread";
                 RepumperScanThreadHelper.theThread.Priority = ThreadPriority.BelowNormal;
@@ -2958,7 +2923,7 @@ namespace ArrayDACControl
             }
             else
             {
-                RepumperScanThreadHelper.IsRunningFlag = false;
+                RepumperScanThreadHelper.ShouldBeRunningFlag = false;
                 RepumperScanButton.BackColor = System.Drawing.Color.Linen;
                 RepumperScanButton.Text = "Start Repumper Scan";
             }
@@ -2978,7 +2943,7 @@ namespace ArrayDACControl
             RepumperScanThreadHelper.numPoints = 5000;
             RepumperScanThreadHelper.delay = 1;
             //run scans
-            while (RepumperScanThreadHelper.IsRunningFlag)
+            while (RepumperScanThreadHelper.ShouldBeRunningFlag)
             {
                 //delay
                 //Thread.Sleep(RepumperScanThreadHelper.delay);
@@ -3273,7 +3238,7 @@ namespace ArrayDACControl
                     Camera.DataDouble = new double[1000, 1000];
                 }
 
-                while (CameraThreadHelper.IsRunningFlag)
+                while (CameraThreadHelper.ShouldBeRunningFlag)
                 {
                     if (DebugCheckbox.Checked)
                     {
@@ -3419,7 +3384,7 @@ namespace ArrayDACControl
 
         private void CameraStartButton_Click(object sender, EventArgs e)
         {
-            if (!CameraThreadHelper.IsRunningFlag)
+            if (!CameraThreadHelper.ShouldBeRunningFlag)
             {
                 StartCameraThread();
             }
@@ -3433,7 +3398,7 @@ namespace ArrayDACControl
         {
             CameraForm.richTextBox1.Text = "Attempting Camera Initialization...";
 
-            CameraThreadHelper.IsRunningFlag = true;
+            CameraThreadHelper.ShouldBeRunningFlag = true;
             CameraThreadHelper.theThread = new Thread(new ThreadStart(CameraThreadExecute));
             CameraThreadHelper.theThread.Name = "Camera thread";
             CameraThreadHelper.theThread.Priority = ThreadPriority.Normal;
@@ -3443,7 +3408,7 @@ namespace ArrayDACControl
             //start camera thread
             CameraThreadHelper.theThread.Start();
             //Camera Time out thread
-            CameraTimeOutThreadHelper.IsRunningFlag = true;
+            CameraTimeOutThreadHelper.ShouldBeRunningFlag = true;
             CameraTimeOutThreadHelper.theThread = new Thread(new ThreadStart(CameraTimeOutThreadExecute));
             CameraTimeOutThreadHelper.theThread.Name = "CameraTimeOut thread";
             CameraTimeOutThreadHelper.theThread.Priority = ThreadPriority.Lowest;
@@ -3451,7 +3416,7 @@ namespace ArrayDACControl
             CameraTimeOutThreadHelper.theThread.Start();
             /*
             //Intensity graph update thread
-            IntensityGraphUpdateThreadHelper.IsRunningFlag = true;
+            IntensityGraphUpdateThreadHelper.ShouldBeRunningFlag = true;
             IntensityGraphUpdateThreadHelper.theThread = new Thread(new ThreadStart(IntensityGraphUpdateThreadExecute));
             IntensityGraphUpdateThreadHelper.theThread.Name = "Intensity Graph thread";
             IntensityGraphUpdateThreadHelper.theThread.Priority = ThreadPriority.BelowNormal;
@@ -3466,9 +3431,9 @@ namespace ArrayDACControl
             //abort acquisition 
             Camera.Abort();
             //reset thread
-            CameraThreadHelper.IsRunningFlag = false;
-            IntensityGraphUpdateThreadHelper.IsRunningFlag = false;
-            CameraTimeOutThreadHelper.IsRunningFlag = false;
+            CameraThreadHelper.ShouldBeRunningFlag = false;
+            IntensityGraphUpdateThreadHelper.ShouldBeRunningFlag = false;
+            CameraTimeOutThreadHelper.ShouldBeRunningFlag = false;
             Camera.running = false;
         }
 
@@ -3492,7 +3457,7 @@ namespace ArrayDACControl
             using (Process p = Process.GetCurrentProcess())
               p.PriorityClass = ProcessPriorityClass.BelowNormal;
 
-            while (IntensityGraphUpdateThreadHelper.IsRunningFlag)
+            while (IntensityGraphUpdateThreadHelper.ShouldBeRunningFlag)
             {
                 if (Camera != null)
                 {
@@ -3518,7 +3483,7 @@ namespace ArrayDACControl
             using (Process p = Process.GetCurrentProcess())
                 p.PriorityClass = ProcessPriorityClass.BelowNormal;
 
-            while (CameraTimeOutThreadHelper.IsRunningFlag && CameraThreadHelper.IsRunningFlag)
+            while (CameraTimeOutThreadHelper.ShouldBeRunningFlag && CameraThreadHelper.ShouldBeRunningFlag)
             {
                 if (Camera != null)
                 {
@@ -3708,6 +3673,14 @@ namespace ArrayDACControl
             theCorrelator.delayIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2DelayText.Text), 0));
 
             theCorrelator.updateAllSignalsLive();
+        }
+
+        private void syncSrcSw_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
+        {
+            if (syncSrcSw.Value) { theCorrelator.syncSrcChoose = true; }
+            else { theCorrelator.syncSrcChoose = false; }
+
+            theCorrelator.updateSyncSourceLive();
         }
 
 

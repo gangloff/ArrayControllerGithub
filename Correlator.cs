@@ -101,7 +101,10 @@ namespace ArrayDACControl
                 
                 // Set integration time via OK wires
                 updateCorrIntTimeExecute();
-                
+
+                // Set the sync source ext vs int
+                updateSyncSourceExecute();
+
                 //set shift register clock division
                 //uint valueClkDiv = (uint)(ClkDiv);
                 ok.SetWire(0, ClkDiv);
@@ -166,6 +169,9 @@ namespace ArrayDACControl
                    //set pulsed output frequency and duty cycle
                    updateAllSignalsExecute();
 
+                   // Set the sync source ext vs int
+                   updateSyncSourceExecute();
+
                 /*
                    //uint valuePulsedClkDiv = (uint)(PulseClkDiv);
                    uint valuePulseWidthDiv = (uint)(PulseWidthDiv);
@@ -224,6 +230,23 @@ namespace ArrayDACControl
             ok.SetTrigger(0x40, 1);   // Trigger 1 signals update of integration time
         }
         //////////////////////////////////////////////////////////
+
+        /////////////////////////////////////////////////////////
+        public void updateSyncSourceLive()
+        {
+            if (ok.checkIfOpen())
+            { updateSyncSourceExecute(); }
+        }
+
+        private void updateSyncSourceExecute()
+        {
+            if (syncSrcChoose) { ok.SetWire(0, 1); }  //binary 11
+            else { ok.SetWire(0, 0); }  //binary 01
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x40, 4);   // Trigger 1 signals update of integration time
+        }
+        //////////////////////////////////////////////////////////
+
         /*
         public void updateCorrPulseClkDivLive()
         {
