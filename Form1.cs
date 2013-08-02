@@ -481,7 +481,7 @@ namespace ArrayDACControl
             this.TrapHeightSlider.SliderAdjusted += this.compensationAdjusted;
             this.QuadrupoleTilt.SliderAdjusted += this.compensationAdjusted;
             this.QuadTiltRatioSlider.SliderAdjusted += this.compensationAdjusted;
-            this.RatioSlider.SliderAdjusted += this.compensationAdjusted;
+            this.SnakeRatioSlider.SliderAdjusted += this.compensationAdjusted;
             this.RightFingersSlider.SliderAdjusted += this.compensationAdjusted;
             this.LeftFingersSlider.SliderAdjusted += this.compensationAdjusted;
             this.SnakeOnlySlider.SliderAdjusted += this.compensationAdjusted;
@@ -550,8 +550,8 @@ namespace ArrayDACControl
             //changed jan 23, 2013; quad tilt applied from outers
             //innerL = RatioSlider.Value * ArrayTotalSlider.Value + innerV + QuadTiltRatioSlider.Value * QuadrupoleTilt.Value + LeftFingersSlider.Value;
             //innerR = RatioSlider.Value * ArrayTotalSlider.Value + innerV - QuadTiltRatioSlider.Value * QuadrupoleTilt.Value + RightFingersSlider.Value;
-            innerL = RatioSlider.Value * ArrayTotalSlider.Value + innerV + LeftFingersSlider.Value;
-            innerR = RatioSlider.Value * ArrayTotalSlider.Value + innerV + RightFingersSlider.Value;
+            innerL = SnakeRatioSlider.Value * ArrayTotalSlider.Value + innerV + LeftFingersSlider.Value;
+            innerR = SnakeRatioSlider.Value * ArrayTotalSlider.Value + innerV + RightFingersSlider.Value;
             //outers = outerV;
             outerL = outerV + QuadrupoleTilt.Value;
             outerR = outerV - QuadrupoleTilt.Value;
@@ -712,7 +712,7 @@ namespace ArrayDACControl
                     QuadrupoleTilt.Value = double.Parse(sr.ReadLine().Split('\t')[1]);
                     QuadTiltRatioSlider.Value = double.Parse(sr.ReadLine().Split('\t')[1]);
                     TransferCavity.Value = double.Parse(sr.ReadLine().Split('\t')[1]);
-                    RatioSlider.Value = double.Parse(sr.ReadLine().Split('\t')[1]);
+                    SnakeRatioSlider.Value = double.Parse(sr.ReadLine().Split('\t')[1]);
                     for (int i = 0; i < DCrows; i++)
                         DCslidersDx[i].Value = double.Parse(sr.ReadLine().Split('\t')[1]);
                     for (int i = 0; i < DCrows; i++)
@@ -747,7 +747,7 @@ namespace ArrayDACControl
                 tw.WriteLine("Quadrupole Tilt" + "\t" + QuadrupoleTilt.Value);
                 tw.WriteLine("Quad Tilt Ratio" + "\t" + QuadTiltRatioSlider.Value);
                 tw.WriteLine("Transfer Cavity" + "\t" + TransferCavity.Value);
-                tw.WriteLine("Snake Inner Ratio" + "\t" + RatioSlider.Value);
+                tw.WriteLine("Snake Inner Ratio" + "\t" + SnakeRatioSlider.Value);
                 for (int i = 0; i < DCrows; i++)
                     tw.WriteLine("DC dx" + i + "\t" + DCslidersDx[i].Value);
                 for (int i = 0; i < DCrows; i++)
@@ -758,6 +758,464 @@ namespace ArrayDACControl
                 tw.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        //Function that saves the value of all sliders and text boxes in the VI
+        private void SaveConfigurationFull(string path)
+        {
+            try
+            {
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(path + DateTime.Now.ToString("HHmmss") + ".txt");
+
+                tw.WriteLine(DateTime.Now);
+
+                //In order of appearance, top left, to bottom right
+
+                //Control Tab
+                tw.WriteLine("ArrayTotalSlider" + "\t" + ArrayTotalSlider.Value);
+                tw.WriteLine("TotalBiasSlider" + "\t" + TotalBiasSlider.Value);
+                tw.WriteLine("DCVertQuadSlider" + "\t" + DCVertQuadSlider.Value);
+                tw.WriteLine("DXSlider" + "\t" + DXSlider.Value);
+                tw.WriteLine("QuadrupoleTilt" + "\t" + QuadrupoleTilt.Value);
+                tw.WriteLine("QuadTiltRatioSlider" + "\t" + QuadTiltRatioSlider.Value);
+                tw.WriteLine("SnakeRatioSlider" + "\t" + SnakeRatioSlider.Value);
+                tw.WriteLine("TrapHeightSlider" + "\t" + TrapHeightSlider.Value);
+                tw.WriteLine("TransferCavity" + "\t" + TransferCavity.Value);
+                tw.WriteLine("CurrentFeedforward370Offset" + "\t" + CurrentFeedforward370Offset.Value);
+                tw.WriteLine("CurrentFeedforward370Gain" + "\t" + CurrentFeedforward370Gain.Value);
+                tw.WriteLine("SideBeam370Power" + "\t" + SideBeam370Power.Value);
+                tw.WriteLine("CavityCoolingPowerControl" + "\t" + CavityCoolingPowerControl.Value);
+                tw.WriteLine("RamanSlider" + "\t" + RamanSlider.Value);
+                tw.WriteLine("LatticePowerControl" + "\t" + LatticePowerControl.Value);
+                tw.WriteLine("RepumperSlider" + "\t" + RepumperSlider.Value);
+                tw.WriteLine("ReadConfigurationFileTextbox" + "\t" + ReadConfigurationFileTextbox.Text);
+                
+                //Coupled DC Tab
+                for (int i = 0; i < DCrows; i++)
+                    tw.WriteLine("DC" + "\t" + i + "\t" + DCsliders[i].Value);
+
+                tw.WriteLine("LeftFingersSlider" + "\t" + LeftFingersSlider.Value);
+                tw.WriteLine("SnakeOnlySlider" + "\t" + SnakeOnlySlider.Value);
+                tw.WriteLine("RightFingersSlider" + "\t" + RightFingersSlider.Value);
+
+                //Individual DC tab
+                for (int i = 0; i < DCrows; i++)
+                    tw.WriteLine("DC dx" + "\t" + i + "\t" + DCslidersDx[i].Value);
+                for (int i = 0; i < DCrows; i++)
+                    tw.WriteLine("DC left" + "\t" + i + "\t" + DCslidersLeft[i].Value);
+                for (int i = 0; i < DCrows; i++)
+                    tw.WriteLine("DC right" + "\t" + i + "\t" + DCslidersRight[i].Value);
+
+                //Electrode Scan Tab
+                tw.WriteLine("ElectrodeScanDC1TextBox" + "\t" + ElectrodeScanDC1TextBox.Text);
+                tw.WriteLine("ElectrodeScanDC2TextBox" + "\t" + ElectrodeScanDC2TextBox.Text);
+                tw.WriteLine("ElectrodeScanStartValue1Textbox" + "\t" + ElectrodeScanStartValue1Textbox.Text);
+                tw.WriteLine("ElectrodeScanEndValue1Textbox" + "\t" + ElectrodeScanEndValue1Textbox.Text);
+                tw.WriteLine("ElectrodeScanStartValue2Textbox" + "\t" + ElectrodeScanStartValue2Textbox.Text);
+                tw.WriteLine("ElectrodeScanEndValue2Textbox" + "\t" + ElectrodeScanEndValue2Textbox.Text);
+                tw.WriteLine("ElectrodeScanPMTAveragingTextbox" + "\t" + ElectrodeScanPMTAveragingTextbox.Text);
+                tw.WriteLine("ElectrodeScanNumPointsTextbox" + "\t" + ElectrodeScanNumPointsTextbox.Text);
+
+                //Cavity Scan Tab
+                tw.WriteLine("CavityScanStartValueTextbox" + "\t" + CavityScanStartValueTextbox.Text);
+                tw.WriteLine("CavityScanEndValueTextbox" + "\t" + CavityScanEndValueTextbox.Text);
+                tw.WriteLine("CavityScanNumPointsTextbox" + "\t" + CavityScanNumPointsTextbox.Text);
+                tw.WriteLine("CavityScanPMTAveragingTextbox" + "\t" + CavityScanPMTAveragingTextbox.Text);
+                tw.WriteLine("Sideband402Control" + "\t" + Sideband402Control.Value);
+
+                //Bfield Scan Tab
+                tw.WriteLine("BfieldScanStartValueTextbox" + "\t" + BfieldScanStartValueTextbox.Text);
+                tw.WriteLine("BfieldScanEndValueTextbox" + "\t" + BfieldScanEndValueTextbox.Text);
+                tw.WriteLine("BfieldScanNumPointsTextbox" + "\t" + BfieldScanNumPointsTextbox.Text);
+                tw.WriteLine("BfieldScanPMTAveragingTextbox" + "\t" + BfieldScanPMTAveragingTextbox.Text);
+                tw.WriteLine("BxSlider" + "\t" + BxSlider.Value);
+
+                //Tickle Spectrum Tab
+                tw.WriteLine("TickleScanStartValueTextbox" + "\t" + TickleScanStartValueTextbox.Text);
+                tw.WriteLine("TickleScanEndValueTextbox" + "\t" + TickleScanEndValueTextbox.Text);
+                tw.WriteLine("TickleScanNumPointsTextbox" + "\t" + TickleScanNumPointsTextbox.Text);
+                tw.WriteLine("TickleScanPMTAveragingTextbox" + "\t" + TickleScanPMTAveragingTextbox.Text);
+                tw.WriteLine("TickleSlider" + "\t" + TickleSlider.Value);
+
+                //Correlator Tab
+                tw.WriteLine("correlatorIntTimetext1" + "\t" + correlatorIntTimetext1.Text);
+                tw.WriteLine("correlatorIntTimetext2" + "\t" + correlatorIntTimetext2.Text);
+                tw.WriteLine("LockInFreqtext1" + "\t" + LockInFreqtext1.Text);
+                tw.WriteLine("LockInFreqtext2" + "\t" + LockInFreqtext2.Text);
+                tw.WriteLine("LockInFreqtext2B" + "\t" + LockInFreqtext2B.Text);
+                tw.WriteLine("ArrayResetDelayText" + "\t" + ArrayResetDelayText.Text);
+                tw.WriteLine("TickleResetDelayText" + "\t" + TickleResetDelayText.Text);
+                tw.WriteLine("correlatorBitFilePath" + "\t" + correlatorBitFilePath.Text);
+                tw.WriteLine("correlatorBitFilePathB" + "\t" + correlatorBitFilePathB.Text);
+                tw.WriteLine("correlatorQtext" + "\t" + correlatorQtext.Text);
+                tw.WriteLine("correlatorDiv1Ntext" + "\t" + correlatorDiv1Ntext.Text);
+                tw.WriteLine("correlatorDiv2Ntext" + "\t" + correlatorDiv2Ntext.Text);
+                tw.WriteLine("DataFilenameFolderPathCorr" + "\t" + DataFilenameFolderPathCorr.Text);
+                tw.WriteLine("DataFilenameCommonRoot1Corr" + "\t" + DataFilenameCommonRoot1Corr.Text);
+
+                //Pulse Programmer Tab
+                tw.WriteLine("pulsePeriodText" + "\t" + pulsePeriodText.Text);
+                tw.WriteLine("out1SigName" + "\t" + out1SigName.Text);
+                tw.WriteLine("out1OnTimeText" + "\t" + out1OnTimeText.Text);
+                tw.WriteLine("out1DelayText" + "\t" + out1DelayText.Text);
+                tw.WriteLine("out2SigName" + "\t" + out2SigName.Text);
+                tw.WriteLine("out2OnTimeText" + "\t" + out2OnTimeText.Text);
+                tw.WriteLine("out2DelayText" + "\t" + out2DelayText.Text);
+                tw.WriteLine("in1SigName" + "\t" + in1SigName.Text);
+                tw.WriteLine("in1OnTimeText" + "\t" + in1OnTimeText.Text);
+                tw.WriteLine("in1DelayText" + "\t" + in1DelayText.Text);
+                tw.WriteLine("in2SigName" + "\t" + in2SigName.Text);
+                tw.WriteLine("in2OnTimeText" + "\t" + in2OnTimeText.Text);
+                tw.WriteLine("in2DelayText" + "\t" + in2DelayText.Text);
+
+                //Camera Tab
+                tw.WriteLine("CameraHbin" + "\t" + CameraHbin.Text);
+                tw.WriteLine("CameraVbin" + "\t" + CameraVbin.Text);
+                tw.WriteLine("CameraHstart" + "\t" + CameraHstart.Text);
+                tw.WriteLine("CameraHend" + "\t" + CameraHend.Text);
+                tw.WriteLine("CameraVstart" + "\t" + CameraVstart.Text);
+                tw.WriteLine("CameraVend" + "\t" + CameraVend.Text);
+                tw.WriteLine("CameraExposure" + "\t" + CameraExposure.Text);
+                tw.WriteLine("CameraEMGain" + "\t" + CameraEMGain.Text);
+
+                //Data Filename Tab
+                tw.Write("DataFilenameChecklist" + "\t");
+                for (int i = 0; i < DataFilenameChecklist.CheckedIndices.Count; i++) tw.Write(DataFilenameChecklist.CheckedIndices[i].ToString() + "\t");
+                if (DataFilenameChecklist.CheckedIndices.Count > 0) tw.WriteLine(DataFilenameChecklist.CheckedIndices[DataFilenameChecklist.CheckedIndices.Count-1].ToString());
+                else tw.WriteLine();
+                tw.WriteLine("DetuningTextbox" + "\t" + DetuningTextbox.Text);
+                tw.WriteLine("S1PowerTextbox" + "\t" + S1PowerTextbox.Text);
+                tw.WriteLine("S2PowerTextbox" + "\t" + S2PowerTextbox.Text);
+                tw.WriteLine("PiPowerTextbox" + "\t" + PiPowerTextbox.Text);
+                tw.WriteLine("Doppler35Textbox" + "\t" + Doppler35Textbox.Text);
+                tw.WriteLine("CavityPowerTextbox" + "\t" + CavityPowerTextbox.Text);
+                tw.WriteLine("BxTextbox" + "\t" + BxTextbox.Text);
+                tw.WriteLine("ByTextbox" + "\t" + ByTextbox.Text);
+                tw.WriteLine("BzTextbox" + "\t" + BzTextbox.Text);
+                tw.WriteLine("LatticeDepthTextbox" + "\t" + LatticeDepthTextbox.Text);
+                tw.WriteLine("DataFilenameFolderPath" + "\t" + DataFilenameFolderPath.Text);
+                tw.WriteLine("DataFilenameCommonRoot1" + "\t" + DataFilenameCommonRoot1.Text);
+                tw.WriteLine("DataFilenameCommonRoot2" + "\t" + DataFilenameCommonRoot2.Text);
+                
+                tw.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void ReadConfigurationFull(string filename)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(filename))
+                {
+                    char[] charSeparators = new char[] { '\t' };
+
+                    while (!sr.EndOfStream)
+                    {
+                        String theString = sr.ReadLine();
+                        switch (theString.Split('\t')[0])
+                        {
+                            case "ArrayTotalSlider":
+                                ArrayTotalSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "TotalBiasSlider":
+                                TotalBiasSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "DCVertQuadSlider":
+                                DCVertQuadSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "DXSlider":
+                                DXSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "QuadrupoleTilt":
+                                QuadrupoleTilt.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "QuadTiltRatioSlider":
+                                QuadTiltRatioSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "SnakeRatioSlider":
+                                SnakeRatioSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "TrapHeightSlider":
+                                TrapHeightSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "TransferCavity":
+                                TransferCavity.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "CurrentFeedforward370Offset":
+                                CurrentFeedforward370Offset.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "CurrentFeedforward370Gain":
+                                CurrentFeedforward370Gain.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "SideBeam370Power":
+                                SideBeam370Power.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "CavityCoolingPowerControl":
+                                CavityCoolingPowerControl.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "RamanSlider":
+                                RamanSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "RepumperSlider":
+                                RepumperSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "ReadConfigurationFileTextbox":
+                                ReadConfigurationFileTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "DC":
+                                DCsliders[0].Value = double.Parse(theString.Split('\t')[2]);
+                                for (int i = 1; i < DCrows; i++)
+                                    DCsliders[i].Value = double.Parse(sr.ReadLine().Split('\t')[2]);
+                                break;
+                            case "LeftFingersSlider":
+                                LeftFingersSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "SnakeOnlySlider":
+                                SnakeOnlySlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "RightFingersSlider":
+                                RightFingersSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "DC dx":
+                                DCslidersLeft[0].Value = double.Parse(theString.Split('\t')[2]);
+                                for (int i = 1; i < DCrows; i++)
+                                    DCslidersLeft[i].Value = double.Parse(sr.ReadLine().Split('\t')[2]);
+                                break;
+                            case "DC left":
+                                DCslidersDx[0].Value = double.Parse(theString.Split('\t')[2]);
+                                for (int i = 1; i < DCrows; i++)
+                                    DCslidersDx[i].Value = double.Parse(sr.ReadLine().Split('\t')[2]);
+                                break;
+                            case "DC right":
+                                DCslidersRight[0].Value = double.Parse(theString.Split('\t')[2]);
+                                for (int i = 1; i < DCrows; i++)
+                                    DCslidersRight[i].Value = double.Parse(sr.ReadLine().Split('\t')[2]);
+                                break;
+                            case "ElectrodeScanDC1TextBox":
+                                ElectrodeScanDC1TextBox.Text = theString.Split('\t')[1];
+                                break;
+                            case "ElectrodeScanDC2TextBox":
+                                ElectrodeScanDC2TextBox.Text = theString.Split('\t')[1];
+                                break;
+                            case "ElectrodeScanStartValue1Textbox":
+                                ElectrodeScanStartValue1Textbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "ElectrodeScanEndValue1Textbox":
+                                ElectrodeScanEndValue1Textbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "ElectrodeScanStartValue2Textbox":
+                                ElectrodeScanStartValue2Textbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "ElectrodeScanEndValue2Textbox":
+                                ElectrodeScanEndValue2Textbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "ElectrodeScanPMTAveragingTextbox":
+                                ElectrodeScanPMTAveragingTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "ElectrodeScanNumPointsTextbox":
+                                ElectrodeScanStartValue2Textbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "CavityScanStartValueTextbox":
+                                CavityScanStartValueTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "CavityScanEndValueTextbox":
+                                CavityScanEndValueTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "CavityScanNumPointsTextbox":
+                                CavityScanNumPointsTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "CavityScanPMTAveragingTextbox":
+                                CavityScanPMTAveragingTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "Sideband402Control":
+                                Sideband402Control.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "BfieldScanStartValueTextbox":
+                                BfieldScanStartValueTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "BfieldScanEndValueTextbox":
+                                BfieldScanEndValueTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "BfieldScanNumPointsTextbox":
+                                BfieldScanNumPointsTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "BfieldScanPMTAveragingTextbox":
+                                BfieldScanPMTAveragingTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "BxSlider":
+                                BxSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "TickleScanStartValueTextbox":
+                                TickleScanStartValueTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "TickleScanEndValueTextbox":
+                                TickleScanEndValueTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "TickleScanNumPointsTextbox":
+                                TickleScanNumPointsTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "TickleScanPMTAveragingTextbox":
+                                TickleScanPMTAveragingTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "TickleSlider":
+                                TickleSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "correlatorIntTimetext1":
+                                correlatorIntTimetext1.Text = theString.Split('\t')[1];
+                                break;
+                            case "correlatorIntTimetext2":
+                                correlatorIntTimetext2.Text = theString.Split('\t')[1];
+                                break;
+                            case "LockInFreqtext1":
+                                LockInFreqtext1.Text = theString.Split('\t')[1];
+                                break;
+                            case "LockInFreqtext2":
+                                LockInFreqtext2.Text = theString.Split('\t')[1];
+                                break;
+                            case "LockInFreqtext2B":
+                                LockInFreqtext2B.Text = theString.Split('\t')[1];
+                                break;
+                            case "ArrayResetDelayText":
+                                ArrayResetDelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "TickleResetDelayText":
+                                TickleResetDelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "correlatorBitFilePath":
+                                correlatorBitFilePath.Text = theString.Split('\t')[1];
+                                break;
+                            case "correlatorBitFilePathB":
+                                correlatorBitFilePathB.Text = theString.Split('\t')[1];
+                                break;
+                            case "correlatorQtext":
+                                correlatorQtext.Text = theString.Split('\t')[1];
+                                break;
+                            case "correlatorDiv1Ntext":
+                                correlatorDiv1Ntext.Text = theString.Split('\t')[1];
+                                break;
+                            case "correlatorDiv2Ntext":
+                                correlatorDiv2Ntext.Text = theString.Split('\t')[1];
+                                break;
+                            case "DataFilenameFolderPathCorr":
+                                DataFilenameFolderPathCorr.Text = theString.Split('\t')[1];
+                                break;
+                            case "DataFilenameCommonRoot1Corr":
+                                DataFilenameCommonRoot1Corr.Text = theString.Split('\t')[1];
+                                break;
+                            case "pulsePeriodText":
+                                pulsePeriodText.Text = theString.Split('\t')[1];
+                                break;
+                            case "out1SigName":
+                                out1SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "out1OnTimeText":
+                                out1OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "out1DelayText":
+                                out1DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "out2SigName":
+                                out2SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "out2OnTimeText":
+                                out2OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "out2DelayText":
+                                out2DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "in1SigName":
+                                in1SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "in1OnTimeText":
+                                in1OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "in1DelayText":
+                                in1DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "in2SigName":
+                                in2SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "in2OnTimeText":
+                                in2OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "in2DelayText":
+                                in2DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "CameraHbin":
+                                CameraHbin.Text = theString.Split('\t')[1];
+                                break;
+                            case "CameraVbin":
+                                CameraVbin.Text = theString.Split('\t')[1];
+                                break;
+                            case "CameraHstart":
+                                CameraHstart.Text = theString.Split('\t')[1];
+                                break;
+                            case "CameraHend":
+                                CameraHend.Text = theString.Split('\t')[1];
+                                break;
+                            case "CameraVstart":
+                                CameraVstart.Text = theString.Split('\t')[1];
+                                break;
+                            case "CameraVend":
+                                CameraVend.Text = theString.Split('\t')[1];
+                                break;
+                            case "CameraExposure":
+                                CameraExposure.Text = theString.Split('\t')[1];
+                                break;
+                            case "CameraEMGain":
+                                CameraEMGain.Text = theString.Split('\t')[1];
+                                break;
+                            case "DataFilenameChecklist":
+                                for (int i = 1; i < theString.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries).GetLength(0); i++)
+                                {
+                                    DataFilenameChecklist.SetItemCheckState(int.Parse(theString.Split('\t')[i]),CheckState.Checked);
+                                }
+                                break;
+                            case "DetuningTextbox":
+                                DetuningTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "S1PowerTextbox":
+                                S1PowerTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "S2PowerTextbox":
+                                S2PowerTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "PiPowerTextbox":
+                                PiPowerTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "Doppler35Textbox":
+                                Doppler35Textbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "CavityPowerTextbox":
+                                CavityPowerTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "BxTextbox":
+                                BxTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "ByTextbox":
+                                ByTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "BzTextbox":
+                                BzTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "LatticeDepthTextbox":
+                                LatticeDepthTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "DataFilenameFolderPath":
+                                DataFilenameFolderPath.Text = theString.Split('\t')[1];
+                                break;
+                            case "DataFilenameCommonRoot1":
+                                DataFilenameCommonRoot1.Text = theString.Split('\t')[1];
+                                break;
+                            case "DataFilenameCommonRoot2":
+                                DataFilenameCommonRoot2.Text = theString.Split('\t')[1];
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (System.IO.FileNotFoundException ex){MessageBox.Show(ex.Message);}
         }
 
         //VCOVVAoutputHelper
@@ -808,7 +1266,7 @@ namespace ArrayDACControl
             DAC.Mask = 0;
             const double rampAmplitude = 2;
             double[] rampInitVal = new double[] { innerL, innerR, innerC };
-            double[] rampFinalVal = new double[] { innerL - RatioSlider.Value * rampAmplitude, innerR - RatioSlider.Value * rampAmplitude, innerC - rampAmplitude };
+            double[] rampFinalVal = new double[] { innerL - SnakeRatioSlider.Value * rampAmplitude, innerR - SnakeRatioSlider.Value * rampAmplitude, innerC - rampAmplitude };
             DAC.Ramp(new int[] { (int)this.RFelectrodeToChannel["innerL"], (int)this.RFelectrodeToChannel["innerR"], (int)this.RFelectrodeToChannel["snake"] }, rampInitVal, rampFinalVal, ref T, ref samples);
             DAC.Wait(ref blankWaitTime);
             DAC.Mask = 128;
@@ -914,7 +1372,7 @@ namespace ArrayDACControl
                         theString[1] += "QuadRatio=" + QuadTiltRatioSlider.Value.ToString("F2") + " ";
                         break;
                     case 21:
-                        theString[1] += "ArrayRatio=" + RatioSlider.Value.ToString("F2") + " ";
+                        theString[1] += "ArrayRatio=" + SnakeRatioSlider.Value.ToString("F2") + " ";
                         break;
 
                 }
@@ -945,7 +1403,7 @@ namespace ArrayDACControl
                 tw.WriteLine("Quadrupole Tilt" + "\t" + QuadrupoleTilt.Value);
                 tw.WriteLine("Quad Tilt Ratio" + "\t" + QuadTiltRatioSlider.Value);
                 tw.WriteLine("Transfer Cavity" + "\t" + TransferCavity.Value);
-                tw.WriteLine("Snake Inner Ratio" + "\t" + RatioSlider.Value);
+                tw.WriteLine("Snake Inner Ratio" + "\t" + SnakeRatioSlider.Value);
                 for (int i = 0; i < DCrows; i++)
                     tw.WriteLine("DC dx" + i + "\t" + DCslidersDx[i].Value);
                 for (int i = 0; i < DCrows; i++)
@@ -1101,14 +1559,20 @@ namespace ArrayDACControl
             RepumperSliderOutHelper();
         }
 
-        private void SaveElectrodeConfig_Click_1(object sender, EventArgs e)
-        {
-            SaveConfigurationFile(textBox1.Text);
-        }
-
         private void ReadElectrodeConfig_Click_1(object sender, EventArgs e)
         {
-            ReadConfigurationFile(textBox2.Text);
+            ReadConfigurationFile(ReadConfigurationFileTextbox.Text);
+            UpdateAll();
+        }
+
+        private void SaveFullConfigButton_Click(object sender, EventArgs e)
+        {
+            SaveConfigurationFull(SaveFullConfigTextbox.Text);
+        }
+
+        private void ReadFullConfigButton_Click(object sender, EventArgs e)
+        {
+            ReadConfigurationFull(ReadFullConfigTextbox.Text);
             UpdateAll();
         }
 
@@ -1132,11 +1596,6 @@ namespace ArrayDACControl
         private void TickleSlider_Adjusted(object sender, EventArgs e)
         {
             Dev7AO0.OutputAnalogValue((double)TickleSlider.Value / TickleCalib);
-        }
-
-        private void CurrentFeedforward370Offset_AfterChangeValue_1(object sender, NationalInstruments.UI.AfterChangeNumericValueEventArgs e)
-        {
-            //Dev4AO2.OutputAnalogValue((double)(TransferCavity.Value-CurrentFeedforward370Offset.Value)*CurrentFeedforward370Gain.Value / TCcalib);
         }
 
         private void RepumperPowerSlider_Adjusted(object sender, EventArgs e)
@@ -1221,10 +1680,19 @@ namespace ArrayDACControl
 
         private void Form1_Closing(object sender, EventArgs e)
         {
+            //Save slider values and textbox values for the application
+            SaveConfigurationFull(SaveFullConfigTextbox.Text);
+            //Shutdown camera
             if (Camera != null)
             {
                 Camera.AppShutDown();
             }
+        }
+
+        private void Form1_Disposed(object sender, System.EventArgs e)
+        {
+            //Save slider values and textbox values for the application
+            SaveConfigurationFull(SaveFullConfigTextbox.Text);
         }
 
         ///////////////////////////
@@ -3507,21 +3975,6 @@ namespace ArrayDACControl
             scatterGraph3.ClearData();
         }
 
-        private void RamanSlider_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DXSlider_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void QuadrupoleTilt_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void corrRecToggle_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
         {
@@ -3556,11 +4009,6 @@ namespace ArrayDACControl
                 corrAmpLog.ClearData();
             else
                 corrMuLog.ClearData();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void groupBox51_Enter(object sender, EventArgs e)
@@ -3682,6 +4130,9 @@ namespace ArrayDACControl
 
             theCorrelator.updateSyncSourceLive();
         }
+
+
+
 
 
         //
