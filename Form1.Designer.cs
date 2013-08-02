@@ -2471,6 +2471,7 @@
             this.FluorLogStart.TabIndex = 160;
             this.FluorLogStart.Text = "Start LOG";
             this.FluorLogStart.UseVisualStyleBackColor = false;
+            this.FluorLogStart.Click += new System.EventHandler(this.FluorLogStart_Click);
             // 
             // groupBox60
             // 
@@ -4025,7 +4026,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.76191F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.2381F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 166F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 168F));
             this.tableLayoutPanel2.Controls.Add(this.in2DelayText, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.in2OnTimeText, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.in1DelayText, 3, 1);
@@ -4050,7 +4051,7 @@
             // 
             // in2DelayText
             // 
-            this.in2DelayText.Location = new System.Drawing.Point(273, 91);
+            this.in2DelayText.Location = new System.Drawing.Point(271, 91);
             this.in2DelayText.Name = "in2DelayText";
             this.in2DelayText.Size = new System.Drawing.Size(117, 20);
             this.in2DelayText.TabIndex = 11;
@@ -4058,7 +4059,7 @@
             // 
             // in2OnTimeText
             // 
-            this.in2OnTimeText.Location = new System.Drawing.Point(143, 91);
+            this.in2OnTimeText.Location = new System.Drawing.Point(141, 91);
             this.in2OnTimeText.Name = "in2OnTimeText";
             this.in2OnTimeText.Size = new System.Drawing.Size(119, 20);
             this.in2OnTimeText.TabIndex = 10;
@@ -4066,7 +4067,7 @@
             // 
             // in1DelayText
             // 
-            this.in1DelayText.Location = new System.Drawing.Point(273, 62);
+            this.in1DelayText.Location = new System.Drawing.Point(271, 62);
             this.in1DelayText.Name = "in1DelayText";
             this.in1DelayText.Size = new System.Drawing.Size(117, 20);
             this.in1DelayText.TabIndex = 9;
@@ -4074,7 +4075,7 @@
             // 
             // in1OnTimeText
             // 
-            this.in1OnTimeText.Location = new System.Drawing.Point(143, 62);
+            this.in1OnTimeText.Location = new System.Drawing.Point(141, 62);
             this.in1OnTimeText.Name = "in1OnTimeText";
             this.in1OnTimeText.Size = new System.Drawing.Size(119, 20);
             this.in1OnTimeText.TabIndex = 8;
@@ -4084,7 +4085,7 @@
             // 
             this.label154.AutoSize = true;
             this.label154.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label154.Location = new System.Drawing.Point(273, 4);
+            this.label154.Location = new System.Drawing.Point(271, 4);
             this.label154.Name = "label154";
             this.label154.Size = new System.Drawing.Size(140, 24);
             this.label154.TabIndex = 7;
@@ -4094,7 +4095,7 @@
             // 
             this.label152.AutoSize = true;
             this.label152.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label152.Location = new System.Drawing.Point(143, 4);
+            this.label152.Location = new System.Drawing.Point(141, 4);
             this.label152.Name = "label152";
             this.label152.Size = new System.Drawing.Size(107, 48);
             this.label152.TabIndex = 6;
@@ -4102,16 +4103,16 @@
             // 
             // in2SigName
             // 
-            this.in2SigName.Location = new System.Drawing.Point(41, 91);
+            this.in2SigName.Location = new System.Drawing.Point(40, 91);
             this.in2SigName.Name = "in2SigName";
-            this.in2SigName.Size = new System.Drawing.Size(95, 20);
+            this.in2SigName.Size = new System.Drawing.Size(94, 20);
             this.in2SigName.TabIndex = 5;
             // 
             // label147
             // 
             this.label147.AutoSize = true;
             this.label147.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label147.Location = new System.Drawing.Point(41, 4);
+            this.label147.Location = new System.Drawing.Point(40, 4);
             this.label147.Name = "label147";
             this.label147.Size = new System.Drawing.Size(64, 48);
             this.label147.TabIndex = 2;
@@ -4149,9 +4150,9 @@
             // 
             // in1SigName
             // 
-            this.in1SigName.Location = new System.Drawing.Point(41, 62);
+            this.in1SigName.Location = new System.Drawing.Point(40, 62);
             this.in1SigName.Name = "in1SigName";
-            this.in1SigName.Size = new System.Drawing.Size(95, 20);
+            this.in1SigName.Size = new System.Drawing.Size(94, 20);
             this.in1SigName.TabIndex = 4;
             // 
             // label145
@@ -4171,7 +4172,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.76191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.2381F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 166F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 168F));
             this.tableLayoutPanel1.Controls.Add(this.out2DelayText, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.out1DelayText, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.out2OnTimeText, 2, 2);
@@ -4196,7 +4197,7 @@
             // 
             // out2DelayText
             // 
-            this.out2DelayText.Location = new System.Drawing.Point(273, 91);
+            this.out2DelayText.Location = new System.Drawing.Point(271, 91);
             this.out2DelayText.Name = "out2DelayText";
             this.out2DelayText.Size = new System.Drawing.Size(117, 20);
             this.out2DelayText.TabIndex = 8;
@@ -4204,7 +4205,7 @@
             // 
             // out1DelayText
             // 
-            this.out1DelayText.Location = new System.Drawing.Point(273, 62);
+            this.out1DelayText.Location = new System.Drawing.Point(271, 62);
             this.out1DelayText.Name = "out1DelayText";
             this.out1DelayText.Size = new System.Drawing.Size(117, 20);
             this.out1DelayText.TabIndex = 7;
@@ -4212,7 +4213,7 @@
             // 
             // out2OnTimeText
             // 
-            this.out2OnTimeText.Location = new System.Drawing.Point(144, 91);
+            this.out2OnTimeText.Location = new System.Drawing.Point(142, 91);
             this.out2OnTimeText.Name = "out2OnTimeText";
             this.out2OnTimeText.Size = new System.Drawing.Size(119, 20);
             this.out2OnTimeText.TabIndex = 6;
@@ -4220,7 +4221,7 @@
             // 
             // out1OnTimeText
             // 
-            this.out1OnTimeText.Location = new System.Drawing.Point(144, 62);
+            this.out1OnTimeText.Location = new System.Drawing.Point(142, 62);
             this.out1OnTimeText.Name = "out1OnTimeText";
             this.out1OnTimeText.Size = new System.Drawing.Size(119, 20);
             this.out1OnTimeText.TabIndex = 5;
@@ -4230,7 +4231,7 @@
             // 
             this.label153.AutoSize = true;
             this.label153.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label153.Location = new System.Drawing.Point(273, 4);
+            this.label153.Location = new System.Drawing.Point(271, 4);
             this.label153.Name = "label153";
             this.label153.Size = new System.Drawing.Size(135, 24);
             this.label153.TabIndex = 6;
@@ -4240,7 +4241,7 @@
             // 
             this.label151.AutoSize = true;
             this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label151.Location = new System.Drawing.Point(144, 4);
+            this.label151.Location = new System.Drawing.Point(142, 4);
             this.label151.Name = "label151";
             this.label151.Size = new System.Drawing.Size(79, 24);
             this.label151.TabIndex = 5;
@@ -4250,7 +4251,7 @@
             // 
             this.out2SigName.Location = new System.Drawing.Point(41, 91);
             this.out2SigName.Name = "out2SigName";
-            this.out2SigName.Size = new System.Drawing.Size(96, 20);
+            this.out2SigName.Size = new System.Drawing.Size(94, 20);
             this.out2SigName.TabIndex = 5;
             // 
             // label144
@@ -4297,7 +4298,7 @@
             // 
             this.out1SigName.Location = new System.Drawing.Point(41, 62);
             this.out1SigName.Name = "out1SigName";
-            this.out1SigName.Size = new System.Drawing.Size(96, 20);
+            this.out1SigName.Size = new System.Drawing.Size(94, 20);
             this.out1SigName.TabIndex = 4;
             // 
             // CameraTab
@@ -5446,8 +5447,8 @@
             this.Controls.Add(this.instrumentControlStrip1);
             this.Name = "Form1";
             this.Text = "Ion Array Controller";
+            this.Disposed += new System.EventHandler(this.Form1_Disposed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_Closing);
-            this.Disposed += new System.EventHandler(Form1_Disposed);
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             this.groupBox12.ResumeLayout(false);
