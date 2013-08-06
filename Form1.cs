@@ -3019,9 +3019,23 @@ namespace ArrayDACControl
                     CameraInitializeHelper();
                 }
             }
+            if (FluorLogThreadHelper.message == "Correlator:Sum")
+            {
+                //Initialize parameters to values entered under "Correlator" Tab  
+                //if correlator returns false for init, abort scan
+                if (!CorrelatorParameterInit())
+                {
+                    //end scan
+                    FluorLogThreadHelper.ShouldBeRunningFlag = false;
+                    //show message
+                    MessageBox.Show("Correlator Init returned false");
+                }
+            }
             //run scans
             while (FluorLogThreadHelper.index < (FluorLogThreadHelper.numPoints) && FluorLogThreadHelper.ShouldBeRunningFlag)
             {
+                //Update Scan variable
+                FluorLogThreadHelper.DoubleScanVariable[0, FluorLogThreadHelper.index] = (double)FluorLogThreadHelper.index;
                 //call to change button
                 try
                 {
@@ -3049,14 +3063,38 @@ namespace ArrayDACControl
                     //plot
                     scatterGraph3.PlotXYAppend(FluorLogThreadHelper.DoubleScanVariable[0, FluorLogThreadHelper.index], FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index]);
                     //increase index
+                    FluorLogThreadHelper.index++;
                 }
                 // if Camera selected run Camera acquisition
                 if (FluorLogThreadHelper.message == "Camera")
                 {
                     CameraAcquisitionHelper();
+                    FluorLogThreadHelper.index++;
                 }
 
-                FluorLogThreadHelper.index++;
+                // if Correlator:Sum selected, get reading from correlator, and sum bins
+                if (FluorLogThreadHelper.message == "Correlator:Sum")
+                {
+                    //Get results into correlator object
+                    CorrelatorGetResultsHelper();
+
+                    //Put sum of two channels data in Thread array
+                    FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+
+                    //plot
+                    lock (FluorLogThreadHelper)
+                    {
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(FluorLogFrmCallback6));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(FluorLogThreadHelper);
+                    }
+                    //increase index
+                    FluorLogThreadHelper.index++;
+                }    
             }
             if (FluorLogThreadHelper.ShouldBeRunningFlag)
             {
@@ -3114,6 +3152,20 @@ namespace ArrayDACControl
 
             FluorLogLiveAverageTextbox.Text = mean.ToString("F1");
             FluorLogLiveStdTextbox.Text = std.ToString("F1");
+        }
+        private void FluorLogFrmCallback6()
+        {
+            lock (FluorLogThreadHelper)
+            {
+                try
+                {
+                    //plot
+                    scatterGraph3.PlotXYAppend((double) FluorLogThreadHelper.index, FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                Monitor.PulseAll(FluorLogThreadHelper);
+            }
         }
 
         //
