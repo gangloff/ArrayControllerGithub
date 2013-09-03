@@ -818,6 +818,12 @@ namespace ArrayDACControl
                 tw.WriteLine("ElectrodeScanPMTAveragingTextbox" + "\t" + ElectrodeScanPMTAveragingTextbox.Text);
                 tw.WriteLine("ElectrodeScanNumPointsTextbox" + "\t" + ElectrodeScanNumPointsTextbox.Text);
 
+                //Slider Scan Tab
+                tw.WriteLine("SliderScanStartValueTextbox" + "\t" + SliderScanStartValueTextbox.Text);
+                tw.WriteLine("SliderScanEndValueTextbox" + "\t" + SliderScanEndValueTextbox.Text);
+                tw.WriteLine("SliderScanNumPointsTextbox" + "\t" + SliderScanNumPointsTextbox.Text);
+                tw.WriteLine("SliderScanPMTAveragingTextbox" + "\t" + SliderScanPMTAveragingTextbox.Text);
+
                 //Cavity Scan Tab
                 tw.WriteLine("CavityScanStartValueTextbox" + "\t" + CavityScanStartValueTextbox.Text);
                 tw.WriteLine("CavityScanEndValueTextbox" + "\t" + CavityScanEndValueTextbox.Text);
@@ -1032,6 +1038,18 @@ namespace ArrayDACControl
                                 break;
                             case "Sideband402Control":
                                 Sideband402Control.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "SliderScanStartValueTextbox":
+                                SliderScanStartValueTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "SliderScanEndValueTextbox":
+                                SliderScanEndValueTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "SliderScanNumPointsTextbox":
+                                SliderScanNumPointsTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "SliderScanPMTAveragingTextbox":
+                                SliderScanPMTAveragingTextbox.Text = theString.Split('\t')[1];
                                 break;
                             case "BfieldScanStartValueTextbox":
                                 BfieldScanStartValueTextbox.Text = theString.Split('\t')[1];
@@ -2955,7 +2973,7 @@ namespace ArrayDACControl
 
         //
         //
-        // B-FIELD SCANS
+        // ARBITRARY SLIDER SCAN
         // 
         //
         private void SliderScanStart_Click(object sender, EventArgs e)
@@ -3248,6 +3266,8 @@ namespace ArrayDACControl
             SliderScanThreadHelper.theSlider.Value = SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index];
             //Button Indicator
             SliderScanStart.Text = "Scanning..." + SliderScanThreadHelper.index.ToString();
+            //update DAC
+            compensationAdjustedHelper();
         }
         private void SliderScanFrmCallback4()
         {
