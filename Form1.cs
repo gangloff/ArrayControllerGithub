@@ -51,6 +51,7 @@ namespace ArrayDACControl
         ThreadHelperClass RepumperScanThreadHelper, BfieldScanThreadHelper, CavityScanThreadHelper, ElectrodeScanThreadHelper, TickleScanThreadHelper;
         ThreadHelperClass CameraThreadHelper, CameraTimeOutThreadHelper, IntensityGraphUpdateThreadHelper;
         ThreadHelperClass CorrelatorThreadHelper, SinglePMTReadThreadHelper, FluorLogThreadHelper;
+        ThreadHelperClass SliderScanThreadHelper;
         delegate void MyDelegate();
 
         double BL, BR, TL, TR, midL, midR;
@@ -266,6 +267,7 @@ namespace ArrayDACControl
             IntensityGraphUpdateThreadHelper = new ThreadHelperClass("IntensityGraphUpdate");
             CorrelatorThreadHelper = new ThreadHelperClass("CorrelatorThread");
             FluorLogThreadHelper = new ThreadHelperClass("FluorLog");
+            SliderScanThreadHelper = new ThreadHelperClass("SliderScan");
 
             stopwatch = new Stopwatch();
         }
@@ -2947,6 +2949,335 @@ namespace ArrayDACControl
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
                 Monitor.PulseAll(BfieldScanThreadHelper);
+            }
+        }
+
+
+        //
+        //
+        // B-FIELD SCANS
+        // 
+        //
+        private void SliderScanStart_Click(object sender, EventArgs e)
+        {
+            if (!SliderScanThreadHelper.ShouldBeRunningFlag)
+            {
+                SliderScanThreadHelper.ShouldBeRunningFlag = true;
+                SliderScanThreadHelper.theThread = new Thread(new ThreadStart(SliderScanExecute));
+                SliderScanThreadHelper.theThread.Name = "Slider Scan thread";
+                SliderScanThreadHelper.theThread.Priority = ThreadPriority.Normal;
+                SliderScanThreadHelper.index = 0;
+                //get scan parameters and declare data arrays
+                SliderScanThreadHelper.min = new double[1];
+                SliderScanThreadHelper.max = new double[1];
+                SliderScanThreadHelper.min[0] = double.Parse(SliderScanStartValueTextbox.Text);
+                SliderScanThreadHelper.max[0] = double.Parse(SliderScanEndValueTextbox.Text);
+                SliderScanThreadHelper.numAverage = int.Parse(SliderScanPMTAveragingTextbox.Text);
+                SliderScanThreadHelper.numPoints = int.Parse(SliderScanNumPointsTextbox.Text);
+                //get Slider to scan
+                switch (SliderScanSelection.Text)
+                {
+                    case "DXSlider":
+                        SliderScanThreadHelper.theSlider = this.DXSlider;
+                        break;
+                    case "ArrayTotalSlider":
+                        SliderScanThreadHelper.theSlider = this.ArrayTotalSlider;
+                        break;
+                    case "DCVertDipoleSlider":
+                        SliderScanThreadHelper.theSlider = this.DCVertDipoleSlider;
+                        break;
+                    case "DCVertQuadSlider":
+                        SliderScanThreadHelper.theSlider = this.DCVertQuadSlider;
+                        break;
+                    case "TotalBiasSlider":
+                        SliderScanThreadHelper.theSlider = this.TotalBiasSlider;
+                        break;
+                    case "TrapHeightSlider":
+                        SliderScanThreadHelper.theSlider = this.TrapHeightSlider;
+                        break;
+                    case "QuadrupoleTilt":
+                        SliderScanThreadHelper.theSlider = this.QuadrupoleTilt;
+                        break;
+                    case "QuadTiltRatioSlider":
+                        SliderScanThreadHelper.theSlider = this.QuadTiltRatioSlider;
+                        break;
+                    case "SnakeRatioSlider":
+                        SliderScanThreadHelper.theSlider = this.SnakeRatioSlider;
+                        break;
+                    case "RightFingersSlider":
+                        SliderScanThreadHelper.theSlider = this.RightFingersSlider;
+                        break;
+                    case "LeftFingersSlider":
+                        SliderScanThreadHelper.theSlider = this.LeftFingersSlider;
+                        break;
+                    case "SnakeOnlySlider":
+                        SliderScanThreadHelper.theSlider = this.SnakeOnlySlider;
+                        break;
+                    case "TransferCavity":
+                        SliderScanThreadHelper.theSlider = this.TransferCavity;
+                        break;
+                    case "RepumperSlider":
+                        SliderScanThreadHelper.theSlider = this.RepumperSlider;
+                        break;
+                    case "RepumperPowerSlider":
+                        SliderScanThreadHelper.theSlider = this.RepumperPowerSlider;
+                        break;
+                    case "SideBeam370Power":
+                        SliderScanThreadHelper.theSlider = this.SideBeam370Power;
+                        break;
+                    case "LatticePowerControl":
+                        SliderScanThreadHelper.theSlider = this.LatticePowerControl;
+                        break;
+                    case "CavityCoolingPowerControl":
+                        SliderScanThreadHelper.theSlider = this.CavityCoolingPowerControl;
+                        break;
+                    case "Sideband402Control":
+                        SliderScanThreadHelper.theSlider = this.Sideband402Control;
+                        break;
+                    case "RamanSlider":
+                        SliderScanThreadHelper.theSlider = this.RamanSlider;
+                        break;
+                    case "BxSlider":
+                        SliderScanThreadHelper.theSlider = this.BxSlider;
+                        break;
+                    case "TickleSlider":
+                        SliderScanThreadHelper.theSlider = this.TickleSlider;
+                        break;
+                    case "CorrelatorBinningPhaseSlider":
+                        SliderScanThreadHelper.theSlider = this.CorrelatorBinningPhaseSlider;
+                        break;
+                }
+                //modify thread name for file saving
+                SliderScanThreadHelper.threadName = SliderScanThreadHelper.theSlider.Name;
+
+                if (SliderScanThreadHelper.numPoints < 2)
+                {
+                    SliderScanThreadHelper.numPoints = 2;
+                    SliderScanNumPointsTextbox.Text = "2";
+                }
+                //get Stream type from combo box
+                SliderScanThreadHelper.message = SliderScanComboBox.Text;
+
+                //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
+                //if camera is running stop it
+                if (SliderScanThreadHelper.message == "PMT & Camera")
+                {
+                    SliderScanThreadHelper.initDoubleData(SliderScanThreadHelper.numPoints, 3, 1);
+                    // if camera is running stop it
+                    if (CameraThreadHelper.ShouldBeRunningFlag)
+                    {
+                        CameraThreadHelper.ShouldBeRunningFlag = false;
+                    }
+                }
+                else if (SliderScanThreadHelper.message == "PMT")
+                {
+                    SliderScanThreadHelper.initDoubleData(SliderScanThreadHelper.numPoints, 2, 1);
+                }
+                else
+                {
+                    SliderScanThreadHelper.initDoubleData(SliderScanThreadHelper.numPoints, 1, 1);
+                    // if camera is running stop it
+                    if (CameraThreadHelper.ShouldBeRunningFlag)
+                    {
+                        CameraThreadHelper.ShouldBeRunningFlag = false;
+                    }
+                }
+
+                //start scan thread
+                try
+                {
+                    SliderScanThreadHelper.theThread.Start();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+            else
+            {
+                SliderScanThreadHelper.ShouldBeRunningFlag = false;
+            }
+        }
+        private void SliderScanExecute()
+        {
+            //update button
+            SliderScanStart.BackColor = System.Drawing.Color.White;
+            //clear graph
+            scatterGraph3.ClearData();
+            //if running camera, initialize, and clear fluor and position graphs
+            if (SliderScanThreadHelper.message == "Camera" || SliderScanThreadHelper.message == "PMT & Camera")
+            {
+                // clear graphs
+                CameraForm.FluorescenceGraph.ClearData();
+                CameraForm.PositionGraph.ClearData();
+                if (Camera.AppInitialize())
+                {
+                    CameraInitializeHelper();
+                }
+            }
+
+            if (SliderScanThreadHelper.message == "Correlator:Sum")
+            {
+                //Initialize parameters to values entered under "Correlator" Tab  
+                //if correlator returns false for init, abort scan
+                if (!CorrelatorParameterInit())
+                {
+                    //end scan
+                    SliderScanThreadHelper.ShouldBeRunningFlag = false;
+                    //show message
+                    MessageBox.Show("Correlator Init returned false");
+                }
+            }
+
+            //run scans
+            while (SliderScanThreadHelper.index < (SliderScanThreadHelper.numPoints) && SliderScanThreadHelper.ShouldBeRunningFlag)
+            {
+                //Compute new field values
+                SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index] = (double)(SliderScanThreadHelper.min[0] + (SliderScanThreadHelper.max[0] - SliderScanThreadHelper.min[0]) * SliderScanThreadHelper.index / (SliderScanThreadHelper.numPoints - 1));
+                //call to change field value
+                try
+                {
+                    this.Invoke(new MyDelegate(SliderScanFrmCallback3));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                BxSliderOutHelper();
+
+                if (SliderScanThreadHelper.message == "PMT" || SliderScanThreadHelper.message == "PMT & Camera")
+                {
+                    for (int i = 0; i < SliderScanThreadHelper.numAverage; i++)
+                    {
+                        //get reading from GPIB counter
+                        gpibdevice.simpleRead(21);
+                        try
+                        {
+                            this.Invoke(new MyDelegate(SliderScanFrmCallback));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        //update Sigma array
+                        SliderScanThreadHelper.DoubleData[1, SliderScanThreadHelper.index] += Math.Pow(SliderScanThreadHelper.SingleDouble, 2);
+                    }
+                    //finalize single point average and standard deviation
+                    SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] = SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] / SliderScanThreadHelper.numAverage;
+                    SliderScanThreadHelper.DoubleData[1, SliderScanThreadHelper.index] = Math.Sqrt(SliderScanThreadHelper.DoubleData[1, SliderScanThreadHelper.index] / SliderScanThreadHelper.numAverage - Math.Pow(SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index], 2));
+
+                    lock (SliderScanThreadHelper)
+                    {
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(SliderScanFrmCallback4));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(SliderScanThreadHelper);
+                    }
+                    //increase index
+                    SliderScanThreadHelper.index++;
+                }
+                // if Camera selected run Camera acquisition
+                if (SliderScanThreadHelper.message == "Camera" || SliderScanThreadHelper.message == "PMT & Camera")
+                {
+                    CameraAcquisitionHelper();
+                    SliderScanThreadHelper.index++;
+                }
+
+                // if AI selected, get reading from NI card
+                if (SliderScanThreadHelper.message == "Dev3AI2")
+                {
+                    SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] = Dev3AI2.ReadAnalogValue();
+                    SliderScanThreadHelper.index++;
+                }
+
+                // if Correlator:Sum selected, get reading from correlator, and sum bins
+                if (SliderScanThreadHelper.message == "Correlator:Sum")
+                {
+                    //Get results into correlator object
+                    CorrelatorGetResultsHelper();
+
+                    //Put sum of two channels data in Thread array
+                    SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+
+                    //plot
+                    lock (SliderScanThreadHelper)
+                    {
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(SliderScanFrmCallback5));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(SliderScanThreadHelper);
+                    }
+                    //increase index
+                    SliderScanThreadHelper.index++;
+                }
+            }
+            if (SliderScanThreadHelper.ShouldBeRunningFlag)
+            {
+                //save Scan Data
+                SaveScanData(SliderScanThreadHelper);
+            }
+            //go back to initial value
+            //reset button
+            try
+            {
+                this.Invoke(new MyDelegate(SliderScanFrmCallback2));
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            //reset scan boolean
+            SliderScanThreadHelper.ShouldBeRunningFlag = false;
+        }
+        private void SliderScanFrmCallback()
+        {
+            //get decimal number
+            SliderScanThreadHelper.SingleDouble = gpibDoubleResult();
+            //load result in array
+            SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] += SliderScanThreadHelper.SingleDouble;
+            //display count
+            PMTcountBox.Text = SliderScanThreadHelper.SingleDouble.ToString();
+            //update PMT plot
+            PMTcountGraph.PlotYAppend(SliderScanThreadHelper.SingleDouble);
+        }
+        private void SliderScanFrmCallback2()
+        {
+            SliderScanStart.BackColor = System.Drawing.Color.WhiteSmoke;
+            SliderScanStart.Text = "Start *Slider* Scan";
+            //reset to original values
+            BxSlider.Value = SliderScanThreadHelper.min[0];
+        }
+        private void SliderScanFrmCallback3()
+        {
+            //update slider
+            SliderScanThreadHelper.theSlider.Value = SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index];
+            //Button Indicator
+            SliderScanStart.Text = "Scanning..." + SliderScanThreadHelper.index.ToString();
+        }
+        private void SliderScanFrmCallback4()
+        {
+            lock (SliderScanThreadHelper)
+            {
+                try
+                {
+                    SliderScanLiveAverageTextbox.Text = SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index].ToString();
+                    SliderScanLiveStdTextbox.Text = SliderScanThreadHelper.DoubleData[1, SliderScanThreadHelper.index].ToString();
+                    //plot
+                    scatterGraph3.PlotXYAppend(SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index], SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                Monitor.PulseAll(SliderScanThreadHelper);
+            }
+        }
+
+        private void SliderScanFrmCallback5()
+        {
+            lock (SliderScanThreadHelper)
+            {
+                try
+                {
+                    //plot
+                    scatterGraph3.PlotXYAppend(SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index], SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                Monitor.PulseAll(SliderScanThreadHelper);
             }
         }
 

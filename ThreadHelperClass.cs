@@ -40,6 +40,8 @@ namespace ArrayDACControl
         public int[,] IntData;
         public int[,] IntScanVariable;
         public double Background;
+        //Slider associated with a scan
+        public AdjustableSlider theSlider;
 
         //constructor
         public ThreadHelperClass(string theName)
