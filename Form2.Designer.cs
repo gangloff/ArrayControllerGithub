@@ -53,6 +53,7 @@ namespace ArrayDACControl
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor8 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripPropertyEditor9 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.PositionLogPathName = new System.Windows.Forms.TextBox();
             this.SavePositionLogButton = new System.Windows.Forms.Button();
@@ -88,7 +89,8 @@ namespace ArrayDACControl
             this.toolStripPropertyEditor4 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor5 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.toolStripPropertyEditor9 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
+            this.SaveImagePath = new System.Windows.Forms.TextBox();
+            this.SaveImageButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.intensityGraph1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor2)).BeginInit();
@@ -322,6 +324,15 @@ namespace ArrayDACControl
             this.toolStripLabel9.Name = "toolStripLabel9";
             this.toolStripLabel9.Size = new System.Drawing.Size(34, 22);
             this.toolStripLabel9.Text = "Plots:";
+            // 
+            // toolStripPropertyEditor9
+            // 
+            this.toolStripPropertyEditor9.AutoSize = false;
+            this.toolStripPropertyEditor9.Name = "toolStripPropertyEditor9";
+            this.toolStripPropertyEditor9.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
+            this.toolStripPropertyEditor9.Size = new System.Drawing.Size(120, 21);
+            this.toolStripPropertyEditor9.Source = new NationalInstruments.UI.PropertyEditorSource(this.FluorescenceGraph, "Plots");
+            this.toolStripPropertyEditor9.Text = "(Collection)";
             // 
             // groupBox2
             // 
@@ -647,20 +658,30 @@ namespace ArrayDACControl
             this.toolStripPropertyEditor5.Source = new NationalInstruments.UI.PropertyEditorSource(this.intensityGraph1, "ColorScales");
             this.toolStripPropertyEditor5.Text = "(Collection)";
             // 
-            // toolStripPropertyEditor9
+            // SaveImagePath
             // 
-            this.toolStripPropertyEditor9.AutoSize = false;
-            this.toolStripPropertyEditor9.Name = "toolStripPropertyEditor9";
-            this.toolStripPropertyEditor9.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
-            this.toolStripPropertyEditor9.Size = new System.Drawing.Size(120, 21);
-            this.toolStripPropertyEditor9.Source = new NationalInstruments.UI.PropertyEditorSource(this.FluorescenceGraph, "Plots");
-            this.toolStripPropertyEditor9.Text = "(Collection)";
+            this.SaveImagePath.Location = new System.Drawing.Point(12, 983);
+            this.SaveImagePath.Name = "SaveImagePath";
+            this.SaveImagePath.Size = new System.Drawing.Size(421, 20);
+            this.SaveImagePath.TabIndex = 19;
+            // 
+            // SaveImageButton
+            // 
+            this.SaveImageButton.Location = new System.Drawing.Point(12, 954);
+            this.SaveImageButton.Name = "SaveImageButton";
+            this.SaveImageButton.Size = new System.Drawing.Size(150, 23);
+            this.SaveImageButton.TabIndex = 18;
+            this.SaveImageButton.Text = "Save Image";
+            this.SaveImageButton.UseVisualStyleBackColor = true;
+            this.SaveImageButton.Click += new System.EventHandler(this.SaveImageButton_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1910, 1028);
+            this.Controls.Add(this.SaveImagePath);
+            this.Controls.Add(this.SaveImageButton);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -755,6 +776,8 @@ namespace ArrayDACControl
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor8;
         private System.Windows.Forms.ToolStripLabel toolStripLabel9;
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor9;
+        private System.Windows.Forms.TextBox SaveImagePath;
+        private System.Windows.Forms.Button SaveImageButton;
 
 
 

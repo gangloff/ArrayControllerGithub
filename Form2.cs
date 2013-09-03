@@ -88,5 +88,30 @@ namespace ArrayDACControl
 
         }
 
+        private void SaveImageButton_Click(object sender, EventArgs e)
+        {
+            double[,] data = this.intensityPlot1.GetZData();
+
+            try
+            {
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(SaveImagePath.Text);
+
+                tw.WriteLine(DateTime.Now);
+
+                for (int i = 0; i < data.GetLength(0); i++)
+                {
+                    for (int j = 0; j < data.GetLength(1) - 1; j++)
+                    {
+                        tw.Write(data[i, j].ToString() + ",");
+                    }
+                    tw.WriteLine(data[i, data.GetLength(1) - 1]);
+                }
+
+                tw.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+        }
+
     }
 }
