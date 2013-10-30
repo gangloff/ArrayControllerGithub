@@ -113,5 +113,43 @@ namespace ArrayDACControl
 
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PMTcountGraphClearButton_Click(object sender, EventArgs e)
+        {
+            PMTcountGraph.ClearData();
+        }
+
+        private void clearScanButton_Click(object sender, EventArgs e)
+        {
+            scatterGraph3.ClearData();
+        }
+
+        private void testlbl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void IonFocusGraphsClearButton_Click(object sender, EventArgs e)
+        {
+            xBalanceGraph.ClearData();
+            xSpreadGraph.ClearData();
+            yBalanceGraph.ClearData();
+            ySpreadGraph.ClearData();
+        }
+
     }
 }

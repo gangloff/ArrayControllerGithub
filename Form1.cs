@@ -28,7 +28,7 @@ namespace ArrayDACControl
         Correlator theCorrelator;
 
         Stopwatch stopwatch;
-        int ncorrbins = 26;
+        int ncorrbins;
         //double[] corrbins = new double[26] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 };
 
 
@@ -501,6 +501,9 @@ namespace ArrayDACControl
         {
             compensationAdjustedHelper();
             RepumperSliderOutHelper();
+            BxSliderOutHelper();
+            TickleSliderOutHelper();
+            RepumperPowerSliderOutHelper();
             //Dev4AO2.OutputAnalogValue((double)(TransferCavity.Value - CurrentFeedforward370Offset.Value) * CurrentFeedforward370Gain.Value / TCcalib);
             Dev4AO3.OutputAnalogValue((double)TransferCavity.Value / TCcalib);
             Dev4AO4.OutputAnalogValue((double)RepumperPowerSlider.Value);
@@ -1285,10 +1288,10 @@ namespace ArrayDACControl
                         else { theString[1] += "corrdt=" + correlatorIntTimetext2.Text + "ms "; }
                         break;
                     case 3:
-                        theString[1] += "ppdc=" + pulsedDutyText.Text + " ";
+                        theString[1] += "ppdc=" + RegRecPerText.Text + " ";
                         break;
                     case 4:
-                        theString[1] += "ppdf=" + pulseFreqText.Text + "kHz ";
+                        theString[1] += "ppdf=" + ncorrbinsText.Text + "kHz ";
                         break;
                     case 5:
                         theString[1] += "det=" + DetuningTextbox.Text + " ";
@@ -1604,10 +1607,6 @@ namespace ArrayDACControl
             Dev2DO3.OutputDigitalValue(Dev2DO3Switch.Value);
         }
 
-        private void PMTcountGraphClearButton_Click(object sender, EventArgs e)
-        {
-            PMTcountGraph.ClearData();
-        }
         private void CameraHbin_LostFocus(object sender, EventArgs e)
         {
             CameraThreadHelper.flag = true;
@@ -1734,9 +1733,9 @@ namespace ArrayDACControl
         {
             double display = gpibDoubleResult();
             //display count
-            PMTcountBox.Text = display.ToString();
+            CameraForm.PMTcountBox.Text = display.ToString();
             //plot
-            PMTcountGraph.PlotYAppend(display);
+            CameraForm.PMTcountGraph.PlotYAppend(display);
         }
 
 
@@ -1835,6 +1834,10 @@ namespace ArrayDACControl
             { theCorrelator.ok.P = int.Parse(correlatorPtext.Text); }
             else
             { theCorrelator.ok.P = int.Parse(correlatorPtextB.Text); };
+            
+            // assign the number of correlator bins
+            ncorrbins = int.Parse(ncorrbinsText.Text);
+            theCorrelator.lshiftreg = ncorrbins;
 
             theCorrelator.ok.Q = int.Parse(correlatorQtext.Text);
             theCorrelator.ok.Div1N = int.Parse(correlatorDiv1Ntext.Text);
@@ -1848,8 +1851,8 @@ namespace ArrayDACControl
                 theCorrelator.IntTime = int.Parse(correlatorIntTimetext2.Text);
             }
 
-            if (syncSrcSw.Value)
-            {
+            //if (syncSrcSw.Value)
+            //{
                 if (LockinFrequencySwitch.Value)
                 {
                     theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0));
@@ -1861,11 +1864,11 @@ namespace ArrayDACControl
                     else
                     { theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2B.Text) - 1, 0)); }
                 }
-            }
-            else
-            {
-                theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(pulsePeriodText.Text) / ncorrbins, 0));
-            }
+            //}
+            //else
+            //{
+            //    theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(pulsePeriodText.Text) / ncorrbins, 0));
+            //}
             
             theCorrelator.PulseClkDiv = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(pulsePeriodText.Text), 0));
 
@@ -1879,16 +1882,26 @@ namespace ArrayDACControl
             theCorrelator.delayIn[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in1DelayText.Text), 0));
             theCorrelator.delayIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2DelayText.Text), 0));
 
+
+            theCorrelator.slow_PulseClkDiv = uint.Parse(slow_pulsePeriodText.Text);
+
+            theCorrelator.slow_onTimeOut[0] = uint.Parse(slow_out1OnTimeText.Text);
+            theCorrelator.slow_onTimeOut[1] = uint.Parse(slow_out2OnTimeText.Text);
+            theCorrelator.slow_delayOut[0] = uint.Parse(slow_out1DelayText.Text);
+            theCorrelator.slow_delayOut[1] = uint.Parse(slow_out2DelayText.Text);
+
+            theCorrelator.slow_onTimeIn[0] = uint.Parse(slow_in1OnTimeText.Text);
+            theCorrelator.slow_onTimeIn[1] = uint.Parse(slow_in2OnTimeText.Text);
+            theCorrelator.slow_delayIn[0] = uint.Parse(slow_in1DelayText.Text);
+            theCorrelator.slow_delayIn[1] = uint.Parse(slow_in2DelayText.Text);
+
             //theCorrelator.PulseClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / double.Parse(pulseFreqText.Text) - 1, 0));
             //theCorrelator.PulseWidthDiv = (int)(Math.Round(theCorrelator.PulseClkDiv * double.Parse(pulsedDutyText.Text)));
 
             theCorrelator.bound1 = int.Parse(correlatorBound1text.Text);
             theCorrelator.bound2 = int.Parse(correlatorBound2text.Text);
 
-            //Set boolean in correlator for data collection according to duty cycle or not
-            //pulseprobe ON means boolean is true
-            if (PulsedProbeSwitch.Value) { theCorrelator.collectDutyCycle = true; }
-            else { theCorrelator.collectDutyCycle = false; }
+            //Set boolean in correlator for sync signal source
             if (syncSrcSw.Value) { theCorrelator.syncSrcChoose = true; }
             else { theCorrelator.syncSrcChoose = false; }
             
@@ -1907,7 +1920,7 @@ namespace ArrayDACControl
         private void CorrelatorExecute()
         {
             //clear graph
-            scatterGraph3.ClearData();
+            CameraForm.scatterGraph3.ClearData();
             //initialize parameters and attempt init, continue only if init returns true
             if (CorrelatorParameterInit())
             {
@@ -1989,10 +2002,10 @@ namespace ArrayDACControl
             }
 
             // retrieve the averaged data on the plot so far:
-            double[] prevCorrDataCh1 = scatterGraph3.Plots[0].GetYData();
-            double[] prevCorrDataCh2 = scatterGraph3.Plots[1].GetYData();
-            double[] prevCorrDataDiff = scatterGraph3.Plots[2].GetYData();
-            double[] prevCorrDataSum = scatterGraph3.Plots[3].GetYData();
+            double[] prevCorrDataCh1 = CameraForm.scatterGraph3.Plots[0].GetYData();
+            double[] prevCorrDataCh2 = CameraForm.scatterGraph3.Plots[1].GetYData();
+            double[] prevCorrDataDiff = CameraForm.scatterGraph3.Plots[2].GetYData();
+            double[] prevCorrDataSum = CameraForm.scatterGraph3.Plots[3].GetYData();
             // new correlator trace that came in from the FPGA:
             double[] newCorrDataCh1 = theCorrelator.phcountarrayCh1;
             double[] newCorrDataCh2 = theCorrelator.phcountarrayCh2;
@@ -2020,17 +2033,17 @@ namespace ArrayDACControl
             CorrelatorGraph.Plots[3].PlotY(newCorrDataSum);
 
             // Display count RATE as a function of time
-            PMTcountGraph.Plots[0].PlotYAppend(theCorrelator.totalCountsCh1 / theCorrelator.IntTime * 1000);
-            PMTcountGraph.Plots[1].PlotYAppend(theCorrelator.totalCountsCh2 / theCorrelator.IntTime * 1000);
+            CameraForm.PMTcountGraph.Plots[0].PlotYAppend(theCorrelator.totalCountsCh1 / theCorrelator.IntTime * 1000);
+            CameraForm.PMTcountGraph.Plots[1].PlotYAppend(theCorrelator.totalCountsCh2 / theCorrelator.IntTime * 1000);
             ctot = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
-            PMTcountGraph.Plots[2].PlotYAppend((theCorrelator.totalCountsCh1 - theCorrelator.totalCountsCh2) / theCorrelator.IntTime * 1000);
-            PMTcountGraph.Plots[3].PlotYAppend(ctot / theCorrelator.IntTime * 1000);
+            CameraForm.PMTcountGraph.Plots[2].PlotYAppend((theCorrelator.totalCountsCh1 - theCorrelator.totalCountsCh2) / theCorrelator.IntTime * 1000);
+            CameraForm.PMTcountGraph.Plots[3].PlotYAppend(ctot / theCorrelator.IntTime * 1000);
             
             //Display total counts in correlator tab
             correlatorTotalCounts.Text = ctot.ToString();
             //Display counts/s above Graph
             double ctotn = ctot / theCorrelator.IntTime * 1000;
-            PMTcountBox.Text = ctotn.ToString();
+            CameraForm.PMTcountBox.Text = ctotn.ToString();
             //Display compensation merit value
             correlatorDecompMerit.Text = theCorrelator.decompMerit.ToString() + "+/-" + theCorrelator.decompMeritErr.ToString() + " %";
 
@@ -2039,10 +2052,10 @@ namespace ArrayDACControl
             if (prevCorrDataCh1.Length == 0)
             {
                 avgCount = 1;
-                scatterGraph3.Plots[0].PlotXY(corrbins, newCorrDataCh1);
-                scatterGraph3.Plots[1].PlotXY(corrbins, newCorrDataCh2);
-                scatterGraph3.Plots[2].PlotXY(corrbins, newCorrDataDiff);
-                scatterGraph3.Plots[3].PlotXY(corrbins, newCorrDataSum);
+                CameraForm.scatterGraph3.Plots[0].PlotXY(corrbins, newCorrDataCh1);
+                CameraForm.scatterGraph3.Plots[1].PlotXY(corrbins, newCorrDataCh2);
+                CameraForm.scatterGraph3.Plots[2].PlotXY(corrbins, newCorrDataDiff);
+                CameraForm.scatterGraph3.Plots[3].PlotXY(corrbins, newCorrDataSum);
                 scatterGraphNormCorrSig.PlotXY(corrbins, newnormSig);
             }
             else
@@ -2058,10 +2071,10 @@ namespace ArrayDACControl
                     avgnormSig[j] = avgCorrDataDiff[j] / (avgCorrDataSum[j] + 2 * avgCount * (int.Parse(textBoxBackEst.Text)));
                 }
 
-                scatterGraph3.Plots[0].PlotXY(corrbins, avgCorrDataCh1);
-                scatterGraph3.Plots[1].PlotXY(corrbins, avgCorrDataCh2);
-                scatterGraph3.Plots[2].PlotXY(corrbins, avgCorrDataDiff);
-                scatterGraph3.Plots[3].PlotXY(corrbins, avgCorrDataSum);
+                CameraForm.scatterGraph3.Plots[0].PlotXY(corrbins, avgCorrDataCh1);
+                CameraForm.scatterGraph3.Plots[1].PlotXY(corrbins, avgCorrDataCh2);
+                CameraForm.scatterGraph3.Plots[2].PlotXY(corrbins, avgCorrDataDiff);
+                CameraForm.scatterGraph3.Plots[3].PlotXY(corrbins, avgCorrDataSum);
                 scatterGraphNormCorrSig.PlotXY(corrbins, avgnormSig);
             }
 
@@ -2088,29 +2101,29 @@ namespace ArrayDACControl
             // Depending on whether we are monitoring ion amplitude or correlator signal, plot "figure of merit" in the appropriate graph
             if (LockinFrequencySwitch.Value == true)
             {
-                if (corrAmpLog.Plots[0].HistoryCount == 0)
+                if (CameraForm.corrAmpLog.Plots[0].HistoryCount == 0)
                 {
-                    corrAmpLog.PlotXYAppend(0, 0);
-                    corrAmpLog.PlotXYAppend(0, 0);
-                    corrAmpLog.PlotXYAppend(0, 0);
-                    corrAmpLog.PlotXYAppend(0, 0);
+                    CameraForm.corrAmpLog.PlotXYAppend(0, 0);
+                    CameraForm.corrAmpLog.PlotXYAppend(0, 0);
+                    CameraForm.corrAmpLog.PlotXYAppend(0, 0);
+                    CameraForm.corrAmpLog.PlotXYAppend(0, 0);
                 }
             }
             else
             {
-                if (corrMuLog.Plots[0].HistoryCount == 0)
+                if (CameraForm.corrMuLog.Plots[0].HistoryCount == 0)
                 {
-                    corrMuLog.PlotXYAppend(0, 0);
-                    corrMuLog.PlotXYAppend(0, 0);
-                    corrMuLog.PlotXYAppend(0, 0);
-                    corrMuLog.PlotXYAppend(0, 0);
+                    CameraForm.corrMuLog.PlotXYAppend(0, 0);
+                    CameraForm.corrMuLog.PlotXYAppend(0, 0);
+                    CameraForm.corrMuLog.PlotXYAppend(0, 0);
+                    CameraForm.corrMuLog.PlotXYAppend(0, 0);
                 }
             }
 
-            double[] prevMicromotionDataY = corrMuLog.Plots[0].GetYData();
-            double[] prevMicromotionDataX = corrMuLog.Plots[0].GetXData();
-            double[] prevAmpDataY = corrAmpLog.Plots[0].GetYData();
-            double[] prevAmpDataX = corrAmpLog.Plots[0].GetXData();
+            double[] prevMicromotionDataY = CameraForm.corrMuLog.Plots[0].GetYData();
+            double[] prevMicromotionDataX = CameraForm.corrMuLog.Plots[0].GetXData();
+            double[] prevAmpDataY = CameraForm.corrAmpLog.Plots[0].GetYData();
+            double[] prevAmpDataX = CameraForm.corrAmpLog.Plots[0].GetXData();
 
             int lastPtIndexMu = prevMicromotionDataX.Length - 1;
             int lastPtIndexAmp = prevAmpDataX.Length - 1;
@@ -2129,7 +2142,7 @@ namespace ArrayDACControl
                     prevAmpDataY[lastPtIndexAmp - 3] = prevAmpDataY[lastPtIndexAmp];
                     prevAmpDataY[lastPtIndexAmp - 2] = prevAmpDataY[lastPtIndexAmp] + Math.Sqrt(dq * dq * (counterAmp - 1) * (counterAmp - 1) + Math.Pow(theCorrelator.decompMeritErr, 2)) / counterAmp;
                     prevAmpDataY[lastPtIndexAmp - 1] = prevAmpDataY[lastPtIndexAmp] - Math.Sqrt(dq * dq * (counterAmp - 1) * (counterAmp - 1) + Math.Pow(theCorrelator.decompMeritErr, 2)) / counterAmp;
-                    corrAmpLog.PlotXY(prevAmpDataX, prevAmpDataY);
+                    CameraForm.corrAmpLog.PlotXY(prevAmpDataX, prevAmpDataY);
                 }
                 else
                 {
@@ -2139,7 +2152,7 @@ namespace ArrayDACControl
                     prevMicromotionDataY[lastPtIndexMu - 3] = prevMicromotionDataY[lastPtIndexMu];
                     prevMicromotionDataY[lastPtIndexMu - 2] = prevMicromotionDataY[lastPtIndexMu] + Math.Sqrt(dq * dq * (counterMu - 1) * (counterMu - 1) + Math.Pow(theCorrelator.decompMeritErr, 2)) / counterMu;
                     prevMicromotionDataY[lastPtIndexMu - 1] = prevMicromotionDataY[lastPtIndexMu] - Math.Sqrt(dq * dq * (counterMu - 1) * (counterMu - 1) + Math.Pow(theCorrelator.decompMeritErr, 2)) / counterMu;
-                    corrMuLog.PlotXY(prevMicromotionDataX, prevMicromotionDataY);
+                    CameraForm.corrMuLog.PlotXY(prevMicromotionDataX, prevMicromotionDataY);
                 }
             }
         }
@@ -2332,7 +2345,7 @@ namespace ArrayDACControl
             //update button
             ElectrodeScanStart.BackColor = System.Drawing.Color.White;
             //clear graph
-            scatterGraph3.ClearData();
+            CameraForm.scatterGraph3.ClearData();
             //if running camera, initialize, and clear fluor and position graphs
             if (ElectrodeScanThreadHelper.message == "Camera" || ElectrodeScanThreadHelper.message == "PMT & Camera")
             {
@@ -2467,9 +2480,9 @@ namespace ArrayDACControl
         private void ElectrodeScanFrmCallback()
         {
             //display count
-            PMTcountBox.Text = ElectrodeScanThreadHelper.SingleDouble.ToString();
+            CameraForm.PMTcountBox.Text = ElectrodeScanThreadHelper.SingleDouble.ToString();
             //update PMT plot
-            PMTcountGraph.PlotYAppend(ElectrodeScanThreadHelper.SingleDouble);
+            CameraForm.PMTcountGraph.PlotYAppend(ElectrodeScanThreadHelper.SingleDouble);
         }
         private void ElectrodeScanFrmCallback2()
         {
@@ -2495,7 +2508,7 @@ namespace ArrayDACControl
                     ElectrodeScanLiveAverageTextbox.Text = ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index].ToString();
                     ElectrodeScanLiveStdTextbox.Text = ElectrodeScanThreadHelper.DoubleData[1, ElectrodeScanThreadHelper.index].ToString();
                     //plot
-                    scatterGraph3.PlotXYAppend(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.index], ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index]);
+                    CameraForm.scatterGraph3.PlotXYAppend(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.index], ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index]);
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -2510,7 +2523,7 @@ namespace ArrayDACControl
                 try
                 {
                     //plot
-                    scatterGraph3.PlotXYAppend(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.index], ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index]);
+                    CameraForm.scatterGraph3.PlotXYAppend(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.index], ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index]);
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -2674,7 +2687,7 @@ namespace ArrayDACControl
             //update button
             SliderScanStart.BackColor = System.Drawing.Color.White;
             //clear graph
-            scatterGraph3.ClearData();
+            CameraForm.scatterGraph3.ClearData();
             //if running camera, initialize, and clear fluor and position graphs
             if (SliderScanThreadHelper.message == "Camera" || SliderScanThreadHelper.message == "PMT & Camera")
             {
@@ -2711,8 +2724,6 @@ namespace ArrayDACControl
                     this.Invoke(new MyDelegate(SliderScanFrmCallback3));
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                BxSliderOutHelper();
 
                 if (SliderScanThreadHelper.message == "PMT" || SliderScanThreadHelper.message == "PMT & Camera")
                 {
@@ -2805,16 +2816,16 @@ namespace ArrayDACControl
             //load result in array
             SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] += SliderScanThreadHelper.SingleDouble;
             //display count
-            PMTcountBox.Text = SliderScanThreadHelper.SingleDouble.ToString();
+            CameraForm.PMTcountBox.Text = SliderScanThreadHelper.SingleDouble.ToString();
             //update PMT plot
-            PMTcountGraph.PlotYAppend(SliderScanThreadHelper.SingleDouble);
+            CameraForm.PMTcountGraph.PlotYAppend(SliderScanThreadHelper.SingleDouble);
         }
         private void SliderScanFrmCallback2()
         {
             SliderScanStart.BackColor = System.Drawing.Color.WhiteSmoke;
             SliderScanStart.Text = "Start *Slider* Scan";
             //reset to original values
-            BxSlider.Value = SliderScanThreadHelper.min[0];
+            SliderScanThreadHelper.theSlider.Value = SliderScanThreadHelper.min[0];
         }
         private void SliderScanFrmCallback3()
         {
@@ -2823,7 +2834,7 @@ namespace ArrayDACControl
             //Button Indicator
             SliderScanStart.Text = "Scanning..." + SliderScanThreadHelper.index.ToString();
             //update DAC
-            compensationAdjustedHelper();
+            UpdateAll();
         }
         private void SliderScanFrmCallback4()
         {
@@ -2834,7 +2845,7 @@ namespace ArrayDACControl
                     SliderScanLiveAverageTextbox.Text = SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index].ToString();
                     SliderScanLiveStdTextbox.Text = SliderScanThreadHelper.DoubleData[1, SliderScanThreadHelper.index].ToString();
                     //plot
-                    scatterGraph3.PlotXYAppend(SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index], SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index]);
+                    CameraForm.scatterGraph3.PlotXYAppend(SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index], SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index]);
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -2849,7 +2860,7 @@ namespace ArrayDACControl
                 try
                 {
                     //plot
-                    scatterGraph3.PlotXYAppend(SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index], SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index]);
+                    CameraForm.scatterGraph3.PlotXYAppend(SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index], SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index]);
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -2914,7 +2925,7 @@ namespace ArrayDACControl
             //update button
             FluorLogStart.BackColor = System.Drawing.Color.White;
             //clear graph
-            scatterGraph3.ClearData();
+            CameraForm.scatterGraph3.ClearData();
             //if running camera, initialize, and clear fluor and position graphs
             if (FluorLogThreadHelper.message == "Camera")
             {
@@ -2968,7 +2979,7 @@ namespace ArrayDACControl
                     FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index] = FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index] / FluorLogThreadHelper.numAverage;
                     FluorLogThreadHelper.DoubleData[1, FluorLogThreadHelper.index] = Math.Sqrt(FluorLogThreadHelper.DoubleData[1, FluorLogThreadHelper.index] / FluorLogThreadHelper.numAverage - Math.Pow(FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index], 2));
                     //plot
-                    scatterGraph3.PlotXYAppend(FluorLogThreadHelper.DoubleScanVariable[0, FluorLogThreadHelper.index], FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index]);
+                    CameraForm.scatterGraph3.PlotXYAppend(FluorLogThreadHelper.DoubleScanVariable[0, FluorLogThreadHelper.index], FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index]);
                     //increase index
                     FluorLogThreadHelper.index++;
                 }
@@ -3031,9 +3042,9 @@ namespace ArrayDACControl
             //load result in array
             FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index] += FluorLogThreadHelper.SingleDouble;
             //display count
-            PMTcountBox.Text = FluorLogThreadHelper.SingleDouble.ToString();
+            CameraForm.PMTcountBox.Text = FluorLogThreadHelper.SingleDouble.ToString();
             //update PMT plot
-            PMTcountGraph.PlotYAppend(FluorLogThreadHelper.SingleDouble);
+            CameraForm.PMTcountGraph.PlotYAppend(FluorLogThreadHelper.SingleDouble);
         }
         private void FluorLogFrmCallback2()
         {
@@ -3067,7 +3078,7 @@ namespace ArrayDACControl
                 try
                 {
                     //plot
-                    scatterGraph3.PlotXYAppend((double) FluorLogThreadHelper.index, FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index]);
+                    CameraForm.scatterGraph3.PlotXYAppend((double) FluorLogThreadHelper.index, FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index]);
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -3152,6 +3163,10 @@ namespace ArrayDACControl
             double multiplier = double.Parse(CameraForm.BackgroundMultiplierTextbox.Text);
             //center of mass variable
             double position = 0;
+            
+            //variables for ion focus optimization, indices of max fluorescence pixel
+            int xmax = 0, ymax = 0;
+            double fmax = 0;
 
             //double[,] myArray = new double[,] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };
             //CameraForm.intensityGraph1.Plot(myArray);
@@ -3228,6 +3243,12 @@ namespace ArrayDACControl
                         for (int k = y1; k <= y2; k++)
                         {
                             sum += CameraThreadHelper.DoubleData[j, k];
+                            //find index of max fluor pixel
+                            if (fmax < CameraThreadHelper.DoubleData[j, k])
+                            {
+                                fmax = CameraThreadHelper.DoubleData[j, k];
+                                xmax = j; ymax = k;
+                            }
                             //Threshold the fluorescence
                             CameraThreadHelper.DoubleData[j, k] -= CameraThreadHelper.Background * multiplier;
                             if (CameraThreadHelper.DoubleData[j, k] < 0)
@@ -3271,6 +3292,40 @@ namespace ArrayDACControl
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                     }
+
+                    //Ion focus logs
+                    if (CameraForm.FocusLogsONCheck.Checked)
+                    {
+                        //find assymetry in x
+                        CameraThreadHelper.DoubleArray[0] = (CameraThreadHelper.DoubleData[xmax - 1, ymax] - CameraThreadHelper.DoubleData[xmax + 1, ymax]) / (CameraThreadHelper.DoubleData[xmax - 1, ymax] + CameraThreadHelper.DoubleData[xmax + 1, ymax]);
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(CameraFormThreadCallBack3));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        //find spread in x
+                        CameraThreadHelper.DoubleArray[1] = (CameraThreadHelper.DoubleData[xmax - 1, ymax] + CameraThreadHelper.DoubleData[xmax + 1, ymax]) / CameraThreadHelper.DoubleData[xmax, ymax];
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(CameraFormThreadCallBack4));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        //find assymetry in y
+                        CameraThreadHelper.DoubleArray[2] = (CameraThreadHelper.DoubleData[xmax, ymax - 1] - CameraThreadHelper.DoubleData[xmax, ymax + 1]) / (CameraThreadHelper.DoubleData[xmax, ymax - 1] + CameraThreadHelper.DoubleData[xmax, ymax + 1]);
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(CameraFormThreadCallBack5));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        //find spread in x
+                        CameraThreadHelper.DoubleArray[3] = (CameraThreadHelper.DoubleData[xmax, ymax - 1] + CameraThreadHelper.DoubleData[xmax, ymax + 1]) / CameraThreadHelper.DoubleData[xmax, ymax];
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(CameraFormThreadCallBack6));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                    }
                 }
                 else
                 {
@@ -3289,6 +3344,22 @@ namespace ArrayDACControl
         private void CameraFormThreadCallBack2()
         {
             CameraForm.PositionGraph.Plots[CameraThreadHelper.index].PlotYAppend(CameraThreadHelper.SingleDouble2);
+        }
+        private void CameraFormThreadCallBack3()
+        {
+            CameraForm.xBalanceGraph.PlotYAppend(CameraThreadHelper.DoubleArray[0]);
+        }
+        private void CameraFormThreadCallBack4()
+        {
+            CameraForm.xSpreadGraph.PlotYAppend(CameraThreadHelper.DoubleArray[1]);
+        }
+        private void CameraFormThreadCallBack5()
+        {
+            CameraForm.yBalanceGraph.PlotYAppend(CameraThreadHelper.DoubleArray[2]);
+        }
+        private void CameraFormThreadCallBack6()
+        {
+            CameraForm.ySpreadGraph.PlotYAppend(CameraThreadHelper.DoubleArray[3]);
         }
 
 
@@ -3586,48 +3657,44 @@ namespace ArrayDACControl
         private void DebugFrmCallback()
         {
             stopwatchTextbox.Text = Camera.stopwatch.Elapsed.ToString();
-            PMTcountGraph.PlotYAppend((double)(Camera.stopwatch.Elapsed.Milliseconds + 1000*Camera.stopwatch.Elapsed.Seconds));
+            CameraForm.PMTcountGraph.PlotYAppend((double)(Camera.stopwatch.Elapsed.Milliseconds + 1000*Camera.stopwatch.Elapsed.Seconds));
         }
-
-        private void clearScanButton_Click(object sender, EventArgs e)
-        {
-            scatterGraph3.ClearData();
-        }
-
 
         private void corrRecToggle_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
         {
             if (corrRecToggle.Value == false)
             {
-
+                            
+                            
                 if (LockinFrequencySwitch.Value == true)
                 {
                     counterAmp = 0;
-                    int nextx = corrAmpLog.Plots[0].HistoryCount;
-                    testlbl.Text = nextx.ToString();
+                    int nextx = CameraForm.corrAmpLog.Plots[0].HistoryCount;
+                    CameraForm.testlbl.Text = nextx.ToString();
                     double[] xnew = new double[4] { nextx, nextx, nextx, nextx };
                     double[] ynew = new double[4] { 0, 0, 0, 0 };
-                    corrAmpLog.PlotXYAppend(xnew, ynew);
+                    CameraForm.corrAmpLog.PlotXYAppend(xnew, ynew);
                 }
                 else
                 {
                     counterMu = 0;
-                    int nextx = corrMuLog.Plots[0].HistoryCount;
-                    testlbl.Text = nextx.ToString();
+                    int nextx = CameraForm.corrMuLog.Plots[0].HistoryCount;
+                    CameraForm.testlbl.Text = nextx.ToString();
                     double[] xnew = new double[4] { nextx, nextx, nextx, nextx };
                     double[] ynew = new double[4] { 0, 0, 0, 0 };
-                    corrMuLog.PlotXYAppend(xnew, ynew);
+                    CameraForm.corrMuLog.PlotXYAppend(xnew, ynew);
                 }
 
             }
+
         }
 
         private void clrCorrLog_Click(object sender, EventArgs e)
         {
             if (LockinFrequencySwitch.Value == true)
-                corrAmpLog.ClearData();
+                CameraForm.corrAmpLog.ClearData();
             else
-                corrMuLog.ClearData();
+                CameraForm.corrMuLog.ClearData();
         }
 
         private void groupBox51_Enter(object sender, EventArgs e)
@@ -3639,16 +3706,16 @@ namespace ArrayDACControl
         {
             if (switchDisplayBases.Value)
             {
-                PMTcountGraph.Plots[0].Visible = true;
-                PMTcountGraph.Plots[1].Visible = true;
-                PMTcountGraph.Plots[2].Visible = false;
-                PMTcountGraph.Plots[3].Visible = false;
+                CameraForm.PMTcountGraph.Plots[0].Visible = true;
+                CameraForm.PMTcountGraph.Plots[1].Visible = true;
+                CameraForm.PMTcountGraph.Plots[2].Visible = false;
+                CameraForm.PMTcountGraph.Plots[3].Visible = false;
 
 
-                scatterGraph3.Plots[0].Visible = true;
-                scatterGraph3.Plots[1].Visible = true;
-                scatterGraph3.Plots[2].Visible = false;
-                scatterGraph3.Plots[3].Visible = false;
+                CameraForm.scatterGraph3.Plots[0].Visible = true;
+                CameraForm.scatterGraph3.Plots[1].Visible = true;
+                CameraForm.scatterGraph3.Plots[2].Visible = false;
+                CameraForm.scatterGraph3.Plots[3].Visible = false;
 
                 CorrelatorGraph.Plots[0].Visible = true;
                 CorrelatorGraph.Plots[1].Visible = true;
@@ -3657,16 +3724,16 @@ namespace ArrayDACControl
             }
             else
             {
-                PMTcountGraph.Plots[0].Visible = false;
-                PMTcountGraph.Plots[1].Visible = false;
-                PMTcountGraph.Plots[2].Visible = true;
-                PMTcountGraph.Plots[3].Visible = true;
+                CameraForm.PMTcountGraph.Plots[0].Visible = false;
+                CameraForm.PMTcountGraph.Plots[1].Visible = false;
+                CameraForm.PMTcountGraph.Plots[2].Visible = true;
+                CameraForm.PMTcountGraph.Plots[3].Visible = true;
 
 
-                scatterGraph3.Plots[0].Visible = false;
-                scatterGraph3.Plots[1].Visible = false;
-                scatterGraph3.Plots[2].Visible = true;
-                scatterGraph3.Plots[3].Visible = true;
+                CameraForm.scatterGraph3.Plots[0].Visible = false;
+                CameraForm.scatterGraph3.Plots[1].Visible = false;
+                CameraForm.scatterGraph3.Plots[2].Visible = true;
+                CameraForm.scatterGraph3.Plots[3].Visible = true;
 
                 CorrelatorGraph.Plots[0].Visible = false;
                 CorrelatorGraph.Plots[1].Visible = false;
@@ -3716,6 +3783,45 @@ namespace ArrayDACControl
             }
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////// Conversion between kHz and microseconds in textboxes /////////////////////////////
+        private void LockInFreqtext1_TextChanged(object sender, EventArgs e)
+        {
+            double lockinfreq1Val = Double.Parse(LockInFreqtext1.Text); // in kHz
+            double lockinper1Val = 1/lockinfreq1Val*1000; // in microseconds
+            LockInPertext1.Text = lockinper1Val.ToString();
+        }
+        private void LockInPertext1_TextChanged(object sender, EventArgs e)
+        {
+            double lockinper1Val = Double.Parse(LockInPertext1.Text); // in kHz
+            double lockinfreq1Val = 1 / lockinper1Val * 1000; // in microseconds
+            LockInFreqtext1.Text = lockinfreq1Val.ToString();
+        }
+        private void LockInFreqtext2_TextChanged(object sender, EventArgs e)
+        {
+            double lockinfreq2Val = Double.Parse(LockInFreqtext2.Text); // in kHz
+            double lockinper2Val = 1 / lockinfreq2Val * 1000; // in microseconds
+            LockInPertext2.Text = lockinper2Val.ToString();
+        }
+        private void LockInPerqtext2_TextChanged(object sender, EventArgs e)
+        {
+            double lockinper2Val = Double.Parse(LockInPertext2.Text); // in kHz
+            double lockinfreq2Val = 1 / lockinper2Val * 1000; // in microseconds
+            LockInFreqtext2.Text = lockinfreq2Val.ToString();
+        }
+        private void LockInFreqtext2B_TextChanged(object sender, EventArgs e)
+        {
+            double lockinfreq2BVal = Double.Parse(LockInFreqtext2B.Text); // in kHz
+            double lockinper2BVal = 1 / lockinfreq2BVal * 1000; // in microseconds
+            LockInPertext2B.Text = lockinper2BVal.ToString();
+        }
+        private void LockInPertext2B_TextChanged(object sender, EventArgs e)
+        {
+            double lockinper2BVal = Double.Parse(LockInPertext2B.Text); // in kHz
+            double lockinfreq2BVal = 1 / lockinper2BVal * 1000; // in microseconds
+            LockInFreqtext2B.Text = lockinfreq2BVal.ToString();
+        }
+
         private void pulsePeriodText_TextChanged(object sender, EventArgs e)
         {
             double pulsePeriodVal = Double.Parse(pulsePeriodText.Text); // in microseconds
@@ -3724,6 +3830,7 @@ namespace ArrayDACControl
             //theCorrelator.PulseClkDiv = (int)(Math.Round(theCorrelator.ok.P * pulsePeriodVal, 0));
             //theCorrelator.updateCorrPulseClkDivLive();
         }
+        ///////////////////////////////////////////////////////////
 
         private void updateAllSignalsButton_Click(object sender, EventArgs e)
         {
@@ -3740,6 +3847,23 @@ namespace ArrayDACControl
             theCorrelator.delayIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2DelayText.Text), 0));
 
             theCorrelator.updateAllSignalsLive();
+            /*
+            try
+            {
+                
+                //plot
+                NationalInstruments.WaveformTiming timing = new NationalInstruments.WaveformTiming;
+                timing.
+                DateTime[] ch1 = { DateTime.FromBinary(0), DateTime.FromBinary(long.Parse(out1DelayText.Text)) };
+                NationalInstruments.WaveformTiming timing = new NationalInstruments.WaveformTiming;
+                NationalInstruments.DigitalWaveform dwave = new NationalInstruments.DigitalWaveform(2, 1);
+                dwave.Timing = 
+                PulseProgrammerTimingDiagram.PlotWaveform(dwave);
+
+                digitalSignalPlot1.TransitionLocation
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }  
+             * */
         }
 
         private void syncSrcSw_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
@@ -3750,10 +3874,387 @@ namespace ArrayDACControl
             theCorrelator.updateSyncSourceLive();
         }
 
+        private void pulsedDutyText_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label142_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Recool_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label99_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        //////////////////////////////////////////////////
+        ////////////Fast output ch2 //////////////////
+        private void Indfo2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Indfo2.Checked)
+            {
+                out2OnTimeText.Enabled = true;
+                out2DelayText.Enabled = true;
+                out2OnTimeText.ForeColor = Color.Black;
+                out2DelayText.ForeColor = Color.Black;
+            }
+        }
+
+        private void c1fo2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c1fo2.Checked)
+            {
+                out2OnTimeText.Text = out1OnTimeText.Text;
+                out2DelayText.Text = out1DelayText.Text;
+
+                out2OnTimeText.Enabled = false;
+                out2DelayText.Enabled = false;
+                out2OnTimeText.ForeColor = Color.Gray;
+                out2DelayText.ForeColor = Color.Gray;
+            }
+        }
+        private void notc1fo2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (notc1fo2.Checked)
+            {
+
+                double vaux2 = double.Parse(out1DelayText.Text) + double.Parse(out1OnTimeText.Text);
+                double vaux1 = double.Parse(pulsePeriodText.Text)-vaux2;
+
+                out2OnTimeText.Text = vaux1.ToString();
+                out2DelayText.Text = vaux2.ToString();
+
+                out2OnTimeText.Enabled = false;
+                out2DelayText.Enabled = false;
+                out2OnTimeText.ForeColor = Color.Gray;
+                out2DelayText.ForeColor = Color.Gray;
+            }
+        }
+        ///////////////////////////////////////////////////////////////
+
+        //////////////////////////////////////////////////
+        ////////////Fast input ch1 //////////////////
+        private void Indfi1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Indfi1.Checked)
+            {
+                in1OnTimeText.Enabled = true;
+                in1DelayText.Enabled = true;
+                in1OnTimeText.ForeColor = Color.Black;
+                in1DelayText.ForeColor = Color.Black;
+            }
+        }
+        private void c1fi1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c1fi1.Checked)
+            {
+                in1OnTimeText.Text = out1OnTimeText.Text;
+                in1DelayText.Text = out1DelayText.Text;
+
+                in1OnTimeText.Enabled = false;
+                in1DelayText.Enabled = false;
+                in1OnTimeText.ForeColor = Color.Gray;
+                in1DelayText.ForeColor = Color.Gray;
+            }
+        }
+        private void c2fi1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c2fi1.Checked)
+            {
+                in1OnTimeText.Text = out2OnTimeText.Text;
+                in1DelayText.Text = out2DelayText.Text;
+
+                in1OnTimeText.Enabled = false;
+                in1DelayText.Enabled = false;
+                in1OnTimeText.ForeColor = Color.Gray;
+                in1DelayText.ForeColor = Color.Gray;
+            }
+        }
+
+        //////////////////////////////////////////////////
+        ////////////Fast input ch2 //////////////////
+        private void Indfi2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Indfi2.Checked)
+            {
+                in2OnTimeText.Enabled = true;
+                in2DelayText.Enabled = true;
+                in2OnTimeText.ForeColor = Color.Black;
+                in2DelayText.ForeColor = Color.Black;
+            }
+        }
+        private void c1fi2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c1fi2.Checked)
+            {
+                in2OnTimeText.Text = out1OnTimeText.Text;
+                in2DelayText.Text = out1DelayText.Text;
+
+                in2OnTimeText.Enabled = false;
+                in2DelayText.Enabled = false;
+                in2OnTimeText.ForeColor = Color.Gray;
+                in2DelayText.ForeColor = Color.Gray;
+            }
+        }
+        private void c2fi2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c2fi2.Checked)
+            {
+                in2OnTimeText.Text = out2OnTimeText.Text;
+                in2DelayText.Text = out2DelayText.Text;
+
+                in2OnTimeText.Enabled = false;
+                in2DelayText.Enabled = false;
+                in2OnTimeText.ForeColor = Color.Gray;
+                in2DelayText.ForeColor = Color.Gray;
+            }
+        }
 
 
+        //////////////////////////////////////////////////
+        ////////////Slow output ch2 //////////////////
+        private void Indso2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Indso2.Checked)
+            {
+                slow_out2OnTimeText.Enabled = true;
+                slow_out2DelayText.Enabled = true;
+                slow_out2OnTimeText.ForeColor = Color.Black;
+                slow_out2DelayText.ForeColor = Color.Black;
+            }
+        }
 
+        private void c1so2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c1so2.Checked)
+            {
+                slow_out2OnTimeText.Text = out1OnTimeText.Text;
+                slow_out2DelayText.Text = out1DelayText.Text;
 
+                slow_out2OnTimeText.Enabled = false;
+                slow_out2DelayText.Enabled = false;
+                slow_out2OnTimeText.ForeColor = Color.Gray;
+                slow_out2DelayText.ForeColor = Color.Gray;
+            }
+        }
+        private void notc1so2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (notc1so2.Checked)
+            {
+
+                double vaux2 = double.Parse(slow_out1DelayText.Text) + double.Parse(slow_out1OnTimeText.Text);
+                double vaux1 = double.Parse(slow_pulsePeriodText.Text) - vaux2;
+
+                slow_out2OnTimeText.Text = vaux1.ToString();
+                slow_out2DelayText.Text = vaux2.ToString();
+
+                slow_out2OnTimeText.Enabled = false;
+                slow_out2DelayText.Enabled = false;
+                slow_out2OnTimeText.ForeColor = Color.Gray;
+                slow_out2DelayText.ForeColor = Color.Gray;
+            }
+        }
+        ///////////////////////////////////////////////////////////////
+
+        //////////////////////////////////////////////////
+        ////////////Fast input ch1 //////////////////
+        private void Indsi1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Indsi1.Checked)
+            {
+                slow_in1OnTimeText.Enabled = true;
+                slow_in1DelayText.Enabled = true;
+                slow_in1OnTimeText.ForeColor = Color.Black;
+                slow_in1DelayText.ForeColor = Color.Black;
+            }
+        }
+        private void c1si1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c1si1.Checked)
+            {
+                slow_in1OnTimeText.Text = slow_out1OnTimeText.Text;
+                slow_in1DelayText.Text = slow_out1DelayText.Text;
+
+                slow_in1OnTimeText.Enabled = false;
+                slow_in1DelayText.Enabled = false;
+                slow_in1OnTimeText.ForeColor = Color.Gray;
+                slow_in1DelayText.ForeColor = Color.Gray;
+            }
+        }
+        private void c2si1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c2si1.Checked)
+            {
+                slow_in1OnTimeText.Text = slow_out2OnTimeText.Text;
+                slow_in1DelayText.Text = slow_out2DelayText.Text;
+
+                slow_in1OnTimeText.Enabled = false;
+                slow_in1DelayText.Enabled = false;
+                slow_in1OnTimeText.ForeColor = Color.Gray;
+                slow_in1DelayText.ForeColor = Color.Gray;
+            }
+        }
+
+        //////////////////////////////////////////////////
+        ////////////Fast input ch2 //////////////////
+        private void Indsi2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Indsi2.Checked)
+            {
+                slow_in2OnTimeText.Enabled = true;
+                slow_in2DelayText.Enabled = true;
+                slow_in2OnTimeText.ForeColor = Color.Black;
+                slow_in2DelayText.ForeColor = Color.Black;
+            }
+        }
+        private void c1si2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c1si2.Checked)
+            {
+                slow_in2OnTimeText.Text = slow_out1OnTimeText.Text;
+                slow_in2DelayText.Text = slow_out1DelayText.Text;
+
+                slow_in2OnTimeText.Enabled = false;
+                slow_in2DelayText.Enabled = false;
+                slow_in2OnTimeText.ForeColor = Color.Gray;
+                slow_in2DelayText.ForeColor = Color.Gray;
+            }
+        }
+        private void c2si2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c2si2.Checked)
+            {
+                slow_in2OnTimeText.Text = slow_out2OnTimeText.Text;
+                slow_in2DelayText.Text = slow_out2DelayText.Text;
+
+                slow_in2OnTimeText.Enabled = false;
+                slow_in2DelayText.Enabled = false;
+                slow_in2OnTimeText.ForeColor = Color.Gray;
+                slow_in2DelayText.ForeColor = Color.Gray;
+            }
+        }
+
+        private void out1_Changed(object sender, EventArgs e)
+        {
+            if (c1fo2.Checked)
+            {
+                out2OnTimeText.Text = out1OnTimeText.Text;
+                out2DelayText.Text = out1DelayText.Text;
+            }
+            else if (notc1fo2.Checked)
+            {
+                double vaux2 = double.Parse(out1DelayText.Text) + double.Parse(out1OnTimeText.Text);
+                double vaux1 = double.Parse(pulsePeriodText.Text) - vaux2;
+
+                out2OnTimeText.Text = vaux1.ToString();
+                out2DelayText.Text = vaux2.ToString();
+            }
+
+            if (c1fi1.Checked)
+            {
+                in1OnTimeText.Text = out1OnTimeText.Text;
+                in1DelayText.Text = out1DelayText.Text;
+            }
+            if (c1fi2.Checked)
+            {
+                in2OnTimeText.Text = out1OnTimeText.Text;
+                in2DelayText.Text = out1DelayText.Text;
+            }
+        }
+
+        private void out2_Changed(object sender, EventArgs e)
+        {
+            if (c2fi1.Checked)
+            {
+                in1OnTimeText.Text = out2OnTimeText.Text;
+                in1DelayText.Text = out2DelayText.Text;
+            }
+            if (c2fi2.Checked)
+            {
+                in2OnTimeText.Text = out2OnTimeText.Text;
+                in2DelayText.Text = out2DelayText.Text;
+            }
+        }
+
+        private void pulsePeriodText_TextChanged_1(object sender, EventArgs e)
+        {
+            if (notc1fo2.Checked)
+            {
+                double vaux2 = double.Parse(out1DelayText.Text) + double.Parse(out1OnTimeText.Text);
+                double vaux1 = double.Parse(pulsePeriodText.Text) - vaux2;
+
+                out2OnTimeText.Text = vaux1.ToString();
+                out2DelayText.Text = vaux2.ToString();
+            }
+        }
+
+        private void slow_pulsePeriodText_TextChanged(object sender, EventArgs e)
+        {
+            if (notc1so2.Checked)
+            {
+                double vaux2 = double.Parse(slow_out1DelayText.Text) + double.Parse(slow_out1OnTimeText.Text);
+                double vaux1 = double.Parse(slow_pulsePeriodText.Text) - vaux2;
+
+                slow_out2OnTimeText.Text = vaux1.ToString();
+                slow_out2DelayText.Text = vaux2.ToString();
+            }
+        }
+
+        private void slow_out1_Changed(object sender, EventArgs e)
+        {
+            if (c1so2.Checked)
+            {
+                slow_out2OnTimeText.Text = slow_out1OnTimeText.Text;
+                slow_out2DelayText.Text = slow_out1DelayText.Text;
+            }
+            else if (notc1so2.Checked)
+            {
+                double vaux2 = double.Parse(slow_out1DelayText.Text) + double.Parse(slow_out1OnTimeText.Text);
+                double vaux1 = double.Parse(slow_pulsePeriodText.Text) - vaux2;
+
+                slow_out2OnTimeText.Text = vaux1.ToString();
+                slow_out2DelayText.Text = vaux2.ToString();
+            }
+
+            if (c1si1.Checked)
+            {
+                slow_in1OnTimeText.Text = slow_out1OnTimeText.Text;
+                slow_in1DelayText.Text = slow_out1DelayText.Text;
+            }
+            if (c1si2.Checked)
+            {
+                slow_in2OnTimeText.Text = slow_out1OnTimeText.Text;
+                slow_in2DelayText.Text = slow_out1DelayText.Text;
+            }
+        }
+
+        private void slow_out2_Changed(object sender, EventArgs e)
+        {
+            if (c2si1.Checked)
+            {
+                slow_in1OnTimeText.Text = slow_out2OnTimeText.Text;
+                slow_in1DelayText.Text = slow_out2DelayText.Text;
+            }
+            if (c2si2.Checked)
+            {
+                slow_in2OnTimeText.Text = slow_out2OnTimeText.Text;
+                slow_in2DelayText.Text = slow_out2DelayText.Text;
+            }
+        }
+
+        
         //
         // CAMERA FORM THREAD
         //

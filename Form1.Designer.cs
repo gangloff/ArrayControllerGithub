@@ -30,25 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.ElectrodeScanStart = new System.Windows.Forms.Button();
-            this.scatterGraph3 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
-            this.scatterPlot3 = new NationalInstruments.UI.ScatterPlot();
-            this.xAxis3 = new NationalInstruments.UI.XAxis();
-            this.yAxis3 = new NationalInstruments.UI.YAxis();
-            this.scatterPlot2 = new NationalInstruments.UI.ScatterPlot();
-            this.scatterPlot6 = new NationalInstruments.UI.ScatterPlot();
-            this.scatterPlot7 = new NationalInstruments.UI.ScatterPlot();
             this.SinglePMTReadButton = new System.Windows.Forms.Button();
-            this.PMTcountBox = new System.Windows.Forms.TextBox();
-            this.PMTcountGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
-            this.waveformPlot1 = new NationalInstruments.UI.WaveformPlot();
-            this.xAxis4 = new NationalInstruments.UI.XAxis();
-            this.yAxis4 = new NationalInstruments.UI.YAxis();
-            this.waveformPlot7 = new NationalInstruments.UI.WaveformPlot();
-            this.waveformPlot8 = new NationalInstruments.UI.WaveformPlot();
-            this.waveformPlot9 = new NationalInstruments.UI.WaveformPlot();
-            this.label48 = new System.Windows.Forms.Label();
-            this.PMTcountGraphClearButton = new System.Windows.Forms.Button();
-            this.label49 = new System.Windows.Forms.Label();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor2 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
@@ -59,27 +41,6 @@
             this.toolStripPropertyEditor3 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor1 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.instrumentControlStrip1 = new NationalInstruments.UI.WindowsForms.InstrumentControlStrip();
-            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripPropertyEditor6 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripPropertyEditor7 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripPropertyEditor8 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripPropertyEditor9 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.clearScanButton = new System.Windows.Forms.Button();
-            this.clrCorrLog = new System.Windows.Forms.Button();
-            this.corrMuLog = new NationalInstruments.UI.WindowsForms.ScatterGraph();
-            this.scatterPlot4 = new NationalInstruments.UI.ScatterPlot();
-            this.xAxis5 = new NationalInstruments.UI.XAxis();
-            this.yAxis5 = new NationalInstruments.UI.YAxis();
-            this.corrAmpLog = new NationalInstruments.UI.WindowsForms.ScatterGraph();
-            this.scatterPlot5 = new NationalInstruments.UI.ScatterPlot();
-            this.xAxis6 = new NationalInstruments.UI.XAxis();
-            this.yAxis6 = new NationalInstruments.UI.YAxis();
-            this.corrRecToggle = new NationalInstruments.UI.WindowsForms.Switch();
-            this.testlbl = new System.Windows.Forms.Label();
             this.SliderScanStart = new System.Windows.Forms.Button();
             this.FilenameTab = new System.Windows.Forms.TabPage();
             this.label164 = new System.Windows.Forms.Label();
@@ -144,6 +105,58 @@
             this.CameraHbin = new System.Windows.Forms.TextBox();
             this.CameraStartButton = new System.Windows.Forms.Button();
             this.PulseProgrammerTab = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label112 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.c2si2 = new System.Windows.Forms.RadioButton();
+            this.Indsi2 = new System.Windows.Forms.RadioButton();
+            this.c1si2 = new System.Windows.Forms.RadioButton();
+            this.slow_in2DelayText = new System.Windows.Forms.TextBox();
+            this.slow_in2OnTimeText = new System.Windows.Forms.TextBox();
+            this.slow_in1DelayText = new System.Windows.Forms.TextBox();
+            this.slow_in1OnTimeText = new System.Windows.Forms.TextBox();
+            this.label113 = new System.Windows.Forms.Label();
+            this.label114 = new System.Windows.Forms.Label();
+            this.slow_in2SigName = new System.Windows.Forms.TextBox();
+            this.label165 = new System.Windows.Forms.Label();
+            this.label166 = new System.Windows.Forms.Label();
+            this.label175 = new System.Windows.Forms.Label();
+            this.label176 = new System.Windows.Forms.Label();
+            this.slow_in1SigName = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.c2si1 = new System.Windows.Forms.RadioButton();
+            this.c1si1 = new System.Windows.Forms.RadioButton();
+            this.Indsi1 = new System.Windows.Forms.RadioButton();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.notc1so2 = new System.Windows.Forms.RadioButton();
+            this.c1so2 = new System.Windows.Forms.RadioButton();
+            this.Indso2 = new System.Windows.Forms.RadioButton();
+            this.slow_out2DelayText = new System.Windows.Forms.TextBox();
+            this.slow_out2OnTimeText = new System.Windows.Forms.TextBox();
+            this.slow_out1OnTimeText = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.slow_out2SigName = new System.Windows.Forms.TextBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label96 = new System.Windows.Forms.Label();
+            this.slow_out1SigName = new System.Windows.Forms.TextBox();
+            this.label97 = new System.Windows.Forms.Label();
+            this.slow_out1DelayText = new System.Windows.Forms.TextBox();
+            this.label111 = new System.Windows.Forms.Label();
+            this.label171 = new System.Windows.Forms.Label();
+            this.slow_pulseFreqLabel = new System.Windows.Forms.Label();
+            this.slow_pulsePeriodText = new System.Windows.Forms.TextBox();
+            this.label170 = new System.Windows.Forms.Label();
+            this.label169 = new System.Windows.Forms.Label();
+            this.label168 = new System.Windows.Forms.Label();
+            this.label167 = new System.Windows.Forms.Label();
+            this.label110 = new System.Windows.Forms.Label();
+            this.label109 = new System.Windows.Forms.Label();
+            this.PulseProgrammerTimingDiagram = new NationalInstruments.UI.WindowsForms.DigitalWaveformGraph();
+            this.digitalWaveformPlot1 = new NationalInstruments.UI.DigitalWaveformPlot();
+            this.digitalSignalPlot1 = new NationalInstruments.UI.DigitalSignalPlot();
             this.updateAllSignalsButton = new System.Windows.Forms.Button();
             this.label158 = new System.Windows.Forms.Label();
             this.pulseFreqLabel = new System.Windows.Forms.Label();
@@ -152,6 +165,11 @@
             this.pulsePeriodText = new System.Windows.Forms.TextBox();
             this.label146 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label174 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.c2fi2 = new System.Windows.Forms.RadioButton();
+            this.Indfi2 = new System.Windows.Forms.RadioButton();
+            this.c1fi2 = new System.Windows.Forms.RadioButton();
             this.in2DelayText = new System.Windows.Forms.TextBox();
             this.in2OnTimeText = new System.Windows.Forms.TextBox();
             this.in1DelayText = new System.Windows.Forms.TextBox();
@@ -164,36 +182,58 @@
             this.label149 = new System.Windows.Forms.Label();
             this.label150 = new System.Windows.Forms.Label();
             this.in1SigName = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.c2fi1 = new System.Windows.Forms.RadioButton();
+            this.c1fi1 = new System.Windows.Forms.RadioButton();
+            this.Indfi1 = new System.Windows.Forms.RadioButton();
             this.label145 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.notc1fo2 = new System.Windows.Forms.RadioButton();
+            this.c1fo2 = new System.Windows.Forms.RadioButton();
+            this.Indfo2 = new System.Windows.Forms.RadioButton();
             this.out2DelayText = new System.Windows.Forms.TextBox();
-            this.out1DelayText = new System.Windows.Forms.TextBox();
             this.out2OnTimeText = new System.Windows.Forms.TextBox();
             this.out1OnTimeText = new System.Windows.Forms.TextBox();
             this.label153 = new System.Windows.Forms.Label();
-            this.label151 = new System.Windows.Forms.Label();
             this.out2SigName = new System.Windows.Forms.TextBox();
             this.label144 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
             this.out1SigName = new System.Windows.Forms.TextBox();
+            this.label151 = new System.Windows.Forms.Label();
+            this.out1DelayText = new System.Windows.Forms.TextBox();
+            this.label173 = new System.Windows.Forms.Label();
+            this.instrumentControlStrip3 = new NationalInstruments.UI.WindowsForms.InstrumentControlStrip();
+            this.toolStripLabel14 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripPropertyEditor14 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
+            this.toolStripLabel15 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripPropertyEditor15 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
+            this.toolStripLabel16 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripPropertyEditor16 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.CorrelatorTab = new System.Windows.Forms.TabPage();
+            this.groupBox36 = new System.Windows.Forms.GroupBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.RefOut = new System.Windows.Forms.TextBox();
+            this.groupBox35 = new System.Windows.Forms.GroupBox();
+            this.FlaggedRecool = new System.Windows.Forms.CheckBox();
+            this.RegularRecool = new System.Windows.Forms.CheckBox();
+            this.RegRecPerText = new System.Windows.Forms.TextBox();
+            this.label142 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.syncSrcSw = new NationalInstruments.UI.WindowsForms.Switch();
-            this.pulsedDutyText = new System.Windows.Forms.TextBox();
-            this.pulseFreqText = new System.Windows.Forms.TextBox();
-            this.PulsedProbeSwitch = new NationalInstruments.UI.WindowsForms.Switch();
+            this.ncorrbinsText = new System.Windows.Forms.TextBox();
+            this.label138 = new System.Windows.Forms.Label();
             this.correlatorBitFilePathB = new System.Windows.Forms.TextBox();
-            this.chooseCode = new NationalInstruments.UI.WindowsForms.Switch();
+            this.label137 = new System.Windows.Forms.Label();
             this.scatterGraphNormCorrSig = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.scatterPlot8 = new NationalInstruments.UI.ScatterPlot();
             this.xAxis7 = new NationalInstruments.UI.XAxis();
             this.yAxis7 = new NationalInstruments.UI.YAxis();
             this.textBoxBackEst = new System.Windows.Forms.TextBox();
-            this.switchDisplayBases = new NationalInstruments.UI.WindowsForms.Switch();
-            this.SaveCorrelatorToggle = new NationalInstruments.UI.WindowsForms.Switch();
             this.CorrelatorGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
             this.waveformPlot2 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis2 = new NationalInstruments.UI.XAxis();
@@ -218,11 +258,7 @@
             this.ArrayReset = new System.Windows.Forms.CheckBox();
             this.ArrayResetDelayLabel = new System.Windows.Forms.Label();
             this.ArrayResetDelayText = new System.Windows.Forms.TextBox();
-            this.label142 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
-            this.label97 = new System.Windows.Forms.Label();
-            this.label96 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
             this.label136 = new System.Windows.Forms.Label();
             this.label135 = new System.Windows.Forms.Label();
             this.label132 = new System.Windows.Forms.Label();
@@ -274,11 +310,19 @@
             this.label100 = new System.Windows.Forms.Label();
             this.correlatorVCOFreqtext = new System.Windows.Forms.TextBox();
             this.groupBox51 = new System.Windows.Forms.GroupBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.LockInPertext2B = new System.Windows.Forms.TextBox();
+            this.LockInPertext2 = new System.Windows.Forms.TextBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.LockInPertext1 = new System.Windows.Forms.TextBox();
             this.label140 = new System.Windows.Forms.Label();
             this.label139 = new System.Windows.Forms.Label();
             this.correlatorPtextB = new System.Windows.Forms.TextBox();
-            this.label138 = new System.Windows.Forms.Label();
-            this.label137 = new System.Windows.Forms.Label();
             this.LockInFreqtext2B = new System.Windows.Forms.TextBox();
             this.label62 = new System.Windows.Forms.Label();
             this.LockInFreqtext2 = new System.Windows.Forms.TextBox();
@@ -292,6 +336,10 @@
             this.intTselector = new NationalInstruments.UI.WindowsForms.Switch();
             this.label63 = new System.Windows.Forms.Label();
             this.LockinFrequencySwitch = new NationalInstruments.UI.WindowsForms.Switch();
+            this.switchDisplayBases = new NationalInstruments.UI.WindowsForms.Switch();
+            this.chooseCode = new NationalInstruments.UI.WindowsForms.Switch();
+            this.SaveCorrelatorToggle = new NationalInstruments.UI.WindowsForms.Switch();
+            this.CorrelatorBinningPhaseSlider = new ArrayDACControl.AdjustableSlider();
             this.FluorLogTab = new System.Windows.Forms.TabPage();
             this.FluorLogStart = new System.Windows.Forms.Button();
             this.groupBox60 = new System.Windows.Forms.GroupBox();
@@ -350,6 +398,9 @@
             this.SliderScanStartValueTextbox = new System.Windows.Forms.TextBox();
             this.IndividualDCTab = new System.Windows.Forms.TabPage();
             this.CoupledDCTab = new System.Windows.Forms.TabPage();
+            this.RightFingersSlider = new ArrayDACControl.AdjustableSlider();
+            this.SnakeOnlySlider = new ArrayDACControl.AdjustableSlider();
+            this.LeftFingersSlider = new ArrayDACControl.AdjustableSlider();
             this.scatterGraph1 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.scatterPlot1 = new NationalInstruments.UI.ScatterPlot();
             this.xAxis1 = new NationalInstruments.UI.XAxis();
@@ -408,11 +459,17 @@
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.MainControlTab = new System.Windows.Forms.TabPage();
+            this.clrCorrLog = new System.Windows.Forms.Button();
+            this.corrRecToggle = new NationalInstruments.UI.WindowsForms.Switch();
+            this.TickleSlider = new ArrayDACControl.AdjustableSlider();
+            this.BxSlider = new ArrayDACControl.AdjustableSlider();
+            this.Sideband402Control = new ArrayDACControl.AdjustableSlider();
             this.ReadFullConfigTextbox = new System.Windows.Forms.TextBox();
             this.SaveFullConfigTextbox = new System.Windows.Forms.TextBox();
             this.ReadConfigurationFileTextbox = new System.Windows.Forms.TextBox();
             this.ReadFullConfigButton = new System.Windows.Forms.Button();
             this.SaveFullConfigButton = new System.Windows.Forms.Button();
+            this.RamanSlider = new ArrayDACControl.AdjustableSlider();
             this.groupBox38 = new System.Windows.Forms.GroupBox();
             this.label64 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
@@ -421,8 +478,10 @@
             this.label38 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.Dev2DO3Switch = new NationalInstruments.UI.WindowsForms.Switch();
+            this.CavityCoolingPowerControl = new ArrayDACControl.AdjustableSlider();
             this.groupBox32 = new System.Windows.Forms.GroupBox();
             this.RepumperFrequency = new System.Windows.Forms.TextBox();
+            this.LatticePowerControl = new ArrayDACControl.AdjustableSlider();
             this.groupBox30 = new System.Windows.Forms.GroupBox();
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
@@ -433,26 +492,19 @@
             this.label32 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.CavityBeam370Switch = new NationalInstruments.UI.WindowsForms.Switch();
+            this.RepumperSlider = new ArrayDACControl.AdjustableSlider();
+            this.RepumperPowerSlider = new ArrayDACControl.AdjustableSlider();
             this.ReadElectrodeConfig = new System.Windows.Forms.Button();
+            this.SideBeam370Power = new ArrayDACControl.AdjustableSlider();
             this.ResetButton = new System.Windows.Forms.Button();
             this.groupBox26 = new System.Windows.Forms.GroupBox();
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.IonizationShutter = new NationalInstruments.UI.WindowsForms.Switch();
-            this.groupBox25 = new System.Windows.Forms.GroupBox();
-            this.CurrentFeedforward370Offset = new NationalInstruments.UI.WindowsForms.NumericEdit();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.TickleSlider = new ArrayDACControl.AdjustableSlider();
-            this.BxSlider = new ArrayDACControl.AdjustableSlider();
-            this.Sideband402Control = new ArrayDACControl.AdjustableSlider();
-            this.RamanSlider = new ArrayDACControl.AdjustableSlider();
-            this.CavityCoolingPowerControl = new ArrayDACControl.AdjustableSlider();
-            this.LatticePowerControl = new ArrayDACControl.AdjustableSlider();
-            this.RepumperSlider = new ArrayDACControl.AdjustableSlider();
-            this.RepumperPowerSlider = new ArrayDACControl.AdjustableSlider();
-            this.SideBeam370Power = new ArrayDACControl.AdjustableSlider();
             this.QuadTiltRatioSlider = new ArrayDACControl.AdjustableSlider();
             this.SnakeRatioSlider = new ArrayDACControl.AdjustableSlider();
+            this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.CurrentFeedforward370Offset = new NationalInstruments.UI.WindowsForms.NumericEdit();
             this.TransferCavity = new ArrayDACControl.AdjustableSlider();
             this.ArrayTotalSlider = new ArrayDACControl.AdjustableSlider();
             this.QuadrupoleTilt = new ArrayDACControl.AdjustableSlider();
@@ -461,16 +513,7 @@
             this.TotalBiasSlider = new ArrayDACControl.AdjustableSlider();
             this.DXSlider = new ArrayDACControl.AdjustableSlider();
             this.TrapHeightSlider = new ArrayDACControl.AdjustableSlider();
-            this.RightFingersSlider = new ArrayDACControl.AdjustableSlider();
-            this.SnakeOnlySlider = new ArrayDACControl.AdjustableSlider();
-            this.LeftFingersSlider = new ArrayDACControl.AdjustableSlider();
-            this.CorrelatorBinningPhaseSlider = new ArrayDACControl.AdjustableSlider();
-            ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PMTcountGraph)).BeginInit();
-            this.instrumentControlStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.corrAmpLog)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).BeginInit();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.FilenameTab.SuspendLayout();
             this.groupBox49.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CommonFilenameSwitch)).BeginInit();
@@ -482,15 +525,23 @@
             this.groupBox43.SuspendLayout();
             this.groupBox42.SuspendLayout();
             this.PulseProgrammerTab.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PulseProgrammerTimingDiagram)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.instrumentControlStrip3.SuspendLayout();
             this.CorrelatorTab.SuspendLayout();
+            this.groupBox36.SuspendLayout();
+            this.groupBox35.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.syncSrcSw)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PulsedProbeSwitch)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.switchDisplayBases)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveCorrelatorToggle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CorrelatorGraph)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.regSelectSw)).BeginInit();
             this.TickleResetBox.SuspendLayout();
@@ -503,6 +554,9 @@
             this.groupBox51.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intTselector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LockinFrequencySwitch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.switchDisplayBases)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveCorrelatorToggle)).BeginInit();
             this.FluorLogTab.SuspendLayout();
             this.groupBox60.SuspendLayout();
             this.groupBox59.SuspendLayout();
@@ -543,6 +597,7 @@
             this.groupBox9.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.MainControlTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).BeginInit();
             this.groupBox38.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Switch638)).BeginInit();
             this.groupBox31.SuspendLayout();
@@ -564,7 +619,7 @@
             // ElectrodeScanStart
             // 
             this.ElectrodeScanStart.BackColor = System.Drawing.Color.Gainsboro;
-            this.ElectrodeScanStart.Location = new System.Drawing.Point(12, 460);
+            this.ElectrodeScanStart.Location = new System.Drawing.Point(598, 857);
             this.ElectrodeScanStart.Name = "ElectrodeScanStart";
             this.ElectrodeScanStart.Size = new System.Drawing.Size(158, 31);
             this.ElectrodeScanStart.TabIndex = 141;
@@ -572,197 +627,17 @@
             this.ElectrodeScanStart.UseVisualStyleBackColor = false;
             this.ElectrodeScanStart.Click += new System.EventHandler(this.ElectrodeScanStart_Click);
             // 
-            // scatterGraph3
-            // 
-            this.scatterGraph3.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY)
-                        | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)
-                        | NationalInstruments.UI.GraphInteractionModes.PanX)
-                        | NationalInstruments.UI.GraphInteractionModes.PanY)
-                        | NationalInstruments.UI.GraphInteractionModes.DragCursor)
-                        | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption)
-                        | NationalInstruments.UI.GraphInteractionModes.EditRange)));
-            this.scatterGraph3.Location = new System.Drawing.Point(12, 497);
-            this.scatterGraph3.Name = "scatterGraph3";
-            this.scatterGraph3.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
-            this.scatterPlot3,
-            this.scatterPlot2,
-            this.scatterPlot6,
-            this.scatterPlot7});
-            this.scatterGraph3.Size = new System.Drawing.Size(624, 303);
-            this.scatterGraph3.TabIndex = 127;
-            this.scatterGraph3.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis3});
-            this.scatterGraph3.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis3});
-            // 
-            // scatterPlot3
-            // 
-            this.scatterPlot3.BaseXValue = -100;
-            this.scatterPlot3.FillToBaseStyle = NationalInstruments.UI.FillStyle.VerticalGradient;
-            this.scatterPlot3.LineColor = System.Drawing.Color.White;
-            this.scatterPlot3.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.scatterPlot3.LineToBaseColor = System.Drawing.Color.Gainsboro;
-            this.scatterPlot3.LineToBaseStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.scatterPlot3.XAxis = this.xAxis3;
-            this.scatterPlot3.YAxis = this.yAxis3;
-            // 
-            // xAxis3
-            // 
-            this.xAxis3.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.xAxis3.MajorDivisions.GridVisible = true;
-            this.xAxis3.Range = new NationalInstruments.UI.Range(-1, 1);
-            // 
-            // yAxis3
-            // 
-            this.yAxis3.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.yAxis3.MajorDivisions.GridVisible = true;
-            // 
-            // scatterPlot2
-            // 
-            this.scatterPlot2.LineColor = System.Drawing.Color.Red;
-            this.scatterPlot2.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.scatterPlot2.XAxis = this.xAxis3;
-            this.scatterPlot2.YAxis = this.yAxis3;
-            // 
-            // scatterPlot6
-            // 
-            this.scatterPlot6.XAxis = this.xAxis3;
-            this.scatterPlot6.YAxis = this.yAxis3;
-            // 
-            // scatterPlot7
-            // 
-            this.scatterPlot7.LineColor = System.Drawing.Color.DeepSkyBlue;
-            this.scatterPlot7.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.scatterPlot7.XAxis = this.xAxis3;
-            this.scatterPlot7.YAxis = this.yAxis3;
-            // 
             // SinglePMTReadButton
             // 
             this.SinglePMTReadButton.BackColor = System.Drawing.Color.Gray;
             this.SinglePMTReadButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.SinglePMTReadButton.Location = new System.Drawing.Point(531, 21);
+            this.SinglePMTReadButton.Location = new System.Drawing.Point(402, 857);
             this.SinglePMTReadButton.Name = "SinglePMTReadButton";
             this.SinglePMTReadButton.Size = new System.Drawing.Size(81, 55);
             this.SinglePMTReadButton.TabIndex = 126;
             this.SinglePMTReadButton.Text = "PMT counts";
             this.SinglePMTReadButton.UseVisualStyleBackColor = false;
             this.SinglePMTReadButton.Click += new System.EventHandler(this.SinglePMTReadButton_Click);
-            // 
-            // PMTcountBox
-            // 
-            this.PMTcountBox.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PMTcountBox.Location = new System.Drawing.Point(192, 41);
-            this.PMTcountBox.Name = "PMTcountBox";
-            this.PMTcountBox.Size = new System.Drawing.Size(239, 35);
-            this.PMTcountBox.TabIndex = 124;
-            this.PMTcountBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // PMTcountGraph
-            // 
-            this.PMTcountGraph.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PMTcountGraph.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY)
-                        | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)
-                        | NationalInstruments.UI.GraphInteractionModes.PanX)
-                        | NationalInstruments.UI.GraphInteractionModes.PanY)
-                        | NationalInstruments.UI.GraphInteractionModes.DragCursor)
-                        | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption)
-                        | NationalInstruments.UI.GraphInteractionModes.EditRange)));
-            this.PMTcountGraph.Location = new System.Drawing.Point(12, 82);
-            this.PMTcountGraph.Name = "PMTcountGraph";
-            this.PMTcountGraph.PlotAreaBorder = NationalInstruments.UI.Border.Sunken;
-            this.PMTcountGraph.PlotAreaColor = System.Drawing.SystemColors.MenuText;
-            this.PMTcountGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.waveformPlot1,
-            this.waveformPlot7,
-            this.waveformPlot8,
-            this.waveformPlot9});
-            this.PMTcountGraph.Size = new System.Drawing.Size(624, 332);
-            this.PMTcountGraph.TabIndex = 147;
-            this.PMTcountGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis4});
-            this.PMTcountGraph.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis4});
-            // 
-            // waveformPlot1
-            // 
-            this.waveformPlot1.LineColor = System.Drawing.Color.GhostWhite;
-            this.waveformPlot1.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.waveformPlot1.XAxis = this.xAxis4;
-            this.waveformPlot1.YAxis = this.yAxis4;
-            // 
-            // xAxis4
-            // 
-            this.xAxis4.MajorDivisions.GridColor = System.Drawing.Color.ForestGreen;
-            this.xAxis4.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.xAxis4.MajorDivisions.GridVisible = true;
-            this.xAxis4.MajorDivisions.LabelFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xAxis4.MajorDivisions.LineWidth = 0.5F;
-            this.xAxis4.MinorDivisions.GridColor = System.Drawing.Color.ForestGreen;
-            this.xAxis4.MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            this.xAxis4.MinorDivisions.Interval = 0.1;
-            this.xAxis4.MinorDivisions.LineWidth = 0.5F;
-            this.xAxis4.MinorDivisions.TickVisible = true;
-            // 
-            // yAxis4
-            // 
-            this.yAxis4.MajorDivisions.GridColor = System.Drawing.Color.ForestGreen;
-            this.yAxis4.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.yAxis4.MajorDivisions.GridVisible = true;
-            this.yAxis4.MinorDivisions.GridColor = System.Drawing.Color.ForestGreen;
-            this.yAxis4.MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            // 
-            // waveformPlot7
-            // 
-            this.waveformPlot7.LineColor = System.Drawing.Color.Red;
-            this.waveformPlot7.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.waveformPlot7.XAxis = this.xAxis4;
-            this.waveformPlot7.YAxis = this.yAxis4;
-            // 
-            // waveformPlot8
-            // 
-            this.waveformPlot8.XAxis = this.xAxis4;
-            this.waveformPlot8.YAxis = this.yAxis4;
-            // 
-            // waveformPlot9
-            // 
-            this.waveformPlot9.LineColor = System.Drawing.Color.DeepSkyBlue;
-            this.waveformPlot9.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.waveformPlot9.XAxis = this.xAxis4;
-            this.waveformPlot9.YAxis = this.yAxis4;
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label48.Location = new System.Drawing.Point(266, 466);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(131, 24);
-            this.label48.TabIndex = 143;
-            this.label48.Text = "Scan Results";
-            // 
-            // PMTcountGraphClearButton
-            // 
-            this.PMTcountGraphClearButton.BackColor = System.Drawing.Color.Firebrick;
-            this.PMTcountGraphClearButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.PMTcountGraphClearButton.Location = new System.Drawing.Point(26, 21);
-            this.PMTcountGraphClearButton.Name = "PMTcountGraphClearButton";
-            this.PMTcountGraphClearButton.Size = new System.Drawing.Size(81, 55);
-            this.PMTcountGraphClearButton.TabIndex = 148;
-            this.PMTcountGraphClearButton.Text = "Clear Log";
-            this.PMTcountGraphClearButton.UseVisualStyleBackColor = false;
-            this.PMTcountGraphClearButton.Click += new System.EventHandler(this.PMTcountGraphClearButton_Click);
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label49.Location = new System.Drawing.Point(229, 9);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(168, 24);
-            this.label49.TabIndex = 149;
-            this.label49.Text = "PMT Live Counts";
             // 
             // toolStripLabel2
             // 
@@ -829,197 +704,11 @@
             this.toolStripPropertyEditor1.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
             this.toolStripPropertyEditor1.Size = new System.Drawing.Size(120, 21);
             // 
-            // instrumentControlStrip1
-            // 
-            this.instrumentControlStrip1.AutoSize = false;
-            this.instrumentControlStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.instrumentControlStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel6,
-            this.toolStripPropertyEditor6,
-            this.toolStripLabel7,
-            this.toolStripPropertyEditor7,
-            this.toolStripLabel8,
-            this.toolStripPropertyEditor8,
-            this.toolStripLabel9,
-            this.toolStripPropertyEditor9});
-            this.instrumentControlStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.instrumentControlStrip1.Location = new System.Drawing.Point(12, 417);
-            this.instrumentControlStrip1.Name = "instrumentControlStrip1";
-            this.instrumentControlStrip1.Size = new System.Drawing.Size(586, 25);
-            this.instrumentControlStrip1.TabIndex = 155;
-            // 
-            // toolStripLabel6
-            // 
-            this.toolStripLabel6.Name = "toolStripLabel6";
-            this.toolStripLabel6.Size = new System.Drawing.Size(90, 22);
-            this.toolStripLabel6.Text = "InteractionMode:";
-            // 
-            // toolStripPropertyEditor6
-            // 
-            this.toolStripPropertyEditor6.AutoSize = false;
-            this.toolStripPropertyEditor6.Name = "toolStripPropertyEditor6";
-            this.toolStripPropertyEditor6.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
-            this.toolStripPropertyEditor6.Size = new System.Drawing.Size(120, 21);
-            this.toolStripPropertyEditor6.Source = new NationalInstruments.UI.PropertyEditorSource(this.PMTcountGraph, "InteractionMode");
-            this.toolStripPropertyEditor6.Text = "ZoomX, ZoomY, ZoomAroundPoint, PanX, PanY, DragCursor, DragAnnotationCaption, Edi" +
-                "tRange";
-            // 
-            // toolStripLabel7
-            // 
-            this.toolStripLabel7.Name = "toolStripLabel7";
-            this.toolStripLabel7.Size = new System.Drawing.Size(48, 22);
-            this.toolStripLabel7.Text = "Cursors:";
-            // 
-            // toolStripPropertyEditor7
-            // 
-            this.toolStripPropertyEditor7.AutoSize = false;
-            this.toolStripPropertyEditor7.Name = "toolStripPropertyEditor7";
-            this.toolStripPropertyEditor7.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
-            this.toolStripPropertyEditor7.Size = new System.Drawing.Size(120, 21);
-            this.toolStripPropertyEditor7.Source = new NationalInstruments.UI.PropertyEditorSource(this.PMTcountGraph, "Cursors");
-            this.toolStripPropertyEditor7.Text = "(Collection)";
-            // 
-            // toolStripLabel8
-            // 
-            this.toolStripLabel8.Name = "toolStripLabel8";
-            this.toolStripLabel8.Size = new System.Drawing.Size(69, 22);
-            this.toolStripLabel8.Text = "Annotations:";
-            // 
-            // toolStripPropertyEditor8
-            // 
-            this.toolStripPropertyEditor8.AutoSize = false;
-            this.toolStripPropertyEditor8.Name = "toolStripPropertyEditor8";
-            this.toolStripPropertyEditor8.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
-            this.toolStripPropertyEditor8.Size = new System.Drawing.Size(120, 21);
-            this.toolStripPropertyEditor8.Source = new NationalInstruments.UI.PropertyEditorSource(this.PMTcountGraph, "Annotations");
-            this.toolStripPropertyEditor8.Text = "(Collection)";
-            // 
-            // toolStripLabel9
-            // 
-            this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(34, 13);
-            this.toolStripLabel9.Text = "Plots:";
-            // 
-            // toolStripPropertyEditor9
-            // 
-            this.toolStripPropertyEditor9.AutoSize = false;
-            this.toolStripPropertyEditor9.Name = "toolStripPropertyEditor9";
-            this.toolStripPropertyEditor9.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
-            this.toolStripPropertyEditor9.Size = new System.Drawing.Size(120, 21);
-            this.toolStripPropertyEditor9.Source = new NationalInstruments.UI.PropertyEditorSource(this.PMTcountGraph, "Plots");
-            this.toolStripPropertyEditor9.Text = "(Collection)";
-            // 
-            // clearScanButton
-            // 
-            this.clearScanButton.BackColor = System.Drawing.Color.Firebrick;
-            this.clearScanButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.clearScanButton.Location = new System.Drawing.Point(398, 804);
-            this.clearScanButton.Name = "clearScanButton";
-            this.clearScanButton.Size = new System.Drawing.Size(81, 29);
-            this.clearScanButton.TabIndex = 156;
-            this.clearScanButton.Text = "Clear Results";
-            this.clearScanButton.UseVisualStyleBackColor = false;
-            this.clearScanButton.Click += new System.EventHandler(this.clearScanButton_Click);
-            // 
-            // clrCorrLog
-            // 
-            this.clrCorrLog.BackColor = System.Drawing.Color.Red;
-            this.clrCorrLog.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.clrCorrLog.Location = new System.Drawing.Point(288, 806);
-            this.clrCorrLog.Name = "clrCorrLog";
-            this.clrCorrLog.Size = new System.Drawing.Size(27, 29);
-            this.clrCorrLog.TabIndex = 161;
-            this.clrCorrLog.UseVisualStyleBackColor = false;
-            this.clrCorrLog.Click += new System.EventHandler(this.clrCorrLog_Click);
-            // 
-            // corrMuLog
-            // 
-            this.corrMuLog.Location = new System.Drawing.Point(5, 840);
-            this.corrMuLog.Name = "corrMuLog";
-            this.corrMuLog.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
-            this.scatterPlot4});
-            this.corrMuLog.Size = new System.Drawing.Size(321, 185);
-            this.corrMuLog.TabIndex = 162;
-            this.corrMuLog.UseColorGenerator = true;
-            this.corrMuLog.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis5});
-            this.corrMuLog.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis5});
-            // 
-            // scatterPlot4
-            // 
-            this.scatterPlot4.LineWidth = 5F;
-            this.scatterPlot4.PointColor = System.Drawing.Color.Red;
-            this.scatterPlot4.PointSize = new System.Drawing.Size(15, 3);
-            this.scatterPlot4.PointStyle = NationalInstruments.UI.PointStyle.SolidSquare;
-            this.scatterPlot4.XAxis = this.xAxis5;
-            this.scatterPlot4.YAxis = this.yAxis5;
-            // 
-            // xAxis5
-            // 
-            this.xAxis5.Mode = NationalInstruments.UI.AxisMode.AutoScaleVisibleLoose;
-            this.xAxis5.Visible = false;
-            // 
-            // yAxis5
-            // 
-            this.yAxis5.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.yAxis5.MajorDivisions.GridVisible = true;
-            // 
-            // corrAmpLog
-            // 
-            this.corrAmpLog.Location = new System.Drawing.Point(332, 839);
-            this.corrAmpLog.Name = "corrAmpLog";
-            this.corrAmpLog.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
-            this.scatterPlot5});
-            this.corrAmpLog.Size = new System.Drawing.Size(309, 185);
-            this.corrAmpLog.TabIndex = 163;
-            this.corrAmpLog.UseColorGenerator = true;
-            this.corrAmpLog.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis6});
-            this.corrAmpLog.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis6});
-            // 
-            // scatterPlot5
-            // 
-            this.scatterPlot5.LineWidth = 5F;
-            this.scatterPlot5.PointColor = System.Drawing.Color.Red;
-            this.scatterPlot5.PointSize = new System.Drawing.Size(15, 3);
-            this.scatterPlot5.PointStyle = NationalInstruments.UI.PointStyle.SolidSquare;
-            this.scatterPlot5.XAxis = this.xAxis6;
-            this.scatterPlot5.YAxis = this.yAxis6;
-            // 
-            // xAxis6
-            // 
-            this.xAxis6.Visible = false;
-            // 
-            // yAxis6
-            // 
-            this.yAxis6.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.yAxis6.MajorDivisions.GridVisible = true;
-            // 
-            // corrRecToggle
-            // 
-            this.corrRecToggle.Location = new System.Drawing.Point(248, 804);
-            this.corrRecToggle.Name = "corrRecToggle";
-            this.corrRecToggle.Size = new System.Drawing.Size(34, 38);
-            this.corrRecToggle.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalSlide3D;
-            this.corrRecToggle.TabIndex = 155;
-            this.corrRecToggle.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.corrRecToggle_StateChanged);
-            // 
-            // testlbl
-            // 
-            this.testlbl.AutoSize = true;
-            this.testlbl.Location = new System.Drawing.Point(172, 815);
-            this.testlbl.Name = "testlbl";
-            this.testlbl.Size = new System.Drawing.Size(13, 13);
-            this.testlbl.TabIndex = 164;
-            this.testlbl.Text = "0";
-            // 
             // SliderScanStart
             // 
             this.SliderScanStart.BackColor = System.Drawing.Color.WhiteSmoke;
             this.SliderScanStart.ForeColor = System.Drawing.Color.IndianRed;
-            this.SliderScanStart.Location = new System.Drawing.Point(523, 459);
+            this.SliderScanStart.Location = new System.Drawing.Point(598, 911);
             this.SliderScanStart.Name = "SliderScanStart";
             this.SliderScanStart.Size = new System.Drawing.Size(113, 31);
             this.SliderScanStart.TabIndex = 165;
@@ -1038,7 +727,7 @@
             this.FilenameTab.Location = new System.Drawing.Point(4, 22);
             this.FilenameTab.Name = "FilenameTab";
             this.FilenameTab.Padding = new System.Windows.Forms.Padding(3);
-            this.FilenameTab.Size = new System.Drawing.Size(1215, 979);
+            this.FilenameTab.Size = new System.Drawing.Size(1845, 979);
             this.FilenameTab.TabIndex = 11;
             this.FilenameTab.Text = "Data Filename Control";
             this.FilenameTab.UseVisualStyleBackColor = true;
@@ -1386,7 +1075,7 @@
             this.CameraTab.Location = new System.Drawing.Point(4, 22);
             this.CameraTab.Name = "CameraTab";
             this.CameraTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CameraTab.Size = new System.Drawing.Size(1215, 979);
+            this.CameraTab.Size = new System.Drawing.Size(1845, 979);
             this.CameraTab.TabIndex = 10;
             this.CameraTab.Text = "Camera Controls";
             this.CameraTab.UseVisualStyleBackColor = true;
@@ -1678,6 +1367,18 @@
             // 
             // PulseProgrammerTab
             // 
+            this.PulseProgrammerTab.Controls.Add(this.tableLayoutPanel4);
+            this.PulseProgrammerTab.Controls.Add(this.tableLayoutPanel3);
+            this.PulseProgrammerTab.Controls.Add(this.label171);
+            this.PulseProgrammerTab.Controls.Add(this.slow_pulseFreqLabel);
+            this.PulseProgrammerTab.Controls.Add(this.slow_pulsePeriodText);
+            this.PulseProgrammerTab.Controls.Add(this.label170);
+            this.PulseProgrammerTab.Controls.Add(this.label169);
+            this.PulseProgrammerTab.Controls.Add(this.label168);
+            this.PulseProgrammerTab.Controls.Add(this.label167);
+            this.PulseProgrammerTab.Controls.Add(this.label110);
+            this.PulseProgrammerTab.Controls.Add(this.label109);
+            this.PulseProgrammerTab.Controls.Add(this.PulseProgrammerTimingDiagram);
             this.PulseProgrammerTab.Controls.Add(this.updateAllSignalsButton);
             this.PulseProgrammerTab.Controls.Add(this.label158);
             this.PulseProgrammerTab.Controls.Add(this.pulseFreqLabel);
@@ -1688,18 +1389,567 @@
             this.PulseProgrammerTab.Controls.Add(this.tableLayoutPanel2);
             this.PulseProgrammerTab.Controls.Add(this.label145);
             this.PulseProgrammerTab.Controls.Add(this.tableLayoutPanel1);
+            this.PulseProgrammerTab.Controls.Add(this.instrumentControlStrip3);
             this.PulseProgrammerTab.Location = new System.Drawing.Point(4, 22);
             this.PulseProgrammerTab.Name = "PulseProgrammerTab";
             this.PulseProgrammerTab.Padding = new System.Windows.Forms.Padding(3);
-            this.PulseProgrammerTab.Size = new System.Drawing.Size(1215, 979);
+            this.PulseProgrammerTab.Size = new System.Drawing.Size(1845, 979);
             this.PulseProgrammerTab.TabIndex = 15;
             this.PulseProgrammerTab.Text = "Pulse Programmer";
             this.PulseProgrammerTab.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel4.ColumnCount = 5;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.31313F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.68687F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 227F));
+            this.tableLayoutPanel4.Controls.Add(this.label112, 4, 0);
+            this.tableLayoutPanel4.Controls.Add(this.panel5, 4, 2);
+            this.tableLayoutPanel4.Controls.Add(this.slow_in2DelayText, 3, 2);
+            this.tableLayoutPanel4.Controls.Add(this.slow_in2OnTimeText, 2, 2);
+            this.tableLayoutPanel4.Controls.Add(this.slow_in1DelayText, 3, 1);
+            this.tableLayoutPanel4.Controls.Add(this.slow_in1OnTimeText, 2, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label113, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label114, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.slow_in2SigName, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.label165, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label166, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.label175, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label176, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.slow_in1SigName, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.panel6, 4, 1);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(528, 293);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.Padding = new System.Windows.Forms.Padding(3);
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.15385F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.84615F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(461, 119);
+            this.tableLayoutPanel4.TabIndex = 179;
+            // 
+            // label112
+            // 
+            this.label112.AutoSize = true;
+            this.label112.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label112.Location = new System.Drawing.Point(232, 4);
+            this.label112.Name = "label112";
+            this.label112.Size = new System.Drawing.Size(71, 24);
+            this.label112.TabIndex = 181;
+            this.label112.Text = "options";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.c2si2);
+            this.panel5.Controls.Add(this.Indsi2);
+            this.panel5.Controls.Add(this.c1si2);
+            this.panel5.Location = new System.Drawing.Point(232, 91);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(164, 21);
+            this.panel5.TabIndex = 180;
+            // 
+            // c2si2
+            // 
+            this.c2si2.AutoSize = true;
+            this.c2si2.Location = new System.Drawing.Point(101, 3);
+            this.c2si2.Name = "c2si2";
+            this.c2si2.Size = new System.Drawing.Size(62, 17);
+            this.c2si2.TabIndex = 182;
+            this.c2si2.Text = "out Ch2";
+            this.c2si2.UseVisualStyleBackColor = true;
+            this.c2si2.CheckedChanged += new System.EventHandler(this.c2si2_CheckedChanged);
+            // 
+            // Indsi2
+            // 
+            this.Indsi2.AutoSize = true;
+            this.Indsi2.Checked = true;
+            this.Indsi2.Location = new System.Drawing.Point(3, 3);
+            this.Indsi2.Name = "Indsi2";
+            this.Indsi2.Size = new System.Drawing.Size(40, 17);
+            this.Indsi2.TabIndex = 10;
+            this.Indsi2.TabStop = true;
+            this.Indsi2.Text = "Ind";
+            this.Indsi2.UseVisualStyleBackColor = true;
+            this.Indsi2.CheckedChanged += new System.EventHandler(this.Indsi2_CheckedChanged);
+            // 
+            // c1si2
+            // 
+            this.c1si2.AutoSize = true;
+            this.c1si2.Location = new System.Drawing.Point(43, 2);
+            this.c1si2.Name = "c1si2";
+            this.c1si2.Size = new System.Drawing.Size(62, 17);
+            this.c1si2.TabIndex = 181;
+            this.c1si2.Text = "out Ch1";
+            this.c1si2.UseVisualStyleBackColor = true;
+            this.c1si2.CheckedChanged += new System.EventHandler(this.c1si2_CheckedChanged);
+            // 
+            // slow_in2DelayText
+            // 
+            this.slow_in2DelayText.Location = new System.Drawing.Point(140, 91);
+            this.slow_in2DelayText.Name = "slow_in2DelayText";
+            this.slow_in2DelayText.Size = new System.Drawing.Size(78, 20);
+            this.slow_in2DelayText.TabIndex = 11;
+            this.slow_in2DelayText.Text = "0";
+            // 
+            // slow_in2OnTimeText
+            // 
+            this.slow_in2OnTimeText.Location = new System.Drawing.Point(46, 91);
+            this.slow_in2OnTimeText.Name = "slow_in2OnTimeText";
+            this.slow_in2OnTimeText.Size = new System.Drawing.Size(79, 20);
+            this.slow_in2OnTimeText.TabIndex = 10;
+            this.slow_in2OnTimeText.Text = "50";
+            // 
+            // slow_in1DelayText
+            // 
+            this.slow_in1DelayText.Location = new System.Drawing.Point(140, 62);
+            this.slow_in1DelayText.Name = "slow_in1DelayText";
+            this.slow_in1DelayText.Size = new System.Drawing.Size(78, 20);
+            this.slow_in1DelayText.TabIndex = 9;
+            this.slow_in1DelayText.Text = "0";
+            // 
+            // slow_in1OnTimeText
+            // 
+            this.slow_in1OnTimeText.Location = new System.Drawing.Point(46, 62);
+            this.slow_in1OnTimeText.Name = "slow_in1OnTimeText";
+            this.slow_in1OnTimeText.Size = new System.Drawing.Size(79, 20);
+            this.slow_in1OnTimeText.TabIndex = 8;
+            this.slow_in1OnTimeText.Text = "50";
+            // 
+            // label113
+            // 
+            this.label113.AutoSize = true;
+            this.label113.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label113.Location = new System.Drawing.Point(140, 4);
+            this.label113.Name = "label113";
+            this.label113.Size = new System.Drawing.Size(54, 48);
+            this.label113.TabIndex = 7;
+            this.label113.Text = "Acq. start";
+            // 
+            // label114
+            // 
+            this.label114.AutoSize = true;
+            this.label114.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label114.Location = new System.Drawing.Point(46, 4);
+            this.label114.Name = "label114";
+            this.label114.Size = new System.Drawing.Size(83, 48);
+            this.label114.TabIndex = 6;
+            this.label114.Text = "Acq. ON time";
+            // 
+            // slow_in2SigName
+            // 
+            this.slow_in2SigName.Location = new System.Drawing.Point(19, 91);
+            this.slow_in2SigName.Name = "slow_in2SigName";
+            this.slow_in2SigName.Size = new System.Drawing.Size(20, 20);
+            this.slow_in2SigName.TabIndex = 5;
+            // 
+            // label165
+            // 
+            this.label165.AutoSize = true;
+            this.label165.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label165.Location = new System.Drawing.Point(19, 4);
+            this.label165.Name = "label165";
+            this.label165.Size = new System.Drawing.Size(20, 54);
+            this.label165.TabIndex = 2;
+            this.label165.Text = "signal name";
+            // 
+            // label166
+            // 
+            this.label166.AutoSize = true;
+            this.label166.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label166.Location = new System.Drawing.Point(7, 88);
+            this.label166.Name = "label166";
+            this.label166.Size = new System.Drawing.Size(5, 20);
+            this.label166.TabIndex = 3;
+            this.label166.Text = "2";
+            // 
+            // label175
+            // 
+            this.label175.AutoSize = true;
+            this.label175.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label175.Location = new System.Drawing.Point(7, 4);
+            this.label175.Name = "label175";
+            this.label175.Size = new System.Drawing.Size(5, 48);
+            this.label175.TabIndex = 0;
+            this.label175.Text = "CH";
+            // 
+            // label176
+            // 
+            this.label176.AutoSize = true;
+            this.label176.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label176.Location = new System.Drawing.Point(7, 59);
+            this.label176.Name = "label176";
+            this.label176.Size = new System.Drawing.Size(5, 20);
+            this.label176.TabIndex = 2;
+            this.label176.Text = "1";
+            // 
+            // slow_in1SigName
+            // 
+            this.slow_in1SigName.Location = new System.Drawing.Point(19, 62);
+            this.slow_in1SigName.Name = "slow_in1SigName";
+            this.slow_in1SigName.Size = new System.Drawing.Size(20, 20);
+            this.slow_in1SigName.TabIndex = 4;
+            this.slow_in1SigName.Text = "PMTs";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.c2si1);
+            this.panel6.Controls.Add(this.c1si1);
+            this.panel6.Controls.Add(this.Indsi1);
+            this.panel6.Location = new System.Drawing.Point(232, 62);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(164, 21);
+            this.panel6.TabIndex = 179;
+            // 
+            // c2si1
+            // 
+            this.c2si1.AutoSize = true;
+            this.c2si1.Location = new System.Drawing.Point(101, 3);
+            this.c2si1.Name = "c2si1";
+            this.c2si1.Size = new System.Drawing.Size(62, 17);
+            this.c2si1.TabIndex = 180;
+            this.c2si1.Text = "out Ch2";
+            this.c2si1.UseVisualStyleBackColor = true;
+            this.c2si1.CheckedChanged += new System.EventHandler(this.c2si1_CheckedChanged);
+            // 
+            // c1si1
+            // 
+            this.c1si1.AutoSize = true;
+            this.c1si1.Location = new System.Drawing.Point(42, 3);
+            this.c1si1.Name = "c1si1";
+            this.c1si1.Size = new System.Drawing.Size(62, 17);
+            this.c1si1.TabIndex = 179;
+            this.c1si1.Text = "out Ch1";
+            this.c1si1.UseVisualStyleBackColor = true;
+            this.c1si1.CheckedChanged += new System.EventHandler(this.c1si1_CheckedChanged);
+            // 
+            // Indsi1
+            // 
+            this.Indsi1.AutoSize = true;
+            this.Indsi1.Checked = true;
+            this.Indsi1.Location = new System.Drawing.Point(3, 3);
+            this.Indsi1.Name = "Indsi1";
+            this.Indsi1.Size = new System.Drawing.Size(40, 17);
+            this.Indsi1.TabIndex = 10;
+            this.Indsi1.TabStop = true;
+            this.Indsi1.Text = "Ind";
+            this.Indsi1.UseVisualStyleBackColor = true;
+            this.Indsi1.CheckedChanged += new System.EventHandler(this.Indsi1_CheckedChanged);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel3.ColumnCount = 5;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.80769F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.19231F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 229F));
+            this.tableLayoutPanel3.Controls.Add(this.panel4, 4, 2);
+            this.tableLayoutPanel3.Controls.Add(this.slow_out2DelayText, 3, 2);
+            this.tableLayoutPanel3.Controls.Add(this.slow_out2OnTimeText, 2, 2);
+            this.tableLayoutPanel3.Controls.Add(this.slow_out1OnTimeText, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label69, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.slow_out2SigName, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label70, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label71, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label72, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label96, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.slow_out1SigName, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label97, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.slow_out1DelayText, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label111, 4, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(529, 137);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.Padding = new System.Windows.Forms.Padding(3);
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.15385F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.84615F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(460, 119);
+            this.tableLayoutPanel3.TabIndex = 178;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.notc1so2);
+            this.panel4.Controls.Add(this.c1so2);
+            this.panel4.Controls.Add(this.Indso2);
+            this.panel4.Location = new System.Drawing.Point(229, 91);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(147, 21);
+            this.panel4.TabIndex = 178;
+            // 
+            // notc1so2
+            // 
+            this.notc1so2.AutoSize = true;
+            this.notc1so2.Location = new System.Drawing.Point(93, 3);
+            this.notc1so2.Name = "notc1so2";
+            this.notc1so2.Size = new System.Drawing.Size(51, 17);
+            this.notc1so2.TabIndex = 180;
+            this.notc1so2.Text = "~Ch1";
+            this.notc1so2.UseVisualStyleBackColor = true;
+            this.notc1so2.CheckedChanged += new System.EventHandler(this.notc1so2_CheckedChanged);
+            // 
+            // c1so2
+            // 
+            this.c1so2.AutoSize = true;
+            this.c1so2.Checked = true;
+            this.c1so2.Location = new System.Drawing.Point(49, 3);
+            this.c1so2.Name = "c1so2";
+            this.c1so2.Size = new System.Drawing.Size(44, 17);
+            this.c1so2.TabIndex = 179;
+            this.c1so2.TabStop = true;
+            this.c1so2.Text = "Ch1";
+            this.c1so2.UseVisualStyleBackColor = true;
+            this.c1so2.CheckedChanged += new System.EventHandler(this.c1so2_CheckedChanged);
+            // 
+            // Indso2
+            // 
+            this.Indso2.AutoSize = true;
+            this.Indso2.Location = new System.Drawing.Point(3, 3);
+            this.Indso2.Name = "Indso2";
+            this.Indso2.Size = new System.Drawing.Size(40, 17);
+            this.Indso2.TabIndex = 10;
+            this.Indso2.Text = "Ind";
+            this.Indso2.UseVisualStyleBackColor = true;
+            this.Indso2.CheckedChanged += new System.EventHandler(this.Indso2_CheckedChanged);
+            // 
+            // slow_out2DelayText
+            // 
+            this.slow_out2DelayText.ForeColor = System.Drawing.Color.Gray;
+            this.slow_out2DelayText.Location = new System.Drawing.Point(137, 91);
+            this.slow_out2DelayText.Name = "slow_out2DelayText";
+            this.slow_out2DelayText.Size = new System.Drawing.Size(79, 20);
+            this.slow_out2DelayText.TabIndex = 8;
+            this.slow_out2DelayText.Text = "0";
+            this.slow_out2DelayText.TextChanged += new System.EventHandler(this.slow_out2_Changed);
+            // 
+            // slow_out2OnTimeText
+            // 
+            this.slow_out2OnTimeText.ForeColor = System.Drawing.Color.Gray;
+            this.slow_out2OnTimeText.Location = new System.Drawing.Point(45, 91);
+            this.slow_out2OnTimeText.Name = "slow_out2OnTimeText";
+            this.slow_out2OnTimeText.Size = new System.Drawing.Size(79, 20);
+            this.slow_out2OnTimeText.TabIndex = 6;
+            this.slow_out2OnTimeText.Text = "5";
+            this.slow_out2OnTimeText.TextChanged += new System.EventHandler(this.slow_out2_Changed);
+            // 
+            // slow_out1OnTimeText
+            // 
+            this.slow_out1OnTimeText.Location = new System.Drawing.Point(45, 62);
+            this.slow_out1OnTimeText.Name = "slow_out1OnTimeText";
+            this.slow_out1OnTimeText.Size = new System.Drawing.Size(79, 20);
+            this.slow_out1OnTimeText.TabIndex = 5;
+            this.slow_out1OnTimeText.Text = "5";
+            this.slow_out1OnTimeText.TextChanged += new System.EventHandler(this.slow_out1_Changed);
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label69.Location = new System.Drawing.Point(137, 4);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(85, 48);
+            this.label69.TabIndex = 6;
+            this.label69.Text = "posedge delay";
+            // 
+            // slow_out2SigName
+            // 
+            this.slow_out2SigName.Location = new System.Drawing.Point(19, 91);
+            this.slow_out2SigName.Name = "slow_out2SigName";
+            this.slow_out2SigName.Size = new System.Drawing.Size(19, 20);
+            this.slow_out2SigName.TabIndex = 5;
+            this.slow_out2SigName.Text = "probe";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label70.Location = new System.Drawing.Point(19, 4);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(19, 54);
+            this.label70.TabIndex = 2;
+            this.label70.Text = "signal name";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label71.Location = new System.Drawing.Point(7, 88);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(5, 20);
+            this.label71.TabIndex = 3;
+            this.label71.Text = "2";
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label72.Location = new System.Drawing.Point(7, 4);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(5, 48);
+            this.label72.TabIndex = 0;
+            this.label72.Text = "CH";
+            // 
+            // label96
+            // 
+            this.label96.AutoSize = true;
+            this.label96.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label96.Location = new System.Drawing.Point(7, 59);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(5, 20);
+            this.label96.TabIndex = 2;
+            this.label96.Text = "1";
+            // 
+            // slow_out1SigName
+            // 
+            this.slow_out1SigName.Location = new System.Drawing.Point(19, 62);
+            this.slow_out1SigName.Name = "slow_out1SigName";
+            this.slow_out1SigName.Size = new System.Drawing.Size(19, 20);
+            this.slow_out1SigName.TabIndex = 4;
+            this.slow_out1SigName.Text = "cool";
+            // 
+            // label97
+            // 
+            this.label97.AutoSize = true;
+            this.label97.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label97.Location = new System.Drawing.Point(45, 4);
+            this.label97.Name = "label97";
+            this.label97.Size = new System.Drawing.Size(79, 24);
+            this.label97.TabIndex = 5;
+            this.label97.Text = "ON time";
+            // 
+            // slow_out1DelayText
+            // 
+            this.slow_out1DelayText.Location = new System.Drawing.Point(137, 62);
+            this.slow_out1DelayText.Name = "slow_out1DelayText";
+            this.slow_out1DelayText.Size = new System.Drawing.Size(79, 20);
+            this.slow_out1DelayText.TabIndex = 7;
+            this.slow_out1DelayText.Text = "0";
+            this.slow_out1DelayText.TextChanged += new System.EventHandler(this.slow_out1_Changed);
+            // 
+            // label111
+            // 
+            this.label111.AutoSize = true;
+            this.label111.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label111.Location = new System.Drawing.Point(229, 4);
+            this.label111.Name = "label111";
+            this.label111.Size = new System.Drawing.Size(71, 24);
+            this.label111.TabIndex = 9;
+            this.label111.Text = "options";
+            // 
+            // label171
+            // 
+            this.label171.AutoSize = true;
+            this.label171.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label171.Location = new System.Drawing.Point(770, 79);
+            this.label171.Name = "label171";
+            this.label171.Size = new System.Drawing.Size(31, 16);
+            this.label171.TabIndex = 177;
+            this.label171.Text = "kHz";
+            // 
+            // slow_pulseFreqLabel
+            // 
+            this.slow_pulseFreqLabel.AutoSize = true;
+            this.slow_pulseFreqLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.slow_pulseFreqLabel.Location = new System.Drawing.Point(742, 79);
+            this.slow_pulseFreqLabel.Name = "slow_pulseFreqLabel";
+            this.slow_pulseFreqLabel.Size = new System.Drawing.Size(22, 16);
+            this.slow_pulseFreqLabel.TabIndex = 176;
+            this.slow_pulseFreqLabel.Text = "20";
+            // 
+            // slow_pulsePeriodText
+            // 
+            this.slow_pulsePeriodText.Location = new System.Drawing.Point(667, 78);
+            this.slow_pulsePeriodText.Name = "slow_pulsePeriodText";
+            this.slow_pulsePeriodText.Size = new System.Drawing.Size(69, 20);
+            this.slow_pulsePeriodText.TabIndex = 175;
+            this.slow_pulsePeriodText.Text = "50";
+            this.slow_pulsePeriodText.TextChanged += new System.EventHandler(this.slow_pulsePeriodText_TextChanged);
+            // 
+            // label170
+            // 
+            this.label170.AutoSize = true;
+            this.label170.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label170.Location = new System.Drawing.Point(537, 77);
+            this.label170.Name = "label170";
+            this.label170.Size = new System.Drawing.Size(124, 24);
+            this.label170.TabIndex = 174;
+            this.label170.Text = "overall period";
+            // 
+            // label169
+            // 
+            this.label169.AutoSize = true;
+            this.label169.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label169.Location = new System.Drawing.Point(560, 39);
+            this.label169.Name = "label169";
+            this.label169.Size = new System.Drawing.Size(406, 24);
+            this.label169.TabIndex = 173;
+            this.label169.Text = "All time scales in units of number of sync cycles";
+            // 
+            // label168
+            // 
+            this.label168.AutoSize = true;
+            this.label168.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label168.Location = new System.Drawing.Point(657, 14);
+            this.label168.Name = "label168";
+            this.label168.Size = new System.Drawing.Size(189, 24);
+            this.label168.TabIndex = 172;
+            this.label168.Text = "SLOW SEQUENCER";
+            // 
+            // label167
+            // 
+            this.label167.AutoSize = true;
+            this.label167.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label167.Location = new System.Drawing.Point(139, 14);
+            this.label167.Name = "label167";
+            this.label167.Size = new System.Drawing.Size(183, 24);
+            this.label167.TabIndex = 171;
+            this.label167.Text = "FAST SEQUENCER";
+            // 
+            // label110
+            // 
+            this.label110.AutoSize = true;
+            this.label110.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label110.Location = new System.Drawing.Point(525, 259);
+            this.label110.Name = "label110";
+            this.label110.Size = new System.Drawing.Size(136, 24);
+            this.label110.TabIndex = 169;
+            this.label110.Text = "Input Channels";
+            // 
+            // label109
+            // 
+            this.label109.AutoSize = true;
+            this.label109.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label109.Location = new System.Drawing.Point(525, 110);
+            this.label109.Name = "label109";
+            this.label109.Size = new System.Drawing.Size(151, 24);
+            this.label109.TabIndex = 168;
+            this.label109.Text = "Output Channels";
+            // 
+            // PulseProgrammerTimingDiagram
+            // 
+            this.PulseProgrammerTimingDiagram.Location = new System.Drawing.Point(6, 450);
+            this.PulseProgrammerTimingDiagram.Name = "PulseProgrammerTimingDiagram";
+            this.PulseProgrammerTimingDiagram.Plots.AddRange(new NationalInstruments.UI.DigitalWaveformPlot[] {
+            this.digitalWaveformPlot1});
+            this.PulseProgrammerTimingDiagram.Size = new System.Drawing.Size(441, 291);
+            this.PulseProgrammerTimingDiagram.TabIndex = 11;
+            // 
+            // digitalWaveformPlot1
+            // 
+            this.digitalWaveformPlot1.LineColor = System.Drawing.Color.OliveDrab;
+            this.digitalWaveformPlot1.SignalPlots.AddRange(new NationalInstruments.UI.DigitalSignalPlot[] {
+            this.digitalSignalPlot1});
+            this.digitalWaveformPlot1.TransitionStyle = NationalInstruments.UI.DigitalWaveformSampleTransitionStyle.StraightEdge;
+            // 
             // updateAllSignalsButton
             // 
             this.updateAllSignalsButton.BackColor = System.Drawing.Color.Orange;
-            this.updateAllSignalsButton.Location = new System.Drawing.Point(305, 34);
+            this.updateAllSignalsButton.Location = new System.Drawing.Point(415, 20);
             this.updateAllSignalsButton.Name = "updateAllSignalsButton";
             this.updateAllSignalsButton.Size = new System.Drawing.Size(96, 43);
             this.updateAllSignalsButton.TabIndex = 10;
@@ -1711,7 +1961,7 @@
             // 
             this.label158.AutoSize = true;
             this.label158.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label158.Location = new System.Drawing.Point(211, 47);
+            this.label158.Location = new System.Drawing.Point(251, 77);
             this.label158.Name = "label158";
             this.label158.Size = new System.Drawing.Size(31, 16);
             this.label158.TabIndex = 9;
@@ -1721,7 +1971,7 @@
             // 
             this.pulseFreqLabel.AutoSize = true;
             this.pulseFreqLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pulseFreqLabel.Location = new System.Drawing.Point(192, 47);
+            this.pulseFreqLabel.Location = new System.Drawing.Point(220, 77);
             this.pulseFreqLabel.Name = "pulseFreqLabel";
             this.pulseFreqLabel.Size = new System.Drawing.Size(22, 16);
             this.pulseFreqLabel.TabIndex = 8;
@@ -1730,10 +1980,10 @@
             // label156
             // 
             this.label156.AutoSize = true;
-            this.label156.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label156.Location = new System.Drawing.Point(15, 7);
+            this.label156.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label156.Location = new System.Drawing.Point(14, 39);
             this.label156.Name = "label156";
-            this.label156.Size = new System.Drawing.Size(239, 16);
+            this.label156.Size = new System.Drawing.Size(337, 24);
             this.label156.TabIndex = 7;
             this.label156.Text = "All time scales in units of microseconds";
             // 
@@ -1741,7 +1991,7 @@
             // 
             this.label155.AutoSize = true;
             this.label155.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label155.Location = new System.Drawing.Point(13, 43);
+            this.label155.Location = new System.Drawing.Point(22, 73);
             this.label155.Name = "label155";
             this.label155.Size = new System.Drawing.Size(124, 24);
             this.label155.TabIndex = 6;
@@ -1749,11 +1999,12 @@
             // 
             // pulsePeriodText
             // 
-            this.pulsePeriodText.Location = new System.Drawing.Point(144, 43);
+            this.pulsePeriodText.Location = new System.Drawing.Point(152, 73);
             this.pulsePeriodText.Name = "pulsePeriodText";
-            this.pulsePeriodText.Size = new System.Drawing.Size(39, 20);
+            this.pulsePeriodText.Size = new System.Drawing.Size(62, 20);
             this.pulsePeriodText.TabIndex = 5;
             this.pulsePeriodText.Text = "50";
+            this.pulsePeriodText.TextChanged += new System.EventHandler(this.pulsePeriodText_TextChanged_1);
             this.pulsePeriodText.LostFocus += new System.EventHandler(this.pulsePeriodText_TextChanged);
             // 
             // label146
@@ -1769,11 +2020,14 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel2.ColumnCount = 4;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.76191F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.2381F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
+            this.tableLayoutPanel2.ColumnCount = 5;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.31313F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.68687F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 227F));
+            this.tableLayoutPanel2.Controls.Add(this.label174, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel3, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.in2DelayText, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.in2OnTimeText, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.in1DelayText, 3, 1);
@@ -1786,45 +2040,105 @@
             this.tableLayoutPanel2.Controls.Add(this.label149, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label150, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.in1SigName, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 289);
+            this.tableLayoutPanel2.Controls.Add(this.panel2, 4, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(17, 289);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(3);
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.15385F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.84615F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(441, 119);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(461, 119);
             this.tableLayoutPanel2.TabIndex = 3;
+            // 
+            // label174
+            // 
+            this.label174.AutoSize = true;
+            this.label174.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label174.Location = new System.Drawing.Point(232, 4);
+            this.label174.Name = "label174";
+            this.label174.Size = new System.Drawing.Size(71, 24);
+            this.label174.TabIndex = 181;
+            this.label174.Text = "options";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.c2fi2);
+            this.panel3.Controls.Add(this.Indfi2);
+            this.panel3.Controls.Add(this.c1fi2);
+            this.panel3.Location = new System.Drawing.Point(232, 91);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(164, 21);
+            this.panel3.TabIndex = 180;
+            // 
+            // c2fi2
+            // 
+            this.c2fi2.AutoSize = true;
+            this.c2fi2.Checked = true;
+            this.c2fi2.Location = new System.Drawing.Point(101, 3);
+            this.c2fi2.Name = "c2fi2";
+            this.c2fi2.Size = new System.Drawing.Size(62, 17);
+            this.c2fi2.TabIndex = 182;
+            this.c2fi2.TabStop = true;
+            this.c2fi2.Text = "out Ch2";
+            this.c2fi2.UseVisualStyleBackColor = true;
+            this.c2fi2.CheckedChanged += new System.EventHandler(this.c2fi2_CheckedChanged);
+            // 
+            // Indfi2
+            // 
+            this.Indfi2.AutoSize = true;
+            this.Indfi2.Location = new System.Drawing.Point(3, 3);
+            this.Indfi2.Name = "Indfi2";
+            this.Indfi2.Size = new System.Drawing.Size(40, 17);
+            this.Indfi2.TabIndex = 10;
+            this.Indfi2.Text = "Ind";
+            this.Indfi2.UseVisualStyleBackColor = true;
+            this.Indfi2.CheckedChanged += new System.EventHandler(this.Indfi2_CheckedChanged);
+            // 
+            // c1fi2
+            // 
+            this.c1fi2.AutoSize = true;
+            this.c1fi2.Location = new System.Drawing.Point(43, 2);
+            this.c1fi2.Name = "c1fi2";
+            this.c1fi2.Size = new System.Drawing.Size(62, 17);
+            this.c1fi2.TabIndex = 181;
+            this.c1fi2.Text = "out Ch1";
+            this.c1fi2.UseVisualStyleBackColor = true;
+            this.c1fi2.CheckedChanged += new System.EventHandler(this.c1fi2_CheckedChanged);
             // 
             // in2DelayText
             // 
-            this.in2DelayText.Location = new System.Drawing.Point(243, 91);
+            this.in2DelayText.ForeColor = System.Drawing.Color.Gray;
+            this.in2DelayText.Location = new System.Drawing.Point(140, 91);
             this.in2DelayText.Name = "in2DelayText";
-            this.in2DelayText.Size = new System.Drawing.Size(117, 20);
+            this.in2DelayText.Size = new System.Drawing.Size(78, 20);
             this.in2DelayText.TabIndex = 11;
             this.in2DelayText.Text = "0";
             // 
             // in2OnTimeText
             // 
-            this.in2OnTimeText.Location = new System.Drawing.Point(113, 91);
+            this.in2OnTimeText.ForeColor = System.Drawing.Color.Gray;
+            this.in2OnTimeText.Location = new System.Drawing.Point(46, 91);
             this.in2OnTimeText.Name = "in2OnTimeText";
-            this.in2OnTimeText.Size = new System.Drawing.Size(119, 20);
+            this.in2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in2OnTimeText.TabIndex = 10;
             this.in2OnTimeText.Text = "50";
             // 
             // in1DelayText
             // 
-            this.in1DelayText.Location = new System.Drawing.Point(243, 62);
+            this.in1DelayText.ForeColor = System.Drawing.Color.DimGray;
+            this.in1DelayText.Location = new System.Drawing.Point(140, 62);
             this.in1DelayText.Name = "in1DelayText";
-            this.in1DelayText.Size = new System.Drawing.Size(117, 20);
+            this.in1DelayText.Size = new System.Drawing.Size(78, 20);
             this.in1DelayText.TabIndex = 9;
             this.in1DelayText.Text = "0";
             // 
             // in1OnTimeText
             // 
-            this.in1OnTimeText.Location = new System.Drawing.Point(113, 62);
+            this.in1OnTimeText.ForeColor = System.Drawing.Color.Gray;
+            this.in1OnTimeText.Location = new System.Drawing.Point(46, 62);
             this.in1OnTimeText.Name = "in1OnTimeText";
-            this.in1OnTimeText.Size = new System.Drawing.Size(119, 20);
+            this.in1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in1OnTimeText.TabIndex = 8;
             this.in1OnTimeText.Text = "50";
             // 
@@ -1832,36 +2146,36 @@
             // 
             this.label154.AutoSize = true;
             this.label154.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label154.Location = new System.Drawing.Point(243, 4);
+            this.label154.Location = new System.Drawing.Point(140, 4);
             this.label154.Name = "label154";
-            this.label154.Size = new System.Drawing.Size(140, 24);
+            this.label154.Size = new System.Drawing.Size(54, 48);
             this.label154.TabIndex = 7;
-            this.label154.Text = "Acquisition start";
+            this.label154.Text = "Acq. start";
             // 
             // label152
             // 
             this.label152.AutoSize = true;
             this.label152.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label152.Location = new System.Drawing.Point(113, 4);
+            this.label152.Location = new System.Drawing.Point(46, 4);
             this.label152.Name = "label152";
-            this.label152.Size = new System.Drawing.Size(107, 48);
+            this.label152.Size = new System.Drawing.Size(83, 48);
             this.label152.TabIndex = 6;
-            this.label152.Text = "Acquisition ON time";
+            this.label152.Text = "Acq. ON time";
             // 
             // in2SigName
             // 
-            this.in2SigName.Location = new System.Drawing.Point(34, 91);
+            this.in2SigName.Location = new System.Drawing.Point(19, 91);
             this.in2SigName.Name = "in2SigName";
-            this.in2SigName.Size = new System.Drawing.Size(72, 20);
+            this.in2SigName.Size = new System.Drawing.Size(20, 20);
             this.in2SigName.TabIndex = 5;
             // 
             // label147
             // 
             this.label147.AutoSize = true;
             this.label147.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label147.Location = new System.Drawing.Point(34, 4);
+            this.label147.Location = new System.Drawing.Point(19, 4);
             this.label147.Name = "label147";
-            this.label147.Size = new System.Drawing.Size(64, 48);
+            this.label147.Size = new System.Drawing.Size(20, 54);
             this.label147.TabIndex = 2;
             this.label147.Text = "signal name";
             // 
@@ -1871,7 +2185,7 @@
             this.label148.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label148.Location = new System.Drawing.Point(7, 88);
             this.label148.Name = "label148";
-            this.label148.Size = new System.Drawing.Size(18, 20);
+            this.label148.Size = new System.Drawing.Size(5, 20);
             this.label148.TabIndex = 3;
             this.label148.Text = "2";
             // 
@@ -1881,7 +2195,7 @@
             this.label149.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label149.Location = new System.Drawing.Point(7, 4);
             this.label149.Name = "label149";
-            this.label149.Size = new System.Drawing.Size(20, 48);
+            this.label149.Size = new System.Drawing.Size(5, 48);
             this.label149.TabIndex = 0;
             this.label149.Text = "CH";
             // 
@@ -1891,22 +2205,68 @@
             this.label150.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label150.Location = new System.Drawing.Point(7, 59);
             this.label150.Name = "label150";
-            this.label150.Size = new System.Drawing.Size(18, 20);
+            this.label150.Size = new System.Drawing.Size(5, 20);
             this.label150.TabIndex = 2;
             this.label150.Text = "1";
             // 
             // in1SigName
             // 
-            this.in1SigName.Location = new System.Drawing.Point(34, 62);
+            this.in1SigName.Location = new System.Drawing.Point(19, 62);
             this.in1SigName.Name = "in1SigName";
-            this.in1SigName.Size = new System.Drawing.Size(72, 20);
+            this.in1SigName.Size = new System.Drawing.Size(20, 20);
             this.in1SigName.TabIndex = 4;
+            this.in1SigName.Text = "PMTs";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.c2fi1);
+            this.panel2.Controls.Add(this.c1fi1);
+            this.panel2.Controls.Add(this.Indfi1);
+            this.panel2.Location = new System.Drawing.Point(232, 62);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(164, 21);
+            this.panel2.TabIndex = 179;
+            // 
+            // c2fi1
+            // 
+            this.c2fi1.AutoSize = true;
+            this.c2fi1.Checked = true;
+            this.c2fi1.Location = new System.Drawing.Point(101, 3);
+            this.c2fi1.Name = "c2fi1";
+            this.c2fi1.Size = new System.Drawing.Size(62, 17);
+            this.c2fi1.TabIndex = 180;
+            this.c2fi1.TabStop = true;
+            this.c2fi1.Text = "out Ch2";
+            this.c2fi1.UseVisualStyleBackColor = true;
+            this.c2fi1.CheckedChanged += new System.EventHandler(this.c2fi1_CheckedChanged);
+            // 
+            // c1fi1
+            // 
+            this.c1fi1.AutoSize = true;
+            this.c1fi1.Location = new System.Drawing.Point(42, 3);
+            this.c1fi1.Name = "c1fi1";
+            this.c1fi1.Size = new System.Drawing.Size(62, 17);
+            this.c1fi1.TabIndex = 179;
+            this.c1fi1.Text = "out Ch1";
+            this.c1fi1.UseVisualStyleBackColor = true;
+            this.c1fi1.CheckedChanged += new System.EventHandler(this.c1fi1_CheckedChanged);
+            // 
+            // Indfi1
+            // 
+            this.Indfi1.AutoSize = true;
+            this.Indfi1.Location = new System.Drawing.Point(3, 3);
+            this.Indfi1.Name = "Indfi1";
+            this.Indfi1.Size = new System.Drawing.Size(40, 17);
+            this.Indfi1.TabIndex = 10;
+            this.Indfi1.Text = "Ind";
+            this.Indfi1.UseVisualStyleBackColor = true;
+            this.Indfi1.CheckedChanged += new System.EventHandler(this.Indfi1_CheckedChanged);
             // 
             // label145
             // 
             this.label145.AutoSize = true;
             this.label145.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label145.Location = new System.Drawing.Point(13, 86);
+            this.label145.Location = new System.Drawing.Point(14, 110);
             this.label145.Name = "label145";
             this.label145.Size = new System.Drawing.Size(151, 24);
             this.label145.TabIndex = 2;
@@ -1915,99 +2275,134 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.76191F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.2381F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.80769F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.19231F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 229F));
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.out2DelayText, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.out1DelayText, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.out2OnTimeText, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.out1OnTimeText, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label153, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label151, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.out2SigName, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label144, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label61, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label59, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label60, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.out1SigName, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 116);
+            this.tableLayoutPanel1.Controls.Add(this.label151, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.out1DelayText, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label173, 4, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(18, 137);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.15385F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.84615F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(441, 119);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(460, 119);
             this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.notc1fo2);
+            this.panel1.Controls.Add(this.c1fo2);
+            this.panel1.Controls.Add(this.Indfo2);
+            this.panel1.Location = new System.Drawing.Point(229, 91);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(147, 21);
+            this.panel1.TabIndex = 178;
+            // 
+            // notc1fo2
+            // 
+            this.notc1fo2.AutoSize = true;
+            this.notc1fo2.Location = new System.Drawing.Point(93, 3);
+            this.notc1fo2.Name = "notc1fo2";
+            this.notc1fo2.Size = new System.Drawing.Size(51, 17);
+            this.notc1fo2.TabIndex = 180;
+            this.notc1fo2.Text = "~Ch1";
+            this.notc1fo2.UseVisualStyleBackColor = true;
+            this.notc1fo2.CheckedChanged += new System.EventHandler(this.notc1fo2_CheckedChanged);
+            // 
+            // c1fo2
+            // 
+            this.c1fo2.AutoSize = true;
+            this.c1fo2.Location = new System.Drawing.Point(49, 3);
+            this.c1fo2.Name = "c1fo2";
+            this.c1fo2.Size = new System.Drawing.Size(44, 17);
+            this.c1fo2.TabIndex = 179;
+            this.c1fo2.Text = "Ch1";
+            this.c1fo2.UseVisualStyleBackColor = true;
+            this.c1fo2.CheckedChanged += new System.EventHandler(this.c1fo2_CheckedChanged);
+            // 
+            // Indfo2
+            // 
+            this.Indfo2.AutoSize = true;
+            this.Indfo2.Checked = true;
+            this.Indfo2.Location = new System.Drawing.Point(3, 3);
+            this.Indfo2.Name = "Indfo2";
+            this.Indfo2.Size = new System.Drawing.Size(40, 17);
+            this.Indfo2.TabIndex = 10;
+            this.Indfo2.TabStop = true;
+            this.Indfo2.Text = "Ind";
+            this.Indfo2.UseVisualStyleBackColor = true;
+            this.Indfo2.CheckedChanged += new System.EventHandler(this.Indfo2_CheckedChanged);
             // 
             // out2DelayText
             // 
-            this.out2DelayText.Location = new System.Drawing.Point(243, 91);
+            this.out2DelayText.Location = new System.Drawing.Point(137, 91);
             this.out2DelayText.Name = "out2DelayText";
-            this.out2DelayText.Size = new System.Drawing.Size(117, 20);
+            this.out2DelayText.Size = new System.Drawing.Size(79, 20);
             this.out2DelayText.TabIndex = 8;
             this.out2DelayText.Text = "0";
-            // 
-            // out1DelayText
-            // 
-            this.out1DelayText.Location = new System.Drawing.Point(243, 62);
-            this.out1DelayText.Name = "out1DelayText";
-            this.out1DelayText.Size = new System.Drawing.Size(117, 20);
-            this.out1DelayText.TabIndex = 7;
-            this.out1DelayText.Text = "0";
+            this.out2DelayText.TextChanged += new System.EventHandler(this.out2_Changed);
             // 
             // out2OnTimeText
             // 
-            this.out2OnTimeText.Location = new System.Drawing.Point(114, 91);
+            this.out2OnTimeText.Location = new System.Drawing.Point(45, 91);
             this.out2OnTimeText.Name = "out2OnTimeText";
-            this.out2OnTimeText.Size = new System.Drawing.Size(119, 20);
+            this.out2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out2OnTimeText.TabIndex = 6;
             this.out2OnTimeText.Text = "50";
+            this.out2OnTimeText.TextChanged += new System.EventHandler(this.out2_Changed);
             // 
             // out1OnTimeText
             // 
-            this.out1OnTimeText.Location = new System.Drawing.Point(114, 62);
+            this.out1OnTimeText.Location = new System.Drawing.Point(45, 62);
             this.out1OnTimeText.Name = "out1OnTimeText";
-            this.out1OnTimeText.Size = new System.Drawing.Size(119, 20);
+            this.out1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out1OnTimeText.TabIndex = 5;
             this.out1OnTimeText.Text = "50";
+            this.out1OnTimeText.TextChanged += new System.EventHandler(this.out1_Changed);
             // 
             // label153
             // 
             this.label153.AutoSize = true;
             this.label153.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label153.Location = new System.Drawing.Point(243, 4);
+            this.label153.Location = new System.Drawing.Point(137, 4);
             this.label153.Name = "label153";
-            this.label153.Size = new System.Drawing.Size(135, 24);
+            this.label153.Size = new System.Drawing.Size(85, 48);
             this.label153.TabIndex = 6;
             this.label153.Text = "posedge delay";
             // 
-            // label151
-            // 
-            this.label151.AutoSize = true;
-            this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label151.Location = new System.Drawing.Point(114, 4);
-            this.label151.Name = "label151";
-            this.label151.Size = new System.Drawing.Size(79, 24);
-            this.label151.TabIndex = 5;
-            this.label151.Text = "ON time";
-            // 
             // out2SigName
             // 
-            this.out2SigName.Location = new System.Drawing.Point(34, 91);
+            this.out2SigName.Location = new System.Drawing.Point(19, 91);
             this.out2SigName.Name = "out2SigName";
-            this.out2SigName.Size = new System.Drawing.Size(73, 20);
+            this.out2SigName.Size = new System.Drawing.Size(19, 20);
             this.out2SigName.TabIndex = 5;
+            this.out2SigName.Text = "probe";
             // 
             // label144
             // 
             this.label144.AutoSize = true;
             this.label144.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label144.Location = new System.Drawing.Point(34, 4);
+            this.label144.Location = new System.Drawing.Point(19, 4);
             this.label144.Name = "label144";
-            this.label144.Size = new System.Drawing.Size(64, 48);
+            this.label144.Size = new System.Drawing.Size(19, 54);
             this.label144.TabIndex = 2;
             this.label144.Text = "signal name";
             // 
@@ -2017,7 +2412,7 @@
             this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label61.Location = new System.Drawing.Point(7, 88);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(18, 20);
+            this.label61.Size = new System.Drawing.Size(5, 20);
             this.label61.TabIndex = 3;
             this.label61.Text = "2";
             // 
@@ -2027,7 +2422,7 @@
             this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label59.Location = new System.Drawing.Point(7, 4);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(20, 48);
+            this.label59.Size = new System.Drawing.Size(5, 48);
             this.label59.TabIndex = 0;
             this.label59.Text = "CH";
             // 
@@ -2037,31 +2432,122 @@
             this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label60.Location = new System.Drawing.Point(7, 59);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(18, 20);
+            this.label60.Size = new System.Drawing.Size(5, 20);
             this.label60.TabIndex = 2;
             this.label60.Text = "1";
             // 
             // out1SigName
             // 
-            this.out1SigName.Location = new System.Drawing.Point(34, 62);
+            this.out1SigName.Location = new System.Drawing.Point(19, 62);
             this.out1SigName.Name = "out1SigName";
-            this.out1SigName.Size = new System.Drawing.Size(73, 20);
+            this.out1SigName.Size = new System.Drawing.Size(19, 20);
             this.out1SigName.TabIndex = 4;
+            this.out1SigName.Text = "cool";
+            // 
+            // label151
+            // 
+            this.label151.AutoSize = true;
+            this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label151.Location = new System.Drawing.Point(45, 4);
+            this.label151.Name = "label151";
+            this.label151.Size = new System.Drawing.Size(79, 24);
+            this.label151.TabIndex = 5;
+            this.label151.Text = "ON time";
+            // 
+            // out1DelayText
+            // 
+            this.out1DelayText.Location = new System.Drawing.Point(137, 62);
+            this.out1DelayText.Name = "out1DelayText";
+            this.out1DelayText.Size = new System.Drawing.Size(79, 20);
+            this.out1DelayText.TabIndex = 7;
+            this.out1DelayText.Text = "0";
+            this.out1DelayText.TextChanged += new System.EventHandler(this.out1_Changed);
+            // 
+            // label173
+            // 
+            this.label173.AutoSize = true;
+            this.label173.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label173.Location = new System.Drawing.Point(229, 4);
+            this.label173.Name = "label173";
+            this.label173.Size = new System.Drawing.Size(71, 24);
+            this.label173.TabIndex = 9;
+            this.label173.Text = "options";
+            // 
+            // instrumentControlStrip3
+            // 
+            this.instrumentControlStrip3.AutoSize = false;
+            this.instrumentControlStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.instrumentControlStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel14,
+            this.toolStripPropertyEditor14,
+            this.toolStripLabel15,
+            this.toolStripPropertyEditor15,
+            this.toolStripLabel16,
+            this.toolStripPropertyEditor16});
+            this.instrumentControlStrip3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.instrumentControlStrip3.Location = new System.Drawing.Point(6, 744);
+            this.instrumentControlStrip3.Name = "instrumentControlStrip3";
+            this.instrumentControlStrip3.Size = new System.Drawing.Size(441, 25);
+            this.instrumentControlStrip3.TabIndex = 166;
+            // 
+            // toolStripLabel14
+            // 
+            this.toolStripLabel14.Name = "toolStripLabel14";
+            this.toolStripLabel14.Size = new System.Drawing.Size(90, 22);
+            this.toolStripLabel14.Text = "InteractionMode:";
+            // 
+            // toolStripPropertyEditor14
+            // 
+            this.toolStripPropertyEditor14.AutoSize = false;
+            this.toolStripPropertyEditor14.Name = "toolStripPropertyEditor14";
+            this.toolStripPropertyEditor14.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
+            this.toolStripPropertyEditor14.Size = new System.Drawing.Size(120, 21);
+            this.toolStripPropertyEditor14.Source = new NationalInstruments.UI.PropertyEditorSource(this.PulseProgrammerTimingDiagram, "InteractionMode");
+            this.toolStripPropertyEditor14.Text = "ZoomX, ZoomAroundPoint, PanX, PanY, EditRange, CollapseSignals";
+            // 
+            // toolStripLabel15
+            // 
+            this.toolStripLabel15.Name = "toolStripLabel15";
+            this.toolStripLabel15.Size = new System.Drawing.Size(101, 22);
+            this.toolStripLabel15.Text = "SignalPlotTemplate:";
+            // 
+            // toolStripPropertyEditor15
+            // 
+            this.toolStripPropertyEditor15.AutoSize = false;
+            this.toolStripPropertyEditor15.Name = "toolStripPropertyEditor15";
+            this.toolStripPropertyEditor15.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
+            this.toolStripPropertyEditor15.Size = new System.Drawing.Size(120, 21);
+            this.toolStripPropertyEditor15.Source = new NationalInstruments.UI.PropertyEditorSource(this.PulseProgrammerTimingDiagram, "SignalPlotTemplate");
+            this.toolStripPropertyEditor15.Text = "(SignalPlotTemplate)";
+            // 
+            // toolStripLabel16
+            // 
+            this.toolStripLabel16.Name = "toolStripLabel16";
+            this.toolStripLabel16.Size = new System.Drawing.Size(123, 13);
+            this.toolStripLabel16.Text = "WaveformPlotTemplate:";
+            // 
+            // toolStripPropertyEditor16
+            // 
+            this.toolStripPropertyEditor16.AutoSize = false;
+            this.toolStripPropertyEditor16.Name = "toolStripPropertyEditor16";
+            this.toolStripPropertyEditor16.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
+            this.toolStripPropertyEditor16.Size = new System.Drawing.Size(120, 21);
+            this.toolStripPropertyEditor16.Source = new NationalInstruments.UI.PropertyEditorSource(this.PulseProgrammerTimingDiagram, "WaveformPlotTemplate");
+            this.toolStripPropertyEditor16.Text = "(WaveformPlotTemplate)";
             // 
             // CorrelatorTab
             // 
+            this.CorrelatorTab.Controls.Add(this.groupBox36);
+            this.CorrelatorTab.Controls.Add(this.label50);
             this.CorrelatorTab.Controls.Add(this.label58);
             this.CorrelatorTab.Controls.Add(this.label54);
             this.CorrelatorTab.Controls.Add(this.syncSrcSw);
-            this.CorrelatorTab.Controls.Add(this.pulsedDutyText);
-            this.CorrelatorTab.Controls.Add(this.pulseFreqText);
-            this.CorrelatorTab.Controls.Add(this.PulsedProbeSwitch);
+            this.CorrelatorTab.Controls.Add(this.ncorrbinsText);
+            this.CorrelatorTab.Controls.Add(this.label138);
             this.CorrelatorTab.Controls.Add(this.correlatorBitFilePathB);
-            this.CorrelatorTab.Controls.Add(this.chooseCode);
+            this.CorrelatorTab.Controls.Add(this.label137);
             this.CorrelatorTab.Controls.Add(this.scatterGraphNormCorrSig);
             this.CorrelatorTab.Controls.Add(this.textBoxBackEst);
-            this.CorrelatorTab.Controls.Add(this.switchDisplayBases);
-            this.CorrelatorTab.Controls.Add(this.SaveCorrelatorToggle);
             this.CorrelatorTab.Controls.Add(this.CorrelatorGraph);
             this.CorrelatorTab.Controls.Add(this.correlatorQtext);
             this.CorrelatorTab.Controls.Add(this.correlatorBound1text);
@@ -2074,11 +2560,7 @@
             this.CorrelatorTab.Controls.Add(this.correlatorID);
             this.CorrelatorTab.Controls.Add(this.TickleResetBox);
             this.CorrelatorTab.Controls.Add(this.ArrayResetBox);
-            this.CorrelatorTab.Controls.Add(this.label142);
             this.CorrelatorTab.Controls.Add(this.label141);
-            this.CorrelatorTab.Controls.Add(this.label97);
-            this.CorrelatorTab.Controls.Add(this.label96);
-            this.CorrelatorTab.Controls.Add(this.label44);
             this.CorrelatorTab.Controls.Add(this.label136);
             this.CorrelatorTab.Controls.Add(this.label135);
             this.CorrelatorTab.Controls.Add(this.label132);
@@ -2108,38 +2590,135 @@
             this.CorrelatorTab.Controls.Add(this.label102);
             this.CorrelatorTab.Controls.Add(this.groupBox52);
             this.CorrelatorTab.Controls.Add(this.groupBox51);
+            this.CorrelatorTab.Controls.Add(this.switchDisplayBases);
+            this.CorrelatorTab.Controls.Add(this.chooseCode);
+            this.CorrelatorTab.Controls.Add(this.SaveCorrelatorToggle);
             this.CorrelatorTab.Controls.Add(this.CorrelatorBinningPhaseSlider);
             this.CorrelatorTab.Location = new System.Drawing.Point(4, 22);
             this.CorrelatorTab.Name = "CorrelatorTab";
             this.CorrelatorTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CorrelatorTab.Size = new System.Drawing.Size(1215, 979);
+            this.CorrelatorTab.Size = new System.Drawing.Size(1845, 979);
             this.CorrelatorTab.TabIndex = 12;
             this.CorrelatorTab.Text = "Correlator";
             this.CorrelatorTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox36
+            // 
+            this.groupBox36.Controls.Add(this.label67);
+            this.groupBox36.Controls.Add(this.RefOut);
+            this.groupBox36.Controls.Add(this.groupBox35);
+            this.groupBox36.Location = new System.Drawing.Point(769, 233);
+            this.groupBox36.Name = "groupBox36";
+            this.groupBox36.Size = new System.Drawing.Size(131, 183);
+            this.groupBox36.TabIndex = 213;
+            this.groupBox36.TabStop = false;
+            this.groupBox36.Text = "UNUSED";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label67.Location = new System.Drawing.Point(6, 21);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(86, 13);
+            this.label67.TabIndex = 212;
+            this.label67.Text = "Ref out (MHz)";
+            // 
+            // RefOut
+            // 
+            this.RefOut.Location = new System.Drawing.Point(9, 40);
+            this.RefOut.Name = "RefOut";
+            this.RefOut.Size = new System.Drawing.Size(39, 20);
+            this.RefOut.TabIndex = 212;
+            this.RefOut.Text = "10";
+            // 
+            // groupBox35
+            // 
+            this.groupBox35.Controls.Add(this.FlaggedRecool);
+            this.groupBox35.Controls.Add(this.RegularRecool);
+            this.groupBox35.Controls.Add(this.RegRecPerText);
+            this.groupBox35.Controls.Add(this.label142);
+            this.groupBox35.Location = new System.Drawing.Point(9, 66);
+            this.groupBox35.Name = "groupBox35";
+            this.groupBox35.Size = new System.Drawing.Size(103, 106);
+            this.groupBox35.TabIndex = 210;
+            this.groupBox35.TabStop = false;
+            this.groupBox35.Text = "Recool Stabilizer";
+            // 
+            // FlaggedRecool
+            // 
+            this.FlaggedRecool.AutoSize = true;
+            this.FlaggedRecool.Location = new System.Drawing.Point(6, 19);
+            this.FlaggedRecool.Name = "FlaggedRecool";
+            this.FlaggedRecool.Size = new System.Drawing.Size(93, 17);
+            this.FlaggedRecool.TabIndex = 212;
+            this.FlaggedRecool.Text = "flagged recool";
+            this.FlaggedRecool.UseVisualStyleBackColor = true;
+            // 
+            // RegularRecool
+            // 
+            this.RegularRecool.AutoSize = true;
+            this.RegularRecool.Location = new System.Drawing.Point(6, 42);
+            this.RegularRecool.Name = "RegularRecool";
+            this.RegularRecool.Size = new System.Drawing.Size(90, 17);
+            this.RegularRecool.TabIndex = 202;
+            this.RegularRecool.Text = "regular recool";
+            this.RegularRecool.UseVisualStyleBackColor = true;
+            this.RegularRecool.CheckedChanged += new System.EventHandler(this.Recool_CheckedChanged);
+            // 
+            // RegRecPerText
+            // 
+            this.RegRecPerText.Location = new System.Drawing.Point(6, 78);
+            this.RegRecPerText.Name = "RegRecPerText";
+            this.RegRecPerText.Size = new System.Drawing.Size(57, 20);
+            this.RegRecPerText.TabIndex = 196;
+            this.RegRecPerText.Text = "10";
+            this.RegRecPerText.TextChanged += new System.EventHandler(this.pulsedDutyText_TextChanged);
+            // 
+            // label142
+            // 
+            this.label142.AutoSize = true;
+            this.label142.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label142.Location = new System.Drawing.Point(4, 62);
+            this.label142.Name = "label142";
+            this.label142.Size = new System.Drawing.Size(90, 13);
+            this.label142.TabIndex = 201;
+            this.label142.Text = "recool period [ms]";
+            this.label142.Click += new System.EventHandler(this.label142_Click);
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.Location = new System.Drawing.Point(206, 157);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(69, 13);
+            this.label50.TabIndex = 211;
+            this.label50.Text = "SYNC SRC";
             // 
             // label58
             // 
             this.label58.AutoSize = true;
             this.label58.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label58.Location = new System.Drawing.Point(409, 262);
+            this.label58.Location = new System.Drawing.Point(225, 261);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(87, 13);
+            this.label58.Size = new System.Drawing.Size(25, 13);
             this.label58.TabIndex = 209;
-            this.label58.Text = "Sync srouce INT";
+            this.label58.Text = "INT";
             // 
             // label54
             // 
             this.label54.AutoSize = true;
             this.label54.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label54.Location = new System.Drawing.Point(409, 185);
+            this.label54.Location = new System.Drawing.Point(225, 178);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(90, 13);
+            this.label54.Size = new System.Drawing.Size(31, 13);
             this.label54.TabIndex = 208;
-            this.label54.Text = "Sync source EXT";
+            this.label54.Text = " EXT";
             // 
             // syncSrcSw
             // 
-            this.syncSrcSw.Location = new System.Drawing.Point(412, 183);
+            this.syncSrcSw.Location = new System.Drawing.Point(209, 178);
             this.syncSrcSw.Name = "syncSrcSw";
             this.syncSrcSw.Size = new System.Drawing.Size(64, 96);
             this.syncSrcSw.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -2147,30 +2726,23 @@
             this.syncSrcSw.Value = true;
             this.syncSrcSw.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.syncSrcSw_StateChanged);
             // 
-            // pulsedDutyText
+            // ncorrbinsText
             // 
-            this.pulsedDutyText.Location = new System.Drawing.Point(226, 234);
-            this.pulsedDutyText.Name = "pulsedDutyText";
-            this.pulsedDutyText.Size = new System.Drawing.Size(57, 20);
-            this.pulsedDutyText.TabIndex = 196;
-            this.pulsedDutyText.Text = "0.1";
+            this.ncorrbinsText.Location = new System.Drawing.Point(827, 110);
+            this.ncorrbinsText.Name = "ncorrbinsText";
+            this.ncorrbinsText.Size = new System.Drawing.Size(57, 20);
+            this.ncorrbinsText.TabIndex = 195;
+            this.ncorrbinsText.Text = "10";
             // 
-            // pulseFreqText
+            // label138
             // 
-            this.pulseFreqText.Location = new System.Drawing.Point(226, 194);
-            this.pulseFreqText.Name = "pulseFreqText";
-            this.pulseFreqText.Size = new System.Drawing.Size(57, 20);
-            this.pulseFreqText.TabIndex = 195;
-            this.pulseFreqText.Text = "20";
-            // 
-            // PulsedProbeSwitch
-            // 
-            this.PulsedProbeSwitch.Location = new System.Drawing.Point(289, 188);
-            this.PulsedProbeSwitch.Name = "PulsedProbeSwitch";
-            this.PulsedProbeSwitch.Size = new System.Drawing.Size(64, 96);
-            this.PulsedProbeSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.PulsedProbeSwitch.TabIndex = 194;
-            this.PulsedProbeSwitch.Value = true;
+            this.label138.AutoSize = true;
+            this.label138.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label138.Location = new System.Drawing.Point(3, 383);
+            this.label138.Name = "label138";
+            this.label138.Size = new System.Drawing.Size(14, 13);
+            this.label138.TabIndex = 195;
+            this.label138.Text = "B";
             // 
             // correlatorBitFilePathB
             // 
@@ -2178,16 +2750,18 @@
             this.correlatorBitFilePathB.Name = "correlatorBitFilePathB";
             this.correlatorBitFilePathB.Size = new System.Drawing.Size(456, 20);
             this.correlatorBitFilePathB.TabIndex = 191;
-            this.correlatorBitFilePathB.Text = "F:\\VIs\\VV_Photonpy\\FastBalancedCorrelatorGitHub\\photoncounter.bit";
+            this.correlatorBitFilePathB.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_working\\PSEC_fastLO_10bins\\photoncount" +
+                "er.bit";
             // 
-            // chooseCode
+            // label137
             // 
-            this.chooseCode.Location = new System.Drawing.Point(885, 125);
-            this.chooseCode.Name = "chooseCode";
-            this.chooseCode.Size = new System.Drawing.Size(64, 96);
-            this.chooseCode.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.chooseCode.TabIndex = 187;
-            this.chooseCode.Value = true;
+            this.label137.AutoSize = true;
+            this.label137.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label137.Location = new System.Drawing.Point(3, 356);
+            this.label137.Name = "label137";
+            this.label137.Size = new System.Drawing.Size(14, 13);
+            this.label137.TabIndex = 194;
+            this.label137.Text = "A";
             // 
             // scatterGraphNormCorrSig
             // 
@@ -2215,24 +2789,6 @@
             this.textBoxBackEst.Size = new System.Drawing.Size(57, 20);
             this.textBoxBackEst.TabIndex = 184;
             this.textBoxBackEst.Text = "20";
-            // 
-            // switchDisplayBases
-            // 
-            this.switchDisplayBases.Location = new System.Drawing.Point(209, 310);
-            this.switchDisplayBases.Name = "switchDisplayBases";
-            this.switchDisplayBases.Size = new System.Drawing.Size(64, 96);
-            this.switchDisplayBases.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.switchDisplayBases.TabIndex = 180;
-            this.switchDisplayBases.Value = true;
-            this.switchDisplayBases.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.switchDisplayBases_StateChanged);
-            // 
-            // SaveCorrelatorToggle
-            // 
-            this.SaveCorrelatorToggle.Location = new System.Drawing.Point(538, 422);
-            this.SaveCorrelatorToggle.Name = "SaveCorrelatorToggle";
-            this.SaveCorrelatorToggle.Size = new System.Drawing.Size(64, 96);
-            this.SaveCorrelatorToggle.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.SaveCorrelatorToggle.TabIndex = 169;
             // 
             // CorrelatorGraph
             // 
@@ -2360,8 +2916,8 @@
             this.correlatorBitFilePath.Name = "correlatorBitFilePath";
             this.correlatorBitFilePath.Size = new System.Drawing.Size(456, 20);
             this.correlatorBitFilePath.TabIndex = 154;
-            this.correlatorBitFilePath.Text = "F:\\VIs\\VV_Photonpy\\ArrayCorrelator_XEM6001_devel_LowFreq_04_17_2013_balancedInput" +
-                "\\photoncounter.bit";
+            this.correlatorBitFilePath.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_working\\PSEC_slowLO_10bins\\photoncount" +
+                "er.bit";
             // 
             // correlatorErrorMessages
             // 
@@ -2392,7 +2948,7 @@
             this.TickleResetBox.Controls.Add(this.TickleReset);
             this.TickleResetBox.Controls.Add(this.label47);
             this.TickleResetBox.Controls.Add(this.TickleResetDelayText);
-            this.TickleResetBox.Location = new System.Drawing.Point(412, 290);
+            this.TickleResetBox.Location = new System.Drawing.Point(422, 300);
             this.TickleResetBox.Name = "TickleResetBox";
             this.TickleResetBox.Size = new System.Drawing.Size(96, 93);
             this.TickleResetBox.TabIndex = 206;
@@ -2432,7 +2988,7 @@
             this.ArrayResetBox.Controls.Add(this.ArrayReset);
             this.ArrayResetBox.Controls.Add(this.ArrayResetDelayLabel);
             this.ArrayResetBox.Controls.Add(this.ArrayResetDelayText);
-            this.ArrayResetBox.Location = new System.Drawing.Point(310, 290);
+            this.ArrayResetBox.Location = new System.Drawing.Point(320, 300);
             this.ArrayResetBox.Name = "ArrayResetBox";
             this.ArrayResetBox.Size = new System.Drawing.Size(96, 93);
             this.ArrayResetBox.TabIndex = 205;
@@ -2467,55 +3023,15 @@
             this.ArrayResetDelayText.TabIndex = 203;
             this.ArrayResetDelayText.Text = "20";
             // 
-            // label142
-            // 
-            this.label142.AutoSize = true;
-            this.label142.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label142.Location = new System.Drawing.Point(187, 218);
-            this.label142.Name = "label142";
-            this.label142.Size = new System.Drawing.Size(55, 13);
-            this.label142.TabIndex = 201;
-            this.label142.Text = "duty cycle";
-            // 
             // label141
             // 
             this.label141.AutoSize = true;
             this.label141.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label141.Location = new System.Drawing.Point(187, 178);
+            this.label141.Location = new System.Drawing.Point(826, 94);
             this.label141.Name = "label141";
-            this.label141.Size = new System.Drawing.Size(53, 13);
+            this.label141.Size = new System.Drawing.Size(42, 13);
             this.label141.TabIndex = 200;
-            this.label141.Text = "freq (kHz)";
-            // 
-            // label97
-            // 
-            this.label97.AutoSize = true;
-            this.label97.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label97.Location = new System.Drawing.Point(298, 259);
-            this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(74, 13);
-            this.label97.TabIndex = 199;
-            this.label97.Text = "Collect always";
-            // 
-            // label96
-            // 
-            this.label96.AutoSize = true;
-            this.label96.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label96.Location = new System.Drawing.Point(298, 185);
-            this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(87, 13);
-            this.label96.TabIndex = 198;
-            this.label96.Text = "Pulsed collection";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.Location = new System.Drawing.Point(252, 162);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(82, 13);
-            this.label44.TabIndex = 197;
-            this.label44.Text = "Pulsed Probe";
+            this.label141.Text = "# BINS";
             // 
             // label136
             // 
@@ -2541,7 +3057,7 @@
             // 
             this.label132.AutoSize = true;
             this.label132.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label132.Location = new System.Drawing.Point(882, 208);
+            this.label132.Location = new System.Drawing.Point(908, 208);
             this.label132.Name = "label132";
             this.label132.Size = new System.Drawing.Size(90, 13);
             this.label132.TabIndex = 190;
@@ -2551,7 +3067,7 @@
             // 
             this.label133.AutoSize = true;
             this.label133.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label133.Location = new System.Drawing.Point(883, 120);
+            this.label133.Location = new System.Drawing.Point(909, 120);
             this.label133.Name = "label133";
             this.label133.Size = new System.Drawing.Size(86, 13);
             this.label133.TabIndex = 189;
@@ -2561,7 +3077,7 @@
             // 
             this.label134.AutoSize = true;
             this.label134.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label134.Location = new System.Drawing.Point(882, 98);
+            this.label134.Location = new System.Drawing.Point(908, 98);
             this.label134.Name = "label134";
             this.label134.Size = new System.Drawing.Size(86, 13);
             this.label134.TabIndex = 188;
@@ -2767,7 +3283,7 @@
             // label117
             // 
             this.label117.AutoSize = true;
-            this.label117.Location = new System.Drawing.Point(196, 39);
+            this.label117.Location = new System.Drawing.Point(187, 33);
             this.label117.Name = "label117";
             this.label117.Size = new System.Drawing.Size(160, 104);
             this.label117.TabIndex = 164;
@@ -3002,11 +3518,19 @@
             // 
             // groupBox51
             // 
+            this.groupBox51.Controls.Add(this.label68);
+            this.groupBox51.Controls.Add(this.label57);
+            this.groupBox51.Controls.Add(this.label56);
+            this.groupBox51.Controls.Add(this.LockInPertext2B);
+            this.groupBox51.Controls.Add(this.LockInPertext2);
+            this.groupBox51.Controls.Add(this.label55);
+            this.groupBox51.Controls.Add(this.label52);
+            this.groupBox51.Controls.Add(this.label51);
+            this.groupBox51.Controls.Add(this.label44);
+            this.groupBox51.Controls.Add(this.LockInPertext1);
             this.groupBox51.Controls.Add(this.label140);
             this.groupBox51.Controls.Add(this.label139);
             this.groupBox51.Controls.Add(this.correlatorPtextB);
-            this.groupBox51.Controls.Add(this.label138);
-            this.groupBox51.Controls.Add(this.label137);
             this.groupBox51.Controls.Add(this.LockInFreqtext2B);
             this.groupBox51.Controls.Add(this.label62);
             this.groupBox51.Controls.Add(this.LockInFreqtext2);
@@ -3028,11 +3552,108 @@
             this.groupBox51.Text = "Parameter Values";
             this.groupBox51.Enter += new System.EventHandler(this.groupBox51_Enter);
             // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label68.Location = new System.Drawing.Point(6, 92);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(61, 13);
+            this.label68.TabIndex = 219;
+            this.label68.Text = "Time (ms)";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label57.Location = new System.Drawing.Point(136, 365);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(18, 13);
+            this.label57.TabIndex = 218;
+            this.label57.Text = "us";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label56.Location = new System.Drawing.Point(136, 335);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(18, 13);
+            this.label56.TabIndex = 217;
+            this.label56.Text = "us";
+            // 
+            // LockInPertext2B
+            // 
+            this.LockInPertext2B.Location = new System.Drawing.Point(93, 360);
+            this.LockInPertext2B.Name = "LockInPertext2B";
+            this.LockInPertext2B.Size = new System.Drawing.Size(41, 20);
+            this.LockInPertext2B.TabIndex = 216;
+            this.LockInPertext2B.Text = "0.06188";
+            this.LockInPertext2B.LostFocus += new System.EventHandler(this.LockInPertext2B_TextChanged);
+            // 
+            // LockInPertext2
+            // 
+            this.LockInPertext2.Location = new System.Drawing.Point(93, 332);
+            this.LockInPertext2.Name = "LockInPertext2";
+            this.LockInPertext2.Size = new System.Drawing.Size(41, 20);
+            this.LockInPertext2.TabIndex = 215;
+            this.LockInPertext2.Text = "50";
+            this.LockInPertext2.LostFocus += new System.EventHandler(this.LockInPerqtext2_TextChanged);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label55.Location = new System.Drawing.Point(47, 361);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(44, 13);
+            this.label55.TabIndex = 214;
+            this.label55.Text = "kHz <->";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label52.Location = new System.Drawing.Point(47, 335);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(44, 13);
+            this.label52.TabIndex = 213;
+            this.label52.Text = "kHz <->";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label51.Location = new System.Drawing.Point(136, 240);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(18, 13);
+            this.label51.TabIndex = 212;
+            this.label51.Text = "us";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label44.Location = new System.Drawing.Point(47, 240);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(44, 13);
+            this.label44.TabIndex = 198;
+            this.label44.Text = "kHz <->";
+            // 
+            // LockInPertext1
+            // 
+            this.LockInPertext1.Location = new System.Drawing.Point(93, 237);
+            this.LockInPertext1.Name = "LockInPertext1";
+            this.LockInPertext1.Size = new System.Drawing.Size(43, 20);
+            this.LockInPertext1.TabIndex = 197;
+            this.LockInPertext1.Text = "100";
+            this.LockInPertext1.LostFocus += new System.EventHandler(this.LockInPertext1_TextChanged);
+            // 
             // label140
             // 
             this.label140.AutoSize = true;
             this.label140.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label140.Location = new System.Drawing.Point(118, 53);
+            this.label140.Location = new System.Drawing.Point(142, 22);
             this.label140.Name = "label140";
             this.label140.Size = new System.Drawing.Size(14, 13);
             this.label140.TabIndex = 196;
@@ -3042,7 +3663,7 @@
             // 
             this.label139.AutoSize = true;
             this.label139.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label139.Location = new System.Drawing.Point(117, 26);
+            this.label139.Location = new System.Drawing.Point(88, 22);
             this.label139.Name = "label139";
             this.label139.Size = new System.Drawing.Size(14, 13);
             this.label139.TabIndex = 195;
@@ -3050,45 +3671,26 @@
             // 
             // correlatorPtextB
             // 
-            this.correlatorPtextB.Location = new System.Drawing.Point(55, 49);
+            this.correlatorPtextB.Location = new System.Drawing.Point(105, 19);
             this.correlatorPtextB.Name = "correlatorPtextB";
-            this.correlatorPtextB.Size = new System.Drawing.Size(57, 20);
+            this.correlatorPtextB.Size = new System.Drawing.Size(36, 20);
             this.correlatorPtextB.TabIndex = 194;
-            this.correlatorPtextB.Text = "384";
-            // 
-            // label138
-            // 
-            this.label138.AutoSize = true;
-            this.label138.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label138.Location = new System.Drawing.Point(128, 358);
-            this.label138.Name = "label138";
-            this.label138.Size = new System.Drawing.Size(14, 13);
-            this.label138.TabIndex = 195;
-            this.label138.Text = "B";
-            // 
-            // label137
-            // 
-            this.label137.AutoSize = true;
-            this.label137.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label137.Location = new System.Drawing.Point(128, 332);
-            this.label137.Name = "label137";
-            this.label137.Size = new System.Drawing.Size(14, 13);
-            this.label137.TabIndex = 194;
-            this.label137.Text = "A";
+            this.correlatorPtextB.Text = "324";
             // 
             // LockInFreqtext2B
             // 
-            this.LockInFreqtext2B.Location = new System.Drawing.Point(71, 355);
+            this.LockInFreqtext2B.Location = new System.Drawing.Point(6, 358);
             this.LockInFreqtext2B.Name = "LockInFreqtext2B";
-            this.LockInFreqtext2B.Size = new System.Drawing.Size(57, 20);
+            this.LockInFreqtext2B.Size = new System.Drawing.Size(41, 20);
             this.LockInFreqtext2B.TabIndex = 194;
-            this.LockInFreqtext2B.Text = "20";
+            this.LockInFreqtext2B.Text = "16160";
+            this.LockInFreqtext2B.LostFocus += new System.EventHandler(this.LockInFreqtext2B_TextChanged);
             // 
             // label62
             // 
             this.label62.AutoSize = true;
             this.label62.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label62.Location = new System.Drawing.Point(6, 240);
+            this.label62.Location = new System.Drawing.Point(6, 221);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(57, 13);
             this.label62.TabIndex = 176;
@@ -3096,15 +3698,16 @@
             // 
             // LockInFreqtext2
             // 
-            this.LockInFreqtext2.Location = new System.Drawing.Point(71, 329);
+            this.LockInFreqtext2.Location = new System.Drawing.Point(6, 332);
             this.LockInFreqtext2.Name = "LockInFreqtext2";
-            this.LockInFreqtext2.Size = new System.Drawing.Size(57, 20);
+            this.LockInFreqtext2.Size = new System.Drawing.Size(41, 20);
             this.LockInFreqtext2.TabIndex = 175;
-            this.LockInFreqtext2.Text = "1";
+            this.LockInFreqtext2.Text = "20";
+            this.LockInFreqtext2.LostFocus += new System.EventHandler(this.LockInFreqtext2_TextChanged);
             // 
             // correlatorIntTimetext2
             // 
-            this.correlatorIntTimetext2.Location = new System.Drawing.Point(62, 177);
+            this.correlatorIntTimetext2.Location = new System.Drawing.Point(91, 135);
             this.correlatorIntTimetext2.Name = "correlatorIntTimetext2";
             this.correlatorIntTimetext2.Size = new System.Drawing.Size(57, 20);
             this.correlatorIntTimetext2.TabIndex = 174;
@@ -3113,25 +3716,26 @@
             // 
             // LockInFreqtext1
             // 
-            this.LockInFreqtext1.Location = new System.Drawing.Point(72, 237);
+            this.LockInFreqtext1.Location = new System.Drawing.Point(6, 237);
             this.LockInFreqtext1.Name = "LockInFreqtext1";
-            this.LockInFreqtext1.Size = new System.Drawing.Size(57, 20);
+            this.LockInFreqtext1.Size = new System.Drawing.Size(41, 20);
             this.LockInFreqtext1.TabIndex = 13;
-            this.LockInFreqtext1.Text = "30";
+            this.LockInFreqtext1.Text = "10";
+            this.LockInFreqtext1.LostFocus += new System.EventHandler(this.LockInFreqtext1_TextChanged);
             // 
             // label118
             // 
             this.label118.AutoSize = true;
             this.label118.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label118.Location = new System.Drawing.Point(4, 210);
+            this.label118.Location = new System.Drawing.Point(3, 201);
             this.label118.Name = "label118";
-            this.label118.Size = new System.Drawing.Size(144, 13);
+            this.label118.Size = new System.Drawing.Size(108, 13);
             this.label118.TabIndex = 12;
-            this.label118.Text = "Lock-In frequency (kHz)";
+            this.label118.Text = "Lock-In reference";
             // 
             // correlatorIntTimetext1
             // 
-            this.correlatorIntTimetext1.Location = new System.Drawing.Point(62, 95);
+            this.correlatorIntTimetext1.Location = new System.Drawing.Point(91, 53);
             this.correlatorIntTimetext1.Name = "correlatorIntTimetext1";
             this.correlatorIntTimetext1.Size = new System.Drawing.Size(57, 20);
             this.correlatorIntTimetext1.TabIndex = 10;
@@ -3144,15 +3748,15 @@
             this.label105.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label105.Location = new System.Drawing.Point(5, 74);
             this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(126, 13);
+            this.label105.Size = new System.Drawing.Size(68, 13);
             this.label105.TabIndex = 11;
-            this.label105.Text = "Integration Time (ms)";
+            this.label105.Text = "Integration";
             // 
             // correlatorPtext
             // 
-            this.correlatorPtext.Location = new System.Drawing.Point(55, 23);
+            this.correlatorPtext.Location = new System.Drawing.Point(51, 17);
             this.correlatorPtext.Name = "correlatorPtext";
-            this.correlatorPtext.Size = new System.Drawing.Size(57, 20);
+            this.correlatorPtext.Size = new System.Drawing.Size(36, 20);
             this.correlatorPtext.TabIndex = 2;
             this.correlatorPtext.Text = "200";
             // 
@@ -3160,15 +3764,16 @@
             // 
             this.label99.AutoSize = true;
             this.label99.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label99.Location = new System.Drawing.Point(16, 26);
+            this.label99.Location = new System.Drawing.Point(-3, 20);
             this.label99.Name = "label99";
-            this.label99.Size = new System.Drawing.Size(15, 13);
+            this.label99.Size = new System.Drawing.Size(52, 13);
             this.label99.TabIndex = 3;
-            this.label99.Text = "P";
+            this.label99.Text = "P (MHz)";
+            this.label99.Click += new System.EventHandler(this.label99_Click);
             // 
             // intTselector
             // 
-            this.intTselector.Location = new System.Drawing.Point(55, 103);
+            this.intTselector.Location = new System.Drawing.Point(84, 61);
             this.intTselector.Name = "intTselector";
             this.intTselector.Size = new System.Drawing.Size(64, 96);
             this.intTselector.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -3180,7 +3785,7 @@
             // 
             this.label63.AutoSize = true;
             this.label63.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label63.Location = new System.Drawing.Point(5, 332);
+            this.label63.Location = new System.Drawing.Point(3, 311);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(64, 13);
             this.label63.TabIndex = 177;
@@ -3189,13 +3794,52 @@
             // LockinFrequencySwitch
             // 
             this.LockinFrequencySwitch.Cursor = System.Windows.Forms.Cursors.Default;
-            this.LockinFrequencySwitch.Location = new System.Drawing.Point(67, 247);
+            this.LockinFrequencySwitch.Location = new System.Drawing.Point(52, 243);
             this.LockinFrequencySwitch.Name = "LockinFrequencySwitch";
             this.LockinFrequencySwitch.Size = new System.Drawing.Size(52, 89);
             this.LockinFrequencySwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
             this.LockinFrequencySwitch.TabIndex = 114;
             this.LockinFrequencySwitch.Value = true;
             this.LockinFrequencySwitch.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.LockinFrequencySwitch_StateChanged);
+            // 
+            // switchDisplayBases
+            // 
+            this.switchDisplayBases.Location = new System.Drawing.Point(209, 310);
+            this.switchDisplayBases.Name = "switchDisplayBases";
+            this.switchDisplayBases.Size = new System.Drawing.Size(64, 96);
+            this.switchDisplayBases.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.switchDisplayBases.TabIndex = 180;
+            this.switchDisplayBases.Value = true;
+            this.switchDisplayBases.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.switchDisplayBases_StateChanged);
+            // 
+            // chooseCode
+            // 
+            this.chooseCode.Location = new System.Drawing.Point(911, 125);
+            this.chooseCode.Name = "chooseCode";
+            this.chooseCode.Size = new System.Drawing.Size(64, 96);
+            this.chooseCode.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.chooseCode.TabIndex = 187;
+            // 
+            // SaveCorrelatorToggle
+            // 
+            this.SaveCorrelatorToggle.Location = new System.Drawing.Point(538, 422);
+            this.SaveCorrelatorToggle.Name = "SaveCorrelatorToggle";
+            this.SaveCorrelatorToggle.Size = new System.Drawing.Size(64, 96);
+            this.SaveCorrelatorToggle.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.SaveCorrelatorToggle.TabIndex = 169;
+            // 
+            // CorrelatorBinningPhaseSlider
+            // 
+            this.CorrelatorBinningPhaseSlider.AbsMax = 13;
+            this.CorrelatorBinningPhaseSlider.AbsMin = 0;
+            this.CorrelatorBinningPhaseSlider.Location = new System.Drawing.Point(654, 856);
+            this.CorrelatorBinningPhaseSlider.Max = 13;
+            this.CorrelatorBinningPhaseSlider.Min = 0;
+            this.CorrelatorBinningPhaseSlider.Name = "CorrelatorBinningPhaseSlider";
+            this.CorrelatorBinningPhaseSlider.Size = new System.Drawing.Size(380, 67);
+            this.CorrelatorBinningPhaseSlider.SliderLabel = "Binning Phase";
+            this.CorrelatorBinningPhaseSlider.TabIndex = 165;
+            this.CorrelatorBinningPhaseSlider.Value = 13;
             // 
             // FluorLogTab
             // 
@@ -3205,7 +3849,7 @@
             this.FluorLogTab.Controls.Add(this.groupBox37);
             this.FluorLogTab.Location = new System.Drawing.Point(4, 22);
             this.FluorLogTab.Name = "FluorLogTab";
-            this.FluorLogTab.Size = new System.Drawing.Size(1215, 979);
+            this.FluorLogTab.Size = new System.Drawing.Size(1845, 979);
             this.FluorLogTab.TabIndex = 14;
             this.FluorLogTab.Text = "FluorLog";
             this.FluorLogTab.UseVisualStyleBackColor = true;
@@ -3333,7 +3977,7 @@
             this.ElectrodeScanTab.Location = new System.Drawing.Point(4, 22);
             this.ElectrodeScanTab.Name = "ElectrodeScanTab";
             this.ElectrodeScanTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ElectrodeScanTab.Size = new System.Drawing.Size(1215, 979);
+            this.ElectrodeScanTab.Size = new System.Drawing.Size(1845, 979);
             this.ElectrodeScanTab.TabIndex = 5;
             this.ElectrodeScanTab.Text = "Electrode Scan";
             this.ElectrodeScanTab.UseVisualStyleBackColor = true;
@@ -3592,7 +4236,7 @@
             this.SliderScan.Location = new System.Drawing.Point(4, 22);
             this.SliderScan.Name = "SliderScan";
             this.SliderScan.Padding = new System.Windows.Forms.Padding(3);
-            this.SliderScan.Size = new System.Drawing.Size(1215, 979);
+            this.SliderScan.Size = new System.Drawing.Size(1845, 979);
             this.SliderScan.TabIndex = 16;
             this.SliderScan.Text = "Slider Scan";
             this.SliderScan.UseVisualStyleBackColor = true;
@@ -3810,7 +4454,7 @@
             this.IndividualDCTab.Location = new System.Drawing.Point(4, 22);
             this.IndividualDCTab.Name = "IndividualDCTab";
             this.IndividualDCTab.Padding = new System.Windows.Forms.Padding(3);
-            this.IndividualDCTab.Size = new System.Drawing.Size(1215, 979);
+            this.IndividualDCTab.Size = new System.Drawing.Size(1845, 979);
             this.IndividualDCTab.TabIndex = 2;
             this.IndividualDCTab.Text = "Individual DC";
             this.IndividualDCTab.UseVisualStyleBackColor = true;
@@ -3853,10 +4497,49 @@
             this.CoupledDCTab.Location = new System.Drawing.Point(4, 22);
             this.CoupledDCTab.Name = "CoupledDCTab";
             this.CoupledDCTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CoupledDCTab.Size = new System.Drawing.Size(1215, 979);
+            this.CoupledDCTab.Size = new System.Drawing.Size(1845, 979);
             this.CoupledDCTab.TabIndex = 1;
             this.CoupledDCTab.Text = "Coupled DC";
             this.CoupledDCTab.UseVisualStyleBackColor = true;
+            // 
+            // RightFingersSlider
+            // 
+            this.RightFingersSlider.AbsMax = 20;
+            this.RightFingersSlider.AbsMin = -20;
+            this.RightFingersSlider.Location = new System.Drawing.Point(546, 903);
+            this.RightFingersSlider.Max = 1;
+            this.RightFingersSlider.Min = -1;
+            this.RightFingersSlider.Name = "RightFingersSlider";
+            this.RightFingersSlider.Size = new System.Drawing.Size(380, 70);
+            this.RightFingersSlider.SliderLabel = "Inner right fingers only";
+            this.RightFingersSlider.TabIndex = 108;
+            this.RightFingersSlider.Value = 0;
+            // 
+            // SnakeOnlySlider
+            // 
+            this.SnakeOnlySlider.AbsMax = 20;
+            this.SnakeOnlySlider.AbsMin = -20;
+            this.SnakeOnlySlider.Location = new System.Drawing.Point(546, 821);
+            this.SnakeOnlySlider.Max = 1;
+            this.SnakeOnlySlider.Min = -1;
+            this.SnakeOnlySlider.Name = "SnakeOnlySlider";
+            this.SnakeOnlySlider.Size = new System.Drawing.Size(380, 70);
+            this.SnakeOnlySlider.SliderLabel = "Snake electrode only";
+            this.SnakeOnlySlider.TabIndex = 107;
+            this.SnakeOnlySlider.Value = 0;
+            // 
+            // LeftFingersSlider
+            // 
+            this.LeftFingersSlider.AbsMax = 20;
+            this.LeftFingersSlider.AbsMin = -20;
+            this.LeftFingersSlider.Location = new System.Drawing.Point(546, 745);
+            this.LeftFingersSlider.Max = 1;
+            this.LeftFingersSlider.Min = -1;
+            this.LeftFingersSlider.Name = "LeftFingersSlider";
+            this.LeftFingersSlider.Size = new System.Drawing.Size(380, 70);
+            this.LeftFingersSlider.SliderLabel = "Inner left fingers only";
+            this.LeftFingersSlider.TabIndex = 106;
+            this.LeftFingersSlider.Value = 0;
             // 
             // scatterGraph1
             // 
@@ -4365,14 +5048,19 @@
             // 
             // MainControlTab
             // 
+            this.MainControlTab.Controls.Add(this.clrCorrLog);
+            this.MainControlTab.Controls.Add(this.corrRecToggle);
+            this.MainControlTab.Controls.Add(this.SliderScanStart);
             this.MainControlTab.Controls.Add(this.TickleSlider);
             this.MainControlTab.Controls.Add(this.BxSlider);
             this.MainControlTab.Controls.Add(this.Sideband402Control);
             this.MainControlTab.Controls.Add(this.ReadFullConfigTextbox);
             this.MainControlTab.Controls.Add(this.SaveFullConfigTextbox);
+            this.MainControlTab.Controls.Add(this.SinglePMTReadButton);
             this.MainControlTab.Controls.Add(this.ReadConfigurationFileTextbox);
             this.MainControlTab.Controls.Add(this.ReadFullConfigButton);
             this.MainControlTab.Controls.Add(this.SaveFullConfigButton);
+            this.MainControlTab.Controls.Add(this.ElectrodeScanStart);
             this.MainControlTab.Controls.Add(this.RamanSlider);
             this.MainControlTab.Controls.Add(this.groupBox38);
             this.MainControlTab.Controls.Add(this.groupBox31);
@@ -4402,10 +5090,71 @@
             this.MainControlTab.Location = new System.Drawing.Point(4, 22);
             this.MainControlTab.Name = "MainControlTab";
             this.MainControlTab.Padding = new System.Windows.Forms.Padding(3);
-            this.MainControlTab.Size = new System.Drawing.Size(1215, 979);
+            this.MainControlTab.Size = new System.Drawing.Size(1845, 979);
             this.MainControlTab.TabIndex = 0;
             this.MainControlTab.Text = "Control";
             this.MainControlTab.UseVisualStyleBackColor = true;
+            // 
+            // clrCorrLog
+            // 
+            this.clrCorrLog.BackColor = System.Drawing.Color.Red;
+            this.clrCorrLog.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.clrCorrLog.Location = new System.Drawing.Point(961, 930);
+            this.clrCorrLog.Name = "clrCorrLog";
+            this.clrCorrLog.Size = new System.Drawing.Size(27, 29);
+            this.clrCorrLog.TabIndex = 169;
+            this.clrCorrLog.UseVisualStyleBackColor = false;
+            // 
+            // corrRecToggle
+            // 
+            this.corrRecToggle.Location = new System.Drawing.Point(903, 930);
+            this.corrRecToggle.Name = "corrRecToggle";
+            this.corrRecToggle.Size = new System.Drawing.Size(34, 38);
+            this.corrRecToggle.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalSlide3D;
+            this.corrRecToggle.TabIndex = 168;
+            this.corrRecToggle.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.corrRecToggle_StateChanged);
+            // 
+            // TickleSlider
+            // 
+            this.TickleSlider.AbsMax = 5;
+            this.TickleSlider.AbsMin = -5;
+            this.TickleSlider.Location = new System.Drawing.Point(815, 309);
+            this.TickleSlider.Max = 5;
+            this.TickleSlider.Min = -5;
+            this.TickleSlider.Name = "TickleSlider";
+            this.TickleSlider.Size = new System.Drawing.Size(380, 67);
+            this.TickleSlider.SliderLabel = "Tickle Frequency Control";
+            this.TickleSlider.TabIndex = 161;
+            this.TickleSlider.Value = 0;
+            // 
+            // BxSlider
+            // 
+            this.BxSlider.AbsMax = 5;
+            this.BxSlider.AbsMin = -5;
+            this.BxSlider.Location = new System.Drawing.Point(815, 233);
+            this.BxSlider.Max = 5;
+            this.BxSlider.Min = -5;
+            this.BxSlider.Name = "BxSlider";
+            this.BxSlider.Size = new System.Drawing.Size(380, 70);
+            this.BxSlider.SliderLabel = "Bx Control";
+            this.BxSlider.TabIndex = 160;
+            this.BxSlider.Value = 0;
+            // 
+            // Sideband402Control
+            // 
+            this.Sideband402Control.AbsMax = 500;
+            this.Sideband402Control.AbsMin = 0;
+            this.Sideband402Control.BackColor = System.Drawing.Color.Transparent;
+            this.Sideband402Control.ForeColor = System.Drawing.Color.Black;
+            this.Sideband402Control.Location = new System.Drawing.Point(815, 155);
+            this.Sideband402Control.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Sideband402Control.Max = 300;
+            this.Sideband402Control.Min = 200;
+            this.Sideband402Control.Name = "Sideband402Control";
+            this.Sideband402Control.Size = new System.Drawing.Size(374, 70);
+            this.Sideband402Control.SliderLabel = "402 Sideband Frequency Control";
+            this.Sideband402Control.TabIndex = 159;
+            this.Sideband402Control.Value = 267;
             // 
             // ReadFullConfigTextbox
             // 
@@ -4450,6 +5199,21 @@
             this.SaveFullConfigButton.Text = "Save Full Configuration to file:";
             this.SaveFullConfigButton.UseVisualStyleBackColor = true;
             this.SaveFullConfigButton.Click += new System.EventHandler(this.SaveFullConfigButton_Click);
+            // 
+            // RamanSlider
+            // 
+            this.RamanSlider.AbsMax = 10;
+            this.RamanSlider.AbsMin = 0;
+            this.RamanSlider.BackColor = System.Drawing.Color.White;
+            this.RamanSlider.Location = new System.Drawing.Point(417, 309);
+            this.RamanSlider.Max = 10;
+            this.RamanSlider.Min = 0;
+            this.RamanSlider.Name = "RamanSlider";
+            this.RamanSlider.Size = new System.Drawing.Size(380, 70);
+            this.RamanSlider.SliderLabel = "Raman Power Control";
+            this.RamanSlider.TabIndex = 154;
+            this.RamanSlider.TabStop = false;
+            this.RamanSlider.Value = 10;
             // 
             // groupBox38
             // 
@@ -4537,6 +5301,20 @@
             this.Dev2DO3Switch.TabIndex = 114;
             this.Dev2DO3Switch.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.Dev2DO3Switch_StateChanged);
             // 
+            // CavityCoolingPowerControl
+            // 
+            this.CavityCoolingPowerControl.AbsMax = 10;
+            this.CavityCoolingPowerControl.AbsMin = 0;
+            this.CavityCoolingPowerControl.BackColor = System.Drawing.Color.Gainsboro;
+            this.CavityCoolingPowerControl.Location = new System.Drawing.Point(417, 233);
+            this.CavityCoolingPowerControl.Max = 10;
+            this.CavityCoolingPowerControl.Min = 0;
+            this.CavityCoolingPowerControl.Name = "CavityCoolingPowerControl";
+            this.CavityCoolingPowerControl.Size = new System.Drawing.Size(380, 70);
+            this.CavityCoolingPowerControl.SliderLabel = "Cavity Cooling Power Control";
+            this.CavityCoolingPowerControl.TabIndex = 125;
+            this.CavityCoolingPowerControl.Value = 0;
+            // 
             // groupBox32
             // 
             this.groupBox32.Controls.Add(this.RepumperFrequency);
@@ -4557,6 +5335,20 @@
             this.RepumperFrequency.Size = new System.Drawing.Size(66, 26);
             this.RepumperFrequency.TabIndex = 123;
             this.RepumperFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // LatticePowerControl
+            // 
+            this.LatticePowerControl.AbsMax = 10;
+            this.LatticePowerControl.AbsMin = 0;
+            this.LatticePowerControl.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.LatticePowerControl.Location = new System.Drawing.Point(417, 384);
+            this.LatticePowerControl.Max = 10;
+            this.LatticePowerControl.Min = 0;
+            this.LatticePowerControl.Name = "LatticePowerControl";
+            this.LatticePowerControl.Size = new System.Drawing.Size(380, 70);
+            this.LatticePowerControl.SliderLabel = "Lattice Power Control";
+            this.LatticePowerControl.TabIndex = 122;
+            this.LatticePowerControl.Value = 10;
             // 
             // groupBox30
             // 
@@ -4664,6 +5456,38 @@
             this.CavityBeam370Switch.Value = true;
             this.CavityBeam370Switch.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.CavityBeam370Switch_StateChanged);
             // 
+            // RepumperSlider
+            // 
+            this.RepumperSlider.AbsMax = 7;
+            this.RepumperSlider.AbsMin = 0;
+            this.RepumperSlider.BackColor = System.Drawing.Color.Transparent;
+            this.RepumperSlider.ForeColor = System.Drawing.Color.Black;
+            this.RepumperSlider.Location = new System.Drawing.Point(419, 498);
+            this.RepumperSlider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RepumperSlider.Max = 7;
+            this.RepumperSlider.Min = 0;
+            this.RepumperSlider.Name = "RepumperSlider";
+            this.RepumperSlider.Size = new System.Drawing.Size(374, 70);
+            this.RepumperSlider.SliderLabel = "Repumper COLOR Control";
+            this.RepumperSlider.TabIndex = 105;
+            this.RepumperSlider.Value = 3.5;
+            // 
+            // RepumperPowerSlider
+            // 
+            this.RepumperPowerSlider.AbsMax = 10;
+            this.RepumperPowerSlider.AbsMin = 0;
+            this.RepumperPowerSlider.BackColor = System.Drawing.Color.White;
+            this.RepumperPowerSlider.Location = new System.Drawing.Point(419, 567);
+            this.RepumperPowerSlider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RepumperPowerSlider.Max = 10;
+            this.RepumperPowerSlider.Min = 0;
+            this.RepumperPowerSlider.Name = "RepumperPowerSlider";
+            this.RepumperPowerSlider.Size = new System.Drawing.Size(376, 67);
+            this.RepumperPowerSlider.SliderLabel = "Repumper POWER Control";
+            this.RepumperPowerSlider.TabIndex = 113;
+            this.RepumperPowerSlider.Value = 10;
+            this.RepumperPowerSlider.Load += new System.EventHandler(this.RepumperPowerSlider_Adjusted);
+            // 
             // ReadElectrodeConfig
             // 
             this.ReadElectrodeConfig.BackColor = System.Drawing.Color.Silver;
@@ -4674,6 +5498,20 @@
             this.ReadElectrodeConfig.Text = "Read Old Configuration file:";
             this.ReadElectrodeConfig.UseVisualStyleBackColor = false;
             this.ReadElectrodeConfig.Click += new System.EventHandler(this.ReadElectrodeConfig_Click_1);
+            // 
+            // SideBeam370Power
+            // 
+            this.SideBeam370Power.AbsMax = 10;
+            this.SideBeam370Power.AbsMin = 0;
+            this.SideBeam370Power.BackColor = System.Drawing.Color.LightGray;
+            this.SideBeam370Power.Location = new System.Drawing.Point(417, 155);
+            this.SideBeam370Power.Max = 10;
+            this.SideBeam370Power.Min = 0;
+            this.SideBeam370Power.Name = "SideBeam370Power";
+            this.SideBeam370Power.Size = new System.Drawing.Size(380, 70);
+            this.SideBeam370Power.SliderLabel = "370 Side Beam POWER Control";
+            this.SideBeam370Power.TabIndex = 116;
+            this.SideBeam370Power.Value = 0;
             // 
             // ResetButton
             // 
@@ -4729,174 +5567,6 @@
             this.IonizationShutter.Value = true;
             this.IonizationShutter.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.IonizationShutter_StateChanged);
             // 
-            // groupBox25
-            // 
-            this.groupBox25.Controls.Add(this.CurrentFeedforward370Offset);
-            this.groupBox25.Location = new System.Drawing.Point(417, 82);
-            this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Size = new System.Drawing.Size(182, 51);
-            this.groupBox25.TabIndex = 109;
-            this.groupBox25.TabStop = false;
-            this.groupBox25.Text = "370 Current Feedforward Offset";
-            // 
-            // CurrentFeedforward370Offset
-            // 
-            this.CurrentFeedforward370Offset.Location = new System.Drawing.Point(6, 19);
-            this.CurrentFeedforward370Offset.Name = "CurrentFeedforward370Offset";
-            this.CurrentFeedforward370Offset.Range = new NationalInstruments.UI.Range(0, 35780);
-            this.CurrentFeedforward370Offset.Size = new System.Drawing.Size(120, 20);
-            this.CurrentFeedforward370Offset.TabIndex = 107;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.MainControlTab);
-            this.tabControl1.Controls.Add(this.CoupledDCTab);
-            this.tabControl1.Controls.Add(this.IndividualDCTab);
-            this.tabControl1.Controls.Add(this.SliderScan);
-            this.tabControl1.Controls.Add(this.ElectrodeScanTab);
-            this.tabControl1.Controls.Add(this.FluorLogTab);
-            this.tabControl1.Controls.Add(this.CorrelatorTab);
-            this.tabControl1.Controls.Add(this.PulseProgrammerTab);
-            this.tabControl1.Controls.Add(this.CameraTab);
-            this.tabControl1.Controls.Add(this.FilenameTab);
-            this.tabControl1.Location = new System.Drawing.Point(642, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1223, 1005);
-            this.tabControl1.TabIndex = 114;
-            // 
-            // TickleSlider
-            // 
-            this.TickleSlider.AbsMax = 5;
-            this.TickleSlider.AbsMin = -5;
-            this.TickleSlider.Location = new System.Drawing.Point(815, 309);
-            this.TickleSlider.Max = 5;
-            this.TickleSlider.Min = -5;
-            this.TickleSlider.Name = "TickleSlider";
-            this.TickleSlider.Size = new System.Drawing.Size(380, 67);
-            this.TickleSlider.SliderLabel = "Tickle Frequency Control";
-            this.TickleSlider.TabIndex = 161;
-            this.TickleSlider.Value = 0;
-            // 
-            // BxSlider
-            // 
-            this.BxSlider.AbsMax = 5;
-            this.BxSlider.AbsMin = -5;
-            this.BxSlider.Location = new System.Drawing.Point(815, 233);
-            this.BxSlider.Max = 5;
-            this.BxSlider.Min = -5;
-            this.BxSlider.Name = "BxSlider";
-            this.BxSlider.Size = new System.Drawing.Size(380, 70);
-            this.BxSlider.SliderLabel = "Bx Control";
-            this.BxSlider.TabIndex = 160;
-            this.BxSlider.Value = 0;
-            // 
-            // Sideband402Control
-            // 
-            this.Sideband402Control.AbsMax = 500;
-            this.Sideband402Control.AbsMin = 0;
-            this.Sideband402Control.BackColor = System.Drawing.Color.Transparent;
-            this.Sideband402Control.ForeColor = System.Drawing.Color.Black;
-            this.Sideband402Control.Location = new System.Drawing.Point(815, 155);
-            this.Sideband402Control.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Sideband402Control.Max = 300;
-            this.Sideband402Control.Min = 200;
-            this.Sideband402Control.Name = "Sideband402Control";
-            this.Sideband402Control.Size = new System.Drawing.Size(374, 70);
-            this.Sideband402Control.SliderLabel = "402 Sideband Frequency Control";
-            this.Sideband402Control.TabIndex = 159;
-            this.Sideband402Control.Value = 267;
-            // 
-            // RamanSlider
-            // 
-            this.RamanSlider.AbsMax = 10;
-            this.RamanSlider.AbsMin = 0;
-            this.RamanSlider.BackColor = System.Drawing.Color.White;
-            this.RamanSlider.Location = new System.Drawing.Point(417, 309);
-            this.RamanSlider.Max = 10;
-            this.RamanSlider.Min = 0;
-            this.RamanSlider.Name = "RamanSlider";
-            this.RamanSlider.Size = new System.Drawing.Size(380, 70);
-            this.RamanSlider.SliderLabel = "Raman Power Control";
-            this.RamanSlider.TabIndex = 154;
-            this.RamanSlider.TabStop = false;
-            this.RamanSlider.Value = 10;
-            // 
-            // CavityCoolingPowerControl
-            // 
-            this.CavityCoolingPowerControl.AbsMax = 10;
-            this.CavityCoolingPowerControl.AbsMin = 0;
-            this.CavityCoolingPowerControl.BackColor = System.Drawing.Color.Gainsboro;
-            this.CavityCoolingPowerControl.Location = new System.Drawing.Point(417, 233);
-            this.CavityCoolingPowerControl.Max = 10;
-            this.CavityCoolingPowerControl.Min = 0;
-            this.CavityCoolingPowerControl.Name = "CavityCoolingPowerControl";
-            this.CavityCoolingPowerControl.Size = new System.Drawing.Size(380, 70);
-            this.CavityCoolingPowerControl.SliderLabel = "Cavity Cooling Power Control";
-            this.CavityCoolingPowerControl.TabIndex = 125;
-            this.CavityCoolingPowerControl.Value = 0;
-            // 
-            // LatticePowerControl
-            // 
-            this.LatticePowerControl.AbsMax = 10;
-            this.LatticePowerControl.AbsMin = 0;
-            this.LatticePowerControl.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.LatticePowerControl.Location = new System.Drawing.Point(417, 384);
-            this.LatticePowerControl.Max = 10;
-            this.LatticePowerControl.Min = 0;
-            this.LatticePowerControl.Name = "LatticePowerControl";
-            this.LatticePowerControl.Size = new System.Drawing.Size(380, 70);
-            this.LatticePowerControl.SliderLabel = "Lattice Power Control";
-            this.LatticePowerControl.TabIndex = 122;
-            this.LatticePowerControl.Value = 10;
-            // 
-            // RepumperSlider
-            // 
-            this.RepumperSlider.AbsMax = 7;
-            this.RepumperSlider.AbsMin = 0;
-            this.RepumperSlider.BackColor = System.Drawing.Color.Transparent;
-            this.RepumperSlider.ForeColor = System.Drawing.Color.Black;
-            this.RepumperSlider.Location = new System.Drawing.Point(419, 498);
-            this.RepumperSlider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RepumperSlider.Max = 7;
-            this.RepumperSlider.Min = 0;
-            this.RepumperSlider.Name = "RepumperSlider";
-            this.RepumperSlider.Size = new System.Drawing.Size(374, 70);
-            this.RepumperSlider.SliderLabel = "Repumper COLOR Control";
-            this.RepumperSlider.TabIndex = 105;
-            this.RepumperSlider.Value = 3.5;
-            this.RepumperSlider.Load += new System.EventHandler(this.RepumperSlider_Adjusted);
-            // 
-            // RepumperPowerSlider
-            // 
-            this.RepumperPowerSlider.AbsMax = 10;
-            this.RepumperPowerSlider.AbsMin = 0;
-            this.RepumperPowerSlider.BackColor = System.Drawing.Color.White;
-            this.RepumperPowerSlider.Location = new System.Drawing.Point(419, 567);
-            this.RepumperPowerSlider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RepumperPowerSlider.Max = 10;
-            this.RepumperPowerSlider.Min = 0;
-            this.RepumperPowerSlider.Name = "RepumperPowerSlider";
-            this.RepumperPowerSlider.Size = new System.Drawing.Size(376, 67);
-            this.RepumperPowerSlider.SliderLabel = "Repumper POWER Control";
-            this.RepumperPowerSlider.TabIndex = 113;
-            this.RepumperPowerSlider.Value = 10;
-            this.RepumperPowerSlider.Load += new System.EventHandler(this.RepumperPowerSlider_Adjusted);
-            // 
-            // SideBeam370Power
-            // 
-            this.SideBeam370Power.AbsMax = 10;
-            this.SideBeam370Power.AbsMin = 0;
-            this.SideBeam370Power.BackColor = System.Drawing.Color.LightGray;
-            this.SideBeam370Power.Location = new System.Drawing.Point(417, 155);
-            this.SideBeam370Power.Max = 10;
-            this.SideBeam370Power.Min = 0;
-            this.SideBeam370Power.Name = "SideBeam370Power";
-            this.SideBeam370Power.Size = new System.Drawing.Size(380, 70);
-            this.SideBeam370Power.SliderLabel = "370 Side Beam POWER Control";
-            this.SideBeam370Power.TabIndex = 116;
-            this.SideBeam370Power.Value = 0;
-            // 
             // QuadTiltRatioSlider
             // 
             this.QuadTiltRatioSlider.AbsMax = 20;
@@ -4922,6 +5592,24 @@
             this.SnakeRatioSlider.SliderLabel = "Ratio of inners and snake";
             this.SnakeRatioSlider.TabIndex = 110;
             this.SnakeRatioSlider.Value = 0;
+            // 
+            // groupBox25
+            // 
+            this.groupBox25.Controls.Add(this.CurrentFeedforward370Offset);
+            this.groupBox25.Location = new System.Drawing.Point(417, 82);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.Size = new System.Drawing.Size(182, 51);
+            this.groupBox25.TabIndex = 109;
+            this.groupBox25.TabStop = false;
+            this.groupBox25.Text = "370 Current Feedforward Offset";
+            // 
+            // CurrentFeedforward370Offset
+            // 
+            this.CurrentFeedforward370Offset.Location = new System.Drawing.Point(6, 19);
+            this.CurrentFeedforward370Offset.Name = "CurrentFeedforward370Offset";
+            this.CurrentFeedforward370Offset.Range = new NationalInstruments.UI.Range(0, 35780);
+            this.CurrentFeedforward370Offset.Size = new System.Drawing.Size(120, 20);
+            this.CurrentFeedforward370Offset.TabIndex = 107;
             // 
             // TransferCavity
             // 
@@ -5027,91 +5715,34 @@
             this.TrapHeightSlider.TabIndex = 103;
             this.TrapHeightSlider.Value = 136;
             // 
-            // RightFingersSlider
+            // tabControl1
             // 
-            this.RightFingersSlider.AbsMax = 20;
-            this.RightFingersSlider.AbsMin = -20;
-            this.RightFingersSlider.Location = new System.Drawing.Point(546, 903);
-            this.RightFingersSlider.Max = 1;
-            this.RightFingersSlider.Min = -1;
-            this.RightFingersSlider.Name = "RightFingersSlider";
-            this.RightFingersSlider.Size = new System.Drawing.Size(380, 70);
-            this.RightFingersSlider.SliderLabel = "Inner right fingers only";
-            this.RightFingersSlider.TabIndex = 108;
-            this.RightFingersSlider.Value = 0;
-            // 
-            // SnakeOnlySlider
-            // 
-            this.SnakeOnlySlider.AbsMax = 20;
-            this.SnakeOnlySlider.AbsMin = -20;
-            this.SnakeOnlySlider.Location = new System.Drawing.Point(546, 821);
-            this.SnakeOnlySlider.Max = 1;
-            this.SnakeOnlySlider.Min = -1;
-            this.SnakeOnlySlider.Name = "SnakeOnlySlider";
-            this.SnakeOnlySlider.Size = new System.Drawing.Size(380, 70);
-            this.SnakeOnlySlider.SliderLabel = "Snake electrode only";
-            this.SnakeOnlySlider.TabIndex = 107;
-            this.SnakeOnlySlider.Value = 0;
-            // 
-            // LeftFingersSlider
-            // 
-            this.LeftFingersSlider.AbsMax = 20;
-            this.LeftFingersSlider.AbsMin = -20;
-            this.LeftFingersSlider.Location = new System.Drawing.Point(546, 745);
-            this.LeftFingersSlider.Max = 1;
-            this.LeftFingersSlider.Min = -1;
-            this.LeftFingersSlider.Name = "LeftFingersSlider";
-            this.LeftFingersSlider.Size = new System.Drawing.Size(380, 70);
-            this.LeftFingersSlider.SliderLabel = "Inner left fingers only";
-            this.LeftFingersSlider.TabIndex = 106;
-            this.LeftFingersSlider.Value = 0;
-            // 
-            // CorrelatorBinningPhaseSlider
-            // 
-            this.CorrelatorBinningPhaseSlider.AbsMax = 13;
-            this.CorrelatorBinningPhaseSlider.AbsMin = 0;
-            this.CorrelatorBinningPhaseSlider.Location = new System.Drawing.Point(654, 856);
-            this.CorrelatorBinningPhaseSlider.Max = 13;
-            this.CorrelatorBinningPhaseSlider.Min = 0;
-            this.CorrelatorBinningPhaseSlider.Name = "CorrelatorBinningPhaseSlider";
-            this.CorrelatorBinningPhaseSlider.Size = new System.Drawing.Size(380, 67);
-            this.CorrelatorBinningPhaseSlider.SliderLabel = "Binning Phase";
-            this.CorrelatorBinningPhaseSlider.TabIndex = 165;
-            this.CorrelatorBinningPhaseSlider.Value = 13;
+            this.tabControl1.Controls.Add(this.MainControlTab);
+            this.tabControl1.Controls.Add(this.CoupledDCTab);
+            this.tabControl1.Controls.Add(this.IndividualDCTab);
+            this.tabControl1.Controls.Add(this.SliderScan);
+            this.tabControl1.Controls.Add(this.ElectrodeScanTab);
+            this.tabControl1.Controls.Add(this.FluorLogTab);
+            this.tabControl1.Controls.Add(this.CorrelatorTab);
+            this.tabControl1.Controls.Add(this.PulseProgrammerTab);
+            this.tabControl1.Controls.Add(this.CameraTab);
+            this.tabControl1.Controls.Add(this.FilenameTab);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1853, 1005);
+            this.tabControl1.TabIndex = 114;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1684, 1028);
-            this.Controls.Add(this.SliderScanStart);
-            this.Controls.Add(this.testlbl);
-            this.Controls.Add(this.corrRecToggle);
-            this.Controls.Add(this.corrAmpLog);
-            this.Controls.Add(this.corrMuLog);
-            this.Controls.Add(this.clrCorrLog);
-            this.Controls.Add(this.clearScanButton);
-            this.Controls.Add(this.label49);
-            this.Controls.Add(this.PMTcountGraphClearButton);
-            this.Controls.Add(this.label48);
-            this.Controls.Add(this.PMTcountGraph);
-            this.Controls.Add(this.PMTcountBox);
-            this.Controls.Add(this.SinglePMTReadButton);
-            this.Controls.Add(this.ElectrodeScanStart);
-            this.Controls.Add(this.scatterGraph3);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.instrumentControlStrip1);
             this.Name = "Form1";
             this.Text = "Ion Array Controller";
             this.Disposed += new System.EventHandler(this.Form1_Disposed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_Closing);
-            ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PMTcountGraph)).EndInit();
-            this.instrumentControlStrip1.ResumeLayout(false);
-            this.instrumentControlStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.corrAmpLog)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).EndInit();
             this.FilenameTab.ResumeLayout(false);
             this.FilenameTab.PerformLayout();
             this.groupBox49.ResumeLayout(false);
@@ -5133,18 +5764,37 @@
             this.groupBox42.PerformLayout();
             this.PulseProgrammerTab.ResumeLayout(false);
             this.PulseProgrammerTab.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PulseProgrammerTimingDiagram)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.instrumentControlStrip3.ResumeLayout(false);
+            this.instrumentControlStrip3.PerformLayout();
             this.CorrelatorTab.ResumeLayout(false);
             this.CorrelatorTab.PerformLayout();
+            this.groupBox36.ResumeLayout(false);
+            this.groupBox36.PerformLayout();
+            this.groupBox35.ResumeLayout(false);
+            this.groupBox35.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.syncSrcSw)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PulsedProbeSwitch)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.switchDisplayBases)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveCorrelatorToggle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CorrelatorGraph)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.regSelectSw)).EndInit();
             this.TickleResetBox.ResumeLayout(false);
@@ -5163,6 +5813,9 @@
             this.groupBox51.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intTselector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LockinFrequencySwitch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.switchDisplayBases)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveCorrelatorToggle)).EndInit();
             this.FluorLogTab.ResumeLayout(false);
             this.groupBox60.ResumeLayout(false);
             this.groupBox60.PerformLayout();
@@ -5235,6 +5888,7 @@
             this.groupBox16.PerformLayout();
             this.MainControlTab.ResumeLayout(false);
             this.MainControlTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).EndInit();
             this.groupBox38.ResumeLayout(false);
             this.groupBox38.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Switch638)).EndInit();
@@ -5258,25 +5912,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.CurrentFeedforward370Offset)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox PMTcountBox;
         private System.Windows.Forms.Button SinglePMTReadButton;
         private System.Windows.Forms.Button ElectrodeScanStart;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph scatterGraph3;
-        private NationalInstruments.UI.ScatterPlot scatterPlot3;
-        private NationalInstruments.UI.XAxis xAxis3;
-        private NationalInstruments.UI.YAxis yAxis3;
-        private NationalInstruments.UI.WaveformPlot waveformPlot1;
-        private NationalInstruments.UI.XAxis xAxis4;
-        private NationalInstruments.UI.YAxis yAxis4;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Button PMTcountGraphClearButton;
-        private System.Windows.Forms.Label label49;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
@@ -5287,34 +5929,6 @@
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor1;
-        public NationalInstruments.UI.WindowsForms.WaveformGraph PMTcountGraph;
-        private NationalInstruments.UI.ScatterPlot scatterPlot2;
-        private NationalInstruments.UI.WindowsForms.InstrumentControlStrip instrumentControlStrip1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel6;
-        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor6;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel7;
-        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor7;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel8;
-        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor8;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel9;
-        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor9;
-        private System.Windows.Forms.Button clearScanButton;
-        private System.Windows.Forms.Button clrCorrLog;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph corrMuLog;
-        private NationalInstruments.UI.ScatterPlot scatterPlot4;
-        private NationalInstruments.UI.XAxis xAxis5;
-        private NationalInstruments.UI.YAxis yAxis5;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph corrAmpLog;
-        private NationalInstruments.UI.ScatterPlot scatterPlot5;
-        private NationalInstruments.UI.XAxis xAxis6;
-        private NationalInstruments.UI.YAxis yAxis6;
-        private NationalInstruments.UI.WindowsForms.Switch corrRecToggle;
-        private System.Windows.Forms.Label testlbl;
-        private NationalInstruments.UI.WaveformPlot waveformPlot7;
-        private NationalInstruments.UI.WaveformPlot waveformPlot8;
-        private NationalInstruments.UI.WaveformPlot waveformPlot9;
-        private NationalInstruments.UI.ScatterPlot scatterPlot6;
-        private NationalInstruments.UI.ScatterPlot scatterPlot7;
         private System.Windows.Forms.Button SliderScanStart;
         private System.Windows.Forms.TabPage FilenameTab;
         private System.Windows.Forms.Label label164;
@@ -5417,9 +6031,8 @@
         private System.Windows.Forms.Label label58;
         private System.Windows.Forms.Label label54;
         private NationalInstruments.UI.WindowsForms.Switch syncSrcSw;
-        private System.Windows.Forms.TextBox pulsedDutyText;
-        private System.Windows.Forms.TextBox pulseFreqText;
-        private NationalInstruments.UI.WindowsForms.Switch PulsedProbeSwitch;
+        private System.Windows.Forms.TextBox RegRecPerText;
+        private System.Windows.Forms.TextBox ncorrbinsText;
         private System.Windows.Forms.TextBox correlatorBitFilePathB;
         private NationalInstruments.UI.WindowsForms.Switch chooseCode;
         private NationalInstruments.UI.WindowsForms.ScatterGraph scatterGraphNormCorrSig;
@@ -5455,9 +6068,6 @@
         private System.Windows.Forms.TextBox ArrayResetDelayText;
         private System.Windows.Forms.Label label142;
         private System.Windows.Forms.Label label141;
-        private System.Windows.Forms.Label label97;
-        private System.Windows.Forms.Label label96;
-        private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label136;
         private System.Windows.Forms.Label label135;
         private System.Windows.Forms.Label label132;
@@ -5700,6 +6310,98 @@
         private AdjustableSlider TickleSlider;
         private AdjustableSlider BxSlider;
         private AdjustableSlider Sideband402Control;
+        private NationalInstruments.UI.WindowsForms.DigitalWaveformGraph PulseProgrammerTimingDiagram;
+        private NationalInstruments.UI.DigitalWaveformPlot digitalWaveformPlot1;
+        private NationalInstruments.UI.WindowsForms.InstrumentControlStrip instrumentControlStrip3;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel14;
+        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor14;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel15;
+        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor15;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel16;
+        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor16;
+        private NationalInstruments.UI.DigitalSignalPlot digitalSignalPlot1;
+        private System.Windows.Forms.GroupBox groupBox35;
+        private System.Windows.Forms.CheckBox RegularRecool;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.CheckBox FlaggedRecool;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox LockInPertext1;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox LockInPertext2B;
+        private System.Windows.Forms.TextBox LockInPertext2;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.TextBox RefOut;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.GroupBox groupBox36;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label110;
+        private System.Windows.Forms.Label label109;
+        private System.Windows.Forms.Label label171;
+        private System.Windows.Forms.Label slow_pulseFreqLabel;
+        private System.Windows.Forms.TextBox slow_pulsePeriodText;
+        private System.Windows.Forms.Label label170;
+        private System.Windows.Forms.Label label169;
+        private System.Windows.Forms.Label label168;
+        private System.Windows.Forms.Label label167;
+        private System.Windows.Forms.Label label173;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton Indfo2;
+        private System.Windows.Forms.RadioButton notc1fo2;
+        private System.Windows.Forms.RadioButton c1fo2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.RadioButton Indfi2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton c2fi1;
+        private System.Windows.Forms.RadioButton c1fi1;
+        private System.Windows.Forms.RadioButton Indfi1;
+        private System.Windows.Forms.Label label174;
+        private System.Windows.Forms.RadioButton c2fi2;
+        private System.Windows.Forms.RadioButton c1fi2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label label112;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.RadioButton c2si2;
+        private System.Windows.Forms.RadioButton Indsi2;
+        private System.Windows.Forms.RadioButton c1si2;
+        private System.Windows.Forms.TextBox slow_in2DelayText;
+        private System.Windows.Forms.TextBox slow_in2OnTimeText;
+        private System.Windows.Forms.TextBox slow_in1DelayText;
+        private System.Windows.Forms.TextBox slow_in1OnTimeText;
+        private System.Windows.Forms.Label label113;
+        private System.Windows.Forms.Label label114;
+        private System.Windows.Forms.TextBox slow_in2SigName;
+        private System.Windows.Forms.Label label165;
+        private System.Windows.Forms.Label label166;
+        private System.Windows.Forms.Label label175;
+        private System.Windows.Forms.Label label176;
+        private System.Windows.Forms.TextBox slow_in1SigName;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.RadioButton c2si1;
+        private System.Windows.Forms.RadioButton c1si1;
+        private System.Windows.Forms.RadioButton Indsi1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.RadioButton notc1so2;
+        private System.Windows.Forms.RadioButton c1so2;
+        private System.Windows.Forms.RadioButton Indso2;
+        private System.Windows.Forms.TextBox slow_out2DelayText;
+        private System.Windows.Forms.TextBox slow_out2OnTimeText;
+        private System.Windows.Forms.TextBox slow_out1OnTimeText;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.TextBox slow_out2SigName;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label96;
+        private System.Windows.Forms.TextBox slow_out1SigName;
+        private System.Windows.Forms.Label label97;
+        private System.Windows.Forms.TextBox slow_out1DelayText;
+        private System.Windows.Forms.Label label111;
+        private System.Windows.Forms.Button clrCorrLog;
+        public NationalInstruments.UI.WindowsForms.Switch corrRecToggle;
     }
 }
 

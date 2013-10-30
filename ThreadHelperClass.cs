@@ -34,6 +34,7 @@ namespace ArrayDACControl
         //data variables for the thread
         public double SingleDouble;
         public double SingleDouble2;
+        public double[] DoubleArray;
         public double[,] DoubleData;
         public double[,] DoubleScanVariable;
         public int SingleInt;
@@ -53,6 +54,7 @@ namespace ArrayDACControl
             max = new double[1];
             min = new double[1];
             threadName = theName;
+            DoubleArray = new double[50];
         }
 
         //initialization methods for data variables
