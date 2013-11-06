@@ -18,6 +18,8 @@ namespace ArrayDACControl
 {
     public partial class Form1 : Form
     {
+        public static Form1 Self;
+
         DACController DAC;
         NICardController Dev4AO0, Dev4AO1, Dev4AO2, Dev4AO3, Dev4AO4, Dev4AO5, Dev4AO6, Dev4AO7, Dev7AO0, Dev7AO2, Dev7AO6, Dev7AO7;
         NICardController Dev2DO0, Dev2DO1, Dev2DO2, Dev2DO3, Dev2DO4, Dev2DO5, Dev2DO6, Dev2DO7;
@@ -31,10 +33,8 @@ namespace ArrayDACControl
         int ncorrbins;
         //double[] corrbins = new double[26] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 };
 
-
-
-        int counterMu = 0;
-        int counterAmp = 0;
+        public int counterMu = 0;
+        public int counterAmp = 0;
 
         int avgCount = 0;
 
@@ -134,6 +134,8 @@ namespace ArrayDACControl
         //
         public Form1()
         {
+            Self = this;
+
             DCindicators = new Label[2, DCrows];
             DCsliders = new AdjustableSlider[DCrows];
             DCslidersDx = new AdjustableSlider[DCrows];
@@ -2027,10 +2029,10 @@ namespace ArrayDACControl
             }
 
             // plot the new correlator data 
-            CorrelatorGraph.Plots[0].PlotY(newCorrDataCh1);
-            CorrelatorGraph.Plots[1].PlotY(newCorrDataCh2);
-            CorrelatorGraph.Plots[2].PlotY(newCorrDataDiff);
-            CorrelatorGraph.Plots[3].PlotY(newCorrDataSum);
+            CameraForm.CorrelatorGraph.Plots[0].PlotY(newCorrDataCh1);
+            CameraForm.CorrelatorGraph.Plots[1].PlotY(newCorrDataCh2);
+            CameraForm.CorrelatorGraph.Plots[2].PlotY(newCorrDataDiff);
+            CameraForm.CorrelatorGraph.Plots[3].PlotY(newCorrDataSum);
 
             // Display count RATE as a function of time
             CameraForm.PMTcountGraph.Plots[0].PlotYAppend(theCorrelator.totalCountsCh1 / theCorrelator.IntTime * 1000);
@@ -2040,12 +2042,12 @@ namespace ArrayDACControl
             CameraForm.PMTcountGraph.Plots[3].PlotYAppend(ctot / theCorrelator.IntTime * 1000);
             
             //Display total counts in correlator tab
-            correlatorTotalCounts.Text = ctot.ToString();
+            CameraForm.correlatorTotalCounts.Text = ctot.ToString();
             //Display counts/s above Graph
             double ctotn = ctot / theCorrelator.IntTime * 1000;
             CameraForm.PMTcountBox.Text = ctotn.ToString();
             //Display compensation merit value
-            correlatorDecompMerit.Text = theCorrelator.decompMerit.ToString() + "+/-" + theCorrelator.decompMeritErr.ToString() + " %";
+            CameraForm.correlatorDecompMerit.Text = theCorrelator.decompMerit.ToString() + "+/-" + theCorrelator.decompMeritErr.ToString() + " %";
 
             // plot the averaged correlator data
             // if this is the first trace, just plot it, otherwise add it to the averaged data from before:
@@ -2056,7 +2058,7 @@ namespace ArrayDACControl
                 CameraForm.scatterGraph3.Plots[1].PlotXY(corrbins, newCorrDataCh2);
                 CameraForm.scatterGraph3.Plots[2].PlotXY(corrbins, newCorrDataDiff);
                 CameraForm.scatterGraph3.Plots[3].PlotXY(corrbins, newCorrDataSum);
-                scatterGraphNormCorrSig.PlotXY(corrbins, newnormSig);
+                CameraForm.scatterGraphNormCorrSig.PlotXY(corrbins, newnormSig);
             }
             else
             {
@@ -2075,7 +2077,7 @@ namespace ArrayDACControl
                 CameraForm.scatterGraph3.Plots[1].PlotXY(corrbins, avgCorrDataCh2);
                 CameraForm.scatterGraph3.Plots[2].PlotXY(corrbins, avgCorrDataDiff);
                 CameraForm.scatterGraph3.Plots[3].PlotXY(corrbins, avgCorrDataSum);
-                scatterGraphNormCorrSig.PlotXY(corrbins, avgnormSig);
+                CameraForm.scatterGraphNormCorrSig.PlotXY(corrbins, avgnormSig);
             }
 
             if (SaveCorrelatorToggle.Value)
@@ -2085,7 +2087,7 @@ namespace ArrayDACControl
 
                 System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "Correlator Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
-                //double[] corrdata = CorrelatorGraph.Plots[0].GetYData();
+                //double[] corrdata = CameraForm.CorrelatorGraph.Plots[0].GetYData();
 
                 for (int j = 0; j < newCorrDataCh1.Length; j++)
                 {
@@ -2131,7 +2133,7 @@ namespace ArrayDACControl
 
             // Display current "amplitude" of micromotion or motion suppression on the appropriate graph:
 
-            if (corrRecToggle.Value == false)
+            if (CameraForm.corrRecToggle.Value == false)
             {
 
                 if (LockinFrequencySwitch.Value == true)
@@ -2257,7 +2259,7 @@ namespace ArrayDACControl
 
             System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "Correlator Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
-            double[] corrdata = CorrelatorGraph.Plots[0].GetYData();
+            double[] corrdata = CameraForm.CorrelatorGraph.Plots[0].GetYData();
             for (int j = 0; j < corrdata.Length; j++)
             {
                 tw.WriteLine(corrdata[j]);
@@ -3160,7 +3162,7 @@ namespace ArrayDACControl
             //define a copy of the data for Center of Mass Calculation
             //double[,] DataDoubleCopy = Camera.DataDouble;
             //multiplier applied to background to threshold fluorescence
-            double multiplier = double.Parse(CameraForm.BackgroundMultiplierTextbox.Text);
+            double multiplier = double.Parse(BackgroundMultiplierTextbox.Text);
             //center of mass variable
             double position = 0;
             
@@ -3452,12 +3454,12 @@ namespace ArrayDACControl
         private void CameraThreadFrmCallback()
         {
             //update status box
-            CameraForm.richTextBox1.Text = Camera.sStatusMsg;
+            richTextBox1.Text = Camera.sStatusMsg;
         }
         private void CameraThreadFrmCallback2()
         {
             //update message status box
-            CameraForm.richTextBox1.Text = Camera.sStatusMsg;
+            richTextBox1.Text = Camera.sStatusMsg;
             //update button
             CameraStartButton.BackColor = System.Drawing.Color.Linen;
             CameraStartButton.Text = "Start Camera";
@@ -3476,7 +3478,7 @@ namespace ArrayDACControl
         private void CameraThreadFrmCallback4()
         {
             //update background box
-            CameraForm.BackgroundTextbox.Text = CameraThreadHelper.Background.ToString("F2");
+            BackgroundTextbox.Text = CameraThreadHelper.Background.ToString("F2");
         }
         private void CameraThreadFrmCallback5()
         {
@@ -3489,7 +3491,7 @@ namespace ArrayDACControl
         }
         private void CameraThreadFrmCallback6()
         {
-            CameraThreadHelper.message = CameraForm.BackgroundComboBox.Text;
+            CameraThreadHelper.message = BackgroundComboBox.Text;
         }
         private void CameraInitializeHelper()
         {
@@ -3554,7 +3556,7 @@ namespace ArrayDACControl
 
         private void StartCameraThread()
         {
-            CameraForm.richTextBox1.Text = "Attempting Camera Initialization...";
+            richTextBox1.Text = "Attempting Camera Initialization...";
 
             CameraThreadHelper.ShouldBeRunningFlag = true;
             CameraThreadHelper.theThread = new Thread(new ThreadStart(CameraThreadExecute));
@@ -3662,39 +3664,7 @@ namespace ArrayDACControl
 
         private void corrRecToggle_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
         {
-            if (corrRecToggle.Value == false)
-            {
-                            
-                            
-                if (LockinFrequencySwitch.Value == true)
-                {
-                    counterAmp = 0;
-                    int nextx = CameraForm.corrAmpLog.Plots[0].HistoryCount;
-                    CameraForm.testlbl.Text = nextx.ToString();
-                    double[] xnew = new double[4] { nextx, nextx, nextx, nextx };
-                    double[] ynew = new double[4] { 0, 0, 0, 0 };
-                    CameraForm.corrAmpLog.PlotXYAppend(xnew, ynew);
-                }
-                else
-                {
-                    counterMu = 0;
-                    int nextx = CameraForm.corrMuLog.Plots[0].HistoryCount;
-                    CameraForm.testlbl.Text = nextx.ToString();
-                    double[] xnew = new double[4] { nextx, nextx, nextx, nextx };
-                    double[] ynew = new double[4] { 0, 0, 0, 0 };
-                    CameraForm.corrMuLog.PlotXYAppend(xnew, ynew);
-                }
 
-            }
-
-        }
-
-        private void clrCorrLog_Click(object sender, EventArgs e)
-        {
-            if (LockinFrequencySwitch.Value == true)
-                CameraForm.corrAmpLog.ClearData();
-            else
-                CameraForm.corrMuLog.ClearData();
         }
 
         private void groupBox51_Enter(object sender, EventArgs e)
@@ -3717,10 +3687,10 @@ namespace ArrayDACControl
                 CameraForm.scatterGraph3.Plots[2].Visible = false;
                 CameraForm.scatterGraph3.Plots[3].Visible = false;
 
-                CorrelatorGraph.Plots[0].Visible = true;
-                CorrelatorGraph.Plots[1].Visible = true;
-                CorrelatorGraph.Plots[2].Visible = false;
-                CorrelatorGraph.Plots[3].Visible = false;
+                CameraForm.CorrelatorGraph.Plots[0].Visible = true;
+                CameraForm.CorrelatorGraph.Plots[1].Visible = true;
+                CameraForm.CorrelatorGraph.Plots[2].Visible = false;
+                CameraForm.CorrelatorGraph.Plots[3].Visible = false;
             }
             else
             {
@@ -3735,10 +3705,10 @@ namespace ArrayDACControl
                 CameraForm.scatterGraph3.Plots[2].Visible = true;
                 CameraForm.scatterGraph3.Plots[3].Visible = true;
 
-                CorrelatorGraph.Plots[0].Visible = false;
-                CorrelatorGraph.Plots[1].Visible = false;
-                CorrelatorGraph.Plots[2].Visible = true;
-                CorrelatorGraph.Plots[3].Visible = true;
+                CameraForm.CorrelatorGraph.Plots[0].Visible = false;
+                CameraForm.CorrelatorGraph.Plots[1].Visible = false;
+                CameraForm.CorrelatorGraph.Plots[2].Visible = true;
+                CameraForm.CorrelatorGraph.Plots[3].Visible = true;
             }
 
         }

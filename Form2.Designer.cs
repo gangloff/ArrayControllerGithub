@@ -28,8 +28,6 @@ namespace ArrayDACControl
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.intensityGraph1 = new NationalInstruments.UI.WindowsForms.IntensityGraph();
             this.colorScale1 = new NationalInstruments.UI.ColorScale();
             this.intensityCursor1 = new NationalInstruments.UI.IntensityCursor();
@@ -71,13 +69,6 @@ namespace ArrayDACControl
             this.toolStripPropertyEditor12 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.toolStripLabel13 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor13 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.BackgroundComboBox = new System.Windows.Forms.ComboBox();
-            this.BackgroundTextbox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.BackgroundMultiplierTextbox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.instrumentControlStrip1 = new NationalInstruments.UI.WindowsForms.InstrumentControlStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor1 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
@@ -124,6 +115,32 @@ namespace ArrayDACControl
             this.scatterPlot6 = new NationalInstruments.UI.ScatterPlot();
             this.scatterPlot7 = new NationalInstruments.UI.ScatterPlot();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox57 = new System.Windows.Forms.GroupBox();
+            this.correlatorDecompMerit = new System.Windows.Forms.RichTextBox();
+            this.groupBox53 = new System.Windows.Forms.GroupBox();
+            this.correlatorTotalCounts = new System.Windows.Forms.RichTextBox();
+            this.scatterGraphNormCorrSig = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.scatterPlot8 = new NationalInstruments.UI.ScatterPlot();
+            this.xAxis12 = new NationalInstruments.UI.XAxis();
+            this.yAxis12 = new NationalInstruments.UI.YAxis();
+            this.CorrelatorGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
+            this.waveformPlot11 = new NationalInstruments.UI.WaveformPlot();
+            this.xAxis11 = new NationalInstruments.UI.XAxis();
+            this.yAxis11 = new NationalInstruments.UI.YAxis();
+            this.waveformPlot12 = new NationalInstruments.UI.WaveformPlot();
+            this.waveformPlot13 = new NationalInstruments.UI.WaveformPlot();
+            this.waveformPlot14 = new NationalInstruments.UI.WaveformPlot();
+            this.instrumentControlStrip5 = new NationalInstruments.UI.WindowsForms.InstrumentControlStrip();
+            this.toolStripLabel18 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripPropertyEditor18 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
+            this.toolStripLabel19 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripPropertyEditor19 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
+            this.toolStripLabel20 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripPropertyEditor20 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
+            this.toolStripLabel21 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripPropertyEditor21 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
+            this.clrCorrLog = new System.Windows.Forms.Button();
+            this.corrRecToggle = new NationalInstruments.UI.WindowsForms.Switch();
             this.testlbl = new System.Windows.Forms.Label();
             this.corrAmpLog = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.scatterPlot5 = new NationalInstruments.UI.ScatterPlot();
@@ -134,6 +151,7 @@ namespace ArrayDACControl
             this.xAxis5 = new NationalInstruments.UI.XAxis();
             this.yAxis5 = new NationalInstruments.UI.YAxis();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.IonFocusGraphsClearButton = new System.Windows.Forms.Button();
             this.ySpreadGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
             this.waveformPlot10 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis10 = new NationalInstruments.UI.XAxis();
@@ -155,7 +173,6 @@ namespace ArrayDACControl
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.FocusLogsONCheck = new System.Windows.Forms.CheckBox();
-            this.IonFocusGraphsClearButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.intensityGraph1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor2)).BeginInit();
@@ -165,7 +182,6 @@ namespace ArrayDACControl
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PositionGraph)).BeginInit();
             this.instrumentControlStrip3.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.instrumentControlStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -175,6 +191,12 @@ namespace ArrayDACControl
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).BeginInit();
             this.tabPage4.SuspendLayout();
+            this.groupBox57.SuspendLayout();
+            this.groupBox53.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CorrelatorGraph)).BeginInit();
+            this.instrumentControlStrip5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrAmpLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).BeginInit();
             this.tabPage5.SuspendLayout();
@@ -183,30 +205,6 @@ namespace ArrayDACControl
             ((System.ComponentModel.ISupportInitialize)(this.xSpreadGraph)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xBalanceGraph)).BeginInit();
             this.SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.richTextBox1.Location = new System.Drawing.Point(387, 962);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(206, 87);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "No Status Message";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(384, 943);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(185, 16);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Camera Status Messages";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // intensityGraph1
             // 
@@ -222,11 +220,11 @@ namespace ArrayDACControl
                         | NationalInstruments.UI.IntensityGraphInteractionModes.DragCursor)
                         | NationalInstruments.UI.IntensityGraphInteractionModes.DragAnnotationCaption)
                         | NationalInstruments.UI.IntensityGraphInteractionModes.EditRange)));
-            this.intensityGraph1.Location = new System.Drawing.Point(12, 12);
+            this.intensityGraph1.Location = new System.Drawing.Point(12, 8);
             this.intensityGraph1.Name = "intensityGraph1";
             this.intensityGraph1.Plots.AddRange(new NationalInstruments.UI.IntensityPlot[] {
             this.intensityPlot1});
-            this.intensityGraph1.Size = new System.Drawing.Size(900, 900);
+            this.intensityGraph1.Size = new System.Drawing.Size(920, 920);
             this.intensityGraph1.TabIndex = 0;
             this.intensityGraph1.XAxes.AddRange(new NationalInstruments.UI.IntensityXAxis[] {
             this.intensityXaxis1});
@@ -275,7 +273,7 @@ namespace ArrayDACControl
             this.groupBox1.Controls.Add(this.instrumentControlStrip2);
             this.groupBox1.Location = new System.Drawing.Point(6, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(765, 503);
+            this.groupBox1.Size = new System.Drawing.Size(940, 503);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Fluorescence Log";
@@ -294,7 +292,7 @@ namespace ArrayDACControl
             this.FluorescenceGraph.Name = "FluorescenceGraph";
             this.FluorescenceGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
             this.waveformPlot1});
-            this.FluorescenceGraph.Size = new System.Drawing.Size(748, 375);
+            this.FluorescenceGraph.Size = new System.Drawing.Size(928, 375);
             this.FluorescenceGraph.TabIndex = 9;
             this.FluorescenceGraph.UseColorGenerator = true;
             this.FluorescenceGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -425,7 +423,7 @@ namespace ArrayDACControl
             this.groupBox2.Controls.Add(this.instrumentControlStrip3);
             this.groupBox2.Location = new System.Drawing.Point(6, 506);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(728, 514);
+            this.groupBox2.Size = new System.Drawing.Size(940, 514);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Position Log";
@@ -460,7 +458,7 @@ namespace ArrayDACControl
             this.PositionGraph.Name = "PositionGraph";
             this.PositionGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
             this.waveformPlot2});
-            this.PositionGraph.Size = new System.Drawing.Size(716, 375);
+            this.PositionGraph.Size = new System.Drawing.Size(928, 375);
             this.PositionGraph.TabIndex = 5;
             this.PositionGraph.UseColorGenerator = true;
             this.PositionGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -511,7 +509,7 @@ namespace ArrayDACControl
             this.instrumentControlStrip3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.instrumentControlStrip3.Location = new System.Drawing.Point(6, 431);
             this.instrumentControlStrip3.Name = "instrumentControlStrip3";
-            this.instrumentControlStrip3.Size = new System.Drawing.Size(655, 25);
+            this.instrumentControlStrip3.Size = new System.Drawing.Size(748, 25);
             this.instrumentControlStrip3.TabIndex = 8;
             // 
             // toolStripLabel10
@@ -575,74 +573,6 @@ namespace ArrayDACControl
             this.toolStripPropertyEditor13.Source = new NationalInstruments.UI.PropertyEditorSource(this.PositionGraph, "Annotations");
             this.toolStripPropertyEditor13.Text = "(Collection)";
             // 
-            // BackgroundComboBox
-            // 
-            this.BackgroundComboBox.FormattingEnabled = true;
-            this.BackgroundComboBox.Items.AddRange(new object[] {
-            "Rim of intensity box",
-            "Duplicate shifted box"});
-            this.BackgroundComboBox.Location = new System.Drawing.Point(13, 39);
-            this.BackgroundComboBox.Name = "BackgroundComboBox";
-            this.BackgroundComboBox.Size = new System.Drawing.Size(121, 21);
-            this.BackgroundComboBox.TabIndex = 16;
-            // 
-            // BackgroundTextbox
-            // 
-            this.BackgroundTextbox.Location = new System.Drawing.Point(13, 78);
-            this.BackgroundTextbox.Name = "BackgroundTextbox";
-            this.BackgroundTextbox.Size = new System.Drawing.Size(71, 20);
-            this.BackgroundTextbox.TabIndex = 17;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(133, 13);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Background Determination";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 62);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(143, 13);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "Calculated Background (/px)";
-            // 
-            // BackgroundMultiplierTextbox
-            // 
-            this.BackgroundMultiplierTextbox.Location = new System.Drawing.Point(170, 38);
-            this.BackgroundMultiplierTextbox.Name = "BackgroundMultiplierTextbox";
-            this.BackgroundMultiplierTextbox.Size = new System.Drawing.Size(34, 20);
-            this.BackgroundMultiplierTextbox.TabIndex = 20;
-            this.BackgroundMultiplierTextbox.Text = "1";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(167, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(109, 13);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "Background Multiplier";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.BackgroundMultiplierTextbox);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.BackgroundTextbox);
-            this.groupBox3.Controls.Add(this.BackgroundComboBox);
-            this.groupBox3.Location = new System.Drawing.Point(630, 943);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(282, 111);
-            this.groupBox3.TabIndex = 16;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Background";
-            // 
             // instrumentControlStrip1
             // 
             this.instrumentControlStrip1.AutoSize = false;
@@ -659,7 +589,7 @@ namespace ArrayDACControl
             this.toolStripLabel5,
             this.toolStripPropertyEditor5});
             this.instrumentControlStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.instrumentControlStrip1.Location = new System.Drawing.Point(12, 915);
+            this.instrumentControlStrip1.Location = new System.Drawing.Point(12, 931);
             this.instrumentControlStrip1.Name = "instrumentControlStrip1";
             this.instrumentControlStrip1.Size = new System.Drawing.Size(900, 25);
             this.instrumentControlStrip1.TabIndex = 17;
@@ -742,14 +672,14 @@ namespace ArrayDACControl
             // 
             // SaveImagePath
             // 
-            this.SaveImagePath.Location = new System.Drawing.Point(12, 983);
+            this.SaveImagePath.Location = new System.Drawing.Point(12, 1015);
             this.SaveImagePath.Name = "SaveImagePath";
             this.SaveImagePath.Size = new System.Drawing.Size(356, 20);
             this.SaveImagePath.TabIndex = 19;
             // 
             // SaveImageButton
             // 
-            this.SaveImageButton.Location = new System.Drawing.Point(12, 954);
+            this.SaveImageButton.Location = new System.Drawing.Point(12, 986);
             this.SaveImageButton.Name = "SaveImageButton";
             this.SaveImageButton.Size = new System.Drawing.Size(150, 23);
             this.SaveImageButton.TabIndex = 18;
@@ -802,7 +732,7 @@ namespace ArrayDACControl
             this.label49.AutoSize = true;
             this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label49.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label49.Location = new System.Drawing.Point(705, 273);
+            this.label49.Location = new System.Drawing.Point(250, 4);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(168, 24);
             this.label49.TabIndex = 160;
@@ -810,18 +740,19 @@ namespace ArrayDACControl
             // 
             // PMTcountBox
             // 
-            this.PMTcountBox.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PMTcountBox.Location = new System.Drawing.Point(668, 305);
+            this.PMTcountBox.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PMTcountBox.Location = new System.Drawing.Point(213, 33);
             this.PMTcountBox.Name = "PMTcountBox";
-            this.PMTcountBox.Size = new System.Drawing.Size(239, 35);
+            this.PMTcountBox.Size = new System.Drawing.Size(239, 63);
             this.PMTcountBox.TabIndex = 159;
+            this.PMTcountBox.Text = "000";
             this.PMTcountBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // PMTcountGraphClearButton
             // 
             this.PMTcountGraphClearButton.BackColor = System.Drawing.Color.Firebrick;
             this.PMTcountGraphClearButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.PMTcountGraphClearButton.Location = new System.Drawing.Point(649, 15);
+            this.PMTcountGraphClearButton.Location = new System.Drawing.Point(21, 41);
             this.PMTcountGraphClearButton.Name = "PMTcountGraphClearButton";
             this.PMTcountGraphClearButton.Size = new System.Drawing.Size(81, 55);
             this.PMTcountGraphClearButton.TabIndex = 158;
@@ -839,7 +770,7 @@ namespace ArrayDACControl
                         | NationalInstruments.UI.GraphInteractionModes.DragCursor)
                         | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption)
                         | NationalInstruments.UI.GraphInteractionModes.EditRange)));
-            this.PMTcountGraph.Location = new System.Drawing.Point(19, 15);
+            this.PMTcountGraph.Location = new System.Drawing.Point(21, 102);
             this.PMTcountGraph.Name = "PMTcountGraph";
             this.PMTcountGraph.PlotAreaBorder = NationalInstruments.UI.Border.Sunken;
             this.PMTcountGraph.PlotAreaColor = System.Drawing.SystemColors.MenuText;
@@ -848,7 +779,7 @@ namespace ArrayDACControl
             this.waveformPlot7,
             this.waveformPlot8,
             this.waveformPlot9});
-            this.PMTcountGraph.Size = new System.Drawing.Size(624, 332);
+            this.PMTcountGraph.Size = new System.Drawing.Size(913, 531);
             this.PMTcountGraph.TabIndex = 156;
             this.PMTcountGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
             this.xAxis4});
@@ -916,7 +847,7 @@ namespace ArrayDACControl
             this.toolStripLabel17,
             this.toolStripPropertyEditor17});
             this.instrumentControlStrip4.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.instrumentControlStrip4.Location = new System.Drawing.Point(19, 350);
+            this.instrumentControlStrip4.Location = new System.Drawing.Point(21, 636);
             this.instrumentControlStrip4.Name = "instrumentControlStrip4";
             this.instrumentControlStrip4.Size = new System.Drawing.Size(586, 25);
             this.instrumentControlStrip4.TabIndex = 157;
@@ -1034,7 +965,7 @@ namespace ArrayDACControl
             this.scatterPlot2,
             this.scatterPlot6,
             this.scatterPlot7});
-            this.scatterGraph3.Size = new System.Drawing.Size(624, 303);
+            this.scatterGraph3.Size = new System.Drawing.Size(916, 591);
             this.scatterGraph3.TabIndex = 144;
             this.scatterGraph3.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
             this.xAxis3});
@@ -1084,6 +1015,13 @@ namespace ArrayDACControl
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.groupBox57);
+            this.tabPage4.Controls.Add(this.groupBox53);
+            this.tabPage4.Controls.Add(this.scatterGraphNormCorrSig);
+            this.tabPage4.Controls.Add(this.CorrelatorGraph);
+            this.tabPage4.Controls.Add(this.instrumentControlStrip5);
+            this.tabPage4.Controls.Add(this.clrCorrLog);
+            this.tabPage4.Controls.Add(this.corrRecToggle);
             this.tabPage4.Controls.Add(this.testlbl);
             this.tabPage4.Controls.Add(this.corrAmpLog);
             this.tabPage4.Controls.Add(this.corrMuLog);
@@ -1095,23 +1033,256 @@ namespace ArrayDACControl
             this.tabPage4.Text = "Correlator";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // groupBox57
+            // 
+            this.groupBox57.Controls.Add(this.correlatorDecompMerit);
+            this.groupBox57.Location = new System.Drawing.Point(6, 946);
+            this.groupBox57.Name = "groupBox57";
+            this.groupBox57.Size = new System.Drawing.Size(275, 74);
+            this.groupBox57.TabIndex = 189;
+            this.groupBox57.TabStop = false;
+            this.groupBox57.Text = "Decompensation";
+            // 
+            // correlatorDecompMerit
+            // 
+            this.correlatorDecompMerit.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.correlatorDecompMerit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.correlatorDecompMerit.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.correlatorDecompMerit.Location = new System.Drawing.Point(19, 19);
+            this.correlatorDecompMerit.Name = "correlatorDecompMerit";
+            this.correlatorDecompMerit.ReadOnly = true;
+            this.correlatorDecompMerit.Size = new System.Drawing.Size(250, 44);
+            this.correlatorDecompMerit.TabIndex = 25;
+            this.correlatorDecompMerit.Text = "0";
+            // 
+            // groupBox53
+            // 
+            this.groupBox53.Controls.Add(this.correlatorTotalCounts);
+            this.groupBox53.Location = new System.Drawing.Point(287, 946);
+            this.groupBox53.Name = "groupBox53";
+            this.groupBox53.Size = new System.Drawing.Size(212, 74);
+            this.groupBox53.TabIndex = 188;
+            this.groupBox53.TabStop = false;
+            this.groupBox53.Text = "Total Counts";
+            // 
+            // correlatorTotalCounts
+            // 
+            this.correlatorTotalCounts.BackColor = System.Drawing.SystemColors.Window;
+            this.correlatorTotalCounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.correlatorTotalCounts.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.correlatorTotalCounts.Location = new System.Drawing.Point(19, 19);
+            this.correlatorTotalCounts.Name = "correlatorTotalCounts";
+            this.correlatorTotalCounts.ReadOnly = true;
+            this.correlatorTotalCounts.Size = new System.Drawing.Size(178, 44);
+            this.correlatorTotalCounts.TabIndex = 25;
+            this.correlatorTotalCounts.Text = "0";
+            // 
+            // scatterGraphNormCorrSig
+            // 
+            this.scatterGraphNormCorrSig.Location = new System.Drawing.Point(572, 810);
+            this.scatterGraphNormCorrSig.Name = "scatterGraphNormCorrSig";
+            this.scatterGraphNormCorrSig.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.scatterPlot8});
+            this.scatterGraphNormCorrSig.Size = new System.Drawing.Size(368, 187);
+            this.scatterGraphNormCorrSig.TabIndex = 187;
+            this.scatterGraphNormCorrSig.UseColorGenerator = true;
+            this.scatterGraphNormCorrSig.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.xAxis12});
+            this.scatterGraphNormCorrSig.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.yAxis12});
+            // 
+            // scatterPlot8
+            // 
+            this.scatterPlot8.XAxis = this.xAxis12;
+            this.scatterPlot8.YAxis = this.yAxis12;
+            // 
+            // CorrelatorGraph
+            // 
+            this.CorrelatorGraph.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY)
+                        | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)
+                        | NationalInstruments.UI.GraphInteractionModes.PanX)
+                        | NationalInstruments.UI.GraphInteractionModes.PanY)
+                        | NationalInstruments.UI.GraphInteractionModes.DragCursor)
+                        | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption)
+                        | NationalInstruments.UI.GraphInteractionModes.EditRange)));
+            this.CorrelatorGraph.Location = new System.Drawing.Point(312, 423);
+            this.CorrelatorGraph.Name = "CorrelatorGraph";
+            this.CorrelatorGraph.PlotAreaBorder = NationalInstruments.UI.Border.Sunken;
+            this.CorrelatorGraph.PlotAreaColor = System.Drawing.SystemColors.MenuText;
+            this.CorrelatorGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
+            this.waveformPlot11,
+            this.waveformPlot12,
+            this.waveformPlot13,
+            this.waveformPlot14});
+            this.CorrelatorGraph.Size = new System.Drawing.Size(629, 333);
+            this.CorrelatorGraph.TabIndex = 172;
+            this.CorrelatorGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.xAxis11});
+            this.CorrelatorGraph.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.yAxis11});
+            // 
+            // waveformPlot11
+            // 
+            this.waveformPlot11.LineColor = System.Drawing.Color.GhostWhite;
+            this.waveformPlot11.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.waveformPlot11.XAxis = this.xAxis11;
+            this.waveformPlot11.YAxis = this.yAxis11;
+            // 
+            // xAxis11
+            // 
+            this.xAxis11.MajorDivisions.GridColor = System.Drawing.Color.ForestGreen;
+            this.xAxis11.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
+            this.xAxis11.MajorDivisions.GridVisible = true;
+            this.xAxis11.MajorDivisions.LineWidth = 0.5F;
+            this.xAxis11.MinorDivisions.GridColor = System.Drawing.Color.ForestGreen;
+            this.xAxis11.MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.xAxis11.MinorDivisions.Interval = 0.1;
+            this.xAxis11.MinorDivisions.LineWidth = 0.5F;
+            this.xAxis11.MinorDivisions.TickVisible = true;
+            // 
+            // yAxis11
+            // 
+            this.yAxis11.MajorDivisions.GridColor = System.Drawing.Color.ForestGreen;
+            this.yAxis11.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
+            this.yAxis11.MajorDivisions.GridVisible = true;
+            this.yAxis11.MinorDivisions.GridColor = System.Drawing.Color.ForestGreen;
+            this.yAxis11.MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            // 
+            // waveformPlot12
+            // 
+            this.waveformPlot12.LineColor = System.Drawing.Color.Red;
+            this.waveformPlot12.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.waveformPlot12.XAxis = this.xAxis11;
+            this.waveformPlot12.YAxis = this.yAxis11;
+            // 
+            // waveformPlot13
+            // 
+            this.waveformPlot13.XAxis = this.xAxis11;
+            this.waveformPlot13.YAxis = this.yAxis11;
+            // 
+            // waveformPlot14
+            // 
+            this.waveformPlot14.LineColor = System.Drawing.Color.DeepSkyBlue;
+            this.waveformPlot14.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.waveformPlot14.XAxis = this.xAxis11;
+            this.waveformPlot14.YAxis = this.yAxis11;
+            // 
+            // instrumentControlStrip5
+            // 
+            this.instrumentControlStrip5.AutoSize = false;
+            this.instrumentControlStrip5.Dock = System.Windows.Forms.DockStyle.None;
+            this.instrumentControlStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel18,
+            this.toolStripPropertyEditor18,
+            this.toolStripLabel19,
+            this.toolStripPropertyEditor19,
+            this.toolStripLabel20,
+            this.toolStripPropertyEditor20,
+            this.toolStripLabel21,
+            this.toolStripPropertyEditor21});
+            this.instrumentControlStrip5.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.instrumentControlStrip5.Location = new System.Drawing.Point(355, 759);
+            this.instrumentControlStrip5.Name = "instrumentControlStrip5";
+            this.instrumentControlStrip5.Size = new System.Drawing.Size(586, 25);
+            this.instrumentControlStrip5.TabIndex = 173;
+            // 
+            // toolStripLabel18
+            // 
+            this.toolStripLabel18.Name = "toolStripLabel18";
+            this.toolStripLabel18.Size = new System.Drawing.Size(90, 22);
+            this.toolStripLabel18.Text = "InteractionMode:";
+            // 
+            // toolStripPropertyEditor18
+            // 
+            this.toolStripPropertyEditor18.AutoSize = false;
+            this.toolStripPropertyEditor18.Name = "toolStripPropertyEditor18";
+            this.toolStripPropertyEditor18.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
+            this.toolStripPropertyEditor18.Size = new System.Drawing.Size(120, 21);
+            this.toolStripPropertyEditor18.Source = new NationalInstruments.UI.PropertyEditorSource(this.CorrelatorGraph, "InteractionMode");
+            this.toolStripPropertyEditor18.Text = "ZoomX, ZoomY, ZoomAroundPoint, PanX, PanY, DragCursor, DragAnnotationCaption, Edi" +
+                "tRange";
+            // 
+            // toolStripLabel19
+            // 
+            this.toolStripLabel19.Name = "toolStripLabel19";
+            this.toolStripLabel19.Size = new System.Drawing.Size(48, 22);
+            this.toolStripLabel19.Text = "Cursors:";
+            // 
+            // toolStripPropertyEditor19
+            // 
+            this.toolStripPropertyEditor19.AutoSize = false;
+            this.toolStripPropertyEditor19.Name = "toolStripPropertyEditor19";
+            this.toolStripPropertyEditor19.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
+            this.toolStripPropertyEditor19.Size = new System.Drawing.Size(120, 21);
+            this.toolStripPropertyEditor19.Source = new NationalInstruments.UI.PropertyEditorSource(this.CorrelatorGraph, "Cursors");
+            this.toolStripPropertyEditor19.Text = "(Collection)";
+            // 
+            // toolStripLabel20
+            // 
+            this.toolStripLabel20.Name = "toolStripLabel20";
+            this.toolStripLabel20.Size = new System.Drawing.Size(69, 22);
+            this.toolStripLabel20.Text = "Annotations:";
+            // 
+            // toolStripPropertyEditor20
+            // 
+            this.toolStripPropertyEditor20.AutoSize = false;
+            this.toolStripPropertyEditor20.Name = "toolStripPropertyEditor20";
+            this.toolStripPropertyEditor20.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
+            this.toolStripPropertyEditor20.Size = new System.Drawing.Size(120, 21);
+            this.toolStripPropertyEditor20.Source = new NationalInstruments.UI.PropertyEditorSource(this.CorrelatorGraph, "Annotations");
+            this.toolStripPropertyEditor20.Text = "(Collection)";
+            // 
+            // toolStripLabel21
+            // 
+            this.toolStripLabel21.Name = "toolStripLabel21";
+            this.toolStripLabel21.Size = new System.Drawing.Size(34, 13);
+            this.toolStripLabel21.Text = "Plots:";
+            // 
+            // toolStripPropertyEditor21
+            // 
+            this.toolStripPropertyEditor21.AutoSize = false;
+            this.toolStripPropertyEditor21.Name = "toolStripPropertyEditor21";
+            this.toolStripPropertyEditor21.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
+            this.toolStripPropertyEditor21.Size = new System.Drawing.Size(120, 21);
+            this.toolStripPropertyEditor21.Source = new NationalInstruments.UI.PropertyEditorSource(this.CorrelatorGraph, "Plots");
+            this.toolStripPropertyEditor21.Text = "(Collection)";
+            // 
+            // clrCorrLog
+            // 
+            this.clrCorrLog.BackColor = System.Drawing.Color.Red;
+            this.clrCorrLog.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.clrCorrLog.Location = new System.Drawing.Point(489, 355);
+            this.clrCorrLog.Name = "clrCorrLog";
+            this.clrCorrLog.Size = new System.Drawing.Size(27, 29);
+            this.clrCorrLog.TabIndex = 171;
+            this.clrCorrLog.UseVisualStyleBackColor = false;
+            this.clrCorrLog.Click += new System.EventHandler(this.clrCorrLog_Click);
+            // 
+            // corrRecToggle
+            // 
+            this.corrRecToggle.Location = new System.Drawing.Point(431, 355);
+            this.corrRecToggle.Name = "corrRecToggle";
+            this.corrRecToggle.Size = new System.Drawing.Size(34, 38);
+            this.corrRecToggle.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalSlide3D;
+            this.corrRecToggle.TabIndex = 170;
+            this.corrRecToggle.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.corrRecToggle_StateChanged);
+            // 
             // testlbl
             // 
             this.testlbl.AutoSize = true;
-            this.testlbl.Location = new System.Drawing.Point(51, 558);
+            this.testlbl.Location = new System.Drawing.Point(49, 367);
             this.testlbl.Name = "testlbl";
             this.testlbl.Size = new System.Drawing.Size(13, 13);
             this.testlbl.TabIndex = 165;
             this.testlbl.Text = "0";
-            this.testlbl.Click += new System.EventHandler(this.testlbl_Click);
             // 
             // corrAmpLog
             // 
-            this.corrAmpLog.Location = new System.Drawing.Point(387, 356);
+            this.corrAmpLog.Location = new System.Drawing.Point(479, 6);
             this.corrAmpLog.Name = "corrAmpLog";
             this.corrAmpLog.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot5});
-            this.corrAmpLog.Size = new System.Drawing.Size(309, 185);
+            this.corrAmpLog.Size = new System.Drawing.Size(467, 343);
             this.corrAmpLog.TabIndex = 164;
             this.corrAmpLog.UseColorGenerator = true;
             this.corrAmpLog.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1139,11 +1310,11 @@ namespace ArrayDACControl
             // 
             // corrMuLog
             // 
-            this.corrMuLog.Location = new System.Drawing.Point(42, 356);
+            this.corrMuLog.Location = new System.Drawing.Point(6, 6);
             this.corrMuLog.Name = "corrMuLog";
             this.corrMuLog.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot4});
-            this.corrMuLog.Size = new System.Drawing.Size(321, 185);
+            this.corrMuLog.Size = new System.Drawing.Size(467, 343);
             this.corrMuLog.TabIndex = 163;
             this.corrMuLog.UseColorGenerator = true;
             this.corrMuLog.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1189,6 +1360,18 @@ namespace ArrayDACControl
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Focus";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // IonFocusGraphsClearButton
+            // 
+            this.IonFocusGraphsClearButton.BackColor = System.Drawing.Color.Firebrick;
+            this.IonFocusGraphsClearButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.IonFocusGraphsClearButton.Location = new System.Drawing.Point(118, 10);
+            this.IonFocusGraphsClearButton.Name = "IonFocusGraphsClearButton";
+            this.IonFocusGraphsClearButton.Size = new System.Drawing.Size(81, 29);
+            this.IonFocusGraphsClearButton.TabIndex = 177;
+            this.IonFocusGraphsClearButton.Text = "Clear Results";
+            this.IonFocusGraphsClearButton.UseVisualStyleBackColor = false;
+            this.IonFocusGraphsClearButton.Click += new System.EventHandler(this.IonFocusGraphsClearButton_Click);
             // 
             // ySpreadGraph
             // 
@@ -1363,7 +1546,6 @@ namespace ArrayDACControl
             this.label7.Size = new System.Drawing.Size(56, 13);
             this.label7.TabIndex = 171;
             this.label7.Text = "Y Balance";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label6
             // 
@@ -1393,18 +1575,6 @@ namespace ArrayDACControl
             this.FocusLogsONCheck.Text = "LOGS ON?";
             this.FocusLogsONCheck.UseVisualStyleBackColor = true;
             // 
-            // IonFocusGraphsClearButton
-            // 
-            this.IonFocusGraphsClearButton.BackColor = System.Drawing.Color.Firebrick;
-            this.IonFocusGraphsClearButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.IonFocusGraphsClearButton.Location = new System.Drawing.Point(118, 10);
-            this.IonFocusGraphsClearButton.Name = "IonFocusGraphsClearButton";
-            this.IonFocusGraphsClearButton.Size = new System.Drawing.Size(81, 29);
-            this.IonFocusGraphsClearButton.TabIndex = 177;
-            this.IonFocusGraphsClearButton.Text = "Clear Results";
-            this.IonFocusGraphsClearButton.UseVisualStyleBackColor = false;
-            this.IonFocusGraphsClearButton.Click += new System.EventHandler(this.IonFocusGraphsClearButton_Click);
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1413,9 +1583,6 @@ namespace ArrayDACControl
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.SaveImagePath);
             this.Controls.Add(this.SaveImageButton);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.intensityGraph1);
             this.Controls.Add(this.instrumentControlStrip1);
             this.Name = "Form2";
@@ -1433,8 +1600,6 @@ namespace ArrayDACControl
             ((System.ComponentModel.ISupportInitialize)(this.PositionGraph)).EndInit();
             this.instrumentControlStrip3.ResumeLayout(false);
             this.instrumentControlStrip3.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.instrumentControlStrip1.ResumeLayout(false);
             this.instrumentControlStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1449,6 +1614,13 @@ namespace ArrayDACControl
             ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.groupBox57.ResumeLayout(false);
+            this.groupBox53.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CorrelatorGraph)).EndInit();
+            this.instrumentControlStrip5.ResumeLayout(false);
+            this.instrumentControlStrip5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrAmpLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).EndInit();
             this.tabPage5.ResumeLayout(false);
@@ -1464,8 +1636,6 @@ namespace ArrayDACControl
 
         #endregion
 
-        public System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Label label1;
         public NationalInstruments.UI.WindowsForms.IntensityGraph intensityGraph1;
         public NationalInstruments.UI.ColorScale colorScale1;
         private NationalInstruments.UI.IntensityXAxis intensityXaxis1;
@@ -1491,13 +1661,6 @@ namespace ArrayDACControl
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor12;
         private System.Windows.Forms.ToolStripLabel toolStripLabel13;
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor13;
-        public System.Windows.Forms.ComboBox BackgroundComboBox;
-        public System.Windows.Forms.TextBox BackgroundTextbox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        public System.Windows.Forms.TextBox BackgroundMultiplierTextbox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox3;
         private NationalInstruments.UI.WindowsForms.InstrumentControlStrip instrumentControlStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor1;
@@ -1592,6 +1755,32 @@ namespace ArrayDACControl
         private NationalInstruments.UI.XAxis xAxis8;
         private NationalInstruments.UI.YAxis yAxis8;
         private System.Windows.Forms.Button IonFocusGraphsClearButton;
+        private System.Windows.Forms.Button clrCorrLog;
+        public NationalInstruments.UI.WindowsForms.Switch corrRecToggle;
+        public NationalInstruments.UI.WindowsForms.WaveformGraph CorrelatorGraph;
+        private NationalInstruments.UI.WaveformPlot waveformPlot11;
+        private NationalInstruments.UI.XAxis xAxis11;
+        private NationalInstruments.UI.YAxis yAxis11;
+        private NationalInstruments.UI.WaveformPlot waveformPlot12;
+        private NationalInstruments.UI.WaveformPlot waveformPlot13;
+        private NationalInstruments.UI.WaveformPlot waveformPlot14;
+        private NationalInstruments.UI.WindowsForms.InstrumentControlStrip instrumentControlStrip5;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel18;
+        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor18;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel19;
+        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor19;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel20;
+        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor20;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel21;
+        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor21;
+        private NationalInstruments.UI.ScatterPlot scatterPlot8;
+        private NationalInstruments.UI.XAxis xAxis12;
+        private NationalInstruments.UI.YAxis yAxis12;
+        private System.Windows.Forms.GroupBox groupBox57;
+        public System.Windows.Forms.RichTextBox correlatorDecompMerit;
+        private System.Windows.Forms.GroupBox groupBox53;
+        public System.Windows.Forms.RichTextBox correlatorTotalCounts;
+        public NationalInstruments.UI.WindowsForms.ScatterGraph scatterGraphNormCorrSig;
 
 
 

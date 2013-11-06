@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.ElectrodeScanStart = new System.Windows.Forms.Button();
             this.SinglePMTReadButton = new System.Windows.Forms.Button();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor2 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
@@ -41,7 +40,6 @@
             this.toolStripPropertyEditor3 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor1 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.SliderScanStart = new System.Windows.Forms.Button();
             this.FilenameTab = new System.Windows.Forms.TabPage();
             this.label164 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -226,21 +224,8 @@
             this.label54 = new System.Windows.Forms.Label();
             this.syncSrcSw = new NationalInstruments.UI.WindowsForms.Switch();
             this.ncorrbinsText = new System.Windows.Forms.TextBox();
-            this.label138 = new System.Windows.Forms.Label();
             this.correlatorBitFilePathB = new System.Windows.Forms.TextBox();
-            this.label137 = new System.Windows.Forms.Label();
-            this.scatterGraphNormCorrSig = new NationalInstruments.UI.WindowsForms.ScatterGraph();
-            this.scatterPlot8 = new NationalInstruments.UI.ScatterPlot();
-            this.xAxis7 = new NationalInstruments.UI.XAxis();
-            this.yAxis7 = new NationalInstruments.UI.YAxis();
             this.textBoxBackEst = new System.Windows.Forms.TextBox();
-            this.CorrelatorGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
-            this.waveformPlot2 = new NationalInstruments.UI.WaveformPlot();
-            this.xAxis2 = new NationalInstruments.UI.XAxis();
-            this.yAxis2 = new NationalInstruments.UI.YAxis();
-            this.waveformPlot6 = new NationalInstruments.UI.WaveformPlot();
-            this.waveformPlot3 = new NationalInstruments.UI.WaveformPlot();
-            this.waveformPlot4 = new NationalInstruments.UI.WaveformPlot();
             this.correlatorQtext = new System.Windows.Forms.TextBox();
             this.correlatorBound1text = new System.Windows.Forms.TextBox();
             this.correlatorDiv1Ntext = new System.Windows.Forms.TextBox();
@@ -276,28 +261,15 @@
             this.label120 = new System.Windows.Forms.Label();
             this.label119 = new System.Windows.Forms.Label();
             this.label66 = new System.Windows.Forms.Label();
-            this.instrumentControlStrip2 = new NationalInstruments.UI.WindowsForms.InstrumentControlStrip();
-            this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripPropertyEditor10 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.toolStripLabel11 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripPropertyEditor11 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.toolStripLabel12 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripPropertyEditor12 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.toolStripLabel13 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripPropertyEditor13 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.label117 = new System.Windows.Forms.Label();
             this.label101 = new System.Windows.Forms.Label();
             this.label115 = new System.Windows.Forms.Label();
             this.label104 = new System.Windows.Forms.Label();
             this.label116 = new System.Windows.Forms.Label();
-            this.groupBox57 = new System.Windows.Forms.GroupBox();
-            this.correlatorDecompMerit = new System.Windows.Forms.RichTextBox();
             this.label108 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.label106 = new System.Windows.Forms.Label();
             this.CorrelatorButton = new System.Windows.Forms.Button();
-            this.groupBox53 = new System.Windows.Forms.GroupBox();
-            this.correlatorTotalCounts = new System.Windows.Forms.RichTextBox();
             this.label103 = new System.Windows.Forms.Label();
             this.label102 = new System.Windows.Forms.Label();
             this.groupBox52 = new System.Windows.Forms.GroupBox();
@@ -316,7 +288,9 @@
             this.LockInPertext2B = new System.Windows.Forms.TextBox();
             this.LockInPertext2 = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
+            this.label138 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
+            this.label137 = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.LockInPertext1 = new System.Windows.Forms.TextBox();
@@ -353,6 +327,7 @@
             this.label126 = new System.Windows.Forms.Label();
             this.FluorLogNumPointsTextbox = new System.Windows.Forms.TextBox();
             this.ElectrodeScanTab = new System.Windows.Forms.TabPage();
+            this.ElectrodeScanStart = new System.Windows.Forms.Button();
             this.groupBox41 = new System.Windows.Forms.GroupBox();
             this.ElectrodeScanComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox34 = new System.Windows.Forms.GroupBox();
@@ -378,6 +353,7 @@
             this.ElectrodeScanEndValue1Textbox = new System.Windows.Forms.TextBox();
             this.ElectrodeScanStartValue1Textbox = new System.Windows.Forms.TextBox();
             this.SliderScan = new System.Windows.Forms.TabPage();
+            this.SliderScanStart = new System.Windows.Forms.Button();
             this.groupBox62 = new System.Windows.Forms.GroupBox();
             this.SliderScanSelection = new System.Windows.Forms.ComboBox();
             this.groupBox33 = new System.Windows.Forms.GroupBox();
@@ -459,8 +435,6 @@
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.MainControlTab = new System.Windows.Forms.TabPage();
-            this.clrCorrLog = new System.Windows.Forms.Button();
-            this.corrRecToggle = new NationalInstruments.UI.WindowsForms.Switch();
             this.TickleSlider = new ArrayDACControl.AdjustableSlider();
             this.BxSlider = new ArrayDACControl.AdjustableSlider();
             this.Sideband402Control = new ArrayDACControl.AdjustableSlider();
@@ -514,6 +488,15 @@
             this.DXSlider = new ArrayDACControl.AdjustableSlider();
             this.TrapHeightSlider = new ArrayDACControl.AdjustableSlider();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.groupBox39 = new System.Windows.Forms.GroupBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.BackgroundMultiplierTextbox = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label172 = new System.Windows.Forms.Label();
+            this.BackgroundTextbox = new System.Windows.Forms.TextBox();
+            this.BackgroundComboBox = new System.Windows.Forms.ComboBox();
+            this.label177 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.FilenameTab.SuspendLayout();
             this.groupBox49.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CommonFilenameSwitch)).BeginInit();
@@ -541,15 +524,10 @@
             this.groupBox36.SuspendLayout();
             this.groupBox35.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.syncSrcSw)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CorrelatorGraph)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.regSelectSw)).BeginInit();
             this.TickleResetBox.SuspendLayout();
             this.ArrayResetBox.SuspendLayout();
             this.groupBox58.SuspendLayout();
-            this.instrumentControlStrip2.SuspendLayout();
-            this.groupBox57.SuspendLayout();
-            this.groupBox53.SuspendLayout();
             this.groupBox52.SuspendLayout();
             this.groupBox51.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intTselector)).BeginInit();
@@ -597,7 +575,6 @@
             this.groupBox9.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.MainControlTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).BeginInit();
             this.groupBox38.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Switch638)).BeginInit();
             this.groupBox31.SuspendLayout();
@@ -614,24 +591,14 @@
             this.groupBox25.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CurrentFeedforward370Offset)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.groupBox39.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ElectrodeScanStart
-            // 
-            this.ElectrodeScanStart.BackColor = System.Drawing.Color.Gainsboro;
-            this.ElectrodeScanStart.Location = new System.Drawing.Point(598, 857);
-            this.ElectrodeScanStart.Name = "ElectrodeScanStart";
-            this.ElectrodeScanStart.Size = new System.Drawing.Size(158, 31);
-            this.ElectrodeScanStart.TabIndex = 141;
-            this.ElectrodeScanStart.Text = "Start *Electrode* Scan";
-            this.ElectrodeScanStart.UseVisualStyleBackColor = false;
-            this.ElectrodeScanStart.Click += new System.EventHandler(this.ElectrodeScanStart_Click);
             // 
             // SinglePMTReadButton
             // 
             this.SinglePMTReadButton.BackColor = System.Drawing.Color.Gray;
             this.SinglePMTReadButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.SinglePMTReadButton.Location = new System.Drawing.Point(402, 857);
+            this.SinglePMTReadButton.Location = new System.Drawing.Point(1475, 845);
             this.SinglePMTReadButton.Name = "SinglePMTReadButton";
             this.SinglePMTReadButton.Size = new System.Drawing.Size(81, 55);
             this.SinglePMTReadButton.TabIndex = 126;
@@ -703,18 +670,6 @@
             this.toolStripPropertyEditor1.Name = "toolStripPropertyEditor1";
             this.toolStripPropertyEditor1.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
             this.toolStripPropertyEditor1.Size = new System.Drawing.Size(120, 21);
-            // 
-            // SliderScanStart
-            // 
-            this.SliderScanStart.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.SliderScanStart.ForeColor = System.Drawing.Color.IndianRed;
-            this.SliderScanStart.Location = new System.Drawing.Point(598, 911);
-            this.SliderScanStart.Name = "SliderScanStart";
-            this.SliderScanStart.Size = new System.Drawing.Size(113, 31);
-            this.SliderScanStart.TabIndex = 165;
-            this.SliderScanStart.Text = "Start *Slider* Scan";
-            this.SliderScanStart.UseVisualStyleBackColor = false;
-            this.SliderScanStart.Click += new System.EventHandler(this.SliderScanStart_Click);
             // 
             // FilenameTab
             // 
@@ -1062,6 +1017,9 @@
             // CameraTab
             // 
             this.CameraTab.BackColor = System.Drawing.SystemColors.Menu;
+            this.CameraTab.Controls.Add(this.label177);
+            this.CameraTab.Controls.Add(this.richTextBox1);
+            this.CameraTab.Controls.Add(this.groupBox39);
             this.CameraTab.Controls.Add(this.label124);
             this.CameraTab.Controls.Add(this.DebugCheckbox);
             this.CameraTab.Controls.Add(this.groupBox46);
@@ -1406,7 +1364,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.68687F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 227F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 235F));
             this.tableLayoutPanel4.Controls.Add(this.label112, 4, 0);
             this.tableLayoutPanel4.Controls.Add(this.panel5, 4, 2);
             this.tableLayoutPanel4.Controls.Add(this.slow_in2DelayText, 3, 2);
@@ -1436,7 +1394,7 @@
             // 
             this.label112.AutoSize = true;
             this.label112.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label112.Location = new System.Drawing.Point(232, 4);
+            this.label112.Location = new System.Drawing.Point(224, 4);
             this.label112.Name = "label112";
             this.label112.Size = new System.Drawing.Size(71, 24);
             this.label112.TabIndex = 181;
@@ -1447,7 +1405,7 @@
             this.panel5.Controls.Add(this.c2si2);
             this.panel5.Controls.Add(this.Indsi2);
             this.panel5.Controls.Add(this.c1si2);
-            this.panel5.Location = new System.Drawing.Point(232, 91);
+            this.panel5.Location = new System.Drawing.Point(224, 91);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(164, 21);
             this.panel5.TabIndex = 180;
@@ -1489,7 +1447,7 @@
             // 
             // slow_in2DelayText
             // 
-            this.slow_in2DelayText.Location = new System.Drawing.Point(140, 91);
+            this.slow_in2DelayText.Location = new System.Drawing.Point(132, 91);
             this.slow_in2DelayText.Name = "slow_in2DelayText";
             this.slow_in2DelayText.Size = new System.Drawing.Size(78, 20);
             this.slow_in2DelayText.TabIndex = 11;
@@ -1497,7 +1455,7 @@
             // 
             // slow_in2OnTimeText
             // 
-            this.slow_in2OnTimeText.Location = new System.Drawing.Point(46, 91);
+            this.slow_in2OnTimeText.Location = new System.Drawing.Point(38, 91);
             this.slow_in2OnTimeText.Name = "slow_in2OnTimeText";
             this.slow_in2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_in2OnTimeText.TabIndex = 10;
@@ -1505,7 +1463,7 @@
             // 
             // slow_in1DelayText
             // 
-            this.slow_in1DelayText.Location = new System.Drawing.Point(140, 62);
+            this.slow_in1DelayText.Location = new System.Drawing.Point(132, 62);
             this.slow_in1DelayText.Name = "slow_in1DelayText";
             this.slow_in1DelayText.Size = new System.Drawing.Size(78, 20);
             this.slow_in1DelayText.TabIndex = 9;
@@ -1513,7 +1471,7 @@
             // 
             // slow_in1OnTimeText
             // 
-            this.slow_in1OnTimeText.Location = new System.Drawing.Point(46, 62);
+            this.slow_in1OnTimeText.Location = new System.Drawing.Point(38, 62);
             this.slow_in1OnTimeText.Name = "slow_in1OnTimeText";
             this.slow_in1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_in1OnTimeText.TabIndex = 8;
@@ -1523,7 +1481,7 @@
             // 
             this.label113.AutoSize = true;
             this.label113.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label113.Location = new System.Drawing.Point(140, 4);
+            this.label113.Location = new System.Drawing.Point(132, 4);
             this.label113.Name = "label113";
             this.label113.Size = new System.Drawing.Size(54, 48);
             this.label113.TabIndex = 7;
@@ -1533,7 +1491,7 @@
             // 
             this.label114.AutoSize = true;
             this.label114.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label114.Location = new System.Drawing.Point(46, 4);
+            this.label114.Location = new System.Drawing.Point(38, 4);
             this.label114.Name = "label114";
             this.label114.Size = new System.Drawing.Size(83, 48);
             this.label114.TabIndex = 6;
@@ -1541,18 +1499,18 @@
             // 
             // slow_in2SigName
             // 
-            this.slow_in2SigName.Location = new System.Drawing.Point(19, 91);
+            this.slow_in2SigName.Location = new System.Drawing.Point(17, 91);
             this.slow_in2SigName.Name = "slow_in2SigName";
-            this.slow_in2SigName.Size = new System.Drawing.Size(20, 20);
+            this.slow_in2SigName.Size = new System.Drawing.Size(14, 20);
             this.slow_in2SigName.TabIndex = 5;
             // 
             // label165
             // 
             this.label165.AutoSize = true;
             this.label165.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label165.Location = new System.Drawing.Point(19, 4);
+            this.label165.Location = new System.Drawing.Point(17, 4);
             this.label165.Name = "label165";
-            this.label165.Size = new System.Drawing.Size(20, 54);
+            this.label165.Size = new System.Drawing.Size(14, 54);
             this.label165.TabIndex = 2;
             this.label165.Text = "signal name";
             // 
@@ -1562,7 +1520,7 @@
             this.label166.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label166.Location = new System.Drawing.Point(7, 88);
             this.label166.Name = "label166";
-            this.label166.Size = new System.Drawing.Size(5, 20);
+            this.label166.Size = new System.Drawing.Size(3, 20);
             this.label166.TabIndex = 3;
             this.label166.Text = "2";
             // 
@@ -1572,7 +1530,7 @@
             this.label175.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label175.Location = new System.Drawing.Point(7, 4);
             this.label175.Name = "label175";
-            this.label175.Size = new System.Drawing.Size(5, 48);
+            this.label175.Size = new System.Drawing.Size(3, 48);
             this.label175.TabIndex = 0;
             this.label175.Text = "CH";
             // 
@@ -1582,15 +1540,15 @@
             this.label176.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label176.Location = new System.Drawing.Point(7, 59);
             this.label176.Name = "label176";
-            this.label176.Size = new System.Drawing.Size(5, 20);
+            this.label176.Size = new System.Drawing.Size(3, 20);
             this.label176.TabIndex = 2;
             this.label176.Text = "1";
             // 
             // slow_in1SigName
             // 
-            this.slow_in1SigName.Location = new System.Drawing.Point(19, 62);
+            this.slow_in1SigName.Location = new System.Drawing.Point(17, 62);
             this.slow_in1SigName.Name = "slow_in1SigName";
-            this.slow_in1SigName.Size = new System.Drawing.Size(20, 20);
+            this.slow_in1SigName.Size = new System.Drawing.Size(14, 20);
             this.slow_in1SigName.TabIndex = 4;
             this.slow_in1SigName.Text = "PMTs";
             // 
@@ -1599,7 +1557,7 @@
             this.panel6.Controls.Add(this.c2si1);
             this.panel6.Controls.Add(this.c1si1);
             this.panel6.Controls.Add(this.Indsi1);
-            this.panel6.Location = new System.Drawing.Point(232, 62);
+            this.panel6.Location = new System.Drawing.Point(224, 62);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(164, 21);
             this.panel6.TabIndex = 179;
@@ -1647,7 +1605,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.19231F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 229F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 237F));
             this.tableLayoutPanel3.Controls.Add(this.panel4, 4, 2);
             this.tableLayoutPanel3.Controls.Add(this.slow_out2DelayText, 3, 2);
             this.tableLayoutPanel3.Controls.Add(this.slow_out2OnTimeText, 2, 2);
@@ -1677,7 +1635,7 @@
             this.panel4.Controls.Add(this.notc1so2);
             this.panel4.Controls.Add(this.c1so2);
             this.panel4.Controls.Add(this.Indso2);
-            this.panel4.Location = new System.Drawing.Point(229, 91);
+            this.panel4.Location = new System.Drawing.Point(221, 91);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(147, 21);
             this.panel4.TabIndex = 178;
@@ -1720,7 +1678,7 @@
             // slow_out2DelayText
             // 
             this.slow_out2DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out2DelayText.Location = new System.Drawing.Point(137, 91);
+            this.slow_out2DelayText.Location = new System.Drawing.Point(129, 91);
             this.slow_out2DelayText.Name = "slow_out2DelayText";
             this.slow_out2DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out2DelayText.TabIndex = 8;
@@ -1730,7 +1688,7 @@
             // slow_out2OnTimeText
             // 
             this.slow_out2OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out2OnTimeText.Location = new System.Drawing.Point(45, 91);
+            this.slow_out2OnTimeText.Location = new System.Drawing.Point(37, 91);
             this.slow_out2OnTimeText.Name = "slow_out2OnTimeText";
             this.slow_out2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out2OnTimeText.TabIndex = 6;
@@ -1739,7 +1697,7 @@
             // 
             // slow_out1OnTimeText
             // 
-            this.slow_out1OnTimeText.Location = new System.Drawing.Point(45, 62);
+            this.slow_out1OnTimeText.Location = new System.Drawing.Point(37, 62);
             this.slow_out1OnTimeText.Name = "slow_out1OnTimeText";
             this.slow_out1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out1OnTimeText.TabIndex = 5;
@@ -1750,7 +1708,7 @@
             // 
             this.label69.AutoSize = true;
             this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label69.Location = new System.Drawing.Point(137, 4);
+            this.label69.Location = new System.Drawing.Point(129, 4);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(85, 48);
             this.label69.TabIndex = 6;
@@ -1758,9 +1716,9 @@
             // 
             // slow_out2SigName
             // 
-            this.slow_out2SigName.Location = new System.Drawing.Point(19, 91);
+            this.slow_out2SigName.Location = new System.Drawing.Point(16, 91);
             this.slow_out2SigName.Name = "slow_out2SigName";
-            this.slow_out2SigName.Size = new System.Drawing.Size(19, 20);
+            this.slow_out2SigName.Size = new System.Drawing.Size(14, 20);
             this.slow_out2SigName.TabIndex = 5;
             this.slow_out2SigName.Text = "probe";
             // 
@@ -1768,9 +1726,9 @@
             // 
             this.label70.AutoSize = true;
             this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label70.Location = new System.Drawing.Point(19, 4);
+            this.label70.Location = new System.Drawing.Point(16, 4);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(19, 54);
+            this.label70.Size = new System.Drawing.Size(14, 54);
             this.label70.TabIndex = 2;
             this.label70.Text = "signal name";
             // 
@@ -1780,7 +1738,7 @@
             this.label71.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label71.Location = new System.Drawing.Point(7, 88);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(5, 20);
+            this.label71.Size = new System.Drawing.Size(2, 20);
             this.label71.TabIndex = 3;
             this.label71.Text = "2";
             // 
@@ -1790,7 +1748,7 @@
             this.label72.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label72.Location = new System.Drawing.Point(7, 4);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(5, 48);
+            this.label72.Size = new System.Drawing.Size(2, 48);
             this.label72.TabIndex = 0;
             this.label72.Text = "CH";
             // 
@@ -1800,15 +1758,15 @@
             this.label96.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label96.Location = new System.Drawing.Point(7, 59);
             this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(5, 20);
+            this.label96.Size = new System.Drawing.Size(2, 20);
             this.label96.TabIndex = 2;
             this.label96.Text = "1";
             // 
             // slow_out1SigName
             // 
-            this.slow_out1SigName.Location = new System.Drawing.Point(19, 62);
+            this.slow_out1SigName.Location = new System.Drawing.Point(16, 62);
             this.slow_out1SigName.Name = "slow_out1SigName";
-            this.slow_out1SigName.Size = new System.Drawing.Size(19, 20);
+            this.slow_out1SigName.Size = new System.Drawing.Size(14, 20);
             this.slow_out1SigName.TabIndex = 4;
             this.slow_out1SigName.Text = "cool";
             // 
@@ -1816,7 +1774,7 @@
             // 
             this.label97.AutoSize = true;
             this.label97.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label97.Location = new System.Drawing.Point(45, 4);
+            this.label97.Location = new System.Drawing.Point(37, 4);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(79, 24);
             this.label97.TabIndex = 5;
@@ -1824,7 +1782,7 @@
             // 
             // slow_out1DelayText
             // 
-            this.slow_out1DelayText.Location = new System.Drawing.Point(137, 62);
+            this.slow_out1DelayText.Location = new System.Drawing.Point(129, 62);
             this.slow_out1DelayText.Name = "slow_out1DelayText";
             this.slow_out1DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out1DelayText.TabIndex = 7;
@@ -1835,7 +1793,7 @@
             // 
             this.label111.AutoSize = true;
             this.label111.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label111.Location = new System.Drawing.Point(229, 4);
+            this.label111.Location = new System.Drawing.Point(221, 4);
             this.label111.Name = "label111";
             this.label111.Size = new System.Drawing.Size(71, 24);
             this.label111.TabIndex = 9;
@@ -2025,7 +1983,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.68687F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 227F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 235F));
             this.tableLayoutPanel2.Controls.Add(this.label174, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel3, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.in2DelayText, 3, 2);
@@ -2055,7 +2013,7 @@
             // 
             this.label174.AutoSize = true;
             this.label174.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label174.Location = new System.Drawing.Point(232, 4);
+            this.label174.Location = new System.Drawing.Point(224, 4);
             this.label174.Name = "label174";
             this.label174.Size = new System.Drawing.Size(71, 24);
             this.label174.TabIndex = 181;
@@ -2066,7 +2024,7 @@
             this.panel3.Controls.Add(this.c2fi2);
             this.panel3.Controls.Add(this.Indfi2);
             this.panel3.Controls.Add(this.c1fi2);
-            this.panel3.Location = new System.Drawing.Point(232, 91);
+            this.panel3.Location = new System.Drawing.Point(224, 91);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(164, 21);
             this.panel3.TabIndex = 180;
@@ -2109,7 +2067,7 @@
             // in2DelayText
             // 
             this.in2DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.in2DelayText.Location = new System.Drawing.Point(140, 91);
+            this.in2DelayText.Location = new System.Drawing.Point(132, 91);
             this.in2DelayText.Name = "in2DelayText";
             this.in2DelayText.Size = new System.Drawing.Size(78, 20);
             this.in2DelayText.TabIndex = 11;
@@ -2118,7 +2076,7 @@
             // in2OnTimeText
             // 
             this.in2OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.in2OnTimeText.Location = new System.Drawing.Point(46, 91);
+            this.in2OnTimeText.Location = new System.Drawing.Point(38, 91);
             this.in2OnTimeText.Name = "in2OnTimeText";
             this.in2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in2OnTimeText.TabIndex = 10;
@@ -2127,7 +2085,7 @@
             // in1DelayText
             // 
             this.in1DelayText.ForeColor = System.Drawing.Color.DimGray;
-            this.in1DelayText.Location = new System.Drawing.Point(140, 62);
+            this.in1DelayText.Location = new System.Drawing.Point(132, 62);
             this.in1DelayText.Name = "in1DelayText";
             this.in1DelayText.Size = new System.Drawing.Size(78, 20);
             this.in1DelayText.TabIndex = 9;
@@ -2136,7 +2094,7 @@
             // in1OnTimeText
             // 
             this.in1OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.in1OnTimeText.Location = new System.Drawing.Point(46, 62);
+            this.in1OnTimeText.Location = new System.Drawing.Point(38, 62);
             this.in1OnTimeText.Name = "in1OnTimeText";
             this.in1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in1OnTimeText.TabIndex = 8;
@@ -2146,7 +2104,7 @@
             // 
             this.label154.AutoSize = true;
             this.label154.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label154.Location = new System.Drawing.Point(140, 4);
+            this.label154.Location = new System.Drawing.Point(132, 4);
             this.label154.Name = "label154";
             this.label154.Size = new System.Drawing.Size(54, 48);
             this.label154.TabIndex = 7;
@@ -2156,7 +2114,7 @@
             // 
             this.label152.AutoSize = true;
             this.label152.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label152.Location = new System.Drawing.Point(46, 4);
+            this.label152.Location = new System.Drawing.Point(38, 4);
             this.label152.Name = "label152";
             this.label152.Size = new System.Drawing.Size(83, 48);
             this.label152.TabIndex = 6;
@@ -2164,18 +2122,18 @@
             // 
             // in2SigName
             // 
-            this.in2SigName.Location = new System.Drawing.Point(19, 91);
+            this.in2SigName.Location = new System.Drawing.Point(17, 91);
             this.in2SigName.Name = "in2SigName";
-            this.in2SigName.Size = new System.Drawing.Size(20, 20);
+            this.in2SigName.Size = new System.Drawing.Size(14, 20);
             this.in2SigName.TabIndex = 5;
             // 
             // label147
             // 
             this.label147.AutoSize = true;
             this.label147.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label147.Location = new System.Drawing.Point(19, 4);
+            this.label147.Location = new System.Drawing.Point(17, 4);
             this.label147.Name = "label147";
-            this.label147.Size = new System.Drawing.Size(20, 54);
+            this.label147.Size = new System.Drawing.Size(14, 54);
             this.label147.TabIndex = 2;
             this.label147.Text = "signal name";
             // 
@@ -2185,7 +2143,7 @@
             this.label148.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label148.Location = new System.Drawing.Point(7, 88);
             this.label148.Name = "label148";
-            this.label148.Size = new System.Drawing.Size(5, 20);
+            this.label148.Size = new System.Drawing.Size(3, 20);
             this.label148.TabIndex = 3;
             this.label148.Text = "2";
             // 
@@ -2195,7 +2153,7 @@
             this.label149.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label149.Location = new System.Drawing.Point(7, 4);
             this.label149.Name = "label149";
-            this.label149.Size = new System.Drawing.Size(5, 48);
+            this.label149.Size = new System.Drawing.Size(3, 48);
             this.label149.TabIndex = 0;
             this.label149.Text = "CH";
             // 
@@ -2205,15 +2163,15 @@
             this.label150.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label150.Location = new System.Drawing.Point(7, 59);
             this.label150.Name = "label150";
-            this.label150.Size = new System.Drawing.Size(5, 20);
+            this.label150.Size = new System.Drawing.Size(3, 20);
             this.label150.TabIndex = 2;
             this.label150.Text = "1";
             // 
             // in1SigName
             // 
-            this.in1SigName.Location = new System.Drawing.Point(19, 62);
+            this.in1SigName.Location = new System.Drawing.Point(17, 62);
             this.in1SigName.Name = "in1SigName";
-            this.in1SigName.Size = new System.Drawing.Size(20, 20);
+            this.in1SigName.Size = new System.Drawing.Size(14, 20);
             this.in1SigName.TabIndex = 4;
             this.in1SigName.Text = "PMTs";
             // 
@@ -2222,7 +2180,7 @@
             this.panel2.Controls.Add(this.c2fi1);
             this.panel2.Controls.Add(this.c1fi1);
             this.panel2.Controls.Add(this.Indfi1);
-            this.panel2.Location = new System.Drawing.Point(232, 62);
+            this.panel2.Location = new System.Drawing.Point(224, 62);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(164, 21);
             this.panel2.TabIndex = 179;
@@ -2280,7 +2238,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.19231F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 229F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 237F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.out2DelayText, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.out2OnTimeText, 2, 2);
@@ -2311,7 +2269,7 @@
             this.panel1.Controls.Add(this.notc1fo2);
             this.panel1.Controls.Add(this.c1fo2);
             this.panel1.Controls.Add(this.Indfo2);
-            this.panel1.Location = new System.Drawing.Point(229, 91);
+            this.panel1.Location = new System.Drawing.Point(221, 91);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(147, 21);
             this.panel1.TabIndex = 178;
@@ -2353,7 +2311,7 @@
             // 
             // out2DelayText
             // 
-            this.out2DelayText.Location = new System.Drawing.Point(137, 91);
+            this.out2DelayText.Location = new System.Drawing.Point(129, 91);
             this.out2DelayText.Name = "out2DelayText";
             this.out2DelayText.Size = new System.Drawing.Size(79, 20);
             this.out2DelayText.TabIndex = 8;
@@ -2362,7 +2320,7 @@
             // 
             // out2OnTimeText
             // 
-            this.out2OnTimeText.Location = new System.Drawing.Point(45, 91);
+            this.out2OnTimeText.Location = new System.Drawing.Point(37, 91);
             this.out2OnTimeText.Name = "out2OnTimeText";
             this.out2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out2OnTimeText.TabIndex = 6;
@@ -2371,7 +2329,7 @@
             // 
             // out1OnTimeText
             // 
-            this.out1OnTimeText.Location = new System.Drawing.Point(45, 62);
+            this.out1OnTimeText.Location = new System.Drawing.Point(37, 62);
             this.out1OnTimeText.Name = "out1OnTimeText";
             this.out1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out1OnTimeText.TabIndex = 5;
@@ -2382,7 +2340,7 @@
             // 
             this.label153.AutoSize = true;
             this.label153.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label153.Location = new System.Drawing.Point(137, 4);
+            this.label153.Location = new System.Drawing.Point(129, 4);
             this.label153.Name = "label153";
             this.label153.Size = new System.Drawing.Size(85, 48);
             this.label153.TabIndex = 6;
@@ -2390,9 +2348,9 @@
             // 
             // out2SigName
             // 
-            this.out2SigName.Location = new System.Drawing.Point(19, 91);
+            this.out2SigName.Location = new System.Drawing.Point(16, 91);
             this.out2SigName.Name = "out2SigName";
-            this.out2SigName.Size = new System.Drawing.Size(19, 20);
+            this.out2SigName.Size = new System.Drawing.Size(14, 20);
             this.out2SigName.TabIndex = 5;
             this.out2SigName.Text = "probe";
             // 
@@ -2400,9 +2358,9 @@
             // 
             this.label144.AutoSize = true;
             this.label144.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label144.Location = new System.Drawing.Point(19, 4);
+            this.label144.Location = new System.Drawing.Point(16, 4);
             this.label144.Name = "label144";
-            this.label144.Size = new System.Drawing.Size(19, 54);
+            this.label144.Size = new System.Drawing.Size(14, 54);
             this.label144.TabIndex = 2;
             this.label144.Text = "signal name";
             // 
@@ -2412,7 +2370,7 @@
             this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label61.Location = new System.Drawing.Point(7, 88);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(5, 20);
+            this.label61.Size = new System.Drawing.Size(2, 20);
             this.label61.TabIndex = 3;
             this.label61.Text = "2";
             // 
@@ -2422,7 +2380,7 @@
             this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label59.Location = new System.Drawing.Point(7, 4);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(5, 48);
+            this.label59.Size = new System.Drawing.Size(2, 48);
             this.label59.TabIndex = 0;
             this.label59.Text = "CH";
             // 
@@ -2432,15 +2390,15 @@
             this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label60.Location = new System.Drawing.Point(7, 59);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(5, 20);
+            this.label60.Size = new System.Drawing.Size(2, 20);
             this.label60.TabIndex = 2;
             this.label60.Text = "1";
             // 
             // out1SigName
             // 
-            this.out1SigName.Location = new System.Drawing.Point(19, 62);
+            this.out1SigName.Location = new System.Drawing.Point(16, 62);
             this.out1SigName.Name = "out1SigName";
-            this.out1SigName.Size = new System.Drawing.Size(19, 20);
+            this.out1SigName.Size = new System.Drawing.Size(14, 20);
             this.out1SigName.TabIndex = 4;
             this.out1SigName.Text = "cool";
             // 
@@ -2448,7 +2406,7 @@
             // 
             this.label151.AutoSize = true;
             this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label151.Location = new System.Drawing.Point(45, 4);
+            this.label151.Location = new System.Drawing.Point(37, 4);
             this.label151.Name = "label151";
             this.label151.Size = new System.Drawing.Size(79, 24);
             this.label151.TabIndex = 5;
@@ -2456,7 +2414,7 @@
             // 
             // out1DelayText
             // 
-            this.out1DelayText.Location = new System.Drawing.Point(137, 62);
+            this.out1DelayText.Location = new System.Drawing.Point(129, 62);
             this.out1DelayText.Name = "out1DelayText";
             this.out1DelayText.Size = new System.Drawing.Size(79, 20);
             this.out1DelayText.TabIndex = 7;
@@ -2467,7 +2425,7 @@
             // 
             this.label173.AutoSize = true;
             this.label173.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label173.Location = new System.Drawing.Point(229, 4);
+            this.label173.Location = new System.Drawing.Point(221, 4);
             this.label173.Name = "label173";
             this.label173.Size = new System.Drawing.Size(71, 24);
             this.label173.TabIndex = 9;
@@ -2543,12 +2501,8 @@
             this.CorrelatorTab.Controls.Add(this.label54);
             this.CorrelatorTab.Controls.Add(this.syncSrcSw);
             this.CorrelatorTab.Controls.Add(this.ncorrbinsText);
-            this.CorrelatorTab.Controls.Add(this.label138);
             this.CorrelatorTab.Controls.Add(this.correlatorBitFilePathB);
-            this.CorrelatorTab.Controls.Add(this.label137);
-            this.CorrelatorTab.Controls.Add(this.scatterGraphNormCorrSig);
             this.CorrelatorTab.Controls.Add(this.textBoxBackEst);
-            this.CorrelatorTab.Controls.Add(this.CorrelatorGraph);
             this.CorrelatorTab.Controls.Add(this.correlatorQtext);
             this.CorrelatorTab.Controls.Add(this.correlatorBound1text);
             this.CorrelatorTab.Controls.Add(this.correlatorDiv1Ntext);
@@ -2574,18 +2528,15 @@
             this.CorrelatorTab.Controls.Add(this.label120);
             this.CorrelatorTab.Controls.Add(this.label119);
             this.CorrelatorTab.Controls.Add(this.label66);
-            this.CorrelatorTab.Controls.Add(this.instrumentControlStrip2);
             this.CorrelatorTab.Controls.Add(this.label117);
             this.CorrelatorTab.Controls.Add(this.label101);
             this.CorrelatorTab.Controls.Add(this.label115);
             this.CorrelatorTab.Controls.Add(this.label104);
             this.CorrelatorTab.Controls.Add(this.label116);
-            this.CorrelatorTab.Controls.Add(this.groupBox57);
             this.CorrelatorTab.Controls.Add(this.label108);
             this.CorrelatorTab.Controls.Add(this.label107);
             this.CorrelatorTab.Controls.Add(this.label106);
             this.CorrelatorTab.Controls.Add(this.CorrelatorButton);
-            this.CorrelatorTab.Controls.Add(this.groupBox53);
             this.CorrelatorTab.Controls.Add(this.label103);
             this.CorrelatorTab.Controls.Add(this.label102);
             this.CorrelatorTab.Controls.Add(this.groupBox52);
@@ -2607,7 +2558,7 @@
             this.groupBox36.Controls.Add(this.label67);
             this.groupBox36.Controls.Add(this.RefOut);
             this.groupBox36.Controls.Add(this.groupBox35);
-            this.groupBox36.Location = new System.Drawing.Point(769, 233);
+            this.groupBox36.Location = new System.Drawing.Point(1397, 741);
             this.groupBox36.Name = "groupBox36";
             this.groupBox36.Size = new System.Drawing.Size(131, 183);
             this.groupBox36.TabIndex = 213;
@@ -2690,7 +2641,7 @@
             // 
             this.label50.AutoSize = true;
             this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label50.Location = new System.Drawing.Point(206, 157);
+            this.label50.Location = new System.Drawing.Point(272, 244);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(69, 13);
             this.label50.TabIndex = 211;
@@ -2700,7 +2651,7 @@
             // 
             this.label58.AutoSize = true;
             this.label58.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label58.Location = new System.Drawing.Point(225, 261);
+            this.label58.Location = new System.Drawing.Point(291, 348);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(25, 13);
             this.label58.TabIndex = 209;
@@ -2710,7 +2661,7 @@
             // 
             this.label54.AutoSize = true;
             this.label54.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label54.Location = new System.Drawing.Point(225, 178);
+            this.label54.Location = new System.Drawing.Point(291, 265);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(31, 13);
             this.label54.TabIndex = 208;
@@ -2718,7 +2669,7 @@
             // 
             // syncSrcSw
             // 
-            this.syncSrcSw.Location = new System.Drawing.Point(209, 178);
+            this.syncSrcSw.Location = new System.Drawing.Point(275, 265);
             this.syncSrcSw.Name = "syncSrcSw";
             this.syncSrcSw.Size = new System.Drawing.Size(64, 96);
             this.syncSrcSw.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -2728,142 +2679,32 @@
             // 
             // ncorrbinsText
             // 
-            this.ncorrbinsText.Location = new System.Drawing.Point(827, 110);
+            this.ncorrbinsText.Location = new System.Drawing.Point(380, 258);
             this.ncorrbinsText.Name = "ncorrbinsText";
             this.ncorrbinsText.Size = new System.Drawing.Size(57, 20);
             this.ncorrbinsText.TabIndex = 195;
             this.ncorrbinsText.Text = "10";
             // 
-            // label138
-            // 
-            this.label138.AutoSize = true;
-            this.label138.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label138.Location = new System.Drawing.Point(3, 383);
-            this.label138.Name = "label138";
-            this.label138.Size = new System.Drawing.Size(14, 13);
-            this.label138.TabIndex = 195;
-            this.label138.Text = "B";
-            // 
             // correlatorBitFilePathB
             // 
-            this.correlatorBitFilePathB.Location = new System.Drawing.Point(579, 48);
+            this.correlatorBitFilePathB.Location = new System.Drawing.Point(400, 410);
             this.correlatorBitFilePathB.Name = "correlatorBitFilePathB";
             this.correlatorBitFilePathB.Size = new System.Drawing.Size(456, 20);
             this.correlatorBitFilePathB.TabIndex = 191;
             this.correlatorBitFilePathB.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_working\\PSEC_fastLO_10bins\\photoncount" +
                 "er.bit";
             // 
-            // label137
-            // 
-            this.label137.AutoSize = true;
-            this.label137.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label137.Location = new System.Drawing.Point(3, 356);
-            this.label137.Name = "label137";
-            this.label137.Size = new System.Drawing.Size(14, 13);
-            this.label137.TabIndex = 194;
-            this.label137.Text = "A";
-            // 
-            // scatterGraphNormCorrSig
-            // 
-            this.scatterGraphNormCorrSig.Location = new System.Drawing.Point(658, 545);
-            this.scatterGraphNormCorrSig.Name = "scatterGraphNormCorrSig";
-            this.scatterGraphNormCorrSig.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
-            this.scatterPlot8});
-            this.scatterGraphNormCorrSig.Size = new System.Drawing.Size(368, 187);
-            this.scatterGraphNormCorrSig.TabIndex = 186;
-            this.scatterGraphNormCorrSig.UseColorGenerator = true;
-            this.scatterGraphNormCorrSig.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis7});
-            this.scatterGraphNormCorrSig.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis7});
-            // 
-            // scatterPlot8
-            // 
-            this.scatterPlot8.XAxis = this.xAxis7;
-            this.scatterPlot8.YAxis = this.yAxis7;
-            // 
             // textBoxBackEst
             // 
-            this.textBoxBackEst.Location = new System.Drawing.Point(793, 738);
+            this.textBoxBackEst.Location = new System.Drawing.Point(142, 866);
             this.textBoxBackEst.Name = "textBoxBackEst";
             this.textBoxBackEst.Size = new System.Drawing.Size(57, 20);
             this.textBoxBackEst.TabIndex = 184;
             this.textBoxBackEst.Text = "20";
             // 
-            // CorrelatorGraph
-            // 
-            this.CorrelatorGraph.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY)
-                        | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)
-                        | NationalInstruments.UI.GraphInteractionModes.PanX)
-                        | NationalInstruments.UI.GraphInteractionModes.PanY)
-                        | NationalInstruments.UI.GraphInteractionModes.DragCursor)
-                        | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption)
-                        | NationalInstruments.UI.GraphInteractionModes.EditRange)));
-            this.CorrelatorGraph.Location = new System.Drawing.Point(19, 565);
-            this.CorrelatorGraph.Name = "CorrelatorGraph";
-            this.CorrelatorGraph.PlotAreaBorder = NationalInstruments.UI.Border.Sunken;
-            this.CorrelatorGraph.PlotAreaColor = System.Drawing.SystemColors.MenuText;
-            this.CorrelatorGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.waveformPlot2,
-            this.waveformPlot6,
-            this.waveformPlot3,
-            this.waveformPlot4});
-            this.CorrelatorGraph.Size = new System.Drawing.Size(629, 333);
-            this.CorrelatorGraph.TabIndex = 167;
-            this.CorrelatorGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis2});
-            this.CorrelatorGraph.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis2});
-            // 
-            // waveformPlot2
-            // 
-            this.waveformPlot2.LineColor = System.Drawing.Color.GhostWhite;
-            this.waveformPlot2.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.waveformPlot2.XAxis = this.xAxis2;
-            this.waveformPlot2.YAxis = this.yAxis2;
-            // 
-            // xAxis2
-            // 
-            this.xAxis2.MajorDivisions.GridColor = System.Drawing.Color.ForestGreen;
-            this.xAxis2.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.xAxis2.MajorDivisions.GridVisible = true;
-            this.xAxis2.MajorDivisions.LineWidth = 0.5F;
-            this.xAxis2.MinorDivisions.GridColor = System.Drawing.Color.ForestGreen;
-            this.xAxis2.MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            this.xAxis2.MinorDivisions.Interval = 0.1;
-            this.xAxis2.MinorDivisions.LineWidth = 0.5F;
-            this.xAxis2.MinorDivisions.TickVisible = true;
-            // 
-            // yAxis2
-            // 
-            this.yAxis2.MajorDivisions.GridColor = System.Drawing.Color.ForestGreen;
-            this.yAxis2.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.yAxis2.MajorDivisions.GridVisible = true;
-            this.yAxis2.MinorDivisions.GridColor = System.Drawing.Color.ForestGreen;
-            this.yAxis2.MinorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dot;
-            // 
-            // waveformPlot6
-            // 
-            this.waveformPlot6.LineColor = System.Drawing.Color.Red;
-            this.waveformPlot6.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.waveformPlot6.XAxis = this.xAxis2;
-            this.waveformPlot6.YAxis = this.yAxis2;
-            // 
-            // waveformPlot3
-            // 
-            this.waveformPlot3.XAxis = this.xAxis2;
-            this.waveformPlot3.YAxis = this.yAxis2;
-            // 
-            // waveformPlot4
-            // 
-            this.waveformPlot4.LineColor = System.Drawing.Color.DeepSkyBlue;
-            this.waveformPlot4.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.waveformPlot4.XAxis = this.xAxis2;
-            this.waveformPlot4.YAxis = this.yAxis2;
-            // 
             // correlatorQtext
             // 
-            this.correlatorQtext.Location = new System.Drawing.Point(964, 304);
+            this.correlatorQtext.Location = new System.Drawing.Point(901, 35);
             this.correlatorQtext.Name = "correlatorQtext";
             this.correlatorQtext.Size = new System.Drawing.Size(57, 20);
             this.correlatorQtext.TabIndex = 4;
@@ -2871,7 +2712,7 @@
             // 
             // correlatorBound1text
             // 
-            this.correlatorBound1text.Location = new System.Drawing.Point(81, 502);
+            this.correlatorBound1text.Location = new System.Drawing.Point(70, 610);
             this.correlatorBound1text.Name = "correlatorBound1text";
             this.correlatorBound1text.Size = new System.Drawing.Size(37, 20);
             this.correlatorBound1text.TabIndex = 160;
@@ -2879,7 +2720,7 @@
             // 
             // correlatorDiv1Ntext
             // 
-            this.correlatorDiv1Ntext.Location = new System.Drawing.Point(964, 330);
+            this.correlatorDiv1Ntext.Location = new System.Drawing.Point(901, 61);
             this.correlatorDiv1Ntext.Name = "correlatorDiv1Ntext";
             this.correlatorDiv1Ntext.Size = new System.Drawing.Size(57, 20);
             this.correlatorDiv1Ntext.TabIndex = 6;
@@ -2887,7 +2728,7 @@
             // 
             // correlatorDiv2Ntext
             // 
-            this.correlatorDiv2Ntext.Location = new System.Drawing.Point(964, 356);
+            this.correlatorDiv2Ntext.Location = new System.Drawing.Point(901, 87);
             this.correlatorDiv2Ntext.Name = "correlatorDiv2Ntext";
             this.correlatorDiv2Ntext.Size = new System.Drawing.Size(57, 20);
             this.correlatorDiv2Ntext.TabIndex = 8;
@@ -2895,7 +2736,7 @@
             // 
             // correlatorBound2text
             // 
-            this.correlatorBound2text.Location = new System.Drawing.Point(178, 502);
+            this.correlatorBound2text.Location = new System.Drawing.Point(167, 610);
             this.correlatorBound2text.Name = "correlatorBound2text";
             this.correlatorBound2text.Size = new System.Drawing.Size(37, 20);
             this.correlatorBound2text.TabIndex = 162;
@@ -2903,7 +2744,7 @@
             // 
             // regSelectSw
             // 
-            this.regSelectSw.Location = new System.Drawing.Point(944, 741);
+            this.regSelectSw.Location = new System.Drawing.Point(25, 679);
             this.regSelectSw.Name = "regSelectSw";
             this.regSelectSw.Size = new System.Drawing.Size(64, 96);
             this.regSelectSw.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -2912,7 +2753,7 @@
             // 
             // correlatorBitFilePath
             // 
-            this.correlatorBitFilePath.Location = new System.Drawing.Point(579, 26);
+            this.correlatorBitFilePath.Location = new System.Drawing.Point(400, 388);
             this.correlatorBitFilePath.Name = "correlatorBitFilePath";
             this.correlatorBitFilePath.Size = new System.Drawing.Size(456, 20);
             this.correlatorBitFilePath.TabIndex = 154;
@@ -2924,7 +2765,7 @@
             this.correlatorErrorMessages.BackColor = System.Drawing.SystemColors.Window;
             this.correlatorErrorMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.correlatorErrorMessages.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.correlatorErrorMessages.Location = new System.Drawing.Point(559, 178);
+            this.correlatorErrorMessages.Location = new System.Drawing.Point(593, 120);
             this.correlatorErrorMessages.Name = "correlatorErrorMessages";
             this.correlatorErrorMessages.ReadOnly = true;
             this.correlatorErrorMessages.Size = new System.Drawing.Size(204, 114);
@@ -2936,7 +2777,7 @@
             this.correlatorID.BackColor = System.Drawing.SystemColors.Window;
             this.correlatorID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.correlatorID.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.correlatorID.Location = new System.Drawing.Point(559, 91);
+            this.correlatorID.Location = new System.Drawing.Point(593, 33);
             this.correlatorID.Name = "correlatorID";
             this.correlatorID.ReadOnly = true;
             this.correlatorID.Size = new System.Drawing.Size(242, 69);
@@ -2948,7 +2789,7 @@
             this.TickleResetBox.Controls.Add(this.TickleReset);
             this.TickleResetBox.Controls.Add(this.label47);
             this.TickleResetBox.Controls.Add(this.TickleResetDelayText);
-            this.TickleResetBox.Location = new System.Drawing.Point(422, 300);
+            this.TickleResetBox.Location = new System.Drawing.Point(124, 439);
             this.TickleResetBox.Name = "TickleResetBox";
             this.TickleResetBox.Size = new System.Drawing.Size(96, 93);
             this.TickleResetBox.TabIndex = 206;
@@ -2988,7 +2829,7 @@
             this.ArrayResetBox.Controls.Add(this.ArrayReset);
             this.ArrayResetBox.Controls.Add(this.ArrayResetDelayLabel);
             this.ArrayResetBox.Controls.Add(this.ArrayResetDelayText);
-            this.ArrayResetBox.Location = new System.Drawing.Point(320, 300);
+            this.ArrayResetBox.Location = new System.Drawing.Point(22, 439);
             this.ArrayResetBox.Name = "ArrayResetBox";
             this.ArrayResetBox.Size = new System.Drawing.Size(96, 93);
             this.ArrayResetBox.TabIndex = 205;
@@ -3027,7 +2868,7 @@
             // 
             this.label141.AutoSize = true;
             this.label141.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label141.Location = new System.Drawing.Point(826, 94);
+            this.label141.Location = new System.Drawing.Point(379, 242);
             this.label141.Name = "label141";
             this.label141.Size = new System.Drawing.Size(42, 13);
             this.label141.TabIndex = 200;
@@ -3037,7 +2878,7 @@
             // 
             this.label136.AutoSize = true;
             this.label136.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label136.Location = new System.Drawing.Point(559, 51);
+            this.label136.Location = new System.Drawing.Point(380, 413);
             this.label136.Name = "label136";
             this.label136.Size = new System.Drawing.Size(14, 13);
             this.label136.TabIndex = 193;
@@ -3047,7 +2888,7 @@
             // 
             this.label135.AutoSize = true;
             this.label135.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label135.Location = new System.Drawing.Point(559, 29);
+            this.label135.Location = new System.Drawing.Point(380, 391);
             this.label135.Name = "label135";
             this.label135.Size = new System.Drawing.Size(14, 13);
             this.label135.TabIndex = 192;
@@ -3057,7 +2898,7 @@
             // 
             this.label132.AutoSize = true;
             this.label132.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label132.Location = new System.Drawing.Point(908, 208);
+            this.label132.Location = new System.Drawing.Point(461, 356);
             this.label132.Name = "label132";
             this.label132.Size = new System.Drawing.Size(90, 13);
             this.label132.TabIndex = 190;
@@ -3067,7 +2908,7 @@
             // 
             this.label133.AutoSize = true;
             this.label133.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label133.Location = new System.Drawing.Point(909, 120);
+            this.label133.Location = new System.Drawing.Point(462, 268);
             this.label133.Name = "label133";
             this.label133.Size = new System.Drawing.Size(86, 13);
             this.label133.TabIndex = 189;
@@ -3077,7 +2918,7 @@
             // 
             this.label134.AutoSize = true;
             this.label134.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label134.Location = new System.Drawing.Point(908, 98);
+            this.label134.Location = new System.Drawing.Point(461, 246);
             this.label134.Name = "label134";
             this.label134.Size = new System.Drawing.Size(86, 13);
             this.label134.TabIndex = 188;
@@ -3087,7 +2928,7 @@
             // 
             this.label131.AutoSize = true;
             this.label131.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label131.Location = new System.Drawing.Point(679, 741);
+            this.label131.Location = new System.Drawing.Point(28, 869);
             this.label131.Name = "label131";
             this.label131.Size = new System.Drawing.Size(108, 13);
             this.label131.TabIndex = 185;
@@ -3097,7 +2938,7 @@
             // 
             this.label128.AutoSize = true;
             this.label128.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label128.Location = new System.Drawing.Point(187, 393);
+            this.label128.Location = new System.Drawing.Point(537, 762);
             this.label128.Name = "label128";
             this.label128.Size = new System.Drawing.Size(116, 13);
             this.label128.TabIndex = 183;
@@ -3107,7 +2948,7 @@
             // 
             this.label127.AutoSize = true;
             this.label127.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label127.Location = new System.Drawing.Point(206, 310);
+            this.label127.Location = new System.Drawing.Point(556, 679);
             this.label127.Name = "label127";
             this.label127.Size = new System.Drawing.Size(69, 13);
             this.label127.TabIndex = 182;
@@ -3117,7 +2958,7 @@
             // 
             this.label125.AutoSize = true;
             this.label125.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label125.Location = new System.Drawing.Point(225, 286);
+            this.label125.Location = new System.Drawing.Point(575, 655);
             this.label125.Name = "label125";
             this.label125.Size = new System.Drawing.Size(36, 13);
             this.label125.TabIndex = 181;
@@ -3129,7 +2970,7 @@
             this.groupBox58.Controls.Add(this.DataFilenameCommonRoot1Corr);
             this.groupBox58.Controls.Add(this.label122);
             this.groupBox58.Controls.Add(this.DataFilenameFolderPathCorr);
-            this.groupBox58.Location = new System.Drawing.Point(624, 422);
+            this.groupBox58.Location = new System.Drawing.Point(1144, 164);
             this.groupBox58.Name = "groupBox58";
             this.groupBox58.Size = new System.Drawing.Size(325, 117);
             this.groupBox58.TabIndex = 172;
@@ -3175,7 +3016,7 @@
             // 
             this.label120.AutoSize = true;
             this.label120.ForeColor = System.Drawing.Color.Black;
-            this.label120.Location = new System.Drawing.Point(543, 502);
+            this.label120.Location = new System.Drawing.Point(1063, 244);
             this.label120.Name = "label120";
             this.label120.Size = new System.Drawing.Size(45, 13);
             this.label120.TabIndex = 171;
@@ -3185,7 +3026,7 @@
             // 
             this.label119.AutoSize = true;
             this.label119.ForeColor = System.Drawing.Color.Red;
-            this.label119.Location = new System.Drawing.Point(553, 422);
+            this.label119.Location = new System.Drawing.Point(1073, 164);
             this.label119.Name = "label119";
             this.label119.Size = new System.Drawing.Size(35, 13);
             this.label119.TabIndex = 170;
@@ -3194,96 +3035,16 @@
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(918, 333);
+            this.label66.Location = new System.Drawing.Point(855, 64);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(37, 13);
             this.label66.TabIndex = 7;
             this.label66.Text = "Div1N";
             // 
-            // instrumentControlStrip2
-            // 
-            this.instrumentControlStrip2.AutoSize = false;
-            this.instrumentControlStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            this.instrumentControlStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel10,
-            this.toolStripPropertyEditor10,
-            this.toolStripLabel11,
-            this.toolStripPropertyEditor11,
-            this.toolStripLabel12,
-            this.toolStripPropertyEditor12,
-            this.toolStripLabel13,
-            this.toolStripPropertyEditor13});
-            this.instrumentControlStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.instrumentControlStrip2.Location = new System.Drawing.Point(62, 898);
-            this.instrumentControlStrip2.Name = "instrumentControlStrip2";
-            this.instrumentControlStrip2.Size = new System.Drawing.Size(586, 25);
-            this.instrumentControlStrip2.TabIndex = 168;
-            // 
-            // toolStripLabel10
-            // 
-            this.toolStripLabel10.Name = "toolStripLabel10";
-            this.toolStripLabel10.Size = new System.Drawing.Size(90, 22);
-            this.toolStripLabel10.Text = "InteractionMode:";
-            // 
-            // toolStripPropertyEditor10
-            // 
-            this.toolStripPropertyEditor10.AutoSize = false;
-            this.toolStripPropertyEditor10.Name = "toolStripPropertyEditor10";
-            this.toolStripPropertyEditor10.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
-            this.toolStripPropertyEditor10.Size = new System.Drawing.Size(120, 21);
-            this.toolStripPropertyEditor10.Source = new NationalInstruments.UI.PropertyEditorSource(this.CorrelatorGraph, "InteractionMode");
-            this.toolStripPropertyEditor10.Text = "ZoomX, ZoomY, ZoomAroundPoint, PanX, PanY, DragCursor, DragAnnotationCaption, Edi" +
-                "tRange";
-            // 
-            // toolStripLabel11
-            // 
-            this.toolStripLabel11.Name = "toolStripLabel11";
-            this.toolStripLabel11.Size = new System.Drawing.Size(48, 22);
-            this.toolStripLabel11.Text = "Cursors:";
-            // 
-            // toolStripPropertyEditor11
-            // 
-            this.toolStripPropertyEditor11.AutoSize = false;
-            this.toolStripPropertyEditor11.Name = "toolStripPropertyEditor11";
-            this.toolStripPropertyEditor11.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
-            this.toolStripPropertyEditor11.Size = new System.Drawing.Size(120, 21);
-            this.toolStripPropertyEditor11.Source = new NationalInstruments.UI.PropertyEditorSource(this.CorrelatorGraph, "Cursors");
-            this.toolStripPropertyEditor11.Text = "(Collection)";
-            // 
-            // toolStripLabel12
-            // 
-            this.toolStripLabel12.Name = "toolStripLabel12";
-            this.toolStripLabel12.Size = new System.Drawing.Size(69, 22);
-            this.toolStripLabel12.Text = "Annotations:";
-            // 
-            // toolStripPropertyEditor12
-            // 
-            this.toolStripPropertyEditor12.AutoSize = false;
-            this.toolStripPropertyEditor12.Name = "toolStripPropertyEditor12";
-            this.toolStripPropertyEditor12.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
-            this.toolStripPropertyEditor12.Size = new System.Drawing.Size(120, 21);
-            this.toolStripPropertyEditor12.Source = new NationalInstruments.UI.PropertyEditorSource(this.CorrelatorGraph, "Annotations");
-            this.toolStripPropertyEditor12.Text = "(Collection)";
-            // 
-            // toolStripLabel13
-            // 
-            this.toolStripLabel13.Name = "toolStripLabel13";
-            this.toolStripLabel13.Size = new System.Drawing.Size(34, 13);
-            this.toolStripLabel13.Text = "Plots:";
-            // 
-            // toolStripPropertyEditor13
-            // 
-            this.toolStripPropertyEditor13.AutoSize = false;
-            this.toolStripPropertyEditor13.Name = "toolStripPropertyEditor13";
-            this.toolStripPropertyEditor13.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
-            this.toolStripPropertyEditor13.Size = new System.Drawing.Size(120, 21);
-            this.toolStripPropertyEditor13.Source = new NationalInstruments.UI.PropertyEditorSource(this.CorrelatorGraph, "Plots");
-            this.toolStripPropertyEditor13.Text = "(Collection)";
-            // 
             // label117
             // 
             this.label117.AutoSize = true;
-            this.label117.Location = new System.Drawing.Point(187, 33);
+            this.label117.Location = new System.Drawing.Point(256, 33);
             this.label117.Name = "label117";
             this.label117.Size = new System.Drawing.Size(160, 104);
             this.label117.TabIndex = 164;
@@ -3292,7 +3053,7 @@
             // label101
             // 
             this.label101.AutoSize = true;
-            this.label101.Location = new System.Drawing.Point(918, 307);
+            this.label101.Location = new System.Drawing.Point(855, 38);
             this.label101.Name = "label101";
             this.label101.Size = new System.Drawing.Size(15, 13);
             this.label101.TabIndex = 5;
@@ -3301,7 +3062,7 @@
             // label115
             // 
             this.label115.AutoSize = true;
-            this.label115.Location = new System.Drawing.Point(35, 505);
+            this.label115.Location = new System.Drawing.Point(24, 613);
             this.label115.Name = "label115";
             this.label115.Size = new System.Drawing.Size(43, 13);
             this.label115.TabIndex = 161;
@@ -3310,7 +3071,7 @@
             // label104
             // 
             this.label104.AutoSize = true;
-            this.label104.Location = new System.Drawing.Point(918, 359);
+            this.label104.Location = new System.Drawing.Point(855, 90);
             this.label104.Name = "label104";
             this.label104.Size = new System.Drawing.Size(37, 13);
             this.label104.TabIndex = 9;
@@ -3319,38 +3080,16 @@
             // label116
             // 
             this.label116.AutoSize = true;
-            this.label116.Location = new System.Drawing.Point(132, 505);
+            this.label116.Location = new System.Drawing.Point(121, 613);
             this.label116.Name = "label116";
             this.label116.Size = new System.Drawing.Size(43, 13);
             this.label116.TabIndex = 163;
             this.label116.Text = "bound2";
             // 
-            // groupBox57
-            // 
-            this.groupBox57.Controls.Add(this.correlatorDecompMerit);
-            this.groupBox57.Location = new System.Drawing.Point(27, 422);
-            this.groupBox57.Name = "groupBox57";
-            this.groupBox57.Size = new System.Drawing.Size(275, 74);
-            this.groupBox57.TabIndex = 159;
-            this.groupBox57.TabStop = false;
-            this.groupBox57.Text = "Decompensation";
-            // 
-            // correlatorDecompMerit
-            // 
-            this.correlatorDecompMerit.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.correlatorDecompMerit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.correlatorDecompMerit.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.correlatorDecompMerit.Location = new System.Drawing.Point(19, 19);
-            this.correlatorDecompMerit.Name = "correlatorDecompMerit";
-            this.correlatorDecompMerit.ReadOnly = true;
-            this.correlatorDecompMerit.Size = new System.Drawing.Size(250, 44);
-            this.correlatorDecompMerit.TabIndex = 25;
-            this.correlatorDecompMerit.Text = "0";
-            // 
             // label108
             // 
             this.label108.AutoSize = true;
-            this.label108.Location = new System.Drawing.Point(950, 840);
+            this.label108.Location = new System.Drawing.Point(34, 778);
             this.label108.Name = "label108";
             this.label108.Size = new System.Drawing.Size(48, 13);
             this.label108.TabIndex = 158;
@@ -3359,7 +3098,7 @@
             // label107
             // 
             this.label107.AutoSize = true;
-            this.label107.Location = new System.Drawing.Point(950, 741);
+            this.label107.Location = new System.Drawing.Point(25, 663);
             this.label107.Name = "label107";
             this.label107.Size = new System.Drawing.Size(64, 13);
             this.label107.TabIndex = 157;
@@ -3369,7 +3108,7 @@
             // 
             this.label106.AutoSize = true;
             this.label106.ForeColor = System.Drawing.Color.Coral;
-            this.label106.Location = new System.Drawing.Point(556, 10);
+            this.label106.Location = new System.Drawing.Point(377, 372);
             this.label106.Name = "label106";
             this.label106.Size = new System.Drawing.Size(60, 13);
             this.label106.TabIndex = 155;
@@ -3379,7 +3118,7 @@
             // 
             this.CorrelatorButton.BackColor = System.Drawing.Color.Gray;
             this.CorrelatorButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.CorrelatorButton.Location = new System.Drawing.Point(562, 316);
+            this.CorrelatorButton.Location = new System.Drawing.Point(1060, 33);
             this.CorrelatorButton.Name = "CorrelatorButton";
             this.CorrelatorButton.Size = new System.Drawing.Size(142, 66);
             this.CorrelatorButton.TabIndex = 153;
@@ -3387,32 +3126,10 @@
             this.CorrelatorButton.UseVisualStyleBackColor = false;
             this.CorrelatorButton.Click += new System.EventHandler(this.CorrelatorButton_Click);
             // 
-            // groupBox53
-            // 
-            this.groupBox53.Controls.Add(this.correlatorTotalCounts);
-            this.groupBox53.Location = new System.Drawing.Point(308, 422);
-            this.groupBox53.Name = "groupBox53";
-            this.groupBox53.Size = new System.Drawing.Size(212, 74);
-            this.groupBox53.TabIndex = 22;
-            this.groupBox53.TabStop = false;
-            this.groupBox53.Text = "Total Counts";
-            // 
-            // correlatorTotalCounts
-            // 
-            this.correlatorTotalCounts.BackColor = System.Drawing.SystemColors.Window;
-            this.correlatorTotalCounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.correlatorTotalCounts.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.correlatorTotalCounts.Location = new System.Drawing.Point(19, 19);
-            this.correlatorTotalCounts.Name = "correlatorTotalCounts";
-            this.correlatorTotalCounts.ReadOnly = true;
-            this.correlatorTotalCounts.Size = new System.Drawing.Size(178, 44);
-            this.correlatorTotalCounts.TabIndex = 25;
-            this.correlatorTotalCounts.Text = "0";
-            // 
             // label103
             // 
             this.label103.AutoSize = true;
-            this.label103.Location = new System.Drawing.Point(556, 162);
+            this.label103.Location = new System.Drawing.Point(590, 104);
             this.label103.Name = "label103";
             this.label103.Size = new System.Drawing.Size(80, 13);
             this.label103.TabIndex = 23;
@@ -3421,7 +3138,7 @@
             // label102
             // 
             this.label102.AutoSize = true;
-            this.label102.Location = new System.Drawing.Point(556, 75);
+            this.label102.Location = new System.Drawing.Point(590, 17);
             this.label102.Name = "label102";
             this.label102.Size = new System.Drawing.Size(122, 13);
             this.label102.TabIndex = 10;
@@ -3437,7 +3154,7 @@
             this.groupBox52.Controls.Add(this.correlatorRefFreqtext);
             this.groupBox52.Controls.Add(this.label100);
             this.groupBox52.Controls.Add(this.correlatorVCOFreqtext);
-            this.groupBox52.Location = new System.Drawing.Point(375, 39);
+            this.groupBox52.Location = new System.Drawing.Point(422, 26);
             this.groupBox52.Name = "groupBox52";
             this.groupBox52.Size = new System.Drawing.Size(154, 136);
             this.groupBox52.TabIndex = 22;
@@ -3524,7 +3241,9 @@
             this.groupBox51.Controls.Add(this.LockInPertext2B);
             this.groupBox51.Controls.Add(this.LockInPertext2);
             this.groupBox51.Controls.Add(this.label55);
+            this.groupBox51.Controls.Add(this.label138);
             this.groupBox51.Controls.Add(this.label52);
+            this.groupBox51.Controls.Add(this.label137);
             this.groupBox51.Controls.Add(this.label51);
             this.groupBox51.Controls.Add(this.label44);
             this.groupBox51.Controls.Add(this.LockInPertext1);
@@ -3546,7 +3265,7 @@
             this.groupBox51.Controls.Add(this.LockinFrequencySwitch);
             this.groupBox51.Location = new System.Drawing.Point(19, 22);
             this.groupBox51.Name = "groupBox51";
-            this.groupBox51.Size = new System.Drawing.Size(156, 386);
+            this.groupBox51.Size = new System.Drawing.Size(201, 386);
             this.groupBox51.TabIndex = 21;
             this.groupBox51.TabStop = false;
             this.groupBox51.Text = "Parameter Values";
@@ -3556,7 +3275,7 @@
             // 
             this.label68.AutoSize = true;
             this.label68.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label68.Location = new System.Drawing.Point(6, 92);
+            this.label68.Location = new System.Drawing.Point(42, 92);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(61, 13);
             this.label68.TabIndex = 219;
@@ -3566,7 +3285,7 @@
             // 
             this.label57.AutoSize = true;
             this.label57.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label57.Location = new System.Drawing.Point(136, 365);
+            this.label57.Location = new System.Drawing.Point(172, 365);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(18, 13);
             this.label57.TabIndex = 218;
@@ -3576,7 +3295,7 @@
             // 
             this.label56.AutoSize = true;
             this.label56.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label56.Location = new System.Drawing.Point(136, 335);
+            this.label56.Location = new System.Drawing.Point(172, 335);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(18, 13);
             this.label56.TabIndex = 217;
@@ -3584,7 +3303,7 @@
             // 
             // LockInPertext2B
             // 
-            this.LockInPertext2B.Location = new System.Drawing.Point(93, 360);
+            this.LockInPertext2B.Location = new System.Drawing.Point(129, 360);
             this.LockInPertext2B.Name = "LockInPertext2B";
             this.LockInPertext2B.Size = new System.Drawing.Size(41, 20);
             this.LockInPertext2B.TabIndex = 216;
@@ -3593,7 +3312,7 @@
             // 
             // LockInPertext2
             // 
-            this.LockInPertext2.Location = new System.Drawing.Point(93, 332);
+            this.LockInPertext2.Location = new System.Drawing.Point(129, 332);
             this.LockInPertext2.Name = "LockInPertext2";
             this.LockInPertext2.Size = new System.Drawing.Size(41, 20);
             this.LockInPertext2.TabIndex = 215;
@@ -3604,27 +3323,47 @@
             // 
             this.label55.AutoSize = true;
             this.label55.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label55.Location = new System.Drawing.Point(47, 361);
+            this.label55.Location = new System.Drawing.Point(83, 361);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(44, 13);
             this.label55.TabIndex = 214;
             this.label55.Text = "kHz <->";
             // 
+            // label138
+            // 
+            this.label138.AutoSize = true;
+            this.label138.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label138.Location = new System.Drawing.Point(15, 363);
+            this.label138.Name = "label138";
+            this.label138.Size = new System.Drawing.Size(14, 13);
+            this.label138.TabIndex = 195;
+            this.label138.Text = "B";
+            // 
             // label52
             // 
             this.label52.AutoSize = true;
             this.label52.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label52.Location = new System.Drawing.Point(47, 335);
+            this.label52.Location = new System.Drawing.Point(83, 335);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(44, 13);
             this.label52.TabIndex = 213;
             this.label52.Text = "kHz <->";
             // 
+            // label137
+            // 
+            this.label137.AutoSize = true;
+            this.label137.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label137.Location = new System.Drawing.Point(15, 336);
+            this.label137.Name = "label137";
+            this.label137.Size = new System.Drawing.Size(14, 13);
+            this.label137.TabIndex = 194;
+            this.label137.Text = "A";
+            // 
             // label51
             // 
             this.label51.AutoSize = true;
             this.label51.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label51.Location = new System.Drawing.Point(136, 240);
+            this.label51.Location = new System.Drawing.Point(172, 240);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(18, 13);
             this.label51.TabIndex = 212;
@@ -3634,7 +3373,7 @@
             // 
             this.label44.AutoSize = true;
             this.label44.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label44.Location = new System.Drawing.Point(47, 240);
+            this.label44.Location = new System.Drawing.Point(83, 240);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(44, 13);
             this.label44.TabIndex = 198;
@@ -3642,7 +3381,7 @@
             // 
             // LockInPertext1
             // 
-            this.LockInPertext1.Location = new System.Drawing.Point(93, 237);
+            this.LockInPertext1.Location = new System.Drawing.Point(129, 237);
             this.LockInPertext1.Name = "LockInPertext1";
             this.LockInPertext1.Size = new System.Drawing.Size(43, 20);
             this.LockInPertext1.TabIndex = 197;
@@ -3653,7 +3392,7 @@
             // 
             this.label140.AutoSize = true;
             this.label140.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label140.Location = new System.Drawing.Point(142, 22);
+            this.label140.Location = new System.Drawing.Point(178, 22);
             this.label140.Name = "label140";
             this.label140.Size = new System.Drawing.Size(14, 13);
             this.label140.TabIndex = 196;
@@ -3663,7 +3402,7 @@
             // 
             this.label139.AutoSize = true;
             this.label139.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label139.Location = new System.Drawing.Point(88, 22);
+            this.label139.Location = new System.Drawing.Point(124, 22);
             this.label139.Name = "label139";
             this.label139.Size = new System.Drawing.Size(14, 13);
             this.label139.TabIndex = 195;
@@ -3671,7 +3410,7 @@
             // 
             // correlatorPtextB
             // 
-            this.correlatorPtextB.Location = new System.Drawing.Point(105, 19);
+            this.correlatorPtextB.Location = new System.Drawing.Point(141, 19);
             this.correlatorPtextB.Name = "correlatorPtextB";
             this.correlatorPtextB.Size = new System.Drawing.Size(36, 20);
             this.correlatorPtextB.TabIndex = 194;
@@ -3679,7 +3418,7 @@
             // 
             // LockInFreqtext2B
             // 
-            this.LockInFreqtext2B.Location = new System.Drawing.Point(6, 358);
+            this.LockInFreqtext2B.Location = new System.Drawing.Point(42, 358);
             this.LockInFreqtext2B.Name = "LockInFreqtext2B";
             this.LockInFreqtext2B.Size = new System.Drawing.Size(41, 20);
             this.LockInFreqtext2B.TabIndex = 194;
@@ -3690,7 +3429,7 @@
             // 
             this.label62.AutoSize = true;
             this.label62.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label62.Location = new System.Drawing.Point(6, 221);
+            this.label62.Location = new System.Drawing.Point(42, 221);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(57, 13);
             this.label62.TabIndex = 176;
@@ -3698,7 +3437,7 @@
             // 
             // LockInFreqtext2
             // 
-            this.LockInFreqtext2.Location = new System.Drawing.Point(6, 332);
+            this.LockInFreqtext2.Location = new System.Drawing.Point(42, 332);
             this.LockInFreqtext2.Name = "LockInFreqtext2";
             this.LockInFreqtext2.Size = new System.Drawing.Size(41, 20);
             this.LockInFreqtext2.TabIndex = 175;
@@ -3707,7 +3446,7 @@
             // 
             // correlatorIntTimetext2
             // 
-            this.correlatorIntTimetext2.Location = new System.Drawing.Point(91, 135);
+            this.correlatorIntTimetext2.Location = new System.Drawing.Point(127, 135);
             this.correlatorIntTimetext2.Name = "correlatorIntTimetext2";
             this.correlatorIntTimetext2.Size = new System.Drawing.Size(57, 20);
             this.correlatorIntTimetext2.TabIndex = 174;
@@ -3716,7 +3455,7 @@
             // 
             // LockInFreqtext1
             // 
-            this.LockInFreqtext1.Location = new System.Drawing.Point(6, 237);
+            this.LockInFreqtext1.Location = new System.Drawing.Point(42, 237);
             this.LockInFreqtext1.Name = "LockInFreqtext1";
             this.LockInFreqtext1.Size = new System.Drawing.Size(41, 20);
             this.LockInFreqtext1.TabIndex = 13;
@@ -3727,7 +3466,7 @@
             // 
             this.label118.AutoSize = true;
             this.label118.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label118.Location = new System.Drawing.Point(3, 201);
+            this.label118.Location = new System.Drawing.Point(39, 201);
             this.label118.Name = "label118";
             this.label118.Size = new System.Drawing.Size(108, 13);
             this.label118.TabIndex = 12;
@@ -3735,7 +3474,7 @@
             // 
             // correlatorIntTimetext1
             // 
-            this.correlatorIntTimetext1.Location = new System.Drawing.Point(91, 53);
+            this.correlatorIntTimetext1.Location = new System.Drawing.Point(127, 53);
             this.correlatorIntTimetext1.Name = "correlatorIntTimetext1";
             this.correlatorIntTimetext1.Size = new System.Drawing.Size(57, 20);
             this.correlatorIntTimetext1.TabIndex = 10;
@@ -3746,7 +3485,7 @@
             // 
             this.label105.AutoSize = true;
             this.label105.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label105.Location = new System.Drawing.Point(5, 74);
+            this.label105.Location = new System.Drawing.Point(41, 74);
             this.label105.Name = "label105";
             this.label105.Size = new System.Drawing.Size(68, 13);
             this.label105.TabIndex = 11;
@@ -3754,7 +3493,7 @@
             // 
             // correlatorPtext
             // 
-            this.correlatorPtext.Location = new System.Drawing.Point(51, 17);
+            this.correlatorPtext.Location = new System.Drawing.Point(87, 17);
             this.correlatorPtext.Name = "correlatorPtext";
             this.correlatorPtext.Size = new System.Drawing.Size(36, 20);
             this.correlatorPtext.TabIndex = 2;
@@ -3764,7 +3503,7 @@
             // 
             this.label99.AutoSize = true;
             this.label99.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label99.Location = new System.Drawing.Point(-3, 20);
+            this.label99.Location = new System.Drawing.Point(33, 20);
             this.label99.Name = "label99";
             this.label99.Size = new System.Drawing.Size(52, 13);
             this.label99.TabIndex = 3;
@@ -3773,7 +3512,7 @@
             // 
             // intTselector
             // 
-            this.intTselector.Location = new System.Drawing.Point(84, 61);
+            this.intTselector.Location = new System.Drawing.Point(120, 61);
             this.intTselector.Name = "intTselector";
             this.intTselector.Size = new System.Drawing.Size(64, 96);
             this.intTselector.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -3785,7 +3524,7 @@
             // 
             this.label63.AutoSize = true;
             this.label63.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label63.Location = new System.Drawing.Point(3, 311);
+            this.label63.Location = new System.Drawing.Point(39, 311);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(64, 13);
             this.label63.TabIndex = 177;
@@ -3794,7 +3533,7 @@
             // LockinFrequencySwitch
             // 
             this.LockinFrequencySwitch.Cursor = System.Windows.Forms.Cursors.Default;
-            this.LockinFrequencySwitch.Location = new System.Drawing.Point(52, 243);
+            this.LockinFrequencySwitch.Location = new System.Drawing.Point(88, 243);
             this.LockinFrequencySwitch.Name = "LockinFrequencySwitch";
             this.LockinFrequencySwitch.Size = new System.Drawing.Size(52, 89);
             this.LockinFrequencySwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -3804,7 +3543,7 @@
             // 
             // switchDisplayBases
             // 
-            this.switchDisplayBases.Location = new System.Drawing.Point(209, 310);
+            this.switchDisplayBases.Location = new System.Drawing.Point(559, 679);
             this.switchDisplayBases.Name = "switchDisplayBases";
             this.switchDisplayBases.Size = new System.Drawing.Size(64, 96);
             this.switchDisplayBases.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -3814,7 +3553,7 @@
             // 
             // chooseCode
             // 
-            this.chooseCode.Location = new System.Drawing.Point(911, 125);
+            this.chooseCode.Location = new System.Drawing.Point(464, 273);
             this.chooseCode.Name = "chooseCode";
             this.chooseCode.Size = new System.Drawing.Size(64, 96);
             this.chooseCode.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -3822,7 +3561,7 @@
             // 
             // SaveCorrelatorToggle
             // 
-            this.SaveCorrelatorToggle.Location = new System.Drawing.Point(538, 422);
+            this.SaveCorrelatorToggle.Location = new System.Drawing.Point(1058, 164);
             this.SaveCorrelatorToggle.Name = "SaveCorrelatorToggle";
             this.SaveCorrelatorToggle.Size = new System.Drawing.Size(64, 96);
             this.SaveCorrelatorToggle.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
@@ -3832,7 +3571,7 @@
             // 
             this.CorrelatorBinningPhaseSlider.AbsMax = 13;
             this.CorrelatorBinningPhaseSlider.AbsMin = 0;
-            this.CorrelatorBinningPhaseSlider.Location = new System.Drawing.Point(654, 856);
+            this.CorrelatorBinningPhaseSlider.Location = new System.Drawing.Point(110, 691);
             this.CorrelatorBinningPhaseSlider.Max = 13;
             this.CorrelatorBinningPhaseSlider.Min = 0;
             this.CorrelatorBinningPhaseSlider.Name = "CorrelatorBinningPhaseSlider";
@@ -3971,6 +3710,7 @@
             // 
             // ElectrodeScanTab
             // 
+            this.ElectrodeScanTab.Controls.Add(this.ElectrodeScanStart);
             this.ElectrodeScanTab.Controls.Add(this.groupBox41);
             this.ElectrodeScanTab.Controls.Add(this.groupBox34);
             this.ElectrodeScanTab.Controls.Add(this.groupBox29);
@@ -3981,6 +3721,16 @@
             this.ElectrodeScanTab.TabIndex = 5;
             this.ElectrodeScanTab.Text = "Electrode Scan";
             this.ElectrodeScanTab.UseVisualStyleBackColor = true;
+            // 
+            // ElectrodeScanStart
+            // 
+            this.ElectrodeScanStart.BackColor = System.Drawing.Color.Gainsboro;
+            this.ElectrodeScanStart.Location = new System.Drawing.Point(18, 327);
+            this.ElectrodeScanStart.Name = "ElectrodeScanStart";
+            this.ElectrodeScanStart.Size = new System.Drawing.Size(158, 31);
+            this.ElectrodeScanStart.TabIndex = 147;
+            this.ElectrodeScanStart.Text = "Start *Electrode* Scan";
+            this.ElectrodeScanStart.UseVisualStyleBackColor = false;
             // 
             // groupBox41
             // 
@@ -4229,6 +3979,7 @@
             // 
             // SliderScan
             // 
+            this.SliderScan.Controls.Add(this.SliderScanStart);
             this.SliderScan.Controls.Add(this.groupBox62);
             this.SliderScan.Controls.Add(this.groupBox33);
             this.SliderScan.Controls.Add(this.groupBox50);
@@ -4240,6 +3991,17 @@
             this.SliderScan.TabIndex = 16;
             this.SliderScan.Text = "Slider Scan";
             this.SliderScan.UseVisualStyleBackColor = true;
+            // 
+            // SliderScanStart
+            // 
+            this.SliderScanStart.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.SliderScanStart.ForeColor = System.Drawing.Color.IndianRed;
+            this.SliderScanStart.Location = new System.Drawing.Point(26, 336);
+            this.SliderScanStart.Name = "SliderScanStart";
+            this.SliderScanStart.Size = new System.Drawing.Size(113, 31);
+            this.SliderScanStart.TabIndex = 166;
+            this.SliderScanStart.Text = "Start *Slider* Scan";
+            this.SliderScanStart.UseVisualStyleBackColor = false;
             // 
             // groupBox62
             // 
@@ -5048,9 +4810,6 @@
             // 
             // MainControlTab
             // 
-            this.MainControlTab.Controls.Add(this.clrCorrLog);
-            this.MainControlTab.Controls.Add(this.corrRecToggle);
-            this.MainControlTab.Controls.Add(this.SliderScanStart);
             this.MainControlTab.Controls.Add(this.TickleSlider);
             this.MainControlTab.Controls.Add(this.BxSlider);
             this.MainControlTab.Controls.Add(this.Sideband402Control);
@@ -5060,7 +4819,6 @@
             this.MainControlTab.Controls.Add(this.ReadConfigurationFileTextbox);
             this.MainControlTab.Controls.Add(this.ReadFullConfigButton);
             this.MainControlTab.Controls.Add(this.SaveFullConfigButton);
-            this.MainControlTab.Controls.Add(this.ElectrodeScanStart);
             this.MainControlTab.Controls.Add(this.RamanSlider);
             this.MainControlTab.Controls.Add(this.groupBox38);
             this.MainControlTab.Controls.Add(this.groupBox31);
@@ -5095,30 +4853,11 @@
             this.MainControlTab.Text = "Control";
             this.MainControlTab.UseVisualStyleBackColor = true;
             // 
-            // clrCorrLog
-            // 
-            this.clrCorrLog.BackColor = System.Drawing.Color.Red;
-            this.clrCorrLog.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.clrCorrLog.Location = new System.Drawing.Point(961, 930);
-            this.clrCorrLog.Name = "clrCorrLog";
-            this.clrCorrLog.Size = new System.Drawing.Size(27, 29);
-            this.clrCorrLog.TabIndex = 169;
-            this.clrCorrLog.UseVisualStyleBackColor = false;
-            // 
-            // corrRecToggle
-            // 
-            this.corrRecToggle.Location = new System.Drawing.Point(903, 930);
-            this.corrRecToggle.Name = "corrRecToggle";
-            this.corrRecToggle.Size = new System.Drawing.Size(34, 38);
-            this.corrRecToggle.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalSlide3D;
-            this.corrRecToggle.TabIndex = 168;
-            this.corrRecToggle.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.corrRecToggle_StateChanged);
-            // 
             // TickleSlider
             // 
             this.TickleSlider.AbsMax = 5;
             this.TickleSlider.AbsMin = -5;
-            this.TickleSlider.Location = new System.Drawing.Point(815, 309);
+            this.TickleSlider.Location = new System.Drawing.Point(950, 309);
             this.TickleSlider.Max = 5;
             this.TickleSlider.Min = -5;
             this.TickleSlider.Name = "TickleSlider";
@@ -5131,7 +4870,7 @@
             // 
             this.BxSlider.AbsMax = 5;
             this.BxSlider.AbsMin = -5;
-            this.BxSlider.Location = new System.Drawing.Point(815, 233);
+            this.BxSlider.Location = new System.Drawing.Point(950, 233);
             this.BxSlider.Max = 5;
             this.BxSlider.Min = -5;
             this.BxSlider.Name = "BxSlider";
@@ -5146,7 +4885,7 @@
             this.Sideband402Control.AbsMin = 0;
             this.Sideband402Control.BackColor = System.Drawing.Color.Transparent;
             this.Sideband402Control.ForeColor = System.Drawing.Color.Black;
-            this.Sideband402Control.Location = new System.Drawing.Point(815, 155);
+            this.Sideband402Control.Location = new System.Drawing.Point(950, 155);
             this.Sideband402Control.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Sideband402Control.Max = 300;
             this.Sideband402Control.Min = 200;
@@ -5158,7 +4897,7 @@
             // 
             // ReadFullConfigTextbox
             // 
-            this.ReadFullConfigTextbox.Location = new System.Drawing.Point(6, 880);
+            this.ReadFullConfigTextbox.Location = new System.Drawing.Point(23, 868);
             this.ReadFullConfigTextbox.Name = "ReadFullConfigTextbox";
             this.ReadFullConfigTextbox.Size = new System.Drawing.Size(358, 20);
             this.ReadFullConfigTextbox.TabIndex = 158;
@@ -5166,7 +4905,7 @@
             // 
             // SaveFullConfigTextbox
             // 
-            this.SaveFullConfigTextbox.Location = new System.Drawing.Point(6, 810);
+            this.SaveFullConfigTextbox.Location = new System.Drawing.Point(23, 798);
             this.SaveFullConfigTextbox.Name = "SaveFullConfigTextbox";
             this.SaveFullConfigTextbox.Size = new System.Drawing.Size(356, 20);
             this.SaveFullConfigTextbox.TabIndex = 156;
@@ -5174,7 +4913,7 @@
             // 
             // ReadConfigurationFileTextbox
             // 
-            this.ReadConfigurationFileTextbox.Location = new System.Drawing.Point(6, 948);
+            this.ReadConfigurationFileTextbox.Location = new System.Drawing.Point(23, 936);
             this.ReadConfigurationFileTextbox.Name = "ReadConfigurationFileTextbox";
             this.ReadConfigurationFileTextbox.Size = new System.Drawing.Size(358, 20);
             this.ReadConfigurationFileTextbox.TabIndex = 109;
@@ -5182,7 +4921,7 @@
             // 
             // ReadFullConfigButton
             // 
-            this.ReadFullConfigButton.Location = new System.Drawing.Point(6, 845);
+            this.ReadFullConfigButton.Location = new System.Drawing.Point(23, 833);
             this.ReadFullConfigButton.Name = "ReadFullConfigButton";
             this.ReadFullConfigButton.Size = new System.Drawing.Size(224, 29);
             this.ReadFullConfigButton.TabIndex = 157;
@@ -5192,7 +4931,7 @@
             // 
             // SaveFullConfigButton
             // 
-            this.SaveFullConfigButton.Location = new System.Drawing.Point(6, 775);
+            this.SaveFullConfigButton.Location = new System.Drawing.Point(23, 763);
             this.SaveFullConfigButton.Name = "SaveFullConfigButton";
             this.SaveFullConfigButton.Size = new System.Drawing.Size(224, 29);
             this.SaveFullConfigButton.TabIndex = 155;
@@ -5205,7 +4944,7 @@
             this.RamanSlider.AbsMax = 10;
             this.RamanSlider.AbsMin = 0;
             this.RamanSlider.BackColor = System.Drawing.Color.White;
-            this.RamanSlider.Location = new System.Drawing.Point(417, 309);
+            this.RamanSlider.Location = new System.Drawing.Point(494, 309);
             this.RamanSlider.Max = 10;
             this.RamanSlider.Min = 0;
             this.RamanSlider.Name = "RamanSlider";
@@ -5221,7 +4960,7 @@
             this.groupBox38.Controls.Add(this.label65);
             this.groupBox38.Controls.Add(this.Switch638);
             this.groupBox38.ForeColor = System.Drawing.Color.Crimson;
-            this.groupBox38.Location = new System.Drawing.Point(826, 659);
+            this.groupBox38.Location = new System.Drawing.Point(899, 802);
             this.groupBox38.Name = "groupBox38";
             this.groupBox38.Size = new System.Drawing.Size(78, 140);
             this.groupBox38.TabIndex = 122;
@@ -5264,7 +5003,7 @@
             this.groupBox31.Controls.Add(this.label38);
             this.groupBox31.Controls.Add(this.label39);
             this.groupBox31.Controls.Add(this.Dev2DO3Switch);
-            this.groupBox31.Location = new System.Drawing.Point(592, 659);
+            this.groupBox31.Location = new System.Drawing.Point(665, 802);
             this.groupBox31.Name = "groupBox31";
             this.groupBox31.Size = new System.Drawing.Size(71, 140);
             this.groupBox31.TabIndex = 126;
@@ -5306,7 +5045,7 @@
             this.CavityCoolingPowerControl.AbsMax = 10;
             this.CavityCoolingPowerControl.AbsMin = 0;
             this.CavityCoolingPowerControl.BackColor = System.Drawing.Color.Gainsboro;
-            this.CavityCoolingPowerControl.Location = new System.Drawing.Point(417, 233);
+            this.CavityCoolingPowerControl.Location = new System.Drawing.Point(494, 233);
             this.CavityCoolingPowerControl.Max = 10;
             this.CavityCoolingPowerControl.Min = 0;
             this.CavityCoolingPowerControl.Name = "CavityCoolingPowerControl";
@@ -5318,7 +5057,7 @@
             // groupBox32
             // 
             this.groupBox32.Controls.Add(this.RepumperFrequency);
-            this.groupBox32.Location = new System.Drawing.Point(800, 500);
+            this.groupBox32.Location = new System.Drawing.Point(875, 486);
             this.groupBox32.Name = "groupBox32";
             this.groupBox32.Size = new System.Drawing.Size(94, 61);
             this.groupBox32.TabIndex = 124;
@@ -5341,7 +5080,7 @@
             this.LatticePowerControl.AbsMax = 10;
             this.LatticePowerControl.AbsMin = 0;
             this.LatticePowerControl.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.LatticePowerControl.Location = new System.Drawing.Point(417, 384);
+            this.LatticePowerControl.Location = new System.Drawing.Point(494, 384);
             this.LatticePowerControl.Max = 10;
             this.LatticePowerControl.Min = 0;
             this.LatticePowerControl.Name = "LatticePowerControl";
@@ -5356,7 +5095,7 @@
             this.groupBox30.Controls.Add(this.label36);
             this.groupBox30.Controls.Add(this.RepumperRFBroadenSwitch);
             this.groupBox30.ForeColor = System.Drawing.Color.Brown;
-            this.groupBox30.Location = new System.Drawing.Point(742, 659);
+            this.groupBox30.Location = new System.Drawing.Point(815, 802);
             this.groupBox30.Name = "groupBox30";
             this.groupBox30.Size = new System.Drawing.Size(78, 140);
             this.groupBox30.TabIndex = 121;
@@ -5397,7 +5136,7 @@
             // groupBox28
             // 
             this.groupBox28.Controls.Add(this.CurrentFeedforward370Gain);
-            this.groupBox28.Location = new System.Drawing.Point(605, 82);
+            this.groupBox28.Location = new System.Drawing.Point(682, 82);
             this.groupBox28.Name = "groupBox28";
             this.groupBox28.Size = new System.Drawing.Size(168, 51);
             this.groupBox28.TabIndex = 110;
@@ -5418,7 +5157,7 @@
             this.groupBox27.Controls.Add(this.label32);
             this.groupBox27.Controls.Add(this.label33);
             this.groupBox27.Controls.Add(this.CavityBeam370Switch);
-            this.groupBox27.Location = new System.Drawing.Point(515, 659);
+            this.groupBox27.Location = new System.Drawing.Point(588, 802);
             this.groupBox27.Name = "groupBox27";
             this.groupBox27.Size = new System.Drawing.Size(71, 140);
             this.groupBox27.TabIndex = 117;
@@ -5462,7 +5201,7 @@
             this.RepumperSlider.AbsMin = 0;
             this.RepumperSlider.BackColor = System.Drawing.Color.Transparent;
             this.RepumperSlider.ForeColor = System.Drawing.Color.Black;
-            this.RepumperSlider.Location = new System.Drawing.Point(419, 498);
+            this.RepumperSlider.Location = new System.Drawing.Point(494, 484);
             this.RepumperSlider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.RepumperSlider.Max = 7;
             this.RepumperSlider.Min = 0;
@@ -5477,7 +5216,7 @@
             this.RepumperPowerSlider.AbsMax = 10;
             this.RepumperPowerSlider.AbsMin = 0;
             this.RepumperPowerSlider.BackColor = System.Drawing.Color.White;
-            this.RepumperPowerSlider.Location = new System.Drawing.Point(419, 567);
+            this.RepumperPowerSlider.Location = new System.Drawing.Point(494, 553);
             this.RepumperPowerSlider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.RepumperPowerSlider.Max = 10;
             this.RepumperPowerSlider.Min = 0;
@@ -5491,7 +5230,7 @@
             // ReadElectrodeConfig
             // 
             this.ReadElectrodeConfig.BackColor = System.Drawing.Color.Silver;
-            this.ReadElectrodeConfig.Location = new System.Drawing.Point(6, 913);
+            this.ReadElectrodeConfig.Location = new System.Drawing.Point(23, 901);
             this.ReadElectrodeConfig.Name = "ReadElectrodeConfig";
             this.ReadElectrodeConfig.Size = new System.Drawing.Size(224, 29);
             this.ReadElectrodeConfig.TabIndex = 108;
@@ -5504,7 +5243,7 @@
             this.SideBeam370Power.AbsMax = 10;
             this.SideBeam370Power.AbsMin = 0;
             this.SideBeam370Power.BackColor = System.Drawing.Color.LightGray;
-            this.SideBeam370Power.Location = new System.Drawing.Point(417, 155);
+            this.SideBeam370Power.Location = new System.Drawing.Point(494, 155);
             this.SideBeam370Power.Max = 10;
             this.SideBeam370Power.Min = 0;
             this.SideBeam370Power.Name = "SideBeam370Power";
@@ -5517,7 +5256,7 @@
             // 
             this.ResetButton.BackColor = System.Drawing.Color.Maroon;
             this.ResetButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ResetButton.Location = new System.Drawing.Point(402, 932);
+            this.ResetButton.Location = new System.Drawing.Point(1475, 920);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(49, 34);
             this.ResetButton.TabIndex = 119;
@@ -5529,7 +5268,7 @@
             this.groupBox26.Controls.Add(this.label31);
             this.groupBox26.Controls.Add(this.label30);
             this.groupBox26.Controls.Add(this.IonizationShutter);
-            this.groupBox26.Location = new System.Drawing.Point(438, 659);
+            this.groupBox26.Location = new System.Drawing.Point(511, 802);
             this.groupBox26.Name = "groupBox26";
             this.groupBox26.Size = new System.Drawing.Size(71, 140);
             this.groupBox26.TabIndex = 115;
@@ -5571,7 +5310,7 @@
             // 
             this.QuadTiltRatioSlider.AbsMax = 20;
             this.QuadTiltRatioSlider.AbsMin = -20;
-            this.QuadTiltRatioSlider.Location = new System.Drawing.Point(6, 463);
+            this.QuadTiltRatioSlider.Location = new System.Drawing.Point(23, 463);
             this.QuadTiltRatioSlider.Max = 1;
             this.QuadTiltRatioSlider.Min = -1;
             this.QuadTiltRatioSlider.Name = "QuadTiltRatioSlider";
@@ -5584,7 +5323,7 @@
             // 
             this.SnakeRatioSlider.AbsMax = 2;
             this.SnakeRatioSlider.AbsMin = -2;
-            this.SnakeRatioSlider.Location = new System.Drawing.Point(6, 605);
+            this.SnakeRatioSlider.Location = new System.Drawing.Point(23, 588);
             this.SnakeRatioSlider.Max = 1;
             this.SnakeRatioSlider.Min = -1;
             this.SnakeRatioSlider.Name = "SnakeRatioSlider";
@@ -5596,7 +5335,7 @@
             // groupBox25
             // 
             this.groupBox25.Controls.Add(this.CurrentFeedforward370Offset);
-            this.groupBox25.Location = new System.Drawing.Point(417, 82);
+            this.groupBox25.Location = new System.Drawing.Point(494, 82);
             this.groupBox25.Name = "groupBox25";
             this.groupBox25.Size = new System.Drawing.Size(182, 51);
             this.groupBox25.TabIndex = 109;
@@ -5615,7 +5354,7 @@
             // 
             this.TransferCavity.AbsMax = 6920;
             this.TransferCavity.AbsMin = 0;
-            this.TransferCavity.Location = new System.Drawing.Point(417, 6);
+            this.TransferCavity.Location = new System.Drawing.Point(494, 6);
             this.TransferCavity.Max = 6920;
             this.TransferCavity.Min = 0;
             this.TransferCavity.Name = "TransferCavity";
@@ -5628,7 +5367,7 @@
             // 
             this.ArrayTotalSlider.AbsMax = 20;
             this.ArrayTotalSlider.AbsMin = -20;
-            this.ArrayTotalSlider.Location = new System.Drawing.Point(6, 6);
+            this.ArrayTotalSlider.Location = new System.Drawing.Point(23, 6);
             this.ArrayTotalSlider.Max = 0;
             this.ArrayTotalSlider.Min = -16;
             this.ArrayTotalSlider.Name = "ArrayTotalSlider";
@@ -5641,7 +5380,7 @@
             // 
             this.QuadrupoleTilt.AbsMax = 20;
             this.QuadrupoleTilt.AbsMin = -20;
-            this.QuadrupoleTilt.Location = new System.Drawing.Point(6, 383);
+            this.QuadrupoleTilt.Location = new System.Drawing.Point(23, 383);
             this.QuadrupoleTilt.Max = 1;
             this.QuadrupoleTilt.Min = -1;
             this.QuadrupoleTilt.Name = "QuadrupoleTilt";
@@ -5654,7 +5393,7 @@
             // 
             this.DCVertQuadSlider.AbsMax = 20;
             this.DCVertQuadSlider.AbsMin = -20;
-            this.DCVertQuadSlider.Location = new System.Drawing.Point(6, 228);
+            this.DCVertQuadSlider.Location = new System.Drawing.Point(23, 228);
             this.DCVertQuadSlider.Max = 0;
             this.DCVertQuadSlider.Min = -6;
             this.DCVertQuadSlider.Name = "DCVertQuadSlider";
@@ -5667,7 +5406,7 @@
             // 
             this.DCVertDipoleSlider.AbsMax = 20;
             this.DCVertDipoleSlider.AbsMin = -20;
-            this.DCVertDipoleSlider.Location = new System.Drawing.Point(6, 82);
+            this.DCVertDipoleSlider.Location = new System.Drawing.Point(23, 82);
             this.DCVertDipoleSlider.Max = 0.1;
             this.DCVertDipoleSlider.Min = -0.1;
             this.DCVertDipoleSlider.Name = "DCVertDipoleSlider";
@@ -5680,7 +5419,7 @@
             // 
             this.TotalBiasSlider.AbsMax = 10;
             this.TotalBiasSlider.AbsMin = -10;
-            this.TotalBiasSlider.Location = new System.Drawing.Point(6, 155);
+            this.TotalBiasSlider.Location = new System.Drawing.Point(23, 155);
             this.TotalBiasSlider.Max = 8;
             this.TotalBiasSlider.Min = 1;
             this.TotalBiasSlider.Name = "TotalBiasSlider";
@@ -5693,7 +5432,7 @@
             // 
             this.DXSlider.AbsMax = 10;
             this.DXSlider.AbsMin = -10;
-            this.DXSlider.Location = new System.Drawing.Point(6, 301);
+            this.DXSlider.Location = new System.Drawing.Point(23, 301);
             this.DXSlider.Max = 1;
             this.DXSlider.Min = -1;
             this.DXSlider.Name = "DXSlider";
@@ -5706,7 +5445,7 @@
             // 
             this.TrapHeightSlider.AbsMax = 200;
             this.TrapHeightSlider.AbsMin = 100;
-            this.TrapHeightSlider.Location = new System.Drawing.Point(6, 674);
+            this.TrapHeightSlider.Location = new System.Drawing.Point(23, 657);
             this.TrapHeightSlider.Max = 200;
             this.TrapHeightSlider.Min = 100;
             this.TrapHeightSlider.Name = "TrapHeightSlider";
@@ -5732,6 +5471,96 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1853, 1005);
             this.tabControl1.TabIndex = 114;
+            // 
+            // groupBox39
+            // 
+            this.groupBox39.Controls.Add(this.label48);
+            this.groupBox39.Controls.Add(this.BackgroundMultiplierTextbox);
+            this.groupBox39.Controls.Add(this.label49);
+            this.groupBox39.Controls.Add(this.label172);
+            this.groupBox39.Controls.Add(this.BackgroundTextbox);
+            this.groupBox39.Controls.Add(this.BackgroundComboBox);
+            this.groupBox39.Location = new System.Drawing.Point(26, 503);
+            this.groupBox39.Name = "groupBox39";
+            this.groupBox39.Size = new System.Drawing.Size(282, 111);
+            this.groupBox39.TabIndex = 145;
+            this.groupBox39.TabStop = false;
+            this.groupBox39.Text = "Background";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(167, 22);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(109, 13);
+            this.label48.TabIndex = 21;
+            this.label48.Text = "Background Multiplier";
+            // 
+            // BackgroundMultiplierTextbox
+            // 
+            this.BackgroundMultiplierTextbox.Location = new System.Drawing.Point(170, 38);
+            this.BackgroundMultiplierTextbox.Name = "BackgroundMultiplierTextbox";
+            this.BackgroundMultiplierTextbox.Size = new System.Drawing.Size(34, 20);
+            this.BackgroundMultiplierTextbox.TabIndex = 20;
+            this.BackgroundMultiplierTextbox.Text = "1";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(10, 62);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(143, 13);
+            this.label49.TabIndex = 19;
+            this.label49.Text = "Calculated Background (/px)";
+            // 
+            // label172
+            // 
+            this.label172.AutoSize = true;
+            this.label172.Location = new System.Drawing.Point(10, 22);
+            this.label172.Name = "label172";
+            this.label172.Size = new System.Drawing.Size(133, 13);
+            this.label172.TabIndex = 18;
+            this.label172.Text = "Background Determination";
+            // 
+            // BackgroundTextbox
+            // 
+            this.BackgroundTextbox.Location = new System.Drawing.Point(13, 78);
+            this.BackgroundTextbox.Name = "BackgroundTextbox";
+            this.BackgroundTextbox.Size = new System.Drawing.Size(71, 20);
+            this.BackgroundTextbox.TabIndex = 17;
+            // 
+            // BackgroundComboBox
+            // 
+            this.BackgroundComboBox.FormattingEnabled = true;
+            this.BackgroundComboBox.Items.AddRange(new object[] {
+            "Rim of intensity box",
+            "Duplicate shifted box"});
+            this.BackgroundComboBox.Location = new System.Drawing.Point(13, 39);
+            this.BackgroundComboBox.Name = "BackgroundComboBox";
+            this.BackgroundComboBox.Size = new System.Drawing.Size(121, 21);
+            this.BackgroundComboBox.TabIndex = 16;
+            // 
+            // label177
+            // 
+            this.label177.AutoSize = true;
+            this.label177.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label177.Location = new System.Drawing.Point(352, 11);
+            this.label177.Name = "label177";
+            this.label177.Size = new System.Drawing.Size(185, 16);
+            this.label177.TabIndex = 147;
+            this.label177.Text = "Camera Status Messages";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.richTextBox1.Location = new System.Drawing.Point(355, 30);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(178, 237);
+            this.richTextBox1.TabIndex = 146;
+            this.richTextBox1.Text = "No Status Message";
             // 
             // Form1
             // 
@@ -5794,8 +5623,6 @@
             this.groupBox35.ResumeLayout(false);
             this.groupBox35.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.syncSrcSw)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scatterGraphNormCorrSig)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CorrelatorGraph)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.regSelectSw)).EndInit();
             this.TickleResetBox.ResumeLayout(false);
             this.TickleResetBox.PerformLayout();
@@ -5803,10 +5630,6 @@
             this.ArrayResetBox.PerformLayout();
             this.groupBox58.ResumeLayout(false);
             this.groupBox58.PerformLayout();
-            this.instrumentControlStrip2.ResumeLayout(false);
-            this.instrumentControlStrip2.PerformLayout();
-            this.groupBox57.ResumeLayout(false);
-            this.groupBox53.ResumeLayout(false);
             this.groupBox52.ResumeLayout(false);
             this.groupBox52.PerformLayout();
             this.groupBox51.ResumeLayout(false);
@@ -5888,7 +5711,6 @@
             this.groupBox16.PerformLayout();
             this.MainControlTab.ResumeLayout(false);
             this.MainControlTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).EndInit();
             this.groupBox38.ResumeLayout(false);
             this.groupBox38.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Switch638)).EndInit();
@@ -5911,6 +5733,8 @@
             this.groupBox25.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CurrentFeedforward370Offset)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.groupBox39.ResumeLayout(false);
+            this.groupBox39.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -5918,7 +5742,6 @@
         #endregion
 
         private System.Windows.Forms.Button SinglePMTReadButton;
-        private System.Windows.Forms.Button ElectrodeScanStart;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
@@ -5929,7 +5752,6 @@
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor1;
-        private System.Windows.Forms.Button SliderScanStart;
         private System.Windows.Forms.TabPage FilenameTab;
         private System.Windows.Forms.Label label164;
         private System.Windows.Forms.TextBox textBox1;
@@ -6035,20 +5857,9 @@
         private System.Windows.Forms.TextBox ncorrbinsText;
         private System.Windows.Forms.TextBox correlatorBitFilePathB;
         private NationalInstruments.UI.WindowsForms.Switch chooseCode;
-        private NationalInstruments.UI.WindowsForms.ScatterGraph scatterGraphNormCorrSig;
-        private NationalInstruments.UI.ScatterPlot scatterPlot8;
-        private NationalInstruments.UI.XAxis xAxis7;
-        private NationalInstruments.UI.YAxis yAxis7;
         private System.Windows.Forms.TextBox textBoxBackEst;
         private NationalInstruments.UI.WindowsForms.Switch switchDisplayBases;
         private NationalInstruments.UI.WindowsForms.Switch SaveCorrelatorToggle;
-        public NationalInstruments.UI.WindowsForms.WaveformGraph CorrelatorGraph;
-        private NationalInstruments.UI.WaveformPlot waveformPlot2;
-        private NationalInstruments.UI.XAxis xAxis2;
-        private NationalInstruments.UI.YAxis yAxis2;
-        private NationalInstruments.UI.WaveformPlot waveformPlot6;
-        private NationalInstruments.UI.WaveformPlot waveformPlot3;
-        private NationalInstruments.UI.WaveformPlot waveformPlot4;
         private System.Windows.Forms.TextBox correlatorQtext;
         private System.Windows.Forms.TextBox correlatorBound1text;
         private System.Windows.Forms.TextBox correlatorDiv1Ntext;
@@ -6085,28 +5896,15 @@
         private System.Windows.Forms.Label label120;
         private System.Windows.Forms.Label label119;
         private System.Windows.Forms.Label label66;
-        private NationalInstruments.UI.WindowsForms.InstrumentControlStrip instrumentControlStrip2;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel10;
-        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor10;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel11;
-        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor11;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel12;
-        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor12;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel13;
-        private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor13;
         private System.Windows.Forms.Label label117;
         private System.Windows.Forms.Label label101;
         private System.Windows.Forms.Label label115;
         private System.Windows.Forms.Label label104;
         private System.Windows.Forms.Label label116;
-        private System.Windows.Forms.GroupBox groupBox57;
-        public System.Windows.Forms.RichTextBox correlatorDecompMerit;
         private System.Windows.Forms.Label label108;
         private System.Windows.Forms.Label label107;
         private System.Windows.Forms.Label label106;
         private System.Windows.Forms.Button CorrelatorButton;
-        private System.Windows.Forms.GroupBox groupBox53;
-        public System.Windows.Forms.RichTextBox correlatorTotalCounts;
         private System.Windows.Forms.Label label103;
         private System.Windows.Forms.Label label102;
         private System.Windows.Forms.GroupBox groupBox52;
@@ -6136,7 +5934,6 @@
         private System.Windows.Forms.Label label99;
         private NationalInstruments.UI.WindowsForms.Switch intTselector;
         private System.Windows.Forms.Label label63;
-        private NationalInstruments.UI.WindowsForms.Switch LockinFrequencySwitch;
         private AdjustableSlider CorrelatorBinningPhaseSlider;
         private System.Windows.Forms.TabPage FluorLogTab;
         private System.Windows.Forms.Button FluorLogStart;
@@ -6400,8 +6197,18 @@
         private System.Windows.Forms.Label label97;
         private System.Windows.Forms.TextBox slow_out1DelayText;
         private System.Windows.Forms.Label label111;
-        private System.Windows.Forms.Button clrCorrLog;
-        public NationalInstruments.UI.WindowsForms.Switch corrRecToggle;
+        public NationalInstruments.UI.WindowsForms.Switch LockinFrequencySwitch;
+        private System.Windows.Forms.Button ElectrodeScanStart;
+        private System.Windows.Forms.Button SliderScanStart;
+        private System.Windows.Forms.GroupBox groupBox39;
+        private System.Windows.Forms.Label label48;
+        public System.Windows.Forms.TextBox BackgroundMultiplierTextbox;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label172;
+        public System.Windows.Forms.TextBox BackgroundTextbox;
+        public System.Windows.Forms.ComboBox BackgroundComboBox;
+        private System.Windows.Forms.Label label177;
+        public System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

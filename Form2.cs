@@ -133,22 +133,47 @@ namespace ArrayDACControl
             scatterGraph3.ClearData();
         }
 
-        private void testlbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void IonFocusGraphsClearButton_Click(object sender, EventArgs e)
         {
             xBalanceGraph.ClearData();
             xSpreadGraph.ClearData();
             yBalanceGraph.ClearData();
             ySpreadGraph.ClearData();
+        }
+
+        private void corrRecToggle_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
+        {
+            if (corrRecToggle.Value == false)
+            {
+                if (Form1.Self.LockinFrequencySwitch.Value == true)
+                {
+                    Form1.Self.counterAmp = 0;
+                    int nextx = corrAmpLog.Plots[0].HistoryCount;
+                    testlbl.Text = nextx.ToString();
+                    double[] xnew = new double[4] { nextx, nextx, nextx, nextx };
+                    double[] ynew = new double[4] { 0, 0, 0, 0 };
+                    corrAmpLog.PlotXYAppend(xnew, ynew);
+                }
+                else
+                {
+                    Form1.Self.counterMu = 0;
+                    int nextx = corrMuLog.Plots[0].HistoryCount;
+                    testlbl.Text = nextx.ToString();
+                    double[] xnew = new double[4] { nextx, nextx, nextx, nextx };
+                    double[] ynew = new double[4] { 0, 0, 0, 0 };
+                    corrMuLog.PlotXYAppend(xnew, ynew);
+                }
+
+            }
+
+        }
+
+        private void clrCorrLog_Click(object sender, EventArgs e)
+        {
+            if (Form1.Self.LockinFrequencySwitch.Value == true)
+                corrAmpLog.ClearData();
+            else
+                corrMuLog.ClearData();
         }
 
     }
