@@ -173,6 +173,10 @@ namespace ArrayDACControl
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.FocusLogsONCheck = new System.Windows.Forms.CheckBox();
+            this.waveformPlot15 = new NationalInstruments.UI.WaveformPlot();
+            this.waveformPlot16 = new NationalInstruments.UI.WaveformPlot();
+            this.waveformPlot17 = new NationalInstruments.UI.WaveformPlot();
+            this.waveformPlot18 = new NationalInstruments.UI.WaveformPlot();
             ((System.ComponentModel.ISupportInitialize)(this.intensityGraph1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor2)).BeginInit();
@@ -1386,7 +1390,8 @@ namespace ArrayDACControl
             this.ySpreadGraph.Location = new System.Drawing.Point(486, 400);
             this.ySpreadGraph.Name = "ySpreadGraph";
             this.ySpreadGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.waveformPlot10});
+            this.waveformPlot10,
+            this.waveformPlot18});
             this.ySpreadGraph.Size = new System.Drawing.Size(426, 296);
             this.ySpreadGraph.TabIndex = 176;
             this.ySpreadGraph.UseColorGenerator = true;
@@ -1425,7 +1430,8 @@ namespace ArrayDACControl
             this.yBalanceGraph.Location = new System.Drawing.Point(22, 400);
             this.yBalanceGraph.Name = "yBalanceGraph";
             this.yBalanceGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.waveformPlot6});
+            this.waveformPlot6,
+            this.waveformPlot17});
             this.yBalanceGraph.Size = new System.Drawing.Size(426, 296);
             this.yBalanceGraph.TabIndex = 175;
             this.yBalanceGraph.UseColorGenerator = true;
@@ -1464,7 +1470,8 @@ namespace ArrayDACControl
             this.xSpreadGraph.Location = new System.Drawing.Point(486, 65);
             this.xSpreadGraph.Name = "xSpreadGraph";
             this.xSpreadGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.waveformPlot5});
+            this.waveformPlot5,
+            this.waveformPlot16});
             this.xSpreadGraph.Size = new System.Drawing.Size(426, 296);
             this.xSpreadGraph.TabIndex = 174;
             this.xSpreadGraph.UseColorGenerator = true;
@@ -1503,7 +1510,8 @@ namespace ArrayDACControl
             this.xBalanceGraph.Location = new System.Drawing.Point(22, 65);
             this.xBalanceGraph.Name = "xBalanceGraph";
             this.xBalanceGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.waveformPlot4});
+            this.waveformPlot4,
+            this.waveformPlot15});
             this.xBalanceGraph.Size = new System.Drawing.Size(426, 296);
             this.xBalanceGraph.TabIndex = 173;
             this.xBalanceGraph.UseColorGenerator = true;
@@ -1574,6 +1582,30 @@ namespace ArrayDACControl
             this.FocusLogsONCheck.TabIndex = 165;
             this.FocusLogsONCheck.Text = "LOGS ON?";
             this.FocusLogsONCheck.UseVisualStyleBackColor = true;
+            // 
+            // waveformPlot15
+            // 
+            this.waveformPlot15.LineWidth = 3F;
+            this.waveformPlot15.XAxis = this.xAxis7;
+            this.waveformPlot15.YAxis = this.yAxis7;
+            // 
+            // waveformPlot16
+            // 
+            this.waveformPlot16.LineWidth = 3F;
+            this.waveformPlot16.XAxis = this.xAxis8;
+            this.waveformPlot16.YAxis = this.yAxis8;
+            // 
+            // waveformPlot17
+            // 
+            this.waveformPlot17.LineWidth = 3F;
+            this.waveformPlot17.XAxis = this.xAxis9;
+            this.waveformPlot17.YAxis = this.yAxis9;
+            // 
+            // waveformPlot18
+            // 
+            this.waveformPlot18.LineWidth = 3F;
+            this.waveformPlot18.XAxis = this.xAxis10;
+            this.waveformPlot18.YAxis = this.yAxis10;
             // 
             // Form2
             // 
@@ -1781,6 +1813,10 @@ namespace ArrayDACControl
         private System.Windows.Forms.GroupBox groupBox53;
         public System.Windows.Forms.RichTextBox correlatorTotalCounts;
         public NationalInstruments.UI.WindowsForms.ScatterGraph scatterGraphNormCorrSig;
+        private NationalInstruments.UI.WaveformPlot waveformPlot18;
+        private NationalInstruments.UI.WaveformPlot waveformPlot17;
+        private NationalInstruments.UI.WaveformPlot waveformPlot16;
+        private NationalInstruments.UI.WaveformPlot waveformPlot15;
 
 
 

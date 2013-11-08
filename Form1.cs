@@ -3169,6 +3169,7 @@ namespace ArrayDACControl
             //variables for ion focus optimization, indices of max fluorescence pixel
             int xmax = 0, ymax = 0;
             double fmax = 0;
+            double background = 0;
 
             //double[,] myArray = new double[,] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };
             //CameraForm.intensityGraph1.Plot(myArray);
@@ -3240,6 +3241,8 @@ namespace ArrayDACControl
 
                     //sum pixels from one cursor to the other
                     //the pixels under the cursor are included
+                    background = CameraThreadHelper.DoubleData[x1, y1];
+
                     for (int j = x1; j <= x2; j++)
                     {
                         for (int k = y1; k <= y2; k++)
@@ -3250,6 +3253,11 @@ namespace ArrayDACControl
                             {
                                 fmax = CameraThreadHelper.DoubleData[j, k];
                                 xmax = j; ymax = k;
+                            }
+                            //find background
+                            if (background > CameraThreadHelper.DoubleData[j, k])
+                            {
+                                background = CameraThreadHelper.DoubleData[j, k];
                             }
                             //Threshold the fluorescence
                             CameraThreadHelper.DoubleData[j, k] -= CameraThreadHelper.Background * multiplier;
@@ -3306,7 +3314,7 @@ namespace ArrayDACControl
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //find spread in x
-                        CameraThreadHelper.DoubleArray[1] = (CameraThreadHelper.DoubleData[xmax - 1, ymax] + CameraThreadHelper.DoubleData[xmax + 1, ymax]) / CameraThreadHelper.DoubleData[xmax, ymax];
+                        CameraThreadHelper.DoubleArray[1] = (CameraThreadHelper.DoubleData[xmax - 1, ymax] + CameraThreadHelper.DoubleData[xmax + 1, ymax] - 2*background) / (CameraThreadHelper.DoubleData[xmax - 1, ymax] + CameraThreadHelper.DoubleData[xmax + 1, ymax] + CameraThreadHelper.DoubleData[xmax, ymax] - 3*background);
                         try
                         {
                             this.BeginInvoke(new MyDelegate(CameraFormThreadCallBack4));
@@ -3320,7 +3328,7 @@ namespace ArrayDACControl
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //find spread in x
-                        CameraThreadHelper.DoubleArray[3] = (CameraThreadHelper.DoubleData[xmax, ymax - 1] + CameraThreadHelper.DoubleData[xmax, ymax + 1]) / CameraThreadHelper.DoubleData[xmax, ymax];
+                        CameraThreadHelper.DoubleArray[3] = (CameraThreadHelper.DoubleData[xmax, ymax - 1] + CameraThreadHelper.DoubleData[xmax, ymax + 1] - 2*background) / (CameraThreadHelper.DoubleData[xmax, ymax - 1] + CameraThreadHelper.DoubleData[xmax, ymax + 1] + CameraThreadHelper.DoubleData[xmax, ymax] - 3*background);
                         try
                         {
                             this.BeginInvoke(new MyDelegate(CameraFormThreadCallBack6));
@@ -3350,18 +3358,22 @@ namespace ArrayDACControl
         private void CameraFormThreadCallBack3()
         {
             CameraForm.xBalanceGraph.PlotYAppend(CameraThreadHelper.DoubleArray[0]);
+            CameraForm.xBalanceGraph.Plots[1].PlotYAppend(0);
         }
         private void CameraFormThreadCallBack4()
         {
             CameraForm.xSpreadGraph.PlotYAppend(CameraThreadHelper.DoubleArray[1]);
+            CameraForm.xSpreadGraph.Plots[1].PlotYAppend(0);
         }
         private void CameraFormThreadCallBack5()
         {
             CameraForm.yBalanceGraph.PlotYAppend(CameraThreadHelper.DoubleArray[2]);
+            CameraForm.yBalanceGraph.Plots[1].PlotYAppend(0);
         }
         private void CameraFormThreadCallBack6()
         {
             CameraForm.ySpreadGraph.PlotYAppend(CameraThreadHelper.DoubleArray[3]);
+            CameraForm.ySpreadGraph.Plots[1].PlotYAppend(0);
         }
 
 
