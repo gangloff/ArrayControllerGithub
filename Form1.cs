@@ -2327,6 +2327,23 @@ namespace ArrayDACControl
                     if (CameraThreadHelper.ShouldBeRunningFlag)
                     {
                         StopCameraThread();
+                        try
+                        {
+                            CameraThreadHelper.theThread.Abort();
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    }
+
+                    //if correlator is running stop it
+                    if (CorrelatorThreadHelper.ShouldBeRunningFlag)
+                    {
+                        CorrelatorThreadHelper.ShouldBeRunningFlag = false;
+                        CorrelatorButton.BackColor = System.Drawing.Color.Gray;
+                        try
+                        {
+                            CorrelatorThreadHelper.theThread.Abort();
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
                     }
                 }
                 
@@ -2668,7 +2685,24 @@ namespace ArrayDACControl
                     // if camera is running stop it
                     if (CameraThreadHelper.ShouldBeRunningFlag)
                     {
-                        CameraThreadHelper.ShouldBeRunningFlag = false;
+                        StopCameraThread();
+                        try
+                        {
+                            CameraThreadHelper.theThread.Abort();
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); } 
+                    }
+
+                    //if correlator is running stop it
+                    if (CorrelatorThreadHelper.ShouldBeRunningFlag)
+                    {
+                        CorrelatorThreadHelper.ShouldBeRunningFlag = false;
+                        CorrelatorButton.BackColor = System.Drawing.Color.Gray;
+                        try
+                        {
+                            CorrelatorThreadHelper.theThread.Abort();
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); } 
                     }
                 }
 
