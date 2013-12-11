@@ -852,7 +852,7 @@ namespace ArrayDACControl
                 tw.WriteLine("DataFilenameFolderPathCorr" + "\t" + DataFilenameFolderPathCorr.Text);
                 tw.WriteLine("DataFilenameCommonRoot1Corr" + "\t" + DataFilenameCommonRoot1Corr.Text);
 
-                //Pulse Programmer Tab
+                //Fast Pulse Programmer Tab
                 tw.WriteLine("pulsePeriodText" + "\t" + pulsePeriodText.Text);
                 tw.WriteLine("out1SigName" + "\t" + out1SigName.Text);
                 tw.WriteLine("out1OnTimeText" + "\t" + out1OnTimeText.Text);
@@ -860,12 +860,39 @@ namespace ArrayDACControl
                 tw.WriteLine("out2SigName" + "\t" + out2SigName.Text);
                 tw.WriteLine("out2OnTimeText" + "\t" + out2OnTimeText.Text);
                 tw.WriteLine("out2DelayText" + "\t" + out2DelayText.Text);
+                tw.WriteLine("out3SigName" + "\t" + out3SigName.Text);
+                tw.WriteLine("out3OnTimeText" + "\t" + out3OnTimeText.Text);
+                tw.WriteLine("out3DelayText" + "\t" + out3DelayText.Text);
+                tw.WriteLine("out4SigName" + "\t" + out4SigName.Text);
+                tw.WriteLine("out4OnTimeText" + "\t" + out4OnTimeText.Text);
+                tw.WriteLine("out4DelayText" + "\t" + out4DelayText.Text);
                 tw.WriteLine("in1SigName" + "\t" + in1SigName.Text);
                 tw.WriteLine("in1OnTimeText" + "\t" + in1OnTimeText.Text);
                 tw.WriteLine("in1DelayText" + "\t" + in1DelayText.Text);
                 tw.WriteLine("in2SigName" + "\t" + in2SigName.Text);
                 tw.WriteLine("in2OnTimeText" + "\t" + in2OnTimeText.Text);
                 tw.WriteLine("in2DelayText" + "\t" + in2DelayText.Text);
+
+                //Slow Pulse Programmer Tab
+                tw.WriteLine("slow_pulsePeriodText" + "\t" + slow_pulsePeriodText.Text);
+                tw.WriteLine("slow_out1SigName" + "\t" + slow_out1SigName.Text);
+                tw.WriteLine("slow_out1OnTimeText" + "\t" + slow_out1OnTimeText.Text);
+                tw.WriteLine("slow_out1DelayText" + "\t" + slow_out1DelayText.Text);
+                tw.WriteLine("slow_out2SigName" + "\t" + slow_out2SigName.Text);
+                tw.WriteLine("slow_out2OnTimeText" + "\t" + slow_out2OnTimeText.Text);
+                tw.WriteLine("slow_out2DelayText" + "\t" + slow_out2DelayText.Text);
+                tw.WriteLine("slow_out3SigName" + "\t" + slow_out3SigName.Text);
+                tw.WriteLine("slow_out3OnTimeText" + "\t" + slow_out3OnTimeText.Text);
+                tw.WriteLine("slow_out3DelayText" + "\t" + slow_out3DelayText.Text);
+                tw.WriteLine("slow_out4SigName" + "\t" + slow_out4SigName.Text);
+                tw.WriteLine("slow_out4OnTimeText" + "\t" + slow_out4OnTimeText.Text);
+                tw.WriteLine("slow_out4DelayText" + "\t" + slow_out4DelayText.Text);
+                tw.WriteLine("slow_in1SigName" + "\t" + slow_in1SigName.Text);
+                tw.WriteLine("slow_in1OnTimeText" + "\t" + slow_in1OnTimeText.Text);
+                tw.WriteLine("slow_in1DelayText" + "\t" + slow_in1DelayText.Text);
+                tw.WriteLine("slow_in2SigName" + "\t" + slow_in2SigName.Text);
+                tw.WriteLine("slow_in2OnTimeText" + "\t" + slow_in2OnTimeText.Text);
+                tw.WriteLine("slow_in2DelayText" + "\t" + slow_in2DelayText.Text);
 
                 //Camera Tab
                 tw.WriteLine("CameraHbin" + "\t" + CameraHbin.Text);
@@ -1078,6 +1105,8 @@ namespace ArrayDACControl
                             case "DataFilenameCommonRoot1Corr":
                                 DataFilenameCommonRoot1Corr.Text = theString.Split('\t')[1];
                                 break;
+
+
                             case "pulsePeriodText":
                                 pulsePeriodText.Text = theString.Split('\t')[1];
                                 break;
@@ -1099,6 +1128,24 @@ namespace ArrayDACControl
                             case "out2DelayText":
                                 out2DelayText.Text = theString.Split('\t')[1];
                                 break;
+                            case "out3SigName":
+                                out3SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "out3OnTimeText":
+                                out3OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "out3DelayText":
+                                out3DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "out4SigName":
+                                out4SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "out4OnTimeText":
+                                out4OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "out4DelayText":
+                                out4DelayText.Text = theString.Split('\t')[1];
+                                break;
                             case "in1SigName":
                                 in1SigName.Text = theString.Split('\t')[1];
                                 break;
@@ -1117,6 +1164,67 @@ namespace ArrayDACControl
                             case "in2DelayText":
                                 in2DelayText.Text = theString.Split('\t')[1];
                                 break;
+
+
+                            case "slow_pulsePeriodText":
+                                slow_pulsePeriodText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out1SigName":
+                                slow_out1SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out1OnTimeText":
+                                slow_out1OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out1DelayText":
+                                slow_out1DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out2SigName":
+                                slow_out2SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out2OnTimeText":
+                                slow_out2OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out2DelayText":
+                                slow_out2DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out3SigName":
+                                slow_out3SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out3OnTimeText":
+                                slow_out3OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out3DelayText":
+                                slow_out3DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out4SigName":
+                                slow_out4SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out4OnTimeText":
+                                slow_out4OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_out4DelayText":
+                                slow_out4DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_in1SigName":
+                                slow_in1SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_in1OnTimeText":
+                                slow_in1OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_in1DelayText":
+                                slow_in1DelayText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_in2SigName":
+                                slow_in2SigName.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_in2OnTimeText":
+                                slow_in2OnTimeText.Text = theString.Split('\t')[1];
+                                break;
+                            case "slow_in2DelayText":
+                                slow_in2DelayText.Text = theString.Split('\t')[1];
+                                break;
+
+
                             case "CameraHbin":
                                 CameraHbin.Text = theString.Split('\t')[1];
                                 break;
@@ -1842,7 +1950,10 @@ namespace ArrayDACControl
             { theCorrelator.ok.P = int.Parse(correlatorPtextB.Text); };
             
             // assign the number of correlator bins
-            ncorrbins = int.Parse(ncorrbinsText.Text);
+            if (nbinSwitch.Value)
+            { ncorrbins = int.Parse(ncorrbinsText.Text); }
+            else
+            { ncorrbins = int.Parse(ncorrbinsText2.Text); }
             theCorrelator.lshiftreg = ncorrbins;
 
             // initialize the Ch1 and Ch2 log variables:
@@ -1889,8 +2000,13 @@ namespace ArrayDACControl
 
             theCorrelator.onTimeOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1OnTimeText.Text), 0));
             theCorrelator.onTimeOut[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out2OnTimeText.Text), 0));
+            theCorrelator.onTimeOut[2] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out3OnTimeText.Text), 0));
+            theCorrelator.onTimeOut[3] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out4OnTimeText.Text), 0));
+
             theCorrelator.delayOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1DelayText.Text), 0));
             theCorrelator.delayOut[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out2DelayText.Text), 0));
+            theCorrelator.delayOut[2] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out3DelayText.Text), 0));
+            theCorrelator.delayOut[3] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out4DelayText.Text), 0));
 
             theCorrelator.onTimeIn[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in1OnTimeText.Text), 0));
             theCorrelator.onTimeIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2OnTimeText.Text), 0));
@@ -1902,8 +2018,13 @@ namespace ArrayDACControl
 
             theCorrelator.slow_onTimeOut[0] = uint.Parse(slow_out1OnTimeText.Text);
             theCorrelator.slow_onTimeOut[1] = uint.Parse(slow_out2OnTimeText.Text);
+            theCorrelator.slow_onTimeOut[2] = uint.Parse(slow_out3OnTimeText.Text);
+            theCorrelator.slow_onTimeOut[3] = uint.Parse(slow_out4OnTimeText.Text);
+
             theCorrelator.slow_delayOut[0] = uint.Parse(slow_out1DelayText.Text);
             theCorrelator.slow_delayOut[1] = uint.Parse(slow_out2DelayText.Text);
+            theCorrelator.slow_delayOut[2] = uint.Parse(slow_out3DelayText.Text);
+            theCorrelator.slow_delayOut[3] = uint.Parse(slow_out4DelayText.Text);
 
             theCorrelator.slow_onTimeIn[0] = uint.Parse(slow_in1OnTimeText.Text);
             theCorrelator.slow_onTimeIn[1] = uint.Parse(slow_in2OnTimeText.Text);
@@ -1923,10 +2044,20 @@ namespace ArrayDACControl
 
             //Attempt Initialize
             bool auxInitBool = true;
-            if (chooseCode.Value)
-            { auxInitBool = theCorrelator.Init(correlatorBitFilePath.Text); }
+            if (nbinSwitch.Value)
+            {
+                if (chooseCode.Value)
+                { auxInitBool = theCorrelator.Init(correlatorBitFilePath.Text); }
+                else
+                { auxInitBool = theCorrelator.Init(correlatorBitFilePathB.Text); }
+            }
             else
-            { auxInitBool = theCorrelator.Init(correlatorBitFilePathB.Text); }
+            {
+                if (chooseCode.Value)
+                { auxInitBool = theCorrelator.Init(correlatorBitFilePath_manybins.Text); }
+                else
+                { auxInitBool = theCorrelator.Init(correlatorBitFilePath_manybinsB.Text); }
+            }
 
             //return status of init
             return auxInitBool;
@@ -4013,13 +4144,37 @@ namespace ArrayDACControl
 
             theCorrelator.onTimeOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1OnTimeText.Text), 0));
             theCorrelator.onTimeOut[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out2OnTimeText.Text), 0));
+            theCorrelator.onTimeOut[2] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out3OnTimeText.Text), 0));
+            theCorrelator.onTimeOut[3] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out4OnTimeText.Text), 0));
+
             theCorrelator.delayOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1DelayText.Text), 0));
             theCorrelator.delayOut[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out2DelayText.Text), 0));
+            theCorrelator.delayOut[2] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out3DelayText.Text), 0));
+            theCorrelator.delayOut[3] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out4DelayText.Text), 0));
 
             theCorrelator.onTimeIn[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in1OnTimeText.Text), 0));
             theCorrelator.onTimeIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2OnTimeText.Text), 0));
             theCorrelator.delayIn[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in1DelayText.Text), 0));
             theCorrelator.delayIn[1] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(in2DelayText.Text), 0));
+
+
+            theCorrelator.slow_PulseClkDiv = uint.Parse(slow_pulsePeriodText.Text);
+
+            theCorrelator.slow_onTimeOut[0] = uint.Parse(slow_out1OnTimeText.Text);
+            theCorrelator.slow_onTimeOut[1] = uint.Parse(slow_out2OnTimeText.Text);
+            theCorrelator.slow_onTimeOut[2] = uint.Parse(slow_out3OnTimeText.Text);
+            theCorrelator.slow_onTimeOut[3] = uint.Parse(slow_out4OnTimeText.Text);
+
+            theCorrelator.slow_delayOut[0] = uint.Parse(slow_out1DelayText.Text);
+            theCorrelator.slow_delayOut[1] = uint.Parse(slow_out2DelayText.Text);
+            theCorrelator.slow_delayOut[2] = uint.Parse(slow_out3DelayText.Text);
+            theCorrelator.slow_delayOut[3] = uint.Parse(slow_out4DelayText.Text);
+
+            theCorrelator.slow_onTimeIn[0] = uint.Parse(slow_in1OnTimeText.Text);
+            theCorrelator.slow_onTimeIn[1] = uint.Parse(slow_in2OnTimeText.Text);
+            theCorrelator.slow_delayIn[0] = uint.Parse(slow_in1DelayText.Text);
+            theCorrelator.slow_delayIn[1] = uint.Parse(slow_in2DelayText.Text);
+
 
             theCorrelator.updateAllSignalsLive();
             /*
@@ -4435,6 +4590,11 @@ namespace ArrayDACControl
         }
 
         private void label183_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void out3SigName_TextChanged(object sender, EventArgs e)
         {
 
         }

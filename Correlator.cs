@@ -39,15 +39,15 @@ namespace ArrayDACControl
 
         // Pulsed output signal characteristics
         public uint PulseClkDiv;
-        public uint[] onTimeOut = new uint[2];
+        public uint[] onTimeOut = new uint[4];
         public uint[] onTimeIn = new uint[2];
-        public uint[] delayOut = new uint[2];
+        public uint[] delayOut = new uint[4];
         public uint[] delayIn = new uint[2];
 
         public uint slow_PulseClkDiv;
-        public uint[] slow_onTimeOut = new uint[2];
+        public uint[] slow_onTimeOut = new uint[4];
         public uint[] slow_onTimeIn = new uint[2];
-        public uint[] slow_delayOut = new uint[2];
+        public uint[] slow_delayOut = new uint[4];
         public uint[] slow_delayIn = new uint[2];
 
         //Figure of merit for compensation
@@ -138,7 +138,7 @@ namespace ArrayDACControl
             ok.SetWire(0, ClkDiv);
             ok.SetWire(1, ClkDiv >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 2);   // Trigger 4 updates the clock divisor
+            ok.SetTrigger(0x40, 2);   // Trigger 2 updates the clock divisor
             
             //set pulsed output frequency and duty cycle
             updateAllSignalsExecute();
@@ -238,7 +238,7 @@ namespace ArrayDACControl
             ok.SetWire(4, delayOut[0]);
             ok.SetWire(5, delayOut[0] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 6);   // Trigger 5 updates output channel 1
+            ok.SetTrigger(0x41, 0);   // Trigger 0 updates output channel 1
 
             ok.SetWire(0, PulseClkDiv);
             ok.SetWire(1, PulseClkDiv >> 16);
@@ -247,7 +247,25 @@ namespace ArrayDACControl
             ok.SetWire(4, delayOut[1]);
             ok.SetWire(5, delayOut[1] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 7);   // Trigger 6 updates output channel 2
+            ok.SetTrigger(0x41, 1);   // Trigger 1 updates output channel 2
+
+            ok.SetWire(0, PulseClkDiv);
+            ok.SetWire(1, PulseClkDiv >> 16);
+            ok.SetWire(2, onTimeOut[2]);
+            ok.SetWire(3, onTimeOut[2] >> 16);
+            ok.SetWire(4, delayOut[2]);
+            ok.SetWire(5, delayOut[2] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x41, 2);   // Trigger 2 updates output channel 3
+
+            ok.SetWire(0, PulseClkDiv);
+            ok.SetWire(1, PulseClkDiv >> 16);
+            ok.SetWire(2, onTimeOut[3]);
+            ok.SetWire(3, onTimeOut[3] >> 16);
+            ok.SetWire(4, delayOut[3]);
+            ok.SetWire(5, delayOut[3] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x41, 3);   // Trigger 3 updates output channel 4
 
             ok.SetWire(0, PulseClkDiv);
             ok.SetWire(1, PulseClkDiv >> 16);
@@ -256,7 +274,7 @@ namespace ArrayDACControl
             ok.SetWire(4, delayIn[0]);
             ok.SetWire(5, delayIn[0] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 8);   // Trigger 7 updates input channel 1
+            ok.SetTrigger(0x41, 4);   // Trigger 7 updates input channel 1
 
             ok.SetWire(0, PulseClkDiv);
             ok.SetWire(1, PulseClkDiv >> 16);
@@ -265,7 +283,7 @@ namespace ArrayDACControl
             ok.SetWire(4, delayIn[1]);
             ok.SetWire(5, delayIn[1] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 9);   // Trigger 8 updates input channel 2
+            ok.SetTrigger(0x41, 5);   // Trigger 8 updates input channel 2
 
 
             //////////// SLOW SEQUENCER WIRES: //////////////////////
@@ -277,7 +295,7 @@ namespace ArrayDACControl
             ok.SetWire(4, slow_delayOut[0]);
             ok.SetWire(5, slow_delayOut[0] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 10);   // Trigger 5 updates output channel 1
+            ok.SetTrigger(0x41, 6);   // Trigger 6 updates slow output channel 1
 
             ok.SetWire(0, slow_PulseClkDiv);
             ok.SetWire(1, slow_PulseClkDiv >> 16);
@@ -286,7 +304,25 @@ namespace ArrayDACControl
             ok.SetWire(4, slow_delayOut[1]);
             ok.SetWire(5, slow_delayOut[1] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 11);   // Trigger 6 updates output channel 2
+            ok.SetTrigger(0x41, 7);   // Trigger 7 updates slow output channel 2
+
+            ok.SetWire(0, slow_PulseClkDiv);
+            ok.SetWire(1, slow_PulseClkDiv >> 16);
+            ok.SetWire(2, slow_onTimeOut[2]);
+            ok.SetWire(3, slow_onTimeOut[2] >> 16);
+            ok.SetWire(4, slow_delayOut[2]);
+            ok.SetWire(5, slow_delayOut[2] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x41, 8);   // Trigger 8 updates slow output channel 3
+
+            ok.SetWire(0, slow_PulseClkDiv);
+            ok.SetWire(1, slow_PulseClkDiv >> 16);
+            ok.SetWire(2, slow_onTimeOut[3]);
+            ok.SetWire(3, slow_onTimeOut[3] >> 16);
+            ok.SetWire(4, slow_delayOut[3]);
+            ok.SetWire(5, slow_delayOut[3] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x41, 9);   // Trigger 9 updates slow output channel 4
 
             ok.SetWire(0, slow_PulseClkDiv);
             ok.SetWire(1, slow_PulseClkDiv >> 16);
@@ -295,7 +331,7 @@ namespace ArrayDACControl
             ok.SetWire(4, slow_delayIn[0]);
             ok.SetWire(5, slow_delayIn[0] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 12);   // Trigger 7 updates input channel 1
+            ok.SetTrigger(0x41, 10);   // Trigger 10 updates input channel 1
 
             ok.SetWire(0, slow_PulseClkDiv);
             ok.SetWire(1, slow_PulseClkDiv >> 16);
@@ -304,7 +340,7 @@ namespace ArrayDACControl
             ok.SetWire(4, slow_delayIn[1]);
             ok.SetWire(5, slow_delayIn[1] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 13);   // Trigger 8 updates input channel 2
+            ok.SetTrigger(0x41, 11);   // Trigger 11 updates input channel 2
         }
         //////////////////////////////////////////////////
 
