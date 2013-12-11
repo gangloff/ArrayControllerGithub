@@ -4434,6 +4434,11 @@ namespace ArrayDACControl
 
         }
 
+        private void label183_Click(object sender, EventArgs e)
+        {
+
+        }
+
         
         //
         // CAMERA FORM THREAD
