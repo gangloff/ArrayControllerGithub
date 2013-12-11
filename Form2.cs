@@ -10,6 +10,8 @@ namespace ArrayDACControl
 {
     public partial class Form2 : Form
     {
+
+
         public Form2()
         {
             InitializeComponent();
@@ -147,6 +149,13 @@ namespace ArrayDACControl
             {
                 if (Form1.Self.LockinFrequencySwitch.Value == true)
                 {
+                    for (int i = 0; i < Form1.Self.ncorrbins; i++)
+                    {
+                        Array.Clear(Form1.Self.corrampCh1history[i], 0, Form1.Self.corrampCh1history[i].Length);
+                        Array.Clear(Form1.Self.corrampCh2history[i], 0, Form1.Self.corrampCh2history[i].Length);
+                    }
+                    Form1.Self.historyCounter = 0;
+
                     Form1.Self.counterAmp = 0;
                     int nextx = corrAmpLog.Plots[0].HistoryCount;
                     testlbl.Text = nextx.ToString();

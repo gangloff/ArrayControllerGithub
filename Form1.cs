@@ -30,11 +30,14 @@ namespace ArrayDACControl
         Correlator theCorrelator;
 
         Stopwatch stopwatch;
-        int ncorrbins;
-        //double[] corrbins = new double[26] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 };
+        public int ncorrbins;
 
         public int counterMu = 0;
         public int counterAmp = 0;
+        public double[][] corrampCh1history;
+        public double[][] corrampCh2history;
+        public int historyCounter = 0;
+        double binningPhase;
 
         int avgCount = 0;
 
@@ -1476,6 +1479,7 @@ namespace ArrayDACControl
         private void CorrelatorBinningPhaseSliderOut(object sender, EventArgs e)
         {
             theCorrelator.binningPhase = CorrelatorBinningPhaseSlider.Value;
+            binningPhase = CorrelatorBinningPhaseSlider.Value;
         }
         private void RamanSliderOut(object sender, EventArgs e)
         {
@@ -1841,6 +1845,15 @@ namespace ArrayDACControl
             ncorrbins = int.Parse(ncorrbinsText.Text);
             theCorrelator.lshiftreg = ncorrbins;
 
+            // initialize the Ch1 and Ch2 log variables:
+            corrampCh1history = new double[ncorrbins][];
+            corrampCh2history = new double[ncorrbins][];
+            for (int i = 0; i < ncorrbins; i++)
+            {
+                corrampCh1history[i] = new double[1000];
+                corrampCh2history[i] = new double[1000];
+            }
+
             theCorrelator.ok.Q = int.Parse(correlatorQtext.Text);
             theCorrelator.ok.Div1N = int.Parse(correlatorDiv1Ntext.Text);
             theCorrelator.ok.Div2N = int.Parse(correlatorDiv2Ntext.Text);
@@ -1994,7 +2007,7 @@ namespace ArrayDACControl
         private void CorrelatorExecuteFrmCallbackCh1()
         {
 
-            double ctot = 0;
+
 
             // initialize x-axis array (bin indices) for plotting correlator curves as XY plots
             double[] corrbins = new double[ncorrbins];
@@ -2014,19 +2027,110 @@ namespace ArrayDACControl
             double[] newCorrDataDiff = new double[ncorrbins];
             double[] newCorrDataSum = new double[ncorrbins];
             double[] newnormSig = new double[ncorrbins];
-            // initialize averaged data vectors
+            // initialize averaged data vectors and error vectors
             double[] avgCorrDataCh1 = new double[ncorrbins];
+            double[] sqferrCorrDataCh1 = new double[ncorrbins];
+            double[] errCorrDataCh1 = new double[ncorrbins];
             double[] avgCorrDataCh2 = new double[ncorrbins];
+            double[] sqferrCorrDataCh2 = new double[ncorrbins];
+            double[] errCorrDataCh2 = new double[ncorrbins];
             double[] avgCorrDataDiff = new double[ncorrbins];
+            double[] errCorrDataDiff = new double[ncorrbins];
             double[] avgCorrDataSum = new double[ncorrbins];
+            double[] errCorrDataSum = new double[ncorrbins];
             double[] avgnormSig = new double[ncorrbins];
+            double[] errnormSig = new double[ncorrbins];
+            // for plotting:
+            double[] corrDataCh1ForPlot = new double[ncorrbins * 4];
+            double[] corrDataCh2ForPlot = new double[ncorrbins * 4];
+            double[] corrDataDiffForPlot = new double[ncorrbins * 4];
+            double[] corrDataSumForPlot = new double[ncorrbins * 4];
+            double[] normSigForPlot = new double[ncorrbins*4];
+            double[] corrbinsForPlot = new double[ncorrbins * 4];
+            // initialize bin variables for sin amplitude estimation:
+            double binA = 0;
+            double binB = 0;
+            double errbinA = 0;
+            double errbinB = 0;
+            // initialize extracted normalized signal amplitude:
+            double normAmplitude = 0;
+            double normAmplitudeErr = 0;
+            // initialize total counts
+            double ctot = 0;
 
-            for (int j = 0; j < newCorrDataCh1.Length; j++)
+            // read in binning phase:
+            binningPhase = CorrelatorBinningPhaseSlider.Value;
+
+            //update history counter
+            historyCounter = historyCounter + 1;
+            // expand Ch1 and Ch2 log variables if needed
+            if(historyCounter > corrampCh1history[0].Length)
             {
+                for (int i = 0; i < ncorrbins; i++)
+                {
+                    int oldlength = corrampCh1history[i].Length;
+
+                    double[] temp1 = corrampCh1history[i];
+                    corrampCh1history[i] = new double[oldlength+1000];
+                    temp1.CopyTo(corrampCh1history[i],0);
+
+                    double[] temp2 = corrampCh2history[i];
+                    corrampCh2history[i] = new double[oldlength + 1000];
+                    temp2.CopyTo(corrampCh1history[i], 0);
+                }
+            }
+
+            // compute functions of data and statistics bin by bin:
+            for (int j = 0; j < ncorrbins; j++)
+            {
+                // put new Ch1 and Ch2 data into the log vectors
+                corrampCh1history[j][historyCounter] = newCorrDataCh1[j];
+                corrampCh2history[j][historyCounter] = newCorrDataCh2[j];
+
+                // calculate the difference and sum counts for new data
                 newCorrDataDiff[j] = newCorrDataCh1[j] - newCorrDataCh2[j];
                 newCorrDataSum[j] = newCorrDataCh1[j] + newCorrDataCh2[j];
-                newnormSig[j] = newCorrDataDiff[j] / (newCorrDataSum[j] + 2 * (int.Parse(textBoxBackEst.Text)));
+                // normalized balanced signal for new data:  (s1 - s2) / (s1 + s2)
+                newnormSig[j] = newCorrDataDiff[j] / (newCorrDataSum[j] - 2 * (int.Parse(textBoxBackEst.Text)));
+                
+                /////////// Statistics of Ch1 and Ch2: /////////////////////////
+                // compute statistical average of all Ch1 and Ch2 data collected since last reset:
+                avgCorrDataCh1[j] = sampleAve(corrampCh1history[j], historyCounter);
+                avgCorrDataCh2[j] = sampleAve(corrampCh2history[j], historyCounter);
+                // compute fractional square error of Ch1 and Ch2 as standard error of the mean over data collected since last reset:
+                sqferrCorrDataCh1[j] = Math.Pow(sampleStd(corrampCh1history[j], historyCounter) / avgCorrDataCh1[j] , 2) / corrampCh1history[j].Length;
+                sqferrCorrDataCh2[j] = Math.Pow(sampleStd(corrampCh2history[j], historyCounter) / avgCorrDataCh2[j] , 2) / corrampCh2history[j].Length ;
+                // actual error of Ch1 and Ch2:
+                errCorrDataCh1[j] = avgCorrDataCh1[j] * Math.Sqrt(sqferrCorrDataCh1[j]);
+                errCorrDataCh2[j] = avgCorrDataCh2[j] * Math.Sqrt(sqferrCorrDataCh2[j]);
+
+                ///////// Statistics of sum and difference: //////////
+                avgCorrDataDiff[j] = avgCorrDataCh1[j] - avgCorrDataCh2[j];
+                avgCorrDataSum[j] = avgCorrDataCh1[j] + avgCorrDataCh2[j];
+                errCorrDataDiff[j] = Math.Sqrt(Math.Pow(errCorrDataCh1[j],2) + Math.Pow(errCorrDataCh2[j],2));
+                errCorrDataSum[j] = errCorrDataDiff[j];
+              
+                ///////// Statistics of normalized balanced signal: //////////
+                avgnormSig[j] = avgCorrDataDiff[j] / (avgCorrDataSum[j] - 2 * (int.Parse(textBoxBackEst.Text)));
+                errnormSig[j] = (2*avgCorrDataCh1[j]*avgCorrDataCh2[j])/((avgCorrDataCh1[j]+avgCorrDataCh2[j])*(avgCorrDataCh1[j]+avgCorrDataCh2[j])) * Math.Sqrt( sqferrCorrDataCh1[j] + sqferrCorrDataCh2[j] );
+
             }
+
+            for (int i = 0; i <= (ncorrbins - 1); i++)
+            {
+                if ((i + 1 < ncorrbins / 2 + 1 + binningPhase) && (i + 1 > binningPhase))
+                {
+                    binA += avgnormSig[i];
+                    errbinA += Math.Pow(errnormSig[i],2);
+                }
+                else
+                {   
+                    binB += avgnormSig[i];
+                    errbinB += Math.Pow(errnormSig[i],2);
+                }
+            }
+            normAmplitude = (binA-binB)/4;
+            normAmplitudeErr = Math.Sqrt(errbinA+errbinB)/4;
 
             // plot the new correlator data 
             CameraForm.CorrelatorGraph.Plots[0].PlotY(newCorrDataCh1);
@@ -2046,11 +2150,61 @@ namespace ArrayDACControl
             //Display counts/s above Graph
             double ctotn = ctot / theCorrelator.IntTime * 1000;
             CameraForm.PMTcountBox.Text = ctotn.ToString();
-            //Display compensation merit value
-            CameraForm.correlatorDecompMerit.Text = theCorrelator.decompMerit.ToString() + "+/-" + theCorrelator.decompMeritErr.ToString() + " %";
+            //Display correlator amplitude
+            //CameraForm.correlatorDecompMerit.Text = theCorrelator.decompMerit.ToString() + "+/-" + theCorrelator.decompMeritErr.ToString() + " %";
+            double roundedAmp = Math.Round(normAmplitude, 3);
+            double roundedAmpErr = Math.Round(normAmplitudeErr, 3);
+            CameraForm.correlatorDecompMerit.Text = roundedAmp.ToString() + "+/-" + roundedAmpErr.ToString();
 
             // plot the averaged correlator data
             // if this is the first trace, just plot it, otherwise add it to the averaged data from before:
+            for(int i = 0; i<ncorrbins*4; i=i+4)
+            {
+                corrbinsForPlot[i] = corrbins[i / 4];
+                corrbinsForPlot[i+1] = corrbins[i / 4];
+                corrbinsForPlot[i+2] = corrbins[i / 4];
+                corrbinsForPlot[i+3] = corrbins[i / 4];
+                normSigForPlot[i] = avgnormSig[i / 4];
+                normSigForPlot[i + 1] = avgnormSig[i / 4] + errnormSig[i / 4];
+                normSigForPlot[i + 2] = avgnormSig[i / 4] - errnormSig[i / 4];
+                normSigForPlot[i + 3] = avgnormSig[i / 4];
+                corrDataCh1ForPlot[i] = avgCorrDataCh1[i / 4];
+                corrDataCh1ForPlot[i + 1] = avgCorrDataCh1[i / 4] + errCorrDataCh1[i / 4];
+                corrDataCh1ForPlot[i + 2] = avgCorrDataCh1[i / 4] - errCorrDataCh1[i / 4];
+                corrDataCh1ForPlot[i + 3] = avgCorrDataCh1[i / 4];
+                corrDataCh2ForPlot[i] = avgCorrDataCh2[i / 4];
+                corrDataCh2ForPlot[i + 1] = avgCorrDataCh2[i / 4] + errCorrDataCh2[i / 4];
+                corrDataCh2ForPlot[i + 2] = avgCorrDataCh2[i / 4] - errCorrDataCh2[i / 4];
+                corrDataCh2ForPlot[i + 3] = avgCorrDataCh2[i / 4];
+                corrDataDiffForPlot[i] = avgCorrDataDiff[i / 4];
+                corrDataDiffForPlot[i + 1] = avgCorrDataDiff[i / 4] + errCorrDataDiff[i / 4];
+                corrDataDiffForPlot[i + 2] = avgCorrDataDiff[i / 4] - errCorrDataDiff[i / 4];
+                corrDataDiffForPlot[i + 3] = avgCorrDataDiff[i / 4];
+                corrDataSumForPlot[i] = avgCorrDataSum[i / 4];
+                corrDataSumForPlot[i + 1] = avgCorrDataSum[i / 4] + errCorrDataSum[i / 4];
+                corrDataSumForPlot[i + 2] = avgCorrDataSum[i / 4] - errCorrDataSum[i / 4];
+                corrDataSumForPlot[i + 3] = avgCorrDataSum[i / 4];
+            }
+            CameraForm.scatterGraph3.Plots[0].PlotXY(corrbinsForPlot, corrDataCh1ForPlot);
+            CameraForm.scatterGraph3.Plots[1].PlotXY(corrbinsForPlot, corrDataCh2ForPlot);
+            CameraForm.scatterGraph3.Plots[2].PlotXY(corrbinsForPlot, corrDataDiffForPlot);
+            CameraForm.scatterGraph3.Plots[3].PlotXY(corrbinsForPlot, corrDataSumForPlot);
+            CameraForm.scatterGraphNormCorrSig.PlotXY(corrbinsForPlot, normSigForPlot);
+            
+
+            if (SaveCorrelatorToggle.Value)
+            {
+                //get filename from control parameters tab
+                string[] filename = GetDataFilename(2);
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "Correlator Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+                for (int j = 0; j < ncorrbins; j++)
+                    tw.WriteLine(newCorrDataCh1[j] + "\t" + newCorrDataCh2[j]);
+                tw.Write("\n");
+                tw.Close();
+            }
+
+
+            /*
             if (prevCorrDataCh1.Length == 0)
             {
                 avgCount = 1;
@@ -2063,40 +2217,22 @@ namespace ArrayDACControl
             else
             {
                 avgCount = avgCount + 1;
-
                 for (int j = 0; j < avgCorrDataCh1.Length; j++)
                 {
                     avgCorrDataCh1[j] = prevCorrDataCh1[j] + newCorrDataCh1[j];
                     avgCorrDataCh2[j] = prevCorrDataCh2[j] + newCorrDataCh2[j];
-                    avgCorrDataDiff[j] = prevCorrDataDiff[j] + newCorrDataDiff[j];
-                    avgCorrDataSum[j] = prevCorrDataSum[j] + newCorrDataSum[j];
-                    avgnormSig[j] = avgCorrDataDiff[j] / (avgCorrDataSum[j] + 2 * avgCount * (int.Parse(textBoxBackEst.Text)));
+                    //avgCorrDataDiff[j] = prevCorrDataDiff[j] + newCorrDataDiff[j];
+                    //avgCorrDataSum[j] = prevCorrDataSum[j] + newCorrDataSum[j];
+                    //avgnormSig[j] = avgCorrDataDiff[j] / (avgCorrDataSum[j] - 2 * avgCount * (int.Parse(textBoxBackEst.Text)));
+                    //errnormsig[j] = avgnormSig[j] * Math.Sqrt( sqferrCorrDataDiff[j] + sqferrCorrDataSum[j] );
                 }
-
                 CameraForm.scatterGraph3.Plots[0].PlotXY(corrbins, avgCorrDataCh1);
                 CameraForm.scatterGraph3.Plots[1].PlotXY(corrbins, avgCorrDataCh2);
                 CameraForm.scatterGraph3.Plots[2].PlotXY(corrbins, avgCorrDataDiff);
                 CameraForm.scatterGraph3.Plots[3].PlotXY(corrbins, avgCorrDataSum);
                 CameraForm.scatterGraphNormCorrSig.PlotXY(corrbins, avgnormSig);
             }
-
-            if (SaveCorrelatorToggle.Value)
-            {
-                //get filename from control parameters tab
-                string[] filename = GetDataFilename(2);
-
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "Correlator Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-                //double[] corrdata = CameraForm.CorrelatorGraph.Plots[0].GetYData();
-
-                for (int j = 0; j < newCorrDataCh1.Length; j++)
-                {
-                    tw.WriteLine(newCorrDataCh1[j] + "\t" + newCorrDataCh2[j]);
-                }
-                tw.Write("\n");
-
-                tw.Close();
-            }
+            */
 
             ////////////////////////////////////////////////////
             // "Figure of merit" monitoring:
@@ -2121,29 +2257,32 @@ namespace ArrayDACControl
                     CameraForm.corrMuLog.PlotXYAppend(0, 0);
                 }
             }
-
+            // Retrieve the data from the plot for appending to it and replotting later:
             double[] prevMicromotionDataY = CameraForm.corrMuLog.Plots[0].GetYData();
             double[] prevMicromotionDataX = CameraForm.corrMuLog.Plots[0].GetXData();
             double[] prevAmpDataY = CameraForm.corrAmpLog.Plots[0].GetYData();
             double[] prevAmpDataX = CameraForm.corrAmpLog.Plots[0].GetXData();
-
             int lastPtIndexMu = prevMicromotionDataX.Length - 1;
             int lastPtIndexAmp = prevAmpDataX.Length - 1;
 
-
-            // Display current "amplitude" of micromotion or motion suppression on the appropriate graph:
-
+            // Display current estimated "amplitude" of micromotion or motion suppression on the appropriate graph:
             if (CameraForm.corrRecToggle.Value == false)
             {
-
                 if (LockinFrequencySwitch.Value == true)
                 {
-                    double dq = Math.Abs(prevAmpDataY[lastPtIndexAmp] - prevAmpDataY[lastPtIndexAmp - 2]);
                     counterAmp++;
+                    /*
+                    double dq = Math.Abs(prevAmpDataY[lastPtIndexAmp] - prevAmpDataY[lastPtIndexAmp - 2]);
                     prevAmpDataY[lastPtIndexAmp] = (prevAmpDataY[lastPtIndexAmp] * (counterAmp - 1) + theCorrelator.decompMerit) / counterAmp;
                     prevAmpDataY[lastPtIndexAmp - 3] = prevAmpDataY[lastPtIndexAmp];
                     prevAmpDataY[lastPtIndexAmp - 2] = prevAmpDataY[lastPtIndexAmp] + Math.Sqrt(dq * dq * (counterAmp - 1) * (counterAmp - 1) + Math.Pow(theCorrelator.decompMeritErr, 2)) / counterAmp;
                     prevAmpDataY[lastPtIndexAmp - 1] = prevAmpDataY[lastPtIndexAmp] - Math.Sqrt(dq * dq * (counterAmp - 1) * (counterAmp - 1) + Math.Pow(theCorrelator.decompMeritErr, 2)) / counterAmp;
+                     * */
+                    prevAmpDataY[lastPtIndexAmp] = normAmplitude;
+                    prevAmpDataY[lastPtIndexAmp - 3] = normAmplitude;
+                    prevAmpDataY[lastPtIndexAmp - 2] = normAmplitude+normAmplitudeErr;
+                    prevAmpDataY[lastPtIndexAmp - 1] = normAmplitude-normAmplitudeErr;
+
                     CameraForm.corrAmpLog.PlotXY(prevAmpDataX, prevAmpDataY);
                 }
                 else
@@ -2159,7 +2298,27 @@ namespace ArrayDACControl
             }
         }
 
+//////////////////// Function for calculating statistics of data ////////////////////////////////////////////////////
 
+        private double sampleAve(double[] data, int n)
+        {
+            double average = 0;
+            //int nn = data.Length;
+            for (int i = 0; i < n; i++)
+                average = average + data[i];
+            average = average / n;
+            return average;
+        }
+        private double sampleStd(double[] data, int n)
+        {
+            double std = 0;
+            //int nn = data.Length;
+            double ave = sampleAve(data, n);
+            for (int i = 0; i < n; i++)
+                std = std + Math.Pow(data[i]-ave,2);
+            std = Math.Sqrt( std / (n - 1) );
+            return std;
+        }
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -4268,6 +4427,11 @@ namespace ArrayDACControl
                 slow_in2OnTimeText.Text = slow_out2OnTimeText.Text;
                 slow_in2DelayText.Text = slow_out2DelayText.Text;
             }
+        }
+
+        private void CorrelatorBinningPhaseSlider_Load(object sender, EventArgs e)
+        {
+
         }
 
         

@@ -156,27 +156,27 @@ namespace ArrayDACControl
             this.waveformPlot10 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis10 = new NationalInstruments.UI.XAxis();
             this.yAxis10 = new NationalInstruments.UI.YAxis();
+            this.waveformPlot18 = new NationalInstruments.UI.WaveformPlot();
             this.yBalanceGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
             this.waveformPlot6 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis9 = new NationalInstruments.UI.XAxis();
             this.yAxis9 = new NationalInstruments.UI.YAxis();
+            this.waveformPlot17 = new NationalInstruments.UI.WaveformPlot();
             this.xSpreadGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
             this.waveformPlot5 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis8 = new NationalInstruments.UI.XAxis();
             this.yAxis8 = new NationalInstruments.UI.YAxis();
+            this.waveformPlot16 = new NationalInstruments.UI.WaveformPlot();
             this.xBalanceGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
             this.waveformPlot4 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis7 = new NationalInstruments.UI.XAxis();
             this.yAxis7 = new NationalInstruments.UI.YAxis();
+            this.waveformPlot15 = new NationalInstruments.UI.WaveformPlot();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.FocusLogsONCheck = new System.Windows.Forms.CheckBox();
-            this.waveformPlot15 = new NationalInstruments.UI.WaveformPlot();
-            this.waveformPlot16 = new NationalInstruments.UI.WaveformPlot();
-            this.waveformPlot17 = new NationalInstruments.UI.WaveformPlot();
-            this.waveformPlot18 = new NationalInstruments.UI.WaveformPlot();
             ((System.ComponentModel.ISupportInitialize)(this.intensityGraph1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor2)).BeginInit();
@@ -736,11 +736,11 @@ namespace ArrayDACControl
             this.label49.AutoSize = true;
             this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label49.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label49.Location = new System.Drawing.Point(250, 4);
+            this.label49.Location = new System.Drawing.Point(229, 5);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(168, 24);
+            this.label49.Size = new System.Drawing.Size(207, 24);
             this.label49.TabIndex = 160;
-            this.label49.Text = "PMT Live Counts";
+            this.label49.Text = "PMT Live Counts/sec";
             // 
             // PMTcountBox
             // 
@@ -984,6 +984,9 @@ namespace ArrayDACControl
             this.scatterPlot3.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
             this.scatterPlot3.LineToBaseColor = System.Drawing.Color.Gainsboro;
             this.scatterPlot3.LineToBaseStyle = NationalInstruments.UI.LineStyle.Dash;
+            this.scatterPlot3.LineWidth = 3F;
+            this.scatterPlot3.PointSize = new System.Drawing.Size(10, 2);
+            this.scatterPlot3.PointStyle = NationalInstruments.UI.PointStyle.SolidSquare;
             this.scatterPlot3.XAxis = this.xAxis3;
             this.scatterPlot3.YAxis = this.yAxis3;
             // 
@@ -1002,11 +1005,17 @@ namespace ArrayDACControl
             // 
             this.scatterPlot2.LineColor = System.Drawing.Color.Red;
             this.scatterPlot2.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.scatterPlot2.LineWidth = 3F;
+            this.scatterPlot2.PointSize = new System.Drawing.Size(10, 2);
+            this.scatterPlot2.PointStyle = NationalInstruments.UI.PointStyle.SolidSquare;
             this.scatterPlot2.XAxis = this.xAxis3;
             this.scatterPlot2.YAxis = this.yAxis3;
             // 
             // scatterPlot6
             // 
+            this.scatterPlot6.LineWidth = 3F;
+            this.scatterPlot6.PointSize = new System.Drawing.Size(10, 2);
+            this.scatterPlot6.PointStyle = NationalInstruments.UI.PointStyle.SolidSquare;
             this.scatterPlot6.XAxis = this.xAxis3;
             this.scatterPlot6.YAxis = this.yAxis3;
             // 
@@ -1014,6 +1023,9 @@ namespace ArrayDACControl
             // 
             this.scatterPlot7.LineColor = System.Drawing.Color.DeepSkyBlue;
             this.scatterPlot7.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.scatterPlot7.LineWidth = 3F;
+            this.scatterPlot7.PointSize = new System.Drawing.Size(10, 2);
+            this.scatterPlot7.PointStyle = NationalInstruments.UI.PointStyle.SolidSquare;
             this.scatterPlot7.XAxis = this.xAxis3;
             this.scatterPlot7.YAxis = this.yAxis3;
             // 
@@ -1040,12 +1052,12 @@ namespace ArrayDACControl
             // groupBox57
             // 
             this.groupBox57.Controls.Add(this.correlatorDecompMerit);
-            this.groupBox57.Location = new System.Drawing.Point(6, 946);
+            this.groupBox57.Location = new System.Drawing.Point(25, 493);
             this.groupBox57.Name = "groupBox57";
             this.groupBox57.Size = new System.Drawing.Size(275, 74);
             this.groupBox57.TabIndex = 189;
             this.groupBox57.TabStop = false;
-            this.groupBox57.Text = "Decompensation";
+            this.groupBox57.Text = "Balanced Correlator Amplitude";
             // 
             // correlatorDecompMerit
             // 
@@ -1062,7 +1074,7 @@ namespace ArrayDACControl
             // groupBox53
             // 
             this.groupBox53.Controls.Add(this.correlatorTotalCounts);
-            this.groupBox53.Location = new System.Drawing.Point(287, 946);
+            this.groupBox53.Location = new System.Drawing.Point(25, 399);
             this.groupBox53.Name = "groupBox53";
             this.groupBox53.Size = new System.Drawing.Size(212, 74);
             this.groupBox53.TabIndex = 188;
@@ -1083,11 +1095,11 @@ namespace ArrayDACControl
             // 
             // scatterGraphNormCorrSig
             // 
-            this.scatterGraphNormCorrSig.Location = new System.Drawing.Point(572, 810);
+            this.scatterGraphNormCorrSig.Location = new System.Drawing.Point(355, 399);
             this.scatterGraphNormCorrSig.Name = "scatterGraphNormCorrSig";
             this.scatterGraphNormCorrSig.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot8});
-            this.scatterGraphNormCorrSig.Size = new System.Drawing.Size(368, 187);
+            this.scatterGraphNormCorrSig.Size = new System.Drawing.Size(586, 360);
             this.scatterGraphNormCorrSig.TabIndex = 187;
             this.scatterGraphNormCorrSig.UseColorGenerator = true;
             this.scatterGraphNormCorrSig.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -1097,6 +1109,12 @@ namespace ArrayDACControl
             // 
             // scatterPlot8
             // 
+            this.scatterPlot8.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.scatterPlot8.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.scatterPlot8.LineWidth = 3F;
+            this.scatterPlot8.PointColor = System.Drawing.Color.Red;
+            this.scatterPlot8.PointSize = new System.Drawing.Size(15, 3);
+            this.scatterPlot8.PointStyle = NationalInstruments.UI.PointStyle.SolidSquare;
             this.scatterPlot8.XAxis = this.xAxis12;
             this.scatterPlot8.YAxis = this.yAxis12;
             // 
@@ -1109,7 +1127,7 @@ namespace ArrayDACControl
                         | NationalInstruments.UI.GraphInteractionModes.DragCursor)
                         | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption)
                         | NationalInstruments.UI.GraphInteractionModes.EditRange)));
-            this.CorrelatorGraph.Location = new System.Drawing.Point(312, 423);
+            this.CorrelatorGraph.Location = new System.Drawing.Point(355, 765);
             this.CorrelatorGraph.Name = "CorrelatorGraph";
             this.CorrelatorGraph.PlotAreaBorder = NationalInstruments.UI.Border.Sunken;
             this.CorrelatorGraph.PlotAreaColor = System.Drawing.SystemColors.MenuText;
@@ -1118,7 +1136,7 @@ namespace ArrayDACControl
             this.waveformPlot12,
             this.waveformPlot13,
             this.waveformPlot14});
-            this.CorrelatorGraph.Size = new System.Drawing.Size(629, 333);
+            this.CorrelatorGraph.Size = new System.Drawing.Size(586, 223);
             this.CorrelatorGraph.TabIndex = 172;
             this.CorrelatorGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
             this.xAxis11});
@@ -1185,7 +1203,7 @@ namespace ArrayDACControl
             this.toolStripLabel21,
             this.toolStripPropertyEditor21});
             this.instrumentControlStrip5.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.instrumentControlStrip5.Location = new System.Drawing.Point(355, 759);
+            this.instrumentControlStrip5.Location = new System.Drawing.Point(355, 991);
             this.instrumentControlStrip5.Name = "instrumentControlStrip5";
             this.instrumentControlStrip5.Size = new System.Drawing.Size(586, 25);
             this.instrumentControlStrip5.TabIndex = 173;
@@ -1274,7 +1292,7 @@ namespace ArrayDACControl
             // testlbl
             // 
             this.testlbl.AutoSize = true;
-            this.testlbl.Location = new System.Drawing.Point(49, 367);
+            this.testlbl.Location = new System.Drawing.Point(32, 970);
             this.testlbl.Name = "testlbl";
             this.testlbl.Size = new System.Drawing.Size(13, 13);
             this.testlbl.TabIndex = 165;
@@ -1417,6 +1435,12 @@ namespace ArrayDACControl
             this.yAxis10.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
             this.yAxis10.MajorDivisions.GridVisible = true;
             // 
+            // waveformPlot18
+            // 
+            this.waveformPlot18.LineWidth = 3F;
+            this.waveformPlot18.XAxis = this.xAxis10;
+            this.waveformPlot18.YAxis = this.yAxis10;
+            // 
             // yBalanceGraph
             // 
             this.yBalanceGraph.AccessibleRole = System.Windows.Forms.AccessibleRole.Chart;
@@ -1456,6 +1480,12 @@ namespace ArrayDACControl
             // 
             this.yAxis9.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
             this.yAxis9.MajorDivisions.GridVisible = true;
+            // 
+            // waveformPlot17
+            // 
+            this.waveformPlot17.LineWidth = 3F;
+            this.waveformPlot17.XAxis = this.xAxis9;
+            this.waveformPlot17.YAxis = this.yAxis9;
             // 
             // xSpreadGraph
             // 
@@ -1497,6 +1527,12 @@ namespace ArrayDACControl
             this.yAxis8.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
             this.yAxis8.MajorDivisions.GridVisible = true;
             // 
+            // waveformPlot16
+            // 
+            this.waveformPlot16.LineWidth = 3F;
+            this.waveformPlot16.XAxis = this.xAxis8;
+            this.waveformPlot16.YAxis = this.yAxis8;
+            // 
             // xBalanceGraph
             // 
             this.xBalanceGraph.AccessibleRole = System.Windows.Forms.AccessibleRole.Chart;
@@ -1536,6 +1572,12 @@ namespace ArrayDACControl
             // 
             this.yAxis7.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
             this.yAxis7.MajorDivisions.GridVisible = true;
+            // 
+            // waveformPlot15
+            // 
+            this.waveformPlot15.LineWidth = 3F;
+            this.waveformPlot15.XAxis = this.xAxis7;
+            this.waveformPlot15.YAxis = this.yAxis7;
             // 
             // label8
             // 
@@ -1582,30 +1624,6 @@ namespace ArrayDACControl
             this.FocusLogsONCheck.TabIndex = 165;
             this.FocusLogsONCheck.Text = "LOGS ON?";
             this.FocusLogsONCheck.UseVisualStyleBackColor = true;
-            // 
-            // waveformPlot15
-            // 
-            this.waveformPlot15.LineWidth = 3F;
-            this.waveformPlot15.XAxis = this.xAxis7;
-            this.waveformPlot15.YAxis = this.yAxis7;
-            // 
-            // waveformPlot16
-            // 
-            this.waveformPlot16.LineWidth = 3F;
-            this.waveformPlot16.XAxis = this.xAxis8;
-            this.waveformPlot16.YAxis = this.yAxis8;
-            // 
-            // waveformPlot17
-            // 
-            this.waveformPlot17.LineWidth = 3F;
-            this.waveformPlot17.XAxis = this.xAxis9;
-            this.waveformPlot17.YAxis = this.yAxis9;
-            // 
-            // waveformPlot18
-            // 
-            this.waveformPlot18.LineWidth = 3F;
-            this.waveformPlot18.XAxis = this.xAxis10;
-            this.waveformPlot18.YAxis = this.yAxis10;
             // 
             // Form2
             // 
