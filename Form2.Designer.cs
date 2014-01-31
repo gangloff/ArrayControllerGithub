@@ -224,7 +224,7 @@ namespace ArrayDACControl
                         | NationalInstruments.UI.IntensityGraphInteractionModes.DragCursor)
                         | NationalInstruments.UI.IntensityGraphInteractionModes.DragAnnotationCaption)
                         | NationalInstruments.UI.IntensityGraphInteractionModes.EditRange)));
-            this.intensityGraph1.Location = new System.Drawing.Point(12, 8);
+            this.intensityGraph1.Location = new System.Drawing.Point(978, 25);
             this.intensityGraph1.Name = "intensityGraph1";
             this.intensityGraph1.Plots.AddRange(new NationalInstruments.UI.IntensityPlot[] {
             this.intensityPlot1});
@@ -593,7 +593,7 @@ namespace ArrayDACControl
             this.toolStripLabel5,
             this.toolStripPropertyEditor5});
             this.instrumentControlStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.instrumentControlStrip1.Location = new System.Drawing.Point(12, 931);
+            this.instrumentControlStrip1.Location = new System.Drawing.Point(978, 962);
             this.instrumentControlStrip1.Name = "instrumentControlStrip1";
             this.instrumentControlStrip1.Size = new System.Drawing.Size(900, 25);
             this.instrumentControlStrip1.TabIndex = 17;
@@ -676,14 +676,14 @@ namespace ArrayDACControl
             // 
             // SaveImagePath
             // 
-            this.SaveImagePath.Location = new System.Drawing.Point(12, 1015);
+            this.SaveImagePath.Location = new System.Drawing.Point(978, 1031);
             this.SaveImagePath.Name = "SaveImagePath";
             this.SaveImagePath.Size = new System.Drawing.Size(356, 20);
             this.SaveImagePath.TabIndex = 19;
             // 
             // SaveImageButton
             // 
-            this.SaveImageButton.Location = new System.Drawing.Point(12, 986);
+            this.SaveImageButton.Location = new System.Drawing.Point(978, 1002);
             this.SaveImageButton.Name = "SaveImageButton";
             this.SaveImageButton.Size = new System.Drawing.Size(150, 23);
             this.SaveImageButton.TabIndex = 18;
@@ -698,7 +698,7 @@ namespace ArrayDACControl
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(938, -1);
+            this.tabControl1.Location = new System.Drawing.Point(5, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(960, 1055);

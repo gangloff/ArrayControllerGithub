@@ -54,6 +54,7 @@ namespace ArrayDACControl
         ThreadHelperClass SliderScanThreadHelper, ElectrodeScanThreadHelper;
         ThreadHelperClass CameraThreadHelper, CameraTimeOutThreadHelper, IntensityGraphUpdateThreadHelper;
         ThreadHelperClass CorrelatorThreadHelper, SinglePMTReadThreadHelper, FluorLogThreadHelper;
+        ThreadHelperClass LatticePositionThreadHelper;
         delegate void MyDelegate();
 
         double BL, BR, TL, TR, midL, midR;
@@ -268,6 +269,7 @@ namespace ArrayDACControl
             CorrelatorThreadHelper = new ThreadHelperClass("CorrelatorThread");
             FluorLogThreadHelper = new ThreadHelperClass("FluorLog");
             SliderScanThreadHelper = new ThreadHelperClass("SliderScan");
+            LatticePositionThreadHelper = new ThreadHelperClass("LatticePosition");
 
             stopwatch = new Stopwatch();
         }
@@ -1340,30 +1342,16 @@ namespace ArrayDACControl
             }
         }
 
-        private void RampArrayAux()
+        //Method to Ramp a slider within a given time and number of poitns
+        private void RampSlider(AdjustableSlider theSlider, int NumSteps, int time, double start, double end)
         {
-            DAC.Clear();
-            double T = 0.5; int samples = 200;
-            double cameraExposure = 0.150;
-            double blankWaitTime = 0.5;
-            DAC.Mask = 0;
-            const double rampAmplitude = 2;
-            double[] rampInitVal = new double[] { innerL, innerR, innerC };
-            double[] rampFinalVal = new double[] { innerL - SnakeRatioSlider.Value * rampAmplitude, innerR - SnakeRatioSlider.Value * rampAmplitude, innerC - rampAmplitude };
-            DAC.Ramp(new int[] { (int)this.RFelectrodeToChannel["innerL"], (int)this.RFelectrodeToChannel["innerR"], (int)this.RFelectrodeToChannel["snake"] }, rampInitVal, rampFinalVal, ref T, ref samples);
-            DAC.Wait(ref blankWaitTime);
-            DAC.Mask = 128;
-            DAC.Wait(ref cameraExposure);
-            DAC.Mask = 0;
-            DAC.Wait(ref blankWaitTime);
-            DAC.Ramp(new int[] { (int)this.RFelectrodeToChannel["innerL"], (int)this.RFelectrodeToChannel["innerR"], (int)this.RFelectrodeToChannel["snake"] }, rampFinalVal, rampInitVal, ref T, ref samples);
-            DAC.Wait(ref blankWaitTime);
-            DAC.Mask = 128;
-            DAC.Wait(ref cameraExposure);
-            DAC.Mask = 0;
-            double cameraReset = .150;
-            DAC.Wait(ref cameraReset);
-            DAC.Commit();
+            for (int i = 0; i < NumSteps; i++)
+            {
+                theSlider.Value = start + (end - start) * i / NumSteps;
+                compensationAdjustedHelper();
+                Thread.Sleep(time);
+            }
+            theSlider.Value = end;
         }
 
         //
@@ -1583,6 +1571,15 @@ namespace ArrayDACControl
         //
         // FORM EVENTS, BUTTON CLICKS ETC.
         //
+
+        private void LatticePositionSetSuggestedButton_Click(object sender, EventArgs e)
+        {
+            //reset to original values
+            this.DCsliders[int.Parse(ElectrodeScanDC1TextBox.Text)].Value = double.Parse(LatticePositionNewValueText.Text);
+            this.DCsliders[int.Parse(ElectrodeScanDC2TextBox.Text)].Value = double.Parse(LatticePositionNewValue2Text.Text);
+            //update DAC
+            compensationAdjustedHelper();
+        }
 
         private void CorrelatorBinningPhaseSliderOut(object sender, EventArgs e)
         {
@@ -2229,8 +2226,8 @@ namespace ArrayDACControl
                 avgCorrDataCh1[j] = sampleAve(corrampCh1history[j], historyCounter);
                 avgCorrDataCh2[j] = sampleAve(corrampCh2history[j], historyCounter);
                 // compute fractional square error of Ch1 and Ch2 as standard error of the mean over data collected since last reset:
-                sqferrCorrDataCh1[j] = Math.Pow(sampleStd(corrampCh1history[j], historyCounter) / avgCorrDataCh1[j] , 2) / corrampCh1history[j].Length;
-                sqferrCorrDataCh2[j] = Math.Pow(sampleStd(corrampCh2history[j], historyCounter) / avgCorrDataCh2[j] , 2) / corrampCh2history[j].Length ;
+                sqferrCorrDataCh1[j] = Math.Pow(sampleStd(corrampCh1history[j], historyCounter) / avgCorrDataCh1[j], 2) / historyCounter;
+                sqferrCorrDataCh2[j] = Math.Pow(sampleStd(corrampCh2history[j], historyCounter) / avgCorrDataCh2[j], 2) / historyCounter;
                 // actual error of Ch1 and Ch2:
                 errCorrDataCh1[j] = avgCorrDataCh1[j] * Math.Sqrt(sqferrCorrDataCh1[j]);
                 errCorrDataCh2[j] = avgCorrDataCh2[j] * Math.Sqrt(sqferrCorrDataCh2[j]);
@@ -2260,8 +2257,8 @@ namespace ArrayDACControl
                     errbinB += Math.Pow(errnormSig[i],2);
                 }
             }
-            normAmplitude = (binA-binB)/4;
-            normAmplitudeErr = Math.Sqrt(errbinA+errbinB)/4;
+            normAmplitude = (binA-binB)/ncorrbins*3.1415/2;
+            normAmplitudeErr = Math.Sqrt(errbinA + errbinB) / ncorrbins * 3.1415 / 2;
 
             // plot the new correlator data 
             CameraForm.CorrelatorGraph.Plots[0].PlotY(newCorrDataCh1);
@@ -2558,10 +2555,313 @@ namespace ArrayDACControl
 
             tw.Close();
         }
-        
 
 
 
+        //
+        //
+        // LATTICE POSITION SCAN
+        // 
+        //
+
+        private void LatticePositionStart_Click(object sender, EventArgs e)
+        {
+            if (!LatticePositionThreadHelper.ShouldBeRunningFlag)
+            {
+                LatticePositionThreadHelper.ShouldBeRunningFlag = true;
+                LatticePositionThreadHelper.theThread = new Thread(new ThreadStart(LatticePositionExecute));
+                LatticePositionThreadHelper.theThread.Name = "Lattice Scan thread";
+                LatticePositionThreadHelper.theThread.Priority = ThreadPriority.Normal;
+                LatticePositionThreadHelper.index = 0;
+                //get scan parameters and declare data arrays
+                LatticePositionThreadHelper.numPoints = 3;
+                LatticePositionThreadHelper.numAverage = int.Parse(LatticePositionNumAveText.Text);
+                //get Stream type from combo box
+                LatticePositionThreadHelper.message = LatticePositionComboBox.Text;
+
+                //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
+                //if camera is running stop it
+                
+                LatticePositionThreadHelper.initDoubleData(LatticePositionThreadHelper.numPoints, 2, 2);
+
+                //Compute field scan values, only 3 points here by default
+                LatticePositionThreadHelper.DoubleScanVariable[0, 0] = (double)this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value - double.Parse(LatticePositionAmplitudeText.Text);
+                LatticePositionThreadHelper.DoubleScanVariable[0, 1] = (double)this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value;
+                LatticePositionThreadHelper.DoubleScanVariable[0, 2] = (double)this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value + double.Parse(LatticePositionAmplitudeText.Text);
+
+                LatticePositionThreadHelper.DoubleScanVariable[1, 0] = (double)this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value + double.Parse(LatticePositionAmplitudeText.Text);
+                LatticePositionThreadHelper.DoubleScanVariable[1, 1] = (double)this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value;
+                LatticePositionThreadHelper.DoubleScanVariable[1, 2] = (double)this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value - double.Parse(LatticePositionAmplitudeText.Text);
+
+                //if ramp array selected
+                if (LatticePositionRampArrayCheckbox.Checked)
+                {
+                    LatticePositionThreadHelper.SingleDouble2 = ArrayTotalSlider.Value;
+                    RampSlider(this.ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, double.Parse(LatticePositionRampArrayValue.Text));
+                }
+
+                // if camera is running stop it
+                if (CameraThreadHelper.ShouldBeRunningFlag)
+                {
+                    StopCameraThread();
+                    try
+                    {
+                        CameraThreadHelper.theThread.Abort();
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                }
+
+                //if correlator is running stop it
+                if (CorrelatorThreadHelper.ShouldBeRunningFlag)
+                {
+                    CorrelatorThreadHelper.ShouldBeRunningFlag = false;
+                    CorrelatorButton.BackColor = System.Drawing.Color.Gray;
+                    try
+                    {
+                        CorrelatorThreadHelper.theThread.Abort();
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                }
+                
+
+                //start scan thread
+                try
+                {
+                    LatticePositionThreadHelper.theThread.Start();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+            else
+            {
+                LatticePositionThreadHelper.ShouldBeRunningFlag = false;
+            }
+        }
+        private void LatticePositionExecute()
+        {
+            //update button
+            LatticePositionStart.BackColor = System.Drawing.Color.White;
+            //clear graph
+            CameraForm.scatterGraph3.ClearData();
+            //if running camera, initialize, and clear fluor and position graphs
+            if (LatticePositionThreadHelper.message == "Camera")
+            {
+                // clear graphs
+                CameraForm.FluorescenceGraph.ClearData();
+                CameraForm.PositionGraph.ClearData();
+                if (Camera.AppInitialize())
+                {
+                    CameraInitializeHelper();
+                }
+            }
+
+            if (LatticePositionThreadHelper.message == "Correlator:Sum")
+            {
+                //Initialize parameters to values entered under "Correlator" Tab  
+                //if correlator returns false for init, abort scan
+                if (!CorrelatorParameterInit())
+                {
+                    //end scan
+                    LatticePositionThreadHelper.ShouldBeRunningFlag = false;
+                    //show message
+                    MessageBox.Show("Correlator Init returned false");
+                }
+            }
+            //run scans
+            while (LatticePositionThreadHelper.index < (LatticePositionThreadHelper.numPoints) && LatticePositionThreadHelper.ShouldBeRunningFlag)
+            { 
+                //call to change electrode values
+                try
+                {
+                    this.Invoke(new MyDelegate(LatticePositionFrmCallback3));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                if (LatticePositionThreadHelper.message == "Correlator:Sum")
+                {
+                    for (int i = 0; i < LatticePositionThreadHelper.numAverage; i++)
+                    {
+                        //Get results into correlator object
+                        CorrelatorGetResultsHelper();
+                        //get total counts
+                        LatticePositionThreadHelper.SingleDouble = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+                        //load result in array
+                        LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index] += LatticePositionThreadHelper.SingleDouble;
+                        try
+                        {
+                            this.Invoke(new MyDelegate(LatticePositionFrmCallback));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        //update Sigma array
+                        LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.index] += Math.Pow(LatticePositionThreadHelper.SingleDouble, 2);
+                    }
+                    //finalize single point average and standard deviation
+                    LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index] = LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index] / LatticePositionThreadHelper.numAverage;
+                    LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.index] = Math.Sqrt(LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.index] / LatticePositionThreadHelper.numAverage - Math.Pow(LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index], 2));
+
+                    lock (LatticePositionThreadHelper)
+                    {
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback4));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(LatticePositionThreadHelper);
+                    }
+                    //increase index
+                    LatticePositionThreadHelper.index++;
+                }
+            }
+
+            //Compute figure of merit for centering by taken the difference between the two outer points, normalized by the total fluorescence
+            double averageFluor = (double) 1 / 3 * (LatticePositionThreadHelper.DoubleData[0, 0] + LatticePositionThreadHelper.DoubleData[0, 1] + LatticePositionThreadHelper.DoubleData[0, 2]);
+            double diff = (LatticePositionThreadHelper.DoubleData[0, 0] - LatticePositionThreadHelper.DoubleData[0, 2]) / averageFluor;
+
+            //Now sample again, but recenter in the direction of decreasing difference with respect to the above normalized difference
+            LatticePositionThreadHelper.DoubleScanVariable[0, 0] = LatticePositionThreadHelper.DoubleScanVariable[0, 0] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text)/2;
+            LatticePositionThreadHelper.DoubleScanVariable[0, 1] = LatticePositionThreadHelper.DoubleScanVariable[0, 1] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2; 
+            LatticePositionThreadHelper.DoubleScanVariable[0, 2] = LatticePositionThreadHelper.DoubleScanVariable[0, 2] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2; 
+
+            LatticePositionThreadHelper.DoubleScanVariable[1, 0] = LatticePositionThreadHelper.DoubleScanVariable[1, 0] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+            LatticePositionThreadHelper.DoubleScanVariable[1, 1] = LatticePositionThreadHelper.DoubleScanVariable[1, 1] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+            LatticePositionThreadHelper.DoubleScanVariable[1, 2] = LatticePositionThreadHelper.DoubleScanVariable[1, 2] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+
+            //run scans again
+            //reset index first
+            LatticePositionThreadHelper.index = 0;
+
+            while (LatticePositionThreadHelper.index < (LatticePositionThreadHelper.numPoints) && LatticePositionThreadHelper.ShouldBeRunningFlag)
+            {
+                //call to change electrode values
+                try
+                {
+                    this.Invoke(new MyDelegate(LatticePositionFrmCallback3));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                if (LatticePositionThreadHelper.message == "Correlator:Sum")
+                {
+                    for (int i = 0; i < LatticePositionThreadHelper.numAverage; i++)
+                    {
+                        //Get results into correlator object
+                        CorrelatorGetResultsHelper();
+                        //get total counts
+                        LatticePositionThreadHelper.SingleDouble = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+                        //load result in array
+                        LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index] += LatticePositionThreadHelper.SingleDouble;
+                        try
+                        {
+                            this.Invoke(new MyDelegate(LatticePositionFrmCallback));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        //update Sigma array
+                        LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.index] += Math.Pow(LatticePositionThreadHelper.SingleDouble, 2);
+                    }
+                    //finalize single point average and standard deviation
+                    LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index] = LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index] / LatticePositionThreadHelper.numAverage;
+                    LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.index] = Math.Sqrt(LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.index] / LatticePositionThreadHelper.numAverage - Math.Pow(LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index], 2));
+
+                    lock (LatticePositionThreadHelper)
+                    {
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback4));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(LatticePositionThreadHelper);
+                    }
+                    //increase index
+                    LatticePositionThreadHelper.index++;
+                }
+            }
+
+            //Compute figure of merit for centering again
+            averageFluor = (double) 1 / 3 * (LatticePositionThreadHelper.DoubleData[0, 0] + LatticePositionThreadHelper.DoubleData[0, 1] + LatticePositionThreadHelper.DoubleData[0, 2]);
+            double diff2 = (LatticePositionThreadHelper.DoubleData[0, 0] - LatticePositionThreadHelper.DoubleData[0, 2]) / averageFluor;
+
+            //Now from the two diff values, infer position where diff = 0
+            LatticePositionThreadHelper.SingleDouble3 = diff / (diff - diff2) * Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+
+            //Reset to original scan variables for center
+            LatticePositionThreadHelper.DoubleScanVariable[0, 1] = LatticePositionThreadHelper.DoubleScanVariable[0, 1] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+            LatticePositionThreadHelper.DoubleScanVariable[1, 1] = LatticePositionThreadHelper.DoubleScanVariable[1, 1] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+
+            if (LatticePositionThreadHelper.ShouldBeRunningFlag)
+            {
+                //go back to initial value and post feedback values
+                try
+                {
+                    this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback6));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+            }
+            //reset button
+            try
+            {
+                this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback2));
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            //reset scan boolean
+            LatticePositionThreadHelper.ShouldBeRunningFlag = false;
+        }
+        private void LatticePositionFrmCallback()
+        {
+            //display count
+            CameraForm.PMTcountBox.Text = LatticePositionThreadHelper.SingleDouble.ToString();
+            //update PMT plot
+            CameraForm.PMTcountGraph.PlotYAppend(LatticePositionThreadHelper.SingleDouble);
+        }
+        private void LatticePositionFrmCallback2()
+        {
+            LatticePositionStart.BackColor = System.Drawing.Color.Gainsboro;
+            LatticePositionStart.Text = "Start *Lattice* Scan";
+        }
+        private void LatticePositionFrmCallback3()
+        {
+            //Compute new electrode values
+            this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value = LatticePositionThreadHelper.DoubleScanVariable[0, LatticePositionThreadHelper.index];
+            this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value = LatticePositionThreadHelper.DoubleScanVariable[1, LatticePositionThreadHelper.index];
+            //update DAC
+            compensationAdjustedHelper();
+            //Button Indicator
+            LatticePositionStart.Text = "Scanning..." + LatticePositionThreadHelper.index.ToString();
+        }
+        private void LatticePositionFrmCallback4()
+        {
+            lock (LatticePositionThreadHelper)
+            {
+                try
+                {
+                    //plot
+                    CameraForm.scatterGraph3.PlotXYAppend(LatticePositionThreadHelper.DoubleScanVariable[0, LatticePositionThreadHelper.index], LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                Monitor.PulseAll(LatticePositionThreadHelper);
+            }
+        }
+
+        private void LatticePositionFrmCallback6()
+        {
+            //reset to original values
+            this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value = LatticePositionThreadHelper.DoubleScanVariable[0, 1];
+            this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value = LatticePositionThreadHelper.DoubleScanVariable[1, 1];
+            //update DAC
+            compensationAdjustedHelper();
+            //post feedback values
+            LatticePositionFeedbackText.Text = LatticePositionThreadHelper.SingleDouble3.ToString("F3");
+            double DC1 = this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value + LatticePositionThreadHelper.SingleDouble3;
+            double DC2 = this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value - LatticePositionThreadHelper.SingleDouble3;
+            LatticePositionNewValueText.Text = DC1.ToString("F3");
+            LatticePositionNewValue2Text.Text = DC2.ToString("F3");
+            //if ramp array selected, ramp it back to initial value
+            if (LatticePositionRampArrayCheckbox.Checked)
+            {
+                RampSlider(ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, LatticePositionThreadHelper.SingleDouble2);
+            }
+        }
 
         //
         //
@@ -2581,6 +2881,9 @@ namespace ArrayDACControl
                 //get scan parameters and declare data arrays
                 ElectrodeScanThreadHelper.min = new double[2];
                 ElectrodeScanThreadHelper.max = new double[2];
+                ElectrodeScanThreadHelper.KeepDoubles = new double[2];
+                ElectrodeScanThreadHelper.KeepDoubles[0] = this.DCsliders[int.Parse(ElectrodeScanDC1TextBox.Text)].Value;
+                ElectrodeScanThreadHelper.KeepDoubles[1] = this.DCsliders[int.Parse(ElectrodeScanDC2TextBox.Text)].Value;
                 ElectrodeScanThreadHelper.min[0] = double.Parse(ElectrodeScanStartValue1Textbox.Text);
                 ElectrodeScanThreadHelper.max[0] = double.Parse(ElectrodeScanEndValue1Textbox.Text);
                 ElectrodeScanThreadHelper.min[1] = double.Parse(ElectrodeScanStartValue2Textbox.Text);
@@ -2824,7 +3127,6 @@ namespace ArrayDACControl
                 Monitor.PulseAll(ElectrodeScanThreadHelper);
             }
         }
-
         private void ElectrodeScanFrmCallback5()
         {
             lock (ElectrodeScanThreadHelper)
@@ -2839,12 +3141,11 @@ namespace ArrayDACControl
                 Monitor.PulseAll(ElectrodeScanThreadHelper);
             }
         }
-
         private void ElectrodeScanFrmCallback6()
         {
             //reset to original values
-            this.DCsliders[int.Parse(ElectrodeScanDC1TextBox.Text)].Value = ElectrodeScanThreadHelper.min[0];
-            this.DCsliders[int.Parse(ElectrodeScanDC2TextBox.Text)].Value = ElectrodeScanThreadHelper.min[1];
+            this.DCsliders[int.Parse(ElectrodeScanDC1TextBox.Text)].Value = ElectrodeScanThreadHelper.KeepDoubles[0];
+            this.DCsliders[int.Parse(ElectrodeScanDC2TextBox.Text)].Value = ElectrodeScanThreadHelper.KeepDoubles[1];
             //update DAC
             compensationAdjustedHelper();
         }
@@ -4598,6 +4899,13 @@ namespace ArrayDACControl
         {
 
         }
+
+        private void label192_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
 
         
         //
