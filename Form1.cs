@@ -1107,8 +1107,6 @@ namespace ArrayDACControl
                             case "DataFilenameCommonRoot1Corr":
                                 DataFilenameCommonRoot1Corr.Text = theString.Split('\t')[1];
                                 break;
-
-
                             case "pulsePeriodText":
                                 pulsePeriodText.Text = theString.Split('\t')[1];
                                 break;
@@ -1166,8 +1164,6 @@ namespace ArrayDACControl
                             case "in2DelayText":
                                 in2DelayText.Text = theString.Split('\t')[1];
                                 break;
-
-
                             case "slow_pulsePeriodText":
                                 slow_pulsePeriodText.Text = theString.Split('\t')[1];
                                 break;
@@ -1225,8 +1221,6 @@ namespace ArrayDACControl
                             case "slow_in2DelayText":
                                 slow_in2DelayText.Text = theString.Split('\t')[1];
                                 break;
-
-
                             case "CameraHbin":
                                 CameraHbin.Text = theString.Split('\t')[1];
                                 break;
@@ -1357,14 +1351,17 @@ namespace ArrayDACControl
         //
         // Method to obtain filename from "Data Filename Control"
         //
-        public string[] GetDataFilename(int what)
+        public string[] GetDataFilename(int what, string scantype)
         {
             string[] theString = new string[2];
             //path + root
 
             if (what == 1)
             {
-                theString[0] = DataFilenameFolderPath.Text;
+                theString[0] = DataFilenameFolderPath.Text + scantype;
+                //check if folder exists, if not create it
+                if (!Directory.Exists(theString[0])) { Directory.CreateDirectory(theString[0]); }
+
                 if (CommonFilenameSwitch.Value) { theString[1] = DataFilenameCommonRoot1.Text + " "; }
                 else { theString[1] = DataFilenameCommonRoot2.Text + " "; }
             }
@@ -1386,64 +1383,73 @@ namespace ArrayDACControl
                         break;
                     case 2:
                         if (intTselector.Value) { theString[1] += "corrdt=" + correlatorIntTimetext1.Text + "ms "; }
-                        else { theString[1] += "corrdt=" + correlatorIntTimetext2.Text + "ms "; }
+                        else { theString[1] += "corrdt=" + correlatorIntTimetext2.Text + " "; }
                         break;
                     case 3:
-                        theString[1] += "ppdc=" + RegRecPerText.Text + " ";
+                        theString[1] += "ppT=" + pulsePeriodText.Text + " ";
                         break;
                     case 4:
-                        theString[1] += "ppdf=" + ncorrbinsText.Text + "kHz ";
+                        theString[1] += "DrF=" + LockInFreqtext1.Text + " ";
                         break;
                     case 5:
                         theString[1] += "det=" + DetuningTextbox.Text + " ";
                         break;
                     case 6:
-                        theString[1] += "sig1=" + S1PowerTextbox.Text + " ";
+                        theString[1] += "s1=" + S1PowerTextbox.Text + " ";
                         break;
                     case 7:
-                        theString[1] += "sig2=" + S2PowerTextbox.Text + " ";
+                        theString[1] += "s2=" + S2PowerTextbox.Text + " ";
                         break;
                     case 8:
-                        theString[1] += "pi=" + PiPowerTextbox.Text + " ";
+                        theString[1] += "s2qwp=" + S2QWPTextbox.Text + " ";
                         break;
                     case 9:
-                        theString[1] += "dop35=" + Doppler35Textbox.Text + " ";
+                        theString[1] += "pi=" + PiPowerTextbox.Text + " ";
                         break;
                     case 10:
-                        theString[1] += "cav=" + CavityPowerTextbox.Text + " ";
+                        theString[1] += "dop35=" + Doppler35Textbox.Text + " ";
                         break;
                     case 11:
-                        theString[1] += "Bx=" + BxTextbox.Text + " ";
+                        theString[1] += "cav=" + CavityPowerTextbox.Text + " ";
                         break;
                     case 12:
-                        theString[1] += "By=" + ByTextbox.Text + " ";
+                        theString[1] += "Bx=" + BxTextbox.Text + " ";
                         break;
                     case 13:
-                        theString[1] += "Bz=" + BzTextbox.Text + " ";
+                        theString[1] += "By=" + ByTextbox.Text + " ";
                         break;
                     case 14:
-                        theString[1] += "Ulatt=" + LatticeDepthTextbox.Text + " ";
+                        theString[1] += "Bz=" + BzTextbox.Text + " ";
                         break;
                     case 15:
-                        theString[1] += "array=" + ArrayTotalSlider.Value.ToString("F2") + " ";
+                        theString[1] += "U=" + LatticeDepthTextbox.Text + " ";
                         break;
                     case 16:
-                        theString[1] += "DY=" + TotalBiasSlider.Value.ToString("F2") + " ";
+                        theString[1] += "Uqwp=" + LatticeQWPTextbox.Text + " ";
                         break;
                     case 17:
-                        theString[1] += "DCQuad=" + DCVertQuadSlider.Value.ToString("F2") + " ";
+                        theString[1] += "ar=" + ArrayTotalSlider.Value.ToString("F2") + " ";
                         break;
                     case 18:
-                        theString[1] += "DX=" + DXSlider.Value.ToString("F3") + " ";
+                        theString[1] += "DY=" + TotalBiasSlider.Value.ToString("F2") + " ";
                         break;
                     case 19:
-                        theString[1] += "QuadTilt=" + QuadrupoleTilt.Value.ToString("F2") + " ";
+                        theString[1] += "DCQ=" + DCVertQuadSlider.Value.ToString("F2") + " ";
                         break;
                     case 20:
-                        theString[1] += "QuadRatio=" + QuadTiltRatioSlider.Value.ToString("F2") + " ";
+                        theString[1] += "DX=" + DXSlider.Value.ToString("F3") + " ";
                         break;
                     case 21:
-                        theString[1] += "ArrayRatio=" + SnakeRatioSlider.Value.ToString("F2") + " ";
+                        theString[1] += "QTilt=" + QuadrupoleTilt.Value.ToString("F2") + " ";
+                        break;
+                    case 22:
+                        theString[1] += "QRat=" + QuadTiltRatioSlider.Value.ToString("F2") + " ";
+                        break;
+                    case 23:
+                        theString[1] += "ArRat=" + SnakeRatioSlider.Value.ToString("F2") + " ";
+                        break;
+                    case 24:
+                        theString[1] += "ztrap=" + ZtrapfrequencyTextbox.Text + " ";
                         break;
 
                 }
@@ -1457,7 +1463,7 @@ namespace ArrayDACControl
             try
             {
                 //get filename from control parameters tab
-                string[] filename = GetDataFilename(1);
+                string[] filename = GetDataFilename(1, threadHelper.threadName + "\\");
 
                 System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
@@ -1506,7 +1512,7 @@ namespace ArrayDACControl
 
                 if (threadHelper.message == "Correlator:Sum")
                 {
-                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " CorrelatorSum Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " CorrSum " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
                     for (int i = 0; i < threadHelper.numPoints; i++)
                         tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i]);
@@ -1517,7 +1523,7 @@ namespace ArrayDACControl
                 if (threadHelper.message == "Camera" || threadHelper.message == "PMT & Camera")
                 {
                     //Save fluorescence data
-                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " Fluorescence Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " FluorLog " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
                     //Write scan variable first
                     for (int j = 0; j < threadHelper.numPoints - 1; j++)
@@ -1542,7 +1548,7 @@ namespace ArrayDACControl
 
                     //Save position data
 
-                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " Position Log " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " PosLog " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
                     //Write scan variable first
                     for (int j = 0; j < threadHelper.numPoints - 1; j++)
@@ -1750,6 +1756,83 @@ namespace ArrayDACControl
         {
             CameraThreadHelper.flag = true;
         }
+
+        private void PPSettings1SaveButton_Click(object sender, EventArgs e)
+        {
+            // settings 1 path
+            SavePPSettings(PPSettingsFolderPath.Text + PPSettings1Textbox.Text);
+        }
+
+        private void PPSettings2SaveButton_Click(object sender, EventArgs e)
+        {
+            // settings 2 path
+            SavePPSettings(PPSettingsFolderPath.Text + PPSettings2Textbox.Text);
+        }
+
+        private void SavePPSettings(string path)
+        {
+            try
+            {
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(path + ".txt");
+
+                tw.WriteLine(DateTime.Now);
+
+                //In order of appearance, top left, to bottom right
+
+                //Fast Pulse Programmer Tab
+                tw.WriteLine("pulsePeriodText" + "\t" + pulsePeriodText.Text);
+                tw.WriteLine("out1SigName" + "\t" + out1SigName.Text);
+                tw.WriteLine("out1OnTimeText" + "\t" + out1OnTimeText.Text);
+                tw.WriteLine("out1DelayText" + "\t" + out1DelayText.Text);
+                tw.WriteLine("out2SigName" + "\t" + out2SigName.Text);
+                tw.WriteLine("out2OnTimeText" + "\t" + out2OnTimeText.Text);
+                tw.WriteLine("out2DelayText" + "\t" + out2DelayText.Text);
+                tw.WriteLine("out3SigName" + "\t" + out3SigName.Text);
+                tw.WriteLine("out3OnTimeText" + "\t" + out3OnTimeText.Text);
+                tw.WriteLine("out3DelayText" + "\t" + out3DelayText.Text);
+                tw.WriteLine("out4SigName" + "\t" + out4SigName.Text);
+                tw.WriteLine("out4OnTimeText" + "\t" + out4OnTimeText.Text);
+                tw.WriteLine("out4DelayText" + "\t" + out4DelayText.Text);
+                tw.WriteLine("in1SigName" + "\t" + in1SigName.Text);
+                tw.WriteLine("in1OnTimeText" + "\t" + in1OnTimeText.Text);
+                tw.WriteLine("in1DelayText" + "\t" + in1DelayText.Text);
+                tw.WriteLine("in2SigName" + "\t" + in2SigName.Text);
+                tw.WriteLine("in2OnTimeText" + "\t" + in2OnTimeText.Text);
+                tw.WriteLine("in2DelayText" + "\t" + in2DelayText.Text);
+
+                //Slow Pulse Programmer Tab
+                tw.WriteLine("slow_pulsePeriodText" + "\t" + slow_pulsePeriodText.Text);
+                tw.WriteLine("slow_out1SigName" + "\t" + slow_out1SigName.Text);
+                tw.WriteLine("slow_out1OnTimeText" + "\t" + slow_out1OnTimeText.Text);
+                tw.WriteLine("slow_out1DelayText" + "\t" + slow_out1DelayText.Text);
+                tw.WriteLine("slow_out2SigName" + "\t" + slow_out2SigName.Text);
+                tw.WriteLine("slow_out2OnTimeText" + "\t" + slow_out2OnTimeText.Text);
+                tw.WriteLine("slow_out2DelayText" + "\t" + slow_out2DelayText.Text);
+                tw.WriteLine("slow_out3SigName" + "\t" + slow_out3SigName.Text);
+                tw.WriteLine("slow_out3OnTimeText" + "\t" + slow_out3OnTimeText.Text);
+                tw.WriteLine("slow_out3DelayText" + "\t" + slow_out3DelayText.Text);
+                tw.WriteLine("slow_out4SigName" + "\t" + slow_out4SigName.Text);
+                tw.WriteLine("slow_out4OnTimeText" + "\t" + slow_out4OnTimeText.Text);
+                tw.WriteLine("slow_out4DelayText" + "\t" + slow_out4DelayText.Text);
+                tw.WriteLine("slow_in1SigName" + "\t" + slow_in1SigName.Text);
+                tw.WriteLine("slow_in1OnTimeText" + "\t" + slow_in1OnTimeText.Text);
+                tw.WriteLine("slow_in1DelayText" + "\t" + slow_in1DelayText.Text);
+                tw.WriteLine("slow_in2SigName" + "\t" + slow_in2SigName.Text);
+                tw.WriteLine("slow_in2OnTimeText" + "\t" + slow_in2OnTimeText.Text);
+                tw.WriteLine("slow_in2DelayText" + "\t" + slow_in2DelayText.Text);
+
+                tw.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void PPSettingsReadButton_Click(object sender, EventArgs e)
+        {
+            if (PPSettingsSwitch.Value) { ReadConfigurationFull(PPSettingsFolderPath.Text + PPSettings1Textbox.Text); }
+            else { ReadConfigurationFull(PPSettingsFolderPath.Text + PPSettings2Textbox.Text); }
+        }
+
+
 
         //
         // Shut down camera when closing the application
@@ -2323,7 +2406,10 @@ namespace ArrayDACControl
             if (SaveCorrelatorToggle.Value)
             {
                 //get filename from control parameters tab
-                string[] filename = GetDataFilename(2);
+                string[] filename = GetDataFilename(2, "correlator\\");
+                //check if folder exists, if not create it
+                if (!Directory.Exists(filename[0])) { Directory.CreateDirectory(filename[0]); }
+
                 System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "Correlator Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
                 for (int j = 0; j < ncorrbins; j++)
                     tw.WriteLine(newCorrDataCh1[j] + "\t" + newCorrDataCh2[j]);
@@ -2500,63 +2586,6 @@ namespace ArrayDACControl
             }
         }
 
-        private void SaveCorrTraceButton_Click(object sender, EventArgs e)
-        {
-            //get filename from control parameters tab
-            string[] filename = GetDataFilename(2);
-
-            // Uncomment the following if you want to save Correlator Settings files
-            /*
-             * 
-            System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "Correlator Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-            
-            tw.WriteLine("Electrodes Settings");
-
-            for (int i = 0; i < DCrows; i++)
-                tw.WriteLine("DC" + i + "\t" + DCsliders[i].Value);
-            tw.WriteLine("DX tot" + "\t" + DXSlider.Value);
-            tw.WriteLine("Array tot" + "\t" + ArrayTotalSlider.Value);
-            tw.WriteLine("DC vert dipole" + "\t" + DCVertDipoleSlider.Value);
-            tw.WriteLine("DC quad" + "\t" + DCVertQuadSlider.Value);
-            tw.WriteLine("Bias tot" + "\t" + TotalBiasSlider.Value);
-            tw.WriteLine("Trap Height" + "\t" + TrapHeightSlider.Value);
-            tw.WriteLine("Quadrupole Tilt" + "\t" + QuadrupoleTilt.Value);
-            tw.WriteLine("Quad Tilt Ratio" + "\t" + QuadTiltRatioSlider.Value);
-            tw.WriteLine("Transfer Cavity" + "\t" + TransferCavity.Value);
-            tw.WriteLine("Snake Inner Ratio" + "\t" + RatioSlider.Value);
-            for (int i = 0; i < DCrows; i++)
-                tw.WriteLine("DC dx" + i + "\t" + DCslidersDx[i].Value);
-            for (int i = 0; i < DCrows; i++)
-                tw.WriteLine("DC left" + i + "\t" + DCslidersLeft[i].Value);
-            for (int i = 0; i < DCrows; i++)
-                tw.WriteLine("DC right" + i + "\t" + DCslidersRight[i].Value);
-
-            tw.WriteLine("Electrode Scan Parameters");
-            tw.WriteLine("DC1 Start Value" + "\t" + ElectrodeScanStartValue1Textbox.Text);
-            tw.WriteLine("DC1 End Value" + "\t" + ElectrodeScanEndValue1Textbox.Text);
-            tw.WriteLine("DC2 Start Value" + "\t" + ElectrodeScanStartValue2Textbox.Text);
-            tw.WriteLine("DC2 End Value" + "\t" + ElectrodeScanEndValue2Textbox.Text);
-            tw.WriteLine("Number of Points" + "\t" + ElectrodeScanNumPointsTextbox.Text);
-            tw.WriteLine("PMT Averaging" + "\t" + ElectrodeScanPMTAveragingTextbox.Text);
-            tw.WriteLine("PMT Average Background" + "\t" + PMTBackgroundAvgTextBox.Text);
-
-            tw.Close();
-             */
-
-
-            System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "Correlator Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-
-            double[] corrdata = CameraForm.CorrelatorGraph.Plots[0].GetYData();
-            for (int j = 0; j < corrdata.Length; j++)
-            {
-                tw.WriteLine(corrdata[j]);
-            }
-            tw.Write("\n");
-
-            tw.Close();
-        }
-
-
 
         //
         //
@@ -2578,6 +2607,11 @@ namespace ArrayDACControl
                 LatticePositionThreadHelper.numAverage = int.Parse(LatticePositionNumAveText.Text);
                 //get Stream type from combo box
                 LatticePositionThreadHelper.message = LatticePositionComboBox.Text;
+
+                //Get initial slider values
+                LatticePositionThreadHelper.KeepDoubles = new double[2];
+                LatticePositionThreadHelper.KeepDoubles[0] = (double)this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value;
+                LatticePositionThreadHelper.KeepDoubles[1] = (double)this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value;
 
                 //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
                 //if camera is running stop it
@@ -2789,7 +2823,7 @@ namespace ArrayDACControl
 
             if (LatticePositionThreadHelper.ShouldBeRunningFlag)
             {
-                //go back to initial value and post feedback values
+                //post feedback values
                 try
                 {
                     this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback6));
@@ -2797,7 +2831,7 @@ namespace ArrayDACControl
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
             }
-            //reset button
+            //reset button and reset to initial slider values
             try
             {
                 this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback2));
@@ -2817,6 +2851,16 @@ namespace ArrayDACControl
         {
             LatticePositionStart.BackColor = System.Drawing.Color.Gainsboro;
             LatticePositionStart.Text = "Start *Lattice* Scan";
+            //reset to original values
+            this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value = LatticePositionThreadHelper.KeepDoubles[0];
+            this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value = LatticePositionThreadHelper.KeepDoubles[1];
+            //update DAC
+            compensationAdjustedHelper();
+            //if ramp array selected, ramp it back to initial value
+            if (LatticePositionRampArrayCheckbox.Checked)
+            {
+                RampSlider(ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, LatticePositionThreadHelper.SingleDouble2);
+            }
         }
         private void LatticePositionFrmCallback3()
         {
@@ -2845,22 +2889,12 @@ namespace ArrayDACControl
 
         private void LatticePositionFrmCallback6()
         {
-            //reset to original values
-            this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value = LatticePositionThreadHelper.DoubleScanVariable[0, 1];
-            this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value = LatticePositionThreadHelper.DoubleScanVariable[1, 1];
-            //update DAC
-            compensationAdjustedHelper();
             //post feedback values
             LatticePositionFeedbackText.Text = LatticePositionThreadHelper.SingleDouble3.ToString("F3");
             double DC1 = this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value + LatticePositionThreadHelper.SingleDouble3;
             double DC2 = this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value - LatticePositionThreadHelper.SingleDouble3;
             LatticePositionNewValueText.Text = DC1.ToString("F3");
             LatticePositionNewValue2Text.Text = DC2.ToString("F3");
-            //if ramp array selected, ramp it back to initial value
-            if (LatticePositionRampArrayCheckbox.Checked)
-            {
-                RampSlider(ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, LatticePositionThreadHelper.SingleDouble2);
-            }
         }
 
         //
@@ -3068,19 +3102,12 @@ namespace ArrayDACControl
                     ElectrodeScanThreadHelper.index++;
                 }
             }
-            if (ElectrodeScanThreadHelper.ShouldBeRunningFlag)
+            if (ElectrodeScanThreadHelper.ShouldBeRunningFlag && ElectrodeScanSaveCheckbox.Checked)
             {
                 //save Scan Data
                 SaveScanData(ElectrodeScanThreadHelper);
-                //go back to initial value
-                try
-                {
-                    this.BeginInvoke(new MyDelegate(ElectrodeScanFrmCallback6));
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
             }
-            //reset button
+            //reset button and go back to initial values
             try
             {
                 this.BeginInvoke(new MyDelegate(ElectrodeScanFrmCallback2));
@@ -3100,6 +3127,11 @@ namespace ArrayDACControl
         {
             ElectrodeScanStart.BackColor = System.Drawing.Color.Gainsboro;
             ElectrodeScanStart.Text = "Start *Electrode* Scan";
+            //reset to original values
+            this.DCsliders[int.Parse(ElectrodeScanDC1TextBox.Text)].Value = ElectrodeScanThreadHelper.KeepDoubles[0];
+            this.DCsliders[int.Parse(ElectrodeScanDC2TextBox.Text)].Value = ElectrodeScanThreadHelper.KeepDoubles[1];
+            //update DAC
+            compensationAdjustedHelper();
         }
         private void ElectrodeScanFrmCallback3()
         {
@@ -3140,14 +3172,6 @@ namespace ArrayDACControl
 
                 Monitor.PulseAll(ElectrodeScanThreadHelper);
             }
-        }
-        private void ElectrodeScanFrmCallback6()
-        {
-            //reset to original values
-            this.DCsliders[int.Parse(ElectrodeScanDC1TextBox.Text)].Value = ElectrodeScanThreadHelper.KeepDoubles[0];
-            this.DCsliders[int.Parse(ElectrodeScanDC2TextBox.Text)].Value = ElectrodeScanThreadHelper.KeepDoubles[1];
-            //update DAC
-            compensationAdjustedHelper();
         }
 
         //
@@ -3244,6 +3268,9 @@ namespace ArrayDACControl
                         SliderScanThreadHelper.theSlider = this.CorrelatorBinningPhaseSlider;
                         break;
                 }
+                //Keep initial slider value
+                SliderScanThreadHelper.KeepDoubles = new double[1];
+                SliderScanThreadHelper.KeepDoubles[0] = SliderScanThreadHelper.theSlider.Value;
                 //modify thread name for file saving
                 SliderScanThreadHelper.threadName = SliderScanThreadHelper.theSlider.Name;
 
@@ -3421,7 +3448,7 @@ namespace ArrayDACControl
                     SliderScanThreadHelper.index++;
                 }
             }
-            if (SliderScanThreadHelper.ShouldBeRunningFlag)
+            if (SliderScanThreadHelper.ShouldBeRunningFlag && SliderScanSaveCheckbox.Checked)
             {
                 //save Scan Data
                 SaveScanData(SliderScanThreadHelper);
@@ -3452,7 +3479,7 @@ namespace ArrayDACControl
             SliderScanStart.BackColor = System.Drawing.Color.WhiteSmoke;
             SliderScanStart.Text = "Start *Slider* Scan";
             //reset to original values
-            SliderScanThreadHelper.theSlider.Value = SliderScanThreadHelper.min[0];
+            SliderScanThreadHelper.theSlider.Value = SliderScanThreadHelper.KeepDoubles[0];
         }
         private void SliderScanFrmCallback3()
         {
@@ -4904,6 +4931,12 @@ namespace ArrayDACControl
         {
 
         }
+
+
+
+
+
+
 
 
 
