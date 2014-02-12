@@ -822,6 +822,12 @@ namespace ArrayDACControl
                 tw.WriteLine("ElectrodeScanEndValue2Textbox" + "\t" + ElectrodeScanEndValue2Textbox.Text);
                 tw.WriteLine("ElectrodeScanPMTAveragingTextbox" + "\t" + ElectrodeScanPMTAveragingTextbox.Text);
                 tw.WriteLine("ElectrodeScanNumPointsTextbox" + "\t" + ElectrodeScanNumPointsTextbox.Text);
+                tw.WriteLine("LatticePositionDC1TextBox" + "\t" + LatticePositionDC1TextBox.Text);
+                tw.WriteLine("LatticePositionDC2TextBox" + "\t" + LatticePositionDC2TextBox.Text);
+                tw.WriteLine("LatticePositionAmplitudeText" + "\t" + LatticePositionAmplitudeText.Text);
+                tw.WriteLine("LatticePositionNumAveText" + "\t" + LatticePositionNumAveText.Text);
+                tw.WriteLine("LatticePositionRampArrayValue" + "\t" + LatticePositionRampArrayValue.Text);
+                
 
                 //Slider Scan Tab
                 tw.WriteLine("SliderScanStartValueTextbox" + "\t" + SliderScanStartValueTextbox.Text);
@@ -912,8 +918,11 @@ namespace ArrayDACControl
                 if (DataFilenameChecklist.CheckedIndices.Count > 0) tw.WriteLine(DataFilenameChecklist.CheckedIndices[DataFilenameChecklist.CheckedIndices.Count-1].ToString());
                 else tw.WriteLine();
                 tw.WriteLine("DetuningTextbox" + "\t" + DetuningTextbox.Text);
+                tw.WriteLine("DriveAmplitudeTextbox" + "\t" + DriveAmplitudeTextbox.Text);
+                tw.WriteLine("DriveStateTextbox" + "\t" + DriveStateTextbox.Text);
                 tw.WriteLine("S1PowerTextbox" + "\t" + S1PowerTextbox.Text);
                 tw.WriteLine("S2PowerTextbox" + "\t" + S2PowerTextbox.Text);
+                tw.WriteLine("S2QWPTextbox" + "\t" + S2QWPTextbox.Text);
                 tw.WriteLine("PiPowerTextbox" + "\t" + PiPowerTextbox.Text);
                 tw.WriteLine("Doppler35Textbox" + "\t" + Doppler35Textbox.Text);
                 tw.WriteLine("CavityPowerTextbox" + "\t" + CavityPowerTextbox.Text);
@@ -921,6 +930,8 @@ namespace ArrayDACControl
                 tw.WriteLine("ByTextbox" + "\t" + ByTextbox.Text);
                 tw.WriteLine("BzTextbox" + "\t" + BzTextbox.Text);
                 tw.WriteLine("LatticeDepthTextbox" + "\t" + LatticeDepthTextbox.Text);
+                tw.WriteLine("LatticeQWPTextbox" + "\t" + LatticeQWPTextbox.Text);
+                tw.WriteLine("ZtrapfrequencyTextbox" + "\t" + ZtrapfrequencyTextbox.Text);
                 tw.WriteLine("DataFilenameFolderPath" + "\t" + DataFilenameFolderPath.Text);
                 tw.WriteLine("DataFilenameCommonRoot1" + "\t" + DataFilenameCommonRoot1.Text);
                 tw.WriteLine("DataFilenameCommonRoot2" + "\t" + DataFilenameCommonRoot2.Text);
@@ -943,6 +954,7 @@ namespace ArrayDACControl
                         String theString = sr.ReadLine();
                         switch (theString.Split('\t')[0])
                         {
+                            //CONTROL TAB
                             case "ArrayTotalSlider":
                                 ArrayTotalSlider.Value = double.Parse(theString.Split('\t')[1]);
                                 break;
@@ -991,6 +1003,17 @@ namespace ArrayDACControl
                             case "ReadConfigurationFileTextbox":
                                 ReadConfigurationFileTextbox.Text = theString.Split('\t')[1];
                                 break;
+                            case "Sideband402Control":
+                                Sideband402Control.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "BxSlider":
+                                BxSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "TickleSlider":
+                                TickleSlider.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+
+                            //COUPLE DC TAB
                             case "DC":
                                 DCsliders[0].Value = double.Parse(theString.Split('\t')[2]);
                                 for (int i = 1; i < DCrows; i++)
@@ -1005,6 +1028,8 @@ namespace ArrayDACControl
                             case "RightFingersSlider":
                                 RightFingersSlider.Value = double.Parse(theString.Split('\t')[1]);
                                 break;
+
+                            //INDIVIDUAL DC TAB
                             case "DC dx":
                                 DCslidersLeft[0].Value = double.Parse(theString.Split('\t')[2]);
                                 for (int i = 1; i < DCrows; i++)
@@ -1020,6 +1045,8 @@ namespace ArrayDACControl
                                 for (int i = 1; i < DCrows; i++)
                                     DCslidersRight[i].Value = double.Parse(sr.ReadLine().Split('\t')[2]);
                                 break;
+
+                            //ELECTRODE SCAN TAB
                             case "ElectrodeScanDC1TextBox":
                                 ElectrodeScanDC1TextBox.Text = theString.Split('\t')[1];
                                 break;
@@ -1044,9 +1071,8 @@ namespace ArrayDACControl
                             case "ElectrodeScanNumPointsTextbox":
                                 ElectrodeScanStartValue2Textbox.Text = theString.Split('\t')[1];
                                 break;
-                            case "Sideband402Control":
-                                Sideband402Control.Value = double.Parse(theString.Split('\t')[1]);
-                                break;
+                            
+                            //SLIDER SCAN TAB
                             case "SliderScanStartValueTextbox":
                                 SliderScanStartValueTextbox.Text = theString.Split('\t')[1];
                                 break;
@@ -1059,12 +1085,8 @@ namespace ArrayDACControl
                             case "SliderScanPMTAveragingTextbox":
                                 SliderScanPMTAveragingTextbox.Text = theString.Split('\t')[1];
                                 break;
-                            case "BxSlider":
-                                BxSlider.Value = double.Parse(theString.Split('\t')[1]);
-                                break;
-                            case "TickleSlider":
-                                TickleSlider.Value = double.Parse(theString.Split('\t')[1]);
-                                break;
+                            
+                            //CORRELATOR TAB
                             case "correlatorIntTimetext1":
                                 correlatorIntTimetext1.Text = theString.Split('\t')[1];
                                 break;
@@ -1107,6 +1129,8 @@ namespace ArrayDACControl
                             case "DataFilenameCommonRoot1Corr":
                                 DataFilenameCommonRoot1Corr.Text = theString.Split('\t')[1];
                                 break;
+
+                            //PULSE PROGRAMMER TAB
                             case "pulsePeriodText":
                                 pulsePeriodText.Text = theString.Split('\t')[1];
                                 break;
@@ -1221,6 +1245,8 @@ namespace ArrayDACControl
                             case "slow_in2DelayText":
                                 slow_in2DelayText.Text = theString.Split('\t')[1];
                                 break;
+
+                            //CAMERA TAB
                             case "CameraHbin":
                                 CameraHbin.Text = theString.Split('\t')[1];
                                 break;
@@ -1245,6 +1271,8 @@ namespace ArrayDACControl
                             case "CameraEMGain":
                                 CameraEMGain.Text = theString.Split('\t')[1];
                                 break;
+
+                            //DATA FILENAME TAB
                             case "DataFilenameChecklist":
                                 for (int i = 1; i < theString.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries).GetLength(0); i++)
                                 {
@@ -1254,11 +1282,20 @@ namespace ArrayDACControl
                             case "DetuningTextbox":
                                 DetuningTextbox.Text = theString.Split('\t')[1];
                                 break;
+                            case "DriveAmplitudeTextbox":
+                                DriveAmplitudeTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "DriveStateTextbox":
+                                DriveStateTextbox.Text = theString.Split('\t')[1];
+                                break;
                             case "S1PowerTextbox":
                                 S1PowerTextbox.Text = theString.Split('\t')[1];
                                 break;
                             case "S2PowerTextbox":
                                 S2PowerTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "S2QWPTextbox":
+                                S2QWPTextbox.Text = theString.Split('\t')[1];
                                 break;
                             case "PiPowerTextbox":
                                 PiPowerTextbox.Text = theString.Split('\t')[1];
@@ -1280,6 +1317,12 @@ namespace ArrayDACControl
                                 break;
                             case "LatticeDepthTextbox":
                                 LatticeDepthTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "LatticeQWPTextbox":
+                                LatticeQWPTextbox.Text = theString.Split('\t')[1];
+                                break;
+                            case "ZtrapfrequencyTextbox":
+                                ZtrapfrequencyTextbox.Text = theString.Split('\t')[1];
                                 break;
                             case "DataFilenameFolderPath":
                                 DataFilenameFolderPath.Text = theString.Split('\t')[1];
@@ -1392,68 +1435,75 @@ namespace ArrayDACControl
                         theString[1] += "DrF=" + LockInFreqtext1.Text + " ";
                         break;
                     case 5:
-                        theString[1] += "det=" + DetuningTextbox.Text + " ";
+                        theString[1] += "DrA=" + DriveAmplitudeTextbox.Text + " ";
                         break;
                     case 6:
-                        theString[1] += "s1=" + S1PowerTextbox.Text + " ";
+                        theString[1] += DriveStateTextbox.Text + " ";
                         break;
                     case 7:
-                        theString[1] += "s2=" + S2PowerTextbox.Text + " ";
+                        theString[1] += "det=" + DetuningTextbox.Text + " ";
                         break;
                     case 8:
-                        theString[1] += "s2qwp=" + S2QWPTextbox.Text + " ";
+                        theString[1] += "s1=" + S1PowerTextbox.Text + " ";
                         break;
                     case 9:
-                        theString[1] += "pi=" + PiPowerTextbox.Text + " ";
+                        theString[1] += "s2=" + S2PowerTextbox.Text + " ";
                         break;
                     case 10:
-                        theString[1] += "dop35=" + Doppler35Textbox.Text + " ";
+                        theString[1] += "s2qwp=" + S2QWPTextbox.Text + " ";
                         break;
                     case 11:
-                        theString[1] += "cav=" + CavityPowerTextbox.Text + " ";
+                        theString[1] += "pi=" + PiPowerTextbox.Text + " ";
                         break;
                     case 12:
-                        theString[1] += "Bx=" + BxTextbox.Text + " ";
+                        theString[1] += "dop35=" + Doppler35Textbox.Text + " ";
                         break;
                     case 13:
-                        theString[1] += "By=" + ByTextbox.Text + " ";
+                        theString[1] += "cav=" + CavityPowerTextbox.Text + " ";
                         break;
                     case 14:
-                        theString[1] += "Bz=" + BzTextbox.Text + " ";
+                        theString[1] += "Bx=" + BxTextbox.Text + " ";
                         break;
                     case 15:
-                        theString[1] += "U=" + LatticeDepthTextbox.Text + " ";
+                        theString[1] += "By=" + ByTextbox.Text + " ";
                         break;
                     case 16:
-                        theString[1] += "Uqwp=" + LatticeQWPTextbox.Text + " ";
+                        theString[1] += "Bz=" + BzTextbox.Text + " ";
                         break;
                     case 17:
-                        theString[1] += "ar=" + ArrayTotalSlider.Value.ToString("F2") + " ";
+                        theString[1] += "U=" + LatticeDepthTextbox.Text + " ";
                         break;
                     case 18:
-                        theString[1] += "DY=" + TotalBiasSlider.Value.ToString("F2") + " ";
+                        theString[1] += "Uqwp=" + LatticeQWPTextbox.Text + " ";
                         break;
                     case 19:
-                        theString[1] += "DCQ=" + DCVertQuadSlider.Value.ToString("F2") + " ";
+                        theString[1] += "ar=" + ArrayTotalSlider.Value.ToString("F2") + " ";
                         break;
                     case 20:
-                        theString[1] += "DX=" + DXSlider.Value.ToString("F3") + " ";
+                        theString[1] += "DY=" + TotalBiasSlider.Value.ToString("F2") + " ";
                         break;
                     case 21:
-                        theString[1] += "QTilt=" + QuadrupoleTilt.Value.ToString("F2") + " ";
+                        theString[1] += "DCQ=" + DCVertQuadSlider.Value.ToString("F2") + " ";
                         break;
                     case 22:
-                        theString[1] += "QRat=" + QuadTiltRatioSlider.Value.ToString("F2") + " ";
+                        theString[1] += "DX=" + DXSlider.Value.ToString("F3") + " ";
                         break;
                     case 23:
-                        theString[1] += "ArRat=" + SnakeRatioSlider.Value.ToString("F2") + " ";
+                        theString[1] += "QTilt=" + QuadrupoleTilt.Value.ToString("F2") + " ";
                         break;
                     case 24:
+                        theString[1] += "QRat=" + QuadTiltRatioSlider.Value.ToString("F2") + " ";
+                        break;
+                    case 25:
+                        theString[1] += "ArRat=" + SnakeRatioSlider.Value.ToString("F2") + " ";
+                        break;
+                    case 26:
                         theString[1] += "ztrap=" + ZtrapfrequencyTextbox.Text + " ";
                         break;
 
                 }
             }
+
             return theString;
         }
 
@@ -2752,13 +2802,27 @@ namespace ArrayDACControl
             double diff = (LatticePositionThreadHelper.DoubleData[0, 0] - LatticePositionThreadHelper.DoubleData[0, 2]) / averageFluor;
 
             //Now sample again, but recenter in the direction of decreasing difference with respect to the above normalized difference
-            LatticePositionThreadHelper.DoubleScanVariable[0, 0] = LatticePositionThreadHelper.DoubleScanVariable[0, 0] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text)/2;
-            LatticePositionThreadHelper.DoubleScanVariable[0, 1] = LatticePositionThreadHelper.DoubleScanVariable[0, 1] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2; 
-            LatticePositionThreadHelper.DoubleScanVariable[0, 2] = LatticePositionThreadHelper.DoubleScanVariable[0, 2] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2; 
+            //If looking for a node (switch up) or an antinode (switch down), direction of shift is different
+            if (LatticePositionFeedbackSwitch.Value)
+            {
+                LatticePositionThreadHelper.DoubleScanVariable[0, 0] = LatticePositionThreadHelper.DoubleScanVariable[0, 0] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.DoubleScanVariable[0, 1] = LatticePositionThreadHelper.DoubleScanVariable[0, 1] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.DoubleScanVariable[0, 2] = LatticePositionThreadHelper.DoubleScanVariable[0, 2] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
 
-            LatticePositionThreadHelper.DoubleScanVariable[1, 0] = LatticePositionThreadHelper.DoubleScanVariable[1, 0] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
-            LatticePositionThreadHelper.DoubleScanVariable[1, 1] = LatticePositionThreadHelper.DoubleScanVariable[1, 1] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
-            LatticePositionThreadHelper.DoubleScanVariable[1, 2] = LatticePositionThreadHelper.DoubleScanVariable[1, 2] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.DoubleScanVariable[1, 0] = LatticePositionThreadHelper.DoubleScanVariable[1, 0] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.DoubleScanVariable[1, 1] = LatticePositionThreadHelper.DoubleScanVariable[1, 1] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.DoubleScanVariable[1, 2] = LatticePositionThreadHelper.DoubleScanVariable[1, 2] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+            }
+            else
+            {
+                LatticePositionThreadHelper.DoubleScanVariable[0, 0] = LatticePositionThreadHelper.DoubleScanVariable[0, 0] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.DoubleScanVariable[0, 1] = LatticePositionThreadHelper.DoubleScanVariable[0, 1] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.DoubleScanVariable[0, 2] = LatticePositionThreadHelper.DoubleScanVariable[0, 2] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+
+                LatticePositionThreadHelper.DoubleScanVariable[1, 0] = LatticePositionThreadHelper.DoubleScanVariable[1, 0] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.DoubleScanVariable[1, 1] = LatticePositionThreadHelper.DoubleScanVariable[1, 1] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.DoubleScanVariable[1, 2] = LatticePositionThreadHelper.DoubleScanVariable[1, 2] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+            }
 
             //run scans again
             //reset index first
@@ -2815,28 +2879,42 @@ namespace ArrayDACControl
             double diff2 = (LatticePositionThreadHelper.DoubleData[0, 0] - LatticePositionThreadHelper.DoubleData[0, 2]) / averageFluor;
 
             //Now from the two diff values, infer position where diff = 0
-            LatticePositionThreadHelper.SingleDouble3 = diff / (diff - diff2) * Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+            if (LatticePositionFeedbackSwitch.Value)
+            {
+                LatticePositionThreadHelper.SingleDouble3 = diff / (diff - diff2) * Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+            }
+            else { LatticePositionThreadHelper.SingleDouble3 = diff / (diff2 - diff) * Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2; }
 
             //Reset to original scan variables for center
             LatticePositionThreadHelper.DoubleScanVariable[0, 1] = LatticePositionThreadHelper.DoubleScanVariable[0, 1] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
             LatticePositionThreadHelper.DoubleScanVariable[1, 1] = LatticePositionThreadHelper.DoubleScanVariable[1, 1] + Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
 
-            if (LatticePositionThreadHelper.ShouldBeRunningFlag)
+            lock (LatticePositionThreadHelper)
             {
-                //post feedback values
+                //reset button and reset to initial slider values
                 try
                 {
-                    this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback6));
+                    this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback2));
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
+                Monitor.Wait(LatticePositionThreadHelper);
+            }
+
+            if (LatticePositionThreadHelper.ShouldBeRunningFlag)
+            {
+                lock (LatticePositionThreadHelper)
+                {
+                    //post feedback values
+                    try
+                    {
+                        this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback6));
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    Monitor.Wait(LatticePositionThreadHelper);
+                }
 
             }
-            //reset button and reset to initial slider values
-            try
-            {
-                this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback2));
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            
             //reset scan boolean
             LatticePositionThreadHelper.ShouldBeRunningFlag = false;
         }
@@ -2849,17 +2927,21 @@ namespace ArrayDACControl
         }
         private void LatticePositionFrmCallback2()
         {
-            LatticePositionStart.BackColor = System.Drawing.Color.Gainsboro;
-            LatticePositionStart.Text = "Start *Lattice* Scan";
-            //reset to original values
-            this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value = LatticePositionThreadHelper.KeepDoubles[0];
-            this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value = LatticePositionThreadHelper.KeepDoubles[1];
-            //update DAC
-            compensationAdjustedHelper();
-            //if ramp array selected, ramp it back to initial value
-            if (LatticePositionRampArrayCheckbox.Checked)
+            lock (LatticePositionThreadHelper)
             {
-                RampSlider(ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, LatticePositionThreadHelper.SingleDouble2);
+                LatticePositionStart.BackColor = System.Drawing.Color.Gainsboro;
+                LatticePositionStart.Text = "Start *Lattice* Scan";
+                //reset to original values
+                this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value = LatticePositionThreadHelper.KeepDoubles[0];
+                this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value = LatticePositionThreadHelper.KeepDoubles[1];
+                //update DAC
+                compensationAdjustedHelper();
+                //if ramp array selected, ramp it back to initial value
+                if (LatticePositionRampArrayCheckbox.Checked)
+                {
+                    RampSlider(ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, LatticePositionThreadHelper.SingleDouble2);
+                }
+                Monitor.PulseAll(LatticePositionThreadHelper);
             }
         }
         private void LatticePositionFrmCallback3()
@@ -2889,12 +2971,16 @@ namespace ArrayDACControl
 
         private void LatticePositionFrmCallback6()
         {
-            //post feedback values
-            LatticePositionFeedbackText.Text = LatticePositionThreadHelper.SingleDouble3.ToString("F3");
-            double DC1 = this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value + LatticePositionThreadHelper.SingleDouble3;
-            double DC2 = this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value - LatticePositionThreadHelper.SingleDouble3;
-            LatticePositionNewValueText.Text = DC1.ToString("F3");
-            LatticePositionNewValue2Text.Text = DC2.ToString("F3");
+            lock (LatticePositionThreadHelper)
+            {
+                //post feedback values
+                LatticePositionFeedbackText.Text = LatticePositionThreadHelper.SingleDouble3.ToString("F3");
+                double DC1 = this.DCsliders[int.Parse(LatticePositionDC1TextBox.Text)].Value + LatticePositionThreadHelper.SingleDouble3;
+                double DC2 = this.DCsliders[int.Parse(LatticePositionDC2TextBox.Text)].Value - LatticePositionThreadHelper.SingleDouble3;
+                LatticePositionNewValueText.Text = DC1.ToString("F3");
+                LatticePositionNewValue2Text.Text = DC2.ToString("F3");
+                Monitor.PulseAll(LatticePositionThreadHelper);
+            }
         }
 
         //
@@ -3165,6 +3251,7 @@ namespace ArrayDACControl
             {
                 try
                 {
+                    CameraForm.scatterGraph3.Plots[0].Visible = true;
                     //plot
                     CameraForm.scatterGraph3.PlotXYAppend(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.index], ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index]);
                 }
@@ -3480,6 +3567,8 @@ namespace ArrayDACControl
             SliderScanStart.Text = "Start *Slider* Scan";
             //reset to original values
             SliderScanThreadHelper.theSlider.Value = SliderScanThreadHelper.KeepDoubles[0];
+            //call to update
+            UpdateAll();
         }
         private void SliderScanFrmCallback3()
         {
@@ -3513,6 +3602,7 @@ namespace ArrayDACControl
             {
                 try
                 {
+                    CameraForm.scatterGraph3.Plots[0].Visible = true;
                     //plot
                     CameraForm.scatterGraph3.PlotXYAppend(SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index], SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index]);
                 }
@@ -3731,6 +3821,7 @@ namespace ArrayDACControl
             {
                 try
                 {
+                    CameraForm.scatterGraph3.Plots[0].Visible = true;
                     //plot
                     CameraForm.scatterGraph3.PlotXYAppend((double) FluorLogThreadHelper.index, FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index]);
                 }
@@ -4928,6 +5019,11 @@ namespace ArrayDACControl
         }
 
         private void label192_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label199_Click(object sender, EventArgs e)
         {
 
         }
