@@ -1507,6 +1507,38 @@ namespace ArrayDACControl
             return theString;
         }
 
+        //Method to save image from intensity graph as a text file
+        private void SaveImageData(ThreadHelperClass theThreadHelper)
+        {
+            double[,] data = CameraForm.intensityPlot1.GetZData();
+
+            //get filename from control parameters tab
+            string[] filename = GetDataFilename(1, "");
+
+            try
+            {
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + theThreadHelper.threadName + " " + theThreadHelper.message + " SV=" + theThreadHelper.DoubleScanVariable[0,theThreadHelper.index].ToString("F3") + " " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+
+                if (theThreadHelper != null)
+                {
+                    tw.WriteLine(theThreadHelper.DoubleScanVariable[0, theThreadHelper.index].ToString());
+                }
+
+                for (int i = 0; i < data.GetLength(0); i++)
+                {
+                    for (int j = 0; j < data.GetLength(1) - 1; j++)
+                    {
+                        tw.Write(data[i, j].ToString() + ",");
+                    }
+                    tw.WriteLine(data[i, data.GetLength(1) - 1]);
+                }
+
+                tw.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+
         //Method to save scan data
         private void SaveScanData(ThreadHelperClass threadHelper)
         {
@@ -3019,17 +3051,7 @@ namespace ArrayDACControl
                 ElectrodeScanThreadHelper.message = ElectrodeScanComboBox.Text;
 
                 //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
-                //if camera is running stop it
-                if (ElectrodeScanThreadHelper.message == "PMT & Camera")
-                {
-                    ElectrodeScanThreadHelper.initDoubleData(ElectrodeScanThreadHelper.numPoints, 3, 2);
-                    // if camera is running stop it
-                    if (CameraThreadHelper.ShouldBeRunningFlag)
-                    {
-                        StopCameraThread();
-                    }
-                }
-                else if (ElectrodeScanThreadHelper.message == "PMT")
+                if (ElectrodeScanThreadHelper.message == "PMT")
                 {
                     ElectrodeScanThreadHelper.initDoubleData(ElectrodeScanThreadHelper.numPoints, 2, 2);
                 }
@@ -3079,7 +3101,7 @@ namespace ArrayDACControl
             //clear graph
             CameraForm.scatterGraph3.ClearData();
             //if running camera, initialize, and clear fluor and position graphs
-            if (ElectrodeScanThreadHelper.message == "Camera" || ElectrodeScanThreadHelper.message == "PMT & Camera")
+            if (ElectrodeScanThreadHelper.message == "Camera" || ElectrodeScanThreadHelper.message == "CameraImage")
             {
                 // clear graphs
                 CameraForm.FluorescenceGraph.ClearData();
@@ -3107,7 +3129,7 @@ namespace ArrayDACControl
             {
                 //Compute new field values
                 ElectrodeScanThreadHelper.DoubleScanVariable[0,ElectrodeScanThreadHelper.index] = (double)(ElectrodeScanThreadHelper.min[0] + (ElectrodeScanThreadHelper.max[0] - ElectrodeScanThreadHelper.min[0]) * ElectrodeScanThreadHelper.index / (ElectrodeScanThreadHelper.numPoints - 1));
-                ElectrodeScanThreadHelper.DoubleScanVariable[1, ElectrodeScanThreadHelper.index] = (double)(ElectrodeScanThreadHelper.min[1] + (ElectrodeScanThreadHelper.max[1] - ElectrodeScanThreadHelper.min[1]) * ElectrodeScanThreadHelper.index / (ElectrodeScanThreadHelper.numPoints - 1));
+                ElectrodeScanThreadHelper.DoubleScanVariable[1,ElectrodeScanThreadHelper.index] = (double)(ElectrodeScanThreadHelper.min[1] + (ElectrodeScanThreadHelper.max[1] - ElectrodeScanThreadHelper.min[1]) * ElectrodeScanThreadHelper.index / (ElectrodeScanThreadHelper.numPoints - 1));
                 //call to change electrode values
                 try
                 {
@@ -3115,7 +3137,8 @@ namespace ArrayDACControl
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-                if (ElectrodeScanThreadHelper.message == "PMT" || ElectrodeScanThreadHelper.message == "PMT & Camera")
+
+                if (ElectrodeScanThreadHelper.message == "PMT")
                 {
                     for (int i = 0; i < ElectrodeScanThreadHelper.numAverage; i++)
                     {
@@ -3152,9 +3175,13 @@ namespace ArrayDACControl
                     ElectrodeScanThreadHelper.index++;
                 }
                 // if Camera selected run Camera acquisition
-                if (ElectrodeScanThreadHelper.message == "Camera" || ElectrodeScanThreadHelper.message == "PMT & Camera")
+                if (ElectrodeScanThreadHelper.message == "Camera" || ElectrodeScanThreadHelper.message == "CameraImage")
                 {
                     CameraAcquisitionHelper();
+                    if(ElectrodeScanThreadHelper.message == "CameraImage")
+                    {
+                        SaveImageData(ElectrodeScanThreadHelper);
+                    }
                     ElectrodeScanThreadHelper.index++;
                 }
                 // if AI selected, get reading from NI card
@@ -3370,17 +3397,7 @@ namespace ArrayDACControl
                 SliderScanThreadHelper.message = SliderScanComboBox.Text;
 
                 //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
-                //if camera is running stop it
-                if (SliderScanThreadHelper.message == "PMT & Camera")
-                {
-                    SliderScanThreadHelper.initDoubleData(SliderScanThreadHelper.numPoints, 3, 1);
-                    // if camera is running stop it
-                    if (CameraThreadHelper.ShouldBeRunningFlag)
-                    {
-                        CameraThreadHelper.ShouldBeRunningFlag = false;
-                    }
-                }
-                else if (SliderScanThreadHelper.message == "PMT")
+                if (SliderScanThreadHelper.message == "PMT")
                 {
                     SliderScanThreadHelper.initDoubleData(SliderScanThreadHelper.numPoints, 2, 1);
                 }
@@ -3430,7 +3447,7 @@ namespace ArrayDACControl
             //clear graph
             CameraForm.scatterGraph3.ClearData();
             //if running camera, initialize, and clear fluor and position graphs
-            if (SliderScanThreadHelper.message == "Camera" || SliderScanThreadHelper.message == "PMT & Camera")
+            if (SliderScanThreadHelper.message == "Camera" || SliderScanThreadHelper.message == "CameraImage")
             {
                 // clear graphs
                 CameraForm.FluorescenceGraph.ClearData();
@@ -3466,7 +3483,7 @@ namespace ArrayDACControl
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-                if (SliderScanThreadHelper.message == "PMT" || SliderScanThreadHelper.message == "PMT & Camera")
+                if (SliderScanThreadHelper.message == "PMT")
                 {
                     for (int i = 0; i < SliderScanThreadHelper.numAverage; i++)
                     {
@@ -3498,9 +3515,13 @@ namespace ArrayDACControl
                     SliderScanThreadHelper.index++;
                 }
                 // if Camera selected run Camera acquisition
-                if (SliderScanThreadHelper.message == "Camera" || SliderScanThreadHelper.message == "PMT & Camera")
+                if (SliderScanThreadHelper.message == "Camera" || SliderScanThreadHelper.message == "CameraImage")
                 {
                     CameraAcquisitionHelper();
+                    if (SliderScanThreadHelper.message == "CameraImage")
+                    {
+                        SaveImageData(SliderScanThreadHelper);
+                    }
                     SliderScanThreadHelper.index++;
                 }
 
@@ -4623,6 +4644,20 @@ namespace ArrayDACControl
             theCorrelator.updateSyncSourceLive();
         }
 
+        private void recaplock_switch_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
+        {
+            if (recaplock_switch.Value) { theCorrelator.recaplockStatus = true; }
+            else { theCorrelator.recaplockStatus = false; }
+
+            theCorrelator.updateRecaplockStatusLive();
+        }
+
+        private void recaplockTheshold_TextChanged(object sender, EventArgs e)
+        {
+            theCorrelator.recaplockThreshold = uint.Parse(recaplock_threshold_textbox.Text);
+            theCorrelator.updateRecaplockThresholdLive();
+        }
+
         private void pulsedDutyText_TextChanged(object sender, EventArgs e)
         {
 
@@ -5027,6 +5062,8 @@ namespace ArrayDACControl
         {
 
         }
+
+
 
 
 

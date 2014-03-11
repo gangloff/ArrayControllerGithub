@@ -34,6 +34,12 @@ namespace ArrayDACControl
         //Sync source boolean
         public bool syncSrcChoose;
 
+        //Recapture lock on/off boolean
+        public bool recaplockStatus;
+
+        //Threshold counts for recapture lock
+        public uint recaplockThreshold;
+
         //Shift register clock divisor
         public uint ClkDiv;
 
@@ -133,6 +139,12 @@ namespace ArrayDACControl
             // Set the sync source ext vs int
             updateSyncSourceExecute();
 
+            // Set the sync source ext vs int
+            updateRecaplockStatusExecute();
+
+            // Set the sync source ext vs int
+            updateRecaplockThresholdExecute();
+
             //set shift register clock division
             //uint valueClkDiv = (uint)(ClkDiv);
             ok.SetWire(0, ClkDiv);
@@ -189,6 +201,37 @@ namespace ArrayDACControl
             else { ok.SetWire(0, 0); }  //binary 01; Sync source = INT
             ok.UpdateAllWires();
             ok.SetTrigger(0x40, 4);   // Trigger 4 signals update of sync source
+        }
+        //////////////////////////////////////////////////////////
+
+        /////////////////////////////////////////////////////////
+        public void updateRecaplockStatusLive()
+        {
+            if (ok.checkIfOpen())
+            { updateRecaplockStatusExecute(); }
+        }
+
+        private void updateRecaplockStatusExecute()
+        {
+            if (recaplockStatus) { ok.SetWire(0, 1); }  //binary 11; Sync source = EXT
+            else { ok.SetWire(0, 0); }  //binary 01; Sync source = INT
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x40, 5);   // Trigger 5 signals update of recaplock status
+        }
+        //////////////////////////////////////////////////////////
+
+        /////////////////////////////////////////////////////////
+        public void updateRecaplockThresholdLive()
+        {
+            if (ok.checkIfOpen())
+            { updateRecaplockThresholdExecute(); }
+        }
+
+        private void updateRecaplockThresholdExecute()
+        {
+            ok.SetWire(0, recaplockThreshold);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x40, 6);   // Trigger 6 signals update of recaplock threshold
         }
         //////////////////////////////////////////////////////////
 

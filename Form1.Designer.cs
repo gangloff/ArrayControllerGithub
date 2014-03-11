@@ -122,6 +122,13 @@
             this.CameraHbin = new System.Windows.Forms.TextBox();
             this.CameraStartButton = new System.Windows.Forms.Button();
             this.PulseProgrammerTab = new System.Windows.Forms.TabPage();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label207 = new System.Windows.Forms.Label();
+            this.label206 = new System.Windows.Forms.Label();
+            this.recaplock_threshold_textbox = new System.Windows.Forms.TextBox();
+            this.label205 = new System.Windows.Forms.Label();
+            this.label204 = new System.Windows.Forms.Label();
+            this.recaplock_switch = new NationalInstruments.UI.WindowsForms.Switch();
             this.groupBox54 = new System.Windows.Forms.GroupBox();
             this.PPSettingsReadButton = new System.Windows.Forms.Button();
             this.PPSettings2SaveButton = new System.Windows.Forms.Button();
@@ -581,6 +588,8 @@
             this.groupBox43.SuspendLayout();
             this.groupBox42.SuspendLayout();
             this.PulseProgrammerTab.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.recaplock_switch)).BeginInit();
             this.groupBox54.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PPSettingsSwitch)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
@@ -1588,6 +1597,7 @@
             // 
             // PulseProgrammerTab
             // 
+            this.PulseProgrammerTab.Controls.Add(this.panel7);
             this.PulseProgrammerTab.Controls.Add(this.groupBox54);
             this.PulseProgrammerTab.Controls.Add(this.label184);
             this.PulseProgrammerTab.Controls.Add(this.label183);
@@ -1621,6 +1631,78 @@
             this.PulseProgrammerTab.TabIndex = 15;
             this.PulseProgrammerTab.Text = "Pulse Programmer";
             this.PulseProgrammerTab.UseVisualStyleBackColor = true;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.label207);
+            this.panel7.Controls.Add(this.label206);
+            this.panel7.Controls.Add(this.recaplock_threshold_textbox);
+            this.panel7.Controls.Add(this.label205);
+            this.panel7.Controls.Add(this.label204);
+            this.panel7.Controls.Add(this.recaplock_switch);
+            this.panel7.Location = new System.Drawing.Point(1025, 505);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(227, 167);
+            this.panel7.TabIndex = 188;
+            // 
+            // label207
+            // 
+            this.label207.AutoSize = true;
+            this.label207.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label207.Location = new System.Drawing.Point(89, 64);
+            this.label207.Name = "label207";
+            this.label207.Size = new System.Drawing.Size(114, 16);
+            this.label207.TabIndex = 189;
+            this.label207.Text = "Threshold counts:";
+            // 
+            // label206
+            // 
+            this.label206.AutoSize = true;
+            this.label206.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label206.ForeColor = System.Drawing.Color.Red;
+            this.label206.Location = new System.Drawing.Point(56, 14);
+            this.label206.Name = "label206";
+            this.label206.Size = new System.Drawing.Size(143, 16);
+            this.label206.TabIndex = 188;
+            this.label206.Text = "RECAPTURE LOCK";
+            // 
+            // recaplock_threshold_textbox
+            // 
+            this.recaplock_threshold_textbox.Location = new System.Drawing.Point(101, 83);
+            this.recaplock_threshold_textbox.Name = "recaplock_threshold_textbox";
+            this.recaplock_threshold_textbox.Size = new System.Drawing.Size(84, 20);
+            this.recaplock_threshold_textbox.TabIndex = 187;
+            this.recaplock_threshold_textbox.Text = "100";
+            this.recaplock_threshold_textbox.LostFocus += new System.EventHandler(this.recaplockTheshold_TextChanged);
+            // 
+            // label205
+            // 
+            this.label205.AutoSize = true;
+            this.label205.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label205.Location = new System.Drawing.Point(48, 130);
+            this.label205.Name = "label205";
+            this.label205.Size = new System.Drawing.Size(34, 16);
+            this.label205.TabIndex = 186;
+            this.label205.Text = "OFF";
+            // 
+            // label204
+            // 
+            this.label204.AutoSize = true;
+            this.label204.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label204.Location = new System.Drawing.Point(48, 49);
+            this.label204.Name = "label204";
+            this.label204.Size = new System.Drawing.Size(28, 16);
+            this.label204.TabIndex = 185;
+            this.label204.Text = "ON";
+            // 
+            // recaplock_switch
+            // 
+            this.recaplock_switch.Location = new System.Drawing.Point(32, 49);
+            this.recaplock_switch.Name = "recaplock_switch";
+            this.recaplock_switch.Size = new System.Drawing.Size(64, 96);
+            this.recaplock_switch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.recaplock_switch.TabIndex = 184;
+            this.recaplock_switch.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.recaplock_switch_StateChanged);
             // 
             // groupBox54
             // 
@@ -1739,7 +1821,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.68687F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 249F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 259F));
             this.tableLayoutPanel4.Controls.Add(this.label112, 4, 0);
             this.tableLayoutPanel4.Controls.Add(this.panel5, 4, 2);
             this.tableLayoutPanel4.Controls.Add(this.slow_in2DelayText, 3, 2);
@@ -1769,7 +1851,7 @@
             // 
             this.label112.AutoSize = true;
             this.label112.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label112.Location = new System.Drawing.Point(307, 4);
+            this.label112.Location = new System.Drawing.Point(297, 4);
             this.label112.Name = "label112";
             this.label112.Size = new System.Drawing.Size(71, 24);
             this.label112.TabIndex = 181;
@@ -1780,7 +1862,7 @@
             this.panel5.Controls.Add(this.c2si2);
             this.panel5.Controls.Add(this.Indsi2);
             this.panel5.Controls.Add(this.c1si2);
-            this.panel5.Location = new System.Drawing.Point(307, 91);
+            this.panel5.Location = new System.Drawing.Point(297, 91);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(164, 21);
             this.panel5.TabIndex = 180;
@@ -1822,7 +1904,7 @@
             // 
             // slow_in2DelayText
             // 
-            this.slow_in2DelayText.Location = new System.Drawing.Point(211, 91);
+            this.slow_in2DelayText.Location = new System.Drawing.Point(201, 91);
             this.slow_in2DelayText.Name = "slow_in2DelayText";
             this.slow_in2DelayText.Size = new System.Drawing.Size(78, 20);
             this.slow_in2DelayText.TabIndex = 11;
@@ -1830,7 +1912,7 @@
             // 
             // slow_in2OnTimeText
             // 
-            this.slow_in2OnTimeText.Location = new System.Drawing.Point(122, 91);
+            this.slow_in2OnTimeText.Location = new System.Drawing.Point(112, 91);
             this.slow_in2OnTimeText.Name = "slow_in2OnTimeText";
             this.slow_in2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_in2OnTimeText.TabIndex = 10;
@@ -1838,7 +1920,7 @@
             // 
             // slow_in1DelayText
             // 
-            this.slow_in1DelayText.Location = new System.Drawing.Point(211, 62);
+            this.slow_in1DelayText.Location = new System.Drawing.Point(201, 62);
             this.slow_in1DelayText.Name = "slow_in1DelayText";
             this.slow_in1DelayText.Size = new System.Drawing.Size(78, 20);
             this.slow_in1DelayText.TabIndex = 9;
@@ -1846,7 +1928,7 @@
             // 
             // slow_in1OnTimeText
             // 
-            this.slow_in1OnTimeText.Location = new System.Drawing.Point(122, 62);
+            this.slow_in1OnTimeText.Location = new System.Drawing.Point(112, 62);
             this.slow_in1OnTimeText.Name = "slow_in1OnTimeText";
             this.slow_in1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_in1OnTimeText.TabIndex = 8;
@@ -1856,7 +1938,7 @@
             // 
             this.label113.AutoSize = true;
             this.label113.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label113.Location = new System.Drawing.Point(211, 4);
+            this.label113.Location = new System.Drawing.Point(201, 4);
             this.label113.Name = "label113";
             this.label113.Size = new System.Drawing.Size(87, 24);
             this.label113.TabIndex = 7;
@@ -1866,7 +1948,7 @@
             // 
             this.label114.AutoSize = true;
             this.label114.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label114.Location = new System.Drawing.Point(122, 4);
+            this.label114.Location = new System.Drawing.Point(112, 4);
             this.label114.Name = "label114";
             this.label114.Size = new System.Drawing.Size(79, 48);
             this.label114.TabIndex = 6;
@@ -1874,16 +1956,16 @@
             // 
             // slow_in2SigName
             // 
-            this.slow_in2SigName.Location = new System.Drawing.Point(43, 91);
+            this.slow_in2SigName.Location = new System.Drawing.Point(40, 91);
             this.slow_in2SigName.Name = "slow_in2SigName";
-            this.slow_in2SigName.Size = new System.Drawing.Size(72, 20);
+            this.slow_in2SigName.Size = new System.Drawing.Size(65, 20);
             this.slow_in2SigName.TabIndex = 5;
             // 
             // label165
             // 
             this.label165.AutoSize = true;
             this.label165.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label165.Location = new System.Drawing.Point(43, 4);
+            this.label165.Location = new System.Drawing.Point(40, 4);
             this.label165.Name = "label165";
             this.label165.Size = new System.Drawing.Size(64, 48);
             this.label165.TabIndex = 2;
@@ -1921,9 +2003,9 @@
             // 
             // slow_in1SigName
             // 
-            this.slow_in1SigName.Location = new System.Drawing.Point(43, 62);
+            this.slow_in1SigName.Location = new System.Drawing.Point(40, 62);
             this.slow_in1SigName.Name = "slow_in1SigName";
-            this.slow_in1SigName.Size = new System.Drawing.Size(72, 20);
+            this.slow_in1SigName.Size = new System.Drawing.Size(65, 20);
             this.slow_in1SigName.TabIndex = 4;
             this.slow_in1SigName.Text = "PMTs";
             // 
@@ -1932,7 +2014,7 @@
             this.panel6.Controls.Add(this.c2si1);
             this.panel6.Controls.Add(this.c1si1);
             this.panel6.Controls.Add(this.Indsi1);
-            this.panel6.Location = new System.Drawing.Point(307, 62);
+            this.panel6.Location = new System.Drawing.Point(297, 62);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(164, 21);
             this.panel6.TabIndex = 179;
@@ -1980,7 +2062,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.19231F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 248F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 258F));
             this.tableLayoutPanel3.Controls.Add(this.slow_out3DelayText, 3, 3);
             this.tableLayoutPanel3.Controls.Add(this.slow_out4OnTimeText, 2, 4);
             this.tableLayoutPanel3.Controls.Add(this.slow_out3OnTimeText, 2, 3);
@@ -2018,7 +2100,7 @@
             // slow_out3DelayText
             // 
             this.slow_out3DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out3DelayText.Location = new System.Drawing.Point(211, 121);
+            this.slow_out3DelayText.Location = new System.Drawing.Point(201, 121);
             this.slow_out3DelayText.Name = "slow_out3DelayText";
             this.slow_out3DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out3DelayText.TabIndex = 180;
@@ -2027,7 +2109,7 @@
             // slow_out4OnTimeText
             // 
             this.slow_out4OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out4OnTimeText.Location = new System.Drawing.Point(123, 150);
+            this.slow_out4OnTimeText.Location = new System.Drawing.Point(113, 150);
             this.slow_out4OnTimeText.Name = "slow_out4OnTimeText";
             this.slow_out4OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out4OnTimeText.TabIndex = 181;
@@ -2036,7 +2118,7 @@
             // slow_out3OnTimeText
             // 
             this.slow_out3OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out3OnTimeText.Location = new System.Drawing.Point(123, 121);
+            this.slow_out3OnTimeText.Location = new System.Drawing.Point(113, 121);
             this.slow_out3OnTimeText.Name = "slow_out3OnTimeText";
             this.slow_out3OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out3OnTimeText.TabIndex = 180;
@@ -2064,9 +2146,9 @@
             // 
             // slow_out4SigName
             // 
-            this.slow_out4SigName.Location = new System.Drawing.Point(42, 150);
+            this.slow_out4SigName.Location = new System.Drawing.Point(39, 150);
             this.slow_out4SigName.Name = "slow_out4SigName";
-            this.slow_out4SigName.Size = new System.Drawing.Size(74, 20);
+            this.slow_out4SigName.Size = new System.Drawing.Size(67, 20);
             this.slow_out4SigName.TabIndex = 182;
             this.slow_out4SigName.Text = "lattice";
             // 
@@ -2075,7 +2157,7 @@
             this.panel4.Controls.Add(this.notc1so2);
             this.panel4.Controls.Add(this.c1so2);
             this.panel4.Controls.Add(this.Indso2);
-            this.panel4.Location = new System.Drawing.Point(308, 91);
+            this.panel4.Location = new System.Drawing.Point(298, 91);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(147, 21);
             this.panel4.TabIndex = 178;
@@ -2117,16 +2199,16 @@
             // 
             // slow_out3SigName
             // 
-            this.slow_out3SigName.Location = new System.Drawing.Point(42, 121);
+            this.slow_out3SigName.Location = new System.Drawing.Point(39, 121);
             this.slow_out3SigName.Name = "slow_out3SigName";
-            this.slow_out3SigName.Size = new System.Drawing.Size(74, 20);
+            this.slow_out3SigName.Size = new System.Drawing.Size(67, 20);
             this.slow_out3SigName.TabIndex = 181;
             this.slow_out3SigName.Text = "drive";
             // 
             // slow_out2DelayText
             // 
             this.slow_out2DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out2DelayText.Location = new System.Drawing.Point(211, 91);
+            this.slow_out2DelayText.Location = new System.Drawing.Point(201, 91);
             this.slow_out2DelayText.Name = "slow_out2DelayText";
             this.slow_out2DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out2DelayText.TabIndex = 8;
@@ -2136,7 +2218,7 @@
             // slow_out2OnTimeText
             // 
             this.slow_out2OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out2OnTimeText.Location = new System.Drawing.Point(123, 91);
+            this.slow_out2OnTimeText.Location = new System.Drawing.Point(113, 91);
             this.slow_out2OnTimeText.Name = "slow_out2OnTimeText";
             this.slow_out2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out2OnTimeText.TabIndex = 6;
@@ -2145,7 +2227,7 @@
             // 
             // slow_out1OnTimeText
             // 
-            this.slow_out1OnTimeText.Location = new System.Drawing.Point(123, 65);
+            this.slow_out1OnTimeText.Location = new System.Drawing.Point(113, 65);
             this.slow_out1OnTimeText.Name = "slow_out1OnTimeText";
             this.slow_out1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out1OnTimeText.TabIndex = 5;
@@ -2156,7 +2238,7 @@
             // 
             this.label69.AutoSize = true;
             this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label69.Location = new System.Drawing.Point(211, 4);
+            this.label69.Location = new System.Drawing.Point(201, 4);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(90, 48);
             this.label69.TabIndex = 6;
@@ -2164,9 +2246,9 @@
             // 
             // slow_out2SigName
             // 
-            this.slow_out2SigName.Location = new System.Drawing.Point(42, 91);
+            this.slow_out2SigName.Location = new System.Drawing.Point(39, 91);
             this.slow_out2SigName.Name = "slow_out2SigName";
-            this.slow_out2SigName.Size = new System.Drawing.Size(74, 20);
+            this.slow_out2SigName.Size = new System.Drawing.Size(67, 20);
             this.slow_out2SigName.TabIndex = 5;
             this.slow_out2SigName.Text = "probe";
             // 
@@ -2174,7 +2256,7 @@
             // 
             this.label70.AutoSize = true;
             this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label70.Location = new System.Drawing.Point(42, 4);
+            this.label70.Location = new System.Drawing.Point(39, 4);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(64, 48);
             this.label70.TabIndex = 2;
@@ -2212,9 +2294,9 @@
             // 
             // slow_out1SigName
             // 
-            this.slow_out1SigName.Location = new System.Drawing.Point(42, 65);
+            this.slow_out1SigName.Location = new System.Drawing.Point(39, 65);
             this.slow_out1SigName.Name = "slow_out1SigName";
-            this.slow_out1SigName.Size = new System.Drawing.Size(74, 20);
+            this.slow_out1SigName.Size = new System.Drawing.Size(67, 20);
             this.slow_out1SigName.TabIndex = 4;
             this.slow_out1SigName.Text = "cool";
             // 
@@ -2222,7 +2304,7 @@
             // 
             this.label97.AutoSize = true;
             this.label97.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label97.Location = new System.Drawing.Point(123, 4);
+            this.label97.Location = new System.Drawing.Point(113, 4);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(79, 24);
             this.label97.TabIndex = 5;
@@ -2230,7 +2312,7 @@
             // 
             // slow_out1DelayText
             // 
-            this.slow_out1DelayText.Location = new System.Drawing.Point(211, 65);
+            this.slow_out1DelayText.Location = new System.Drawing.Point(201, 65);
             this.slow_out1DelayText.Name = "slow_out1DelayText";
             this.slow_out1DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out1DelayText.TabIndex = 7;
@@ -2241,7 +2323,7 @@
             // 
             this.label111.AutoSize = true;
             this.label111.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label111.Location = new System.Drawing.Point(308, 4);
+            this.label111.Location = new System.Drawing.Point(298, 4);
             this.label111.Name = "label111";
             this.label111.Size = new System.Drawing.Size(71, 24);
             this.label111.TabIndex = 9;
@@ -2250,7 +2332,7 @@
             // slow_out4DelayText
             // 
             this.slow_out4DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out4DelayText.Location = new System.Drawing.Point(211, 150);
+            this.slow_out4DelayText.Location = new System.Drawing.Point(201, 150);
             this.slow_out4DelayText.Name = "slow_out4DelayText";
             this.slow_out4DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out4DelayText.TabIndex = 183;
@@ -2440,7 +2522,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.29703F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 248F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 258F));
             this.tableLayoutPanel2.Controls.Add(this.label174, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel3, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.in2DelayText, 3, 2);
@@ -2470,7 +2552,7 @@
             // 
             this.label174.AutoSize = true;
             this.label174.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label174.Location = new System.Drawing.Point(316, 4);
+            this.label174.Location = new System.Drawing.Point(306, 4);
             this.label174.Name = "label174";
             this.label174.Size = new System.Drawing.Size(71, 24);
             this.label174.TabIndex = 181;
@@ -2481,7 +2563,7 @@
             this.panel3.Controls.Add(this.c2fi2);
             this.panel3.Controls.Add(this.Indfi2);
             this.panel3.Controls.Add(this.c1fi2);
-            this.panel3.Location = new System.Drawing.Point(316, 91);
+            this.panel3.Location = new System.Drawing.Point(306, 91);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(164, 21);
             this.panel3.TabIndex = 180;
@@ -2524,7 +2606,7 @@
             // in2DelayText
             // 
             this.in2DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.in2DelayText.Location = new System.Drawing.Point(228, 91);
+            this.in2DelayText.Location = new System.Drawing.Point(218, 91);
             this.in2DelayText.Name = "in2DelayText";
             this.in2DelayText.Size = new System.Drawing.Size(78, 20);
             this.in2DelayText.TabIndex = 11;
@@ -2533,7 +2615,7 @@
             // in2OnTimeText
             // 
             this.in2OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.in2OnTimeText.Location = new System.Drawing.Point(135, 91);
+            this.in2OnTimeText.Location = new System.Drawing.Point(125, 91);
             this.in2OnTimeText.Name = "in2OnTimeText";
             this.in2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in2OnTimeText.TabIndex = 10;
@@ -2542,7 +2624,7 @@
             // in1DelayText
             // 
             this.in1DelayText.ForeColor = System.Drawing.Color.DimGray;
-            this.in1DelayText.Location = new System.Drawing.Point(228, 62);
+            this.in1DelayText.Location = new System.Drawing.Point(218, 62);
             this.in1DelayText.Name = "in1DelayText";
             this.in1DelayText.Size = new System.Drawing.Size(78, 20);
             this.in1DelayText.TabIndex = 9;
@@ -2551,7 +2633,7 @@
             // in1OnTimeText
             // 
             this.in1OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.in1OnTimeText.Location = new System.Drawing.Point(135, 62);
+            this.in1OnTimeText.Location = new System.Drawing.Point(125, 62);
             this.in1OnTimeText.Name = "in1OnTimeText";
             this.in1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in1OnTimeText.TabIndex = 8;
@@ -2561,7 +2643,7 @@
             // 
             this.label154.AutoSize = true;
             this.label154.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label154.Location = new System.Drawing.Point(228, 4);
+            this.label154.Location = new System.Drawing.Point(218, 4);
             this.label154.Name = "label154";
             this.label154.Size = new System.Drawing.Size(54, 48);
             this.label154.TabIndex = 7;
@@ -2571,7 +2653,7 @@
             // 
             this.label152.AutoSize = true;
             this.label152.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label152.Location = new System.Drawing.Point(135, 4);
+            this.label152.Location = new System.Drawing.Point(125, 4);
             this.label152.Name = "label152";
             this.label152.Size = new System.Drawing.Size(83, 48);
             this.label152.TabIndex = 6;
@@ -2579,16 +2661,16 @@
             // 
             // in2SigName
             // 
-            this.in2SigName.Location = new System.Drawing.Point(45, 91);
+            this.in2SigName.Location = new System.Drawing.Point(42, 91);
             this.in2SigName.Name = "in2SigName";
-            this.in2SigName.Size = new System.Drawing.Size(83, 20);
+            this.in2SigName.Size = new System.Drawing.Size(76, 20);
             this.in2SigName.TabIndex = 5;
             // 
             // label147
             // 
             this.label147.AutoSize = true;
             this.label147.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label147.Location = new System.Drawing.Point(45, 4);
+            this.label147.Location = new System.Drawing.Point(42, 4);
             this.label147.Name = "label147";
             this.label147.Size = new System.Drawing.Size(64, 48);
             this.label147.TabIndex = 2;
@@ -2626,9 +2708,9 @@
             // 
             // in1SigName
             // 
-            this.in1SigName.Location = new System.Drawing.Point(45, 62);
+            this.in1SigName.Location = new System.Drawing.Point(42, 62);
             this.in1SigName.Name = "in1SigName";
-            this.in1SigName.Size = new System.Drawing.Size(83, 20);
+            this.in1SigName.Size = new System.Drawing.Size(76, 20);
             this.in1SigName.TabIndex = 4;
             this.in1SigName.Text = "PMTs";
             // 
@@ -2637,7 +2719,7 @@
             this.panel2.Controls.Add(this.c2fi1);
             this.panel2.Controls.Add(this.c1fi1);
             this.panel2.Controls.Add(this.Indfi1);
-            this.panel2.Location = new System.Drawing.Point(316, 62);
+            this.panel2.Location = new System.Drawing.Point(306, 62);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(164, 21);
             this.panel2.TabIndex = 179;
@@ -2695,7 +2777,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.71717F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 248F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 258F));
             this.tableLayoutPanel1.Controls.Add(this.out3DelayText, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.out4OnTimeText, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.out3OnTimeText, 2, 3);
@@ -2733,7 +2815,7 @@
             // 
             // out3DelayText
             // 
-            this.out3DelayText.Location = new System.Drawing.Point(222, 120);
+            this.out3DelayText.Location = new System.Drawing.Point(212, 120);
             this.out3DelayText.Name = "out3DelayText";
             this.out3DelayText.Size = new System.Drawing.Size(79, 20);
             this.out3DelayText.TabIndex = 180;
@@ -2741,7 +2823,7 @@
             // 
             // out4OnTimeText
             // 
-            this.out4OnTimeText.Location = new System.Drawing.Point(133, 149);
+            this.out4OnTimeText.Location = new System.Drawing.Point(123, 149);
             this.out4OnTimeText.Name = "out4OnTimeText";
             this.out4OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out4OnTimeText.TabIndex = 181;
@@ -2749,7 +2831,7 @@
             // 
             // out3OnTimeText
             // 
-            this.out3OnTimeText.Location = new System.Drawing.Point(133, 120);
+            this.out3OnTimeText.Location = new System.Drawing.Point(123, 120);
             this.out3OnTimeText.Name = "out3OnTimeText";
             this.out3OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out3OnTimeText.TabIndex = 180;
@@ -2757,9 +2839,9 @@
             // 
             // out4SigName
             // 
-            this.out4SigName.Location = new System.Drawing.Point(43, 149);
+            this.out4SigName.Location = new System.Drawing.Point(40, 149);
             this.out4SigName.Name = "out4SigName";
-            this.out4SigName.Size = new System.Drawing.Size(83, 20);
+            this.out4SigName.Size = new System.Drawing.Size(76, 20);
             this.out4SigName.TabIndex = 181;
             this.out4SigName.Text = "lattice";
             // 
@@ -2775,9 +2857,9 @@
             // 
             // out3SigName
             // 
-            this.out3SigName.Location = new System.Drawing.Point(43, 120);
+            this.out3SigName.Location = new System.Drawing.Point(40, 120);
             this.out3SigName.Name = "out3SigName";
-            this.out3SigName.Size = new System.Drawing.Size(83, 20);
+            this.out3SigName.Size = new System.Drawing.Size(76, 20);
             this.out3SigName.TabIndex = 180;
             this.out3SigName.Text = "drive";
             this.out3SigName.TextChanged += new System.EventHandler(this.out3SigName_TextChanged);
@@ -2797,7 +2879,7 @@
             this.panel1.Controls.Add(this.notc1fo2);
             this.panel1.Controls.Add(this.c1fo2);
             this.panel1.Controls.Add(this.Indfo2);
-            this.panel1.Location = new System.Drawing.Point(315, 91);
+            this.panel1.Location = new System.Drawing.Point(305, 91);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(147, 21);
             this.panel1.TabIndex = 178;
@@ -2839,7 +2921,7 @@
             // 
             // out2DelayText
             // 
-            this.out2DelayText.Location = new System.Drawing.Point(222, 91);
+            this.out2DelayText.Location = new System.Drawing.Point(212, 91);
             this.out2DelayText.Name = "out2DelayText";
             this.out2DelayText.Size = new System.Drawing.Size(79, 20);
             this.out2DelayText.TabIndex = 8;
@@ -2848,7 +2930,7 @@
             // 
             // out2OnTimeText
             // 
-            this.out2OnTimeText.Location = new System.Drawing.Point(133, 91);
+            this.out2OnTimeText.Location = new System.Drawing.Point(123, 91);
             this.out2OnTimeText.Name = "out2OnTimeText";
             this.out2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out2OnTimeText.TabIndex = 6;
@@ -2857,7 +2939,7 @@
             // 
             // out1OnTimeText
             // 
-            this.out1OnTimeText.Location = new System.Drawing.Point(133, 62);
+            this.out1OnTimeText.Location = new System.Drawing.Point(123, 62);
             this.out1OnTimeText.Name = "out1OnTimeText";
             this.out1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out1OnTimeText.TabIndex = 5;
@@ -2868,7 +2950,7 @@
             // 
             this.label153.AutoSize = true;
             this.label153.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label153.Location = new System.Drawing.Point(222, 4);
+            this.label153.Location = new System.Drawing.Point(212, 4);
             this.label153.Name = "label153";
             this.label153.Size = new System.Drawing.Size(85, 48);
             this.label153.TabIndex = 6;
@@ -2876,9 +2958,9 @@
             // 
             // out2SigName
             // 
-            this.out2SigName.Location = new System.Drawing.Point(43, 91);
+            this.out2SigName.Location = new System.Drawing.Point(40, 91);
             this.out2SigName.Name = "out2SigName";
-            this.out2SigName.Size = new System.Drawing.Size(83, 20);
+            this.out2SigName.Size = new System.Drawing.Size(76, 20);
             this.out2SigName.TabIndex = 5;
             this.out2SigName.Text = "probe";
             // 
@@ -2886,7 +2968,7 @@
             // 
             this.label144.AutoSize = true;
             this.label144.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label144.Location = new System.Drawing.Point(43, 4);
+            this.label144.Location = new System.Drawing.Point(40, 4);
             this.label144.Name = "label144";
             this.label144.Size = new System.Drawing.Size(64, 48);
             this.label144.TabIndex = 2;
@@ -2924,9 +3006,9 @@
             // 
             // out1SigName
             // 
-            this.out1SigName.Location = new System.Drawing.Point(43, 62);
+            this.out1SigName.Location = new System.Drawing.Point(40, 62);
             this.out1SigName.Name = "out1SigName";
-            this.out1SigName.Size = new System.Drawing.Size(83, 20);
+            this.out1SigName.Size = new System.Drawing.Size(76, 20);
             this.out1SigName.TabIndex = 4;
             this.out1SigName.Text = "cool";
             // 
@@ -2934,7 +3016,7 @@
             // 
             this.label151.AutoSize = true;
             this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label151.Location = new System.Drawing.Point(133, 4);
+            this.label151.Location = new System.Drawing.Point(123, 4);
             this.label151.Name = "label151";
             this.label151.Size = new System.Drawing.Size(79, 24);
             this.label151.TabIndex = 5;
@@ -2942,7 +3024,7 @@
             // 
             // out1DelayText
             // 
-            this.out1DelayText.Location = new System.Drawing.Point(222, 62);
+            this.out1DelayText.Location = new System.Drawing.Point(212, 62);
             this.out1DelayText.Name = "out1DelayText";
             this.out1DelayText.Size = new System.Drawing.Size(79, 20);
             this.out1DelayText.TabIndex = 7;
@@ -2953,7 +3035,7 @@
             // 
             this.label173.AutoSize = true;
             this.label173.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label173.Location = new System.Drawing.Point(315, 4);
+            this.label173.Location = new System.Drawing.Point(305, 4);
             this.label173.Name = "label173";
             this.label173.Size = new System.Drawing.Size(71, 24);
             this.label173.TabIndex = 9;
@@ -2961,7 +3043,7 @@
             // 
             // out4DelayText
             // 
-            this.out4DelayText.Location = new System.Drawing.Point(222, 149);
+            this.out4DelayText.Location = new System.Drawing.Point(212, 149);
             this.out4DelayText.Name = "out4DelayText";
             this.out4DelayText.Size = new System.Drawing.Size(79, 20);
             this.out4DelayText.TabIndex = 182;
@@ -4648,7 +4730,7 @@
             this.ElectrodeScanComboBox.Items.AddRange(new object[] {
             "PMT",
             "Camera",
-            "PMT & Camera",
+            "CameraImage",
             "Dev3AI2",
             "Correlator:Sum"});
             this.ElectrodeScanComboBox.Location = new System.Drawing.Point(10, 19);
@@ -4976,7 +5058,7 @@
             this.SliderScanComboBox.Items.AddRange(new object[] {
             "PMT",
             "Camera",
-            "PMT & Camera",
+            "CameraImage",
             "Dev3AI2",
             "Correlator:Sum"});
             this.SliderScanComboBox.Location = new System.Drawing.Point(10, 19);
@@ -6419,6 +6501,9 @@
             this.groupBox42.PerformLayout();
             this.PulseProgrammerTab.ResumeLayout(false);
             this.PulseProgrammerTab.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.recaplock_switch)).EndInit();
             this.groupBox54.ResumeLayout(false);
             this.groupBox54.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PPSettingsSwitch)).EndInit();
@@ -7115,6 +7200,13 @@
         private System.Windows.Forms.TextBox DriveAmplitudeTextbox;
         private System.Windows.Forms.Label label203;
         private System.Windows.Forms.TextBox DriveStateTextbox;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label207;
+        protected System.Windows.Forms.Label label206;
+        private System.Windows.Forms.TextBox recaplock_threshold_textbox;
+        private System.Windows.Forms.Label label205;
+        private System.Windows.Forms.Label label204;
+        private NationalInstruments.UI.WindowsForms.Switch recaplock_switch;
     }
 }
 
