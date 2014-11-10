@@ -158,9 +158,20 @@ namespace ArrayDACControl
         //    m_dev.UpdateWireIns();
         }
 
+        public uint GetWire(int address)
+        {
+            uint wireoutval = m_dev.GetWireOutValue(address);
+            return wireoutval;
+        }
+
         public void UpdateAllWires()
         {
             m_dev.UpdateWireIns();
+        }
+
+        public void UpdateAllOutputWires()
+        {
+            m_dev.UpdateWireOuts();
         }
 
         public void SetTrigger(int address, int bit)

@@ -171,9 +171,9 @@ namespace ArrayDACControl
             // Repumper Color
             Dev4AO1 = new NICardController();
             Dev4AO1.InitAnalogOutput("Dev4/ao1", 0, 10); //Repumper HV amp input saturates at 7V
-            // 370 Current Feedforward
-            //Dev4AO2 = new NICardController();
-            //Dev4AO2.InitAnalogOutput("Dev4/ao2", 0, 10);
+            // 399 Error Offset
+            Dev4AO2 = new NICardController();
+            Dev4AO2.InitAnalogOutput("Dev4/ao2", 0, 10);
             // Transfer Cavity Piezo
             Dev4AO3 = new NICardController();
             Dev4AO3.InitAnalogOutput("Dev4/ao3", 0, 10);
@@ -492,6 +492,7 @@ namespace ArrayDACControl
             this.TransferCavity.SliderAdjusted += this.TransferCavityOut;
             this.RepumperSlider.SliderAdjusted += this.RepumperSliderOut;
             this.RepumperPowerSlider.SliderAdjusted += this.RepumperPowerSliderOut;
+            this.ErrorOffset399Slider.SliderAdjusted += this.ErrorOffset399SliderOut;
             this.SideBeam370Power.SliderAdjusted += this.SideBeam370PowerOut;
             this.LatticePowerControl.SliderAdjusted += this.LatticePowerControlOut;
             this.CavityCoolingPowerControl.SliderAdjusted += this.APDBiasOut;
@@ -512,6 +513,7 @@ namespace ArrayDACControl
             TickleSliderOutHelper();
             RepumperPowerSliderOutHelper();
             //Dev4AO2.OutputAnalogValue((double)(TransferCavity.Value - CurrentFeedforward370Offset.Value) * CurrentFeedforward370Gain.Value / TCcalib);
+            Dev4AO2.OutputAnalogValue(ErrorOffset399Slider.Value);
             Dev4AO3.OutputAnalogValue((double)TransferCavity.Value / TCcalib);
             Dev4AO4.OutputAnalogValue((double)RepumperPowerSlider.Value);
             Dev4AO5.OutputAnalogValue((double)SideBeam370Power.Value);
@@ -633,8 +635,8 @@ namespace ArrayDACControl
             {
                 int channelL = rowColumnToChannel[i, 0];
                 int channelR = rowColumnToChannel[i, 1];
-                DCindicators[0, i].Text = String.Format("{0:F2}", -DX / 2 + DCvalues[i] - DCvaluesDx[i] + DCvaluesLeft[i] + QuadrupoleTilt.Value);
-                DCindicators[1, i].Text = String.Format("{0:F2}", +DX / 2 + DCvalues[i] + DCvaluesDx[i] + DCvaluesRight[i] - QuadrupoleTilt.Value);
+                DCindicators[0, i].Text = String.Format("{0:F2}", -DX / 2 + DCvalues[i] - DCvaluesDx[i] + DCvaluesLeft[i] + QuadTiltRatioSlider.Value * QuadrupoleTilt.Value);
+                DCindicators[1, i].Text = String.Format("{0:F2}", +DX / 2 + DCvalues[i] + DCvaluesDx[i] + DCvaluesRight[i] - QuadTiltRatioSlider.Value * QuadrupoleTilt.Value);
             }
             label25.Text = String.Format("{0:F2}", outerL);
             label29.Text = String.Format("{0:F2}", outerR);
@@ -726,7 +728,7 @@ namespace ArrayDACControl
                         DCslidersLeft[i].Value = double.Parse(sr.ReadLine().Split('\t')[1]);
                     for (int i = 0; i < DCrows; i++)
                         DCslidersRight[i].Value = double.Parse(sr.ReadLine().Split('\t')[1]);
-                    CurrentFeedforward370Offset.Value = TransferCavity.Value;
+                    //CurrentFeedforward370Offset.Value = TransferCavity.Value;
                 }
             }
             catch (System.IO.FileNotFoundException ex)
@@ -788,8 +790,8 @@ namespace ArrayDACControl
                 tw.WriteLine("SnakeRatioSlider" + "\t" + SnakeRatioSlider.Value);
                 tw.WriteLine("TrapHeightSlider" + "\t" + TrapHeightSlider.Value);
                 tw.WriteLine("TransferCavity" + "\t" + TransferCavity.Value);
-                tw.WriteLine("CurrentFeedforward370Offset" + "\t" + CurrentFeedforward370Offset.Value);
-                tw.WriteLine("CurrentFeedforward370Gain" + "\t" + CurrentFeedforward370Gain.Value);
+                //tw.WriteLine("CurrentFeedforward370Offset" + "\t" + CurrentFeedforward370Offset.Value);
+                //tw.WriteLine("CurrentFeedforward370Gain" + "\t" + CurrentFeedforward370Gain.Value);
                 tw.WriteLine("SideBeam370Power" + "\t" + SideBeam370Power.Value);
                 tw.WriteLine("CavityCoolingPowerControl" + "\t" + CavityCoolingPowerControl.Value);
                 tw.WriteLine("RamanSlider" + "\t" + RamanSlider.Value);
@@ -983,10 +985,10 @@ namespace ArrayDACControl
                                 TransferCavity.Value = double.Parse(theString.Split('\t')[1]);
                                 break;
                             case "CurrentFeedforward370Offset":
-                                CurrentFeedforward370Offset.Value = double.Parse(theString.Split('\t')[1]);
+                                //CurrentFeedforward370Offset.Value = double.Parse(theString.Split('\t')[1]);
                                 break;
                             case "CurrentFeedforward370Gain":
-                                CurrentFeedforward370Gain.Value = double.Parse(theString.Split('\t')[1]);
+                                //CurrentFeedforward370Gain.Value = double.Parse(theString.Split('\t')[1]);
                                 break;
                             case "SideBeam370Power":
                                 SideBeam370Power.Value = double.Parse(theString.Split('\t')[1]);
@@ -1772,6 +1774,11 @@ namespace ArrayDACControl
             Dev4AO4.OutputAnalogValue((double)RepumperPowerSlider.Value);
         }
 
+        private void ErrorOffset399SliderOut(object sender, EventArgs e)
+        {
+            Dev4AO2.OutputAnalogValue((double)ErrorOffset399Slider.Value);
+        }
+
         private void IonizationShutter_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
         {
             Dev2DO0.OutputDigitalValue(IonizationShutter.Value);
@@ -2384,7 +2391,7 @@ namespace ArrayDACControl
                 newCorrDataDiff[j] = newCorrDataCh1[j] - newCorrDataCh2[j];
                 newCorrDataSum[j] = newCorrDataCh1[j] + newCorrDataCh2[j];
                 // normalized balanced signal for new data:  (s1 - s2) / (s1 + s2)
-                newnormSig[j] = newCorrDataDiff[j] / (newCorrDataSum[j] - 2 * (int.Parse(textBoxBackEst.Text)));
+                newnormSig[j] = newCorrDataDiff[j] / (newCorrDataSum[j] - 2 * (int.Parse(textBoxPMT1back.Text)));
                 
                 /////////// Statistics of Ch1 and Ch2: /////////////////////////
                 // compute statistical average of all Ch1 and Ch2 data collected since last reset:
@@ -2404,7 +2411,7 @@ namespace ArrayDACControl
                 errCorrDataSum[j] = errCorrDataDiff[j];
               
                 ///////// Statistics of normalized balanced signal: //////////
-                avgnormSig[j] = avgCorrDataDiff[j] / (avgCorrDataSum[j] - 2 * (int.Parse(textBoxBackEst.Text)));
+                avgnormSig[j] = (avgCorrDataDiff[j] - (int.Parse(textBoxPMT1back.Text) - int.Parse(textBoxPMT2back.Text))) / (avgCorrDataSum[j] - (int.Parse(textBoxPMT1back.Text) + int.Parse(textBoxPMT2back.Text)));
                 errnormSig[j] = (2*avgCorrDataCh1[j]*avgCorrDataCh2[j])/((avgCorrDataCh1[j]+avgCorrDataCh2[j])*(avgCorrDataCh1[j]+avgCorrDataCh2[j])) * Math.Sqrt( sqferrCorrDataCh1[j] + sqferrCorrDataCh2[j] );
 
             }
@@ -2448,6 +2455,9 @@ namespace ArrayDACControl
             double roundedAmp = Math.Round(normAmplitude, 3);
             double roundedAmpErr = Math.Round(normAmplitudeErr, 3);
             CameraForm.correlatorDecompMerit.Text = roundedAmp.ToString() + "+/-" + roundedAmpErr.ToString();
+
+            // display recapture lock feedback counts:
+            recaplockcounts_display.Text = theCorrelator.recaplockcnts.ToString();
 
             // plot the averaged correlator data
             // if this is the first trace, just plot it, otherwise add it to the averaged data from before:
@@ -5059,6 +5069,37 @@ namespace ArrayDACControl
         }
 
         private void label199_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox25_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CurrentFeedforward370Offset_AfterChangeValue(object sender, NationalInstruments.UI.AfterChangeNumericValueEventArgs e)
+        {
+
+        }
+
+        private void label208_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void recaplock_thresholdfrac_textbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double temp = Math.Round(double.Parse(recaplock_thresholdfrac_textbox.Text) * double.Parse(recaplockcounts_display.Text));
+            recaplock_threshold_textbox.Text = temp.ToString();
+        }
+
+        private void label131_Click(object sender, EventArgs e)
         {
 
         }

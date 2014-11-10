@@ -18,6 +18,8 @@ namespace ArrayDACControl
         public double decompMeritErr = 0;
         public int jl = 0;
 
+        public uint recaplockcnts = 0;
+
         UInt16 first2bytesCh1 = 0;
         UInt16 first2bytesCh2 = 0;
         const UInt16 magicNumber = 60926;  // 16'hFEED in hexadecimal when bytes are swapped  ;)
@@ -435,6 +437,9 @@ namespace ArrayDACControl
                 //read results from Pipe
                 //ok.ReadFromPipeOut(0xA0, lshiftreg*4+2, bytearrayCh1);
                 ok.ReadFromPipeOut(0xA0, lshiftreg*2, bytearrayCh1);
+
+                ok.UpdateAllOutputWires();
+                recaplockcnts = ok.GetWire(0x20);
 
                 phcountarrayCh1binned[0] = 0;
                 phcountarrayCh1binned[1] = 0;
