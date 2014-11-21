@@ -132,7 +132,7 @@ namespace ArrayDACControl
 
         private void clearScanButton_Click(object sender, EventArgs e)
         {
-            scatterGraph3.ClearData();
+            ScanResultsGraph.ClearData();
         }
 
         private void IonFocusGraphsClearButton_Click(object sender, EventArgs e)

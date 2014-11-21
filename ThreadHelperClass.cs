@@ -14,8 +14,12 @@ namespace ArrayDACControl
         //Thread
         public Thread theThread;
         public string threadName;
+        //name of Data Stream
+        public string dataStreamName;
+        public string folderPathExtra;
         //helper variables for scans
         public int index;
+        public int index2;
         public int direction;
         public double[] max;
         public double[] min;
@@ -45,6 +49,8 @@ namespace ArrayDACControl
         public double Background;
         //Slider associated with a scan
         public AdjustableSlider theSlider;
+        //Button associated with a scan
+        public Button theButton;
 
         //constructor
         public ThreadHelperClass(string theName)
@@ -57,6 +63,7 @@ namespace ArrayDACControl
             min = new double[1];
             threadName = theName;
             DoubleArray = new double[50];
+            folderPathExtra = "";
         }
 
         //initialization methods for data variables

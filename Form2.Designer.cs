@@ -107,7 +107,7 @@ namespace ArrayDACControl
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.clearScanButton = new System.Windows.Forms.Button();
             this.label48 = new System.Windows.Forms.Label();
-            this.scatterGraph3 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.ScanResultsGraph = new NationalInstruments.UI.WindowsForms.ScatterGraph();
             this.scatterPlot3 = new NationalInstruments.UI.ScatterPlot();
             this.xAxis3 = new NationalInstruments.UI.XAxis();
             this.yAxis3 = new NationalInstruments.UI.YAxis();
@@ -193,7 +193,7 @@ namespace ArrayDACControl
             ((System.ComponentModel.ISupportInitialize)(this.PMTcountGraph)).BeginInit();
             this.instrumentControlStrip4.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScanResultsGraph)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox57.SuspendLayout();
             this.groupBox53.SuspendLayout();
@@ -921,7 +921,7 @@ namespace ArrayDACControl
             // 
             this.tabPage3.Controls.Add(this.clearScanButton);
             this.tabPage3.Controls.Add(this.label48);
-            this.tabPage3.Controls.Add(this.scatterGraph3);
+            this.tabPage3.Controls.Add(this.ScanResultsGraph);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -953,27 +953,27 @@ namespace ArrayDACControl
             this.label48.TabIndex = 145;
             this.label48.Text = "Scan Results";
             // 
-            // scatterGraph3
+            // ScanResultsGraph
             // 
-            this.scatterGraph3.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY)
+            this.ScanResultsGraph.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY)
                         | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)
                         | NationalInstruments.UI.GraphInteractionModes.PanX)
                         | NationalInstruments.UI.GraphInteractionModes.PanY)
                         | NationalInstruments.UI.GraphInteractionModes.DragCursor)
                         | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption)
                         | NationalInstruments.UI.GraphInteractionModes.EditRange)));
-            this.scatterGraph3.Location = new System.Drawing.Point(16, 55);
-            this.scatterGraph3.Name = "scatterGraph3";
-            this.scatterGraph3.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.ScanResultsGraph.Location = new System.Drawing.Point(16, 55);
+            this.ScanResultsGraph.Name = "ScanResultsGraph";
+            this.ScanResultsGraph.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot3,
             this.scatterPlot2,
             this.scatterPlot6,
             this.scatterPlot7});
-            this.scatterGraph3.Size = new System.Drawing.Size(916, 591);
-            this.scatterGraph3.TabIndex = 144;
-            this.scatterGraph3.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.ScanResultsGraph.Size = new System.Drawing.Size(916, 591);
+            this.ScanResultsGraph.TabIndex = 144;
+            this.ScanResultsGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
             this.xAxis3});
-            this.scatterGraph3.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.ScanResultsGraph.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
             this.yAxis3});
             // 
             // scatterPlot3
@@ -1661,7 +1661,7 @@ namespace ArrayDACControl
             this.instrumentControlStrip4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scatterGraph3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ScanResultsGraph)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.groupBox57.ResumeLayout(false);
@@ -1778,7 +1778,7 @@ namespace ArrayDACControl
         private NationalInstruments.UI.XAxis xAxis6;
         private NationalInstruments.UI.YAxis yAxis6;
         public System.Windows.Forms.TextBox PMTcountBox;
-        public NationalInstruments.UI.WindowsForms.ScatterGraph scatterGraph3;
+        public NationalInstruments.UI.WindowsForms.ScatterGraph ScanResultsGraph;
         public NationalInstruments.UI.WindowsForms.ScatterGraph corrMuLog;
         public NationalInstruments.UI.WindowsForms.ScatterGraph corrAmpLog;
         public System.Windows.Forms.Label testlbl;

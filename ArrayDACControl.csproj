@@ -51,6 +51,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -72,6 +73,12 @@
       <DependentUpon>AvivHandleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AvivThreadExamples.cs" />
+    <Compile Include="PulseSequencerChannel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PulseSequencerChannel.Designer.cs">
+      <DependentUpon>PulseSequencerChannel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Correlator.cs" />
     <Compile Include="OpalKelly.cs" />
     <Compile Include="Form2.cs">
@@ -94,6 +101,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AdjustableSlider.resx">
       <DependentUpon>AdjustableSlider.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PulseSequencerChannel.resx">
+      <DependentUpon>PulseSequencerChannel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
@@ -119,6 +130,7 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <None Include="ClassDiagram3.cd" />
+    <None Include="ClassDiagram4.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

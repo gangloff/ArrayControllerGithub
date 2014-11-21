@@ -28,9 +28,21 @@ namespace ArrayDACControl
         Andor Camera;
         Form2 CameraForm;
         Correlator theCorrelator;
-
+        
         Stopwatch stopwatch;
-        public int ncorrbins;
+        public int ncorrbins;   
+        const int nfastchOut = 5;
+        const int nslowchOut = 5;
+        const int nfastchIn = 3;
+        const int nslowchIn = 3;
+        PulseSequencerChannel[] fastOutCh;
+        PulseSequencerChannel[] slowOutCh;
+        PulseSequencerChannel[] fastInCh;
+        PulseSequencerChannel[] slowInCh;
+        Color[] chcolorarray = new Color[] { Color.Blue, Color.Red, Color.Green, Color.Orange, Color.Purple, Color.Brown, Color.Cyan, Color.Lime };
+
+        double pulsePeriodVal;
+        double slow_pulsePeriodVal;
 
         public int counterMu = 0;
         public int counterAmp = 0;
@@ -55,7 +67,13 @@ namespace ArrayDACControl
         ThreadHelperClass CameraThreadHelper, CameraTimeOutThreadHelper, IntensityGraphUpdateThreadHelper;
         ThreadHelperClass CorrelatorThreadHelper, SinglePMTReadThreadHelper, FluorLogThreadHelper;
         ThreadHelperClass LatticePositionThreadHelper;
+        ThreadHelperClass ExperimentalSequencerThreadHelper;
+        ThreadHelperClass InterlockedScan1ThreadHelper, InterlockedScan2ThreadHelper;
+        //delegate methods for cross-thread calls
         delegate void MyDelegate();
+        delegate void MyDelegateThreadHelper(ThreadHelperClass theThreadHelper);
+        delegate void MyDelegateLabelUpdate(string theString, Label theLabel);
+        delegate void MyDelegateThreadHelperComboBox(ThreadHelperClass theThreadHelper, ComboBox theComboBox);
 
         double BL, BR, TL, TR, midL, midR;
 
@@ -140,6 +158,20 @@ namespace ArrayDACControl
         {
             Self = this;
 
+            fastOutCh = new PulseSequencerChannel[nfastchOut];
+            slowOutCh = new PulseSequencerChannel[nslowchOut];
+            fastInCh = new PulseSequencerChannel[nfastchIn];
+            slowInCh = new PulseSequencerChannel[nslowchIn];
+
+            for (int i = 0; i < fastOutCh.Length; i++)
+                fastOutCh[i] = new PulseSequencerChannel();
+            for (int i = 0; i < slowOutCh.Length; i++)
+                slowOutCh[i] = new PulseSequencerChannel();
+            for (int i = 0; i < fastInCh.Length; i++)
+                fastInCh[i] = new PulseSequencerChannel();
+            for (int i = 0; i < slowInCh.Length; i++)
+                slowInCh[i] = new PulseSequencerChannel();
+
             DCindicators = new Label[2, DCrows];
             DCsliders = new AdjustableSlider[DCrows];
             DCslidersDx = new AdjustableSlider[DCrows];
@@ -163,6 +195,7 @@ namespace ArrayDACControl
 
             InitializeComponent();
             initializeSliders();
+            initializeSequencerForm();
 
             DAC = new DACController();
             // Raman VVA
@@ -270,6 +303,9 @@ namespace ArrayDACControl
             FluorLogThreadHelper = new ThreadHelperClass("FluorLog");
             SliderScanThreadHelper = new ThreadHelperClass("SliderScan");
             LatticePositionThreadHelper = new ThreadHelperClass("LatticePosition");
+            ExperimentalSequencerThreadHelper = new ThreadHelperClass("ExperimentalSequencer");
+            InterlockedScan1ThreadHelper = new ThreadHelperClass("InterlockedScan1");
+            InterlockedScan2ThreadHelper = new ThreadHelperClass("InterlockedScan2");
 
             stopwatch = new Stopwatch();
         }
@@ -419,7 +455,7 @@ namespace ArrayDACControl
                 DCsliders[i].SliderLabel = String.Format("DC {0}", i);
                 DCsliders[i].Min = -10;
                 DCsliders[i].Max = 10;
-                DCsliders[i].AbsMin = -20;
+                DCsliders [i].AbsMin = -20;
                 DCsliders[i].AbsMax = 20;
                 DCsliders[i].Value = 0;
                 this.Controls.Add(DCsliders[i]);
@@ -503,6 +539,266 @@ namespace ArrayDACControl
             this.CorrelatorBinningPhaseSlider.SliderAdjusted += this.CorrelatorBinningPhaseSliderOut;
 
             this.DXSlider.Value = 0;
+        }
+
+        private void initializeSequencerForm()
+        {
+            //positions of the tables of channels:
+            int fastoutxpos = 20;
+            int fastoutypos = 300;
+            int slowoutxpos = 840;
+            int slowoutypos = fastoutypos;
+            int fastinxpos = fastoutxpos;
+            int slowinxpos = slowoutxpos;
+            int fastinypos = fastoutypos + fastInCh.Length * 47 + 100;
+            int slowinypos = fastinypos;
+
+            pulsePeriodVal = double.Parse(pulsePeriodText.Text);
+            slow_pulsePeriodVal = double.Parse(pulsePeriodText.Text);
+            //pulsePeriodText_TextChanged();
+
+            // FAST OUTPUT CHANNELS:
+            for (int i = 0; i < fastOutCh.Length; i++)
+            {
+                fastOutCh[i].paramsEntered += this.refreshChannels;
+                fastOutCh[i].optionChanged += this.refreshChannels;
+                fastOutCh[i].Size = new System.Drawing.Size(800, 47);
+                //DCsliders[i].TabIndex = 90 + i;
+                fastOutCh[i].Location = new System.Drawing.Point(fastoutxpos, fastoutypos - (47) * ((fastOutCh.Length - i - 1) - 1));
+                fastOutCh[i].ChannelLabel = String.Format("ch {0}", i+1);
+                fastOutCh[i].ChannelColor = chcolorarray[i];
+                fastOutCh[i].Param1Label = String.Format("sub-period");
+                fastOutCh[i].Param2Label = String.Format("ON duration");
+                fastOutCh[i].Param3Label = String.Format("delay");
+                if (i == 0)
+                {
+                    fastOutCh[i].Opt2Label = String.Format("ON");
+                    fastOutCh[i].Opt3Label = String.Format("OFF");
+                }
+                else if (i == 1)
+                {
+                    fastOutCh[i].Opt2Label = String.Format("ch1");
+                    fastOutCh[i].Opt3Label = String.Format("OFF");
+                }
+                else
+                {
+                    fastOutCh[i].Opt2Label = String.Format("ch1");
+                    fastOutCh[i].Opt3Label = String.Format("ch2");
+                }
+                fastOutCh[i].opt1Value = true;
+                fastOutCh[i].opt2Value = false;
+                fastOutCh[i].opt3Value = false;
+                fastOutCh[i].ExpPeriodValue = pulsePeriodVal;
+                this.Controls.Add(fastOutCh[i]);
+                this.PulseProgrammerTab.Controls.Add(this.fastOutCh[i]);
+
+
+            }
+
+            // FAST INPUT CHANNELS:
+            label146.Location = new System.Drawing.Point(14, fastinypos-80);
+            label184.Location = new System.Drawing.Point(302, fastinypos - 80);
+            for (int i = 0; i < fastInCh.Length; i++)
+            {
+                fastInCh[i].paramsEntered += this.refreshChannels;
+                fastInCh[i].optionChanged += this.refreshChannels;
+                fastInCh[i].Size = new System.Drawing.Size(800, 47);
+                //DCsliders[i].TabIndex = 90 + i;
+                fastInCh[i].Location = new System.Drawing.Point(fastinxpos, fastinypos - (47) * ((fastInCh.Length - i - 1) - 1));
+                fastInCh[i].ChannelLabel = String.Format("ch {0}", i+1);
+                fastInCh[i].ChannelColor = chcolorarray[i];
+                fastInCh[i].Param1Label = String.Format("sub-period");
+                fastInCh[i].Param2Label = String.Format("ON duration");
+                fastInCh[i].Param3Label = String.Format("delay");
+                fastInCh[i].Opt2Label = String.Format("out1");
+                fastInCh[i].Opt3Label = String.Format("out2");
+                fastInCh[i].opt1Value = true;
+                fastInCh[i].opt2Value = false;
+                fastInCh[i].opt3Value = false;
+                fastInCh[i].ExpPeriodValue = pulsePeriodVal;
+                this.Controls.Add(fastInCh[i]);
+                this.PulseProgrammerTab.Controls.Add(this.fastInCh[i]);
+            }
+
+            //SLOW OUTPUT CHANNELS
+            for (int i = 0; i < slowOutCh.Length; i++)
+            {
+                slowOutCh[i].paramsEntered += this.refreshChannels;
+                slowOutCh[i].optionChanged += this.refreshChannels;
+                slowOutCh[i].Size = new System.Drawing.Size(800, 47);
+                //DCsliders[i].TabIndex = 90 + i;
+                slowOutCh[i].Location = new System.Drawing.Point(slowoutxpos, slowoutypos - (47) * ((slowOutCh.Length - i - 1) - 1));
+                slowOutCh[i].ChannelLabel = String.Format("ch {0}", i+1);
+                slowOutCh[i].ChannelColor = chcolorarray[i];
+                slowOutCh[i].Param1Label = String.Format("sub-period");
+                slowOutCh[i].Param2Label = String.Format("ON duration");
+                slowOutCh[i].Param3Label = String.Format("delay");
+                if (i == 0)
+                {
+                    slowOutCh[i].Opt2Label = String.Format("ON");
+                    slowOutCh[i].Opt3Label = String.Format("OFF");
+                }
+                else if (i == 1)
+                {
+                    slowOutCh[i].Opt2Label = String.Format("ch1");
+                    slowOutCh[i].Opt3Label = String.Format("OFF");
+                }
+                else
+                {
+                    slowOutCh[i].Opt2Label = String.Format("ch1");
+                    slowOutCh[i].Opt3Label = String.Format("ch2");
+                }
+                slowOutCh[i].opt1Value = true;
+                slowOutCh[i].opt2Value = false;
+                slowOutCh[i].opt3Value = false;
+                slowOutCh[i].ExpPeriodValue = slow_pulsePeriodVal;
+                this.Controls.Add(slowOutCh[i]);
+                this.PulseProgrammerTab.Controls.Add(this.slowOutCh[i]);
+            }
+
+            //SLOW INPUT CHANNELS
+            label110.Location = new System.Drawing.Point(879, slowinypos-80);
+            for (int i = 0; i < slowInCh.Length; i++)
+            {
+                slowInCh[i].paramsEntered += this.refreshChannels;
+                slowInCh[i].optionChanged += this.refreshChannels;
+                slowInCh[i].Size = new System.Drawing.Size(800, 47);
+                //DCsliders[i].TabIndex = 90 + i;
+                slowInCh[i].Location = new System.Drawing.Point(slowinxpos, slowinypos - (47) * ((slowInCh.Length - i - 1) - 1));
+                slowInCh[i].ChannelLabel = String.Format("ch {0}", i+1);
+                slowInCh[i].ChannelColor = chcolorarray[i];
+                slowInCh[i].Param1Label = String.Format("sub-period");
+                slowInCh[i].Param2Label = String.Format("ON duration");
+                slowInCh[i].Param3Label = String.Format("delay");
+                slowInCh[i].Opt2Label = String.Format("out1");
+                slowInCh[i].Opt3Label = String.Format("out2");
+                slowInCh[i].opt1Value = true;
+                slowInCh[i].opt2Value = false;
+                slowInCh[i].opt3Value = false;
+                slowInCh[i].ExpPeriodValue = slow_pulsePeriodVal;
+                this.Controls.Add(slowInCh[i]);
+                this.PulseProgrammerTab.Controls.Add(this.slowInCh[i]);
+            }
+
+
+        }
+
+        public void refreshChannels(object sender, EventArgs e)
+        {
+            refreshChannelsHelper();
+        }
+        private void refreshChannelsHelper()
+        {
+
+            // FAST OUTPUT CHANNELS:
+            for (int i = 0; i < fastOutCh.Length; i++)
+            {
+                fastOutCh[i].ExpPeriodValue = pulsePeriodVal;
+
+                if (i == 0)
+                {
+                    //always on option for first channel
+                    fastOutCh[i].Param1opt2Value = pulsePeriodVal;
+                    fastOutCh[i].Param2opt2Value = pulsePeriodVal;
+                    fastOutCh[i].Param3opt2Value = 0;
+                    //always off option for first channel
+                    fastOutCh[i].Param1opt3Value = pulsePeriodVal;
+                    fastOutCh[i].Param2opt3Value = 0;
+                    fastOutCh[i].Param3opt3Value = 0;
+                }
+                else if(i==1)
+                {
+                    //ch1 option for second channel
+                    fastOutCh[i].Param1opt2Value = fastOutCh[0].Param1Value;
+                    fastOutCh[i].Param2opt2Value = fastOutCh[0].Param2Value;
+                    fastOutCh[i].Param3opt2Value = fastOutCh[0].Param3Value;
+                    //always off option for second channel
+                    fastOutCh[i].Param1opt3Value = pulsePeriodVal;
+                    fastOutCh[i].Param2opt3Value = 0;
+                    fastOutCh[i].Param3opt3Value = 0;
+                }
+                else
+                {
+                    //ch1 option
+                    fastOutCh[i].Param1opt2Value = fastOutCh[0].Param1Value;
+                    fastOutCh[i].Param2opt2Value = fastOutCh[0].Param2Value;
+                    fastOutCh[i].Param3opt2Value = fastOutCh[0].Param3Value;
+                    //ch2 option
+                    fastOutCh[i].Param1opt3Value = fastOutCh[1].Param1Value;
+                    fastOutCh[i].Param2opt3Value = fastOutCh[1].Param2Value;
+                    fastOutCh[i].Param3opt3Value = fastOutCh[1].Param3Value;
+                }
+            }
+
+            // FAST INPUT CHANNELS:
+            for (int i = 0; i < fastInCh.Length; i++)
+            {
+                fastInCh[i].ExpPeriodValue = pulsePeriodVal;
+
+                    //ch1 option
+                    fastInCh[i].Param1opt2Value = fastOutCh[0].Param1Value;
+                    fastInCh[i].Param2opt2Value = fastOutCh[0].Param2Value;
+                    fastInCh[i].Param3opt2Value = fastOutCh[0].Param3Value;
+                    //ch2 option
+                    fastInCh[i].Param1opt3Value = fastOutCh[1].Param1Value;
+                    fastInCh[i].Param2opt3Value = fastOutCh[1].Param2Value;
+                    fastInCh[i].Param3opt3Value = fastOutCh[1].Param3Value;
+            }
+
+            //SLOW OUTPUT CHANNELS
+            for (int i = 0; i < slowOutCh.Length; i++)
+            {
+                slowOutCh[i].ExpPeriodValue = slow_pulsePeriodVal;
+
+                if (i == 0)
+                {
+                    //always on option for first channel
+                    slowOutCh[i].Param1opt2Value = pulsePeriodVal;
+                    slowOutCh[i].Param2opt2Value = pulsePeriodVal;
+                    slowOutCh[i].Param3opt2Value = 0;
+                    //always off option for first channel
+                    slowOutCh[i].Param1opt3Value = pulsePeriodVal;
+                    slowOutCh[i].Param2opt3Value = 0;
+                    slowOutCh[i].Param3opt3Value = 0;
+                }
+                else if(i==1)
+                {
+                    //ch1 option for second channel
+                    slowOutCh[i].Param1opt2Value = slowOutCh[0].Param1Value;
+                    slowOutCh[i].Param2opt2Value = slowOutCh[0].Param2Value;
+                    slowOutCh[i].Param3opt2Value = slowOutCh[0].Param3Value;
+                    //always off option for second channel
+                    slowOutCh[i].Param1opt3Value = pulsePeriodVal;
+                    slowOutCh[i].Param2opt3Value = 0;
+                    slowOutCh[i].Param3opt3Value = 0;
+                }
+                else
+                {
+                    //ch1 option
+                    slowOutCh[i].Param1opt2Value = slowOutCh[0].Param1Value;
+                    slowOutCh[i].Param2opt2Value = slowOutCh[0].Param2Value;
+                    slowOutCh[i].Param3opt2Value = slowOutCh[0].Param3Value;
+                    //ch2 option
+                    slowOutCh[i].Param1opt3Value = slowOutCh[1].Param1Value;
+                    slowOutCh[i].Param2opt3Value = slowOutCh[1].Param2Value;
+                    slowOutCh[i].Param3opt3Value = slowOutCh[1].Param3Value;
+                }
+            }
+
+            //SLOW INPUT CHANNELS
+            for (int i = 0; i < slowInCh.Length; i++)
+            {
+                slowInCh[i].ExpPeriodValue = slow_pulsePeriodVal;
+
+                    //ch1 option
+                slowInCh[i].Param1opt2Value = slowOutCh[0].Param1Value;
+                slowInCh[i].Param2opt2Value = slowOutCh[0].Param2Value;
+                slowInCh[i].Param3opt2Value = slowOutCh[0].Param3Value;
+                    //ch2 option
+                slowInCh[i].Param1opt3Value = slowOutCh[1].Param1Value;
+                slowInCh[i].Param2opt3Value = slowOutCh[1].Param2Value;
+                slowInCh[i].Param3opt3Value = slowOutCh[1].Param3Value;
+            }
         }
 
         private void UpdateAll()
@@ -1401,18 +1697,21 @@ namespace ArrayDACControl
             string[] theString = new string[2];
             //path + root
 
+            theString[0] = "f:\\raw_data\\Array\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + scantype;
+            //check if folder exists, if not create it
+            if (!Directory.Exists(theString[0])) { Directory.CreateDirectory(theString[0]); }
+            //set to current directory
+            Directory.SetCurrentDirectory(theString[0]);
+
             if (what == 1)
             {
-                theString[0] = DataFilenameFolderPath.Text + scantype;
-                //check if folder exists, if not create it
-                if (!Directory.Exists(theString[0])) { Directory.CreateDirectory(theString[0]); }
-
+                //theString[0] = DataFilenameFolderPath.Text + scantype;
                 if (CommonFilenameSwitch.Value) { theString[1] = DataFilenameCommonRoot1.Text + " "; }
                 else { theString[1] = DataFilenameCommonRoot2.Text + " "; }
             }
             else if (what == 2)
             {
-                theString[0] = DataFilenameFolderPathCorr.Text;
+                //theString[0] = DataFilenameFolderPathCorr.Text;
                 theString[1] = DataFilenameCommonRoot1Corr.Text + " ";
             }
 
@@ -1515,11 +1814,13 @@ namespace ArrayDACControl
             double[,] data = CameraForm.intensityPlot1.GetZData();
 
             //get filename from control parameters tab
-            string[] filename = GetDataFilename(1, "");
+            string[] filename = GetDataFilename(1, "ImageScan\\");
 
             try
             {
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + theThreadHelper.threadName + " " + theThreadHelper.message + " SV=" + theThreadHelper.DoubleScanVariable[0,theThreadHelper.index].ToString("F3") + " " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+                //create text file
+                //System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + theThreadHelper.threadName + " " + theThreadHelper.message + " SV=" + theThreadHelper.DoubleScanVariable[0,theThreadHelper.index].ToString("F3") + " " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(theThreadHelper.threadName + " " + theThreadHelper.message + " SV=" + theThreadHelper.DoubleScanVariable[0, theThreadHelper.index].ToString("F3") + " " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
                 if (theThreadHelper != null)
                 {
@@ -1547,9 +1848,9 @@ namespace ArrayDACControl
             try
             {
                 //get filename from control parameters tab
-                string[] filename = GetDataFilename(1, threadHelper.threadName + "\\");
-
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+                string[] filename = GetDataFilename(1, threadHelper.folderPathExtra + threadHelper.threadName + "\\");
+                //create text file
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(threadHelper.threadName + " Settings " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
                 tw.WriteLine("Electrodes Settings");
 
@@ -1950,7 +2251,355 @@ namespace ArrayDACControl
         //
         ///////////////////////////
 
+        //
+        // FORM CALLBACK FUNCTIONS
+        //
 
+        private void UpdateLabelCallbackFn(string theString, Label theLabel)
+        {
+            theLabel.Text = theString;
+        }
+
+        private void GetComboBoxTextCallbackFn(ThreadHelperClass theThreadHelper, ComboBox theComboBox)
+        {
+            //Get text from combo box
+            theThreadHelper.message5 = theComboBox.Text;
+        }
+
+        private void ScanUpdateCallbackFn(ThreadHelperClass theThreadHelper)
+        {
+            //update slider
+            theThreadHelper.theSlider.Value = theThreadHelper.DoubleScanVariable[0, theThreadHelper.index];
+            //Button Indicator
+            if (!(theThreadHelper.theButton == null))
+            {
+                int updateInt = theThreadHelper.index + 1;
+                theThreadHelper.theButton.Text = "Scanning..." + updateInt.ToString();
+            }
+            //update DAC
+            UpdateAll();
+        }
+
+        private void ScanResetCallbackFn(ThreadHelperClass theThreadHelper)
+        {
+            if (!(theThreadHelper.theButton == null))
+            {
+                theThreadHelper.theButton.BackColor = System.Drawing.Color.WhiteSmoke;
+                theThreadHelper.theButton.Text = "Start Scan";
+            }
+            //reset to original values
+            theThreadHelper.theSlider.Value = theThreadHelper.KeepDoubles[0];
+            //call to update
+            UpdateAll();
+        }
+
+
+        private void PMTPlotCallbackFn(ThreadHelperClass theThreadHelper)
+        {
+            //display count
+            CameraForm.PMTcountBox.Text = theThreadHelper.SingleDouble.ToString();
+            //update PMT plot
+            CameraForm.PMTcountGraph.PlotYAppend(theThreadHelper.SingleDouble);
+        }
+
+        private void ScanResultsGraphCallbackFn(ThreadHelperClass theThreadHelper)
+        {
+            lock (theThreadHelper)
+            {
+                try
+                {
+                    CameraForm.ScanResultsGraph.Plots[0].Visible = true;
+                    //plot
+                    CameraForm.ScanResultsGraph.PlotXYAppend(theThreadHelper.DoubleScanVariable[0, theThreadHelper.index], theThreadHelper.DoubleData[0, theThreadHelper.index]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                Monitor.PulseAll(theThreadHelper);
+            }
+        }
+
+        // GENERAL SCAN FUNCTIONS
+
+        private void initializeDataStreams(ThreadHelperClass theThreadHelper)
+        {
+            //if running camera, initialize, and clear fluor and position graphs
+            if (theThreadHelper.message == "Camera" || theThreadHelper.message == "CameraImage")
+            {
+                // clear graphs
+                CameraForm.FluorescenceGraph.ClearData();
+                CameraForm.PositionGraph.ClearData();
+                if (Camera.AppInitialize())
+                {
+                    CameraInitializeHelper();
+                }
+            }
+
+            if (theThreadHelper.message == "Correlator:Sum" || theThreadHelper.message == "Correlator:Channels")
+            {
+                //Initialize parameters to values entered under "Correlator" Tab  
+                //if correlator returns false for init, abort scan
+                if (!CorrelatorParameterInit())
+                {
+                    //end scan
+                    theThreadHelper.ShouldBeRunningFlag = false;
+                    //show message
+                    MessageBox.Show("Correlator Init returned false");
+                }
+            }
+        }
+
+        private void getDatafromStream(ThreadHelperClass theThreadHelper)
+        {
+            if (theThreadHelper.message == "PMT")
+            {
+                for (int i = 0; i < theThreadHelper.numAverage; i++)
+                {
+                    //get reading from GPIB counter
+                    gpibdevice.simpleRead(21);
+                    //get decimal number
+                    theThreadHelper.SingleDouble = gpibDoubleResult();
+                    //load result in array
+                    theThreadHelper.DoubleData[0, theThreadHelper.index] += theThreadHelper.SingleDouble;
+
+                    try
+                    {
+                        this.BeginInvoke(new MyDelegateThreadHelper(PMTPlotCallbackFn), theThreadHelper);
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    //update Sigma array
+                    theThreadHelper.DoubleData[1, theThreadHelper.index] += Math.Pow(theThreadHelper.SingleDouble, 2);
+                }
+                //finalize single point average and standard deviation
+                theThreadHelper.DoubleData[0, theThreadHelper.index] = theThreadHelper.DoubleData[0, theThreadHelper.index] / theThreadHelper.numAverage;
+                theThreadHelper.DoubleData[1, theThreadHelper.index] = Math.Sqrt(theThreadHelper.DoubleData[1, theThreadHelper.index] / theThreadHelper.numAverage - Math.Pow(theThreadHelper.DoubleData[0, theThreadHelper.index], 2));
+
+                lock (theThreadHelper)
+                {
+                    //display count, plot
+                    try
+                    {
+                        this.BeginInvoke(new MyDelegateThreadHelper(ScanResultsGraphCallbackFn), theThreadHelper);
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    Monitor.Wait(theThreadHelper);
+                }
+                //increase index
+                theThreadHelper.index++;
+            }
+            // if Camera selected run Camera acquisition
+            if (theThreadHelper.message == "Camera" || theThreadHelper.message == "CameraImage")
+            {
+                CameraAcquisitionHelper();
+                if (theThreadHelper.message == "CameraImage")
+                {
+                    SaveImageData(theThreadHelper);
+                }
+                theThreadHelper.index++;
+            }
+
+            // if AI selected, get reading from NI card
+            if (theThreadHelper.message == "Dev3AI2")
+            {
+                theThreadHelper.DoubleData[0, theThreadHelper.index] = Dev3AI2.ReadAnalogValue();
+                theThreadHelper.index++;
+            }
+
+            // if Correlator:Sum selected, get reading from correlator, and sum bins
+            if (theThreadHelper.message == "Correlator:Sum")
+            {
+                //Get results into correlator object
+                CorrelatorGetResultsHelper();
+
+                //Put sum of two channels data in Thread array
+                theThreadHelper.DoubleData[0, theThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+
+                //plot
+                lock (theThreadHelper)
+                {
+                    //display count, plot
+                    try
+                    {
+                        this.BeginInvoke(new MyDelegateThreadHelper(ScanResultsGraphCallbackFn),theThreadHelper);
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    Monitor.Wait(theThreadHelper);
+                }
+                //increase index
+                theThreadHelper.index++;
+            }
+
+            // if Correlator:Channels selected, get reading from correlator, and sum bins
+            if (theThreadHelper.message == "Correlator:Channels")
+            {
+                //Get results into correlator object
+                CorrelatorGetResultsHelper();
+
+                //Put sum of two channels data in Thread array
+                theThreadHelper.DoubleData[0, theThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+
+                //plot
+                lock (theThreadHelper)
+                {
+                    //display count, plot
+                    try
+                    {
+                        this.BeginInvoke(new MyDelegateThreadHelper(ScanResultsGraphCallbackFn), theThreadHelper);
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    Monitor.Wait(theThreadHelper);
+                }
+                //save
+                SaveCorrelatorData(theThreadHelper.folderPathExtra + "correlator\\" + theThreadHelper.threadName + "=" + theThreadHelper.DoubleScanVariable[0, theThreadHelper.index].ToString("F3") + "\\");
+                //increase index
+                theThreadHelper.index++;
+            }
+
+        }
+
+        private void StopDataStreams()
+        {
+            // if camera is running stop it
+            if (CameraThreadHelper.ShouldBeRunningFlag)
+            {
+                StopCameraThread();
+                try
+                {
+                    CameraThreadHelper.theThread.Abort();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+
+            //if correlator is running stop it
+            if (CorrelatorThreadHelper.ShouldBeRunningFlag)
+            {
+                CorrelatorThreadHelper.ShouldBeRunningFlag = false;
+                CorrelatorButton.BackColor = System.Drawing.Color.Gray;
+                try
+                {
+                    CorrelatorThreadHelper.theThread.Abort();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+        }
+
+        private AdjustableSlider getSliderfromText(string SliderName)
+        {
+            AdjustableSlider theSlider;
+
+            switch (SliderName)
+            {
+                case "DXSlider":
+                    theSlider = this.DXSlider;
+                    break;
+                case "ArrayTotalSlider":
+                    theSlider = this.ArrayTotalSlider;
+                    break;
+                case "DCVertDipoleSlider":
+                    theSlider = this.DCVertDipoleSlider;
+                    break;
+                case "DCVertQuadSlider":
+                    theSlider = this.DCVertQuadSlider;
+                    break;
+                case "TotalBiasSlider":
+                    theSlider = this.TotalBiasSlider;
+                    break;
+                case "TrapHeightSlider":
+                    theSlider = this.TrapHeightSlider;
+                    break;
+                case "QuadrupoleTilt":
+                    theSlider = this.QuadrupoleTilt;
+                    break;
+                case "QuadTiltRatioSlider":
+                    theSlider = this.QuadTiltRatioSlider;
+                    break;
+                case "SnakeRatioSlider":
+                    theSlider = this.SnakeRatioSlider;
+                    break;
+                case "RightFingersSlider":
+                    theSlider = this.RightFingersSlider;
+                    break;
+                case "LeftFingersSlider":
+                    theSlider = this.LeftFingersSlider;
+                    break;
+                case "SnakeOnlySlider":
+                    theSlider = this.SnakeOnlySlider;
+                    break;
+                case "TransferCavity":
+                    theSlider = this.TransferCavity;
+                    break;
+                case "RepumperSlider":
+                    theSlider = this.RepumperSlider;
+                    break;
+                case "RepumperPowerSlider":
+                    theSlider = this.RepumperPowerSlider;
+                    break;
+                case "SideBeam370Power":
+                    theSlider = this.SideBeam370Power;
+                    break;
+                case "LatticePowerControl":
+                    theSlider = this.LatticePowerControl;
+                    break;
+                case "CavityCoolingPowerControl":
+                    theSlider = this.CavityCoolingPowerControl;
+                    break;
+                case "Sideband402Control":
+                    theSlider = this.Sideband402Control;
+                    break;
+                case "RamanSlider":
+                    theSlider = this.RamanSlider;
+                    break;
+                case "BxSlider":
+                    theSlider = this.BxSlider;
+                    break;
+                case "TickleSlider":
+                    theSlider = this.TickleSlider;
+                    break;
+                case "CorrelatorBinningPhaseSlider":
+                    theSlider = this.CorrelatorBinningPhaseSlider;
+                    break;
+                case "DC0":
+                    theSlider = this.DCsliders[0];
+                    break;
+                case "DC1":
+                    theSlider = this.DCsliders[1];
+                    break;
+                case "DC2":
+                    theSlider = this.DCsliders[2];
+                    break;
+                case "DC3":
+                    theSlider = this.DCsliders[3];
+                    break;
+                case "DC4":
+                    theSlider = this.DCsliders[4];
+                    break;
+                case "DC5":
+                    theSlider = this.DCsliders[5];
+                    break;
+                case "DC6":
+                    theSlider = this.DCsliders[6];
+                    break;
+                case "DC7":
+                    theSlider = this.DCsliders[7];
+                    break;
+                case "DC8":
+                    theSlider = this.DCsliders[8];
+                    break;
+                case "DC9":
+                    theSlider = this.DCsliders[9];
+                    break;
+                case "DC10":
+                    theSlider = this.DCsliders[10];
+                    break;
+                case "DC11":
+                    theSlider = this.DCsliders[11];
+                    break;
+                default:
+                    theSlider = new AdjustableSlider();
+                    break;
+            }
+
+            return theSlider;
+        }
 
         private double gpibDoubleResult()
         {
@@ -2049,6 +2698,18 @@ namespace ArrayDACControl
         //CORRELATOR
         //
 
+        private void SaveCorrelatorData(string foldernameaddon)
+        {
+            //get filename from control parameters tab
+            string[] filename = GetDataFilename(2, foldernameaddon);
+            //create text file
+            System.IO.StreamWriter tw = new System.IO.StreamWriter("Correlator Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+            for (int j = 0; j < ncorrbins; j++)
+                tw.WriteLine(theCorrelator.phcountarrayCh1[j] + "\t" + theCorrelator.phcountarrayCh2[j]);
+            tw.Write("\n");
+            tw.Close();
+        }
+
         private void CorrelatorGetResultsHelper()
         {
             //Raise wire to tell FPGA to start collecting data
@@ -2146,25 +2807,49 @@ namespace ArrayDACControl
                 theCorrelator.IntTime = int.Parse(correlatorIntTimetext2.Text);
             }
 
-            //if (syncSrcSw.Value)
-            //{
-                if (LockinFrequencySwitch.Value)
-                {
-                    theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0));
-                }
+
+            if (LockinFrequencySwitch.Value)
+            {
+                 theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0));
+            }
+            else
+            {
+                if (chooseCode.Value)
+                { theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2.Text) - 1, 0)); }
                 else
-                {
-                    if (chooseCode.Value)
-                    { theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2.Text) - 1, 0)); }
-                    else
-                    { theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2B.Text) - 1, 0)); }
-                }
-            //}
-            //else
-            //{
-            //    theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(pulsePeriodText.Text) / ncorrbins, 0));
-            //}
-            
+                { theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2B.Text) - 1, 0)); }
+            }
+
+            theCorrelator.PulseClkDiv = (uint)(Math.Round(theCorrelator.ok.P * pulsePeriodVal, 0));
+            theCorrelator.slow_PulseClkDiv = (uint)(Math.Round(theCorrelator.ok.P * slow_pulsePeriodVal, 0));
+
+            for(int i=0; i < nfastchOut; i++)
+            {
+               theCorrelator.onTimeOut[i] = (uint)(Math.Round(theCorrelator.ok.P * fastOutCh[i].Param2Value, 0));
+               theCorrelator.delayOut[i] = (uint)(Math.Round(theCorrelator.ok.P * fastOutCh[i].Param3Value, 0));
+               theCorrelator.subperiodOut[i] = (uint)(Math.Round(theCorrelator.ok.P * fastOutCh[i].Param1Value, 0));
+            }
+            for (int i = 0; i < nfastchIn; i++)
+            {
+                theCorrelator.onTimeIn[i] = (uint)(Math.Round(theCorrelator.ok.P * fastInCh[i].Param2Value, 0));
+                theCorrelator.delayIn[i] = (uint)(Math.Round(theCorrelator.ok.P * fastInCh[i].Param3Value, 0));
+                theCorrelator.subperiodIn[i] = (uint)(Math.Round(theCorrelator.ok.P * fastInCh[i].Param1Value, 0));
+            }
+            for (int i = 0; i < nslowchOut; i++)
+            {
+                theCorrelator.slow_onTimeOut[i] = (uint)(slowOutCh[i].Param2Value);
+                theCorrelator.slow_delayOut[i] = (uint)(slowOutCh[i].Param3Value);
+                theCorrelator.slow_subperiodOut[i] = (uint)(slowOutCh[i].Param1Value);
+            }
+            for (int i = 0; i < nslowchIn; i++)
+            {
+                theCorrelator.slow_onTimeIn[i] = (uint)(slowInCh[i].Param2Value);
+                theCorrelator.slow_delayIn[i] = (uint)(slowInCh[i].Param3Value);
+                theCorrelator.slow_subperiodIn[i] = (uint)(slowInCh[i].Param1Value); ;
+            }
+
+            /*
+             
             theCorrelator.PulseClkDiv = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(pulsePeriodText.Text), 0));
 
             theCorrelator.onTimeOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1OnTimeText.Text), 0));
@@ -2200,16 +2885,16 @@ namespace ArrayDACControl
             theCorrelator.slow_delayIn[0] = uint.Parse(slow_in1DelayText.Text);
             theCorrelator.slow_delayIn[1] = uint.Parse(slow_in2DelayText.Text);
 
-            //theCorrelator.PulseClkDiv = (int)(Math.Round(theCorrelator.ok.P * 1000 / double.Parse(pulseFreqText.Text) - 1, 0));
-            //theCorrelator.PulseWidthDiv = (int)(Math.Round(theCorrelator.PulseClkDiv * double.Parse(pulsedDutyText.Text)));
+            */
 
             theCorrelator.bound1 = int.Parse(correlatorBound1text.Text);
             theCorrelator.bound2 = int.Parse(correlatorBound2text.Text);
 
+
+
             //Set boolean in correlator for sync signal source
             if (syncSrcSw.Value) { theCorrelator.syncSrcChoose = true; }
             else { theCorrelator.syncSrcChoose = false; }
-            
 
             //Attempt Initialize
             bool auxInitBool = true;
@@ -2235,7 +2920,7 @@ namespace ArrayDACControl
         private void CorrelatorExecute()
         {
             //clear graph
-            CameraForm.scatterGraph3.ClearData();
+            CameraForm.ScanResultsGraph.ClearData();
             //initialize parameters and attempt init, continue only if init returns true
             if (CorrelatorParameterInit())
             {
@@ -2317,10 +3002,10 @@ namespace ArrayDACControl
             }
 
             // retrieve the averaged data on the plot so far:
-            double[] prevCorrDataCh1 = CameraForm.scatterGraph3.Plots[0].GetYData();
-            double[] prevCorrDataCh2 = CameraForm.scatterGraph3.Plots[1].GetYData();
-            double[] prevCorrDataDiff = CameraForm.scatterGraph3.Plots[2].GetYData();
-            double[] prevCorrDataSum = CameraForm.scatterGraph3.Plots[3].GetYData();
+            double[] prevCorrDataCh1 = CameraForm.ScanResultsGraph.Plots[0].GetYData();
+            double[] prevCorrDataCh2 = CameraForm.ScanResultsGraph.Plots[1].GetYData();
+            double[] prevCorrDataDiff = CameraForm.ScanResultsGraph.Plots[2].GetYData();
+            double[] prevCorrDataSum = CameraForm.ScanResultsGraph.Plots[3].GetYData();
             // new correlator trace that came in from the FPGA:
             double[] newCorrDataCh1 = theCorrelator.phcountarrayCh1;
             double[] newCorrDataCh2 = theCorrelator.phcountarrayCh2;
@@ -2364,7 +3049,7 @@ namespace ArrayDACControl
             //update history counter
             historyCounter = historyCounter + 1;
             // expand Ch1 and Ch2 log variables if needed
-            if(historyCounter > corrampCh1history[0].Length)
+            if(historyCounter >= corrampCh1history[0].Length)
             {
                 for (int i = 0; i < ncorrbins; i++)
                 {
@@ -2488,57 +3173,17 @@ namespace ArrayDACControl
                 corrDataSumForPlot[i + 2] = avgCorrDataSum[i / 4] - errCorrDataSum[i / 4];
                 corrDataSumForPlot[i + 3] = avgCorrDataSum[i / 4];
             }
-            CameraForm.scatterGraph3.Plots[0].PlotXY(corrbinsForPlot, corrDataCh1ForPlot);
-            CameraForm.scatterGraph3.Plots[1].PlotXY(corrbinsForPlot, corrDataCh2ForPlot);
-            CameraForm.scatterGraph3.Plots[2].PlotXY(corrbinsForPlot, corrDataDiffForPlot);
-            CameraForm.scatterGraph3.Plots[3].PlotXY(corrbinsForPlot, corrDataSumForPlot);
+            CameraForm.ScanResultsGraph.Plots[0].PlotXY(corrbinsForPlot, corrDataCh1ForPlot);
+            CameraForm.ScanResultsGraph.Plots[1].PlotXY(corrbinsForPlot, corrDataCh2ForPlot);
+            CameraForm.ScanResultsGraph.Plots[2].PlotXY(corrbinsForPlot, corrDataDiffForPlot);
+            CameraForm.ScanResultsGraph.Plots[3].PlotXY(corrbinsForPlot, corrDataSumForPlot);
             CameraForm.scatterGraphNormCorrSig.PlotXY(corrbinsForPlot, normSigForPlot);
             
 
             if (SaveCorrelatorToggle.Value)
             {
-                //get filename from control parameters tab
-                string[] filename = GetDataFilename(2, "correlator\\");
-                //check if folder exists, if not create it
-                if (!Directory.Exists(filename[0])) { Directory.CreateDirectory(filename[0]); }
-
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + "Correlator Data " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-                for (int j = 0; j < ncorrbins; j++)
-                    tw.WriteLine(newCorrDataCh1[j] + "\t" + newCorrDataCh2[j]);
-                tw.Write("\n");
-                tw.Close();
+                SaveCorrelatorData("correlator\\");
             }
-
-
-            /*
-            if (prevCorrDataCh1.Length == 0)
-            {
-                avgCount = 1;
-                CameraForm.scatterGraph3.Plots[0].PlotXY(corrbins, newCorrDataCh1);
-                CameraForm.scatterGraph3.Plots[1].PlotXY(corrbins, newCorrDataCh2);
-                CameraForm.scatterGraph3.Plots[2].PlotXY(corrbins, newCorrDataDiff);
-                CameraForm.scatterGraph3.Plots[3].PlotXY(corrbins, newCorrDataSum);
-                CameraForm.scatterGraphNormCorrSig.PlotXY(corrbins, newnormSig);
-            }
-            else
-            {
-                avgCount = avgCount + 1;
-                for (int j = 0; j < avgCorrDataCh1.Length; j++)
-                {
-                    avgCorrDataCh1[j] = prevCorrDataCh1[j] + newCorrDataCh1[j];
-                    avgCorrDataCh2[j] = prevCorrDataCh2[j] + newCorrDataCh2[j];
-                    //avgCorrDataDiff[j] = prevCorrDataDiff[j] + newCorrDataDiff[j];
-                    //avgCorrDataSum[j] = prevCorrDataSum[j] + newCorrDataSum[j];
-                    //avgnormSig[j] = avgCorrDataDiff[j] / (avgCorrDataSum[j] - 2 * avgCount * (int.Parse(textBoxBackEst.Text)));
-                    //errnormsig[j] = avgnormSig[j] * Math.Sqrt( sqferrCorrDataDiff[j] + sqferrCorrDataSum[j] );
-                }
-                CameraForm.scatterGraph3.Plots[0].PlotXY(corrbins, avgCorrDataCh1);
-                CameraForm.scatterGraph3.Plots[1].PlotXY(corrbins, avgCorrDataCh2);
-                CameraForm.scatterGraph3.Plots[2].PlotXY(corrbins, avgCorrDataDiff);
-                CameraForm.scatterGraph3.Plots[3].PlotXY(corrbins, avgCorrDataSum);
-                CameraForm.scatterGraphNormCorrSig.PlotXY(corrbins, avgnormSig);
-            }
-            */
 
             ////////////////////////////////////////////////////
             // "Figure of merit" monitoring:
@@ -2627,9 +3272,11 @@ namespace ArrayDACControl
         }
 
 ////////////////////////////////////////////////////////////////////////////////
-
-
-
+        //
+        //
+        // Correlator thread
+        //
+        //
         private void CorrelatorExecuteFrmCallback2()
         {
             CorrelatorButton.BackColor = System.Drawing.Color.Gray;
@@ -2644,12 +3291,7 @@ namespace ArrayDACControl
             correlatorRefFreqtext.Text = theCorrelator.ok.RefFreq.ToString();
             correlatorVCOFreqtext.Text = theCorrelator.ok.VCOFreq.ToString();
             correlatorCLKDIVISORtext.Text = Convert.ToString(Math.Round( theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0));
-            //textBox7.Text = Convert.ToString((uint)Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0), 2);
-            //textBox9.Text = Convert.ToString((UInt16)Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0), 2);
-            //textBox10.Text = Convert.ToString((UInt16)(((uint)Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0))>>16), 2);
         }
-
-
         private void CorrelatorButton_Click(object sender, EventArgs e)
         {
             if (!CorrelatorThreadHelper.ShouldBeRunningFlag)
@@ -2726,28 +3368,8 @@ namespace ArrayDACControl
                     RampSlider(this.ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, double.Parse(LatticePositionRampArrayValue.Text));
                 }
 
-                // if camera is running stop it
-                if (CameraThreadHelper.ShouldBeRunningFlag)
-                {
-                    StopCameraThread();
-                    try
-                    {
-                        CameraThreadHelper.theThread.Abort();
-                    }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
-                }
-
-                //if correlator is running stop it
-                if (CorrelatorThreadHelper.ShouldBeRunningFlag)
-                {
-                    CorrelatorThreadHelper.ShouldBeRunningFlag = false;
-                    CorrelatorButton.BackColor = System.Drawing.Color.Gray;
-                    try
-                    {
-                        CorrelatorThreadHelper.theThread.Abort();
-                    }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
-                }
+                // if camera or correlator is running stop it
+                StopDataStreams();
                 
 
                 //start scan thread
@@ -2767,7 +3389,7 @@ namespace ArrayDACControl
             //update button
             LatticePositionStart.BackColor = System.Drawing.Color.White;
             //clear graph
-            CameraForm.scatterGraph3.ClearData();
+            CameraForm.ScanResultsGraph.ClearData();
             //if running camera, initialize, and clear fluor and position graphs
             if (LatticePositionThreadHelper.message == "Camera")
             {
@@ -3003,7 +3625,7 @@ namespace ArrayDACControl
                 try
                 {
                     //plot
-                    CameraForm.scatterGraph3.PlotXYAppend(LatticePositionThreadHelper.DoubleScanVariable[0, LatticePositionThreadHelper.index], LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index]);
+                    CameraForm.ScanResultsGraph.PlotXYAppend(LatticePositionThreadHelper.DoubleScanVariable[0, LatticePositionThreadHelper.index], LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.index]);
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -3068,28 +3690,8 @@ namespace ArrayDACControl
                 else
                 {
                     ElectrodeScanThreadHelper.initDoubleData(ElectrodeScanThreadHelper.numPoints, 1, 2);
-                    // if camera is running stop it
-                    if (CameraThreadHelper.ShouldBeRunningFlag)
-                    {
-                        StopCameraThread();
-                        try
-                        {
-                            CameraThreadHelper.theThread.Abort();
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                    }
-
-                    //if correlator is running stop it
-                    if (CorrelatorThreadHelper.ShouldBeRunningFlag)
-                    {
-                        CorrelatorThreadHelper.ShouldBeRunningFlag = false;
-                        CorrelatorButton.BackColor = System.Drawing.Color.Gray;
-                        try
-                        {
-                            CorrelatorThreadHelper.theThread.Abort();
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                    }
+                    // if camera or correlator is running stop it
+                    StopDataStreams();
                 }
                 
                 //start scan thread
@@ -3109,31 +3711,9 @@ namespace ArrayDACControl
             //update button
             ElectrodeScanStart.BackColor = System.Drawing.Color.White;
             //clear graph
-            CameraForm.scatterGraph3.ClearData();
-            //if running camera, initialize, and clear fluor and position graphs
-            if (ElectrodeScanThreadHelper.message == "Camera" || ElectrodeScanThreadHelper.message == "CameraImage")
-            {
-                // clear graphs
-                CameraForm.FluorescenceGraph.ClearData();
-                CameraForm.PositionGraph.ClearData();
-                if (Camera.AppInitialize())
-                {
-                    CameraInitializeHelper();
-                }
-            }
-
-            if (ElectrodeScanThreadHelper.message == "Correlator:Sum")
-            {
-                //Initialize parameters to values entered under "Correlator" Tab  
-                //if correlator returns false for init, abort scan
-                if (!CorrelatorParameterInit())
-                {
-                    //end scan
-                    ElectrodeScanThreadHelper.ShouldBeRunningFlag = false;
-                    //show message
-                    MessageBox.Show("Correlator Init returned false");
-                }
-            }
+            CameraForm.ScanResultsGraph.ClearData();
+            //initialize
+            initializeDataStreams(ElectrodeScanThreadHelper);
             //run scans
             while (ElectrodeScanThreadHelper.index < (ElectrodeScanThreadHelper.numPoints) && ElectrodeScanThreadHelper.ShouldBeRunningFlag)
             {
@@ -3146,84 +3726,8 @@ namespace ArrayDACControl
                     this.Invoke(new MyDelegate(ElectrodeScanFrmCallback3));
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-
-                if (ElectrodeScanThreadHelper.message == "PMT")
-                {
-                    for (int i = 0; i < ElectrodeScanThreadHelper.numAverage; i++)
-                    {
-                        //GPIB PMT Counts
-                        //get reading from GPIB counter
-                        gpibdevice.simpleRead(21);
-                        //get decimal number
-                        ElectrodeScanThreadHelper.SingleDouble = gpibDoubleResult();
-                        //load result in array
-                        ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index] += ElectrodeScanThreadHelper.SingleDouble;
-                        try
-                        {
-                            this.Invoke(new MyDelegate(ElectrodeScanFrmCallback));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        //update Sigma array
-                        ElectrodeScanThreadHelper.DoubleData[1, ElectrodeScanThreadHelper.index] += Math.Pow(ElectrodeScanThreadHelper.SingleDouble, 2);
-                    }
-                    //finalize single point average and standard deviation
-                    ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index] = ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index] / ElectrodeScanThreadHelper.numAverage;
-                    ElectrodeScanThreadHelper.DoubleData[1, ElectrodeScanThreadHelper.index] = Math.Sqrt(ElectrodeScanThreadHelper.DoubleData[1, ElectrodeScanThreadHelper.index] / ElectrodeScanThreadHelper.numAverage - Math.Pow(ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index], 2));
-
-                    lock (ElectrodeScanThreadHelper)
-                    {
-                        //display count, plot
-                        try
-                        {
-                            this.BeginInvoke(new MyDelegate(ElectrodeScanFrmCallback4));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        Monitor.Wait(ElectrodeScanThreadHelper);
-                    }
-                    //increase index
-                    ElectrodeScanThreadHelper.index++;
-                }
-                // if Camera selected run Camera acquisition
-                if (ElectrodeScanThreadHelper.message == "Camera" || ElectrodeScanThreadHelper.message == "CameraImage")
-                {
-                    CameraAcquisitionHelper();
-                    if(ElectrodeScanThreadHelper.message == "CameraImage")
-                    {
-                        SaveImageData(ElectrodeScanThreadHelper);
-                    }
-                    ElectrodeScanThreadHelper.index++;
-                }
-                // if AI selected, get reading from NI card
-                if (ElectrodeScanThreadHelper.message == "Dev3AI2")
-                {
-                    ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index] = Dev3AI2.ReadAnalogValue();
-                    ElectrodeScanThreadHelper.index++;
-                }
-
-                // if Correlator:Sum selected, get reading from correlator, and sum bins
-                if (ElectrodeScanThreadHelper.message == "Correlator:Sum")
-                {
-                    //Get results into correlator object
-                    CorrelatorGetResultsHelper();
-
-                    //Put sum of two channels data in Thread array
-                    ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
-
-                    //plot
-                    lock (ElectrodeScanThreadHelper)
-                    {
-                        //display count, plot
-                        try
-                        {
-                            this.BeginInvoke(new MyDelegate(ElectrodeScanFrmCallback5));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        Monitor.Wait(ElectrodeScanThreadHelper);
-                    }
-                    //increase index
-                    ElectrodeScanThreadHelper.index++;
-                }
+                //get data
+                getDatafromStream(ElectrodeScanThreadHelper);
             }
             if (ElectrodeScanThreadHelper.ShouldBeRunningFlag && ElectrodeScanSaveCheckbox.Checked)
             {
@@ -3239,13 +3743,7 @@ namespace ArrayDACControl
             //reset scan boolean
             ElectrodeScanThreadHelper.ShouldBeRunningFlag = false;
         }
-        private void ElectrodeScanFrmCallback()
-        {
-            //display count
-            CameraForm.PMTcountBox.Text = ElectrodeScanThreadHelper.SingleDouble.ToString();
-            //update PMT plot
-            CameraForm.PMTcountGraph.PlotYAppend(ElectrodeScanThreadHelper.SingleDouble);
-        }
+
         private void ElectrodeScanFrmCallback2()
         {
             ElectrodeScanStart.BackColor = System.Drawing.Color.Gainsboro;
@@ -3265,37 +3763,6 @@ namespace ArrayDACControl
             compensationAdjustedHelper();
             //Button Indicator
             ElectrodeScanStart.Text = "Scanning..." + ElectrodeScanThreadHelper.index.ToString();
-        }
-        private void ElectrodeScanFrmCallback4()
-        {
-            lock (ElectrodeScanThreadHelper)
-            {
-                try
-                {
-                    ElectrodeScanLiveAverageTextbox.Text = ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index].ToString();
-                    ElectrodeScanLiveStdTextbox.Text = ElectrodeScanThreadHelper.DoubleData[1, ElectrodeScanThreadHelper.index].ToString();
-                    //plot
-                    CameraForm.scatterGraph3.PlotXYAppend(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.index], ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index]);
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                Monitor.PulseAll(ElectrodeScanThreadHelper);
-            }
-        }
-        private void ElectrodeScanFrmCallback5()
-        {
-            lock (ElectrodeScanThreadHelper)
-            {
-                try
-                {
-                    CameraForm.scatterGraph3.Plots[0].Visible = true;
-                    //plot
-                    CameraForm.scatterGraph3.PlotXYAppend(ElectrodeScanThreadHelper.DoubleScanVariable[0, ElectrodeScanThreadHelper.index], ElectrodeScanThreadHelper.DoubleData[0, ElectrodeScanThreadHelper.index]);
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                Monitor.PulseAll(ElectrodeScanThreadHelper);
-            }
         }
 
         //
@@ -3319,79 +3786,9 @@ namespace ArrayDACControl
                 SliderScanThreadHelper.max[0] = double.Parse(SliderScanEndValueTextbox.Text);
                 SliderScanThreadHelper.numAverage = int.Parse(SliderScanPMTAveragingTextbox.Text);
                 SliderScanThreadHelper.numPoints = int.Parse(SliderScanNumPointsTextbox.Text);
+                SliderScanThreadHelper.theButton = SliderScanStart;
                 //get Slider to scan
-                switch (SliderScanSelection.Text)
-                {
-                    case "DXSlider":
-                        SliderScanThreadHelper.theSlider = this.DXSlider;
-                        break;
-                    case "ArrayTotalSlider":
-                        SliderScanThreadHelper.theSlider = this.ArrayTotalSlider;
-                        break;
-                    case "DCVertDipoleSlider":
-                        SliderScanThreadHelper.theSlider = this.DCVertDipoleSlider;
-                        break;
-                    case "DCVertQuadSlider":
-                        SliderScanThreadHelper.theSlider = this.DCVertQuadSlider;
-                        break;
-                    case "TotalBiasSlider":
-                        SliderScanThreadHelper.theSlider = this.TotalBiasSlider;
-                        break;
-                    case "TrapHeightSlider":
-                        SliderScanThreadHelper.theSlider = this.TrapHeightSlider;
-                        break;
-                    case "QuadrupoleTilt":
-                        SliderScanThreadHelper.theSlider = this.QuadrupoleTilt;
-                        break;
-                    case "QuadTiltRatioSlider":
-                        SliderScanThreadHelper.theSlider = this.QuadTiltRatioSlider;
-                        break;
-                    case "SnakeRatioSlider":
-                        SliderScanThreadHelper.theSlider = this.SnakeRatioSlider;
-                        break;
-                    case "RightFingersSlider":
-                        SliderScanThreadHelper.theSlider = this.RightFingersSlider;
-                        break;
-                    case "LeftFingersSlider":
-                        SliderScanThreadHelper.theSlider = this.LeftFingersSlider;
-                        break;
-                    case "SnakeOnlySlider":
-                        SliderScanThreadHelper.theSlider = this.SnakeOnlySlider;
-                        break;
-                    case "TransferCavity":
-                        SliderScanThreadHelper.theSlider = this.TransferCavity;
-                        break;
-                    case "RepumperSlider":
-                        SliderScanThreadHelper.theSlider = this.RepumperSlider;
-                        break;
-                    case "RepumperPowerSlider":
-                        SliderScanThreadHelper.theSlider = this.RepumperPowerSlider;
-                        break;
-                    case "SideBeam370Power":
-                        SliderScanThreadHelper.theSlider = this.SideBeam370Power;
-                        break;
-                    case "LatticePowerControl":
-                        SliderScanThreadHelper.theSlider = this.LatticePowerControl;
-                        break;
-                    case "CavityCoolingPowerControl":
-                        SliderScanThreadHelper.theSlider = this.CavityCoolingPowerControl;
-                        break;
-                    case "Sideband402Control":
-                        SliderScanThreadHelper.theSlider = this.Sideband402Control;
-                        break;
-                    case "RamanSlider":
-                        SliderScanThreadHelper.theSlider = this.RamanSlider;
-                        break;
-                    case "BxSlider":
-                        SliderScanThreadHelper.theSlider = this.BxSlider;
-                        break;
-                    case "TickleSlider":
-                        SliderScanThreadHelper.theSlider = this.TickleSlider;
-                        break;
-                    case "CorrelatorBinningPhaseSlider":
-                        SliderScanThreadHelper.theSlider = this.CorrelatorBinningPhaseSlider;
-                        break;
-                }
+                SliderScanThreadHelper.theSlider = getSliderfromText(SliderScanSelection.Text);
                 //Keep initial slider value
                 SliderScanThreadHelper.KeepDoubles = new double[1];
                 SliderScanThreadHelper.KeepDoubles[0] = SliderScanThreadHelper.theSlider.Value;
@@ -3414,28 +3811,8 @@ namespace ArrayDACControl
                 else
                 {
                     SliderScanThreadHelper.initDoubleData(SliderScanThreadHelper.numPoints, 1, 1);
-                    // if camera is running stop it
-                    if (CameraThreadHelper.ShouldBeRunningFlag)
-                    {
-                        StopCameraThread();
-                        try
-                        {
-                            CameraThreadHelper.theThread.Abort();
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); } 
-                    }
-
-                    //if correlator is running stop it
-                    if (CorrelatorThreadHelper.ShouldBeRunningFlag)
-                    {
-                        CorrelatorThreadHelper.ShouldBeRunningFlag = false;
-                        CorrelatorButton.BackColor = System.Drawing.Color.Gray;
-                        try
-                        {
-                            CorrelatorThreadHelper.theThread.Abort();
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); } 
-                    }
+                    // if camera or correlator is running stop it
+                    StopDataStreams();
                 }
 
                 //start scan thread
@@ -3455,31 +3832,9 @@ namespace ArrayDACControl
             //update button
             SliderScanStart.BackColor = System.Drawing.Color.White;
             //clear graph
-            CameraForm.scatterGraph3.ClearData();
-            //if running camera, initialize, and clear fluor and position graphs
-            if (SliderScanThreadHelper.message == "Camera" || SliderScanThreadHelper.message == "CameraImage")
-            {
-                // clear graphs
-                CameraForm.FluorescenceGraph.ClearData();
-                CameraForm.PositionGraph.ClearData();
-                if (Camera.AppInitialize())
-                {
-                    CameraInitializeHelper();
-                }
-            }
-
-            if (SliderScanThreadHelper.message == "Correlator:Sum")
-            {
-                //Initialize parameters to values entered under "Correlator" Tab  
-                //if correlator returns false for init, abort scan
-                if (!CorrelatorParameterInit())
-                {
-                    //end scan
-                    SliderScanThreadHelper.ShouldBeRunningFlag = false;
-                    //show message
-                    MessageBox.Show("Correlator Init returned false");
-                }
-            }
+            CameraForm.ScanResultsGraph.ClearData();
+            //init data stream
+            initializeDataStreams(SliderScanThreadHelper);
 
             //run scans
             while (SliderScanThreadHelper.index < (SliderScanThreadHelper.numPoints) && SliderScanThreadHelper.ShouldBeRunningFlag)
@@ -3489,82 +3844,12 @@ namespace ArrayDACControl
                 //call to change field value
                 try
                 {
-                    this.Invoke(new MyDelegate(SliderScanFrmCallback3));
+                    this.Invoke(new MyDelegateThreadHelper(ScanUpdateCallbackFn), SliderScanThreadHelper);
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-                if (SliderScanThreadHelper.message == "PMT")
-                {
-                    for (int i = 0; i < SliderScanThreadHelper.numAverage; i++)
-                    {
-                        //get reading from GPIB counter
-                        gpibdevice.simpleRead(21);
-                        try
-                        {
-                            this.Invoke(new MyDelegate(SliderScanFrmCallback));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        //update Sigma array
-                        SliderScanThreadHelper.DoubleData[1, SliderScanThreadHelper.index] += Math.Pow(SliderScanThreadHelper.SingleDouble, 2);
-                    }
-                    //finalize single point average and standard deviation
-                    SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] = SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] / SliderScanThreadHelper.numAverage;
-                    SliderScanThreadHelper.DoubleData[1, SliderScanThreadHelper.index] = Math.Sqrt(SliderScanThreadHelper.DoubleData[1, SliderScanThreadHelper.index] / SliderScanThreadHelper.numAverage - Math.Pow(SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index], 2));
-
-                    lock (SliderScanThreadHelper)
-                    {
-                        //display count, plot
-                        try
-                        {
-                            this.BeginInvoke(new MyDelegate(SliderScanFrmCallback4));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        Monitor.Wait(SliderScanThreadHelper);
-                    }
-                    //increase index
-                    SliderScanThreadHelper.index++;
-                }
-                // if Camera selected run Camera acquisition
-                if (SliderScanThreadHelper.message == "Camera" || SliderScanThreadHelper.message == "CameraImage")
-                {
-                    CameraAcquisitionHelper();
-                    if (SliderScanThreadHelper.message == "CameraImage")
-                    {
-                        SaveImageData(SliderScanThreadHelper);
-                    }
-                    SliderScanThreadHelper.index++;
-                }
-
-                // if AI selected, get reading from NI card
-                if (SliderScanThreadHelper.message == "Dev3AI2")
-                {
-                    SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] = Dev3AI2.ReadAnalogValue();
-                    SliderScanThreadHelper.index++;
-                }
-
-                // if Correlator:Sum selected, get reading from correlator, and sum bins
-                if (SliderScanThreadHelper.message == "Correlator:Sum")
-                {
-                    //Get results into correlator object
-                    CorrelatorGetResultsHelper();
-
-                    //Put sum of two channels data in Thread array
-                    SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
-
-                    //plot
-                    lock (SliderScanThreadHelper)
-                    {
-                        //display count, plot
-                        try
-                        {
-                            this.BeginInvoke(new MyDelegate(SliderScanFrmCallback5));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        Monitor.Wait(SliderScanThreadHelper);
-                    }
-                    //increase index
-                    SliderScanThreadHelper.index++;
-                }
+                //get data
+                getDatafromStream(SliderScanThreadHelper);
             }
             if (SliderScanThreadHelper.ShouldBeRunningFlag && SliderScanSaveCheckbox.Checked)
             {
@@ -3575,73 +3860,13 @@ namespace ArrayDACControl
             //reset button
             try
             {
-                this.Invoke(new MyDelegate(SliderScanFrmCallback2));
+                this.Invoke(new MyDelegateThreadHelper(ScanResetCallbackFn), SliderScanThreadHelper);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             //reset scan boolean
             SliderScanThreadHelper.ShouldBeRunningFlag = false;
         }
-        private void SliderScanFrmCallback()
-        {
-            //get decimal number
-            SliderScanThreadHelper.SingleDouble = gpibDoubleResult();
-            //load result in array
-            SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index] += SliderScanThreadHelper.SingleDouble;
-            //display count
-            CameraForm.PMTcountBox.Text = SliderScanThreadHelper.SingleDouble.ToString();
-            //update PMT plot
-            CameraForm.PMTcountGraph.PlotYAppend(SliderScanThreadHelper.SingleDouble);
-        }
-        private void SliderScanFrmCallback2()
-        {
-            SliderScanStart.BackColor = System.Drawing.Color.WhiteSmoke;
-            SliderScanStart.Text = "Start *Slider* Scan";
-            //reset to original values
-            SliderScanThreadHelper.theSlider.Value = SliderScanThreadHelper.KeepDoubles[0];
-            //call to update
-            UpdateAll();
-        }
-        private void SliderScanFrmCallback3()
-        {
-            //update slider
-            SliderScanThreadHelper.theSlider.Value = SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index];
-            //Button Indicator
-            SliderScanStart.Text = "Scanning..." + SliderScanThreadHelper.index.ToString();
-            //update DAC
-            UpdateAll();
-        }
-        private void SliderScanFrmCallback4()
-        {
-            lock (SliderScanThreadHelper)
-            {
-                try
-                {
-                    SliderScanLiveAverageTextbox.Text = SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index].ToString();
-                    SliderScanLiveStdTextbox.Text = SliderScanThreadHelper.DoubleData[1, SliderScanThreadHelper.index].ToString();
-                    //plot
-                    CameraForm.scatterGraph3.PlotXYAppend(SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index], SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index]);
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                Monitor.PulseAll(SliderScanThreadHelper);
-            }
-        }
-
-        private void SliderScanFrmCallback5()
-        {
-            lock (SliderScanThreadHelper)
-            {
-                try
-                {
-                    CameraForm.scatterGraph3.Plots[0].Visible = true;
-                    //plot
-                    CameraForm.scatterGraph3.PlotXYAppend(SliderScanThreadHelper.DoubleScanVariable[0, SliderScanThreadHelper.index], SliderScanThreadHelper.DoubleData[0, SliderScanThreadHelper.index]);
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                Monitor.PulseAll(SliderScanThreadHelper);
-            }
-        }
+        
 
         //
         //
@@ -3676,11 +3901,8 @@ namespace ArrayDACControl
                 else
                 {
                     FluorLogThreadHelper.initDoubleData(FluorLogThreadHelper.numPoints, 1, 1);
-                    // if camera is running stop it
-                    if (CameraThreadHelper.ShouldBeRunningFlag)
-                    {
-                        CameraThreadHelper.ShouldBeRunningFlag = false;
-                    }
+                    // if camera or correlator is running stop it
+                    StopDataStreams();
                 }
 
                 //start scan thread
@@ -3700,30 +3922,9 @@ namespace ArrayDACControl
             //update button
             FluorLogStart.BackColor = System.Drawing.Color.White;
             //clear graph
-            CameraForm.scatterGraph3.ClearData();
-            //if running camera, initialize, and clear fluor and position graphs
-            if (FluorLogThreadHelper.message == "Camera")
-            {
-                // clear graphs
-                CameraForm.FluorescenceGraph.ClearData();
-                CameraForm.PositionGraph.ClearData();
-                if (Camera.AppInitialize())
-                {
-                    CameraInitializeHelper();
-                }
-            }
-            if (FluorLogThreadHelper.message == "Correlator:Sum")
-            {
-                //Initialize parameters to values entered under "Correlator" Tab  
-                //if correlator returns false for init, abort scan
-                if (!CorrelatorParameterInit())
-                {
-                    //end scan
-                    FluorLogThreadHelper.ShouldBeRunningFlag = false;
-                    //show message
-                    MessageBox.Show("Correlator Init returned false");
-                }
-            }
+            CameraForm.ScanResultsGraph.ClearData();
+            //initialize data stream
+            initializeDataStreams(FluorLogThreadHelper);
             //run scans
             while (FluorLogThreadHelper.index < (FluorLogThreadHelper.numPoints) && FluorLogThreadHelper.ShouldBeRunningFlag)
             {
@@ -3736,58 +3937,8 @@ namespace ArrayDACControl
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-                if (FluorLogThreadHelper.message == "PMT")
-                {
-                    for (int i = 0; i < FluorLogThreadHelper.numAverage; i++)
-                    {
-                        //get reading from GPIB counter
-                        gpibdevice.simpleRead(21);
-                        try
-                        {
-                            this.Invoke(new MyDelegate(FluorLogFrmCallback));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        //update Sigma array
-                        FluorLogThreadHelper.DoubleData[1, FluorLogThreadHelper.index] += Math.Pow(FluorLogThreadHelper.SingleDouble, 2);
-                    }
-                    //finalize single point average and standard deviation
-                    FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index] = FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index] / FluorLogThreadHelper.numAverage;
-                    FluorLogThreadHelper.DoubleData[1, FluorLogThreadHelper.index] = Math.Sqrt(FluorLogThreadHelper.DoubleData[1, FluorLogThreadHelper.index] / FluorLogThreadHelper.numAverage - Math.Pow(FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index], 2));
-                    //plot
-                    CameraForm.scatterGraph3.PlotXYAppend(FluorLogThreadHelper.DoubleScanVariable[0, FluorLogThreadHelper.index], FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index]);
-                    //increase index
-                    FluorLogThreadHelper.index++;
-                }
-                // if Camera selected run Camera acquisition
-                if (FluorLogThreadHelper.message == "Camera")
-                {
-                    CameraAcquisitionHelper();
-                    FluorLogThreadHelper.index++;
-                }
-
-                // if Correlator:Sum selected, get reading from correlator, and sum bins
-                if (FluorLogThreadHelper.message == "Correlator:Sum")
-                {
-                    //Get results into correlator object
-                    CorrelatorGetResultsHelper();
-
-                    //Put sum of two channels data in Thread array
-                    FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
-
-                    //plot
-                    lock (FluorLogThreadHelper)
-                    {
-                        //display count, plot
-                        try
-                        {
-                            this.BeginInvoke(new MyDelegate(FluorLogFrmCallback6));
-                        }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        Monitor.Wait(FluorLogThreadHelper);
-                    }
-                    //increase index
-                    FluorLogThreadHelper.index++;
-                }    
+                //get data
+                getDatafromStream(FluorLogThreadHelper);
             }
             if (FluorLogThreadHelper.ShouldBeRunningFlag)
             {
@@ -3810,17 +3961,7 @@ namespace ArrayDACControl
             //reset scan boolean
             FluorLogThreadHelper.ShouldBeRunningFlag = false;
         }
-        private void FluorLogFrmCallback()
-        {
-            //get decimal number
-            FluorLogThreadHelper.SingleDouble = gpibDoubleResult();
-            //load result in array
-            FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index] += FluorLogThreadHelper.SingleDouble;
-            //display count
-            CameraForm.PMTcountBox.Text = FluorLogThreadHelper.SingleDouble.ToString();
-            //update PMT plot
-            CameraForm.PMTcountGraph.PlotYAppend(FluorLogThreadHelper.SingleDouble);
-        }
+        
         private void FluorLogFrmCallback2()
         {
             FluorLogStart.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -3845,21 +3986,6 @@ namespace ArrayDACControl
 
             FluorLogLiveAverageTextbox.Text = mean.ToString("F1");
             FluorLogLiveStdTextbox.Text = std.ToString("F1");
-        }
-        private void FluorLogFrmCallback6()
-        {
-            lock (FluorLogThreadHelper)
-            {
-                try
-                {
-                    CameraForm.scatterGraph3.Plots[0].Visible = true;
-                    //plot
-                    CameraForm.scatterGraph3.PlotXYAppend((double) FluorLogThreadHelper.index, FluorLogThreadHelper.DoubleData[0, FluorLogThreadHelper.index]);
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                Monitor.PulseAll(FluorLogThreadHelper);
-            }
         }
 
         //
@@ -4449,14 +4575,7 @@ namespace ArrayDACControl
         }
 
         private void corrRecToggle_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
-        {
-
-        }
-
-        private void groupBox51_Enter(object sender, EventArgs e)
-        {
-
-        }
+        { }
 
         private void switchDisplayBases_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
         {
@@ -4468,10 +4587,10 @@ namespace ArrayDACControl
                 CameraForm.PMTcountGraph.Plots[3].Visible = false;
 
 
-                CameraForm.scatterGraph3.Plots[0].Visible = true;
-                CameraForm.scatterGraph3.Plots[1].Visible = true;
-                CameraForm.scatterGraph3.Plots[2].Visible = false;
-                CameraForm.scatterGraph3.Plots[3].Visible = false;
+                CameraForm.ScanResultsGraph.Plots[0].Visible = true;
+                CameraForm.ScanResultsGraph.Plots[1].Visible = true;
+                CameraForm.ScanResultsGraph.Plots[2].Visible = false;
+                CameraForm.ScanResultsGraph.Plots[3].Visible = false;
 
                 CameraForm.CorrelatorGraph.Plots[0].Visible = true;
                 CameraForm.CorrelatorGraph.Plots[1].Visible = true;
@@ -4486,10 +4605,10 @@ namespace ArrayDACControl
                 CameraForm.PMTcountGraph.Plots[3].Visible = true;
 
 
-                CameraForm.scatterGraph3.Plots[0].Visible = false;
-                CameraForm.scatterGraph3.Plots[1].Visible = false;
-                CameraForm.scatterGraph3.Plots[2].Visible = true;
-                CameraForm.scatterGraph3.Plots[3].Visible = true;
+                CameraForm.ScanResultsGraph.Plots[0].Visible = false;
+                CameraForm.ScanResultsGraph.Plots[1].Visible = false;
+                CameraForm.ScanResultsGraph.Plots[2].Visible = true;
+                CameraForm.ScanResultsGraph.Plots[3].Visible = true;
 
                 CameraForm.CorrelatorGraph.Plots[0].Visible = false;
                 CameraForm.CorrelatorGraph.Plots[1].Visible = false;
@@ -4580,16 +4699,24 @@ namespace ArrayDACControl
 
         private void pulsePeriodText_TextChanged(object sender, EventArgs e)
         {
-            double pulsePeriodVal = Double.Parse(pulsePeriodText.Text); // in microseconds
-            double pulseFreqVal = 1/pulsePeriodVal*1000; // in kHz
+            pulsePeriodVal = Double.Parse(pulsePeriodText.Text); // in microseconds
+            double pulseFreqVal = 1 / pulsePeriodVal * 1000; // in kHz
             pulseFreqLabel.Text = pulseFreqVal.ToString();
-            //theCorrelator.PulseClkDiv = (int)(Math.Round(theCorrelator.ok.P * pulsePeriodVal, 0));
-            //theCorrelator.updateCorrPulseClkDivLive();
+            refreshChannelsHelper();
+        }
+
+        private void slow_pulsePeriodText_TextChanged(object sender, EventArgs e)
+        {
+            slow_pulsePeriodVal = Double.Parse(slow_pulsePeriodText.Text); // in microseconds
+            double slow_pulseFreqVal = 1 / slow_pulsePeriodVal * 1000; // in kHz
+            slow_pulseFreqLabel.Text = slow_pulseFreqVal.ToString();
+            refreshChannelsHelper();
         }
         ///////////////////////////////////////////////////////////
 
         private void updateAllSignalsButton_Click(object sender, EventArgs e)
         {
+            /*
             theCorrelator.PulseClkDiv = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(pulsePeriodText.Text), 0));
 
             theCorrelator.onTimeOut[0] = (uint)(Math.Round(theCorrelator.ok.P * double.Parse(out1OnTimeText.Text), 0));
@@ -4624,26 +4751,38 @@ namespace ArrayDACControl
             theCorrelator.slow_onTimeIn[1] = uint.Parse(slow_in2OnTimeText.Text);
             theCorrelator.slow_delayIn[0] = uint.Parse(slow_in1DelayText.Text);
             theCorrelator.slow_delayIn[1] = uint.Parse(slow_in2DelayText.Text);
+            */
 
+            theCorrelator.PulseClkDiv = (uint)(Math.Round(theCorrelator.ok.P * pulsePeriodVal, 0));
+            theCorrelator.slow_PulseClkDiv = (uint)(Math.Round(theCorrelator.ok.P * slow_pulsePeriodVal, 0));
+
+            for (int i = 0; i < nfastchOut; i++)
+            {
+                theCorrelator.onTimeOut[i] = (uint)(Math.Round(theCorrelator.ok.P * fastOutCh[i].Param2Value, 0));
+                theCorrelator.delayOut[i] = (uint)(Math.Round(theCorrelator.ok.P * fastOutCh[i].Param3Value, 0));
+                theCorrelator.subperiodOut[i] = (uint)(Math.Round(theCorrelator.ok.P * fastOutCh[i].Param1Value, 0));
+            }
+            for (int i = 0; i < nfastchIn; i++)
+            {
+                theCorrelator.onTimeIn[i] = (uint)(Math.Round(theCorrelator.ok.P * fastInCh[i].Param2Value, 0));
+                theCorrelator.delayIn[i] = (uint)(Math.Round(theCorrelator.ok.P * fastInCh[i].Param3Value, 0));
+                theCorrelator.subperiodIn[i] = (uint)(Math.Round(theCorrelator.ok.P * fastInCh[i].Param1Value, 0));
+            }
+            for (int i = 0; i < nslowchOut; i++)
+            {
+                theCorrelator.slow_onTimeOut[i] = (uint)(slowOutCh[i].Param2Value);
+                theCorrelator.slow_delayOut[i] = (uint)(slowOutCh[i].Param3Value);
+                theCorrelator.slow_subperiodOut[i] = (uint)(slowOutCh[i].Param1Value);
+            }
+            for (int i = 0; i < nslowchIn; i++)
+            {
+                theCorrelator.slow_onTimeIn[i] = (uint)(slowInCh[i].Param2Value);
+                theCorrelator.slow_delayIn[i] = (uint)(slowInCh[i].Param3Value);
+                theCorrelator.slow_subperiodIn[i] = (uint)(slowInCh[i].Param1Value);
+            }
 
             theCorrelator.updateAllSignalsLive();
-            /*
-            try
-            {
-                
-                //plot
-                NationalInstruments.WaveformTiming timing = new NationalInstruments.WaveformTiming;
-                timing.
-                DateTime[] ch1 = { DateTime.FromBinary(0), DateTime.FromBinary(long.Parse(out1DelayText.Text)) };
-                NationalInstruments.WaveformTiming timing = new NationalInstruments.WaveformTiming;
-                NationalInstruments.DigitalWaveform dwave = new NationalInstruments.DigitalWaveform(2, 1);
-                dwave.Timing = 
-                PulseProgrammerTimingDiagram.PlotWaveform(dwave);
 
-                digitalSignalPlot1.TransitionLocation
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }  
-             * */
         }
 
         private void syncSrcSw_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
@@ -4667,31 +4806,12 @@ namespace ArrayDACControl
             theCorrelator.recaplockThreshold = uint.Parse(recaplock_threshold_textbox.Text);
             theCorrelator.updateRecaplockThresholdLive();
         }
-
-        private void pulsedDutyText_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            double temp = Math.Round(double.Parse(recaplock_thresholdfrac_textbox.Text) * double.Parse(recaplockcounts_display.Text));
+            recaplock_threshold_textbox.Text = temp.ToString();
         }
 
-        private void label142_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Recool_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label99_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         //////////////////////////////////////////////////
         ////////////Fast output ch2 //////////////////
@@ -4705,7 +4825,6 @@ namespace ArrayDACControl
                 out2DelayText.ForeColor = Color.Black;
             }
         }
-
         private void c1fo2_CheckedChanged(object sender, EventArgs e)
         {
             if (c1fo2.Checked)
@@ -4736,9 +4855,7 @@ namespace ArrayDACControl
                 out2DelayText.ForeColor = Color.Gray;
             }
         }
-        ///////////////////////////////////////////////////////////////
 
-        //////////////////////////////////////////////////
         ////////////Fast input ch1 //////////////////
         private void Indfi1_CheckedChanged(object sender, EventArgs e)
         {
@@ -4777,7 +4894,6 @@ namespace ArrayDACControl
             }
         }
 
-        //////////////////////////////////////////////////
         ////////////Fast input ch2 //////////////////
         private void Indfi2_CheckedChanged(object sender, EventArgs e)
         {
@@ -4816,8 +4932,6 @@ namespace ArrayDACControl
             }
         }
 
-
-        //////////////////////////////////////////////////
         ////////////Slow output ch2 //////////////////
         private void Indso2_CheckedChanged(object sender, EventArgs e)
         {
@@ -4829,7 +4943,6 @@ namespace ArrayDACControl
                 slow_out2DelayText.ForeColor = Color.Black;
             }
         }
-
         private void c1so2_CheckedChanged(object sender, EventArgs e)
         {
             if (c1so2.Checked)
@@ -4860,10 +4973,8 @@ namespace ArrayDACControl
                 slow_out2DelayText.ForeColor = Color.Gray;
             }
         }
-        ///////////////////////////////////////////////////////////////
 
-        //////////////////////////////////////////////////
-        ////////////Fast input ch1 //////////////////
+        ////////////Fast input ch1 options //////////////////
         private void Indsi1_CheckedChanged(object sender, EventArgs e)
         {
             if (Indsi1.Checked)
@@ -4901,8 +5012,7 @@ namespace ArrayDACControl
             }
         }
 
-        //////////////////////////////////////////////////
-        ////////////Fast input ch2 //////////////////
+        ////////////Fast input ch2 options//////////////////
         private void Indsi2_CheckedChanged(object sender, EventArgs e)
         {
             if (Indsi2.Checked)
@@ -4939,7 +5049,6 @@ namespace ArrayDACControl
                 slow_in2DelayText.ForeColor = Color.Gray;
             }
         }
-
         private void out1_Changed(object sender, EventArgs e)
         {
             if (c1fo2.Checked)
@@ -4967,7 +5076,6 @@ namespace ArrayDACControl
                 in2DelayText.Text = out1DelayText.Text;
             }
         }
-
         private void out2_Changed(object sender, EventArgs e)
         {
             if (c2fi1.Checked)
@@ -4981,7 +5089,6 @@ namespace ArrayDACControl
                 in2DelayText.Text = out2DelayText.Text;
             }
         }
-
         private void pulsePeriodText_TextChanged_1(object sender, EventArgs e)
         {
             if (notc1fo2.Checked)
@@ -4993,8 +5100,7 @@ namespace ArrayDACControl
                 out2DelayText.Text = vaux2.ToString();
             }
         }
-
-        private void slow_pulsePeriodText_TextChanged(object sender, EventArgs e)
+        private void slow_pulsePeriodText_TextChanged1(object sender, EventArgs e)
         {
             if (notc1so2.Checked)
             {
@@ -5005,7 +5111,6 @@ namespace ArrayDACControl
                 slow_out2DelayText.Text = vaux2.ToString();
             }
         }
-
         private void slow_out1_Changed(object sender, EventArgs e)
         {
             if (c1so2.Checked)
@@ -5033,7 +5138,6 @@ namespace ArrayDACControl
                 slow_in2DelayText.Text = slow_out1DelayText.Text;
             }
         }
-
         private void slow_out2_Changed(object sender, EventArgs e)
         {
             if (c2si1.Checked)
@@ -5048,69 +5152,314 @@ namespace ArrayDACControl
             }
         }
 
-        private void CorrelatorBinningPhaseSlider_Load(object sender, EventArgs e)
+       ///////////////////////////////////
+
+
+
+        ////////
+        ////////EXPERIMENTAL SEQUENCER CODE
+        ////////
+
+        private void ExpSeqStartButton_Click(object sender, EventArgs e)
         {
+            if (!ExperimentalSequencerThreadHelper.ShouldBeRunningFlag)
+            {
+                ExperimentalSequencerThreadHelper.ShouldBeRunningFlag = true;
+                ExperimentalSequencerThreadHelper.theThread = new Thread(new ThreadStart(ExperimentalSequencerExecute));
+                ExperimentalSequencerThreadHelper.theThread.Name = "Slider Scan thread";
+                ExperimentalSequencerThreadHelper.theThread.Priority = ThreadPriority.Normal;
+                ExperimentalSequencerThreadHelper.index = 0;
+                ExperimentalSequencerThreadHelper.index2 = 0;
+                //get scan parameters and declare data arrays
+                ExperimentalSequencerThreadHelper.min = new double[1];
+                ExperimentalSequencerThreadHelper.max = new double[1];
+                ExperimentalSequencerThreadHelper.min[0] = double.Parse(ExpSeqMainSliderStartText.Text);
+                ExperimentalSequencerThreadHelper.max[0] = double.Parse(ExpSeqMainSliderEndText.Text);
+                ExperimentalSequencerThreadHelper.numAverage = int.Parse(ExpSeqMainSliderNumScansText.Text);
+                ExperimentalSequencerThreadHelper.numPoints = int.Parse(ExpSeqMainSliderNumPointsText.Text);
+                ExperimentalSequencerThreadHelper.theButton = ExpSeqStartButton;
+                ExperimentalSequencerThreadHelper.dataStreamName = ExpSeqMainSlider.Text;
+                ExperimentalSequencerThreadHelper.folderPathExtra = "ExpSeq\\" + ExpSeqExtraPathnameText.Text;
+                //get Slider to scan
+                ExperimentalSequencerThreadHelper.theSlider = getSliderfromText(ExperimentalSequencerThreadHelper.dataStreamName);
+                //Keep initial slider value
+                ExperimentalSequencerThreadHelper.KeepDoubles = new double[1];
+                ExperimentalSequencerThreadHelper.KeepDoubles[0] = ExperimentalSequencerThreadHelper.theSlider.Value;
+                //modify thread name for file saving
+                ExperimentalSequencerThreadHelper.threadName = ExperimentalSequencerThreadHelper.theSlider.Name;
+
+                if (ExperimentalSequencerThreadHelper.numPoints < 2)
+                {
+                    ExperimentalSequencerThreadHelper.numPoints = 2;
+                    ExpSeqMainSliderNumPointsText.Text = "2";
+                }
+                //get Stream type from combo box
+                ExperimentalSequencerThreadHelper.message = ExpSeqMainData.Text;
+
+                //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
+                if (ExperimentalSequencerThreadHelper.message == "PMT")
+                {
+                    ExperimentalSequencerThreadHelper.initDoubleData(ExperimentalSequencerThreadHelper.numPoints, 2, 1);
+                }
+                else
+                {
+                    ExperimentalSequencerThreadHelper.initDoubleData(ExperimentalSequencerThreadHelper.numPoints, 1, 1);
+
+                    // if camera or correlator is running stop it
+                    StopDataStreams();
+                }
+
+                //if Interlocked Scan 1 checked, initialize thread helper
+                if (ExpSeqScan1Checkbox.Checked)
+                {
+                    InterlockedScan1ThreadHelper.ShouldBeRunningFlag = true;
+                    InterlockedScan1ThreadHelper.index = 0;
+                    //get scan parameters and declare data arrays
+                    InterlockedScan1ThreadHelper.min = new double[1];
+                    InterlockedScan1ThreadHelper.max = new double[1];
+                    InterlockedScan1ThreadHelper.min[0] = double.Parse(ExpSeqIntSlider1StartText.Text);
+                    InterlockedScan1ThreadHelper.max[0] = double.Parse(ExpSeqIntSlider1StopText.Text);
+                    InterlockedScan1ThreadHelper.numPoints = int.Parse(ExpSeqIntSlider1NumPointsText.Text);
+
+                    InterlockedScan1ThreadHelper.folderPathExtra = "ExpSeq\\" + ExpSeqExtraPathnameText.Text + "IntScan1\\";
+                    //get Slider to scan
+                    InterlockedScan1ThreadHelper.theSlider = getSliderfromText(ExpSeqIntSlider1.Text);
+
+
+                    //Keep initial slider value
+                    InterlockedScan1ThreadHelper.KeepDoubles = new double[1];
+                    InterlockedScan1ThreadHelper.KeepDoubles[0] = InterlockedScan1ThreadHelper.theSlider.Value;
+                    //modify thread name for file saving
+                    InterlockedScan1ThreadHelper.threadName = InterlockedScan1ThreadHelper.theSlider.Name;
+
+                    if (InterlockedScan1ThreadHelper.numPoints < 2)
+                    {
+                        InterlockedScan1ThreadHelper.numPoints = 2;
+                        ExpSeqIntSlider1NumPointsText.Text = "2";
+                    }
+                    //get Stream type from combo box
+                    InterlockedScan1ThreadHelper.message = "Correlator:Sum";
+                    InterlockedScan1ThreadHelper.initDoubleData(InterlockedScan1ThreadHelper.numPoints, 1, 1);
+
+                }
+
+                if (ExpSeqScan2Checkbox.Checked)
+                {
+                    InterlockedScan2ThreadHelper.ShouldBeRunningFlag = true;
+                    InterlockedScan2ThreadHelper.index = 0;
+                    //get scan parameters and declare data arrays
+                    InterlockedScan2ThreadHelper.min = new double[1];
+                    InterlockedScan2ThreadHelper.max = new double[1];
+                    InterlockedScan2ThreadHelper.min[0] = double.Parse(ExpSeqIntSlider2StartText.Text);
+                    InterlockedScan2ThreadHelper.max[0] = double.Parse(ExpSeqIntSlider2StopText.Text);
+                    InterlockedScan2ThreadHelper.numPoints = int.Parse(ExpSeqIntSlider2NumPointsText.Text);
+
+                    InterlockedScan2ThreadHelper.folderPathExtra = "ExpSeq\\" + ExpSeqExtraPathnameText.Text + "IntScan2\\";
+                    //get Slider to scan
+                    InterlockedScan2ThreadHelper.theSlider = getSliderfromText(ExpSeqIntSlider2.Text);
+
+
+                    //Keep initial slider value
+                    InterlockedScan2ThreadHelper.KeepDoubles = new double[1];
+                    InterlockedScan2ThreadHelper.KeepDoubles[0] = InterlockedScan2ThreadHelper.theSlider.Value;
+                    //modify thread name for file saving
+                    InterlockedScan2ThreadHelper.threadName = InterlockedScan2ThreadHelper.theSlider.Name;
+
+                    if (InterlockedScan2ThreadHelper.numPoints < 2)
+                    {
+                        InterlockedScan2ThreadHelper.numPoints = 2;
+                        ExpSeqIntSlider2NumPointsText.Text = "2";
+                    }
+                    //get Stream type from combo box
+                    InterlockedScan2ThreadHelper.message = "Correlator:Sum";
+                    InterlockedScan2ThreadHelper.initDoubleData(InterlockedScan2ThreadHelper.numPoints, 1, 1);
+
+                }
+
+                //start scan thread
+                try
+                {
+                    ExperimentalSequencerThreadHelper.theThread.Start();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+            else
+            {
+                ExperimentalSequencerThreadHelper.ShouldBeRunningFlag = false;
+                InterlockedScan1ThreadHelper.ShouldBeRunningFlag = false;
+                InterlockedScan2ThreadHelper.ShouldBeRunningFlag = false;
+            }
 
         }
 
-        private void label183_Click(object sender, EventArgs e)
+        private void ExperimentalSequencerExecute()
         {
+            //update button
+            ExpSeqStartButton.BackColor = System.Drawing.Color.White;
+            //clear graph
+            CameraForm.ScanResultsGraph.ClearData();
+            //initialize camera or correlator depending on desired data stream
+            initializeDataStreams(ExperimentalSequencerThreadHelper);
 
+            //loop scans
+            while (ExperimentalSequencerThreadHelper.index2 < (ExperimentalSequencerThreadHelper.numAverage) && ExperimentalSequencerThreadHelper.ShouldBeRunningFlag)
+            {
+                InterlockedScan1ThreadHelper.ShouldBeRunningFlag = true;
+                InterlockedScan2ThreadHelper.ShouldBeRunningFlag = true;
+
+                ExperimentalSequencerThreadHelper.index = 0;
+                
+                //update label
+                int updateInt = ExperimentalSequencerThreadHelper.index2 + 1;
+                string update = "Scan # " + updateInt.ToString();
+                try
+                {
+                    this.Invoke(new MyDelegateLabelUpdate(UpdateLabelCallbackFn), update, ExpSeqScanNumberLabel);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                //run scans
+                while (ExperimentalSequencerThreadHelper.index < (ExperimentalSequencerThreadHelper.numPoints) && ExperimentalSequencerThreadHelper.ShouldBeRunningFlag)
+                {
+                    //Compute new field values
+                    ExperimentalSequencerThreadHelper.DoubleScanVariable[0, ExperimentalSequencerThreadHelper.index] = (double)(ExperimentalSequencerThreadHelper.min[0] + (ExperimentalSequencerThreadHelper.max[0] - ExperimentalSequencerThreadHelper.min[0]) * ExperimentalSequencerThreadHelper.index / (ExperimentalSequencerThreadHelper.numPoints - 1));
+                    //call to change field value
+                    try
+                    {
+                        this.Invoke(new MyDelegateThreadHelper(ScanUpdateCallbackFn),ExperimentalSequencerThreadHelper);
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                    //get Data from selected Data Stream into ThreadHelper variable
+                    //update graphs
+                    getDatafromStream(ExperimentalSequencerThreadHelper);
+                }
+                if (ExperimentalSequencerThreadHelper.ShouldBeRunningFlag)
+                {
+                    //save Scan Data
+                    SaveScanData(ExperimentalSequencerThreadHelper);
+                }
+
+                //Interlocked Scan 1
+                if (ExpSeqScan1Checkbox.Checked)
+                {
+                    InterlockedScan1ThreadHelper.index = 0;
+                    //run scans
+                    while (InterlockedScan1ThreadHelper.index < (InterlockedScan1ThreadHelper.numPoints) && InterlockedScan1ThreadHelper.ShouldBeRunningFlag)
+                    {
+                        //update label
+                        updateInt = InterlockedScan1ThreadHelper.index + 1;
+                        update = "Point # " + updateInt.ToString();
+                        try
+                        {
+                            this.Invoke(new MyDelegateLabelUpdate(UpdateLabelCallbackFn), update, ExpSeqIntScan1ProgressLabel);
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        //Compute new field values
+                        InterlockedScan1ThreadHelper.DoubleScanVariable[0, InterlockedScan1ThreadHelper.index] = (double)(InterlockedScan1ThreadHelper.min[0] + (InterlockedScan1ThreadHelper.max[0] - InterlockedScan1ThreadHelper.min[0]) * InterlockedScan1ThreadHelper.index / (InterlockedScan1ThreadHelper.numPoints - 1));
+                        //call to change field value
+                        try
+                        {
+                            this.Invoke(new MyDelegateThreadHelper(ScanUpdateCallbackFn), InterlockedScan1ThreadHelper);
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                        //get Data from selected Data Stream into ThreadHelper variable
+                        //update graphs
+                        getDatafromStream(InterlockedScan1ThreadHelper);
+                    }
+                    if (InterlockedScan1ThreadHelper.ShouldBeRunningFlag)
+                    {
+                        //save Scan Data
+                        SaveScanData(InterlockedScan1ThreadHelper);
+                    }
+                    //go back to initial value
+                    //reset button
+                    try
+                    {
+                        this.Invoke(new MyDelegateThreadHelper(ScanResetCallbackFn), InterlockedScan1ThreadHelper);
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    //reset scan boolean
+                    InterlockedScan1ThreadHelper.ShouldBeRunningFlag = false;
+                }
+
+                //Interlocked Scan 2
+                if (ExpSeqScan2Checkbox.Checked)
+                {
+                    InterlockedScan2ThreadHelper.index = 0;
+                    //run scans
+                    while (InterlockedScan2ThreadHelper.index < (InterlockedScan2ThreadHelper.numPoints) && InterlockedScan2ThreadHelper.ShouldBeRunningFlag)
+                    {
+                        //update label
+                        updateInt = InterlockedScan2ThreadHelper.index + 1;
+                        update = "Point # " + updateInt.ToString();
+                        try
+                        {
+                            this.Invoke(new MyDelegateLabelUpdate(UpdateLabelCallbackFn), update, ExpSeqIntScan2ProgressLabel); 
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        //Compute new field values
+                        InterlockedScan2ThreadHelper.DoubleScanVariable[0, InterlockedScan2ThreadHelper.index] = (double)(InterlockedScan2ThreadHelper.min[0] + (InterlockedScan2ThreadHelper.max[0] - InterlockedScan2ThreadHelper.min[0]) * InterlockedScan2ThreadHelper.index / (InterlockedScan2ThreadHelper.numPoints - 1));
+                        //call to change field value
+                        try
+                        {
+                            this.Invoke(new MyDelegateThreadHelper(ScanUpdateCallbackFn), InterlockedScan2ThreadHelper);
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                        //get Data from selected Data Stream into ThreadHelper variable
+                        //update graphs
+                        getDatafromStream(InterlockedScan2ThreadHelper);
+                    }
+                    if (InterlockedScan2ThreadHelper.ShouldBeRunningFlag)
+                    {
+                        //save Scan Data
+                        SaveScanData(InterlockedScan2ThreadHelper);
+                    }
+                    //go back to initial value
+                    //reset button
+                    try
+                    {
+                        this.Invoke(new MyDelegateThreadHelper(ScanResetCallbackFn), InterlockedScan2ThreadHelper);
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    //reset scan boolean
+                    InterlockedScan2ThreadHelper.ShouldBeRunningFlag = false;
+                }
+
+                //increase scan index
+                ExperimentalSequencerThreadHelper.index2++;
+            }
+            //go back to initial value
+            //reset button
+            try
+            {
+                this.Invoke(new MyDelegateThreadHelper(ScanResetCallbackFn),ExperimentalSequencerThreadHelper);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            //reset scan boolean
+            ExperimentalSequencerThreadHelper.ShouldBeRunningFlag = false;
         }
 
-        private void out3SigName_TextChanged(object sender, EventArgs e)
+        private void ExpSeqPauseButton_Click(object sender, EventArgs e)
         {
-
+            if (ExperimentalSequencerThreadHelper.ShouldBeRunningFlag && !(ExperimentalSequencerThreadHelper.theThread.ThreadState == System.Threading.ThreadState.Suspended))
+            {
+                ExperimentalSequencerThreadHelper.theThread.Suspend();
+                ExpSeqPauseButton.Text = "RESUME";
+                ExpSeqPauseButton.BackColor = System.Drawing.Color.White;
+                ExpSeqStartButton.Enabled = false;
+            }
+            else if (ExperimentalSequencerThreadHelper.ShouldBeRunningFlag)
+            {
+                ExperimentalSequencerThreadHelper.theThread.Resume();
+                ExpSeqPauseButton.Text = "Pause Sequencer";
+                ExpSeqPauseButton.BackColor = System.Drawing.Color.WhiteSmoke;
+                ExpSeqStartButton.Enabled = true;
+            }
+            
         }
-
-        private void label192_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label199_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox25_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CurrentFeedforward370Offset_AfterChangeValue(object sender, NationalInstruments.UI.AfterChangeNumericValueEventArgs e)
-        {
-
-        }
-
-        private void label208_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void recaplock_thresholdfrac_textbox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            double temp = Math.Round(double.Parse(recaplock_thresholdfrac_textbox.Text) * double.Parse(recaplockcounts_display.Text));
-            recaplock_threshold_textbox.Text = temp.ToString();
-        }
-
-        private void label131_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-
-
-
-
-
 
 
 
