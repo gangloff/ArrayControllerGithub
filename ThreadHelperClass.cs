@@ -16,11 +16,14 @@ namespace ArrayDACControl
         public string threadName;
         //name of Data Stream
         public string dataStreamName;
+        public string slider1Name;
+        public string slider2Name;
         public string folderPathExtra;
         //helper variables for scans
         public int index;
         public int index2;
         public int direction;
+        public int numScanVar;
         public double[] max;
         public double[] min;
         public int numPoints;
@@ -49,6 +52,7 @@ namespace ArrayDACControl
         public double Background;
         //Slider associated with a scan
         public AdjustableSlider theSlider;
+        public AdjustableSlider theSlider2;
         //Button associated with a scan
         public Button theButton;
 

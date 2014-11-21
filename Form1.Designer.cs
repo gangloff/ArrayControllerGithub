@@ -480,30 +480,50 @@
             this.label215 = new System.Windows.Forms.Label();
             this.ExpSeqExtraPathnameText = new System.Windows.Forms.TextBox();
             this.groupBox66 = new System.Windows.Forms.GroupBox();
+            this.groupBox69 = new System.Windows.Forms.GroupBox();
+            this.ExpSeqInt2Slider2 = new System.Windows.Forms.ComboBox();
+            this.label228 = new System.Windows.Forms.Label();
+            this.label229 = new System.Windows.Forms.Label();
+            this.ExpSeqInt2Slider2StartText = new System.Windows.Forms.TextBox();
+            this.ExpSeqInt2Slider2StopText = new System.Windows.Forms.TextBox();
             this.ExpSeqIntScan2ProgressLabel = new System.Windows.Forms.Label();
             this.ExpSeqScan2Checkbox = new System.Windows.Forms.CheckBox();
             this.groupBox63 = new System.Windows.Forms.GroupBox();
             this.label220 = new System.Windows.Forms.Label();
+            this.ExpSeqIntSlider2NumPointsText = new System.Windows.Forms.TextBox();
+            this.groupBox56 = new System.Windows.Forms.GroupBox();
+            this.ExpSeqInt2Slider1 = new System.Windows.Forms.ComboBox();
             this.label221 = new System.Windows.Forms.Label();
             this.label222 = new System.Windows.Forms.Label();
-            this.ExpSeqIntSlider2NumPointsText = new System.Windows.Forms.TextBox();
-            this.ExpSeqIntSlider2StopText = new System.Windows.Forms.TextBox();
-            this.ExpSeqIntSlider2StartText = new System.Windows.Forms.TextBox();
-            this.groupBox56 = new System.Windows.Forms.GroupBox();
-            this.ExpSeqIntSlider2 = new System.Windows.Forms.ComboBox();
+            this.ExpSeqInt2Slider1StartText = new System.Windows.Forms.TextBox();
+            this.ExpSeqInt2Slider1StopText = new System.Windows.Forms.TextBox();
             this.groupBox65 = new System.Windows.Forms.GroupBox();
+            this.groupBox68 = new System.Windows.Forms.GroupBox();
+            this.ExpSeqInt1Slider2 = new System.Windows.Forms.ComboBox();
+            this.label226 = new System.Windows.Forms.Label();
+            this.label227 = new System.Windows.Forms.Label();
+            this.ExpSeqInt1Slider2StartText = new System.Windows.Forms.TextBox();
+            this.ExpSeqInt1Slider2StopText = new System.Windows.Forms.TextBox();
             this.ExpSeqIntScan1ProgressLabel = new System.Windows.Forms.Label();
             this.ExpSeqScan1Checkbox = new System.Windows.Forms.CheckBox();
             this.groupBox57 = new System.Windows.Forms.GroupBox();
             this.label216 = new System.Windows.Forms.Label();
+            this.ExpSeqIntSlider1NumPointsText = new System.Windows.Forms.TextBox();
+            this.groupBox55 = new System.Windows.Forms.GroupBox();
+            this.ExpSeqInt1Slider1 = new System.Windows.Forms.ComboBox();
             this.label217 = new System.Windows.Forms.Label();
             this.label218 = new System.Windows.Forms.Label();
-            this.ExpSeqIntSlider1NumPointsText = new System.Windows.Forms.TextBox();
-            this.ExpSeqIntSlider1StopText = new System.Windows.Forms.TextBox();
-            this.ExpSeqIntSlider1StartText = new System.Windows.Forms.TextBox();
-            this.groupBox55 = new System.Windows.Forms.GroupBox();
-            this.ExpSeqIntSlider1 = new System.Windows.Forms.ComboBox();
+            this.ExpSeqInt1Slider1StartText = new System.Windows.Forms.TextBox();
+            this.ExpSeqInt1Slider1StopText = new System.Windows.Forms.TextBox();
+            this.groupBox28 = new System.Windows.Forms.GroupBox();
+            this.ExpSeqMainData = new System.Windows.Forms.ComboBox();
             this.groupBox64 = new System.Windows.Forms.GroupBox();
+            this.groupBox67 = new System.Windows.Forms.GroupBox();
+            this.label225 = new System.Windows.Forms.Label();
+            this.ExpSeqMainSlider2 = new System.Windows.Forms.ComboBox();
+            this.ExpSeqMainSlider2EndText = new System.Windows.Forms.TextBox();
+            this.label224 = new System.Windows.Forms.Label();
+            this.ExpSeqMainSlider2StartText = new System.Windows.Forms.TextBox();
             this.ExpSeqScanNumberLabel = new System.Windows.Forms.Label();
             this.ExpSeqPauseButton = new System.Windows.Forms.Button();
             this.ExpSeqStartButton = new System.Windows.Forms.Button();
@@ -511,15 +531,13 @@
             this.label211 = new System.Windows.Forms.Label();
             this.ExpSeqMainSliderNumScansText = new System.Windows.Forms.TextBox();
             this.label212 = new System.Windows.Forms.Label();
-            this.label213 = new System.Windows.Forms.Label();
-            this.label214 = new System.Windows.Forms.Label();
             this.ExpSeqMainSliderNumPointsText = new System.Windows.Forms.TextBox();
-            this.ExpSeqMainSliderEndText = new System.Windows.Forms.TextBox();
-            this.ExpSeqMainSliderStartText = new System.Windows.Forms.TextBox();
-            this.groupBox28 = new System.Windows.Forms.GroupBox();
-            this.ExpSeqMainData = new System.Windows.Forms.ComboBox();
             this.groupBox25 = new System.Windows.Forms.GroupBox();
-            this.ExpSeqMainSlider = new System.Windows.Forms.ComboBox();
+            this.ExpSeqMainSlider1 = new System.Windows.Forms.ComboBox();
+            this.label214 = new System.Windows.Forms.Label();
+            this.ExpSeqMainSliderStartText = new System.Windows.Forms.TextBox();
+            this.ExpSeqMainSliderEndText = new System.Windows.Forms.TextBox();
+            this.label213 = new System.Windows.Forms.Label();
             this.RecycleBin = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label112 = new System.Windows.Forms.Label();
@@ -617,6 +635,8 @@
             this.out1DelayText = new System.Windows.Forms.TextBox();
             this.label173 = new System.Windows.Forms.Label();
             this.out4DelayText = new System.Windows.Forms.TextBox();
+            this.groupBox70 = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.FilenameTab.SuspendLayout();
             this.groupBox49.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CommonFilenameSwitch)).BeginInit();
@@ -706,14 +726,17 @@
             this.trashBin.SuspendLayout();
             this.ExperimentalSequencer.SuspendLayout();
             this.groupBox66.SuspendLayout();
+            this.groupBox69.SuspendLayout();
             this.groupBox63.SuspendLayout();
             this.groupBox56.SuspendLayout();
             this.groupBox65.SuspendLayout();
+            this.groupBox68.SuspendLayout();
             this.groupBox57.SuspendLayout();
             this.groupBox55.SuspendLayout();
-            this.groupBox64.SuspendLayout();
-            this.groupBox53.SuspendLayout();
             this.groupBox28.SuspendLayout();
+            this.groupBox64.SuspendLayout();
+            this.groupBox67.SuspendLayout();
+            this.groupBox53.SuspendLayout();
             this.groupBox25.SuspendLayout();
             this.RecycleBin.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -726,6 +749,7 @@
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox70.SuspendLayout();
             this.SuspendLayout();
             // 
             // SinglePMTReadButton
@@ -5461,6 +5485,7 @@
             // 
             // ExperimentalSequencer
             // 
+            this.ExperimentalSequencer.Controls.Add(this.groupBox70);
             this.ExperimentalSequencer.Controls.Add(this.label215);
             this.ExperimentalSequencer.Controls.Add(this.ExpSeqExtraPathnameText);
             this.ExperimentalSequencer.Controls.Add(this.groupBox66);
@@ -5495,22 +5520,119 @@
             // 
             // groupBox66
             // 
+            this.groupBox66.Controls.Add(this.groupBox69);
             this.groupBox66.Controls.Add(this.ExpSeqIntScan2ProgressLabel);
             this.groupBox66.Controls.Add(this.ExpSeqScan2Checkbox);
             this.groupBox66.Controls.Add(this.groupBox63);
             this.groupBox66.Controls.Add(this.groupBox56);
-            this.groupBox66.Location = new System.Drawing.Point(67, 478);
+            this.groupBox66.Location = new System.Drawing.Point(26, 465);
             this.groupBox66.Name = "groupBox66";
-            this.groupBox66.Size = new System.Drawing.Size(854, 123);
+            this.groupBox66.Size = new System.Drawing.Size(789, 144);
             this.groupBox66.TabIndex = 175;
             this.groupBox66.TabStop = false;
             this.groupBox66.Text = "Interlocked Scan 2";
+            // 
+            // groupBox69
+            // 
+            this.groupBox69.Controls.Add(this.ExpSeqInt2Slider2);
+            this.groupBox69.Controls.Add(this.label228);
+            this.groupBox69.Controls.Add(this.label229);
+            this.groupBox69.Controls.Add(this.ExpSeqInt2Slider2StartText);
+            this.groupBox69.Controls.Add(this.ExpSeqInt2Slider2StopText);
+            this.groupBox69.Location = new System.Drawing.Point(89, 74);
+            this.groupBox69.Name = "groupBox69";
+            this.groupBox69.Size = new System.Drawing.Size(282, 54);
+            this.groupBox69.TabIndex = 171;
+            this.groupBox69.TabStop = false;
+            this.groupBox69.Text = "Slider 2";
+            // 
+            // ExpSeqInt2Slider2
+            // 
+            this.ExpSeqInt2Slider2.FormattingEnabled = true;
+            this.ExpSeqInt2Slider2.Items.AddRange(new object[] {
+            "None",
+            "DC0",
+            "DC1",
+            "DC2",
+            "DC3",
+            "DC4",
+            "DC5",
+            "DC6",
+            "DC7",
+            "DC8",
+            "DC9",
+            "DC10",
+            "DC11",
+            "BxSlider",
+            "TickleSlider",
+            "Sideband402Control",
+            "TransferCavity",
+            "RepumperSlider",
+            "DXSlider",
+            "ArrayTotalSlider",
+            "DCVertDipoleSlider",
+            "DCVertQuadSlider",
+            "TotalBiasSlider",
+            "TrapHeightSlider",
+            "QuadrupoleTilt",
+            "QuadTiltRatioSlider",
+            "SnakeRatioSlider",
+            "RightFingersSlider",
+            "LeftFingersSlider",
+            "SnakeOnlySlider",
+            "RepumperPowerSlider",
+            "SideBeam370Power",
+            "LatticePowerControl",
+            "CavityCoolingPowerControl",
+            "RamanSlider",
+            "CorrelatorBinningPhaseSlider"});
+            this.ExpSeqInt2Slider2.Location = new System.Drawing.Point(10, 19);
+            this.ExpSeqInt2Slider2.Name = "ExpSeqInt2Slider2";
+            this.ExpSeqInt2Slider2.Size = new System.Drawing.Size(121, 21);
+            this.ExpSeqInt2Slider2.TabIndex = 0;
+            this.ExpSeqInt2Slider2.Text = "Slider";
+            // 
+            // label228
+            // 
+            this.label228.AutoSize = true;
+            this.label228.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label228.Location = new System.Drawing.Point(209, 11);
+            this.label228.Name = "label228";
+            this.label228.Size = new System.Drawing.Size(56, 13);
+            this.label228.TabIndex = 133;
+            this.label228.Text = "End Value";
+            // 
+            // label229
+            // 
+            this.label229.AutoSize = true;
+            this.label229.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label229.Location = new System.Drawing.Point(143, 11);
+            this.label229.Name = "label229";
+            this.label229.Size = new System.Drawing.Size(59, 13);
+            this.label229.TabIndex = 132;
+            this.label229.Text = "Start Value";
+            // 
+            // ExpSeqInt2Slider2StartText
+            // 
+            this.ExpSeqInt2Slider2StartText.Location = new System.Drawing.Point(149, 27);
+            this.ExpSeqInt2Slider2StartText.Name = "ExpSeqInt2Slider2StartText";
+            this.ExpSeqInt2Slider2StartText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqInt2Slider2StartText.TabIndex = 129;
+            this.ExpSeqInt2Slider2StartText.Text = "-1";
+            // 
+            // ExpSeqInt2Slider2StopText
+            // 
+            this.ExpSeqInt2Slider2StopText.Location = new System.Drawing.Point(212, 27);
+            this.ExpSeqInt2Slider2StopText.Name = "ExpSeqInt2Slider2StopText";
+            this.ExpSeqInt2Slider2StopText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqInt2Slider2StopText.TabIndex = 130;
+            this.ExpSeqInt2Slider2StopText.Text = "1";
             // 
             // ExpSeqIntScan2ProgressLabel
             // 
             this.ExpSeqIntScan2ProgressLabel.AutoSize = true;
             this.ExpSeqIntScan2ProgressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExpSeqIntScan2ProgressLabel.Location = new System.Drawing.Point(727, 63);
+            this.ExpSeqIntScan2ProgressLabel.Location = new System.Drawing.Point(553, 60);
             this.ExpSeqIntScan2ProgressLabel.Name = "ExpSeqIntScan2ProgressLabel";
             this.ExpSeqIntScan2ProgressLabel.Size = new System.Drawing.Size(62, 20);
             this.ExpSeqIntScan2ProgressLabel.TabIndex = 172;
@@ -5531,14 +5653,10 @@
             // groupBox63
             // 
             this.groupBox63.Controls.Add(this.label220);
-            this.groupBox63.Controls.Add(this.label221);
-            this.groupBox63.Controls.Add(this.label222);
             this.groupBox63.Controls.Add(this.ExpSeqIntSlider2NumPointsText);
-            this.groupBox63.Controls.Add(this.ExpSeqIntSlider2StopText);
-            this.groupBox63.Controls.Add(this.ExpSeqIntSlider2StartText);
-            this.groupBox63.Location = new System.Drawing.Point(365, 29);
+            this.groupBox63.Location = new System.Drawing.Point(418, 33);
             this.groupBox63.Name = "groupBox63";
-            this.groupBox63.Size = new System.Drawing.Size(316, 74);
+            this.groupBox63.Size = new System.Drawing.Size(108, 74);
             this.groupBox63.TabIndex = 165;
             this.groupBox63.TabStop = false;
             this.groupBox63.Text = "Scan Parameters";
@@ -5547,70 +5665,50 @@
             // 
             this.label220.AutoSize = true;
             this.label220.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label220.Location = new System.Drawing.Point(210, 25);
+            this.label220.Location = new System.Drawing.Point(18, 27);
             this.label220.Name = "label220";
             this.label220.Size = new System.Drawing.Size(42, 13);
             this.label220.TabIndex = 134;
             this.label220.Text = "#points";
             // 
-            // label221
-            // 
-            this.label221.AutoSize = true;
-            this.label221.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label221.Location = new System.Drawing.Point(115, 25);
-            this.label221.Name = "label221";
-            this.label221.Size = new System.Drawing.Size(56, 13);
-            this.label221.TabIndex = 133;
-            this.label221.Text = "End Value";
-            // 
-            // label222
-            // 
-            this.label222.AutoSize = true;
-            this.label222.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label222.Location = new System.Drawing.Point(7, 25);
-            this.label222.Name = "label222";
-            this.label222.Size = new System.Drawing.Size(59, 13);
-            this.label222.TabIndex = 132;
-            this.label222.Text = "Start Value";
-            // 
             // ExpSeqIntSlider2NumPointsText
             // 
-            this.ExpSeqIntSlider2NumPointsText.Location = new System.Drawing.Point(211, 41);
+            this.ExpSeqIntSlider2NumPointsText.Location = new System.Drawing.Point(19, 43);
             this.ExpSeqIntSlider2NumPointsText.Name = "ExpSeqIntSlider2NumPointsText";
             this.ExpSeqIntSlider2NumPointsText.Size = new System.Drawing.Size(43, 20);
             this.ExpSeqIntSlider2NumPointsText.TabIndex = 131;
             this.ExpSeqIntSlider2NumPointsText.Text = "50";
             // 
-            // ExpSeqIntSlider2StopText
-            // 
-            this.ExpSeqIntSlider2StopText.Location = new System.Drawing.Point(118, 41);
-            this.ExpSeqIntSlider2StopText.Name = "ExpSeqIntSlider2StopText";
-            this.ExpSeqIntSlider2StopText.Size = new System.Drawing.Size(43, 20);
-            this.ExpSeqIntSlider2StopText.TabIndex = 130;
-            this.ExpSeqIntSlider2StopText.Text = "1";
-            // 
-            // ExpSeqIntSlider2StartText
-            // 
-            this.ExpSeqIntSlider2StartText.Location = new System.Drawing.Point(13, 41);
-            this.ExpSeqIntSlider2StartText.Name = "ExpSeqIntSlider2StartText";
-            this.ExpSeqIntSlider2StartText.Size = new System.Drawing.Size(43, 20);
-            this.ExpSeqIntSlider2StartText.TabIndex = 129;
-            this.ExpSeqIntSlider2StartText.Text = "-1";
-            // 
             // groupBox56
             // 
-            this.groupBox56.Controls.Add(this.ExpSeqIntSlider2);
-            this.groupBox56.Location = new System.Drawing.Point(131, 29);
+            this.groupBox56.Controls.Add(this.ExpSeqInt2Slider1);
+            this.groupBox56.Controls.Add(this.label221);
+            this.groupBox56.Controls.Add(this.label222);
+            this.groupBox56.Controls.Add(this.ExpSeqInt2Slider1StartText);
+            this.groupBox56.Controls.Add(this.ExpSeqInt2Slider1StopText);
+            this.groupBox56.Location = new System.Drawing.Point(89, 14);
             this.groupBox56.Name = "groupBox56";
-            this.groupBox56.Size = new System.Drawing.Size(146, 54);
+            this.groupBox56.Size = new System.Drawing.Size(282, 54);
             this.groupBox56.TabIndex = 170;
             this.groupBox56.TabStop = false;
-            this.groupBox56.Text = "Slider";
+            this.groupBox56.Text = "Slider 1";
             // 
-            // ExpSeqIntSlider2
+            // ExpSeqInt2Slider1
             // 
-            this.ExpSeqIntSlider2.FormattingEnabled = true;
-            this.ExpSeqIntSlider2.Items.AddRange(new object[] {
+            this.ExpSeqInt2Slider1.FormattingEnabled = true;
+            this.ExpSeqInt2Slider1.Items.AddRange(new object[] {
+            "DC0",
+            "DC1",
+            "DC2",
+            "DC3",
+            "DC4",
+            "DC5",
+            "DC6",
+            "DC7",
+            "DC8",
+            "DC9",
+            "DC10",
+            "DC11",
             "BxSlider",
             "TickleSlider",
             "Sideband402Control",
@@ -5634,30 +5732,163 @@
             "CavityCoolingPowerControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
-            this.ExpSeqIntSlider2.Location = new System.Drawing.Point(10, 19);
-            this.ExpSeqIntSlider2.Name = "ExpSeqIntSlider2";
-            this.ExpSeqIntSlider2.Size = new System.Drawing.Size(121, 21);
-            this.ExpSeqIntSlider2.TabIndex = 0;
-            this.ExpSeqIntSlider2.Text = "Slider";
+            this.ExpSeqInt2Slider1.Location = new System.Drawing.Point(10, 19);
+            this.ExpSeqInt2Slider1.Name = "ExpSeqInt2Slider1";
+            this.ExpSeqInt2Slider1.Size = new System.Drawing.Size(121, 21);
+            this.ExpSeqInt2Slider1.TabIndex = 0;
+            this.ExpSeqInt2Slider1.Text = "Slider";
+            // 
+            // label221
+            // 
+            this.label221.AutoSize = true;
+            this.label221.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label221.Location = new System.Drawing.Point(209, 11);
+            this.label221.Name = "label221";
+            this.label221.Size = new System.Drawing.Size(56, 13);
+            this.label221.TabIndex = 133;
+            this.label221.Text = "End Value";
+            // 
+            // label222
+            // 
+            this.label222.AutoSize = true;
+            this.label222.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label222.Location = new System.Drawing.Point(143, 11);
+            this.label222.Name = "label222";
+            this.label222.Size = new System.Drawing.Size(59, 13);
+            this.label222.TabIndex = 132;
+            this.label222.Text = "Start Value";
+            // 
+            // ExpSeqInt2Slider1StartText
+            // 
+            this.ExpSeqInt2Slider1StartText.Location = new System.Drawing.Point(149, 27);
+            this.ExpSeqInt2Slider1StartText.Name = "ExpSeqInt2Slider1StartText";
+            this.ExpSeqInt2Slider1StartText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqInt2Slider1StartText.TabIndex = 129;
+            this.ExpSeqInt2Slider1StartText.Text = "-1";
+            // 
+            // ExpSeqInt2Slider1StopText
+            // 
+            this.ExpSeqInt2Slider1StopText.Location = new System.Drawing.Point(212, 27);
+            this.ExpSeqInt2Slider1StopText.Name = "ExpSeqInt2Slider1StopText";
+            this.ExpSeqInt2Slider1StopText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqInt2Slider1StopText.TabIndex = 130;
+            this.ExpSeqInt2Slider1StopText.Text = "1";
             // 
             // groupBox65
             // 
+            this.groupBox65.Controls.Add(this.groupBox68);
             this.groupBox65.Controls.Add(this.ExpSeqIntScan1ProgressLabel);
             this.groupBox65.Controls.Add(this.ExpSeqScan1Checkbox);
             this.groupBox65.Controls.Add(this.groupBox57);
             this.groupBox65.Controls.Add(this.groupBox55);
-            this.groupBox65.Location = new System.Drawing.Point(67, 344);
+            this.groupBox65.Location = new System.Drawing.Point(26, 316);
             this.groupBox65.Name = "groupBox65";
-            this.groupBox65.Size = new System.Drawing.Size(854, 118);
+            this.groupBox65.Size = new System.Drawing.Size(789, 143);
             this.groupBox65.TabIndex = 174;
             this.groupBox65.TabStop = false;
             this.groupBox65.Text = "Interlocked Scan 1";
+            // 
+            // groupBox68
+            // 
+            this.groupBox68.Controls.Add(this.ExpSeqInt1Slider2);
+            this.groupBox68.Controls.Add(this.label226);
+            this.groupBox68.Controls.Add(this.label227);
+            this.groupBox68.Controls.Add(this.ExpSeqInt1Slider2StartText);
+            this.groupBox68.Controls.Add(this.ExpSeqInt1Slider2StopText);
+            this.groupBox68.Location = new System.Drawing.Point(89, 75);
+            this.groupBox68.Name = "groupBox68";
+            this.groupBox68.Size = new System.Drawing.Size(282, 54);
+            this.groupBox68.TabIndex = 170;
+            this.groupBox68.TabStop = false;
+            this.groupBox68.Text = "Slider 2";
+            // 
+            // ExpSeqInt1Slider2
+            // 
+            this.ExpSeqInt1Slider2.FormattingEnabled = true;
+            this.ExpSeqInt1Slider2.Items.AddRange(new object[] {
+            "None",
+            "DC0",
+            "DC1",
+            "DC2",
+            "DC3",
+            "DC4",
+            "DC5",
+            "DC6",
+            "DC7",
+            "DC8",
+            "DC9",
+            "DC10",
+            "DC11",
+            "BxSlider",
+            "TickleSlider",
+            "Sideband402Control",
+            "TransferCavity",
+            "RepumperSlider",
+            "DXSlider",
+            "ArrayTotalSlider",
+            "DCVertDipoleSlider",
+            "DCVertQuadSlider",
+            "TotalBiasSlider",
+            "TrapHeightSlider",
+            "QuadrupoleTilt",
+            "QuadTiltRatioSlider",
+            "SnakeRatioSlider",
+            "RightFingersSlider",
+            "LeftFingersSlider",
+            "SnakeOnlySlider",
+            "RepumperPowerSlider",
+            "SideBeam370Power",
+            "LatticePowerControl",
+            "CavityCoolingPowerControl",
+            "RamanSlider",
+            "CorrelatorBinningPhaseSlider"});
+            this.ExpSeqInt1Slider2.Location = new System.Drawing.Point(10, 19);
+            this.ExpSeqInt1Slider2.Name = "ExpSeqInt1Slider2";
+            this.ExpSeqInt1Slider2.Size = new System.Drawing.Size(121, 21);
+            this.ExpSeqInt1Slider2.TabIndex = 0;
+            this.ExpSeqInt1Slider2.Text = "Slider";
+            // 
+            // label226
+            // 
+            this.label226.AutoSize = true;
+            this.label226.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label226.Location = new System.Drawing.Point(213, 12);
+            this.label226.Name = "label226";
+            this.label226.Size = new System.Drawing.Size(56, 13);
+            this.label226.TabIndex = 133;
+            this.label226.Text = "End Value";
+            // 
+            // label227
+            // 
+            this.label227.AutoSize = true;
+            this.label227.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label227.Location = new System.Drawing.Point(143, 12);
+            this.label227.Name = "label227";
+            this.label227.Size = new System.Drawing.Size(59, 13);
+            this.label227.TabIndex = 132;
+            this.label227.Text = "Start Value";
+            // 
+            // ExpSeqInt1Slider2StartText
+            // 
+            this.ExpSeqInt1Slider2StartText.Location = new System.Drawing.Point(149, 28);
+            this.ExpSeqInt1Slider2StartText.Name = "ExpSeqInt1Slider2StartText";
+            this.ExpSeqInt1Slider2StartText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqInt1Slider2StartText.TabIndex = 129;
+            this.ExpSeqInt1Slider2StartText.Text = "-1";
+            // 
+            // ExpSeqInt1Slider2StopText
+            // 
+            this.ExpSeqInt1Slider2StopText.Location = new System.Drawing.Point(216, 28);
+            this.ExpSeqInt1Slider2StopText.Name = "ExpSeqInt1Slider2StopText";
+            this.ExpSeqInt1Slider2StopText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqInt1Slider2StopText.TabIndex = 130;
+            this.ExpSeqInt1Slider2StopText.Text = "1";
             // 
             // ExpSeqIntScan1ProgressLabel
             // 
             this.ExpSeqIntScan1ProgressLabel.AutoSize = true;
             this.ExpSeqIntScan1ProgressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExpSeqIntScan1ProgressLabel.Location = new System.Drawing.Point(727, 57);
+            this.ExpSeqIntScan1ProgressLabel.Location = new System.Drawing.Point(553, 58);
             this.ExpSeqIntScan1ProgressLabel.Name = "ExpSeqIntScan1ProgressLabel";
             this.ExpSeqIntScan1ProgressLabel.Size = new System.Drawing.Size(62, 20);
             this.ExpSeqIntScan1ProgressLabel.TabIndex = 170;
@@ -5678,14 +5909,10 @@
             // groupBox57
             // 
             this.groupBox57.Controls.Add(this.label216);
-            this.groupBox57.Controls.Add(this.label217);
-            this.groupBox57.Controls.Add(this.label218);
             this.groupBox57.Controls.Add(this.ExpSeqIntSlider1NumPointsText);
-            this.groupBox57.Controls.Add(this.ExpSeqIntSlider1StopText);
-            this.groupBox57.Controls.Add(this.ExpSeqIntSlider1StartText);
-            this.groupBox57.Location = new System.Drawing.Point(368, 23);
+            this.groupBox57.Location = new System.Drawing.Point(418, 30);
             this.groupBox57.Name = "groupBox57";
-            this.groupBox57.Size = new System.Drawing.Size(316, 74);
+            this.groupBox57.Size = new System.Drawing.Size(108, 74);
             this.groupBox57.TabIndex = 165;
             this.groupBox57.TabStop = false;
             this.groupBox57.Text = "Scan Parameters";
@@ -5694,70 +5921,50 @@
             // 
             this.label216.AutoSize = true;
             this.label216.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label216.Location = new System.Drawing.Point(210, 25);
+            this.label216.Location = new System.Drawing.Point(20, 23);
             this.label216.Name = "label216";
             this.label216.Size = new System.Drawing.Size(42, 13);
             this.label216.TabIndex = 134;
             this.label216.Text = "#points";
             // 
-            // label217
-            // 
-            this.label217.AutoSize = true;
-            this.label217.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label217.Location = new System.Drawing.Point(115, 25);
-            this.label217.Name = "label217";
-            this.label217.Size = new System.Drawing.Size(56, 13);
-            this.label217.TabIndex = 133;
-            this.label217.Text = "End Value";
-            // 
-            // label218
-            // 
-            this.label218.AutoSize = true;
-            this.label218.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label218.Location = new System.Drawing.Point(7, 25);
-            this.label218.Name = "label218";
-            this.label218.Size = new System.Drawing.Size(59, 13);
-            this.label218.TabIndex = 132;
-            this.label218.Text = "Start Value";
-            // 
             // ExpSeqIntSlider1NumPointsText
             // 
-            this.ExpSeqIntSlider1NumPointsText.Location = new System.Drawing.Point(211, 41);
+            this.ExpSeqIntSlider1NumPointsText.Location = new System.Drawing.Point(21, 39);
             this.ExpSeqIntSlider1NumPointsText.Name = "ExpSeqIntSlider1NumPointsText";
             this.ExpSeqIntSlider1NumPointsText.Size = new System.Drawing.Size(43, 20);
             this.ExpSeqIntSlider1NumPointsText.TabIndex = 131;
             this.ExpSeqIntSlider1NumPointsText.Text = "50";
             // 
-            // ExpSeqIntSlider1StopText
-            // 
-            this.ExpSeqIntSlider1StopText.Location = new System.Drawing.Point(118, 41);
-            this.ExpSeqIntSlider1StopText.Name = "ExpSeqIntSlider1StopText";
-            this.ExpSeqIntSlider1StopText.Size = new System.Drawing.Size(43, 20);
-            this.ExpSeqIntSlider1StopText.TabIndex = 130;
-            this.ExpSeqIntSlider1StopText.Text = "1";
-            // 
-            // ExpSeqIntSlider1StartText
-            // 
-            this.ExpSeqIntSlider1StartText.Location = new System.Drawing.Point(13, 41);
-            this.ExpSeqIntSlider1StartText.Name = "ExpSeqIntSlider1StartText";
-            this.ExpSeqIntSlider1StartText.Size = new System.Drawing.Size(43, 20);
-            this.ExpSeqIntSlider1StartText.TabIndex = 129;
-            this.ExpSeqIntSlider1StartText.Text = "-1";
-            // 
             // groupBox55
             // 
-            this.groupBox55.Controls.Add(this.ExpSeqIntSlider1);
-            this.groupBox55.Location = new System.Drawing.Point(134, 23);
+            this.groupBox55.Controls.Add(this.ExpSeqInt1Slider1);
+            this.groupBox55.Controls.Add(this.label217);
+            this.groupBox55.Controls.Add(this.label218);
+            this.groupBox55.Controls.Add(this.ExpSeqInt1Slider1StartText);
+            this.groupBox55.Controls.Add(this.ExpSeqInt1Slider1StopText);
+            this.groupBox55.Location = new System.Drawing.Point(89, 14);
             this.groupBox55.Name = "groupBox55";
-            this.groupBox55.Size = new System.Drawing.Size(146, 54);
+            this.groupBox55.Size = new System.Drawing.Size(282, 54);
             this.groupBox55.TabIndex = 169;
             this.groupBox55.TabStop = false;
-            this.groupBox55.Text = "Slider";
+            this.groupBox55.Text = "Slider 1";
             // 
-            // ExpSeqIntSlider1
+            // ExpSeqInt1Slider1
             // 
-            this.ExpSeqIntSlider1.FormattingEnabled = true;
-            this.ExpSeqIntSlider1.Items.AddRange(new object[] {
+            this.ExpSeqInt1Slider1.FormattingEnabled = true;
+            this.ExpSeqInt1Slider1.Items.AddRange(new object[] {
+            "DC0",
+            "DC1",
+            "DC2",
+            "DC3",
+            "DC4",
+            "DC5",
+            "DC6",
+            "DC7",
+            "DC8",
+            "DC9",
+            "DC10",
+            "DC11",
             "BxSlider",
             "TickleSlider",
             "Sideband402Control",
@@ -5781,154 +5988,52 @@
             "CavityCoolingPowerControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
-            this.ExpSeqIntSlider1.Location = new System.Drawing.Point(10, 19);
-            this.ExpSeqIntSlider1.Name = "ExpSeqIntSlider1";
-            this.ExpSeqIntSlider1.Size = new System.Drawing.Size(121, 21);
-            this.ExpSeqIntSlider1.TabIndex = 0;
-            this.ExpSeqIntSlider1.Text = "Slider";
+            this.ExpSeqInt1Slider1.Location = new System.Drawing.Point(10, 19);
+            this.ExpSeqInt1Slider1.Name = "ExpSeqInt1Slider1";
+            this.ExpSeqInt1Slider1.Size = new System.Drawing.Size(121, 21);
+            this.ExpSeqInt1Slider1.TabIndex = 0;
+            this.ExpSeqInt1Slider1.Text = "Slider";
             // 
-            // groupBox64
+            // label217
             // 
-            this.groupBox64.Controls.Add(this.ExpSeqScanNumberLabel);
-            this.groupBox64.Controls.Add(this.ExpSeqPauseButton);
-            this.groupBox64.Controls.Add(this.ExpSeqStartButton);
-            this.groupBox64.Controls.Add(this.groupBox53);
-            this.groupBox64.Controls.Add(this.groupBox25);
-            this.groupBox64.Location = new System.Drawing.Point(26, 106);
-            this.groupBox64.Name = "groupBox64";
-            this.groupBox64.Size = new System.Drawing.Size(1067, 175);
-            this.groupBox64.TabIndex = 173;
-            this.groupBox64.TabStop = false;
-            this.groupBox64.Text = "Main Thread";
+            this.label217.AutoSize = true;
+            this.label217.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label217.Location = new System.Drawing.Point(213, 12);
+            this.label217.Name = "label217";
+            this.label217.Size = new System.Drawing.Size(56, 13);
+            this.label217.TabIndex = 133;
+            this.label217.Text = "End Value";
             // 
-            // ExpSeqScanNumberLabel
+            // label218
             // 
-            this.ExpSeqScanNumberLabel.AutoSize = true;
-            this.ExpSeqScanNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExpSeqScanNumberLabel.Location = new System.Drawing.Point(768, 109);
-            this.ExpSeqScanNumberLabel.Name = "ExpSeqScanNumberLabel";
-            this.ExpSeqScanNumberLabel.Size = new System.Drawing.Size(63, 20);
-            this.ExpSeqScanNumberLabel.TabIndex = 169;
-            this.ExpSeqScanNumberLabel.Text = "Scan # ";
+            this.label218.AutoSize = true;
+            this.label218.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label218.Location = new System.Drawing.Point(143, 12);
+            this.label218.Name = "label218";
+            this.label218.Size = new System.Drawing.Size(59, 13);
+            this.label218.TabIndex = 132;
+            this.label218.Text = "Start Value";
             // 
-            // ExpSeqPauseButton
+            // ExpSeqInt1Slider1StartText
             // 
-            this.ExpSeqPauseButton.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ExpSeqPauseButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.ExpSeqPauseButton.Location = new System.Drawing.Point(911, 27);
-            this.ExpSeqPauseButton.Name = "ExpSeqPauseButton";
-            this.ExpSeqPauseButton.Size = new System.Drawing.Size(113, 31);
-            this.ExpSeqPauseButton.TabIndex = 168;
-            this.ExpSeqPauseButton.Text = "Pause Sequencer";
-            this.ExpSeqPauseButton.UseVisualStyleBackColor = false;
-            this.ExpSeqPauseButton.Click += new System.EventHandler(this.ExpSeqPauseButton_Click);
+            this.ExpSeqInt1Slider1StartText.Location = new System.Drawing.Point(149, 28);
+            this.ExpSeqInt1Slider1StartText.Name = "ExpSeqInt1Slider1StartText";
+            this.ExpSeqInt1Slider1StartText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqInt1Slider1StartText.TabIndex = 129;
+            this.ExpSeqInt1Slider1StartText.Text = "-1";
             // 
-            // ExpSeqStartButton
+            // ExpSeqInt1Slider1StopText
             // 
-            this.ExpSeqStartButton.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ExpSeqStartButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.ExpSeqStartButton.Location = new System.Drawing.Point(763, 27);
-            this.ExpSeqStartButton.Name = "ExpSeqStartButton";
-            this.ExpSeqStartButton.Size = new System.Drawing.Size(113, 31);
-            this.ExpSeqStartButton.TabIndex = 167;
-            this.ExpSeqStartButton.Text = "Start Sequencer";
-            this.ExpSeqStartButton.UseVisualStyleBackColor = false;
-            this.ExpSeqStartButton.Click += new System.EventHandler(this.ExpSeqStartButton_Click);
-            // 
-            // groupBox53
-            // 
-            this.groupBox53.Controls.Add(this.label211);
-            this.groupBox53.Controls.Add(this.ExpSeqMainSliderNumScansText);
-            this.groupBox53.Controls.Add(this.label212);
-            this.groupBox53.Controls.Add(this.label213);
-            this.groupBox53.Controls.Add(this.label214);
-            this.groupBox53.Controls.Add(this.ExpSeqMainSliderNumPointsText);
-            this.groupBox53.Controls.Add(this.ExpSeqMainSliderEndText);
-            this.groupBox53.Controls.Add(this.ExpSeqMainSliderStartText);
-            this.groupBox53.Location = new System.Drawing.Point(185, 27);
-            this.groupBox53.Name = "groupBox53";
-            this.groupBox53.Size = new System.Drawing.Size(334, 127);
-            this.groupBox53.TabIndex = 164;
-            this.groupBox53.TabStop = false;
-            this.groupBox53.Text = "Scan Parameters";
-            // 
-            // label211
-            // 
-            this.label211.AutoSize = true;
-            this.label211.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label211.Location = new System.Drawing.Point(208, 82);
-            this.label211.Name = "label211";
-            this.label211.Size = new System.Drawing.Size(89, 13);
-            this.label211.TabIndex = 140;
-            this.label211.Text = "Number of Scans";
-            // 
-            // ExpSeqMainSliderNumScansText
-            // 
-            this.ExpSeqMainSliderNumScansText.Location = new System.Drawing.Point(211, 98);
-            this.ExpSeqMainSliderNumScansText.Name = "ExpSeqMainSliderNumScansText";
-            this.ExpSeqMainSliderNumScansText.Size = new System.Drawing.Size(43, 20);
-            this.ExpSeqMainSliderNumScansText.TabIndex = 139;
-            this.ExpSeqMainSliderNumScansText.Text = "100";
-            // 
-            // label212
-            // 
-            this.label212.AutoSize = true;
-            this.label212.ForeColor = System.Drawing.Color.Goldenrod;
-            this.label212.Location = new System.Drawing.Point(210, 25);
-            this.label212.Name = "label212";
-            this.label212.Size = new System.Drawing.Size(42, 13);
-            this.label212.TabIndex = 134;
-            this.label212.Text = "#points";
-            // 
-            // label213
-            // 
-            this.label213.AutoSize = true;
-            this.label213.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label213.Location = new System.Drawing.Point(115, 25);
-            this.label213.Name = "label213";
-            this.label213.Size = new System.Drawing.Size(56, 13);
-            this.label213.TabIndex = 133;
-            this.label213.Text = "End Value";
-            // 
-            // label214
-            // 
-            this.label214.AutoSize = true;
-            this.label214.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label214.Location = new System.Drawing.Point(7, 25);
-            this.label214.Name = "label214";
-            this.label214.Size = new System.Drawing.Size(59, 13);
-            this.label214.TabIndex = 132;
-            this.label214.Text = "Start Value";
-            // 
-            // ExpSeqMainSliderNumPointsText
-            // 
-            this.ExpSeqMainSliderNumPointsText.Location = new System.Drawing.Point(211, 41);
-            this.ExpSeqMainSliderNumPointsText.Name = "ExpSeqMainSliderNumPointsText";
-            this.ExpSeqMainSliderNumPointsText.Size = new System.Drawing.Size(43, 20);
-            this.ExpSeqMainSliderNumPointsText.TabIndex = 131;
-            this.ExpSeqMainSliderNumPointsText.Text = "50";
-            // 
-            // ExpSeqMainSliderEndText
-            // 
-            this.ExpSeqMainSliderEndText.Location = new System.Drawing.Point(118, 41);
-            this.ExpSeqMainSliderEndText.Name = "ExpSeqMainSliderEndText";
-            this.ExpSeqMainSliderEndText.Size = new System.Drawing.Size(43, 20);
-            this.ExpSeqMainSliderEndText.TabIndex = 130;
-            this.ExpSeqMainSliderEndText.Text = "1";
-            // 
-            // ExpSeqMainSliderStartText
-            // 
-            this.ExpSeqMainSliderStartText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.ExpSeqMainSliderStartText.Location = new System.Drawing.Point(13, 41);
-            this.ExpSeqMainSliderStartText.Name = "ExpSeqMainSliderStartText";
-            this.ExpSeqMainSliderStartText.Size = new System.Drawing.Size(43, 20);
-            this.ExpSeqMainSliderStartText.TabIndex = 129;
-            this.ExpSeqMainSliderStartText.Text = "-1";
+            this.ExpSeqInt1Slider1StopText.Location = new System.Drawing.Point(216, 28);
+            this.ExpSeqInt1Slider1StopText.Name = "ExpSeqInt1Slider1StopText";
+            this.ExpSeqInt1Slider1StopText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqInt1Slider1StopText.TabIndex = 130;
+            this.ExpSeqInt1Slider1StopText.Text = "1";
             // 
             // groupBox28
             // 
             this.groupBox28.Controls.Add(this.ExpSeqMainData);
-            this.groupBox28.Location = new System.Drawing.Point(510, 39);
+            this.groupBox28.Location = new System.Drawing.Point(495, 23);
             this.groupBox28.Name = "groupBox28";
             this.groupBox28.Size = new System.Drawing.Size(146, 54);
             this.groupBox28.TabIndex = 163;
@@ -5951,20 +6056,62 @@
             this.ExpSeqMainData.TabIndex = 0;
             this.ExpSeqMainData.Text = "Data";
             // 
-            // groupBox25
+            // groupBox64
             // 
-            this.groupBox25.Controls.Add(this.ExpSeqMainSlider);
-            this.groupBox25.Location = new System.Drawing.Point(20, 27);
-            this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Size = new System.Drawing.Size(146, 54);
-            this.groupBox25.TabIndex = 162;
-            this.groupBox25.TabStop = false;
-            this.groupBox25.Text = "Variable to be scanned";
+            this.groupBox64.Controls.Add(this.groupBox67);
+            this.groupBox64.Controls.Add(this.ExpSeqScanNumberLabel);
+            this.groupBox64.Controls.Add(this.ExpSeqPauseButton);
+            this.groupBox64.Controls.Add(this.ExpSeqStartButton);
+            this.groupBox64.Controls.Add(this.groupBox53);
+            this.groupBox64.Controls.Add(this.groupBox25);
+            this.groupBox64.Location = new System.Drawing.Point(26, 106);
+            this.groupBox64.Name = "groupBox64";
+            this.groupBox64.Size = new System.Drawing.Size(785, 175);
+            this.groupBox64.TabIndex = 173;
+            this.groupBox64.TabStop = false;
+            this.groupBox64.Text = "Main Thread";
             // 
-            // ExpSeqMainSlider
+            // groupBox67
             // 
-            this.ExpSeqMainSlider.FormattingEnabled = true;
-            this.ExpSeqMainSlider.Items.AddRange(new object[] {
+            this.groupBox67.Controls.Add(this.label225);
+            this.groupBox67.Controls.Add(this.ExpSeqMainSlider2);
+            this.groupBox67.Controls.Add(this.ExpSeqMainSlider2EndText);
+            this.groupBox67.Controls.Add(this.label224);
+            this.groupBox67.Controls.Add(this.ExpSeqMainSlider2StartText);
+            this.groupBox67.Location = new System.Drawing.Point(20, 100);
+            this.groupBox67.Name = "groupBox67";
+            this.groupBox67.Size = new System.Drawing.Size(301, 54);
+            this.groupBox67.TabIndex = 163;
+            this.groupBox67.TabStop = false;
+            this.groupBox67.Text = "Variable to be scanned 2";
+            // 
+            // label225
+            // 
+            this.label225.AutoSize = true;
+            this.label225.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label225.Location = new System.Drawing.Point(227, 12);
+            this.label225.Name = "label225";
+            this.label225.Size = new System.Drawing.Size(56, 13);
+            this.label225.TabIndex = 144;
+            this.label225.Text = "End Value";
+            // 
+            // ExpSeqMainSlider2
+            // 
+            this.ExpSeqMainSlider2.FormattingEnabled = true;
+            this.ExpSeqMainSlider2.Items.AddRange(new object[] {
+            "None",
+            "DC0",
+            "DC1",
+            "DC2",
+            "DC3",
+            "DC4",
+            "DC5",
+            "DC6",
+            "DC7",
+            "DC8",
+            "DC9",
+            "DC10",
+            "DC11",
             "BxSlider",
             "TickleSlider",
             "Sideband402Control",
@@ -5988,11 +6135,217 @@
             "CavityCoolingPowerControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
-            this.ExpSeqMainSlider.Location = new System.Drawing.Point(10, 19);
-            this.ExpSeqMainSlider.Name = "ExpSeqMainSlider";
-            this.ExpSeqMainSlider.Size = new System.Drawing.Size(121, 21);
-            this.ExpSeqMainSlider.TabIndex = 0;
-            this.ExpSeqMainSlider.Text = "Slider";
+            this.ExpSeqMainSlider2.Location = new System.Drawing.Point(10, 19);
+            this.ExpSeqMainSlider2.Name = "ExpSeqMainSlider2";
+            this.ExpSeqMainSlider2.Size = new System.Drawing.Size(121, 21);
+            this.ExpSeqMainSlider2.TabIndex = 0;
+            this.ExpSeqMainSlider2.Text = "Slider";
+            // 
+            // ExpSeqMainSlider2EndText
+            // 
+            this.ExpSeqMainSlider2EndText.Location = new System.Drawing.Point(230, 28);
+            this.ExpSeqMainSlider2EndText.Name = "ExpSeqMainSlider2EndText";
+            this.ExpSeqMainSlider2EndText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqMainSlider2EndText.TabIndex = 143;
+            this.ExpSeqMainSlider2EndText.Text = "1";
+            // 
+            // label224
+            // 
+            this.label224.AutoSize = true;
+            this.label224.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label224.Location = new System.Drawing.Point(157, 12);
+            this.label224.Name = "label224";
+            this.label224.Size = new System.Drawing.Size(59, 13);
+            this.label224.TabIndex = 142;
+            this.label224.Text = "Start Value";
+            // 
+            // ExpSeqMainSlider2StartText
+            // 
+            this.ExpSeqMainSlider2StartText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.ExpSeqMainSlider2StartText.Location = new System.Drawing.Point(163, 28);
+            this.ExpSeqMainSlider2StartText.Name = "ExpSeqMainSlider2StartText";
+            this.ExpSeqMainSlider2StartText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqMainSlider2StartText.TabIndex = 141;
+            this.ExpSeqMainSlider2StartText.Text = "-1";
+            // 
+            // ExpSeqScanNumberLabel
+            // 
+            this.ExpSeqScanNumberLabel.AutoSize = true;
+            this.ExpSeqScanNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpSeqScanNumberLabel.Location = new System.Drawing.Point(523, 126);
+            this.ExpSeqScanNumberLabel.Name = "ExpSeqScanNumberLabel";
+            this.ExpSeqScanNumberLabel.Size = new System.Drawing.Size(63, 20);
+            this.ExpSeqScanNumberLabel.TabIndex = 169;
+            this.ExpSeqScanNumberLabel.Text = "Scan # ";
+            // 
+            // ExpSeqPauseButton
+            // 
+            this.ExpSeqPauseButton.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ExpSeqPauseButton.ForeColor = System.Drawing.Color.IndianRed;
+            this.ExpSeqPauseButton.Location = new System.Drawing.Point(657, 31);
+            this.ExpSeqPauseButton.Name = "ExpSeqPauseButton";
+            this.ExpSeqPauseButton.Size = new System.Drawing.Size(113, 31);
+            this.ExpSeqPauseButton.TabIndex = 168;
+            this.ExpSeqPauseButton.Text = "Pause Sequencer";
+            this.ExpSeqPauseButton.UseVisualStyleBackColor = false;
+            this.ExpSeqPauseButton.Click += new System.EventHandler(this.ExpSeqPauseButton_Click);
+            // 
+            // ExpSeqStartButton
+            // 
+            this.ExpSeqStartButton.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ExpSeqStartButton.ForeColor = System.Drawing.Color.IndianRed;
+            this.ExpSeqStartButton.Location = new System.Drawing.Point(517, 31);
+            this.ExpSeqStartButton.Name = "ExpSeqStartButton";
+            this.ExpSeqStartButton.Size = new System.Drawing.Size(113, 31);
+            this.ExpSeqStartButton.TabIndex = 167;
+            this.ExpSeqStartButton.Text = "Start Sequencer";
+            this.ExpSeqStartButton.UseVisualStyleBackColor = false;
+            this.ExpSeqStartButton.Click += new System.EventHandler(this.ExpSeqStartButton_Click);
+            // 
+            // groupBox53
+            // 
+            this.groupBox53.Controls.Add(this.label211);
+            this.groupBox53.Controls.Add(this.ExpSeqMainSliderNumScansText);
+            this.groupBox53.Controls.Add(this.label212);
+            this.groupBox53.Controls.Add(this.ExpSeqMainSliderNumPointsText);
+            this.groupBox53.Location = new System.Drawing.Point(342, 27);
+            this.groupBox53.Name = "groupBox53";
+            this.groupBox53.Size = new System.Drawing.Size(120, 127);
+            this.groupBox53.TabIndex = 164;
+            this.groupBox53.TabStop = false;
+            this.groupBox53.Text = "Scan Parameters";
+            // 
+            // label211
+            // 
+            this.label211.AutoSize = true;
+            this.label211.ForeColor = System.Drawing.Color.YellowGreen;
+            this.label211.Location = new System.Drawing.Point(17, 79);
+            this.label211.Name = "label211";
+            this.label211.Size = new System.Drawing.Size(89, 13);
+            this.label211.TabIndex = 140;
+            this.label211.Text = "Number of Scans";
+            // 
+            // ExpSeqMainSliderNumScansText
+            // 
+            this.ExpSeqMainSliderNumScansText.Location = new System.Drawing.Point(20, 95);
+            this.ExpSeqMainSliderNumScansText.Name = "ExpSeqMainSliderNumScansText";
+            this.ExpSeqMainSliderNumScansText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqMainSliderNumScansText.TabIndex = 139;
+            this.ExpSeqMainSliderNumScansText.Text = "100";
+            // 
+            // label212
+            // 
+            this.label212.AutoSize = true;
+            this.label212.ForeColor = System.Drawing.Color.Orange;
+            this.label212.Location = new System.Drawing.Point(19, 22);
+            this.label212.Name = "label212";
+            this.label212.Size = new System.Drawing.Size(70, 13);
+            this.label212.TabIndex = 134;
+            this.label212.Text = "#points/scan";
+            // 
+            // ExpSeqMainSliderNumPointsText
+            // 
+            this.ExpSeqMainSliderNumPointsText.Location = new System.Drawing.Point(20, 38);
+            this.ExpSeqMainSliderNumPointsText.Name = "ExpSeqMainSliderNumPointsText";
+            this.ExpSeqMainSliderNumPointsText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqMainSliderNumPointsText.TabIndex = 131;
+            this.ExpSeqMainSliderNumPointsText.Text = "50";
+            // 
+            // groupBox25
+            // 
+            this.groupBox25.Controls.Add(this.ExpSeqMainSlider1);
+            this.groupBox25.Controls.Add(this.label214);
+            this.groupBox25.Controls.Add(this.ExpSeqMainSliderStartText);
+            this.groupBox25.Controls.Add(this.ExpSeqMainSliderEndText);
+            this.groupBox25.Controls.Add(this.label213);
+            this.groupBox25.Location = new System.Drawing.Point(20, 27);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.Size = new System.Drawing.Size(301, 54);
+            this.groupBox25.TabIndex = 162;
+            this.groupBox25.TabStop = false;
+            this.groupBox25.Text = "Variable to be scanned 1";
+            // 
+            // ExpSeqMainSlider1
+            // 
+            this.ExpSeqMainSlider1.FormattingEnabled = true;
+            this.ExpSeqMainSlider1.Items.AddRange(new object[] {
+            "DC0",
+            "DC1",
+            "DC2",
+            "DC3",
+            "DC4",
+            "DC5",
+            "DC6",
+            "DC7",
+            "DC8",
+            "DC9",
+            "DC10",
+            "DC11",
+            "BxSlider",
+            "TickleSlider",
+            "Sideband402Control",
+            "TransferCavity",
+            "RepumperSlider",
+            "DXSlider",
+            "ArrayTotalSlider",
+            "DCVertDipoleSlider",
+            "DCVertQuadSlider",
+            "TotalBiasSlider",
+            "TrapHeightSlider",
+            "QuadrupoleTilt",
+            "QuadTiltRatioSlider",
+            "SnakeRatioSlider",
+            "RightFingersSlider",
+            "LeftFingersSlider",
+            "SnakeOnlySlider",
+            "RepumperPowerSlider",
+            "SideBeam370Power",
+            "LatticePowerControl",
+            "CavityCoolingPowerControl",
+            "RamanSlider",
+            "CorrelatorBinningPhaseSlider"});
+            this.ExpSeqMainSlider1.Location = new System.Drawing.Point(10, 19);
+            this.ExpSeqMainSlider1.Name = "ExpSeqMainSlider1";
+            this.ExpSeqMainSlider1.Size = new System.Drawing.Size(121, 21);
+            this.ExpSeqMainSlider1.TabIndex = 0;
+            this.ExpSeqMainSlider1.Text = "Slider";
+            // 
+            // label214
+            // 
+            this.label214.AutoSize = true;
+            this.label214.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label214.Location = new System.Drawing.Point(157, 11);
+            this.label214.Name = "label214";
+            this.label214.Size = new System.Drawing.Size(59, 13);
+            this.label214.TabIndex = 132;
+            this.label214.Text = "Start Value";
+            // 
+            // ExpSeqMainSliderStartText
+            // 
+            this.ExpSeqMainSliderStartText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.ExpSeqMainSliderStartText.Location = new System.Drawing.Point(163, 27);
+            this.ExpSeqMainSliderStartText.Name = "ExpSeqMainSliderStartText";
+            this.ExpSeqMainSliderStartText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqMainSliderStartText.TabIndex = 129;
+            this.ExpSeqMainSliderStartText.Text = "-1";
+            // 
+            // ExpSeqMainSliderEndText
+            // 
+            this.ExpSeqMainSliderEndText.Location = new System.Drawing.Point(233, 27);
+            this.ExpSeqMainSliderEndText.Name = "ExpSeqMainSliderEndText";
+            this.ExpSeqMainSliderEndText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqMainSliderEndText.TabIndex = 130;
+            this.ExpSeqMainSliderEndText.Text = "1";
+            // 
+            // label213
+            // 
+            this.label213.AutoSize = true;
+            this.label213.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label213.Location = new System.Drawing.Point(230, 11);
+            this.label213.Name = "label213";
+            this.label213.Size = new System.Drawing.Size(56, 13);
+            this.label213.TabIndex = 133;
+            this.label213.Text = "End Value";
             // 
             // RecycleBin
             // 
@@ -6016,7 +6369,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.68687F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 377F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 386F));
             this.tableLayoutPanel4.Controls.Add(this.label112, 4, 0);
             this.tableLayoutPanel4.Controls.Add(this.panel5, 4, 2);
             this.tableLayoutPanel4.Controls.Add(this.slow_in2DelayText, 3, 2);
@@ -6046,7 +6399,7 @@
             // 
             this.label112.AutoSize = true;
             this.label112.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label112.Location = new System.Drawing.Point(181, 4);
+            this.label112.Location = new System.Drawing.Point(172, 4);
             this.label112.Name = "label112";
             this.label112.Size = new System.Drawing.Size(71, 24);
             this.label112.TabIndex = 181;
@@ -6057,7 +6410,7 @@
             this.panel5.Controls.Add(this.c2si2);
             this.panel5.Controls.Add(this.Indsi2);
             this.panel5.Controls.Add(this.c1si2);
-            this.panel5.Location = new System.Drawing.Point(181, 91);
+            this.panel5.Location = new System.Drawing.Point(172, 91);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(164, 21);
             this.panel5.TabIndex = 180;
@@ -6096,7 +6449,7 @@
             // 
             // slow_in2DelayText
             // 
-            this.slow_in2DelayText.Location = new System.Drawing.Point(85, 91);
+            this.slow_in2DelayText.Location = new System.Drawing.Point(76, 91);
             this.slow_in2DelayText.Name = "slow_in2DelayText";
             this.slow_in2DelayText.Size = new System.Drawing.Size(78, 20);
             this.slow_in2DelayText.TabIndex = 11;
@@ -6104,7 +6457,7 @@
             // 
             // slow_in2OnTimeText
             // 
-            this.slow_in2OnTimeText.Location = new System.Drawing.Point(-4, 91);
+            this.slow_in2OnTimeText.Location = new System.Drawing.Point(-13, 91);
             this.slow_in2OnTimeText.Name = "slow_in2OnTimeText";
             this.slow_in2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_in2OnTimeText.TabIndex = 10;
@@ -6112,7 +6465,7 @@
             // 
             // slow_in1DelayText
             // 
-            this.slow_in1DelayText.Location = new System.Drawing.Point(85, 62);
+            this.slow_in1DelayText.Location = new System.Drawing.Point(76, 62);
             this.slow_in1DelayText.Name = "slow_in1DelayText";
             this.slow_in1DelayText.Size = new System.Drawing.Size(78, 20);
             this.slow_in1DelayText.TabIndex = 9;
@@ -6120,7 +6473,7 @@
             // 
             // slow_in1OnTimeText
             // 
-            this.slow_in1OnTimeText.Location = new System.Drawing.Point(-4, 62);
+            this.slow_in1OnTimeText.Location = new System.Drawing.Point(-13, 62);
             this.slow_in1OnTimeText.Name = "slow_in1OnTimeText";
             this.slow_in1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_in1OnTimeText.TabIndex = 8;
@@ -6130,7 +6483,7 @@
             // 
             this.label113.AutoSize = true;
             this.label113.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label113.Location = new System.Drawing.Point(85, 4);
+            this.label113.Location = new System.Drawing.Point(76, 4);
             this.label113.Name = "label113";
             this.label113.Size = new System.Drawing.Size(87, 24);
             this.label113.TabIndex = 7;
@@ -6140,7 +6493,7 @@
             // 
             this.label114.AutoSize = true;
             this.label114.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label114.Location = new System.Drawing.Point(-4, 4);
+            this.label114.Location = new System.Drawing.Point(-13, 4);
             this.label114.Name = "label114";
             this.label114.Size = new System.Drawing.Size(79, 48);
             this.label114.TabIndex = 6;
@@ -6148,7 +6501,7 @@
             // 
             // slow_in2SigName
             // 
-            this.slow_in2SigName.Location = new System.Drawing.Point(4, 91);
+            this.slow_in2SigName.Location = new System.Drawing.Point(1, 91);
             this.slow_in2SigName.Name = "slow_in2SigName";
             this.slow_in2SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_in2SigName.TabIndex = 5;
@@ -6157,7 +6510,7 @@
             // 
             this.label165.AutoSize = true;
             this.label165.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label165.Location = new System.Drawing.Point(4, 4);
+            this.label165.Location = new System.Drawing.Point(1, 4);
             this.label165.Name = "label165";
             this.label165.Size = new System.Drawing.Size(1, 24);
             this.label165.TabIndex = 2;
@@ -6195,7 +6548,7 @@
             // 
             // slow_in1SigName
             // 
-            this.slow_in1SigName.Location = new System.Drawing.Point(4, 62);
+            this.slow_in1SigName.Location = new System.Drawing.Point(1, 62);
             this.slow_in1SigName.Name = "slow_in1SigName";
             this.slow_in1SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_in1SigName.TabIndex = 4;
@@ -6206,7 +6559,7 @@
             this.panel6.Controls.Add(this.c2si1);
             this.panel6.Controls.Add(this.c1si1);
             this.panel6.Controls.Add(this.Indsi1);
-            this.panel6.Location = new System.Drawing.Point(181, 62);
+            this.panel6.Location = new System.Drawing.Point(172, 62);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(164, 21);
             this.panel6.TabIndex = 179;
@@ -6251,7 +6604,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.19231F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 377F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 386F));
             this.tableLayoutPanel3.Controls.Add(this.slow_out3DelayText, 3, 3);
             this.tableLayoutPanel3.Controls.Add(this.slow_out4OnTimeText, 2, 4);
             this.tableLayoutPanel3.Controls.Add(this.slow_out3OnTimeText, 2, 3);
@@ -6289,7 +6642,7 @@
             // slow_out3DelayText
             // 
             this.slow_out3DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out3DelayText.Location = new System.Drawing.Point(84, 121);
+            this.slow_out3DelayText.Location = new System.Drawing.Point(75, 121);
             this.slow_out3DelayText.Name = "slow_out3DelayText";
             this.slow_out3DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out3DelayText.TabIndex = 180;
@@ -6298,7 +6651,7 @@
             // slow_out4OnTimeText
             // 
             this.slow_out4OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out4OnTimeText.Location = new System.Drawing.Point(-4, 150);
+            this.slow_out4OnTimeText.Location = new System.Drawing.Point(-13, 150);
             this.slow_out4OnTimeText.Name = "slow_out4OnTimeText";
             this.slow_out4OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out4OnTimeText.TabIndex = 181;
@@ -6307,7 +6660,7 @@
             // slow_out3OnTimeText
             // 
             this.slow_out3OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out3OnTimeText.Location = new System.Drawing.Point(-4, 121);
+            this.slow_out3OnTimeText.Location = new System.Drawing.Point(-13, 121);
             this.slow_out3OnTimeText.Name = "slow_out3OnTimeText";
             this.slow_out3OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out3OnTimeText.TabIndex = 180;
@@ -6335,7 +6688,7 @@
             // 
             // slow_out4SigName
             // 
-            this.slow_out4SigName.Location = new System.Drawing.Point(4, 150);
+            this.slow_out4SigName.Location = new System.Drawing.Point(2, 150);
             this.slow_out4SigName.Name = "slow_out4SigName";
             this.slow_out4SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_out4SigName.TabIndex = 182;
@@ -6346,7 +6699,7 @@
             this.panel4.Controls.Add(this.notc1so2);
             this.panel4.Controls.Add(this.c1so2);
             this.panel4.Controls.Add(this.Indso2);
-            this.panel4.Location = new System.Drawing.Point(181, 91);
+            this.panel4.Location = new System.Drawing.Point(172, 91);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(147, 21);
             this.panel4.TabIndex = 178;
@@ -6385,7 +6738,7 @@
             // 
             // slow_out3SigName
             // 
-            this.slow_out3SigName.Location = new System.Drawing.Point(4, 121);
+            this.slow_out3SigName.Location = new System.Drawing.Point(2, 121);
             this.slow_out3SigName.Name = "slow_out3SigName";
             this.slow_out3SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_out3SigName.TabIndex = 181;
@@ -6394,7 +6747,7 @@
             // slow_out2DelayText
             // 
             this.slow_out2DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out2DelayText.Location = new System.Drawing.Point(84, 91);
+            this.slow_out2DelayText.Location = new System.Drawing.Point(75, 91);
             this.slow_out2DelayText.Name = "slow_out2DelayText";
             this.slow_out2DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out2DelayText.TabIndex = 8;
@@ -6403,7 +6756,7 @@
             // slow_out2OnTimeText
             // 
             this.slow_out2OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out2OnTimeText.Location = new System.Drawing.Point(-4, 91);
+            this.slow_out2OnTimeText.Location = new System.Drawing.Point(-13, 91);
             this.slow_out2OnTimeText.Name = "slow_out2OnTimeText";
             this.slow_out2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out2OnTimeText.TabIndex = 6;
@@ -6411,7 +6764,7 @@
             // 
             // slow_out1OnTimeText
             // 
-            this.slow_out1OnTimeText.Location = new System.Drawing.Point(-4, 65);
+            this.slow_out1OnTimeText.Location = new System.Drawing.Point(-13, 65);
             this.slow_out1OnTimeText.Name = "slow_out1OnTimeText";
             this.slow_out1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out1OnTimeText.TabIndex = 5;
@@ -6421,7 +6774,7 @@
             // 
             this.label69.AutoSize = true;
             this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label69.Location = new System.Drawing.Point(84, 4);
+            this.label69.Location = new System.Drawing.Point(75, 4);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(90, 48);
             this.label69.TabIndex = 6;
@@ -6429,7 +6782,7 @@
             // 
             // slow_out2SigName
             // 
-            this.slow_out2SigName.Location = new System.Drawing.Point(4, 91);
+            this.slow_out2SigName.Location = new System.Drawing.Point(2, 91);
             this.slow_out2SigName.Name = "slow_out2SigName";
             this.slow_out2SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_out2SigName.TabIndex = 5;
@@ -6439,7 +6792,7 @@
             // 
             this.label70.AutoSize = true;
             this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label70.Location = new System.Drawing.Point(4, 4);
+            this.label70.Location = new System.Drawing.Point(2, 4);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(1, 24);
             this.label70.TabIndex = 2;
@@ -6477,7 +6830,7 @@
             // 
             // slow_out1SigName
             // 
-            this.slow_out1SigName.Location = new System.Drawing.Point(4, 65);
+            this.slow_out1SigName.Location = new System.Drawing.Point(2, 65);
             this.slow_out1SigName.Name = "slow_out1SigName";
             this.slow_out1SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_out1SigName.TabIndex = 4;
@@ -6487,7 +6840,7 @@
             // 
             this.label97.AutoSize = true;
             this.label97.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label97.Location = new System.Drawing.Point(-4, 4);
+            this.label97.Location = new System.Drawing.Point(-13, 4);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(79, 24);
             this.label97.TabIndex = 5;
@@ -6495,7 +6848,7 @@
             // 
             // slow_out1DelayText
             // 
-            this.slow_out1DelayText.Location = new System.Drawing.Point(84, 65);
+            this.slow_out1DelayText.Location = new System.Drawing.Point(75, 65);
             this.slow_out1DelayText.Name = "slow_out1DelayText";
             this.slow_out1DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out1DelayText.TabIndex = 7;
@@ -6505,7 +6858,7 @@
             // 
             this.label111.AutoSize = true;
             this.label111.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label111.Location = new System.Drawing.Point(181, 4);
+            this.label111.Location = new System.Drawing.Point(172, 4);
             this.label111.Name = "label111";
             this.label111.Size = new System.Drawing.Size(71, 24);
             this.label111.TabIndex = 9;
@@ -6514,7 +6867,7 @@
             // slow_out4DelayText
             // 
             this.slow_out4DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out4DelayText.Location = new System.Drawing.Point(84, 150);
+            this.slow_out4DelayText.Location = new System.Drawing.Point(75, 150);
             this.slow_out4DelayText.Name = "slow_out4DelayText";
             this.slow_out4DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out4DelayText.TabIndex = 183;
@@ -6528,7 +6881,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.29703F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 383F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 392F));
             this.tableLayoutPanel2.Controls.Add(this.label174, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel3, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.in2DelayText, 3, 2);
@@ -6558,7 +6911,7 @@
             // 
             this.label174.AutoSize = true;
             this.label174.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label174.Location = new System.Drawing.Point(183, 4);
+            this.label174.Location = new System.Drawing.Point(174, 4);
             this.label174.Name = "label174";
             this.label174.Size = new System.Drawing.Size(71, 24);
             this.label174.TabIndex = 181;
@@ -6569,7 +6922,7 @@
             this.panel3.Controls.Add(this.c2fi2);
             this.panel3.Controls.Add(this.Indfi2);
             this.panel3.Controls.Add(this.c1fi2);
-            this.panel3.Location = new System.Drawing.Point(183, 91);
+            this.panel3.Location = new System.Drawing.Point(174, 91);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(164, 21);
             this.panel3.TabIndex = 180;
@@ -6609,7 +6962,7 @@
             // in2DelayText
             // 
             this.in2DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.in2DelayText.Location = new System.Drawing.Point(95, 91);
+            this.in2DelayText.Location = new System.Drawing.Point(86, 91);
             this.in2DelayText.Name = "in2DelayText";
             this.in2DelayText.Size = new System.Drawing.Size(78, 20);
             this.in2DelayText.TabIndex = 11;
@@ -6618,7 +6971,7 @@
             // in2OnTimeText
             // 
             this.in2OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.in2OnTimeText.Location = new System.Drawing.Point(2, 91);
+            this.in2OnTimeText.Location = new System.Drawing.Point(-7, 91);
             this.in2OnTimeText.Name = "in2OnTimeText";
             this.in2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in2OnTimeText.TabIndex = 10;
@@ -6627,7 +6980,7 @@
             // in1DelayText
             // 
             this.in1DelayText.ForeColor = System.Drawing.Color.DimGray;
-            this.in1DelayText.Location = new System.Drawing.Point(95, 62);
+            this.in1DelayText.Location = new System.Drawing.Point(86, 62);
             this.in1DelayText.Name = "in1DelayText";
             this.in1DelayText.Size = new System.Drawing.Size(78, 20);
             this.in1DelayText.TabIndex = 9;
@@ -6636,7 +6989,7 @@
             // in1OnTimeText
             // 
             this.in1OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.in1OnTimeText.Location = new System.Drawing.Point(2, 62);
+            this.in1OnTimeText.Location = new System.Drawing.Point(-7, 62);
             this.in1OnTimeText.Name = "in1OnTimeText";
             this.in1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in1OnTimeText.TabIndex = 8;
@@ -6646,7 +6999,7 @@
             // 
             this.label154.AutoSize = true;
             this.label154.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label154.Location = new System.Drawing.Point(95, 4);
+            this.label154.Location = new System.Drawing.Point(86, 4);
             this.label154.Name = "label154";
             this.label154.Size = new System.Drawing.Size(54, 48);
             this.label154.TabIndex = 7;
@@ -6656,7 +7009,7 @@
             // 
             this.label152.AutoSize = true;
             this.label152.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label152.Location = new System.Drawing.Point(2, 4);
+            this.label152.Location = new System.Drawing.Point(-7, 4);
             this.label152.Name = "label152";
             this.label152.Size = new System.Drawing.Size(83, 48);
             this.label152.TabIndex = 6;
@@ -6664,7 +7017,7 @@
             // 
             // in2SigName
             // 
-            this.in2SigName.Location = new System.Drawing.Point(6, 91);
+            this.in2SigName.Location = new System.Drawing.Point(3, 91);
             this.in2SigName.Name = "in2SigName";
             this.in2SigName.Size = new System.Drawing.Size(1, 20);
             this.in2SigName.TabIndex = 5;
@@ -6673,7 +7026,7 @@
             // 
             this.label147.AutoSize = true;
             this.label147.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label147.Location = new System.Drawing.Point(6, 4);
+            this.label147.Location = new System.Drawing.Point(3, 4);
             this.label147.Name = "label147";
             this.label147.Size = new System.Drawing.Size(1, 24);
             this.label147.TabIndex = 2;
@@ -6711,7 +7064,7 @@
             // 
             // in1SigName
             // 
-            this.in1SigName.Location = new System.Drawing.Point(6, 62);
+            this.in1SigName.Location = new System.Drawing.Point(3, 62);
             this.in1SigName.Name = "in1SigName";
             this.in1SigName.Size = new System.Drawing.Size(1, 20);
             this.in1SigName.TabIndex = 4;
@@ -6722,7 +7075,7 @@
             this.panel2.Controls.Add(this.c2fi1);
             this.panel2.Controls.Add(this.c1fi1);
             this.panel2.Controls.Add(this.Indfi1);
-            this.panel2.Location = new System.Drawing.Point(183, 62);
+            this.panel2.Location = new System.Drawing.Point(174, 62);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(164, 21);
             this.panel2.TabIndex = 179;
@@ -6767,7 +7120,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.71717F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 382F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 391F));
             this.tableLayoutPanel1.Controls.Add(this.out3DelayText, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.out4OnTimeText, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.out3OnTimeText, 2, 3);
@@ -6804,7 +7157,7 @@
             // 
             // out3DelayText
             // 
-            this.out3DelayText.Location = new System.Drawing.Point(90, 120);
+            this.out3DelayText.Location = new System.Drawing.Point(81, 120);
             this.out3DelayText.Name = "out3DelayText";
             this.out3DelayText.Size = new System.Drawing.Size(79, 20);
             this.out3DelayText.TabIndex = 180;
@@ -6812,7 +7165,7 @@
             // 
             // out4OnTimeText
             // 
-            this.out4OnTimeText.Location = new System.Drawing.Point(1, 149);
+            this.out4OnTimeText.Location = new System.Drawing.Point(-8, 149);
             this.out4OnTimeText.Name = "out4OnTimeText";
             this.out4OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out4OnTimeText.TabIndex = 181;
@@ -6820,7 +7173,7 @@
             // 
             // out3OnTimeText
             // 
-            this.out3OnTimeText.Location = new System.Drawing.Point(1, 120);
+            this.out3OnTimeText.Location = new System.Drawing.Point(-8, 120);
             this.out3OnTimeText.Name = "out3OnTimeText";
             this.out3OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out3OnTimeText.TabIndex = 180;
@@ -6828,7 +7181,7 @@
             // 
             // out4SigName
             // 
-            this.out4SigName.Location = new System.Drawing.Point(6, 149);
+            this.out4SigName.Location = new System.Drawing.Point(3, 149);
             this.out4SigName.Name = "out4SigName";
             this.out4SigName.Size = new System.Drawing.Size(1, 20);
             this.out4SigName.TabIndex = 181;
@@ -6846,7 +7199,7 @@
             // 
             // out3SigName
             // 
-            this.out3SigName.Location = new System.Drawing.Point(6, 120);
+            this.out3SigName.Location = new System.Drawing.Point(3, 120);
             this.out3SigName.Name = "out3SigName";
             this.out3SigName.Size = new System.Drawing.Size(1, 20);
             this.out3SigName.TabIndex = 180;
@@ -6867,7 +7220,7 @@
             this.panel1.Controls.Add(this.notc1fo2);
             this.panel1.Controls.Add(this.c1fo2);
             this.panel1.Controls.Add(this.Indfo2);
-            this.panel1.Location = new System.Drawing.Point(183, 91);
+            this.panel1.Location = new System.Drawing.Point(174, 91);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(147, 21);
             this.panel1.TabIndex = 178;
@@ -6906,7 +7259,7 @@
             // 
             // out2DelayText
             // 
-            this.out2DelayText.Location = new System.Drawing.Point(90, 91);
+            this.out2DelayText.Location = new System.Drawing.Point(81, 91);
             this.out2DelayText.Name = "out2DelayText";
             this.out2DelayText.Size = new System.Drawing.Size(79, 20);
             this.out2DelayText.TabIndex = 8;
@@ -6914,7 +7267,7 @@
             // 
             // out2OnTimeText
             // 
-            this.out2OnTimeText.Location = new System.Drawing.Point(1, 91);
+            this.out2OnTimeText.Location = new System.Drawing.Point(-8, 91);
             this.out2OnTimeText.Name = "out2OnTimeText";
             this.out2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out2OnTimeText.TabIndex = 6;
@@ -6922,7 +7275,7 @@
             // 
             // out1OnTimeText
             // 
-            this.out1OnTimeText.Location = new System.Drawing.Point(1, 62);
+            this.out1OnTimeText.Location = new System.Drawing.Point(-8, 62);
             this.out1OnTimeText.Name = "out1OnTimeText";
             this.out1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out1OnTimeText.TabIndex = 5;
@@ -6932,7 +7285,7 @@
             // 
             this.label153.AutoSize = true;
             this.label153.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label153.Location = new System.Drawing.Point(90, 4);
+            this.label153.Location = new System.Drawing.Point(81, 4);
             this.label153.Name = "label153";
             this.label153.Size = new System.Drawing.Size(85, 48);
             this.label153.TabIndex = 6;
@@ -6940,7 +7293,7 @@
             // 
             // out2SigName
             // 
-            this.out2SigName.Location = new System.Drawing.Point(6, 91);
+            this.out2SigName.Location = new System.Drawing.Point(3, 91);
             this.out2SigName.Name = "out2SigName";
             this.out2SigName.Size = new System.Drawing.Size(1, 20);
             this.out2SigName.TabIndex = 5;
@@ -6950,7 +7303,7 @@
             // 
             this.label144.AutoSize = true;
             this.label144.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label144.Location = new System.Drawing.Point(6, 4);
+            this.label144.Location = new System.Drawing.Point(3, 4);
             this.label144.Name = "label144";
             this.label144.Size = new System.Drawing.Size(1, 24);
             this.label144.TabIndex = 2;
@@ -6988,7 +7341,7 @@
             // 
             // out1SigName
             // 
-            this.out1SigName.Location = new System.Drawing.Point(6, 62);
+            this.out1SigName.Location = new System.Drawing.Point(3, 62);
             this.out1SigName.Name = "out1SigName";
             this.out1SigName.Size = new System.Drawing.Size(1, 20);
             this.out1SigName.TabIndex = 4;
@@ -6998,7 +7351,7 @@
             // 
             this.label151.AutoSize = true;
             this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label151.Location = new System.Drawing.Point(1, 4);
+            this.label151.Location = new System.Drawing.Point(-8, 4);
             this.label151.Name = "label151";
             this.label151.Size = new System.Drawing.Size(79, 24);
             this.label151.TabIndex = 5;
@@ -7006,7 +7359,7 @@
             // 
             // out1DelayText
             // 
-            this.out1DelayText.Location = new System.Drawing.Point(90, 62);
+            this.out1DelayText.Location = new System.Drawing.Point(81, 62);
             this.out1DelayText.Name = "out1DelayText";
             this.out1DelayText.Size = new System.Drawing.Size(79, 20);
             this.out1DelayText.TabIndex = 7;
@@ -7016,7 +7369,7 @@
             // 
             this.label173.AutoSize = true;
             this.label173.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label173.Location = new System.Drawing.Point(183, 4);
+            this.label173.Location = new System.Drawing.Point(174, 4);
             this.label173.Name = "label173";
             this.label173.Size = new System.Drawing.Size(71, 24);
             this.label173.TabIndex = 9;
@@ -7024,11 +7377,33 @@
             // 
             // out4DelayText
             // 
-            this.out4DelayText.Location = new System.Drawing.Point(90, 149);
+            this.out4DelayText.Location = new System.Drawing.Point(81, 149);
             this.out4DelayText.Name = "out4DelayText";
             this.out4DelayText.Size = new System.Drawing.Size(79, 20);
             this.out4DelayText.TabIndex = 182;
             this.out4DelayText.Text = "0";
+            // 
+            // groupBox70
+            // 
+            this.groupBox70.Controls.Add(this.listBox1);
+            this.groupBox70.Location = new System.Drawing.Point(922, 94);
+            this.groupBox70.Name = "groupBox70";
+            this.groupBox70.Size = new System.Drawing.Size(150, 131);
+            this.groupBox70.TabIndex = 178;
+            this.groupBox70.TabStop = false;
+            this.groupBox70.Text = "Preset Scans";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "Bx Slider",
+            "Electrode Scan",
+            "Repumper Slider"});
+            this.listBox1.Location = new System.Drawing.Point(16, 19);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 95);
+            this.listBox1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -7193,20 +7568,29 @@
             this.ExperimentalSequencer.PerformLayout();
             this.groupBox66.ResumeLayout(false);
             this.groupBox66.PerformLayout();
+            this.groupBox69.ResumeLayout(false);
+            this.groupBox69.PerformLayout();
             this.groupBox63.ResumeLayout(false);
             this.groupBox63.PerformLayout();
             this.groupBox56.ResumeLayout(false);
+            this.groupBox56.PerformLayout();
             this.groupBox65.ResumeLayout(false);
             this.groupBox65.PerformLayout();
+            this.groupBox68.ResumeLayout(false);
+            this.groupBox68.PerformLayout();
             this.groupBox57.ResumeLayout(false);
             this.groupBox57.PerformLayout();
             this.groupBox55.ResumeLayout(false);
+            this.groupBox55.PerformLayout();
+            this.groupBox28.ResumeLayout(false);
             this.groupBox64.ResumeLayout(false);
             this.groupBox64.PerformLayout();
+            this.groupBox67.ResumeLayout(false);
+            this.groupBox67.PerformLayout();
             this.groupBox53.ResumeLayout(false);
             this.groupBox53.PerformLayout();
-            this.groupBox28.ResumeLayout(false);
             this.groupBox25.ResumeLayout(false);
+            this.groupBox25.PerformLayout();
             this.RecycleBin.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -7228,6 +7612,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox70.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -7691,26 +8076,26 @@
         private System.Windows.Forms.GroupBox groupBox28;
         private System.Windows.Forms.ComboBox ExpSeqMainData;
         private System.Windows.Forms.GroupBox groupBox25;
-        private System.Windows.Forms.ComboBox ExpSeqMainSlider;
+        private System.Windows.Forms.ComboBox ExpSeqMainSlider1;
         private System.Windows.Forms.Button ExpSeqStartButton;
         private System.Windows.Forms.GroupBox groupBox63;
         private System.Windows.Forms.Label label220;
         private System.Windows.Forms.Label label221;
         private System.Windows.Forms.Label label222;
         private System.Windows.Forms.TextBox ExpSeqIntSlider2NumPointsText;
-        private System.Windows.Forms.TextBox ExpSeqIntSlider2StopText;
-        private System.Windows.Forms.TextBox ExpSeqIntSlider2StartText;
+        private System.Windows.Forms.TextBox ExpSeqInt2Slider1StopText;
+        private System.Windows.Forms.TextBox ExpSeqInt2Slider1StartText;
         private System.Windows.Forms.GroupBox groupBox57;
         private System.Windows.Forms.Label label216;
         private System.Windows.Forms.Label label217;
         private System.Windows.Forms.Label label218;
         private System.Windows.Forms.TextBox ExpSeqIntSlider1NumPointsText;
-        private System.Windows.Forms.TextBox ExpSeqIntSlider1StopText;
-        private System.Windows.Forms.TextBox ExpSeqIntSlider1StartText;
+        private System.Windows.Forms.TextBox ExpSeqInt1Slider1StopText;
+        private System.Windows.Forms.TextBox ExpSeqInt1Slider1StartText;
         private System.Windows.Forms.GroupBox groupBox56;
-        private System.Windows.Forms.ComboBox ExpSeqIntSlider2;
+        private System.Windows.Forms.ComboBox ExpSeqInt2Slider1;
         private System.Windows.Forms.GroupBox groupBox55;
-        private System.Windows.Forms.ComboBox ExpSeqIntSlider1;
+        private System.Windows.Forms.ComboBox ExpSeqInt1Slider1;
         private System.Windows.Forms.Button ExpSeqPauseButton;
         private System.Windows.Forms.CheckBox ExpSeqScan2Checkbox;
         private System.Windows.Forms.CheckBox ExpSeqScan1Checkbox;
@@ -7822,6 +8207,26 @@
         private System.Windows.Forms.TextBox out1DelayText;
         private System.Windows.Forms.Label label173;
         private System.Windows.Forms.TextBox out4DelayText;
+        private System.Windows.Forms.GroupBox groupBox67;
+        private System.Windows.Forms.ComboBox ExpSeqMainSlider2;
+        private System.Windows.Forms.Label label225;
+        private System.Windows.Forms.TextBox ExpSeqMainSlider2EndText;
+        private System.Windows.Forms.Label label224;
+        private System.Windows.Forms.TextBox ExpSeqMainSlider2StartText;
+        private System.Windows.Forms.GroupBox groupBox68;
+        private System.Windows.Forms.ComboBox ExpSeqInt1Slider2;
+        private System.Windows.Forms.Label label226;
+        private System.Windows.Forms.Label label227;
+        private System.Windows.Forms.TextBox ExpSeqInt1Slider2StartText;
+        private System.Windows.Forms.TextBox ExpSeqInt1Slider2StopText;
+        private System.Windows.Forms.GroupBox groupBox69;
+        private System.Windows.Forms.ComboBox ExpSeqInt2Slider2;
+        private System.Windows.Forms.Label label228;
+        private System.Windows.Forms.Label label229;
+        private System.Windows.Forms.TextBox ExpSeqInt2Slider2StartText;
+        private System.Windows.Forms.TextBox ExpSeqInt2Slider2StopText;
+        private System.Windows.Forms.GroupBox groupBox70;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

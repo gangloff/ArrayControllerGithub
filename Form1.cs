@@ -2270,6 +2270,10 @@ namespace ArrayDACControl
         {
             //update slider
             theThreadHelper.theSlider.Value = theThreadHelper.DoubleScanVariable[0, theThreadHelper.index];
+            if (theThreadHelper.numScanVar > 1)
+            {
+                theThreadHelper.theSlider2.Value = theThreadHelper.DoubleScanVariable[1, theThreadHelper.index];
+            }
             //Button Indicator
             if (!(theThreadHelper.theButton == null))
             {
@@ -2289,6 +2293,10 @@ namespace ArrayDACControl
             }
             //reset to original values
             theThreadHelper.theSlider.Value = theThreadHelper.KeepDoubles[0];
+            if (theThreadHelper.numScanVar > 1)
+            {
+                theThreadHelper.theSlider2.Value = theThreadHelper.KeepDoubles[1];
+            }
             //call to update
             UpdateAll();
         }
@@ -3779,6 +3787,7 @@ namespace ArrayDACControl
                 SliderScanThreadHelper.theThread.Name = "Slider Scan thread";
                 SliderScanThreadHelper.theThread.Priority = ThreadPriority.Normal;
                 SliderScanThreadHelper.index = 0;
+                SliderScanThreadHelper.numScanVar = 1;
                 //get scan parameters and declare data arrays
                 SliderScanThreadHelper.min = new double[1];
                 SliderScanThreadHelper.max = new double[1];
@@ -5170,23 +5179,40 @@ namespace ArrayDACControl
                 ExperimentalSequencerThreadHelper.theThread.Priority = ThreadPriority.Normal;
                 ExperimentalSequencerThreadHelper.index = 0;
                 ExperimentalSequencerThreadHelper.index2 = 0;
+                if (ExpSeqMainSlider2.Text == "None") { ExperimentalSequencerThreadHelper.numScanVar = 1; }
+                else { ExperimentalSequencerThreadHelper.numScanVar = 2; }
                 //get scan parameters and declare data arrays
-                ExperimentalSequencerThreadHelper.min = new double[1];
-                ExperimentalSequencerThreadHelper.max = new double[1];
+                ExperimentalSequencerThreadHelper.min = new double[ExperimentalSequencerThreadHelper.numScanVar];
+                ExperimentalSequencerThreadHelper.max = new double[ExperimentalSequencerThreadHelper.numScanVar];
                 ExperimentalSequencerThreadHelper.min[0] = double.Parse(ExpSeqMainSliderStartText.Text);
                 ExperimentalSequencerThreadHelper.max[0] = double.Parse(ExpSeqMainSliderEndText.Text);
+                if (ExperimentalSequencerThreadHelper.numScanVar > 1)
+                {
+                    ExperimentalSequencerThreadHelper.min[1] = double.Parse(ExpSeqMainSlider2StartText.Text);
+                    ExperimentalSequencerThreadHelper.max[1] = double.Parse(ExpSeqMainSlider2EndText.Text);
+                }
                 ExperimentalSequencerThreadHelper.numAverage = int.Parse(ExpSeqMainSliderNumScansText.Text);
                 ExperimentalSequencerThreadHelper.numPoints = int.Parse(ExpSeqMainSliderNumPointsText.Text);
                 ExperimentalSequencerThreadHelper.theButton = ExpSeqStartButton;
-                ExperimentalSequencerThreadHelper.dataStreamName = ExpSeqMainSlider.Text;
+                ExperimentalSequencerThreadHelper.slider1Name = ExpSeqMainSlider1.Text;
+                ExperimentalSequencerThreadHelper.slider2Name = ExpSeqMainSlider2.Text;
                 ExperimentalSequencerThreadHelper.folderPathExtra = "ExpSeq\\" + ExpSeqExtraPathnameText.Text;
                 //get Slider to scan
-                ExperimentalSequencerThreadHelper.theSlider = getSliderfromText(ExperimentalSequencerThreadHelper.dataStreamName);
+                ExperimentalSequencerThreadHelper.theSlider = getSliderfromText(ExperimentalSequencerThreadHelper.slider1Name);
+                ExperimentalSequencerThreadHelper.theSlider2 = getSliderfromText(ExperimentalSequencerThreadHelper.slider2Name);
                 //Keep initial slider value
-                ExperimentalSequencerThreadHelper.KeepDoubles = new double[1];
+                ExperimentalSequencerThreadHelper.KeepDoubles = new double[ExperimentalSequencerThreadHelper.numScanVar];
                 ExperimentalSequencerThreadHelper.KeepDoubles[0] = ExperimentalSequencerThreadHelper.theSlider.Value;
+                if (ExperimentalSequencerThreadHelper.numScanVar > 1)
+                {
+                    ExperimentalSequencerThreadHelper.KeepDoubles[1] = ExperimentalSequencerThreadHelper.theSlider2.Value;
+                }
                 //modify thread name for file saving
                 ExperimentalSequencerThreadHelper.threadName = ExperimentalSequencerThreadHelper.theSlider.Name;
+                if (ExperimentalSequencerThreadHelper.numScanVar > 1)
+                {
+                    ExperimentalSequencerThreadHelper.threadName += ExperimentalSequencerThreadHelper.theSlider2.Name;    
+                }
 
                 if (ExperimentalSequencerThreadHelper.numPoints < 2)
                 {
@@ -5199,11 +5225,11 @@ namespace ArrayDACControl
                 //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
                 if (ExperimentalSequencerThreadHelper.message == "PMT")
                 {
-                    ExperimentalSequencerThreadHelper.initDoubleData(ExperimentalSequencerThreadHelper.numPoints, 2, 1);
+                    ExperimentalSequencerThreadHelper.initDoubleData(ExperimentalSequencerThreadHelper.numPoints, 2, ExperimentalSequencerThreadHelper.numScanVar);
                 }
                 else
                 {
-                    ExperimentalSequencerThreadHelper.initDoubleData(ExperimentalSequencerThreadHelper.numPoints, 1, 1);
+                    ExperimentalSequencerThreadHelper.initDoubleData(ExperimentalSequencerThreadHelper.numPoints, 1, ExperimentalSequencerThreadHelper.numScanVar);
 
                     // if camera or correlator is running stop it
                     StopDataStreams();
@@ -5214,21 +5240,34 @@ namespace ArrayDACControl
                 {
                     InterlockedScan1ThreadHelper.ShouldBeRunningFlag = true;
                     InterlockedScan1ThreadHelper.index = 0;
+                    if (ExpSeqInt1Slider2.Text == "None") { InterlockedScan1ThreadHelper.numScanVar = 1; }
+                    else { InterlockedScan1ThreadHelper.numScanVar = 2; }
                     //get scan parameters and declare data arrays
-                    InterlockedScan1ThreadHelper.min = new double[1];
-                    InterlockedScan1ThreadHelper.max = new double[1];
-                    InterlockedScan1ThreadHelper.min[0] = double.Parse(ExpSeqIntSlider1StartText.Text);
-                    InterlockedScan1ThreadHelper.max[0] = double.Parse(ExpSeqIntSlider1StopText.Text);
+                    InterlockedScan1ThreadHelper.min = new double[InterlockedScan1ThreadHelper.numScanVar];
+                    InterlockedScan1ThreadHelper.max = new double[InterlockedScan1ThreadHelper.numScanVar];
+                    InterlockedScan1ThreadHelper.min[0] = double.Parse(ExpSeqInt1Slider1StartText.Text);
+                    InterlockedScan1ThreadHelper.max[0] = double.Parse(ExpSeqInt1Slider1StopText.Text);
+                    if (InterlockedScan1ThreadHelper.numScanVar > 1)
+                    {
+                        InterlockedScan1ThreadHelper.min[1] = double.Parse(ExpSeqInt1Slider2StartText.Text);
+                        InterlockedScan1ThreadHelper.max[1] = double.Parse(ExpSeqInt1Slider2StopText.Text);
+                    }
+
                     InterlockedScan1ThreadHelper.numPoints = int.Parse(ExpSeqIntSlider1NumPointsText.Text);
 
                     InterlockedScan1ThreadHelper.folderPathExtra = "ExpSeq\\" + ExpSeqExtraPathnameText.Text + "IntScan1\\";
                     //get Slider to scan
-                    InterlockedScan1ThreadHelper.theSlider = getSliderfromText(ExpSeqIntSlider1.Text);
+                    InterlockedScan1ThreadHelper.theSlider = getSliderfromText(ExpSeqInt1Slider1.Text);
+                    InterlockedScan1ThreadHelper.theSlider2 = getSliderfromText(ExpSeqInt1Slider2.Text);
 
 
                     //Keep initial slider value
-                    InterlockedScan1ThreadHelper.KeepDoubles = new double[1];
+                    InterlockedScan1ThreadHelper.KeepDoubles = new double[InterlockedScan1ThreadHelper.numScanVar];
                     InterlockedScan1ThreadHelper.KeepDoubles[0] = InterlockedScan1ThreadHelper.theSlider.Value;
+                    if (InterlockedScan1ThreadHelper.numScanVar > 1)
+                    {
+                        InterlockedScan1ThreadHelper.KeepDoubles[1] = InterlockedScan1ThreadHelper.theSlider2.Value;
+                    }
                     //modify thread name for file saving
                     InterlockedScan1ThreadHelper.threadName = InterlockedScan1ThreadHelper.theSlider.Name;
 
@@ -5239,7 +5278,7 @@ namespace ArrayDACControl
                     }
                     //get Stream type from combo box
                     InterlockedScan1ThreadHelper.message = "Correlator:Sum";
-                    InterlockedScan1ThreadHelper.initDoubleData(InterlockedScan1ThreadHelper.numPoints, 1, 1);
+                    InterlockedScan1ThreadHelper.initDoubleData(InterlockedScan1ThreadHelper.numPoints, 1, InterlockedScan1ThreadHelper.numScanVar);
 
                 }
 
@@ -5247,21 +5286,33 @@ namespace ArrayDACControl
                 {
                     InterlockedScan2ThreadHelper.ShouldBeRunningFlag = true;
                     InterlockedScan2ThreadHelper.index = 0;
+                    if (ExpSeqInt2Slider2.Text == "None") { InterlockedScan2ThreadHelper.numScanVar = 1; }
+                    else { InterlockedScan2ThreadHelper.numScanVar = 2; }
                     //get scan parameters and declare data arrays
-                    InterlockedScan2ThreadHelper.min = new double[1];
-                    InterlockedScan2ThreadHelper.max = new double[1];
-                    InterlockedScan2ThreadHelper.min[0] = double.Parse(ExpSeqIntSlider2StartText.Text);
-                    InterlockedScan2ThreadHelper.max[0] = double.Parse(ExpSeqIntSlider2StopText.Text);
+                    InterlockedScan2ThreadHelper.min = new double[InterlockedScan2ThreadHelper.numScanVar];
+                    InterlockedScan2ThreadHelper.max = new double[InterlockedScan2ThreadHelper.numScanVar];
+                    InterlockedScan2ThreadHelper.min[0] = double.Parse(ExpSeqInt2Slider1StartText.Text);
+                    InterlockedScan2ThreadHelper.max[0] = double.Parse(ExpSeqInt2Slider1StopText.Text);
+                    if (InterlockedScan2ThreadHelper.numScanVar > 1)
+                    {
+                        InterlockedScan2ThreadHelper.min[1] = double.Parse(ExpSeqInt2Slider2StartText.Text);
+                        InterlockedScan2ThreadHelper.max[1] = double.Parse(ExpSeqInt2Slider2StopText.Text);
+                    }
                     InterlockedScan2ThreadHelper.numPoints = int.Parse(ExpSeqIntSlider2NumPointsText.Text);
 
                     InterlockedScan2ThreadHelper.folderPathExtra = "ExpSeq\\" + ExpSeqExtraPathnameText.Text + "IntScan2\\";
                     //get Slider to scan
-                    InterlockedScan2ThreadHelper.theSlider = getSliderfromText(ExpSeqIntSlider2.Text);
+                    InterlockedScan2ThreadHelper.theSlider = getSliderfromText(ExpSeqInt2Slider1.Text);
+                    InterlockedScan2ThreadHelper.theSlider2 = getSliderfromText(ExpSeqInt2Slider2.Text);
 
 
                     //Keep initial slider value
-                    InterlockedScan2ThreadHelper.KeepDoubles = new double[1];
+                    InterlockedScan2ThreadHelper.KeepDoubles = new double[InterlockedScan2ThreadHelper.numScanVar];
                     InterlockedScan2ThreadHelper.KeepDoubles[0] = InterlockedScan2ThreadHelper.theSlider.Value;
+                    if (InterlockedScan2ThreadHelper.numScanVar > 1)
+                    {
+                        InterlockedScan2ThreadHelper.KeepDoubles[1] = InterlockedScan2ThreadHelper.theSlider2.Value;
+                    }
                     //modify thread name for file saving
                     InterlockedScan2ThreadHelper.threadName = InterlockedScan2ThreadHelper.theSlider.Name;
 
@@ -5272,7 +5323,7 @@ namespace ArrayDACControl
                     }
                     //get Stream type from combo box
                     InterlockedScan2ThreadHelper.message = "Correlator:Sum";
-                    InterlockedScan2ThreadHelper.initDoubleData(InterlockedScan2ThreadHelper.numPoints, 1, 1);
+                    InterlockedScan2ThreadHelper.initDoubleData(InterlockedScan2ThreadHelper.numPoints, 1, InterlockedScan2ThreadHelper.numScanVar);
 
                 }
 
@@ -5323,6 +5374,10 @@ namespace ArrayDACControl
                 {
                     //Compute new field values
                     ExperimentalSequencerThreadHelper.DoubleScanVariable[0, ExperimentalSequencerThreadHelper.index] = (double)(ExperimentalSequencerThreadHelper.min[0] + (ExperimentalSequencerThreadHelper.max[0] - ExperimentalSequencerThreadHelper.min[0]) * ExperimentalSequencerThreadHelper.index / (ExperimentalSequencerThreadHelper.numPoints - 1));
+                    if (ExperimentalSequencerThreadHelper.numScanVar > 1)
+                    {
+                        ExperimentalSequencerThreadHelper.DoubleScanVariable[1, ExperimentalSequencerThreadHelper.index] = (double)(ExperimentalSequencerThreadHelper.min[1] + (ExperimentalSequencerThreadHelper.max[1] - ExperimentalSequencerThreadHelper.min[1]) * ExperimentalSequencerThreadHelper.index / (ExperimentalSequencerThreadHelper.numPoints - 1));
+                    }
                     //call to change field value
                     try
                     {
@@ -5357,6 +5412,10 @@ namespace ArrayDACControl
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //Compute new field values
                         InterlockedScan1ThreadHelper.DoubleScanVariable[0, InterlockedScan1ThreadHelper.index] = (double)(InterlockedScan1ThreadHelper.min[0] + (InterlockedScan1ThreadHelper.max[0] - InterlockedScan1ThreadHelper.min[0]) * InterlockedScan1ThreadHelper.index / (InterlockedScan1ThreadHelper.numPoints - 1));
+                        if (InterlockedScan1ThreadHelper.numScanVar > 1)
+                        {
+                            InterlockedScan1ThreadHelper.DoubleScanVariable[1, InterlockedScan1ThreadHelper.index] = (double)(InterlockedScan1ThreadHelper.min[1] + (InterlockedScan1ThreadHelper.max[1] - InterlockedScan1ThreadHelper.min[1]) * InterlockedScan1ThreadHelper.index / (InterlockedScan1ThreadHelper.numPoints - 1));
+                        }
                         //call to change field value
                         try
                         {
@@ -5401,6 +5460,10 @@ namespace ArrayDACControl
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //Compute new field values
                         InterlockedScan2ThreadHelper.DoubleScanVariable[0, InterlockedScan2ThreadHelper.index] = (double)(InterlockedScan2ThreadHelper.min[0] + (InterlockedScan2ThreadHelper.max[0] - InterlockedScan2ThreadHelper.min[0]) * InterlockedScan2ThreadHelper.index / (InterlockedScan2ThreadHelper.numPoints - 1));
+                        if (InterlockedScan2ThreadHelper.numScanVar > 1)
+                        {
+                            InterlockedScan2ThreadHelper.DoubleScanVariable[1, InterlockedScan2ThreadHelper.index] = (double)(InterlockedScan2ThreadHelper.min[1] + (InterlockedScan2ThreadHelper.max[1] - InterlockedScan2ThreadHelper.min[1]) * InterlockedScan2ThreadHelper.index / (InterlockedScan2ThreadHelper.numPoints - 1));
+                        }
                         //call to change field value
                         try
                         {
