@@ -150,6 +150,40 @@ namespace ArrayDACControl
             this.scatterPlot4 = new NationalInstruments.UI.ScatterPlot();
             this.xAxis5 = new NationalInstruments.UI.XAxis();
             this.yAxis5 = new NationalInstruments.UI.YAxis();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.ExpSeqWaveFormGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
+            this.waveformPlot19 = new NationalInstruments.UI.WaveformPlot();
+            this.xAxis13 = new NationalInstruments.UI.XAxis();
+            this.yAxis13 = new NationalInstruments.UI.YAxis();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ExpSeqViewScanIndex = new System.Windows.Forms.TextBox();
+            this.groupBox28 = new System.Windows.Forms.GroupBox();
+            this.ExpSeqViewPMTConfig = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label215 = new System.Windows.Forms.Label();
+            this.ExpSeqIntensityGraph4 = new NationalInstruments.UI.WindowsForms.IntensityGraph();
+            this.colorScale5 = new NationalInstruments.UI.ColorScale();
+            this.ExpSeqIntensityPlot4 = new NationalInstruments.UI.IntensityPlot();
+            this.intensityXAxis5 = new NationalInstruments.UI.IntensityXAxis();
+            this.intensityYAxis5 = new NationalInstruments.UI.IntensityYAxis();
+            this.ExpSeqIntensityGraph3 = new NationalInstruments.UI.WindowsForms.IntensityGraph();
+            this.colorScale4 = new NationalInstruments.UI.ColorScale();
+            this.ExpSeqIntensityPlot3 = new NationalInstruments.UI.IntensityPlot();
+            this.intensityXAxis4 = new NationalInstruments.UI.IntensityXAxis();
+            this.intensityYAxis4 = new NationalInstruments.UI.IntensityYAxis();
+            this.ExpSeqIntensityGraph2 = new NationalInstruments.UI.WindowsForms.IntensityGraph();
+            this.colorScale3 = new NationalInstruments.UI.ColorScale();
+            this.ExpSeqIntensityPlot2 = new NationalInstruments.UI.IntensityPlot();
+            this.intensityXAxis3 = new NationalInstruments.UI.IntensityXAxis();
+            this.intensityYAxis3 = new NationalInstruments.UI.IntensityYAxis();
+            this.ExpSeqIntensityGraph1 = new NationalInstruments.UI.WindowsForms.IntensityGraph();
+            this.colorScale2 = new NationalInstruments.UI.ColorScale();
+            this.ExpSeqIntensityPlot1 = new NationalInstruments.UI.IntensityPlot();
+            this.intensityXAxis2 = new NationalInstruments.UI.IntensityXAxis();
+            this.intensityYAxis2 = new NationalInstruments.UI.IntensityYAxis();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.IonFocusGraphsClearButton = new System.Windows.Forms.Button();
             this.ySpreadGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
@@ -203,6 +237,15 @@ namespace ArrayDACControl
             ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrAmpLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqWaveFormGraph)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox28.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqIntensityGraph4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqIntensityGraph3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqIntensityGraph2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqIntensityGraph1)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ySpreadGraph)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yBalanceGraph)).BeginInit();
@@ -697,6 +740,7 @@ namespace ArrayDACControl
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(5, 3);
             this.tabControl1.Name = "tabControl1";
@@ -927,7 +971,7 @@ namespace ArrayDACControl
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(952, 1029);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Scans";
+            this.tabPage3.Text = "PMT";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // clearScanButton
@@ -1363,6 +1407,272 @@ namespace ArrayDACControl
             this.yAxis5.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
             this.yAxis5.MajorDivisions.GridVisible = true;
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.ExpSeqWaveFormGraph);
+            this.tabPage6.Controls.Add(this.groupBox3);
+            this.tabPage6.Controls.Add(this.label3);
+            this.tabPage6.Controls.Add(this.label2);
+            this.tabPage6.Controls.Add(this.label1);
+            this.tabPage6.Controls.Add(this.label215);
+            this.tabPage6.Controls.Add(this.ExpSeqIntensityGraph4);
+            this.tabPage6.Controls.Add(this.ExpSeqIntensityGraph3);
+            this.tabPage6.Controls.Add(this.ExpSeqIntensityGraph2);
+            this.tabPage6.Controls.Add(this.ExpSeqIntensityGraph1);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(952, 1029);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "ExpSeq 2D";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // ExpSeqWaveFormGraph
+            // 
+            this.ExpSeqWaveFormGraph.AccessibleRole = System.Windows.Forms.AccessibleRole.Chart;
+            this.ExpSeqWaveFormGraph.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY)
+                        | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)
+                        | NationalInstruments.UI.GraphInteractionModes.PanX)
+                        | NationalInstruments.UI.GraphInteractionModes.PanY)
+                        | NationalInstruments.UI.GraphInteractionModes.DragCursor)
+                        | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption)
+                        | NationalInstruments.UI.GraphInteractionModes.EditRange)));
+            this.ExpSeqWaveFormGraph.Location = new System.Drawing.Point(210, 582);
+            this.ExpSeqWaveFormGraph.Name = "ExpSeqWaveFormGraph";
+            this.ExpSeqWaveFormGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
+            this.waveformPlot19});
+            this.ExpSeqWaveFormGraph.Size = new System.Drawing.Size(720, 405);
+            this.ExpSeqWaveFormGraph.TabIndex = 183;
+            this.ExpSeqWaveFormGraph.UseColorGenerator = true;
+            this.ExpSeqWaveFormGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.xAxis13});
+            this.ExpSeqWaveFormGraph.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.yAxis13});
+            // 
+            // waveformPlot19
+            // 
+            this.waveformPlot19.LineColor = System.Drawing.Color.White;
+            this.waveformPlot19.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
+            this.waveformPlot19.XAxis = this.xAxis13;
+            this.waveformPlot19.YAxis = this.yAxis13;
+            // 
+            // xAxis13
+            // 
+            this.xAxis13.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
+            this.xAxis13.MajorDivisions.GridVisible = true;
+            // 
+            // yAxis13
+            // 
+            this.yAxis13.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
+            this.yAxis13.MajorDivisions.GridVisible = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.groupBox4);
+            this.groupBox3.Controls.Add(this.groupBox28);
+            this.groupBox3.Location = new System.Drawing.Point(11, 580);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(169, 166);
+            this.groupBox3.TabIndex = 182;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Experimental Sequencer";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.ExpSeqViewScanIndex);
+            this.groupBox4.Location = new System.Drawing.Point(12, 29);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(79, 54);
+            this.groupBox4.TabIndex = 165;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Scan Index";
+            // 
+            // ExpSeqViewScanIndex
+            // 
+            this.ExpSeqViewScanIndex.Location = new System.Drawing.Point(17, 22);
+            this.ExpSeqViewScanIndex.Name = "ExpSeqViewScanIndex";
+            this.ExpSeqViewScanIndex.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqViewScanIndex.TabIndex = 132;
+            this.ExpSeqViewScanIndex.Text = "1";
+            this.ExpSeqViewScanIndex.LostFocus += new System.EventHandler(this.ExpSeqViewScanIndex_TextChanged);
+            // 
+            // groupBox28
+            // 
+            this.groupBox28.Controls.Add(this.ExpSeqViewPMTConfig);
+            this.groupBox28.Location = new System.Drawing.Point(12, 98);
+            this.groupBox28.Name = "groupBox28";
+            this.groupBox28.Size = new System.Drawing.Size(146, 54);
+            this.groupBox28.TabIndex = 164;
+            this.groupBox28.TabStop = false;
+            this.groupBox28.Text = "PMT Config";
+            // 
+            // ExpSeqViewPMTConfig
+            // 
+            this.ExpSeqViewPMTConfig.FormattingEnabled = true;
+            this.ExpSeqViewPMTConfig.Items.AddRange(new object[] {
+            "PMT 1",
+            "PMT 2",
+            "SUM",
+            "DIFFERENCE"});
+            this.ExpSeqViewPMTConfig.Location = new System.Drawing.Point(12, 21);
+            this.ExpSeqViewPMTConfig.Name = "ExpSeqViewPMTConfig";
+            this.ExpSeqViewPMTConfig.Size = new System.Drawing.Size(121, 21);
+            this.ExpSeqViewPMTConfig.TabIndex = 0;
+            this.ExpSeqViewPMTConfig.Text = "PMT Config";
+            this.ExpSeqViewPMTConfig.SelectedIndexChanged += new System.EventHandler(this.ExpSeqViewPMTConfig_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Coral;
+            this.label3.Location = new System.Drawing.Point(466, 281);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 13);
+            this.label3.TabIndex = 181;
+            this.label3.Text = "DIFFERENCE";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Coral;
+            this.label2.Location = new System.Drawing.Point(8, 281);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 180;
+            this.label2.Text = "SUM";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Coral;
+            this.label1.Location = new System.Drawing.Point(466, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 13);
+            this.label1.TabIndex = 179;
+            this.label1.Text = "PMT 2";
+            // 
+            // label215
+            // 
+            this.label215.AutoSize = true;
+            this.label215.ForeColor = System.Drawing.Color.Coral;
+            this.label215.Location = new System.Drawing.Point(8, 6);
+            this.label215.Name = "label215";
+            this.label215.Size = new System.Drawing.Size(39, 13);
+            this.label215.TabIndex = 178;
+            this.label215.Text = "PMT 1";
+            // 
+            // ExpSeqIntensityGraph4
+            // 
+            this.ExpSeqIntensityGraph4.ColorScales.AddRange(new NationalInstruments.UI.ColorScale[] {
+            this.colorScale5});
+            this.ExpSeqIntensityGraph4.InteractionMode = ((NationalInstruments.UI.IntensityGraphInteractionModes)((((((((NationalInstruments.UI.IntensityGraphInteractionModes.ZoomX | NationalInstruments.UI.IntensityGraphInteractionModes.ZoomY)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.ZoomAroundPoint)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.PanX)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.PanY)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.DragCursor)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.DragAnnotationCaption)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.EditRange)));
+            this.ExpSeqIntensityGraph4.Location = new System.Drawing.Point(469, 297);
+            this.ExpSeqIntensityGraph4.Name = "ExpSeqIntensityGraph4";
+            this.ExpSeqIntensityGraph4.Plots.AddRange(new NationalInstruments.UI.IntensityPlot[] {
+            this.ExpSeqIntensityPlot4});
+            this.ExpSeqIntensityGraph4.Size = new System.Drawing.Size(389, 245);
+            this.ExpSeqIntensityGraph4.TabIndex = 3;
+            this.ExpSeqIntensityGraph4.XAxes.AddRange(new NationalInstruments.UI.IntensityXAxis[] {
+            this.intensityXAxis5});
+            this.ExpSeqIntensityGraph4.YAxes.AddRange(new NationalInstruments.UI.IntensityYAxis[] {
+            this.intensityYAxis5});
+            // 
+            // ExpSeqIntensityPlot4
+            // 
+            this.ExpSeqIntensityPlot4.ColorScale = this.colorScale5;
+            this.ExpSeqIntensityPlot4.XAxis = this.intensityXAxis5;
+            this.ExpSeqIntensityPlot4.YAxis = this.intensityYAxis5;
+            // 
+            // ExpSeqIntensityGraph3
+            // 
+            this.ExpSeqIntensityGraph3.ColorScales.AddRange(new NationalInstruments.UI.ColorScale[] {
+            this.colorScale4});
+            this.ExpSeqIntensityGraph3.InteractionMode = ((NationalInstruments.UI.IntensityGraphInteractionModes)((((((((NationalInstruments.UI.IntensityGraphInteractionModes.ZoomX | NationalInstruments.UI.IntensityGraphInteractionModes.ZoomY)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.ZoomAroundPoint)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.PanX)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.PanY)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.DragCursor)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.DragAnnotationCaption)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.EditRange)));
+            this.ExpSeqIntensityGraph3.Location = new System.Drawing.Point(11, 297);
+            this.ExpSeqIntensityGraph3.Name = "ExpSeqIntensityGraph3";
+            this.ExpSeqIntensityGraph3.Plots.AddRange(new NationalInstruments.UI.IntensityPlot[] {
+            this.ExpSeqIntensityPlot3});
+            this.ExpSeqIntensityGraph3.Size = new System.Drawing.Size(397, 245);
+            this.ExpSeqIntensityGraph3.TabIndex = 2;
+            this.ExpSeqIntensityGraph3.XAxes.AddRange(new NationalInstruments.UI.IntensityXAxis[] {
+            this.intensityXAxis4});
+            this.ExpSeqIntensityGraph3.YAxes.AddRange(new NationalInstruments.UI.IntensityYAxis[] {
+            this.intensityYAxis4});
+            // 
+            // ExpSeqIntensityPlot3
+            // 
+            this.ExpSeqIntensityPlot3.ColorScale = this.colorScale4;
+            this.ExpSeqIntensityPlot3.XAxis = this.intensityXAxis4;
+            this.ExpSeqIntensityPlot3.YAxis = this.intensityYAxis4;
+            // 
+            // ExpSeqIntensityGraph2
+            // 
+            this.ExpSeqIntensityGraph2.ColorScales.AddRange(new NationalInstruments.UI.ColorScale[] {
+            this.colorScale3});
+            this.ExpSeqIntensityGraph2.InteractionMode = ((NationalInstruments.UI.IntensityGraphInteractionModes)((((((((NationalInstruments.UI.IntensityGraphInteractionModes.ZoomX | NationalInstruments.UI.IntensityGraphInteractionModes.ZoomY)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.ZoomAroundPoint)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.PanX)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.PanY)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.DragCursor)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.DragAnnotationCaption)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.EditRange)));
+            this.ExpSeqIntensityGraph2.Location = new System.Drawing.Point(469, 22);
+            this.ExpSeqIntensityGraph2.Name = "ExpSeqIntensityGraph2";
+            this.ExpSeqIntensityGraph2.Plots.AddRange(new NationalInstruments.UI.IntensityPlot[] {
+            this.ExpSeqIntensityPlot2});
+            this.ExpSeqIntensityGraph2.Size = new System.Drawing.Size(389, 244);
+            this.ExpSeqIntensityGraph2.TabIndex = 1;
+            this.ExpSeqIntensityGraph2.XAxes.AddRange(new NationalInstruments.UI.IntensityXAxis[] {
+            this.intensityXAxis3});
+            this.ExpSeqIntensityGraph2.YAxes.AddRange(new NationalInstruments.UI.IntensityYAxis[] {
+            this.intensityYAxis3});
+            // 
+            // ExpSeqIntensityPlot2
+            // 
+            this.ExpSeqIntensityPlot2.ColorScale = this.colorScale3;
+            this.ExpSeqIntensityPlot2.XAxis = this.intensityXAxis3;
+            this.ExpSeqIntensityPlot2.YAxis = this.intensityYAxis3;
+            // 
+            // ExpSeqIntensityGraph1
+            // 
+            this.ExpSeqIntensityGraph1.ColorScales.AddRange(new NationalInstruments.UI.ColorScale[] {
+            this.colorScale2});
+            this.ExpSeqIntensityGraph1.InteractionMode = ((NationalInstruments.UI.IntensityGraphInteractionModes)((((((((NationalInstruments.UI.IntensityGraphInteractionModes.ZoomX | NationalInstruments.UI.IntensityGraphInteractionModes.ZoomY)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.ZoomAroundPoint)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.PanX)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.PanY)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.DragCursor)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.DragAnnotationCaption)
+                        | NationalInstruments.UI.IntensityGraphInteractionModes.EditRange)));
+            this.ExpSeqIntensityGraph1.Location = new System.Drawing.Point(11, 22);
+            this.ExpSeqIntensityGraph1.Name = "ExpSeqIntensityGraph1";
+            this.ExpSeqIntensityGraph1.Plots.AddRange(new NationalInstruments.UI.IntensityPlot[] {
+            this.ExpSeqIntensityPlot1});
+            this.ExpSeqIntensityGraph1.Size = new System.Drawing.Size(397, 244);
+            this.ExpSeqIntensityGraph1.TabIndex = 0;
+            this.ExpSeqIntensityGraph1.XAxes.AddRange(new NationalInstruments.UI.IntensityXAxis[] {
+            this.intensityXAxis2});
+            this.ExpSeqIntensityGraph1.YAxes.AddRange(new NationalInstruments.UI.IntensityYAxis[] {
+            this.intensityYAxis2});
+            // 
+            // ExpSeqIntensityPlot1
+            // 
+            this.ExpSeqIntensityPlot1.ColorScale = this.colorScale2;
+            this.ExpSeqIntensityPlot1.XAxis = this.intensityXAxis2;
+            this.ExpSeqIntensityPlot1.YAxis = this.intensityYAxis2;
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.IonFocusGraphsClearButton);
@@ -1673,6 +1983,17 @@ namespace ArrayDACControl
             ((System.ComponentModel.ISupportInitialize)(this.corrRecToggle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrAmpLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.corrMuLog)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqWaveFormGraph)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox28.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqIntensityGraph4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqIntensityGraph3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqIntensityGraph2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqIntensityGraph1)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ySpreadGraph)).EndInit();
@@ -1835,6 +2156,40 @@ namespace ArrayDACControl
         private NationalInstruments.UI.WaveformPlot waveformPlot17;
         private NationalInstruments.UI.WaveformPlot waveformPlot16;
         private NationalInstruments.UI.WaveformPlot waveformPlot15;
+        private System.Windows.Forms.TabPage tabPage6;
+        private NationalInstruments.UI.IntensityXAxis intensityXAxis2;
+        private NationalInstruments.UI.IntensityYAxis intensityYAxis2;
+        private NationalInstruments.UI.IntensityXAxis intensityXAxis5;
+        private NationalInstruments.UI.IntensityYAxis intensityYAxis5;
+        private NationalInstruments.UI.IntensityXAxis intensityXAxis4;
+        private NationalInstruments.UI.IntensityYAxis intensityYAxis4;
+        private NationalInstruments.UI.IntensityXAxis intensityXAxis3;
+        private NationalInstruments.UI.IntensityYAxis intensityYAxis3;
+        public NationalInstruments.UI.WindowsForms.IntensityGraph ExpSeqIntensityGraph1;
+        public NationalInstruments.UI.WindowsForms.IntensityGraph ExpSeqIntensityGraph4;
+        public NationalInstruments.UI.WindowsForms.IntensityGraph ExpSeqIntensityGraph3;
+        public NationalInstruments.UI.WindowsForms.IntensityGraph ExpSeqIntensityGraph2;
+        public NationalInstruments.UI.ColorScale colorScale2;
+        public NationalInstruments.UI.IntensityPlot ExpSeqIntensityPlot1;
+        public NationalInstruments.UI.ColorScale colorScale3;
+        public NationalInstruments.UI.IntensityPlot ExpSeqIntensityPlot2;
+        public NationalInstruments.UI.ColorScale colorScale4;
+        public NationalInstruments.UI.IntensityPlot ExpSeqIntensityPlot3;
+        public NationalInstruments.UI.ColorScale colorScale5;
+        public NationalInstruments.UI.IntensityPlot ExpSeqIntensityPlot4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label215;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox28;
+        public System.Windows.Forms.ComboBox ExpSeqViewPMTConfig;
+        public System.Windows.Forms.TextBox ExpSeqViewScanIndex;
+        public NationalInstruments.UI.WindowsForms.WaveformGraph ExpSeqWaveFormGraph;
+        private NationalInstruments.UI.WaveformPlot waveformPlot19;
+        private NationalInstruments.UI.XAxis xAxis13;
+        private NationalInstruments.UI.YAxis yAxis13;
 
 
 

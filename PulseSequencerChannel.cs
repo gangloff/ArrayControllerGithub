@@ -140,6 +140,11 @@ namespace ArrayDACControl
         public double Param1Value
         {
             get { return param1; }
+            set
+            {
+                param1 = value;
+                directSet();
+            }
         }
 
         public double Param1opt1Value
@@ -176,6 +181,11 @@ namespace ArrayDACControl
         public double Param2Value
         {
             get { return param2; }
+            set
+            {
+                param2 = value;
+                directSet();
+            }
         }
 
         public double Param2opt1Value
@@ -212,6 +222,11 @@ namespace ArrayDACControl
         public double Param3Value
         {
             get { return param3; }
+            set
+            {
+                param3 = value;
+                directSet();
+            }
         }
 
         public double Param3opt1Value
@@ -344,6 +359,52 @@ namespace ArrayDACControl
                 SigParam2.Text = param2.ToString();
                 param3 = param3opt3;
                 SigParam3.Text = param3.ToString();
+            }
+
+            makeWfm();
+        }
+
+        private void directSet()
+        {
+            SigParam1.Text = param1.ToString();
+            SigParam2.Text = param2.ToString();
+            SigParam3.Text = param3.ToString();
+
+            if (opt1.Checked)
+            {
+                SigParam1.Enabled = true;
+                SigParam2.Enabled = true;
+                SigParam3.Enabled = true;
+                SigParam1.BackColor = System.Drawing.Color.White;
+                SigParam2.BackColor = System.Drawing.Color.White;
+                SigParam3.BackColor = System.Drawing.Color.White;
+                param1opt1 = param1;
+                param2opt1 = param2;
+                param3opt1 = param3;
+            }
+            else if (opt2.Checked)
+            {
+                SigParam1.Enabled = false;
+                SigParam2.Enabled = false;
+                SigParam3.Enabled = false;
+                SigParam1.BackColor = System.Drawing.Color.LightGray;
+                SigParam2.BackColor = System.Drawing.Color.LightGray;
+                SigParam3.BackColor = System.Drawing.Color.LightGray;
+                param1opt2 = param1;
+                param2opt2 = param2;
+                param3opt2 = param3;
+            }
+            else if (opt3.Checked)
+            {
+                SigParam1.Enabled = false;
+                SigParam2.Enabled = false;
+                SigParam3.Enabled = false;
+                SigParam1.BackColor = System.Drawing.Color.LightGray;
+                SigParam2.BackColor = System.Drawing.Color.LightGray;
+                SigParam3.BackColor = System.Drawing.Color.LightGray;
+                param1opt3 = param1;
+                param2opt3 = param2;
+                param3opt3 = param3;
             }
 
             makeWfm();

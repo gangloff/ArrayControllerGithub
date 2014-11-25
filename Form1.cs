@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +12,8 @@ using System.Diagnostics;
 using Microsoft.Win32.SafeHandles;
 using NationalInstruments.DAQmx;
 using NationalInstruments.UI.WindowsForms;
+using NationalInstruments.VisaNS;
+using System.Web.UI.WebControls;
 
 
 
@@ -19,6 +22,10 @@ namespace ArrayDACControl
     public partial class Form1 : Form
     {
         public static Form1 Self;
+
+        //global variables for Rigol Tab
+        ArrayList importedWaveforms = new ArrayList(); //ArrayList to store importedWaveforms
+        int index = 0; //each waveform is assigned an index number
 
         DACController DAC;
         NICardController Dev4AO0, Dev4AO1, Dev4AO2, Dev4AO3, Dev4AO4, Dev4AO5, Dev4AO6, Dev4AO7, Dev7AO0, Dev7AO2, Dev7AO6, Dev7AO7;
@@ -67,12 +74,12 @@ namespace ArrayDACControl
         ThreadHelperClass CameraThreadHelper, CameraTimeOutThreadHelper, IntensityGraphUpdateThreadHelper;
         ThreadHelperClass CorrelatorThreadHelper, SinglePMTReadThreadHelper, FluorLogThreadHelper;
         ThreadHelperClass LatticePositionThreadHelper;
-        ThreadHelperClass ExperimentalSequencerThreadHelper;
+        public ThreadHelperClass ExperimentalSequencerThreadHelper;
         ThreadHelperClass InterlockedScan1ThreadHelper, InterlockedScan2ThreadHelper;
         //delegate methods for cross-thread calls
         delegate void MyDelegate();
         delegate void MyDelegateThreadHelper(ThreadHelperClass theThreadHelper);
-        delegate void MyDelegateLabelUpdate(string theString, Label theLabel);
+        delegate void MyDelegateLabelUpdate(string theString, System.Windows.Forms.Label theLabel);
         delegate void MyDelegateThreadHelperComboBox(ThreadHelperClass theThreadHelper, ComboBox theComboBox);
 
         double BL, BR, TL, TR, midL, midR;
@@ -113,7 +120,7 @@ namespace ArrayDACControl
 
         private int[,] rowColumnToChannel;
 
-        private Label[,] DCindicators;
+        private System.Windows.Forms.Label[,] DCindicators;
 
         const int DCrows = 12;
         AdjustableSlider[] DCsliders;
@@ -172,7 +179,7 @@ namespace ArrayDACControl
             for (int i = 0; i < slowInCh.Length; i++)
                 slowInCh[i] = new PulseSequencerChannel();
 
-            DCindicators = new Label[2, DCrows];
+            DCindicators = new System.Windows.Forms.Label[2, DCrows];
             DCsliders = new AdjustableSlider[DCrows];
             DCslidersDx = new AdjustableSlider[DCrows];
             DCslidersLeft = new AdjustableSlider[DCrows];
@@ -255,7 +262,7 @@ namespace ArrayDACControl
             // 638 Shutter
             Dev2DO6 = new NICardController();
             Dev2DO6.InitDigitalOutput("Dev2/port2/line6");
-            // Camera Trigger
+            // 935 Shutter
             Dev2DO7 = new NICardController();
             Dev2DO7.InitDigitalOutput("Dev2/port2/line7");
             // Analog Input
@@ -545,12 +552,12 @@ namespace ArrayDACControl
         {
             //positions of the tables of channels:
             int fastoutxpos = 20;
-            int fastoutypos = 300;
+            int fastoutypos = 275+400;
             int slowoutxpos = 840;
             int slowoutypos = fastoutypos;
             int fastinxpos = fastoutxpos;
             int slowinxpos = slowoutxpos;
-            int fastinypos = fastoutypos + fastInCh.Length * 47 + 100;
+            int fastinypos = fastoutypos + fastInCh.Length * 47 + 60;
             int slowinypos = fastinypos;
 
             pulsePeriodVal = double.Parse(pulsePeriodText.Text);
@@ -590,7 +597,7 @@ namespace ArrayDACControl
                 fastOutCh[i].opt3Value = false;
                 fastOutCh[i].ExpPeriodValue = pulsePeriodVal;
                 this.Controls.Add(fastOutCh[i]);
-                this.PulseProgrammerTab.Controls.Add(this.fastOutCh[i]);
+                this.CorrelatorTab.Controls.Add(this.fastOutCh[i]);
 
 
             }
@@ -617,7 +624,7 @@ namespace ArrayDACControl
                 fastInCh[i].opt3Value = false;
                 fastInCh[i].ExpPeriodValue = pulsePeriodVal;
                 this.Controls.Add(fastInCh[i]);
-                this.PulseProgrammerTab.Controls.Add(this.fastInCh[i]);
+                this.CorrelatorTab.Controls.Add(this.fastInCh[i]);
             }
 
             //SLOW OUTPUT CHANNELS
@@ -653,7 +660,7 @@ namespace ArrayDACControl
                 slowOutCh[i].opt3Value = false;
                 slowOutCh[i].ExpPeriodValue = slow_pulsePeriodVal;
                 this.Controls.Add(slowOutCh[i]);
-                this.PulseProgrammerTab.Controls.Add(this.slowOutCh[i]);
+                this.CorrelatorTab.Controls.Add(this.slowOutCh[i]);
             }
 
             //SLOW INPUT CHANNELS
@@ -677,7 +684,7 @@ namespace ArrayDACControl
                 slowInCh[i].opt3Value = false;
                 slowInCh[i].ExpPeriodValue = slow_pulsePeriodVal;
                 this.Controls.Add(slowInCh[i]);
-                this.PulseProgrammerTab.Controls.Add(this.slowInCh[i]);
+                this.CorrelatorTab.Controls.Add(this.slowInCh[i]);
             }
 
 
@@ -753,11 +760,11 @@ namespace ArrayDACControl
                 if (i == 0)
                 {
                     //always on option for first channel
-                    slowOutCh[i].Param1opt2Value = pulsePeriodVal;
-                    slowOutCh[i].Param2opt2Value = pulsePeriodVal;
+                    slowOutCh[i].Param1opt2Value = slow_pulsePeriodVal;
+                    slowOutCh[i].Param2opt2Value = slow_pulsePeriodVal;
                     slowOutCh[i].Param3opt2Value = 0;
                     //always off option for first channel
-                    slowOutCh[i].Param1opt3Value = pulsePeriodVal;
+                    slowOutCh[i].Param1opt3Value = slow_pulsePeriodVal;
                     slowOutCh[i].Param2opt3Value = 0;
                     slowOutCh[i].Param3opt3Value = 0;
                 }
@@ -768,7 +775,7 @@ namespace ArrayDACControl
                     slowOutCh[i].Param2opt2Value = slowOutCh[0].Param2Value;
                     slowOutCh[i].Param3opt2Value = slowOutCh[0].Param3Value;
                     //always off option for second channel
-                    slowOutCh[i].Param1opt3Value = pulsePeriodVal;
+                    slowOutCh[i].Param1opt3Value = slow_pulsePeriodVal;
                     slowOutCh[i].Param2opt3Value = 0;
                     slowOutCh[i].Param3opt3Value = 0;
                 }
@@ -1158,6 +1165,58 @@ namespace ArrayDACControl
                 tw.WriteLine("DataFilenameFolderPathCorr" + "\t" + DataFilenameFolderPathCorr.Text);
                 tw.WriteLine("DataFilenameCommonRoot1Corr" + "\t" + DataFilenameCommonRoot1Corr.Text);
 
+                //////////////////////
+
+                //In order of appearance, top left, to bottom right
+                tw.WriteLine("Sync period" + "\t" + LockInPertext1.Text);
+                tw.WriteLine("Fast Overall Period" + "\t" + pulsePeriodVal.ToString());
+                tw.WriteLine("Slow Overall Period" + "\t" + slow_pulsePeriodVal.ToString());
+
+                for (int i = 0; i < nfastchOut; i++)
+                {
+                    tw.WriteLine("Fast Out \t" + i.ToString() + "\t name \t" + fastOutCh[i].Name);
+                    tw.WriteLine("Fast Out \t" + i.ToString() + "\t OptInd \t" + fastOutCh[i].opt1Value.ToString());
+                    tw.WriteLine("Fast Out \t" + i.ToString() + "\t Opt2 \t" + fastOutCh[i].opt2Value.ToString());
+                    tw.WriteLine("Fast Out \t" + i.ToString() + "\t Opt3 \t" + fastOutCh[i].opt3Value.ToString());
+                    tw.WriteLine("Fast Out \t" + i.ToString() + "\t param1 \t" + fastOutCh[i].Param1Value.ToString());
+                    tw.WriteLine("Fast Out \t" + i.ToString() + "\t param2 \t" + fastOutCh[i].Param2Value.ToString());
+                    tw.WriteLine("Fast Out \t" + i.ToString() + "\t param3 \t" + fastOutCh[i].Param3Value.ToString());
+
+                }
+                for (int i = 0; i < nfastchIn; i++)
+                {
+                    tw.WriteLine("Fast In \t" + i.ToString() + "\t name \t" + fastInCh[i].Name);
+                    tw.WriteLine("Fast In \t" + i.ToString() + "\t OptInd \t" + fastInCh[i].opt1Value.ToString());
+                    tw.WriteLine("Fast In \t" + i.ToString() + "\t Opt2 \t" + fastInCh[i].opt2Value.ToString());
+                    tw.WriteLine("Fast In \t" + i.ToString() + "\t Opt3 \t" + fastInCh[i].opt3Value.ToString());
+                    tw.WriteLine("Fast In \t" + i.ToString() + "\t param1 \t" + fastInCh[i].Param1Value.ToString());
+                    tw.WriteLine("Fast In \t" + i.ToString() + "\t param2 \t" + fastInCh[i].Param2Value.ToString());
+                    tw.WriteLine("Fast In \t" + i.ToString() + "\t param3 \t" + fastInCh[i].Param3Value.ToString());
+                }
+                for (int i = 0; i < nslowchOut; i++)
+                {
+                    tw.WriteLine("Slow Out \t" + i.ToString() + "\t name \t" + slowOutCh[i].Name);
+                    tw.WriteLine("Slow Out \t" + i.ToString() + "\t OptInd \t" + slowOutCh[i].opt1Value.ToString());
+                    tw.WriteLine("Slow Out \t" + i.ToString() + "\t Opt2 \t" + slowOutCh[i].opt2Value.ToString());
+                    tw.WriteLine("Slow Out \t" + i.ToString() + "\t Opt3 \t" + slowOutCh[i].opt3Value.ToString());
+                    tw.WriteLine("Slow Out \t" + i.ToString() + "\t param1 \t" + slowOutCh[i].Param1Value.ToString());
+                    tw.WriteLine("Slow Out \t" + i.ToString() + "\t param2 \t" + slowOutCh[i].Param2Value.ToString());
+                    tw.WriteLine("Slow Out \t" + i.ToString() + "\t param3 \t" + slowOutCh[i].Param3Value.ToString());
+                }
+                for (int i = 0; i < nslowchIn; i++)
+                {
+                    tw.WriteLine("Slow In \t" + i.ToString() + "\t name \t" + slowInCh[i].Name);
+                    tw.WriteLine("Slow In \t" + i.ToString() + "\t OptInd \t" + slowInCh[i].opt1Value.ToString());
+                    tw.WriteLine("Slow In \t" + i.ToString() + "\t Opt2 \t" + slowInCh[i].opt2Value.ToString());
+                    tw.WriteLine("Slow In \t" + i.ToString() + "\t Opt3 \t" + slowInCh[i].opt3Value.ToString());
+                    tw.WriteLine("Slow In \t" + i.ToString() + "\t param1 \t" + slowInCh[i].Param1Value.ToString());
+                    tw.WriteLine("Slow In \t" + i.ToString() + "\t param2 \t" + slowInCh[i].Param2Value.ToString());
+                    tw.WriteLine("Slow In \t" + i.ToString() + "\t param3 \t" + slowInCh[i].Param3Value.ToString());
+                }
+
+                ////////////////////////
+
+                /*
                 //Fast Pulse Programmer Tab
                 tw.WriteLine("pulsePeriodText" + "\t" + pulsePeriodText.Text);
                 tw.WriteLine("out1SigName" + "\t" + out1SigName.Text);
@@ -1199,7 +1258,7 @@ namespace ArrayDACControl
                 tw.WriteLine("slow_in2SigName" + "\t" + slow_in2SigName.Text);
                 tw.WriteLine("slow_in2OnTimeText" + "\t" + slow_in2OnTimeText.Text);
                 tw.WriteLine("slow_in2DelayText" + "\t" + slow_in2DelayText.Text);
-
+                */
                 //Camera Tab
                 tw.WriteLine("CameraHbin" + "\t" + CameraHbin.Text);
                 tw.WriteLine("CameraVbin" + "\t" + CameraVbin.Text);
@@ -1429,6 +1488,151 @@ namespace ArrayDACControl
                                 break;
 
                             //PULSE PROGRAMMER TAB
+                            case "Sync period":
+                                {
+                                    LockInPertext1.Text = theString.Split('\t')[1];
+                                    break;
+                                }
+                            case "Fast Overall Period":
+                                {
+                                    pulsePeriodText.Text = theString.Split('\t')[1];
+                                    pulsePeriodVal = double.Parse(pulsePeriodText.Text);
+                                    break;
+                                }
+                            case "Slow Overall Period":
+                                {
+                                    slow_pulsePeriodText.Text = theString.Split('\t')[1];
+                                    slow_pulsePeriodVal = double.Parse(slow_pulsePeriodText.Text);
+                                    syncTimeScales(pulsePeriodVal);
+                                    break;
+                                }
+                            case "Fast Out":
+                                {
+                                      int i = int.Parse(theString.Split('\t')[1]);
+
+                                      switch(theString.Split('\t')[2])
+                                      {
+                                          case "name":
+                                              fastOutCh[i].Name = theString.Split('\t')[3];
+                                              break;
+                                          case "OptInd":
+                                              fastOutCh[i].opt1Value = bool.Parse(theString.Split('\t')[3]);
+                                              break;
+                                          case "Opt2":
+                                              fastOutCh[i].opt2Value = bool.Parse(theString.Split('\t')[3]);
+                                              break;
+                                          case "Opt3":
+                                              fastOutCh[i].opt3Value = bool.Parse(theString.Split('\t')[3]);
+                                              break;
+                                          case "param1":
+                                              fastOutCh[i].Param1Value = double.Parse(theString.Split('\t')[3]);
+                                              break;
+                                          case "param2":
+                                              fastOutCh[i].Param2Value = double.Parse(theString.Split('\t')[3]);
+                                              break;
+                                          case "param3":
+                                              fastOutCh[i].Param3Value = double.Parse(theString.Split('\t')[3]);
+                                              break;
+                                      }
+
+                                      break;
+                                }
+                            case "Fast In":
+                                {
+                                    int i = int.Parse(theString.Split('\t')[1]);
+
+                                    switch (theString.Split('\t')[2])
+                                    {
+                                        case "name":
+                                            fastInCh[i].Name = theString.Split('\t')[3];
+                                            break;
+                                        case "OptInd":
+                                            fastInCh[i].opt1Value = bool.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "Opt2":
+                                            fastInCh[i].opt2Value = bool.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "Opt3":
+                                            fastInCh[i].opt3Value = bool.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "param1":
+                                            fastInCh[i].Param1Value = double.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "param2":
+                                            fastInCh[i].Param2Value = double.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "param3":
+                                            fastInCh[i].Param3Value = double.Parse(theString.Split('\t')[3]);
+                                            break;
+                                    }
+
+                                    break;
+                                }
+                            case "Slow Out":
+                                {
+                                    int i = int.Parse(theString.Split('\t')[1]);
+
+                                    switch (theString.Split('\t')[2])
+                                    {
+                                        case "name":
+                                            slowOutCh[i].Name = theString.Split('\t')[3];
+                                            break;
+                                        case "OptInd":
+                                            slowOutCh[i].opt1Value = bool.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "Opt2":
+                                            slowOutCh[i].opt2Value = bool.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "Opt3":
+                                            slowOutCh[i].opt3Value = bool.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "param1":
+                                            slowOutCh[i].Param1Value = double.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "param2":
+                                            slowOutCh[i].Param2Value = double.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "param3":
+                                            slowOutCh[i].Param3Value = double.Parse(theString.Split('\t')[3]);
+                                            break;
+                                    }
+
+                                    break;
+                                }
+                            case "Slow In":
+                                {
+                                    int i = int.Parse(theString.Split('\t')[1]);
+
+                                    switch (theString.Split('\t')[2])
+                                    {
+                                        case "name":
+                                            slowInCh[i].Name = theString.Split('\t')[3];
+                                            break;
+                                        case "OptInd":
+                                            slowInCh[i].opt1Value = bool.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "Opt2":
+                                            slowInCh[i].opt2Value = bool.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "Opt3":
+                                            slowInCh[i].opt3Value = bool.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "param1":
+                                            slowInCh[i].Param1Value = double.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "param2":
+                                            slowInCh[i].Param2Value = double.Parse(theString.Split('\t')[3]);
+                                            break;
+                                        case "param3":
+                                            slowInCh[i].Param3Value = double.Parse(theString.Split('\t')[3]);
+                                            break;
+                                    }
+
+                                    break;
+                                }
+
+
+                                /*
                             case "pulsePeriodText":
                                 pulsePeriodText.Text = theString.Split('\t')[1];
                                 break;
@@ -1543,7 +1747,7 @@ namespace ArrayDACControl
                             case "slow_in2DelayText":
                                 slow_in2DelayText.Text = theString.Split('\t')[1];
                                 break;
-
+                                */
                             //CAMERA TAB
                             case "CameraHbin":
                                 CameraHbin.Text = theString.Split('\t')[1];
@@ -2159,6 +2363,7 @@ namespace ArrayDACControl
             SavePPSettings(PPSettingsFolderPath.Text + PPSettings2Textbox.Text);
         }
 
+        // OLD pulse programmer saving:
         private void SavePPSettings(string path)
         {
             try
@@ -2216,6 +2421,66 @@ namespace ArrayDACControl
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
+        private void SavePulseSequencerSettings(string path)
+        {
+            try
+            {
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(path + ".txt");
+
+                tw.WriteLine(DateTime.Now);
+
+                //In order of appearance, top left, to bottom right
+                tw.WriteLine("Sync period" + "\t" + LockInPertext1.Text);
+                tw.WriteLine("Fast Overall Period" + "\t" + pulsePeriodVal.ToString());
+                tw.WriteLine("Slow Overall Period" + "\t" + slow_pulsePeriodVal.ToString());
+
+                for (int i = 0; i < nfastchOut; i++)
+                {
+                    tw.WriteLine("Fast Out" + "\t" + i.ToString() + "\t" + "name" + "\t" + fastOutCh[i].Name);
+                    tw.WriteLine("Fast Out" + "\t" + i.ToString() + "\t" + "OptInd" + "\t" + fastOutCh[i].opt1Value.ToString() );
+                    tw.WriteLine("Fast Out" + "\t" + i.ToString() + "\t" + "Opt2" + "\t" + fastOutCh[i].opt2Value.ToString() );
+                    tw.WriteLine("Fast Out" + "\t" + i.ToString() + "\t" + "Opt3" + "\t" + fastOutCh[i].opt3Value.ToString());
+                    tw.WriteLine("Fast Out" + "\t" + i.ToString() + "\t" + "param1" + "\t" + fastOutCh[i].Param1Value.ToString());
+                    tw.WriteLine("Fast Out" + "\t" + i.ToString() + "\t" + "param2" + "\t" + fastOutCh[i].Param2Value.ToString());
+                    tw.WriteLine("Fast Out" + "\t" + i.ToString() + "\t" + "param3" + "\t" + fastOutCh[i].Param3Value.ToString());
+
+                }
+                for (int i = 0; i < nfastchIn; i++)
+                {
+                    tw.WriteLine("Fast In" + "\t" + i.ToString() + "\t" + "name" + "\t" + fastInCh[i].Name);
+                    tw.WriteLine("Fast In" + "\t" + i.ToString() + "\t" + "OptInd" + "\t" + fastInCh[i].opt1Value.ToString());
+                    tw.WriteLine("Fast In" + "\t" + i.ToString() + "\t" + "Opt2" + "\t" + fastInCh[i].opt2Value.ToString());
+                    tw.WriteLine("Fast In" + "\t" + i.ToString() + "\t" + "Opt3" + "\t" + fastInCh[i].opt3Value.ToString());
+                    tw.WriteLine("Fast In" + "\t" + i.ToString() + "\t" + "param1" + "\t" + fastInCh[i].Param1Value.ToString());
+                    tw.WriteLine("Fast In" + "\t" + i.ToString() + "\t" + "param2" + "\t" + fastInCh[i].Param2Value.ToString());
+                    tw.WriteLine("Fast In" + "\t" + i.ToString() + "\t" + "param3" + "\t" + fastInCh[i].Param3Value.ToString());
+                }
+                for (int i = 0; i < nslowchOut; i++)
+                {
+                    tw.WriteLine("Slow Out" + "\t" + i.ToString() + "\t" + "name" + "\t" + slowOutCh[i].Name);
+                    tw.WriteLine("Slow Out" + "\t" + i.ToString() + "\t" + "OptInd" + "\t" + slowOutCh[i].opt1Value.ToString());
+                    tw.WriteLine("Slow Out" + "\t" + i.ToString() + "\t" + "Opt2" + "\t" + slowOutCh[i].opt2Value.ToString());
+                    tw.WriteLine("Slow Out" + "\t" + i.ToString() + "\t" + "Opt3" + "\t" + slowOutCh[i].opt3Value.ToString());
+                    tw.WriteLine("Slow Out" + "\t" + i.ToString() + "\t" + "param1" + "\t" + slowOutCh[i].Param1Value.ToString());
+                    tw.WriteLine("Slow Out" + "\t" + i.ToString() + "\t" + "param2" + "\t" + slowOutCh[i].Param2Value.ToString());
+                    tw.WriteLine("Slow Out" + "\t" + i.ToString() + "\t" + "param3" + "\t" + slowOutCh[i].Param3Value.ToString());
+                }
+                for (int i = 0; i < nslowchIn; i++)
+                {
+                    tw.WriteLine("Slow In" + "\t" + i.ToString() + "\t" + "name" + "\t" + slowInCh[i].Name);
+                    tw.WriteLine("Slow In" + "\t" + i.ToString() + "\t" + "OptInd" + "\t" + slowInCh[i].opt1Value.ToString());
+                    tw.WriteLine("Slow In" + "\t" + i.ToString() + "\t" + "Opt2" + "\t" + slowInCh[i].opt2Value.ToString());
+                    tw.WriteLine("Slow In" + "\t" + i.ToString() + "\t" + "Opt3" + "\t" + slowInCh[i].opt3Value.ToString());
+                    tw.WriteLine("Slow In" + "\t" + i.ToString() + "\t" + "param1" + "\t" + slowInCh[i].Param1Value.ToString());
+                    tw.WriteLine("Slow In" + "\t" + i.ToString() + "\t" + "param2" + "\t" + slowInCh[i].Param2Value.ToString());
+                    tw.WriteLine("Slow In" + "\t" + i.ToString() + "\t" + "param3" + "\t" + slowInCh[i].Param3Value.ToString());
+                }
+
+                tw.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
         private void PPSettingsReadButton_Click(object sender, EventArgs e)
         {
             if (PPSettingsSwitch.Value) { ReadConfigurationFull(PPSettingsFolderPath.Text + PPSettings1Textbox.Text); }
@@ -2255,7 +2520,7 @@ namespace ArrayDACControl
         // FORM CALLBACK FUNCTIONS
         //
 
-        private void UpdateLabelCallbackFn(string theString, Label theLabel)
+        private void UpdateLabelCallbackFn(string theString, System.Windows.Forms.Label theLabel)
         {
             theLabel.Text = theString;
         }
@@ -2309,6 +2574,58 @@ namespace ArrayDACControl
             //update PMT plot
             CameraForm.PMTcountGraph.PlotYAppend(theThreadHelper.SingleDouble);
         }
+
+        private void ExpSeqIntensityGraphUpdateCallbackFn(ThreadHelperClass theThreadHelper)
+        {
+            //pmt1
+            CameraForm.ExpSeqIntensityPlot1.Plot(theThreadHelper.DoubleDataArray[0]);
+            //pmt2
+            CameraForm.ExpSeqIntensityPlot2.Plot(theThreadHelper.DoubleDataArray[1]);
+            //sum
+            CameraForm.ExpSeqIntensityPlot3.Plot(theThreadHelper.DoubleDataArray[2]);
+            //difference
+            CameraForm.ExpSeqIntensityPlot4.Plot(theThreadHelper.DoubleDataArray[3]);
+        }
+
+        public void ExpSeqViewScatterGraphUpdateCallbackFn(ThreadHelperClass theThreadHelper)
+        {
+            //which PMT configuration to view
+            int PMTConfig;
+            switch (CameraForm.ExpSeqViewPMTConfig.Text)
+            {
+                case "PMT 1":
+                    PMTConfig = 0;
+                    break;
+                case "PMT 2":
+                    PMTConfig = 1;
+                    break;
+                case "SUM":
+                    PMTConfig = 2;
+                    break;
+                case "DIFFERENCE":
+                    PMTConfig = 3;
+                    break;
+                default:
+                    PMTConfig = 0;
+                    break;
+            }
+
+            //which scan index
+            int ScanIndex = int.Parse(CameraForm.ExpSeqViewScanIndex.Text);
+            if (ScanIndex < 0) ScanIndex = 0;
+            if (ScanIndex > theThreadHelper.numPoints - 1) ScanIndex = theThreadHelper.numPoints - 1;
+
+            int lengthofdata = theCorrelator.phcountarrayCh1.Length;
+            double[] dataPlot = new double[lengthofdata];
+            for (int i = 0; i < lengthofdata; i++)
+            {
+                dataPlot[i] = theThreadHelper.DoubleDataArray[PMTConfig][ScanIndex, i];
+            }
+
+            //plot
+            CameraForm.ExpSeqWaveFormGraph.PlotY(dataPlot);
+        }
+
 
         private void ScanResultsGraphCallbackFn(ThreadHelperClass theThreadHelper)
         {
@@ -2391,8 +2708,6 @@ namespace ArrayDACControl
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
                     Monitor.Wait(theThreadHelper);
                 }
-                //increase index
-                theThreadHelper.index++;
             }
             // if Camera selected run Camera acquisition
             if (theThreadHelper.message == "Camera" || theThreadHelper.message == "CameraImage")
@@ -2402,14 +2717,12 @@ namespace ArrayDACControl
                 {
                     SaveImageData(theThreadHelper);
                 }
-                theThreadHelper.index++;
             }
 
             // if AI selected, get reading from NI card
             if (theThreadHelper.message == "Dev3AI2")
             {
                 theThreadHelper.DoubleData[0, theThreadHelper.index] = Dev3AI2.ReadAnalogValue();
-                theThreadHelper.index++;
             }
 
             // if Correlator:Sum selected, get reading from correlator, and sum bins
@@ -2432,8 +2745,6 @@ namespace ArrayDACControl
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
                     Monitor.Wait(theThreadHelper);
                 }
-                //increase index
-                theThreadHelper.index++;
             }
 
             // if Correlator:Channels selected, get reading from correlator, and sum bins
@@ -2458,8 +2769,6 @@ namespace ArrayDACControl
                 }
                 //save
                 SaveCorrelatorData(theThreadHelper.folderPathExtra + "correlator\\" + theThreadHelper.threadName + "=" + theThreadHelper.DoubleScanVariable[0, theThreadHelper.index].ToString("F3") + "\\");
-                //increase index
-                theThreadHelper.index++;
             }
 
         }
@@ -2795,6 +3104,7 @@ namespace ArrayDACControl
             theCorrelator.lshiftreg = ncorrbins;
 
             // initialize the Ch1 and Ch2 log variables:
+            historyCounter = 0;
             corrampCh1history = new double[ncorrbins][];
             corrampCh2history = new double[ncorrbins][];
             for (int i = 0; i < ncorrbins; i++)
@@ -3736,6 +4046,8 @@ namespace ArrayDACControl
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
                 //get data
                 getDatafromStream(ElectrodeScanThreadHelper);
+                //index++
+                ElectrodeScanThreadHelper.index++;
             }
             if (ElectrodeScanThreadHelper.ShouldBeRunningFlag && ElectrodeScanSaveCheckbox.Checked)
             {
@@ -3859,6 +4171,8 @@ namespace ArrayDACControl
 
                 //get data
                 getDatafromStream(SliderScanThreadHelper);
+                //index++
+                SliderScanThreadHelper.index++;
             }
             if (SliderScanThreadHelper.ShouldBeRunningFlag && SliderScanSaveCheckbox.Checked)
             {
@@ -3948,6 +4262,8 @@ namespace ArrayDACControl
 
                 //get data
                 getDatafromStream(FluorLogThreadHelper);
+                //index++
+                FluorLogThreadHelper.index++;
             }
             if (FluorLogThreadHelper.ShouldBeRunningFlag)
             {
@@ -4674,12 +4990,14 @@ namespace ArrayDACControl
             double lockinfreq1Val = Double.Parse(LockInFreqtext1.Text); // in kHz
             double lockinper1Val = 1/lockinfreq1Val*1000; // in microseconds
             LockInPertext1.Text = lockinper1Val.ToString();
+            syncTimeScales(lockinper1Val);
         }
         private void LockInPertext1_TextChanged(object sender, EventArgs e)
         {
             double lockinper1Val = Double.Parse(LockInPertext1.Text); // in kHz
             double lockinfreq1Val = 1 / lockinper1Val * 1000; // in microseconds
             LockInFreqtext1.Text = lockinfreq1Val.ToString();
+            syncTimeScales(lockinper1Val);
         }
         private void LockInFreqtext2_TextChanged(object sender, EventArgs e)
         {
@@ -4711,13 +5029,25 @@ namespace ArrayDACControl
             pulsePeriodVal = Double.Parse(pulsePeriodText.Text); // in microseconds
             double pulseFreqVal = 1 / pulsePeriodVal * 1000; // in kHz
             pulseFreqLabel.Text = pulseFreqVal.ToString();
+            syncTimeScales(pulsePeriodVal);
             refreshChannelsHelper();
         }
 
         private void slow_pulsePeriodText_TextChanged(object sender, EventArgs e)
         {
+            syncTimeScales(pulsePeriodVal);
+        }
+
+        private void syncTimeScales(double mainref)
+        {
+            pulsePeriodVal = mainref;
+            pulsePeriodText.Text = pulsePeriodVal.ToString();
+            double pulseFreqVal = 1 / pulsePeriodVal * 1000; // in kHz
+            pulseFreqLabel.Text = pulseFreqVal.ToString();
             slow_pulsePeriodVal = Double.Parse(slow_pulsePeriodText.Text); // in microseconds
-            double slow_pulseFreqVal = 1 / slow_pulsePeriodVal * 1000; // in kHz
+            double slow_pulsePeriodValUS = slow_pulsePeriodVal * pulsePeriodVal; // in kHz
+            double slow_pulseFreqVal = 1 / slow_pulsePeriodValUS * 1000; // in kHz
+            slowUS_pulsePeriodText.Text = slow_pulsePeriodValUS.ToString();
             slow_pulseFreqLabel.Text = slow_pulseFreqVal.ToString();
             refreshChannelsHelper();
         }
@@ -5098,6 +5428,7 @@ namespace ArrayDACControl
                 in2DelayText.Text = out2DelayText.Text;
             }
         }
+        /*
         private void pulsePeriodText_TextChanged_1(object sender, EventArgs e)
         {
             if (notc1fo2.Checked)
@@ -5120,6 +5451,7 @@ namespace ArrayDACControl
                 slow_out2DelayText.Text = vaux2.ToString();
             }
         }
+         * */
         private void slow_out1_Changed(object sender, EventArgs e)
         {
             if (c1so2.Checked)
@@ -5388,6 +5720,57 @@ namespace ArrayDACControl
                     //get Data from selected Data Stream into ThreadHelper variable
                     //update graphs
                     getDatafromStream(ExperimentalSequencerThreadHelper);
+
+                    if(ExperimentalSequencerThreadHelper.message == "Correlator:Channels")
+                    {
+                        if(ExperimentalSequencerThreadHelper.DoubleDataArray == null)
+                        {
+                            ExperimentalSequencerThreadHelper.DoubleDataArray = new double[4][,];
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[0] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[1] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[2] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[3] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
+
+                            for(int i = 0; i< ExperimentalSequencerThreadHelper.numPoints;i++)
+                            {
+                                for(int j = 0; j< theCorrelator.phcountarrayCh1.Length; j++)
+                                {
+                                    ExperimentalSequencerThreadHelper.DoubleDataArray[0][i, j] = 0;
+                                    ExperimentalSequencerThreadHelper.DoubleDataArray[1][i, j] = 0;
+                                    ExperimentalSequencerThreadHelper.DoubleDataArray[2][i, j] = 0;
+                                    ExperimentalSequencerThreadHelper.DoubleDataArray[3][i, j] = 0;
+                                }
+                            }
+                        }
+
+                        for (int i = 0; i < theCorrelator.phcountarrayCh1.Length; i++)
+                        {
+                            //PMT1, PMT2, SUM, DIFFERENCE1
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] = (ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] * (ExperimentalSequencerThreadHelper.index2) + theCorrelator.phcountarrayCh1[i]) / (ExperimentalSequencerThreadHelper.index2+1);
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i] = (ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] * (ExperimentalSequencerThreadHelper.index2) + theCorrelator.phcountarrayCh2[i]) / (ExperimentalSequencerThreadHelper.index2+1);
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[2][ExperimentalSequencerThreadHelper.index, i] = ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] + ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i];
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[3][ExperimentalSequencerThreadHelper.index, i] = (ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] - ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i])/(ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] + ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i]);
+                        }
+
+                        
+
+                        //call to update intensity graphs
+                        try
+                        {
+                            this.Invoke(new MyDelegateThreadHelper(ExpSeqIntensityGraphUpdateCallbackFn), ExperimentalSequencerThreadHelper);
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                        //update 1D plot
+                        try
+                        {
+                            this.Invoke(new MyDelegateThreadHelper(ExpSeqViewScatterGraphUpdateCallbackFn), ExperimentalSequencerThreadHelper);
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                        //index++
+                        ExperimentalSequencerThreadHelper.index++;
+                    }
                 }
                 if (ExperimentalSequencerThreadHelper.ShouldBeRunningFlag)
                 {
@@ -5426,6 +5809,8 @@ namespace ArrayDACControl
                         //get Data from selected Data Stream into ThreadHelper variable
                         //update graphs
                         getDatafromStream(InterlockedScan1ThreadHelper);
+                        //index++
+                        InterlockedScan1ThreadHelper.index++;
                     }
                     if (InterlockedScan1ThreadHelper.ShouldBeRunningFlag)
                     {
@@ -5474,6 +5859,8 @@ namespace ArrayDACControl
                         //get Data from selected Data Stream into ThreadHelper variable
                         //update graphs
                         getDatafromStream(InterlockedScan2ThreadHelper);
+                        //index++
+                        InterlockedScan2ThreadHelper.index++;
                     }
                     if (InterlockedScan2ThreadHelper.ShouldBeRunningFlag)
                     {
@@ -5524,9 +5911,370 @@ namespace ArrayDACControl
             
         }
 
-
-
+        private void Repumper935Switch_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
+        {
+            Dev2DO7.OutputDigitalValue(!Repumper935Switch.Value);
+        }
         
+
+//////////////////////////////// IAN's Rigol Function Generator Control /////////////////////////
+
+       //"Import" button click event
+        //---------------------------
+        //retrives the waveform info in the radio buttons and textboxes
+        //creates a new ImportedWaveform object with this info and adds it to an ArrayList
+        //---------------------------
+        private void RigImport_Click(object sender, EventArgs e)
+        {
+            //handle unchecked radio buttons and unfilled text boxes
+            if ((RigCh1Opt.Checked || RigCh2Opt.Checked) && !string.IsNullOrEmpty(RigFreqText.Text)
+                && !string.IsNullOrEmpty(RigAmplText.Text) && !string.IsNullOrEmpty(RigOffsetText.Text)
+                && !string.IsNullOrEmpty(RigPhaseText.Text) && !string.IsNullOrEmpty(RigBrowseText.Text))
+            {
+                //retrive waveform info
+                int channel;
+                if (RigCh1Opt.Checked)
+                {
+                    channel = Convert.ToInt16(RigCh1Opt.Text); //channel 1
+                }
+                else
+                {
+                    channel = Convert.ToInt16(RigCh2Opt.Text); //channel 2
+                }
+
+                //handle bad input
+                try
+                {
+                    double frequency = Convert.ToDouble(RigFreqText.Text);
+                    double amplitude = Convert.ToDouble(RigAmplText.Text);
+                    double offset = Convert.ToDouble(RigOffsetText.Text);
+                    double phase = Convert.ToDouble(RigPhaseText.Text);
+                    string filename = RigBrowseText.Text;
+
+                    //create new ImportedWaveform object
+                    ImportedWaveform waveform =
+                        new ImportedWaveform(channel, frequency, amplitude, offset, phase, filename);
+
+                    //add it to the ArrayList importedWaveforms
+                    importedWaveforms.Add(waveform);
+
+                    //populate the listbox with a new ListItem
+                    RigFileListBox.Items.Add(new ListItem(waveform.Display(), Convert.ToString(index)));
+                    index++;
+                }
+                catch
+                {
+                    MessageBox.Show("Unexpected input format.");
+                }
+            }
+        }
+
+        //"Send" button click event
+        //---------------------------
+        //creates a new Rigol object (from Rigol class) using the FN GEN selection
+        //uses the selected ImportedWaveform object to run the Rigol class's GenerateWaveform method
+        //---------------------------
+        private void RigProgramRigol_Click(object sender, EventArgs e)
+        {
+            //handle unchecked radio button and unselected waveforms
+            if ((RigGen1.Checked || RigGen2.Checked) && RigFileListBox.SelectedIndex > -1)
+            {
+                //determine which fn gen to send to
+                string usbID;
+                if (RigGen1.Checked)
+                {
+                    usbID = "USB0::0x1AB1::0x0641::DG4C141600215::INSTR";
+                }
+                else
+                {
+                    usbID = "USB0::0x1AB1::0x0641::DG4C141400145::INSTR";
+                }
+
+                //create new Rigol object
+                Rigol rigol = new Rigol(usbID);
+
+                //determine which waveform to send
+                int waveformIndex = Convert.ToInt16(((ListItem)RigFileListBox.SelectedItem).Value);
+                ImportedWaveform waveform = (ImportedWaveform)importedWaveforms[waveformIndex];
+
+                //handle bad filenames
+                try
+                {
+                    //send it
+                    rigol.GenerateWaveform(waveform.getChannel(), waveform.getFrequency(),
+                        waveform.getAmplitude(), waveform.getOffset(), waveform.getPhase(),
+                        waveform.getFilename());
+                }
+                catch
+                {
+                    MessageBox.Show("Couldn't find file... Or unexpected file contents... Or couldn't find RIGOL.");
+                }
+            }  
+        }
+
+        //"Browse" button click event
+        //---------------------------
+        //opens a file browser
+        //---------------------------
+        private void RigBrowseButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "txt files (*.txt)|*.txt";
+            dialog.InitialDirectory = "\\\\Iondance\\experimental control";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                RigBrowseText.Text = dialog.FileName;
+            }
+        }
+
+        private void browseA1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialogA1 = new OpenFileDialog();
+            dialogA1.InitialDirectory = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_multichannel";
+            dialogA1.RestoreDirectory = true;
+            dialogA1.Filter = "bit files (*.bit)|*.bit";
+
+
+            if (dialogA1.ShowDialog() == DialogResult.OK)
+            {
+                correlatorBitFilePath.Text = dialogA1.FileName;
+            }
+        }
+
+        private void browseB1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialogB1 = new OpenFileDialog();
+            dialogB1.Filter = "bit files (*.bit)|*.bit";
+            dialogB1.InitialDirectory = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_multichannel";
+
+            if (dialogB1.ShowDialog() == DialogResult.OK)
+            {
+                correlatorBitFilePathB.Text = dialogB1.FileName;
+            }
+        }
+
+        private void browseA2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialogA2 = new OpenFileDialog();
+            dialogA2.Filter = "bit files (*.bit)|*.bit";
+            dialogA2.InitialDirectory = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_multichannel";
+
+            if (dialogA2.ShowDialog() == DialogResult.OK)
+            {
+                correlatorBitFilePath_manybins.Text = dialogA2.FileName;
+            }
+        }
+
+        private void browseB2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialogB2 = new OpenFileDialog();
+            dialogB2.Filter = "bit files (*.bit)|*.bit";
+            dialogB2.InitialDirectory = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_multichannel";
+
+            if (dialogB2.ShowDialog() == DialogResult.OK)
+            {
+                correlatorBitFilePath_manybinsB.Text = dialogB2.FileName;
+            }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "text files (*.txt)|*.txt";
+            dialog.InitialDirectory = textBox6.Text;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = dialog.FileName;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "text files (*.txt)|*.txt";
+            dialog.InitialDirectory = textBox6.Text;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBox2.Text = dialog.FileName;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "text files (*.txt)|*.txt";
+            dialog.InitialDirectory = textBox6.Text;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBox3.Text = dialog.FileName;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "text files (*.txt)|*.txt";
+            dialog.InitialDirectory = textBox6.Text;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBox4.Text = dialog.FileName;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "text files (*.txt)|*.txt";
+            dialog.InitialDirectory = textBox6.Text;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBox5.Text = dialog.FileName;
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.SelectedPath = textBox6.Text;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                textBox6.Text = dialog.SelectedPath;
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            SavePulseSequencerSettings(textBox6.Text +"\\" + textBox7.Text);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            { ReadConfigurationFull(textBox1.Text); }
+            else if (radioButton2.Checked)
+            { ReadConfigurationFull(textBox2.Text); }
+            else if (radioButton3.Checked)
+            { ReadConfigurationFull(textBox3.Text); }
+            else if (radioButton4.Checked)
+            { ReadConfigurationFull(textBox4.Text); }
+            else if (radioButton5.Checked)
+            { ReadConfigurationFull(textBox5.Text); }
+        }
+
+        private void ExpSeqPresetScanBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch(ExpSeqPresetScanBox.Text)
+            {
+                case "Bx Slider":
+                    ExpSeqMainSlider1.Text = "BxSlider";
+                    ExpSeqMainSlider2.Text = "None";
+                    ExpSeqMainSliderStartText.Text = "0";
+                    ExpSeqMainSliderEndText.Text = "2";
+                    ExpSeqMainSliderNumPointsText.Text = "50";
+                    ExpSeqMainSliderNumScansText.Text = "1";
+                    ExpSeqMainData.Text = "Correlator:Sum";
+                    ExpSeqScan1Checkbox.Checked = false;
+                    ExpSeqScan2Checkbox.Checked = false;
+                    break;
+                case "Electrode Scan":
+                    ExpSeqMainSlider1.Text = "DC2";
+                    ExpSeqMainSlider2.Text = "DC9";
+                    ExpSeqMainSliderStartText.Text = "12.4";
+                    ExpSeqMainSliderEndText.Text = "11.6";
+                    ExpSeqMainSlider2StartText.Text = "11.6";
+                    ExpSeqMainSlider2EndText.Text = "12.4";
+                    ExpSeqMainSliderNumPointsText.Text = "50";
+                    ExpSeqMainSliderNumScansText.Text = "1";
+                    ExpSeqMainData.Text = "Correlator:Sum";
+                    ExpSeqScan1Checkbox.Checked = false;
+                    ExpSeqScan2Checkbox.Checked = false;
+                    break;
+                case "Repumper Slider":
+                    ExpSeqMainSlider1.Text = "RepumperSlider";
+                    ExpSeqMainSlider2.Text = "None";
+                    ExpSeqMainSliderStartText.Text = "2.85";
+                    ExpSeqMainSliderEndText.Text = "3.15";
+                    ExpSeqMainSliderNumPointsText.Text = "50";
+                    ExpSeqMainSliderNumScansText.Text = "1";
+                    ExpSeqMainData.Text = "Correlator:Sum";
+                    ExpSeqScan1Checkbox.Checked = false;
+                    ExpSeqScan2Checkbox.Checked = false;
+                    break;
+            }
+
+        }
+
+    }
+
+
+    //class: ImportedWaveform
+    //-----------------------
+    //represents the settings and filename of the imported waveform
+    //-----------------------
+    public class ImportedWaveform
+    {
+
+        //instance variables
+        private int channel;
+        private double frequency;
+        private double amplitude;
+        private double offset;
+        private double phase;
+        private string filename;
+
+        //constructor
+        public ImportedWaveform(int ch, double freq, double amp, double off, double ph, string file)
+        {
+            channel = ch;
+            frequency = freq;
+            amplitude = amp;
+            offset = off;
+            phase = ph;
+            filename = file;
+        }
+
+        //getter methods
+        public int getChannel()
+        {
+            return channel;
+        }
+        public double getFrequency()
+        {
+            return frequency;
+        }
+        public double getAmplitude()
+        {
+            return amplitude;
+        }
+        public double getOffset()
+        {
+            return offset;
+        }
+        public double getPhase()
+        {
+            return phase;
+        }
+        public string getFilename()
+        {
+            return filename;
+        }
+
+        //method: display waveform info
+        public string Display()
+        {
+            return getChannel() + "_" + getFrequency() + "_" + getAmplitude() +
+                "_" + getOffset() + "_" + getPhase() + "_" + getFilename();
+        }
+
+
+////////////////////////////////////////////////
+
         //
         // CAMERA FORM THREAD
         //

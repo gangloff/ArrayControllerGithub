@@ -333,7 +333,7 @@ namespace ArrayDACControl
             ok.SetWire(7, subperiodOut[3] >> 16);
             ok.UpdateAllWires();
             ok.SetTrigger(0x41, 3);   // Trigger 3 updates output channel 4
-            /*
+            //
             ok.SetWire(0, PulseClkDiv);
             ok.SetWire(1, PulseClkDiv >> 16);
             ok.SetWire(2, onTimeOut[4]);
@@ -343,8 +343,8 @@ namespace ArrayDACControl
             ok.SetWire(6, subperiodOut[4]);
             ok.SetWire(7, subperiodOut[4] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x41, 4);  
-            */
+            ok.SetTrigger(0x41, 12);    // Trigger 12 updates output channel 5
+            //
 
             ok.SetWire(0, PulseClkDiv);
             ok.SetWire(1, PulseClkDiv >> 16);
@@ -367,7 +367,7 @@ namespace ArrayDACControl
             ok.SetWire(7, subperiodIn[1] >> 16);
             ok.UpdateAllWires();
             ok.SetTrigger(0x41, 5);   // Trigger 5 updates input channel 2
-            /*
+            //
             ok.SetWire(0, PulseClkDiv);
             ok.SetWire(1, PulseClkDiv >> 16);
             ok.SetWire(2, onTimeIn[2]);
@@ -377,8 +377,8 @@ namespace ArrayDACControl
             ok.SetWire(6, subperiodIn[2]);
             ok.SetWire(7, subperiodIn[2] >> 16);
             ok.UpdateAllWires();
-            ok.SetTrigger(0x41, );  
-            */
+            ok.SetTrigger(0x41, 13);    // Trigger 13 updates input channel 3
+            //
 
             //////////// SLOW SEQUENCER WIRES: //////////////////////
 
@@ -428,6 +428,17 @@ namespace ArrayDACControl
 
             ok.SetWire(0, slow_PulseClkDiv);
             ok.SetWire(1, slow_PulseClkDiv >> 16);
+            ok.SetWire(2, slow_onTimeOut[4]);
+            ok.SetWire(3, slow_onTimeOut[4] >> 16);
+            ok.SetWire(4, slow_delayOut[4]);
+            ok.SetWire(5, slow_delayOut[4] >> 16);
+            ok.SetWire(6, slow_subperiodOut[4]);
+            ok.SetWire(7, slow_subperiodOut[4] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x41, 14);   // Trigger 14 updates slow output channel 5
+
+            ok.SetWire(0, slow_PulseClkDiv);
+            ok.SetWire(1, slow_PulseClkDiv >> 16);
             ok.SetWire(2, slow_onTimeIn[0]);
             ok.SetWire(3, slow_onTimeIn[0] >> 16);
             ok.SetWire(4, slow_delayIn[0]);
@@ -447,6 +458,17 @@ namespace ArrayDACControl
             ok.SetWire(7, slow_subperiodIn[1] >> 16);
             ok.UpdateAllWires();
             ok.SetTrigger(0x41, 11);   // Trigger 11 updates input channel 2
+
+            ok.SetWire(0, slow_PulseClkDiv);
+            ok.SetWire(1, slow_PulseClkDiv >> 16);
+            ok.SetWire(2, slow_onTimeIn[2]);
+            ok.SetWire(3, slow_onTimeIn[2] >> 16);
+            ok.SetWire(4, slow_delayIn[2]);
+            ok.SetWire(5, slow_delayIn[2] >> 16);
+            ok.SetWire(6, slow_subperiodIn[2]);
+            ok.SetWire(7, slow_subperiodIn[2] >> 16);
+            ok.UpdateAllWires();
+            ok.SetTrigger(0x41, 15);   // Trigger 15 updates input channel 3
         }
         //////////////////////////////////////////////////
 

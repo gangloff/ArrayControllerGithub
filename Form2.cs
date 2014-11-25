@@ -10,7 +10,7 @@ namespace ArrayDACControl
 {
     public partial class Form2 : Form
     {
-
+        delegate void MyDelegateThreadHelper(ThreadHelperClass theThreadHelper);
 
         public Form2()
         {
@@ -183,6 +183,25 @@ namespace ArrayDACControl
                 corrAmpLog.ClearData();
             else
                 corrMuLog.ClearData();
+        }
+
+        private void ExpSeqViewScanIndex_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Invoke(new MyDelegateThreadHelper(Form1.Self.ExpSeqViewScatterGraphUpdateCallbackFn), Form1.Self.ExperimentalSequencerThreadHelper);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void ExpSeqViewPMTConfig_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Invoke(new MyDelegateThreadHelper(Form1.Self.ExpSeqViewScatterGraphUpdateCallbackFn), Form1.Self.ExperimentalSequencerThreadHelper);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+
         }
 
     }

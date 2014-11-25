@@ -46,6 +46,7 @@ namespace ArrayDACControl
         public double[] DoubleArray;
         public double[,] DoubleData;
         public double[,] DoubleScanVariable;
+        public double[][,] DoubleDataArray;
         public int SingleInt;
         public int[,] IntData;
         public int[,] IntScanVariable;
