@@ -1902,10 +1902,6 @@ namespace ArrayDACControl
             //path + root
 
             theString[0] = "f:\\raw_data\\Array\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + scantype;
-            //check if folder exists, if not create it
-            if (!Directory.Exists(theString[0])) { Directory.CreateDirectory(theString[0]); }
-            //set to current directory
-            Directory.SetCurrentDirectory(theString[0]);
 
             if (what == 1)
             {
@@ -1916,8 +1912,13 @@ namespace ArrayDACControl
             else if (what == 2)
             {
                 //theString[0] = DataFilenameFolderPathCorr.Text;
-                theString[1] = DataFilenameCommonRoot1Corr.Text + " ";
+                theString[0] += DataFilenameCommonRoot1Corr.Text + " ";
             }
+
+            //check if folder exists, if not create it
+            if (!Directory.Exists(theString[0])) { Directory.CreateDirectory(theString[0]); }
+            //set to current directory
+            Directory.SetCurrentDirectory(theString[0]);
 
             for (int i = 0; i < DataFilenameChecklist.CheckedIndices.Count; i++)
             {
@@ -2578,13 +2579,13 @@ namespace ArrayDACControl
         private void ExpSeqIntensityGraphUpdateCallbackFn(ThreadHelperClass theThreadHelper)
         {
             //pmt1
-            CameraForm.ExpSeqIntensityPlot1.Plot(theThreadHelper.DoubleDataArray[0]);
+            CameraForm.ExpSeqIntensityPlot1.Plot(theThreadHelper.DoubleDataArray[0], theThreadHelper.min[0], (theThreadHelper.max[0] - theThreadHelper.min[0]) / (theThreadHelper.numPoints - 1), 0, 1);
             //pmt2
-            CameraForm.ExpSeqIntensityPlot2.Plot(theThreadHelper.DoubleDataArray[1]);
+            CameraForm.ExpSeqIntensityPlot2.Plot(theThreadHelper.DoubleDataArray[1], theThreadHelper.min[0], (theThreadHelper.max[0] - theThreadHelper.min[0]) / (theThreadHelper.numPoints - 1), 0, 1);
             //sum
-            CameraForm.ExpSeqIntensityPlot3.Plot(theThreadHelper.DoubleDataArray[2]);
+            CameraForm.ExpSeqIntensityPlot3.Plot(theThreadHelper.DoubleDataArray[2], theThreadHelper.min[0], (theThreadHelper.max[0] - theThreadHelper.min[0]) / (theThreadHelper.numPoints - 1), 0, 1);
             //difference
-            CameraForm.ExpSeqIntensityPlot4.Plot(theThreadHelper.DoubleDataArray[3]);
+            CameraForm.ExpSeqIntensityPlot4.Plot(theThreadHelper.DoubleDataArray[3], theThreadHelper.min[0], (theThreadHelper.max[0] - theThreadHelper.min[0]) / (theThreadHelper.numPoints - 1), 0, 1);
         }
 
         public void ExpSeqViewScatterGraphUpdateCallbackFn(ThreadHelperClass theThreadHelper)
@@ -5723,7 +5724,7 @@ namespace ArrayDACControl
 
                     if(ExperimentalSequencerThreadHelper.message == "Correlator:Channels")
                     {
-                        if(ExperimentalSequencerThreadHelper.DoubleDataArray == null)
+                        if(ExperimentalSequencerThreadHelper.DoubleDataArray == null || ExperimentalSequencerThreadHelper.index2 == 0)
                         {
                             ExperimentalSequencerThreadHelper.DoubleDataArray = new double[4][,];
                             ExperimentalSequencerThreadHelper.DoubleDataArray[0] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
@@ -5767,10 +5768,10 @@ namespace ArrayDACControl
                             this.Invoke(new MyDelegateThreadHelper(ExpSeqViewScatterGraphUpdateCallbackFn), ExperimentalSequencerThreadHelper);
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                        //index++
-                        ExperimentalSequencerThreadHelper.index++;
                     }
+
+                    //index++
+                    ExperimentalSequencerThreadHelper.index++;
                 }
                 if (ExperimentalSequencerThreadHelper.ShouldBeRunningFlag)
                 {
