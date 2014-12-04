@@ -82,8 +82,6 @@ namespace ArrayDACControl
         delegate void MyDelegateLabelUpdate(string theString, System.Windows.Forms.Label theLabel);
         delegate void MyDelegateThreadHelperComboBox(ThreadHelperClass theThreadHelper, ComboBox theComboBox);
 
-        double BL, BR, TL, TR, midL, midR;
-
         //adjusted apr 10, 2011 by Dorian & Alexei based on updated calculations
         //const double arrayratio = -0.786;
         const double arrayratio = -0.152;
@@ -217,7 +215,7 @@ namespace ArrayDACControl
             // Transfer Cavity Piezo
             Dev4AO3 = new NICardController();
             Dev4AO3.InitAnalogOutput("Dev4/ao3", 0, 10);
-            // Repumper Power Control
+            // Recapture Power Control
             Dev4AO4 = new NICardController();
             Dev4AO4.InitAnalogOutput("Dev4/ao4", 0, 10);
             // Side Beam 370 Power
@@ -534,7 +532,7 @@ namespace ArrayDACControl
             this.SnakeOnlySlider.SliderAdjusted += this.compensationAdjusted;
             this.TransferCavity.SliderAdjusted += this.TransferCavityOut;
             this.RepumperSlider.SliderAdjusted += this.RepumperSliderOut;
-            this.RepumperPowerSlider.SliderAdjusted += this.RepumperPowerSliderOut;
+            this.RecapturePowerSlider.SliderAdjusted += this.RecapturePowerSliderOut;
             this.ErrorOffset399Slider.SliderAdjusted += this.ErrorOffset399SliderOut;
             this.SideBeam370Power.SliderAdjusted += this.SideBeam370PowerOut;
             this.LatticePowerControl.SliderAdjusted += this.LatticePowerControlOut;
@@ -814,11 +812,11 @@ namespace ArrayDACControl
             RepumperSliderOutHelper();
             BxSliderOutHelper();
             TickleSliderOutHelper();
-            RepumperPowerSliderOutHelper();
+            RecapturePowerSliderOutHelper();
             //Dev4AO2.OutputAnalogValue((double)(TransferCavity.Value - CurrentFeedforward370Offset.Value) * CurrentFeedforward370Gain.Value / TCcalib);
             Dev4AO2.OutputAnalogValue(ErrorOffset399Slider.Value);
             Dev4AO3.OutputAnalogValue((double)TransferCavity.Value / TCcalib);
-            Dev4AO4.OutputAnalogValue((double)RepumperPowerSlider.Value);
+            Dev4AO4.OutputAnalogValue((double)RecapturePowerSlider.Value);
             Dev4AO5.OutputAnalogValue((double)SideBeam370Power.Value);
             Dev7AO6.OutputAnalogValue((double)LatticePowerControl.Value);
             Dev7AO7.OutputAnalogValue((double)CavityCoolingPowerControl.Value);
@@ -1073,11 +1071,15 @@ namespace ArrayDACControl
         }
 
         //Function that saves the value of all sliders and text boxes in the VI
-        private void SaveConfigurationFull(string path)
+        private void SaveConfigurationFull(string path, string extraname)
         {
             try
             {
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(path + DateTime.Now.ToString("HHmmss") + ".txt");
+
+                //check if folder exists, if not create it
+                if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
+
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(path + extraname + DateTime.Now.ToString("yyyyMMdd") + " " + DateTime.Now.ToString("hhmmss") + ".txt");
 
                 tw.WriteLine(DateTime.Now);
 
@@ -1097,6 +1099,7 @@ namespace ArrayDACControl
                 //tw.WriteLine("CurrentFeedforward370Gain" + "\t" + CurrentFeedforward370Gain.Value);
                 tw.WriteLine("SideBeam370Power" + "\t" + SideBeam370Power.Value);
                 tw.WriteLine("CavityCoolingPowerControl" + "\t" + CavityCoolingPowerControl.Value);
+                tw.WriteLine("RecapturePowerSlider" + "\t" + RecapturePowerSlider.Value);
                 tw.WriteLine("RamanSlider" + "\t" + RamanSlider.Value);
                 tw.WriteLine("LatticePowerControl" + "\t" + LatticePowerControl.Value);
                 tw.WriteLine("RepumperSlider" + "\t" + RepumperSlider.Value);
@@ -1350,6 +1353,9 @@ namespace ArrayDACControl
                                 break;
                             case "CavityCoolingPowerControl":
                                 CavityCoolingPowerControl.Value = double.Parse(theString.Split('\t')[1]);
+                                break;
+                            case "RecapturePowerSlider":
+                                RecapturePowerSlider.Value = double.Parse(theString.Split('\t')[1]);
                                 break;
                             case "RamanSlider":
                                 RamanSlider.Value = double.Parse(theString.Split('\t')[1]);
@@ -2202,17 +2208,17 @@ namespace ArrayDACControl
         {
             Dev7AO0.OutputAnalogValue((double)TickleSlider.Value / TickleCalib);
         }
-        private void RepumperPowerSliderOutHelper()
+        private void RecapturePowerSliderOutHelper()
         {
-            Dev4AO4.OutputAnalogValue((double)RepumperPowerSlider.Value);
+            Dev4AO4.OutputAnalogValue((double)RecapturePowerSlider.Value);
         }
         private void Sideband402ControlOut(object sender, EventArgs e)
         {
             VCOVVAoutputHelper((double)Sideband402Control.Value);
         }
-        private void RepumperPowerSliderOut(object sender, EventArgs e)
+        private void RecapturePowerSliderOut(object sender, EventArgs e)
         {
-            RepumperPowerSliderOutHelper();
+            RecapturePowerSliderOutHelper();
         }
         private void SideBeam370PowerOut(object sender, EventArgs e)
         {
@@ -2244,11 +2250,20 @@ namespace ArrayDACControl
 
         private void SaveFullConfigButton_Click(object sender, EventArgs e)
         {
-            SaveConfigurationFull(SaveFullConfigTextbox.Text);
+            SaveConfigurationFull("f:\\raw_data\\Array\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("yyyyMMdd") + "\\", SaveFullConfigTextbox.Text);
         }
 
         private void ReadFullConfigButton_Click(object sender, EventArgs e)
         {
+            //get file from dialog
+            OpenFileDialog dialogB1 = new OpenFileDialog();
+            dialogB1.InitialDirectory = "f:\\raw_data\\Array\\";
+
+            if (dialogB1.ShowDialog() == DialogResult.OK)
+            {
+                ReadFullConfigTextbox.Text = dialogB1.FileName;
+            }
+            //update
             ReadConfigurationFull(ReadFullConfigTextbox.Text);
             UpdateAll();
         }
@@ -2275,9 +2290,14 @@ namespace ArrayDACControl
             Dev7AO0.OutputAnalogValue((double)TickleSlider.Value / TickleCalib);
         }
 
-        private void RepumperPowerSlider_Adjusted(object sender, EventArgs e)
+        private void RecapturePowerSlider_Adjusted(object sender, EventArgs e)
         {
-            Dev4AO4.OutputAnalogValue((double)RepumperPowerSlider.Value);
+            Dev4AO4.OutputAnalogValue((double)RecapturePowerSlider.Value);
+        }
+
+        private void Repumper935Switch_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
+        {
+            Dev2DO7.OutputDigitalValue(!Repumper935Switch.Value);
         }
 
         private void ErrorOffset399SliderOut(object sender, EventArgs e)
@@ -2352,76 +2372,6 @@ namespace ArrayDACControl
             CameraThreadHelper.flag = true;
         }
 
-        private void PPSettings1SaveButton_Click(object sender, EventArgs e)
-        {
-            // settings 1 path
-            SavePPSettings(PPSettingsFolderPath.Text + PPSettings1Textbox.Text);
-        }
-
-        private void PPSettings2SaveButton_Click(object sender, EventArgs e)
-        {
-            // settings 2 path
-            SavePPSettings(PPSettingsFolderPath.Text + PPSettings2Textbox.Text);
-        }
-
-        // OLD pulse programmer saving:
-        private void SavePPSettings(string path)
-        {
-            try
-            {
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(path + ".txt");
-
-                tw.WriteLine(DateTime.Now);
-
-                //In order of appearance, top left, to bottom right
-
-                //Fast Pulse Programmer Tab
-                tw.WriteLine("pulsePeriodText" + "\t" + pulsePeriodText.Text);
-                tw.WriteLine("out1SigName" + "\t" + out1SigName.Text);
-                tw.WriteLine("out1OnTimeText" + "\t" + out1OnTimeText.Text);
-                tw.WriteLine("out1DelayText" + "\t" + out1DelayText.Text);
-                tw.WriteLine("out2SigName" + "\t" + out2SigName.Text);
-                tw.WriteLine("out2OnTimeText" + "\t" + out2OnTimeText.Text);
-                tw.WriteLine("out2DelayText" + "\t" + out2DelayText.Text);
-                tw.WriteLine("out3SigName" + "\t" + out3SigName.Text);
-                tw.WriteLine("out3OnTimeText" + "\t" + out3OnTimeText.Text);
-                tw.WriteLine("out3DelayText" + "\t" + out3DelayText.Text);
-                tw.WriteLine("out4SigName" + "\t" + out4SigName.Text);
-                tw.WriteLine("out4OnTimeText" + "\t" + out4OnTimeText.Text);
-                tw.WriteLine("out4DelayText" + "\t" + out4DelayText.Text);
-                tw.WriteLine("in1SigName" + "\t" + in1SigName.Text);
-                tw.WriteLine("in1OnTimeText" + "\t" + in1OnTimeText.Text);
-                tw.WriteLine("in1DelayText" + "\t" + in1DelayText.Text);
-                tw.WriteLine("in2SigName" + "\t" + in2SigName.Text);
-                tw.WriteLine("in2OnTimeText" + "\t" + in2OnTimeText.Text);
-                tw.WriteLine("in2DelayText" + "\t" + in2DelayText.Text);
-
-                //Slow Pulse Programmer Tab
-                tw.WriteLine("slow_pulsePeriodText" + "\t" + slow_pulsePeriodText.Text);
-                tw.WriteLine("slow_out1SigName" + "\t" + slow_out1SigName.Text);
-                tw.WriteLine("slow_out1OnTimeText" + "\t" + slow_out1OnTimeText.Text);
-                tw.WriteLine("slow_out1DelayText" + "\t" + slow_out1DelayText.Text);
-                tw.WriteLine("slow_out2SigName" + "\t" + slow_out2SigName.Text);
-                tw.WriteLine("slow_out2OnTimeText" + "\t" + slow_out2OnTimeText.Text);
-                tw.WriteLine("slow_out2DelayText" + "\t" + slow_out2DelayText.Text);
-                tw.WriteLine("slow_out3SigName" + "\t" + slow_out3SigName.Text);
-                tw.WriteLine("slow_out3OnTimeText" + "\t" + slow_out3OnTimeText.Text);
-                tw.WriteLine("slow_out3DelayText" + "\t" + slow_out3DelayText.Text);
-                tw.WriteLine("slow_out4SigName" + "\t" + slow_out4SigName.Text);
-                tw.WriteLine("slow_out4OnTimeText" + "\t" + slow_out4OnTimeText.Text);
-                tw.WriteLine("slow_out4DelayText" + "\t" + slow_out4DelayText.Text);
-                tw.WriteLine("slow_in1SigName" + "\t" + slow_in1SigName.Text);
-                tw.WriteLine("slow_in1OnTimeText" + "\t" + slow_in1OnTimeText.Text);
-                tw.WriteLine("slow_in1DelayText" + "\t" + slow_in1DelayText.Text);
-                tw.WriteLine("slow_in2SigName" + "\t" + slow_in2SigName.Text);
-                tw.WriteLine("slow_in2OnTimeText" + "\t" + slow_in2OnTimeText.Text);
-                tw.WriteLine("slow_in2DelayText" + "\t" + slow_in2DelayText.Text);
-
-                tw.Close();
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
-
         private void SavePulseSequencerSettings(string path)
         {
             try
@@ -2482,12 +2432,6 @@ namespace ArrayDACControl
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void PPSettingsReadButton_Click(object sender, EventArgs e)
-        {
-            if (PPSettingsSwitch.Value) { ReadConfigurationFull(PPSettingsFolderPath.Text + PPSettings1Textbox.Text); }
-            else { ReadConfigurationFull(PPSettingsFolderPath.Text + PPSettings2Textbox.Text); }
-        }
-
 
 
         //
@@ -2497,7 +2441,7 @@ namespace ArrayDACControl
         private void Form1_Closing(object sender, EventArgs e)
         {
             //Save slider values and textbox values for the application
-            SaveConfigurationFull(SaveFullConfigTextbox.Text);
+            SaveConfigurationFull("f:\\raw_data\\Array\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("yyyyMMdd") + "\\", SaveFullConfigTextbox.Text);
             //Shutdown camera
             if (Camera != null)
             {
@@ -2508,7 +2452,7 @@ namespace ArrayDACControl
         private void Form1_Disposed(object sender, System.EventArgs e)
         {
             //Save slider values and textbox values for the application
-            SaveConfigurationFull(SaveFullConfigTextbox.Text);
+            SaveConfigurationFull("f:\\raw_data\\Array\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("yyyyMMdd") + "\\", SaveFullConfigTextbox.Text);
         }
 
         ///////////////////////////
@@ -2613,15 +2557,20 @@ namespace ArrayDACControl
 
             //which scan index
             int ScanIndex = int.Parse(CameraForm.ExpSeqViewScanIndex.Text);
-            if (ScanIndex < 0) ScanIndex = 0;
-            if (ScanIndex > theThreadHelper.numPoints - 1) ScanIndex = theThreadHelper.numPoints - 1;
+            if (ScanIndex < 1) ScanIndex = 1;
+            if (ScanIndex > theThreadHelper.numPoints) ScanIndex = theThreadHelper.numPoints ;
 
             int lengthofdata = theCorrelator.phcountarrayCh1.Length;
             double[] dataPlot = new double[lengthofdata];
+            double[] dataPlotErr = new double[lengthofdata];
             for (int i = 0; i < lengthofdata; i++)
             {
-                dataPlot[i] = theThreadHelper.DoubleDataArray[PMTConfig][ScanIndex, i];
+                dataPlot[i] = theThreadHelper.DoubleDataArray[PMTConfig][ScanIndex-1, i];
+                dataPlotErr[i] = theThreadHelper.DoubleDataArray[PMTConfig+4][ScanIndex - 1, i];
             }
+
+            //scan variable display
+            CameraForm.ExpSeqViewScanVariable.Text = theThreadHelper.DoubleScanVariable[0, ScanIndex - 1].ToString();
 
             //plot
             CameraForm.ExpSeqWaveFormGraph.PlotY(dataPlot);
@@ -2732,6 +2681,13 @@ namespace ArrayDACControl
                 //Get results into correlator object
                 CorrelatorGetResultsHelper();
 
+                //Correlator Plots
+                try
+                {
+                    this.Invoke(new MyDelegate(CorrelatorExecuteFrmCallbackCh1));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
                 //Put sum of two channels data in Thread array
                 theThreadHelper.DoubleData[0, theThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
 
@@ -2753,6 +2709,13 @@ namespace ArrayDACControl
             {
                 //Get results into correlator object
                 CorrelatorGetResultsHelper();
+
+                //Correlator Plots
+                try
+                {
+                    this.Invoke(new MyDelegate(CorrelatorExecuteFrmCallbackCh1));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
 
                 //Put sum of two channels data in Thread array
                 theThreadHelper.DoubleData[0, theThreadHelper.index] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
@@ -2848,8 +2811,8 @@ namespace ArrayDACControl
                 case "RepumperSlider":
                     theSlider = this.RepumperSlider;
                     break;
-                case "RepumperPowerSlider":
-                    theSlider = this.RepumperPowerSlider;
+                case "RecapturePowerSlider":
+                    theSlider = this.RecapturePowerSlider;
                     break;
                 case "SideBeam370Power":
                     theSlider = this.SideBeam370Power;
@@ -3039,8 +3002,11 @@ namespace ArrayDACControl
             {
                 theCorrelator.GetResults();
             }
-            //Lower wire to stop FPGA acquiring
 
+
+
+
+            /*
             //If array reset checked, lower array to 0 and back to initial value
             if (ArrayReset.Checked)
             {
@@ -3059,6 +3025,7 @@ namespace ArrayDACControl
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
+             * */
         }
 
         private void CorrelatorArrayResetFormCallback()
@@ -3321,10 +3288,10 @@ namespace ArrayDACControl
             }
 
             // retrieve the averaged data on the plot so far:
-            double[] prevCorrDataCh1 = CameraForm.ScanResultsGraph.Plots[0].GetYData();
-            double[] prevCorrDataCh2 = CameraForm.ScanResultsGraph.Plots[1].GetYData();
-            double[] prevCorrDataDiff = CameraForm.ScanResultsGraph.Plots[2].GetYData();
-            double[] prevCorrDataSum = CameraForm.ScanResultsGraph.Plots[3].GetYData();
+            double[] prevCorrDataCh1 = CameraForm.scatterGraphNormCorrSig.Plots[0].GetYData();
+            double[] prevCorrDataCh2 = CameraForm.scatterGraphNormCorrSig.Plots[1].GetYData();
+            double[] prevCorrDataDiff = CameraForm.scatterGraphNormCorrSig.Plots[2].GetYData();
+            double[] prevCorrDataSum = CameraForm.scatterGraphNormCorrSig.Plots[3].GetYData();
             // new correlator trace that came in from the FPGA:
             double[] newCorrDataCh1 = theCorrelator.phcountarrayCh1;
             double[] newCorrDataCh2 = theCorrelator.phcountarrayCh2;
@@ -3492,11 +3459,11 @@ namespace ArrayDACControl
                 corrDataSumForPlot[i + 2] = avgCorrDataSum[i / 4] - errCorrDataSum[i / 4];
                 corrDataSumForPlot[i + 3] = avgCorrDataSum[i / 4];
             }
-            CameraForm.ScanResultsGraph.Plots[0].PlotXY(corrbinsForPlot, corrDataCh1ForPlot);
-            CameraForm.ScanResultsGraph.Plots[1].PlotXY(corrbinsForPlot, corrDataCh2ForPlot);
-            CameraForm.ScanResultsGraph.Plots[2].PlotXY(corrbinsForPlot, corrDataDiffForPlot);
-            CameraForm.ScanResultsGraph.Plots[3].PlotXY(corrbinsForPlot, corrDataSumForPlot);
-            CameraForm.scatterGraphNormCorrSig.PlotXY(corrbinsForPlot, normSigForPlot);
+            CameraForm.scatterGraphNormCorrSig.Plots[0].PlotXY(corrbinsForPlot, corrDataCh1ForPlot);
+            CameraForm.scatterGraphNormCorrSig.Plots[1].PlotXY(corrbinsForPlot, corrDataCh2ForPlot);
+            CameraForm.scatterGraphNormCorrSig.Plots[2].PlotXY(corrbinsForPlot, corrDataDiffForPlot);
+            CameraForm.scatterGraphNormCorrSig.Plots[3].PlotXY(corrbinsForPlot, corrDataSumForPlot);
+            CameraForm.scatterGraphNormCorrSig.Plots[4].PlotXY(corrbinsForPlot, normSigForPlot);
             
 
             if (SaveCorrelatorToggle.Value)
@@ -3749,6 +3716,13 @@ namespace ArrayDACControl
                     {
                         //Get results into correlator object
                         CorrelatorGetResultsHelper();
+                        //Correlator Plots
+                        try
+                        {
+                            this.Invoke(new MyDelegate(CorrelatorExecuteFrmCallbackCh1));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+
                         //get total counts
                         LatticePositionThreadHelper.SingleDouble = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
                         //load result in array
@@ -3826,6 +3800,12 @@ namespace ArrayDACControl
                     {
                         //Get results into correlator object
                         CorrelatorGetResultsHelper();
+                        //Correlator Plots
+                        try
+                        {
+                            this.Invoke(new MyDelegate(CorrelatorExecuteFrmCallbackCh1));
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //get total counts
                         LatticePositionThreadHelper.SingleDouble = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
                         //load result in array
@@ -4911,17 +4891,6 @@ namespace ArrayDACControl
                 CameraForm.PMTcountGraph.Plots[1].Visible = true;
                 CameraForm.PMTcountGraph.Plots[2].Visible = false;
                 CameraForm.PMTcountGraph.Plots[3].Visible = false;
-
-
-                CameraForm.ScanResultsGraph.Plots[0].Visible = true;
-                CameraForm.ScanResultsGraph.Plots[1].Visible = true;
-                CameraForm.ScanResultsGraph.Plots[2].Visible = false;
-                CameraForm.ScanResultsGraph.Plots[3].Visible = false;
-
-                CameraForm.CorrelatorGraph.Plots[0].Visible = true;
-                CameraForm.CorrelatorGraph.Plots[1].Visible = true;
-                CameraForm.CorrelatorGraph.Plots[2].Visible = false;
-                CameraForm.CorrelatorGraph.Plots[3].Visible = false;
             }
             else
             {
@@ -4929,17 +4898,6 @@ namespace ArrayDACControl
                 CameraForm.PMTcountGraph.Plots[1].Visible = false;
                 CameraForm.PMTcountGraph.Plots[2].Visible = true;
                 CameraForm.PMTcountGraph.Plots[3].Visible = true;
-
-
-                CameraForm.ScanResultsGraph.Plots[0].Visible = false;
-                CameraForm.ScanResultsGraph.Plots[1].Visible = false;
-                CameraForm.ScanResultsGraph.Plots[2].Visible = true;
-                CameraForm.ScanResultsGraph.Plots[3].Visible = true;
-
-                CameraForm.CorrelatorGraph.Plots[0].Visible = false;
-                CameraForm.CorrelatorGraph.Plots[1].Visible = false;
-                CameraForm.CorrelatorGraph.Plots[2].Visible = true;
-                CameraForm.CorrelatorGraph.Plots[3].Visible = true;
             }
 
         }
@@ -5547,10 +5505,10 @@ namespace ArrayDACControl
                     ExperimentalSequencerThreadHelper.threadName += ExperimentalSequencerThreadHelper.theSlider2.Name;    
                 }
 
-                if (ExperimentalSequencerThreadHelper.numPoints < 2)
+                if (ExperimentalSequencerThreadHelper.numPoints < 1)
                 {
-                    ExperimentalSequencerThreadHelper.numPoints = 2;
-                    ExpSeqMainSliderNumPointsText.Text = "2";
+                    ExperimentalSequencerThreadHelper.numPoints = 1;
+                    ExpSeqMainSliderNumPointsText.Text = "1";
                 }
                 //get Stream type from combo box
                 ExperimentalSequencerThreadHelper.message = ExpSeqMainData.Text;
@@ -5604,13 +5562,13 @@ namespace ArrayDACControl
                     //modify thread name for file saving
                     InterlockedScan1ThreadHelper.threadName = InterlockedScan1ThreadHelper.theSlider.Name;
 
-                    if (InterlockedScan1ThreadHelper.numPoints < 2)
+                    if (InterlockedScan1ThreadHelper.numPoints < 1)
                     {
-                        InterlockedScan1ThreadHelper.numPoints = 2;
-                        ExpSeqIntSlider1NumPointsText.Text = "2";
+                        InterlockedScan1ThreadHelper.numPoints = 1;
+                        ExpSeqIntSlider1NumPointsText.Text = "1";
                     }
                     //get Stream type from combo box
-                    InterlockedScan1ThreadHelper.message = "Correlator:Sum";
+                    InterlockedScan1ThreadHelper.message = ExpSeqInt1DataSream.Text;
                     InterlockedScan1ThreadHelper.initDoubleData(InterlockedScan1ThreadHelper.numPoints, 1, InterlockedScan1ThreadHelper.numScanVar);
 
                 }
@@ -5649,13 +5607,13 @@ namespace ArrayDACControl
                     //modify thread name for file saving
                     InterlockedScan2ThreadHelper.threadName = InterlockedScan2ThreadHelper.theSlider.Name;
 
-                    if (InterlockedScan2ThreadHelper.numPoints < 2)
+                    if (InterlockedScan2ThreadHelper.numPoints < 1)
                     {
-                        InterlockedScan2ThreadHelper.numPoints = 2;
-                        ExpSeqIntSlider2NumPointsText.Text = "2";
+                        InterlockedScan2ThreadHelper.numPoints = 1;
+                        ExpSeqIntSlider2NumPointsText.Text = "1";
                     }
                     //get Stream type from combo box
-                    InterlockedScan2ThreadHelper.message = "Correlator:Sum";
+                    InterlockedScan2ThreadHelper.message = ExpSeqInt2DataSream.Text;
                     InterlockedScan2ThreadHelper.initDoubleData(InterlockedScan2ThreadHelper.numPoints, 1, InterlockedScan2ThreadHelper.numScanVar);
 
                 }
@@ -5706,10 +5664,13 @@ namespace ArrayDACControl
                 while (ExperimentalSequencerThreadHelper.index < (ExperimentalSequencerThreadHelper.numPoints) && ExperimentalSequencerThreadHelper.ShouldBeRunningFlag)
                 {
                     //Compute new field values
-                    ExperimentalSequencerThreadHelper.DoubleScanVariable[0, ExperimentalSequencerThreadHelper.index] = (double)(ExperimentalSequencerThreadHelper.min[0] + (ExperimentalSequencerThreadHelper.max[0] - ExperimentalSequencerThreadHelper.min[0]) * ExperimentalSequencerThreadHelper.index / (ExperimentalSequencerThreadHelper.numPoints - 1));
+                    if (ExperimentalSequencerThreadHelper.numPoints > 1) { ExperimentalSequencerThreadHelper.DoubleScanVariable[0, ExperimentalSequencerThreadHelper.index] = (double)(ExperimentalSequencerThreadHelper.min[0] + (ExperimentalSequencerThreadHelper.max[0] - ExperimentalSequencerThreadHelper.min[0]) * ExperimentalSequencerThreadHelper.index / (ExperimentalSequencerThreadHelper.numPoints - 1)); }
+                    else { ExperimentalSequencerThreadHelper.DoubleScanVariable[0, ExperimentalSequencerThreadHelper.index] = ExperimentalSequencerThreadHelper.min[0]; }
+
                     if (ExperimentalSequencerThreadHelper.numScanVar > 1)
                     {
-                        ExperimentalSequencerThreadHelper.DoubleScanVariable[1, ExperimentalSequencerThreadHelper.index] = (double)(ExperimentalSequencerThreadHelper.min[1] + (ExperimentalSequencerThreadHelper.max[1] - ExperimentalSequencerThreadHelper.min[1]) * ExperimentalSequencerThreadHelper.index / (ExperimentalSequencerThreadHelper.numPoints - 1));
+                        if (ExperimentalSequencerThreadHelper.numPoints > 1) { ExperimentalSequencerThreadHelper.DoubleScanVariable[1, ExperimentalSequencerThreadHelper.index] = (double)(ExperimentalSequencerThreadHelper.min[1] + (ExperimentalSequencerThreadHelper.max[1] - ExperimentalSequencerThreadHelper.min[1]) * ExperimentalSequencerThreadHelper.index / (ExperimentalSequencerThreadHelper.numPoints - 1)); }
+                        else {ExperimentalSequencerThreadHelper.DoubleScanVariable[1, ExperimentalSequencerThreadHelper.index] = ExperimentalSequencerThreadHelper.min[1];}
                     }
                     //call to change field value
                     try
@@ -5717,6 +5678,13 @@ namespace ArrayDACControl
                         this.Invoke(new MyDelegateThreadHelper(ScanUpdateCallbackFn),ExperimentalSequencerThreadHelper);
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                    //if first scan, pause for 500ms
+                    if (ExperimentalSequencerThreadHelper.index == 0)
+                    {
+                        //wait for 500ms before scanning
+                        Thread.Sleep(int.Parse(ExpSeqTimeDelay.Text));
+                    }
 
                     //get Data from selected Data Stream into ThreadHelper variable
                     //update graphs
@@ -5726,20 +5694,20 @@ namespace ArrayDACControl
                     {
                         if(ExperimentalSequencerThreadHelper.DoubleDataArray == null || ExperimentalSequencerThreadHelper.index2 == 0)
                         {
-                            ExperimentalSequencerThreadHelper.DoubleDataArray = new double[4][,];
-                            ExperimentalSequencerThreadHelper.DoubleDataArray[0] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
-                            ExperimentalSequencerThreadHelper.DoubleDataArray[1] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
-                            ExperimentalSequencerThreadHelper.DoubleDataArray[2] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
-                            ExperimentalSequencerThreadHelper.DoubleDataArray[3] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
+                            ExperimentalSequencerThreadHelper.DoubleDataArray = new double[8][,];
+                            for (int i = 0; i < 8; i++)
+                            {
+                                ExperimentalSequencerThreadHelper.DoubleDataArray[i] = new double[ExperimentalSequencerThreadHelper.numPoints, theCorrelator.phcountarrayCh1.Length];
+                            }
 
                             for(int i = 0; i< ExperimentalSequencerThreadHelper.numPoints;i++)
                             {
                                 for(int j = 0; j< theCorrelator.phcountarrayCh1.Length; j++)
                                 {
-                                    ExperimentalSequencerThreadHelper.DoubleDataArray[0][i, j] = 0;
-                                    ExperimentalSequencerThreadHelper.DoubleDataArray[1][i, j] = 0;
-                                    ExperimentalSequencerThreadHelper.DoubleDataArray[2][i, j] = 0;
-                                    ExperimentalSequencerThreadHelper.DoubleDataArray[3][i, j] = 0;
+                                    for (int k = 0; k < 8; k++)
+                                    {
+                                        ExperimentalSequencerThreadHelper.DoubleDataArray[k][i, j] = 0;
+                                    }
                                 }
                             }
                         }
@@ -5747,13 +5715,29 @@ namespace ArrayDACControl
                         for (int i = 0; i < theCorrelator.phcountarrayCh1.Length; i++)
                         {
                             //PMT1, PMT2, SUM, DIFFERENCE1
-                            ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] = (ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] * (ExperimentalSequencerThreadHelper.index2) + theCorrelator.phcountarrayCh1[i]) / (ExperimentalSequencerThreadHelper.index2+1);
-                            ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i] = (ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] * (ExperimentalSequencerThreadHelper.index2) + theCorrelator.phcountarrayCh2[i]) / (ExperimentalSequencerThreadHelper.index2+1);
-                            ExperimentalSequencerThreadHelper.DoubleDataArray[2][ExperimentalSequencerThreadHelper.index, i] = ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] + ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i];
-                            ExperimentalSequencerThreadHelper.DoubleDataArray[3][ExperimentalSequencerThreadHelper.index, i] = (ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] - ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i])/(ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] + ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i]);
-                        }
+                            double newCh1 = (ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] * (ExperimentalSequencerThreadHelper.index2) + theCorrelator.phcountarrayCh1[i]) / (ExperimentalSequencerThreadHelper.index2 + 1);
+                            double newCh2 = (ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i] * (ExperimentalSequencerThreadHelper.index2) + theCorrelator.phcountarrayCh2[i]) / (ExperimentalSequencerThreadHelper.index2 + 1);
+                            double instSum = theCorrelator.phcountarrayCh1[i] + theCorrelator.phcountarrayCh2[i];
+                            double instDiff = (theCorrelator.phcountarrayCh1[i] - theCorrelator.phcountarrayCh2[i]) / (theCorrelator.phcountarrayCh1[i] + theCorrelator.phcountarrayCh2[i]);
+                            double newSum = newCh1 + newCh2;
+                            double newDiff = (newCh1 - newCh2) / (newCh1 + newCh2);
 
-                        
+                            double newCh1Err = Math.Sqrt(Math.Pow(ExperimentalSequencerThreadHelper.DoubleDataArray[4][ExperimentalSequencerThreadHelper.index, i],2) * (ExperimentalSequencerThreadHelper.index2) + Math.Pow(theCorrelator.phcountarrayCh1[i] - newCh1,2)) / (ExperimentalSequencerThreadHelper.index2 + 1);
+                            double newCh2Err = Math.Sqrt(Math.Pow(ExperimentalSequencerThreadHelper.DoubleDataArray[5][ExperimentalSequencerThreadHelper.index, i], 2) * (ExperimentalSequencerThreadHelper.index2) + Math.Pow(theCorrelator.phcountarrayCh2[i] - newCh1, 2)) / (ExperimentalSequencerThreadHelper.index2 + 1);
+                            double newSumErr = Math.Sqrt(Math.Pow(ExperimentalSequencerThreadHelper.DoubleDataArray[6][ExperimentalSequencerThreadHelper.index, i], 2) * (ExperimentalSequencerThreadHelper.index2) + Math.Pow(newSum - instSum, 2)) / (ExperimentalSequencerThreadHelper.index2 + 1);
+                            double newDiffErr = Math.Sqrt(Math.Pow(ExperimentalSequencerThreadHelper.DoubleDataArray[7][ExperimentalSequencerThreadHelper.index, i], 2) * (ExperimentalSequencerThreadHelper.index2) + Math.Pow(newDiff - instDiff, 2)) / (ExperimentalSequencerThreadHelper.index2 + 1);
+                            
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[0][ExperimentalSequencerThreadHelper.index, i] = newCh1;
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[1][ExperimentalSequencerThreadHelper.index, i] = newCh2;
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[2][ExperimentalSequencerThreadHelper.index, i] = newSum;
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[3][ExperimentalSequencerThreadHelper.index, i] = newDiff;
+                            //New Error estimates
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[4][ExperimentalSequencerThreadHelper.index, i] = newCh1Err;
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[5][ExperimentalSequencerThreadHelper.index, i] = newCh2Err;
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[6][ExperimentalSequencerThreadHelper.index, i] = newSumErr;
+                            ExperimentalSequencerThreadHelper.DoubleDataArray[7][ExperimentalSequencerThreadHelper.index, i] = newDiffErr;
+
+                        }
 
                         //call to update intensity graphs
                         try
@@ -5780,7 +5764,7 @@ namespace ArrayDACControl
                 }
 
                 //Interlocked Scan 1
-                if (ExpSeqScan1Checkbox.Checked)
+                if (ExpSeqScan1Checkbox.Checked && ((ExperimentalSequencerThreadHelper.index2+1)%int.Parse(ExpSeqIntScan1Period.Text)==0))
                 {
                     InterlockedScan1ThreadHelper.index = 0;
                     //run scans
@@ -5795,10 +5779,13 @@ namespace ArrayDACControl
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //Compute new field values
-                        InterlockedScan1ThreadHelper.DoubleScanVariable[0, InterlockedScan1ThreadHelper.index] = (double)(InterlockedScan1ThreadHelper.min[0] + (InterlockedScan1ThreadHelper.max[0] - InterlockedScan1ThreadHelper.min[0]) * InterlockedScan1ThreadHelper.index / (InterlockedScan1ThreadHelper.numPoints - 1));
+                        if (InterlockedScan1ThreadHelper.numPoints > 1) { InterlockedScan1ThreadHelper.DoubleScanVariable[0, InterlockedScan1ThreadHelper.index] = (double)(InterlockedScan1ThreadHelper.min[0] + (InterlockedScan1ThreadHelper.max[0] - InterlockedScan1ThreadHelper.min[0]) * InterlockedScan1ThreadHelper.index / (InterlockedScan1ThreadHelper.numPoints - 1)); }
+                        else { InterlockedScan1ThreadHelper.DoubleScanVariable[0, InterlockedScan1ThreadHelper.index] = InterlockedScan1ThreadHelper.min[0]; }
+                        
                         if (InterlockedScan1ThreadHelper.numScanVar > 1)
                         {
-                            InterlockedScan1ThreadHelper.DoubleScanVariable[1, InterlockedScan1ThreadHelper.index] = (double)(InterlockedScan1ThreadHelper.min[1] + (InterlockedScan1ThreadHelper.max[1] - InterlockedScan1ThreadHelper.min[1]) * InterlockedScan1ThreadHelper.index / (InterlockedScan1ThreadHelper.numPoints - 1));
+                            if (InterlockedScan1ThreadHelper.numPoints > 1) { InterlockedScan1ThreadHelper.DoubleScanVariable[1, InterlockedScan1ThreadHelper.index] = (double)(InterlockedScan1ThreadHelper.min[1] + (InterlockedScan1ThreadHelper.max[1] - InterlockedScan1ThreadHelper.min[1]) * InterlockedScan1ThreadHelper.index / (InterlockedScan1ThreadHelper.numPoints - 1)); }
+                            else { InterlockedScan1ThreadHelper.DoubleScanVariable[1, InterlockedScan1ThreadHelper.index] = InterlockedScan1ThreadHelper.min[1]; }
                         }
                         //call to change field value
                         try
@@ -5806,6 +5793,13 @@ namespace ArrayDACControl
                             this.Invoke(new MyDelegateThreadHelper(ScanUpdateCallbackFn), InterlockedScan1ThreadHelper);
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                        //if first scan, pause for 500ms
+                        if (InterlockedScan1ThreadHelper.index == 0)
+                        {
+                            //wait for 500ms before scanning
+                            Thread.Sleep(int.Parse(ExpSeqTimeDelay.Text));
+                        }
 
                         //get Data from selected Data Stream into ThreadHelper variable
                         //update graphs
@@ -5830,7 +5824,7 @@ namespace ArrayDACControl
                 }
 
                 //Interlocked Scan 2
-                if (ExpSeqScan2Checkbox.Checked)
+                if (ExpSeqScan2Checkbox.Checked && ((ExperimentalSequencerThreadHelper.index2 + 1) % int.Parse(ExpSeqIntScan2Period.Text) == 0))
                 {
                     InterlockedScan2ThreadHelper.index = 0;
                     //run scans
@@ -5845,7 +5839,9 @@ namespace ArrayDACControl
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //Compute new field values
-                        InterlockedScan2ThreadHelper.DoubleScanVariable[0, InterlockedScan2ThreadHelper.index] = (double)(InterlockedScan2ThreadHelper.min[0] + (InterlockedScan2ThreadHelper.max[0] - InterlockedScan2ThreadHelper.min[0]) * InterlockedScan2ThreadHelper.index / (InterlockedScan2ThreadHelper.numPoints - 1));
+                        if (InterlockedScan2ThreadHelper.numPoints > 1) { InterlockedScan2ThreadHelper.DoubleScanVariable[0, InterlockedScan2ThreadHelper.index] = (double)(InterlockedScan2ThreadHelper.min[0] + (InterlockedScan2ThreadHelper.max[0] - InterlockedScan2ThreadHelper.min[0]) * InterlockedScan2ThreadHelper.index / (InterlockedScan2ThreadHelper.numPoints - 1)); }
+                        else { InterlockedScan2ThreadHelper.DoubleScanVariable[0, InterlockedScan2ThreadHelper.index] = InterlockedScan2ThreadHelper.min[0]; }
+
                         if (InterlockedScan2ThreadHelper.numScanVar > 1)
                         {
                             InterlockedScan2ThreadHelper.DoubleScanVariable[1, InterlockedScan2ThreadHelper.index] = (double)(InterlockedScan2ThreadHelper.min[1] + (InterlockedScan2ThreadHelper.max[1] - InterlockedScan2ThreadHelper.min[1]) * InterlockedScan2ThreadHelper.index / (InterlockedScan2ThreadHelper.numPoints - 1));
@@ -5857,9 +5853,27 @@ namespace ArrayDACControl
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
 
+                        //if first scan, pause for 500ms
+                        if (InterlockedScan2ThreadHelper.index == 0)
+                        {
+                            //wait for 500ms before scanning
+                            Thread.Sleep(int.Parse(ExpSeqTimeDelay.Text));
+                        }
+
                         //get Data from selected Data Stream into ThreadHelper variable
                         //update graphs
                         getDatafromStream(InterlockedScan2ThreadHelper);
+
+                        //Fluorescence Interrupt
+                        if(ExpSeqFluorInterruptCheck.Checked)
+                        {
+                            if(InterlockedScan2ThreadHelper.DoubleData[0,InterlockedScan2ThreadHelper.index] < double.Parse(ExpSeqFluorInterruptThreshold.Text))
+                            {
+                                ExperimentalSequencerThreadHelper.ShouldBeRunningFlag = false;
+                                MessageBox.Show("Experimental Sequencer Stopped at " + DateTime.Now.ToString("hhmmss"));
+                            }
+                        }
+
                         //index++
                         InterlockedScan2ThreadHelper.index++;
                     }
@@ -5912,10 +5926,61 @@ namespace ArrayDACControl
             
         }
 
-        private void Repumper935Switch_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
+        private void ExpSeqPresetScanBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Dev2DO7.OutputDigitalValue(!Repumper935Switch.Value);
+            switch (ExpSeqPresetScanBox.Text)
+            {
+                case "Bx Slider":
+                    ExpSeqMainSlider1.Text = "BxSlider";
+                    ExpSeqMainSlider2.Text = "None";
+                    ExpSeqMainSliderStartText.Text = "0";
+                    ExpSeqMainSliderEndText.Text = "2";
+                    ExpSeqMainSliderNumPointsText.Text = "50";
+                    ExpSeqMainSliderNumScansText.Text = "1";
+                    ExpSeqMainData.Text = "Correlator:Sum";
+                    ExpSeqScan1Checkbox.Checked = false;
+                    ExpSeqScan2Checkbox.Checked = false;
+                    break;
+                case "Electrode Scan":
+                    ExpSeqMainSlider1.Text = "DC2";
+                    ExpSeqMainSlider2.Text = "DC9";
+                    ExpSeqMainSliderStartText.Text = "12.4";
+                    ExpSeqMainSliderEndText.Text = "11.6";
+                    ExpSeqMainSlider2StartText.Text = "11.6";
+                    ExpSeqMainSlider2EndText.Text = "12.4";
+                    ExpSeqMainSliderNumPointsText.Text = "50";
+                    ExpSeqMainSliderNumScansText.Text = "1";
+                    ExpSeqMainData.Text = "Correlator:Sum";
+                    ExpSeqScan1Checkbox.Checked = false;
+                    ExpSeqScan2Checkbox.Checked = false;
+                    break;
+                case "Repumper Slider":
+                    ExpSeqMainSlider1.Text = "RepumperSlider";
+                    ExpSeqMainSlider2.Text = "None";
+                    ExpSeqMainSliderStartText.Text = "2.85";
+                    ExpSeqMainSliderEndText.Text = "3.15";
+                    ExpSeqMainSliderNumPointsText.Text = "50";
+                    ExpSeqMainSliderNumScansText.Text = "1";
+                    ExpSeqMainData.Text = "Correlator:Sum";
+                    ExpSeqScan1Checkbox.Checked = false;
+                    ExpSeqScan2Checkbox.Checked = false;
+                    break;
+                case "DX Slider":
+                    ExpSeqMainSlider1.Text = "DXSlider";
+                    ExpSeqMainSlider2.Text = "None";
+                    ExpSeqMainSliderStartText.Text = "4.5";
+                    ExpSeqMainSliderEndText.Text = "5.5";
+                    ExpSeqMainSliderNumPointsText.Text = "10";
+                    ExpSeqMainSliderNumScansText.Text = "10";
+                    ExpSeqMainData.Text = "Correlator:Channels";
+                    ExpSeqScan1Checkbox.Checked = false;
+                    ExpSeqScan2Checkbox.Checked = false;
+                    break;
+            }
+
         }
+
+
         
 
 //////////////////////////////// IAN's Rigol Function Generator Control /////////////////////////
@@ -6168,48 +6233,7 @@ namespace ArrayDACControl
             { ReadConfigurationFull(textBox5.Text); }
         }
 
-        private void ExpSeqPresetScanBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch(ExpSeqPresetScanBox.Text)
-            {
-                case "Bx Slider":
-                    ExpSeqMainSlider1.Text = "BxSlider";
-                    ExpSeqMainSlider2.Text = "None";
-                    ExpSeqMainSliderStartText.Text = "0";
-                    ExpSeqMainSliderEndText.Text = "2";
-                    ExpSeqMainSliderNumPointsText.Text = "50";
-                    ExpSeqMainSliderNumScansText.Text = "1";
-                    ExpSeqMainData.Text = "Correlator:Sum";
-                    ExpSeqScan1Checkbox.Checked = false;
-                    ExpSeqScan2Checkbox.Checked = false;
-                    break;
-                case "Electrode Scan":
-                    ExpSeqMainSlider1.Text = "DC2";
-                    ExpSeqMainSlider2.Text = "DC9";
-                    ExpSeqMainSliderStartText.Text = "12.4";
-                    ExpSeqMainSliderEndText.Text = "11.6";
-                    ExpSeqMainSlider2StartText.Text = "11.6";
-                    ExpSeqMainSlider2EndText.Text = "12.4";
-                    ExpSeqMainSliderNumPointsText.Text = "50";
-                    ExpSeqMainSliderNumScansText.Text = "1";
-                    ExpSeqMainData.Text = "Correlator:Sum";
-                    ExpSeqScan1Checkbox.Checked = false;
-                    ExpSeqScan2Checkbox.Checked = false;
-                    break;
-                case "Repumper Slider":
-                    ExpSeqMainSlider1.Text = "RepumperSlider";
-                    ExpSeqMainSlider2.Text = "None";
-                    ExpSeqMainSliderStartText.Text = "2.85";
-                    ExpSeqMainSliderEndText.Text = "3.15";
-                    ExpSeqMainSliderNumPointsText.Text = "50";
-                    ExpSeqMainSliderNumScansText.Text = "1";
-                    ExpSeqMainData.Text = "Correlator:Sum";
-                    ExpSeqScan1Checkbox.Checked = false;
-                    ExpSeqScan2Checkbox.Checked = false;
-                    break;
-            }
 
-        }
 
     }
 
@@ -6272,6 +6296,7 @@ namespace ArrayDACControl
             return getChannel() + "_" + getFrequency() + "_" + getAmplitude() +
                 "_" + getOffset() + "_" + getPhase() + "_" + getFilename();
         }
+    }
 
 
 ////////////////////////////////////////////////
@@ -6297,7 +6322,7 @@ namespace ArrayDACControl
         }
          */
             
-    }
+    
 
     }
 

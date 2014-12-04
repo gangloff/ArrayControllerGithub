@@ -158,7 +158,6 @@ namespace ArrayDACControl
 
                     Form1.Self.counterAmp = 0;
                     int nextx = corrAmpLog.Plots[0].HistoryCount;
-                    testlbl.Text = nextx.ToString();
                     double[] xnew = new double[4] { nextx, nextx, nextx, nextx };
                     double[] ynew = new double[4] { 0, 0, 0, 0 };
                     corrAmpLog.PlotXYAppend(xnew, ynew);
@@ -167,7 +166,6 @@ namespace ArrayDACControl
                 {
                     Form1.Self.counterMu = 0;
                     int nextx = corrMuLog.Plots[0].HistoryCount;
-                    testlbl.Text = nextx.ToString();
                     double[] xnew = new double[4] { nextx, nextx, nextx, nextx };
                     double[] ynew = new double[4] { 0, 0, 0, 0 };
                     corrMuLog.PlotXYAppend(xnew, ynew);
@@ -202,6 +200,29 @@ namespace ArrayDACControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
+        }
+
+        private void toolStripPropertyEditor25_SourceValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CorrelatorDisplayMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < scatterGraphNormCorrSig.Plots.Count; i++)
+            {
+                scatterGraphNormCorrSig.Plots[i].Visible = false;
+                if (i < CorrelatorGraph.Plots.Count) CorrelatorGraph.Plots[i].Visible = false;
+            }
+
+            int[] indices = new int[CorrelatorDisplayMode.SelectedIndices.Count];
+            CorrelatorDisplayMode.SelectedIndices.CopyTo(indices, 0);
+
+            for( int i=0; i < indices.Length; i++)
+            {
+                scatterGraphNormCorrSig.Plots[indices[i]].Visible = true;
+                if (indices[i] < CorrelatorGraph.Plots.Count) CorrelatorGraph.Plots[indices[i]].Visible = true;
+            }
         }
 
     }

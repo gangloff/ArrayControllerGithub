@@ -75,6 +75,12 @@
       <DependentUpon>AvivHandleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AvivThreadExamples.cs" />
+    <Compile Include="ErrorBarGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ErrorBarGraph.Designer.cs">
+      <DependentUpon>ErrorBarGraph.cs</DependentUpon>
+    </Compile>
     <Compile Include="PulseSequencerChannel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,6 +111,10 @@
     <EmbeddedResource Include="AdjustableSlider.resx">
       <DependentUpon>AdjustableSlider.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorBarGraph.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ErrorBarGraph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PulseSequencerChannel.resx">
       <DependentUpon>PulseSequencerChannel.cs</DependentUpon>
