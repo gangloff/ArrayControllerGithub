@@ -12,9 +12,18 @@ namespace ArrayDACControl
     {
         delegate void MyDelegateThreadHelper(ThreadHelperClass theThreadHelper);
 
+        public ErrorBarGraph ExpSeqErrorBarGraph;
+
         public Form2()
         {
             InitializeComponent();
+
+            ExpSeqErrorBarGraph = new ErrorBarGraph();
+            ExpSeqErrorBarGraph.theLabel = "Experimental Sequencer Averages";
+            ExpSeqErrorBarGraph.Size = new System.Drawing.Size(729, 453);
+            ExpSeqErrorBarGraph.Location = new System.Drawing.Point(191, 560);
+            this.Controls.Add(ExpSeqErrorBarGraph);
+            this.tabPage6.Controls.Add(ExpSeqErrorBarGraph);
         }
 
         private void SaveFluorLogButton_Click(object sender, EventArgs e)

@@ -295,7 +295,7 @@ namespace ArrayDACControl
 
         private void makeWfm()
         {
-            int subperpts = (int)(Math.Round(wfmpts * param1 / expPeriod,0));  // number of sample points within one subperiod; there are wfmpts number of points in the overall period
+            int subperpts = Math.Max((int)(Math.Round(wfmpts * param1 / expPeriod,0)),1);  // number of sample points within one subperiod; there are wfmpts number of points in the overall period
             int sec1pts = (int)(Math.Round(wfmpts * param3 / expPeriod, 0));
             int sec2pts = (int)(Math.Round(wfmpts * param2 / expPeriod, 0));
 

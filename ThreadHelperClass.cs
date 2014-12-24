@@ -54,6 +54,7 @@ namespace ArrayDACControl
         //Slider associated with a scan
         public AdjustableSlider theSlider;
         public AdjustableSlider theSlider2;
+        public AdjustableSlider theSlider3;
         //Button associated with a scan
         public Button theButton;
 

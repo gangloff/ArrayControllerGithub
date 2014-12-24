@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+//using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
@@ -25,7 +26,6 @@ namespace ArrayDACControl
 
         //global variables for Rigol Tab
         ArrayList importedWaveforms = new ArrayList(); //ArrayList to store importedWaveforms
-        int index = 0; //each waveform is assigned an index number
 
         DACController DAC;
         NICardController Dev4AO0, Dev4AO1, Dev4AO2, Dev4AO3, Dev4AO4, Dev4AO5, Dev4AO6, Dev4AO7, Dev7AO0, Dev7AO2, Dev7AO6, Dev7AO7;
@@ -1486,9 +1486,9 @@ namespace ArrayDACControl
                             case "correlatorDiv2Ntext":
                                 correlatorDiv2Ntext.Text = theString.Split('\t')[1];
                                 break;
-                            case "DataFilenameFolderPathCorr":
-                                DataFilenameFolderPathCorr.Text = theString.Split('\t')[1];
-                                break;
+                            //case "DataFilenameFolderPathCorr":
+                            //    DataFilenameFolderPathCorr.Text = theString.Split('\t')[1];
+                            //    break;
                             case "DataFilenameCommonRoot1Corr":
                                 DataFilenameCommonRoot1Corr.Text = theString.Split('\t')[1];
                                 break;
@@ -1832,9 +1832,9 @@ namespace ArrayDACControl
                             case "ZtrapfrequencyTextbox":
                                 ZtrapfrequencyTextbox.Text = theString.Split('\t')[1];
                                 break;
-                            case "DataFilenameFolderPath":
-                                DataFilenameFolderPath.Text = theString.Split('\t')[1];
-                                break;
+                            //case "DataFilenameFolderPath":
+                            //    DataFilenameFolderPath.Text = theString.Split('\t')[1];
+                            //    break;
                             case "DataFilenameCommonRoot1":
                                 DataFilenameCommonRoot1.Text = theString.Split('\t')[1];
                                 break;
@@ -1907,18 +1907,39 @@ namespace ArrayDACControl
             string[] theString = new string[2];
             //path + root
 
-            theString[0] = "f:\\raw_data\\Array\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + scantype;
+            //if it's before 6am save to previous day's folder
+            if (int.Parse(DateTime.Now.Hour.ToString()) < 6)
+            {
+                DateTime yesterday = DateTime.Now.AddDays(-1);
+                theString[0] = "f:\\raw_data\\Array\\" + DateTime.Now.ToString("yyyy") + "\\" + yesterday.ToString("yyyyMMdd") + "\\" + scantype;
+            }
+            else
+            {
+                theString[0] = "f:\\raw_data\\Array\\" + DateTime.Now.ToString("yyyy") + "\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + scantype;
+            }
 
             if (what == 1)
             {
-                //theString[0] = DataFilenameFolderPath.Text + scantype;
-                if (CommonFilenameSwitch.Value) { theString[1] = DataFilenameCommonRoot1.Text + " "; }
-                else { theString[1] = DataFilenameCommonRoot2.Text + " "; }
+                string[] commonroot;
+
+                if (CommonFilenameSwitch.Value) { commonroot = DataFilenameCommonRoot1.Text.Split('\\'); }
+                else { commonroot = DataFilenameCommonRoot2.Text.Split('\\'); }
+
+                for (int i = 0; i < commonroot.Length - 1; i++)
+                {
+                    theString[0] += commonroot[i];
+                }
+                theString[1] += commonroot[commonroot.Length - 1] + " "; 
             }
             else if (what == 2)
             {
-                //theString[0] = DataFilenameFolderPathCorr.Text;
-                theString[0] += DataFilenameCommonRoot1Corr.Text + " ";
+                string[] commonroot = DataFilenameCommonRoot1Corr.Text.Split('\\');
+                for (int i = 0; i < commonroot.Length - 1; i++)
+                {
+                    theString[0] += commonroot[i];
+                }
+                theString[1] += commonroot[commonroot.Length - 1] + " ";
+                
             }
 
             //check if folder exists, if not create it
@@ -2031,7 +2052,7 @@ namespace ArrayDACControl
             {
                 //create text file
                 //System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[0] + theThreadHelper.threadName + " " + theThreadHelper.message + " SV=" + theThreadHelper.DoubleScanVariable[0,theThreadHelper.index].ToString("F3") + " " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
-                System.IO.StreamWriter tw = new System.IO.StreamWriter(theThreadHelper.threadName + " " + theThreadHelper.message + " SV=" + theThreadHelper.DoubleScanVariable[0, theThreadHelper.index].ToString("F3") + " " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+                System.IO.StreamWriter tw = new System.IO.StreamWriter(filename[1] + theThreadHelper.threadName + " " + theThreadHelper.message + " SV=" + theThreadHelper.DoubleScanVariable[0, theThreadHelper.index].ToString("F3") + " " + DateTime.Now.ToString("HHmmss") + " " + ".txt");
 
                 if (theThreadHelper != null)
                 {
@@ -2573,7 +2594,7 @@ namespace ArrayDACControl
             CameraForm.ExpSeqViewScanVariable.Text = theThreadHelper.DoubleScanVariable[0, ScanIndex - 1].ToString();
 
             //plot
-            CameraForm.ExpSeqWaveFormGraph.PlotY(dataPlot);
+            CameraForm.ExpSeqErrorBarGraph.PlotY(dataPlot, dataPlotErr);
         }
 
 
@@ -5488,9 +5509,10 @@ namespace ArrayDACControl
                 ExperimentalSequencerThreadHelper.slider1Name = ExpSeqMainSlider1.Text;
                 ExperimentalSequencerThreadHelper.slider2Name = ExpSeqMainSlider2.Text;
                 ExperimentalSequencerThreadHelper.folderPathExtra = "ExpSeq\\" + ExpSeqExtraPathnameText.Text;
-                //get Slider to scan
+                //get Sliders to scan
                 ExperimentalSequencerThreadHelper.theSlider = getSliderfromText(ExperimentalSequencerThreadHelper.slider1Name);
                 ExperimentalSequencerThreadHelper.theSlider2 = getSliderfromText(ExperimentalSequencerThreadHelper.slider2Name);
+                if (ExpSeqNestingSlider.Text != "None") { ExperimentalSequencerThreadHelper.theSlider3 = getSliderfromText(ExpSeqNestingSlider.Text); }
                 //Keep initial slider value
                 ExperimentalSequencerThreadHelper.KeepDoubles = new double[ExperimentalSequencerThreadHelper.numScanVar];
                 ExperimentalSequencerThreadHelper.KeepDoubles[0] = ExperimentalSequencerThreadHelper.theSlider.Value;
@@ -5502,7 +5524,7 @@ namespace ArrayDACControl
                 ExperimentalSequencerThreadHelper.threadName = ExperimentalSequencerThreadHelper.theSlider.Name;
                 if (ExperimentalSequencerThreadHelper.numScanVar > 1)
                 {
-                    ExperimentalSequencerThreadHelper.threadName += ExperimentalSequencerThreadHelper.theSlider2.Name;    
+                    ExperimentalSequencerThreadHelper.threadName += " " + ExperimentalSequencerThreadHelper.theSlider2.Name;    
                 }
 
                 if (ExperimentalSequencerThreadHelper.numPoints < 1)
@@ -5870,7 +5892,7 @@ namespace ArrayDACControl
                             if(InterlockedScan2ThreadHelper.DoubleData[0,InterlockedScan2ThreadHelper.index] < double.Parse(ExpSeqFluorInterruptThreshold.Text))
                             {
                                 ExperimentalSequencerThreadHelper.ShouldBeRunningFlag = false;
-                                MessageBox.Show("Experimental Sequencer Stopped at " + DateTime.Now.ToString("hhmmss"));
+                                MessageBox.Show("Experimental Sequencer Stopped at " + DateTime.Now.ToString("hhmmss"),"Interrupt",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
                             }
                         }
 
@@ -5985,19 +6007,23 @@ namespace ArrayDACControl
 
 //////////////////////////////// IAN's Rigol Function Generator Control /////////////////////////
 
-       //"Import" button click event
+       //"Send" button click event
         //---------------------------
-        //retrives the waveform info in the radio buttons and textboxes
+        //retrieves the waveform info in the radio buttons and textboxes
         //creates a new ImportedWaveform object with this info and adds it to an ArrayList
+        //creates a new Rigol object using the FN GEN selection and runs the GenerateWaveform method
         //---------------------------
-        private void RigImport_Click(object sender, EventArgs e)
+        private void RigSend_Click(object sender, EventArgs e)
         {
+            ImportedWaveform waveform = null;
+            bool goodWaveform = false;
+
             //handle unchecked radio buttons and unfilled text boxes
             if ((RigCh1Opt.Checked || RigCh2Opt.Checked) && !string.IsNullOrEmpty(RigFreqText.Text)
                 && !string.IsNullOrEmpty(RigAmplText.Text) && !string.IsNullOrEmpty(RigOffsetText.Text)
                 && !string.IsNullOrEmpty(RigPhaseText.Text) && !string.IsNullOrEmpty(RigBrowseText.Text))
             {
-                //retrive waveform info
+                //retrieve waveform info
                 int channel;
                 if (RigCh1Opt.Checked)
                 {
@@ -6018,32 +6044,35 @@ namespace ArrayDACControl
                     string filename = RigBrowseText.Text;
 
                     //create new ImportedWaveform object
-                    ImportedWaveform waveform =
-                        new ImportedWaveform(channel, frequency, amplitude, offset, phase, filename);
+                    waveform = new ImportedWaveform(channel, frequency, amplitude, offset, phase, filename);
+                    goodWaveform = true;
 
-                    //add it to the ArrayList importedWaveforms
-                    importedWaveforms.Add(waveform);
+                    //add it to the ArrayList importedWaveforms if not already there
+                    bool waveformAlreadyExists = false;
+                    for (int i = 0; i < importedWaveforms.Count; i++)
+                    {
+                        if (waveform.Display() == ((ImportedWaveform)importedWaveforms[i]).Display())
+                        {
+                            waveformAlreadyExists = true;
+                        }
+                    }
+                    if (!waveformAlreadyExists)
+                    {
+                        importedWaveforms.Add(waveform);
 
-                    //populate the listbox with a new ListItem
-                    RigFileListBox.Items.Add(new ListItem(waveform.Display(), Convert.ToString(index)));
-                    index++;
+                        //populate the listbox with a new ListItem
+                        RigFileListBox.Items.Add(new ListItem(waveform.Display()));
+                    }
                 }
                 catch
                 {
                     MessageBox.Show("Unexpected input format.");
-                }
+                }       
+                
             }
-        }
 
-        //"Send" button click event
-        //---------------------------
-        //creates a new Rigol object (from Rigol class) using the FN GEN selection
-        //uses the selected ImportedWaveform object to run the Rigol class's GenerateWaveform method
-        //---------------------------
-        private void RigProgramRigol_Click(object sender, EventArgs e)
-        {
-            //handle unchecked radio button and unselected waveforms
-            if ((RigGen1.Checked || RigGen2.Checked) && RigFileListBox.SelectedIndex > -1)
+            //handle unchecked FN GEN radio buttons
+            if ((RigGen1.Checked || RigGen2.Checked) && goodWaveform)
             {
                 //determine which fn gen to send to
                 string usbID;
@@ -6059,21 +6088,57 @@ namespace ArrayDACControl
                 //create new Rigol object
                 Rigol rigol = new Rigol(usbID);
 
-                //determine which waveform to send
-                int waveformIndex = Convert.ToInt16(((ListItem)RigFileListBox.SelectedItem).Value);
-                ImportedWaveform waveform = (ImportedWaveform)importedWaveforms[waveformIndex];
-
-                //handle bad filenames
+                //handling
                 try
                 {
-                    //send it
-                    rigol.GenerateWaveform(waveform.getChannel(), waveform.getFrequency(),
-                        waveform.getAmplitude(), waveform.getOffset(), waveform.getPhase(),
-                        waveform.getFilename());
+                    rigol.GenerateWaveform(waveform.getChannel(), waveform.getFrequency(), waveform.getAmplitude(),
+                        waveform.getOffset(), waveform.getPhase(), waveform.getFilename());
                 }
                 catch
                 {
-                    MessageBox.Show("Couldn't find file... Or unexpected file contents... Or couldn't find RIGOL.");
+                    MessageBox.Show("Couldn't find file... Or unexpected file format... Or couldn't connect to RIGOL.");
+                }
+            }  
+
+
+        }
+
+        //"Load" button click event
+        //---------------------------
+        //populates the waveform settings boxes with the settings of an old waveform
+        //---------------------------
+        private void RigLoad_Click(object sender, EventArgs e)
+        {
+            //handle unselected waveforms
+            if (RigFileListBox.SelectedIndex > -1)
+            {
+                //determine which waveform to send
+                int waveformIndex = RigFileListBox.SelectedIndex;
+                ImportedWaveform waveform = (ImportedWaveform)importedWaveforms[waveformIndex];
+
+                //handle
+                try
+                {
+                    int channel = waveform.getChannel();
+                    if (channel == 1)
+                    {
+                        RigCh1Opt.Checked = true;
+                        RigCh2Opt.Checked = false;
+                    }
+                    if (channel == 2)
+                    {
+                        RigCh1Opt.Checked = false;
+                        RigCh2Opt.Checked = true;
+                    }
+                    RigFreqText.Text = Convert.ToString(waveform.getFrequency());
+                    RigAmplText.Text = Convert.ToString(waveform.getAmplitude());
+                    RigOffsetText.Text = Convert.ToString(waveform.getOffset());
+                    RigPhaseText.Text = Convert.ToString(waveform.getPhase());
+                    RigBrowseText.Text = Convert.ToString(waveform.getFilename());
+                }
+                catch
+                {
+                    MessageBox.Show("Something happened.");
                 }
             }  
         }
@@ -6233,7 +6298,10 @@ namespace ArrayDACControl
             { ReadConfigurationFull(textBox5.Text); }
         }
 
-
+        private void ResetButton_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show(DateTime.Now.Hour.ToString());
+        }
 
     }
 

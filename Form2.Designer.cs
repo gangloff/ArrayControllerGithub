@@ -115,6 +115,7 @@ namespace ArrayDACControl
             this.scatterPlot6 = new NationalInstruments.UI.ScatterPlot();
             this.scatterPlot7 = new NationalInstruments.UI.ScatterPlot();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -153,10 +154,6 @@ namespace ArrayDACControl
             this.waveformPlot13 = new NationalInstruments.UI.WaveformPlot();
             this.waveformPlot14 = new NationalInstruments.UI.WaveformPlot();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.ExpSeqWaveFormGraph = new NationalInstruments.UI.WindowsForms.WaveformGraph();
-            this.waveformPlot19 = new NationalInstruments.UI.WaveformPlot();
-            this.xAxis13 = new NationalInstruments.UI.XAxis();
-            this.yAxis13 = new NationalInstruments.UI.YAxis();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.ExpSeqViewScanVariable = new System.Windows.Forms.TextBox();
@@ -215,7 +212,6 @@ namespace ArrayDACControl
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.FocusLogsONCheck = new System.Windows.Forms.CheckBox();
-            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.intensityGraph1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensityCursor2)).BeginInit();
@@ -246,7 +242,6 @@ namespace ArrayDACControl
             this.groupBox53.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CorrelatorGraph)).BeginInit();
             this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqWaveFormGraph)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -751,7 +746,7 @@ namespace ArrayDACControl
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(5, 3);
+            this.tabControl1.Location = new System.Drawing.Point(12, -4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(960, 1055);
@@ -1104,6 +1099,16 @@ namespace ArrayDACControl
             this.tabPage4.Text = "Correlator";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(13, 367);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(68, 20);
+            this.label11.TabIndex = 197;
+            this.label11.Text = "Average";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -1294,7 +1299,7 @@ namespace ArrayDACControl
             this.scatterPlot10,
             this.scatterPlot11,
             this.scatterPlot8});
-            this.scatterGraphNormCorrSig.Size = new System.Drawing.Size(935, 633);
+            this.scatterGraphNormCorrSig.Size = new System.Drawing.Size(935, 617);
             this.scatterGraphNormCorrSig.TabIndex = 190;
             this.scatterGraphNormCorrSig.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
             this.xAxis14});
@@ -1481,7 +1486,6 @@ namespace ArrayDACControl
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.ExpSeqWaveFormGraph);
             this.tabPage6.Controls.Add(this.groupBox3);
             this.tabPage6.Controls.Add(this.label3);
             this.tabPage6.Controls.Add(this.label2);
@@ -1498,45 +1502,6 @@ namespace ArrayDACControl
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "ExpSeq 2D";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // ExpSeqWaveFormGraph
-            // 
-            this.ExpSeqWaveFormGraph.AccessibleRole = System.Windows.Forms.AccessibleRole.Chart;
-            this.ExpSeqWaveFormGraph.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY)
-                        | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)
-                        | NationalInstruments.UI.GraphInteractionModes.PanX)
-                        | NationalInstruments.UI.GraphInteractionModes.PanY)
-                        | NationalInstruments.UI.GraphInteractionModes.DragCursor)
-                        | NationalInstruments.UI.GraphInteractionModes.DragAnnotationCaption)
-                        | NationalInstruments.UI.GraphInteractionModes.EditRange)));
-            this.ExpSeqWaveFormGraph.Location = new System.Drawing.Point(191, 580);
-            this.ExpSeqWaveFormGraph.Name = "ExpSeqWaveFormGraph";
-            this.ExpSeqWaveFormGraph.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.waveformPlot19});
-            this.ExpSeqWaveFormGraph.Size = new System.Drawing.Size(676, 382);
-            this.ExpSeqWaveFormGraph.TabIndex = 183;
-            this.ExpSeqWaveFormGraph.UseColorGenerator = true;
-            this.ExpSeqWaveFormGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis13});
-            this.ExpSeqWaveFormGraph.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis13});
-            // 
-            // waveformPlot19
-            // 
-            this.waveformPlot19.LineColor = System.Drawing.Color.White;
-            this.waveformPlot19.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
-            this.waveformPlot19.XAxis = this.xAxis13;
-            this.waveformPlot19.YAxis = this.yAxis13;
-            // 
-            // xAxis13
-            // 
-            this.xAxis13.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.xAxis13.MajorDivisions.GridVisible = true;
-            // 
-            // yAxis13
-            // 
-            this.yAxis13.MajorDivisions.GridLineStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.yAxis13.MajorDivisions.GridVisible = true;
             // 
             // groupBox3
             // 
@@ -2027,16 +1992,6 @@ namespace ArrayDACControl
             this.FocusLogsONCheck.Text = "LOGS ON?";
             this.FocusLogsONCheck.UseVisualStyleBackColor = true;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(13, 367);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(68, 20);
-            this.label11.TabIndex = 197;
-            this.label11.Text = "Average";
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2089,7 +2044,6 @@ namespace ArrayDACControl
             ((System.ComponentModel.ISupportInitialize)(this.CorrelatorGraph)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ExpSeqWaveFormGraph)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -2258,10 +2212,6 @@ namespace ArrayDACControl
         public System.Windows.Forms.TextBox ExpSeqViewScanIndex;
         private System.Windows.Forms.GroupBox groupBox5;
         public System.Windows.Forms.TextBox ExpSeqViewScanVariable;
-        public NationalInstruments.UI.WindowsForms.WaveformGraph ExpSeqWaveFormGraph;
-        private NationalInstruments.UI.WaveformPlot waveformPlot19;
-        private NationalInstruments.UI.XAxis xAxis13;
-        private NationalInstruments.UI.YAxis yAxis13;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;

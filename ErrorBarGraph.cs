@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using NationalInstruments.UI.WindowsForms;
 
 namespace ArrayDACControl
 {
@@ -42,35 +43,24 @@ namespace ArrayDACControl
         }
 
         //YData
-        public double[] theYData
-        {
-            get
-            {
-                return theYData;
-            }
-            set
-            {
-                theYData = value;
-            }
-        }
-
+        private double[] theYData;
         //Error Vector
-        public double[] theErrData
-        {
-            get
-            {
-                return theErrData;
-            }
-            set
-            {
-                theErrData = value;
-            }
-        }
-
+        private double[] theErrData;
+ 
         public void PlotY(double[] theY, double[] theErr)
         {
-            theYData = theY;
-            theErrData = theErr;
+            if (theYData == null || theYData.Length != theY.Length)
+            { 
+                theYData = new double[theY.Length];
+                theErrData = new double[theY.Length];
+            }
+
+            for (int i = 0; i < theY.Length; i++)
+            {
+                theYData[i] = theY[i];
+                theErrData[i] = theErr[i];
+            }
+
             //plot
             PlotYData();
         }
@@ -94,9 +84,19 @@ namespace ArrayDACControl
 
         public void PlotXY(double[] theX, double[] theY, double[] theErr)
         {
-            theXData = theX;
-            theYData = theY;
-            theErrData = theErr;
+            if (theYData == null || theYData.Length != theY.Length)
+            {
+                theXData = new double[theY.Length];
+                theYData = new double[theY.Length];
+                theErrData = new double[theY.Length];
+            }
+
+            for (int i = 0; i < theY.Length; i++)
+            {
+                theXData[i] = theX[i];
+                theYData[i] = theY[i];
+                theErrData[i] = theErr[i];
+            }
             //plot
             PlotXYData();
         }

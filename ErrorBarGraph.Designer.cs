@@ -1,3 +1,4 @@
+using System;
 namespace ArrayDACControl
 {
     partial class ErrorBarGraph
@@ -42,7 +43,7 @@ namespace ArrayDACControl
             this.thescatterGraph.Name = "thescatterGraph";
             this.thescatterGraph.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.thescatterPlot});
-            this.thescatterGraph.Size = new System.Drawing.Size(586, 360);
+            this.thescatterGraph.Size = new System.Drawing.Size(707, 413);
             this.thescatterGraph.TabIndex = 188;
             this.thescatterGraph.UseColorGenerator = true;
             this.thescatterGraph.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -52,10 +53,10 @@ namespace ArrayDACControl
             // 
             // thescatterPlot
             // 
-            this.thescatterPlot.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.thescatterPlot.LineColor = System.Drawing.Color.White;
             this.thescatterPlot.LineColorPrecedence = NationalInstruments.UI.ColorPrecedence.UserDefinedColor;
             this.thescatterPlot.LineWidth = 3F;
-            this.thescatterPlot.PointColor = System.Drawing.Color.Red;
+            this.thescatterPlot.PointColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.thescatterPlot.PointSize = new System.Drawing.Size(15, 3);
             this.thescatterPlot.PointStyle = NationalInstruments.UI.PointStyle.SolidSquare;
             this.thescatterPlot.XAxis = this.xAxis12;
@@ -79,7 +80,7 @@ namespace ArrayDACControl
             this.Controls.Add(this.theName);
             this.Controls.Add(this.thescatterGraph);
             this.Name = "ErrorBarGraph";
-            this.Size = new System.Drawing.Size(608, 398);
+            this.Size = new System.Drawing.Size(729, 453);
             ((System.ComponentModel.ISupportInitialize)(this.thescatterGraph)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -88,10 +89,10 @@ namespace ArrayDACControl
 
         #endregion
 
-        public NationalInstruments.UI.WindowsForms.ScatterGraph thescatterGraph;
         private NationalInstruments.UI.ScatterPlot thescatterPlot;
         private NationalInstruments.UI.XAxis xAxis12;
         private NationalInstruments.UI.YAxis yAxis12;
         private System.Windows.Forms.Label theName;
+        private NationalInstruments.UI.WindowsForms.ScatterGraph thescatterGraph;
     }
 }
