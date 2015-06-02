@@ -156,7 +156,7 @@ namespace ArrayDACControl
         {
             if (corrRecToggle.Value == false)
             {
-                if (Form1.Self.LockinFrequencySwitch.Value == true)
+                if (Form1.Self.ext1SrcButton.Checked)
                 {
                     for (int i = 0; i < Form1.Self.ncorrbins; i++)
                     {
@@ -171,7 +171,7 @@ namespace ArrayDACControl
                     double[] ynew = new double[4] { 0, 0, 0, 0 };
                     corrAmpLog.PlotXYAppend(xnew, ynew);
                 }
-                else
+                else if (Form1.Self.ext2SrcButton.Checked)
                 {
                     Form1.Self.counterMu = 0;
                     int nextx = corrMuLog.Plots[0].HistoryCount;
@@ -186,9 +186,9 @@ namespace ArrayDACControl
 
         private void clrCorrLog_Click(object sender, EventArgs e)
         {
-            if (Form1.Self.LockinFrequencySwitch.Value == true)
+            if (Form1.Self.ext1SrcButton.Checked)
                 corrAmpLog.ClearData();
-            else
+            else if (Form1.Self.ext2SrcButton.Checked)
                 corrMuLog.ClearData();
         }
 

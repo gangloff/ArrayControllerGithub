@@ -38,8 +38,8 @@ namespace ArrayDACControl
         //Integration time
         public int IntTime;
 
-        //Sync source boolean
-        public bool syncSrcChoose;
+        //Sync source (0 = int, 1 = ext1, 2 = ext2)
+        public int syncSrcChoose;
 
         //Recapture lock on/off boolean
         public bool recaplockStatus;
@@ -212,10 +212,11 @@ namespace ArrayDACControl
 
         private void updateSyncSourceExecute()
         {
-            if (syncSrcChoose) { ok.SetWire(0, 1); }  //binary 11; Sync source = EXT
-            else { ok.SetWire(0, 0); }  //binary 01; Sync source = INT
+            if (syncSrcChoose == 0) { ok.SetWire(0, 0); }  //binary 01; Sync source = INT
+            else if (syncSrcChoose == 1) { ok.SetWire(0, 1); }  //binary 11; Sync source = EXT1
+            else if (syncSrcChoose == 2) { ok.SetWire(0, 2); }  //Sync source = EXT2      
             ok.UpdateAllWires();
-            ok.SetTrigger(0x40, 4);   // Trigger 4 signals update of sync source
+            ok.SetTrigger(0x40, 4);  // Trigger 4 signals update of sync source
         }
         //////////////////////////////////////////////////////////
 
@@ -268,6 +269,7 @@ namespace ArrayDACControl
             //if collectDutyCycle is true, collect according to duty cycle
             if (collectDutyCycle)
             {
+                // this needs to be changed- syncSrcChoose is now an integer
                 if (syncSrcChoose) ok.SetWire(2, 3);  //binary 11
                 else ok.SetWire(2, 1);  //binary 01
             }

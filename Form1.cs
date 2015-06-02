@@ -2137,6 +2137,16 @@ namespace ArrayDACControl
                     tw.Close();
                 }
 
+                if (threadHelper.message == "Correlator:ChSum")
+                {
+                    tw = new System.IO.StreamWriter(filename[0] + threadHelper.threadName + " CorrChSum " + filename[1] + DateTime.Now.ToString("HHmmss") + " " + ".txt");
+
+                    for (int i = 0; i < threadHelper.numPoints; i++)
+                        tw.WriteLine(threadHelper.DoubleScanVariable[0, i] + "\t" + threadHelper.DoubleData[0, i] + "\t" + threadHelper.DoubleData[1, i]);
+
+                    tw.Close();
+                }
+
                 if (threadHelper.message == "Camera" || threadHelper.message == "PMT & Camera")
                 {
                     //Save fluorescence data
@@ -2331,10 +2341,10 @@ namespace ArrayDACControl
             Dev2DO0.OutputDigitalValue(IonizationShutter.Value);
         }
 
-        private void LockinFrequencySwitch_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
-        {
-            Dev2DO4.OutputDigitalValue(LockinFrequencySwitch.Value);
-        }
+        //private void LockinFrequencySwitch_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
+        //{
+        //    Dev2DO4.OutputDigitalValue(LockinFrequencySwitch.Value);
+        //}
 
         private void CavityBeam370Switch_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
         {
@@ -2719,6 +2729,36 @@ namespace ArrayDACControl
                     try
                     {
                         this.BeginInvoke(new MyDelegateThreadHelper(ScanResultsGraphCallbackFn),theThreadHelper);
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    Monitor.Wait(theThreadHelper);
+                }
+            }
+
+            // if Correlator:Sum selected, get reading from correlator, and sum bins
+            if (theThreadHelper.message == "Correlator:ChSum")
+            {
+                //Get results into correlator object
+                CorrelatorGetResultsHelper();
+
+                //Correlator Plots
+                try
+                {
+                    this.Invoke(new MyDelegate(CorrelatorExecuteFrmCallbackCh1));
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                //Put sum of two channels data in Thread array
+                theThreadHelper.DoubleData[0, theThreadHelper.index] = theCorrelator.totalCountsCh1;
+                theThreadHelper.DoubleData[1, theThreadHelper.index] = theCorrelator.totalCountsCh2;
+
+                //plot
+                lock (theThreadHelper)
+                {
+                    //display count, plot
+                    try
+                    {
+                        this.BeginInvoke(new MyDelegateThreadHelper(ScanResultsGraphCallbackFn), theThreadHelper);
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
                     Monitor.Wait(theThreadHelper);
@@ -3115,11 +3155,11 @@ namespace ArrayDACControl
             }
 
 
-            if (LockinFrequencySwitch.Value)
+            if (ext1SrcButton.Checked)
             {
                  theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext1.Text) - 1, 0));
             }
-            else
+            else if (ext2SrcButton.Checked)
             {
                 if (chooseCode.Value)
                 { theCorrelator.ClkDiv = (uint)(Math.Round(theCorrelator.ok.P * 1000 / ncorrbins / double.Parse(LockInFreqtext2.Text) - 1, 0)); }
@@ -3199,9 +3239,10 @@ namespace ArrayDACControl
 
 
 
-            //Set boolean in correlator for sync signal source
-            if (syncSrcSw.Value) { theCorrelator.syncSrcChoose = true; }
-            else { theCorrelator.syncSrcChoose = false; }
+            //Set sync signal source
+            if (intSrcButton.Checked) { theCorrelator.syncSrcChoose = 0; }
+            else if (ext1SrcButton.Checked) { theCorrelator.syncSrcChoose = 1; }
+            else if (ext2SrcButton.Checked) { theCorrelator.syncSrcChoose = 2; }
 
             //Attempt Initialize
             bool auxInitBool = true;
@@ -3495,7 +3536,7 @@ namespace ArrayDACControl
             ////////////////////////////////////////////////////
             // "Figure of merit" monitoring:
             // Depending on whether we are monitoring ion amplitude or correlator signal, plot "figure of merit" in the appropriate graph
-            if (LockinFrequencySwitch.Value == true)
+            if (ext1SrcButton.Checked)
             {
                 if (CameraForm.corrAmpLog.Plots[0].HistoryCount == 0)
                 {
@@ -3505,7 +3546,7 @@ namespace ArrayDACControl
                     CameraForm.corrAmpLog.PlotXYAppend(0, 0);
                 }
             }
-            else
+            else if (ext2SrcButton.Checked)
             {
                 if (CameraForm.corrMuLog.Plots[0].HistoryCount == 0)
                 {
@@ -3526,7 +3567,7 @@ namespace ArrayDACControl
             // Display current estimated "amplitude" of micromotion or motion suppression on the appropriate graph:
             if (CameraForm.corrRecToggle.Value == false)
             {
-                if (LockinFrequencySwitch.Value == true)
+                if (ext1SrcButton.Checked)
                 {
                     counterAmp++;
                     /*
@@ -3543,7 +3584,7 @@ namespace ArrayDACControl
 
                     CameraForm.corrAmpLog.PlotXY(prevAmpDataX, prevAmpDataY);
                 }
-                else
+                else if (ext2SrcButton.Checked)
                 {
                     double dq = Math.Abs(prevMicromotionDataY[lastPtIndexMu] - prevMicromotionDataY[lastPtIndexMu - 2]);
                     counterMu++;
@@ -5104,12 +5145,19 @@ namespace ArrayDACControl
 
         }
 
-        private void syncSrcSw_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
+        private void intSrcButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (syncSrcSw.Value) { theCorrelator.syncSrcChoose = true; }
-            else { theCorrelator.syncSrcChoose = false; }
+            if (intSrcButton.Checked) theCorrelator.syncSrcChoose = 0;
+        }
 
-            theCorrelator.updateSyncSourceLive();
+        private void ext1SrcButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ext1SrcButton.Checked) theCorrelator.syncSrcChoose = 1;
+        }
+
+        private void ext2SrcButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ext2SrcButton.Checked) theCorrelator.syncSrcChoose = 2;
         }
 
         private void recaplock_switch_StateChanged(object sender, NationalInstruments.UI.ActionEventArgs e)
@@ -5536,17 +5584,11 @@ namespace ArrayDACControl
                 ExperimentalSequencerThreadHelper.message = ExpSeqMainData.Text;
 
                 //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
-                if (ExperimentalSequencerThreadHelper.message == "PMT")
-                {
-                    ExperimentalSequencerThreadHelper.initDoubleData(ExperimentalSequencerThreadHelper.numPoints, 2, ExperimentalSequencerThreadHelper.numScanVar);
-                }
-                else
-                {
-                    ExperimentalSequencerThreadHelper.initDoubleData(ExperimentalSequencerThreadHelper.numPoints, 1, ExperimentalSequencerThreadHelper.numScanVar);
+                ExperimentalSequencerThreadHelper.initDoubleData(ExperimentalSequencerThreadHelper.numPoints, 2, ExperimentalSequencerThreadHelper.numScanVar);
 
-                    // if camera or correlator is running stop it
-                    StopDataStreams();
-                }
+                // if camera or correlator is running stop it
+                StopDataStreams();
+                
 
                 //if Interlocked Scan 1 checked, initialize thread helper
                 if (ExpSeqScan1Checkbox.Checked)
@@ -6302,6 +6344,7 @@ namespace ArrayDACControl
         {
             MessageBox.Show(DateTime.Now.Hour.ToString());
         }
+
 
     }
 
