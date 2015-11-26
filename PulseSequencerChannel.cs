@@ -106,7 +106,7 @@ namespace ArrayDACControl
             set {  this.opt3.Text = value;       }
         }
         //Channel Name
-        public String SignalName
+        public String Name
         {
             get {   return this.SigName.Text; }
             set {  this.SigName.Text = value; }

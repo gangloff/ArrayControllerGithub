@@ -75,6 +75,7 @@
       <DependentUpon>AvivHandleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AvivThreadExamples.cs" />
+    <Compile Include="Keithley.cs" />
     <Compile Include="ErrorBarGraph.cs">
       <SubType>UserControl</SubType>
     </Compile>

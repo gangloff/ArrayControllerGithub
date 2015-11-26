@@ -436,8 +436,8 @@ namespace ArrayDACControl
 
         private void initData()
         {
-            xImageSize = (ulong)Math.Ceiling((double)(hend - hstart + 1) / hbin);
-            yImageSize = (ulong)Math.Ceiling((double)(vend - vstart + 1) / vbin);
+            xImageSize = (ulong)Math.Ceiling((double)Math.Abs(hend - hstart + 1) / hbin);
+            yImageSize = (ulong)Math.Ceiling((double)Math.Abs(vend - vstart + 1) / vbin);
             ulong TotalPixels = xImageSize * yImageSize;
             DataInt = new int[TotalPixels];
             DataDouble = new double[xImageSize,yImageSize];

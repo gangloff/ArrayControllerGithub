@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.SinglePMTReadButton = new System.Windows.Forms.Button();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -40,50 +41,6 @@
             this.toolStripPropertyEditor3 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripPropertyEditor1 = new NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor();
-            this.FilenameTab = new System.Windows.Forms.TabPage();
-            this.label164 = new System.Windows.Forms.Label();
-            this.DataFilenameNotes = new System.Windows.Forms.TextBox();
-            this.groupBox49 = new System.Windows.Forms.GroupBox();
-            this.CommonFilenameSwitch = new NationalInstruments.UI.WindowsForms.Switch();
-            this.label143 = new System.Windows.Forms.Label();
-            this.DataFilenameCommonRoot2 = new System.Windows.Forms.TextBox();
-            this.label94 = new System.Windows.Forms.Label();
-            this.DataFilenameCommonRoot1 = new System.Windows.Forms.TextBox();
-            this.label93 = new System.Windows.Forms.Label();
-            this.DataFilenameFolderPath = new System.Windows.Forms.TextBox();
-            this.groupBox48 = new System.Windows.Forms.GroupBox();
-            this.label202 = new System.Windows.Forms.Label();
-            this.DriveAmplitudeTextbox = new System.Windows.Forms.TextBox();
-            this.label203 = new System.Windows.Forms.Label();
-            this.DriveStateTextbox = new System.Windows.Forms.TextBox();
-            this.label198 = new System.Windows.Forms.Label();
-            this.ZtrapfrequencyTextbox = new System.Windows.Forms.TextBox();
-            this.label197 = new System.Windows.Forms.Label();
-            this.LatticeQWPTextbox = new System.Windows.Forms.TextBox();
-            this.label196 = new System.Windows.Forms.Label();
-            this.S2QWPTextbox = new System.Windows.Forms.TextBox();
-            this.label95 = new System.Windows.Forms.Label();
-            this.LatticeDepthTextbox = new System.Windows.Forms.TextBox();
-            this.label86 = new System.Windows.Forms.Label();
-            this.label92 = new System.Windows.Forms.Label();
-            this.DetuningTextbox = new System.Windows.Forms.TextBox();
-            this.BzTextbox = new System.Windows.Forms.TextBox();
-            this.label79 = new System.Windows.Forms.Label();
-            this.label91 = new System.Windows.Forms.Label();
-            this.S1PowerTextbox = new System.Windows.Forms.TextBox();
-            this.ByTextbox = new System.Windows.Forms.TextBox();
-            this.label85 = new System.Windows.Forms.Label();
-            this.label90 = new System.Windows.Forms.Label();
-            this.S2PowerTextbox = new System.Windows.Forms.TextBox();
-            this.BxTextbox = new System.Windows.Forms.TextBox();
-            this.PiPowerTextbox = new System.Windows.Forms.TextBox();
-            this.label89 = new System.Windows.Forms.Label();
-            this.label87 = new System.Windows.Forms.Label();
-            this.CavityPowerTextbox = new System.Windows.Forms.TextBox();
-            this.Doppler35Textbox = new System.Windows.Forms.TextBox();
-            this.label88 = new System.Windows.Forms.Label();
-            this.label78 = new System.Windows.Forms.Label();
-            this.DataFilenameChecklist = new System.Windows.Forms.CheckedListBox();
             this.CameraTab = new System.Windows.Forms.TabPage();
             this.label177 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -138,26 +95,26 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.button9 = new System.Windows.Forms.Button();
             this.label245 = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
+            this.pulseSaveFilenameButton = new System.Windows.Forms.Button();
             this.label244 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.pulseSaveFilenameBox = new System.Windows.Forms.TextBox();
             this.label219 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
+            this.pulseFolderPathBox = new System.Windows.Forms.TextBox();
+            this.LoadPulseSeqSettingsButton = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.pulseSettingsBox5 = new System.Windows.Forms.TextBox();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.pulseSettingsBox4 = new System.Windows.Forms.TextBox();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.pulseSettingsBox3 = new System.Windows.Forms.TextBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.pulseSettingsBox2 = new System.Windows.Forms.TextBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pulseSettingsBox1 = new System.Windows.Forms.TextBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.updateAllSignalsButton = new System.Windows.Forms.Button();
             this.label223 = new System.Windows.Forms.Label();
@@ -200,33 +157,30 @@
             this.label120 = new System.Windows.Forms.Label();
             this.SaveCorrelatorToggle = new NationalInstruments.UI.WindowsForms.Switch();
             this.groupBox75 = new System.Windows.Forms.GroupBox();
+            this.binButton4 = new System.Windows.Forms.RadioButton();
+            this.binButton3 = new System.Windows.Forms.RadioButton();
+            this.binButton2 = new System.Windows.Forms.RadioButton();
+            this.binButton1 = new System.Windows.Forms.RadioButton();
+            this.ncorrbinsText4 = new System.Windows.Forms.TextBox();
+            this.ncorrbinsText3 = new System.Windows.Forms.TextBox();
             this.browseB2 = new System.Windows.Forms.Button();
             this.browseA2 = new System.Windows.Forms.Button();
             this.browseB1 = new System.Windows.Forms.Button();
             this.browseA1 = new System.Windows.Forms.Button();
-            this.correlatorBitFilePath_manybinsB = new System.Windows.Forms.TextBox();
+            this.correlatorBitFilePath4 = new System.Windows.Forms.TextBox();
             this.label106 = new System.Windows.Forms.Label();
-            this.label135 = new System.Windows.Forms.Label();
-            this.label136 = new System.Windows.Forms.Label();
-            this.correlatorBitFilePath = new System.Windows.Forms.TextBox();
-            this.correlatorBitFilePathB = new System.Windows.Forms.TextBox();
-            this.ncorrbinsText = new System.Windows.Forms.TextBox();
-            this.correlatorBitFilePath_manybins = new System.Windows.Forms.TextBox();
+            this.correlatorBitFilePath1 = new System.Windows.Forms.TextBox();
+            this.correlatorBitFilePath2 = new System.Windows.Forms.TextBox();
+            this.ncorrbinsText1 = new System.Windows.Forms.TextBox();
+            this.correlatorBitFilePath3 = new System.Windows.Forms.TextBox();
             this.ncorrbinsText2 = new System.Windows.Forms.TextBox();
-            this.label185 = new System.Windows.Forms.Label();
             this.label187 = new System.Windows.Forms.Label();
-            this.label186 = new System.Windows.Forms.Label();
-            this.nbinSwitch = new NationalInstruments.UI.WindowsForms.Switch();
             this.groupBox74 = new System.Windows.Forms.GroupBox();
             this.correlatorIntTimetext2 = new System.Windows.Forms.TextBox();
             this.label105 = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
             this.correlatorIntTimetext1 = new System.Windows.Forms.TextBox();
             this.intTselector = new NationalInstruments.UI.WindowsForms.Switch();
-            this.groupBox73 = new System.Windows.Forms.GroupBox();
-            this.label132 = new System.Windows.Forms.Label();
-            this.label133 = new System.Windows.Forms.Label();
-            this.chooseCode = new NationalInstruments.UI.WindowsForms.Switch();
             this.label178 = new System.Windows.Forms.Label();
             this.correlatorQtext = new System.Windows.Forms.TextBox();
             this.correlatorBound1text = new System.Windows.Forms.TextBox();
@@ -258,31 +212,34 @@
             this.label100 = new System.Windows.Forms.Label();
             this.correlatorVCOFreqtext = new System.Windows.Forms.TextBox();
             this.groupBox51 = new System.Windows.Forms.GroupBox();
-            this.label54 = new System.Windows.Forms.Label();
-            this.intSrcButton = new System.Windows.Forms.RadioButton();
-            this.label117 = new System.Windows.Forms.Label();
-            this.CorrelatorBinningPhaseSlider = new ArrayDACControl.AdjustableSlider();
-            this.ext2SrcButton = new System.Windows.Forms.RadioButton();
-            this.ext1SrcButton = new System.Windows.Forms.RadioButton();
-            this.label137 = new System.Windows.Forms.Label();
-            this.label138 = new System.Windows.Forms.Label();
-            this.label140 = new System.Windows.Forms.Label();
-            this.LockInFreqtext1 = new System.Windows.Forms.TextBox();
-            this.label139 = new System.Windows.Forms.Label();
-            this.LockInFreqtext2 = new System.Windows.Forms.TextBox();
-            this.correlatorPtextB = new System.Windows.Forms.TextBox();
-            this.LockInFreqtext2B = new System.Windows.Forms.TextBox();
-            this.correlatorPtext = new System.Windows.Forms.TextBox();
-            this.LockInPertext1 = new System.Windows.Forms.TextBox();
-            this.label57 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
+            this.LockInFreqtextInt = new System.Windows.Forms.TextBox();
+            this.label132 = new System.Windows.Forms.Label();
+            this.label133 = new System.Windows.Forms.Label();
+            this.LockInPertextInt = new System.Windows.Forms.TextBox();
             this.label99 = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
+            this.label118 = new System.Windows.Forms.Label();
+            this.correlatorPtextInt = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.ext2SrcButton = new System.Windows.Forms.RadioButton();
+            this.label54 = new System.Windows.Forms.Label();
+            this.ext1SrcButton = new System.Windows.Forms.RadioButton();
+            this.intSrcButton = new System.Windows.Forms.RadioButton();
             this.LockInPertext2 = new System.Windows.Forms.TextBox();
-            this.LockInPertext2B = new System.Windows.Forms.TextBox();
+            this.LockInFreqtext1 = new System.Windows.Forms.TextBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.correlatorPtext2 = new System.Windows.Forms.TextBox();
+            this.LockInFreqtext2 = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.correlatorPtext1 = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.LockInPertext1 = new System.Windows.Forms.TextBox();
+            this.label117 = new System.Windows.Forms.Label();
+            this.CorrelatorBinningPhaseSlider = new ArrayDACControl.AdjustableSlider();
             this.FluorLogTab = new System.Windows.Forms.TabPage();
             this.FluorLogStart = new System.Windows.Forms.Button();
             this.groupBox60 = new System.Windows.Forms.GroupBox();
@@ -358,12 +315,51 @@
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.MainControlTab = new System.Windows.Forms.TabPage();
+            this.groupBox54 = new System.Windows.Forms.GroupBox();
+            this.label251 = new System.Windows.Forms.Label();
+            this.DetuneTextBox = new System.Windows.Forms.TextBox();
+            this.DetuneButton = new System.Windows.Forms.Button();
+            this.LatticeSetpointSlider = new ArrayDACControl.AdjustableSlider();
+            this.groupBox90 = new System.Windows.Forms.GroupBox();
+            this.RS2Voltage = new System.Windows.Forms.TextBox();
+            this.groupBox89 = new System.Windows.Forms.GroupBox();
+            this.RS1Voltage = new System.Windows.Forms.TextBox();
+            this.groupBox88 = new System.Windows.Forms.GroupBox();
+            this.label246 = new System.Windows.Forms.Label();
+            this.label247 = new System.Windows.Forms.Label();
+            this.RamanS2Shutter = new NationalInstruments.UI.WindowsForms.Switch();
+            this.groupBox87 = new System.Windows.Forms.GroupBox();
+            this.label186 = new System.Windows.Forms.Label();
+            this.label234 = new System.Windows.Forms.Label();
+            this.RamanS1Shutter = new NationalInstruments.UI.WindowsForms.Switch();
+            this.RamanS2PowerControl = new ArrayDACControl.AdjustableSlider();
+            this.label140 = new System.Windows.Forms.Label();
+            this.TimerSwitch = new NationalInstruments.UI.WindowsForms.Switch();
+            this.label139 = new System.Windows.Forms.Label();
+            this.label138 = new System.Windows.Forms.Label();
+            this.QueueBox = new System.Windows.Forms.TextBox();
+            this.IntervalBox = new System.Windows.Forms.TextBox();
+            this.groupBox86 = new System.Windows.Forms.GroupBox();
+            this.label137 = new System.Windows.Forms.Label();
+            this.label136 = new System.Windows.Forms.Label();
+            this.IBox = new System.Windows.Forms.TextBox();
+            this.PBox = new System.Windows.Forms.TextBox();
+            this.label135 = new System.Windows.Forms.Label();
+            this.LatticeLockSwitch = new NationalInstruments.UI.WindowsForms.Switch();
+            this.groupBox85 = new System.Windows.Forms.GroupBox();
+            this.LatticeSetpoint = new System.Windows.Forms.TextBox();
+            this.groupBox73 = new System.Windows.Forms.GroupBox();
+            this.CavityVoltage = new System.Windows.Forms.TextBox();
+            this.groupBox72 = new System.Windows.Forms.GroupBox();
+            this.label185 = new System.Windows.Forms.Label();
+            this.CalibLatticeVoltage = new System.Windows.Forms.TextBox();
+            this.LatticeVoltage = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
             this.groupBox71 = new System.Windows.Forms.GroupBox();
             this.label230 = new System.Windows.Forms.Label();
             this.label231 = new System.Windows.Forms.Label();
             this.Repumper935Switch = new NationalInstruments.UI.WindowsForms.Switch();
-            this.ErrorOffset399Slider = new ArrayDACControl.AdjustableSlider();
+            this.RamanS2ColorControl = new ArrayDACControl.AdjustableSlider();
             this.TickleSlider = new ArrayDACControl.AdjustableSlider();
             this.BxSlider = new ArrayDACControl.AdjustableSlider();
             this.Sideband402Control = new ArrayDACControl.AdjustableSlider();
@@ -379,7 +375,7 @@
             this.groupBox31 = new System.Windows.Forms.GroupBox();
             this.label38 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
-            this.Dev2DO3Switch = new NationalInstruments.UI.WindowsForms.Switch();
+            this.LatticeSwitch = new NationalInstruments.UI.WindowsForms.Switch();
             this.CavityCoolingPowerControl = new ArrayDACControl.AdjustableSlider();
             this.groupBox32 = new System.Windows.Forms.GroupBox();
             this.RepumperFrequency = new System.Windows.Forms.TextBox();
@@ -393,7 +389,7 @@
             this.label33 = new System.Windows.Forms.Label();
             this.CavityBeam370Switch = new NationalInstruments.UI.WindowsForms.Switch();
             this.RepumperSlider = new ArrayDACControl.AdjustableSlider();
-            this.RecapturePowerSlider = new ArrayDACControl.AdjustableSlider();
+            this.RamanS1PowerControl = new ArrayDACControl.AdjustableSlider();
             this.SideBeam370Power = new ArrayDACControl.AdjustableSlider();
             this.ResetButton = new System.Windows.Forms.Button();
             this.groupBox26 = new System.Windows.Forms.GroupBox();
@@ -439,12 +435,44 @@
             this.label242 = new System.Windows.Forms.Label();
             this.label243 = new System.Windows.Forms.Label();
             this.ExperimentalSequencer = new System.Windows.Forms.TabPage();
+            this.groupBox49 = new System.Windows.Forms.GroupBox();
+            this.groupBox48 = new System.Windows.Forms.GroupBox();
+            this.label202 = new System.Windows.Forms.Label();
+            this.DriveAmplitudeTextbox = new System.Windows.Forms.TextBox();
+            this.label203 = new System.Windows.Forms.Label();
+            this.DriveStateTextbox = new System.Windows.Forms.TextBox();
+            this.label198 = new System.Windows.Forms.Label();
+            this.ZtrapfrequencyTextbox = new System.Windows.Forms.TextBox();
+            this.label197 = new System.Windows.Forms.Label();
+            this.LatticeQWPTextbox = new System.Windows.Forms.TextBox();
+            this.label196 = new System.Windows.Forms.Label();
+            this.S2QWPTextbox = new System.Windows.Forms.TextBox();
+            this.label95 = new System.Windows.Forms.Label();
+            this.LatticeDepthTextbox = new System.Windows.Forms.TextBox();
+            this.label86 = new System.Windows.Forms.Label();
+            this.label92 = new System.Windows.Forms.Label();
+            this.DetuningTextbox = new System.Windows.Forms.TextBox();
+            this.BzTextbox = new System.Windows.Forms.TextBox();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label91 = new System.Windows.Forms.Label();
+            this.S1PowerTextbox = new System.Windows.Forms.TextBox();
+            this.ByTextbox = new System.Windows.Forms.TextBox();
+            this.label85 = new System.Windows.Forms.Label();
+            this.label90 = new System.Windows.Forms.Label();
+            this.S2PowerTextbox = new System.Windows.Forms.TextBox();
+            this.BxTextbox = new System.Windows.Forms.TextBox();
+            this.PiPowerTextbox = new System.Windows.Forms.TextBox();
+            this.label89 = new System.Windows.Forms.Label();
+            this.label87 = new System.Windows.Forms.Label();
+            this.CavityPowerTextbox = new System.Windows.Forms.TextBox();
+            this.Doppler35Textbox = new System.Windows.Forms.TextBox();
+            this.label88 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.DataFilenameChecklist = new System.Windows.Forms.CheckedListBox();
             this.groupBox82 = new System.Windows.Forms.GroupBox();
             this.label46 = new System.Windows.Forms.Label();
             this.ExpSeqFluorInterruptThreshold = new System.Windows.Forms.TextBox();
             this.ExpSeqFluorInterruptCheck = new System.Windows.Forms.CheckBox();
-            this.groupBox54 = new System.Windows.Forms.GroupBox();
-            this.ExpSeqTimeDelay = new System.Windows.Forms.TextBox();
             this.groupBox70 = new System.Windows.Forms.GroupBox();
             this.ExpSeqPresetScanBox = new System.Windows.Forms.ListBox();
             this.label215 = new System.Windows.Forms.Label();
@@ -494,6 +522,11 @@
             this.ExpSeqInt1Slider1StartText = new System.Windows.Forms.TextBox();
             this.ExpSeqInt1Slider1StopText = new System.Windows.Forms.TextBox();
             this.groupBox64 = new System.Windows.Forms.GroupBox();
+            this.groupBox91 = new System.Windows.Forms.GroupBox();
+            this.label250 = new System.Windows.Forms.Label();
+            this.label249 = new System.Windows.Forms.Label();
+            this.ExpSeqPointTimeDelay = new System.Windows.Forms.TextBox();
+            this.ExpSeqScanTimeDelay = new System.Windows.Forms.TextBox();
             this.label201 = new System.Windows.Forms.Label();
             this.groupBox84 = new System.Windows.Forms.GroupBox();
             this.label157 = new System.Windows.Forms.Label();
@@ -512,6 +545,8 @@
             this.ExpSeqStartButton = new System.Windows.Forms.Button();
             this.groupBox53 = new System.Windows.Forms.GroupBox();
             this.label211 = new System.Windows.Forms.Label();
+            this.label248 = new System.Windows.Forms.Label();
+            this.ExpSeqMainSliderNumTakesText = new System.Windows.Forms.TextBox();
             this.ExpSeqMainSliderNumScansText = new System.Windows.Forms.TextBox();
             this.label212 = new System.Windows.Forms.Label();
             this.ExpSeqMainSliderNumPointsText = new System.Windows.Forms.TextBox();
@@ -523,18 +558,11 @@
             this.ExpSeqMainSliderStartText = new System.Windows.Forms.TextBox();
             this.ExpSeqMainSliderEndText = new System.Windows.Forms.TextBox();
             this.label213 = new System.Windows.Forms.Label();
-            this.RecycleBin = new System.Windows.Forms.TabPage();
-            this.TickleResetBox = new System.Windows.Forms.GroupBox();
-            this.TickleReset = new System.Windows.Forms.CheckBox();
-            this.label47 = new System.Windows.Forms.Label();
-            this.TickleResetDelayText = new System.Windows.Forms.TextBox();
-            this.ArrayResetBox = new System.Windows.Forms.GroupBox();
-            this.ArrayReset = new System.Windows.Forms.CheckBox();
-            this.ArrayResetDelayLabel = new System.Windows.Forms.Label();
-            this.ArrayResetDelayText = new System.Windows.Forms.TextBox();
-            this.ReadConfigurationFileTextbox = new System.Windows.Forms.TextBox();
-            this.ReadElectrodeConfig = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox40 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.LatticeFeedbackLatticeSetpointText = new System.Windows.Forms.TextBox();
+            this.LatticeFeedbackLatticeSetpointCheck = new System.Windows.Forms.CheckBox();
             this.label199 = new System.Windows.Forms.Label();
             this.label200 = new System.Windows.Forms.Label();
             this.LatticePositionFeedbackSwitch = new NationalInstruments.UI.WindowsForms.Switch();
@@ -560,44 +588,17 @@
             this.LatticePositionAmplitudeText = new System.Windows.Forms.TextBox();
             this.label188 = new System.Windows.Forms.Label();
             this.LatticePositionNumAveText = new System.Windows.Forms.TextBox();
-            this.groupBox34 = new System.Windows.Forms.GroupBox();
-            this.ElectrodeScanSaveCheckbox = new System.Windows.Forms.CheckBox();
-            this.ElectrodeScanStart = new System.Windows.Forms.Button();
-            this.groupBox41 = new System.Windows.Forms.GroupBox();
-            this.ElectrodeScanComboBox = new System.Windows.Forms.ComboBox();
-            this.groupBox29 = new System.Windows.Forms.GroupBox();
-            this.label73 = new System.Windows.Forms.Label();
-            this.label74 = new System.Windows.Forms.Label();
-            this.ElectrodeScanEndValue2Textbox = new System.Windows.Forms.TextBox();
-            this.ElectrodeScanStartValue2Textbox = new System.Windows.Forms.TextBox();
-            this.label43 = new System.Windows.Forms.Label();
-            this.ElectrodeScanPMTAveragingTextbox = new System.Windows.Forms.TextBox();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.ElectrodeScanDC2TextBox = new System.Windows.Forms.TextBox();
-            this.ElectrodeScanDC1TextBox = new System.Windows.Forms.TextBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.ElectrodeScanNumPointsTextbox = new System.Windows.Forms.TextBox();
-            this.ElectrodeScanEndValue1Textbox = new System.Windows.Forms.TextBox();
-            this.ElectrodeScanStartValue1Textbox = new System.Windows.Forms.TextBox();
-            this.groupBox80 = new System.Windows.Forms.GroupBox();
-            this.SliderScanSaveCheckbox = new System.Windows.Forms.CheckBox();
-            this.SliderScanStart = new System.Windows.Forms.Button();
-            this.groupBox62 = new System.Windows.Forms.GroupBox();
-            this.SliderScanSelection = new System.Windows.Forms.ComboBox();
-            this.groupBox33 = new System.Windows.Forms.GroupBox();
-            this.SliderScanComboBox = new System.Windows.Forms.ComboBox();
-            this.groupBox61 = new System.Windows.Forms.GroupBox();
-            this.label160 = new System.Windows.Forms.Label();
-            this.SliderScanPMTAveragingTextbox = new System.Windows.Forms.TextBox();
-            this.label161 = new System.Windows.Forms.Label();
-            this.label162 = new System.Windows.Forms.Label();
-            this.label163 = new System.Windows.Forms.Label();
-            this.SliderScanNumPointsTextbox = new System.Windows.Forms.TextBox();
-            this.SliderScanEndValueTextbox = new System.Windows.Forms.TextBox();
-            this.SliderScanStartValueTextbox = new System.Windows.Forms.TextBox();
+            this.RecycleBin = new System.Windows.Forms.TabPage();
+            this.TickleResetBox = new System.Windows.Forms.GroupBox();
+            this.TickleReset = new System.Windows.Forms.CheckBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.TickleResetDelayText = new System.Windows.Forms.TextBox();
+            this.ArrayResetBox = new System.Windows.Forms.GroupBox();
+            this.ArrayReset = new System.Windows.Forms.CheckBox();
+            this.ArrayResetDelayLabel = new System.Windows.Forms.Label();
+            this.ArrayResetDelayText = new System.Windows.Forms.TextBox();
+            this.ReadConfigurationFileTextbox = new System.Windows.Forms.TextBox();
+            this.ReadElectrodeConfig = new System.Windows.Forms.Button();
             this.groupBox36 = new System.Windows.Forms.GroupBox();
             this.label67 = new System.Windows.Forms.Label();
             this.RefOut = new System.Windows.Forms.TextBox();
@@ -702,11 +703,10 @@
             this.out1DelayText = new System.Windows.Forms.TextBox();
             this.label173 = new System.Windows.Forms.Label();
             this.out4DelayText = new System.Windows.Forms.TextBox();
-            this.label58 = new System.Windows.Forms.Label();
-            this.FilenameTab.SuspendLayout();
-            this.groupBox49.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CommonFilenameSwitch)).BeginInit();
-            this.groupBox48.SuspendLayout();
+            this.Keithley = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.CameraTab.SuspendLayout();
             this.groupBox39.SuspendLayout();
             this.groupBox46.SuspendLayout();
@@ -726,11 +726,8 @@
             this.groupBox76.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SaveCorrelatorToggle)).BeginInit();
             this.groupBox75.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nbinSwitch)).BeginInit();
             this.groupBox74.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intTselector)).BeginInit();
-            this.groupBox73.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).BeginInit();
             this.groupBox58.SuspendLayout();
             this.groupBox52.SuspendLayout();
             this.groupBox51.SuspendLayout();
@@ -765,12 +762,25 @@
             this.groupBox9.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.MainControlTab.SuspendLayout();
+            this.groupBox54.SuspendLayout();
+            this.groupBox90.SuspendLayout();
+            this.groupBox89.SuspendLayout();
+            this.groupBox88.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RamanS2Shutter)).BeginInit();
+            this.groupBox87.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RamanS1Shutter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TimerSwitch)).BeginInit();
+            this.groupBox86.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LatticeLockSwitch)).BeginInit();
+            this.groupBox85.SuspendLayout();
+            this.groupBox73.SuspendLayout();
+            this.groupBox72.SuspendLayout();
             this.groupBox71.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Repumper935Switch)).BeginInit();
             this.groupBox38.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Switch638)).BeginInit();
             this.groupBox31.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Dev2DO3Switch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LatticeSwitch)).BeginInit();
             this.groupBox32.SuspendLayout();
             this.groupBox30.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RepumperRFBroadenSwitch)).BeginInit();
@@ -783,8 +793,9 @@
             this.RigGroupBox2.SuspendLayout();
             this.RigOptGroupBox.SuspendLayout();
             this.ExperimentalSequencer.SuspendLayout();
+            this.groupBox49.SuspendLayout();
+            this.groupBox48.SuspendLayout();
             this.groupBox82.SuspendLayout();
-            this.groupBox54.SuspendLayout();
             this.groupBox70.SuspendLayout();
             this.groupBox66.SuspendLayout();
             this.ExpSeqIntScan2PeriodGroupbox.SuspendLayout();
@@ -799,24 +810,19 @@
             this.groupBox57.SuspendLayout();
             this.groupBox55.SuspendLayout();
             this.groupBox64.SuspendLayout();
+            this.groupBox91.SuspendLayout();
             this.groupBox84.SuspendLayout();
             this.groupBox67.SuspendLayout();
             this.groupBox53.SuspendLayout();
             this.groupBox28.SuspendLayout();
             this.groupBox25.SuspendLayout();
-            this.RecycleBin.SuspendLayout();
-            this.TickleResetBox.SuspendLayout();
-            this.ArrayResetBox.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.groupBox40.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LatticePositionFeedbackSwitch)).BeginInit();
             this.groupBox47.SuspendLayout();
-            this.groupBox34.SuspendLayout();
-            this.groupBox41.SuspendLayout();
-            this.groupBox29.SuspendLayout();
-            this.groupBox80.SuspendLayout();
-            this.groupBox62.SuspendLayout();
-            this.groupBox33.SuspendLayout();
-            this.groupBox61.SuspendLayout();
+            this.RecycleBin.SuspendLayout();
+            this.TickleResetBox.SuspendLayout();
+            this.ArrayResetBox.SuspendLayout();
             this.groupBox36.SuspendLayout();
             this.groupBox35.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -829,6 +835,7 @@
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.Keithley.SuspendLayout();
             this.SuspendLayout();
             // 
             // SinglePMTReadButton
@@ -907,445 +914,6 @@
             this.toolStripPropertyEditor1.Name = "toolStripPropertyEditor1";
             this.toolStripPropertyEditor1.RenderMode = NationalInstruments.UI.PropertyEditorRenderMode.Inherit;
             this.toolStripPropertyEditor1.Size = new System.Drawing.Size(120, 21);
-            // 
-            // FilenameTab
-            // 
-            this.FilenameTab.Controls.Add(this.label164);
-            this.FilenameTab.Controls.Add(this.DataFilenameNotes);
-            this.FilenameTab.Controls.Add(this.groupBox49);
-            this.FilenameTab.Controls.Add(this.groupBox48);
-            this.FilenameTab.Controls.Add(this.label78);
-            this.FilenameTab.Controls.Add(this.DataFilenameChecklist);
-            this.FilenameTab.Location = new System.Drawing.Point(4, 22);
-            this.FilenameTab.Name = "FilenameTab";
-            this.FilenameTab.Padding = new System.Windows.Forms.Padding(3);
-            this.FilenameTab.Size = new System.Drawing.Size(1892, 984);
-            this.FilenameTab.TabIndex = 11;
-            this.FilenameTab.Text = "Data Filename Control";
-            this.FilenameTab.UseVisualStyleBackColor = true;
-            // 
-            // label164
-            // 
-            this.label164.AutoSize = true;
-            this.label164.Location = new System.Drawing.Point(476, 269);
-            this.label164.Name = "label164";
-            this.label164.Size = new System.Drawing.Size(35, 13);
-            this.label164.TabIndex = 23;
-            this.label164.Text = "Notes";
-            // 
-            // DataFilenameNotes
-            // 
-            this.DataFilenameNotes.Location = new System.Drawing.Point(479, 285);
-            this.DataFilenameNotes.Multiline = true;
-            this.DataFilenameNotes.Name = "DataFilenameNotes";
-            this.DataFilenameNotes.Size = new System.Drawing.Size(384, 236);
-            this.DataFilenameNotes.TabIndex = 22;
-            // 
-            // groupBox49
-            // 
-            this.groupBox49.Controls.Add(this.CommonFilenameSwitch);
-            this.groupBox49.Controls.Add(this.label143);
-            this.groupBox49.Controls.Add(this.DataFilenameCommonRoot2);
-            this.groupBox49.Controls.Add(this.label94);
-            this.groupBox49.Controls.Add(this.DataFilenameCommonRoot1);
-            this.groupBox49.Controls.Add(this.label93);
-            this.groupBox49.Controls.Add(this.DataFilenameFolderPath);
-            this.groupBox49.Location = new System.Drawing.Point(479, 28);
-            this.groupBox49.Name = "groupBox49";
-            this.groupBox49.Size = new System.Drawing.Size(689, 169);
-            this.groupBox49.TabIndex = 21;
-            this.groupBox49.TabStop = false;
-            this.groupBox49.Text = "Root";
-            // 
-            // CommonFilenameSwitch
-            // 
-            this.CommonFilenameSwitch.Location = new System.Drawing.Point(619, 75);
-            this.CommonFilenameSwitch.Name = "CommonFilenameSwitch";
-            this.CommonFilenameSwitch.Size = new System.Drawing.Size(64, 96);
-            this.CommonFilenameSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.CommonFilenameSwitch.TabIndex = 195;
-            this.CommonFilenameSwitch.Value = true;
-            // 
-            // label143
-            // 
-            this.label143.AutoSize = true;
-            this.label143.ForeColor = System.Drawing.Color.Coral;
-            this.label143.Location = new System.Drawing.Point(6, 127);
-            this.label143.Name = "label143";
-            this.label143.Size = new System.Drawing.Size(102, 13);
-            this.label143.TabIndex = 24;
-            this.label143.Text = "Common Filename 2";
-            // 
-            // DataFilenameCommonRoot2
-            // 
-            this.DataFilenameCommonRoot2.Location = new System.Drawing.Point(6, 143);
-            this.DataFilenameCommonRoot2.Name = "DataFilenameCommonRoot2";
-            this.DataFilenameCommonRoot2.Size = new System.Drawing.Size(607, 20);
-            this.DataFilenameCommonRoot2.TabIndex = 23;
-            // 
-            // label94
-            // 
-            this.label94.AutoSize = true;
-            this.label94.ForeColor = System.Drawing.Color.Coral;
-            this.label94.Location = new System.Drawing.Point(6, 74);
-            this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(102, 13);
-            this.label94.TabIndex = 22;
-            this.label94.Text = "Common Filename 1";
-            // 
-            // DataFilenameCommonRoot1
-            // 
-            this.DataFilenameCommonRoot1.Location = new System.Drawing.Point(6, 90);
-            this.DataFilenameCommonRoot1.Name = "DataFilenameCommonRoot1";
-            this.DataFilenameCommonRoot1.Size = new System.Drawing.Size(607, 20);
-            this.DataFilenameCommonRoot1.TabIndex = 21;
-            // 
-            // label93
-            // 
-            this.label93.AutoSize = true;
-            this.label93.ForeColor = System.Drawing.Color.Coral;
-            this.label93.Location = new System.Drawing.Point(6, 25);
-            this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(116, 13);
-            this.label93.TabIndex = 20;
-            this.label93.Text = "Folder Path (automatic)";
-            // 
-            // DataFilenameFolderPath
-            // 
-            this.DataFilenameFolderPath.Location = new System.Drawing.Point(6, 41);
-            this.DataFilenameFolderPath.Name = "DataFilenameFolderPath";
-            this.DataFilenameFolderPath.ReadOnly = true;
-            this.DataFilenameFolderPath.Size = new System.Drawing.Size(607, 20);
-            this.DataFilenameFolderPath.TabIndex = 0;
-            this.DataFilenameFolderPath.Text = "f:\\raw_data\\Array\\yyyy\\yyyymmdd\\";
-            // 
-            // groupBox48
-            // 
-            this.groupBox48.Controls.Add(this.label202);
-            this.groupBox48.Controls.Add(this.DriveAmplitudeTextbox);
-            this.groupBox48.Controls.Add(this.label203);
-            this.groupBox48.Controls.Add(this.DriveStateTextbox);
-            this.groupBox48.Controls.Add(this.label198);
-            this.groupBox48.Controls.Add(this.ZtrapfrequencyTextbox);
-            this.groupBox48.Controls.Add(this.label197);
-            this.groupBox48.Controls.Add(this.LatticeQWPTextbox);
-            this.groupBox48.Controls.Add(this.label196);
-            this.groupBox48.Controls.Add(this.S2QWPTextbox);
-            this.groupBox48.Controls.Add(this.label95);
-            this.groupBox48.Controls.Add(this.LatticeDepthTextbox);
-            this.groupBox48.Controls.Add(this.label86);
-            this.groupBox48.Controls.Add(this.label92);
-            this.groupBox48.Controls.Add(this.DetuningTextbox);
-            this.groupBox48.Controls.Add(this.BzTextbox);
-            this.groupBox48.Controls.Add(this.label79);
-            this.groupBox48.Controls.Add(this.label91);
-            this.groupBox48.Controls.Add(this.S1PowerTextbox);
-            this.groupBox48.Controls.Add(this.ByTextbox);
-            this.groupBox48.Controls.Add(this.label85);
-            this.groupBox48.Controls.Add(this.label90);
-            this.groupBox48.Controls.Add(this.S2PowerTextbox);
-            this.groupBox48.Controls.Add(this.BxTextbox);
-            this.groupBox48.Controls.Add(this.PiPowerTextbox);
-            this.groupBox48.Controls.Add(this.label89);
-            this.groupBox48.Controls.Add(this.label87);
-            this.groupBox48.Controls.Add(this.CavityPowerTextbox);
-            this.groupBox48.Controls.Add(this.Doppler35Textbox);
-            this.groupBox48.Controls.Add(this.label88);
-            this.groupBox48.Location = new System.Drawing.Point(247, 28);
-            this.groupBox48.Name = "groupBox48";
-            this.groupBox48.Size = new System.Drawing.Size(182, 411);
-            this.groupBox48.TabIndex = 20;
-            this.groupBox48.TabStop = false;
-            this.groupBox48.Text = "Parameter Values";
-            // 
-            // label202
-            // 
-            this.label202.AutoSize = true;
-            this.label202.Location = new System.Drawing.Point(16, 76);
-            this.label202.Name = "label202";
-            this.label202.Size = new System.Drawing.Size(60, 13);
-            this.label202.TabIndex = 31;
-            this.label202.Text = "Drive State";
-            // 
-            // DriveAmplitudeTextbox
-            // 
-            this.DriveAmplitudeTextbox.Location = new System.Drawing.Point(109, 47);
-            this.DriveAmplitudeTextbox.Name = "DriveAmplitudeTextbox";
-            this.DriveAmplitudeTextbox.Size = new System.Drawing.Size(57, 20);
-            this.DriveAmplitudeTextbox.TabIndex = 28;
-            // 
-            // label203
-            // 
-            this.label203.AutoSize = true;
-            this.label203.Location = new System.Drawing.Point(16, 50);
-            this.label203.Name = "label203";
-            this.label203.Size = new System.Drawing.Size(81, 13);
-            this.label203.TabIndex = 29;
-            this.label203.Text = "Drive Amplitude";
-            // 
-            // DriveStateTextbox
-            // 
-            this.DriveStateTextbox.Location = new System.Drawing.Point(109, 73);
-            this.DriveStateTextbox.Name = "DriveStateTextbox";
-            this.DriveStateTextbox.Size = new System.Drawing.Size(57, 20);
-            this.DriveStateTextbox.TabIndex = 30;
-            // 
-            // label198
-            // 
-            this.label198.AutoSize = true;
-            this.label198.Location = new System.Drawing.Point(16, 384);
-            this.label198.Name = "label198";
-            this.label198.Size = new System.Drawing.Size(83, 13);
-            this.label198.TabIndex = 27;
-            this.label198.Text = "z-trap frequency";
-            // 
-            // ZtrapfrequencyTextbox
-            // 
-            this.ZtrapfrequencyTextbox.Location = new System.Drawing.Point(109, 381);
-            this.ZtrapfrequencyTextbox.Name = "ZtrapfrequencyTextbox";
-            this.ZtrapfrequencyTextbox.Size = new System.Drawing.Size(57, 20);
-            this.ZtrapfrequencyTextbox.TabIndex = 26;
-            // 
-            // label197
-            // 
-            this.label197.AutoSize = true;
-            this.label197.Location = new System.Drawing.Point(16, 360);
-            this.label197.Name = "label197";
-            this.label197.Size = new System.Drawing.Size(68, 13);
-            this.label197.TabIndex = 25;
-            this.label197.Text = "Lattice QWP";
-            // 
-            // LatticeQWPTextbox
-            // 
-            this.LatticeQWPTextbox.Location = new System.Drawing.Point(109, 357);
-            this.LatticeQWPTextbox.Name = "LatticeQWPTextbox";
-            this.LatticeQWPTextbox.Size = new System.Drawing.Size(57, 20);
-            this.LatticeQWPTextbox.TabIndex = 24;
-            // 
-            // label196
-            // 
-            this.label196.AutoSize = true;
-            this.label196.Location = new System.Drawing.Point(16, 153);
-            this.label196.Name = "label196";
-            this.label196.Size = new System.Drawing.Size(71, 13);
-            this.label196.TabIndex = 23;
-            this.label196.Text = "Sigma2 QWP";
-            // 
-            // S2QWPTextbox
-            // 
-            this.S2QWPTextbox.Location = new System.Drawing.Point(109, 150);
-            this.S2QWPTextbox.Name = "S2QWPTextbox";
-            this.S2QWPTextbox.Size = new System.Drawing.Size(57, 20);
-            this.S2QWPTextbox.TabIndex = 22;
-            // 
-            // label95
-            // 
-            this.label95.AutoSize = true;
-            this.label95.Location = new System.Drawing.Point(16, 335);
-            this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(71, 13);
-            this.label95.TabIndex = 21;
-            this.label95.Text = "Lattice Depth";
-            // 
-            // LatticeDepthTextbox
-            // 
-            this.LatticeDepthTextbox.Location = new System.Drawing.Point(109, 332);
-            this.LatticeDepthTextbox.Name = "LatticeDepthTextbox";
-            this.LatticeDepthTextbox.Size = new System.Drawing.Size(57, 20);
-            this.LatticeDepthTextbox.TabIndex = 20;
-            // 
-            // label86
-            // 
-            this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(16, 127);
-            this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(75, 13);
-            this.label86.TabIndex = 7;
-            this.label86.Text = "Sigma2 Power";
-            // 
-            // label92
-            // 
-            this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(16, 309);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(19, 13);
-            this.label92.TabIndex = 19;
-            this.label92.Text = "Bz";
-            // 
-            // DetuningTextbox
-            // 
-            this.DetuningTextbox.Location = new System.Drawing.Point(109, 23);
-            this.DetuningTextbox.Name = "DetuningTextbox";
-            this.DetuningTextbox.Size = new System.Drawing.Size(57, 20);
-            this.DetuningTextbox.TabIndex = 2;
-            this.DetuningTextbox.Text = "100";
-            // 
-            // BzTextbox
-            // 
-            this.BzTextbox.Location = new System.Drawing.Point(109, 306);
-            this.BzTextbox.Name = "BzTextbox";
-            this.BzTextbox.Size = new System.Drawing.Size(57, 20);
-            this.BzTextbox.TabIndex = 18;
-            this.BzTextbox.Text = "0";
-            // 
-            // label79
-            // 
-            this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(16, 26);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(50, 13);
-            this.label79.TabIndex = 3;
-            this.label79.Text = "Detuning";
-            // 
-            // label91
-            // 
-            this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(16, 283);
-            this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(19, 13);
-            this.label91.TabIndex = 17;
-            this.label91.Text = "By";
-            // 
-            // S1PowerTextbox
-            // 
-            this.S1PowerTextbox.Location = new System.Drawing.Point(109, 98);
-            this.S1PowerTextbox.Name = "S1PowerTextbox";
-            this.S1PowerTextbox.Size = new System.Drawing.Size(57, 20);
-            this.S1PowerTextbox.TabIndex = 4;
-            // 
-            // ByTextbox
-            // 
-            this.ByTextbox.Location = new System.Drawing.Point(109, 280);
-            this.ByTextbox.Name = "ByTextbox";
-            this.ByTextbox.Size = new System.Drawing.Size(57, 20);
-            this.ByTextbox.TabIndex = 16;
-            this.ByTextbox.Text = "0.85";
-            // 
-            // label85
-            // 
-            this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(16, 101);
-            this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(75, 13);
-            this.label85.TabIndex = 5;
-            this.label85.Text = "Sigma1 Power";
-            // 
-            // label90
-            // 
-            this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(16, 257);
-            this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(19, 13);
-            this.label90.TabIndex = 15;
-            this.label90.Text = "Bx";
-            // 
-            // S2PowerTextbox
-            // 
-            this.S2PowerTextbox.Location = new System.Drawing.Point(109, 124);
-            this.S2PowerTextbox.Name = "S2PowerTextbox";
-            this.S2PowerTextbox.Size = new System.Drawing.Size(57, 20);
-            this.S2PowerTextbox.TabIndex = 6;
-            // 
-            // BxTextbox
-            // 
-            this.BxTextbox.Location = new System.Drawing.Point(109, 254);
-            this.BxTextbox.Name = "BxTextbox";
-            this.BxTextbox.Size = new System.Drawing.Size(57, 20);
-            this.BxTextbox.TabIndex = 14;
-            // 
-            // PiPowerTextbox
-            // 
-            this.PiPowerTextbox.Location = new System.Drawing.Point(109, 176);
-            this.PiPowerTextbox.Name = "PiPowerTextbox";
-            this.PiPowerTextbox.Size = new System.Drawing.Size(57, 20);
-            this.PiPowerTextbox.TabIndex = 8;
-            // 
-            // label89
-            // 
-            this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(16, 231);
-            this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(69, 13);
-            this.label89.TabIndex = 13;
-            this.label89.Text = "Cavity Power";
-            // 
-            // label87
-            // 
-            this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(16, 179);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(49, 13);
-            this.label87.TabIndex = 9;
-            this.label87.Text = "Pi Power";
-            // 
-            // CavityPowerTextbox
-            // 
-            this.CavityPowerTextbox.Location = new System.Drawing.Point(109, 228);
-            this.CavityPowerTextbox.Name = "CavityPowerTextbox";
-            this.CavityPowerTextbox.Size = new System.Drawing.Size(57, 20);
-            this.CavityPowerTextbox.TabIndex = 12;
-            // 
-            // Doppler35Textbox
-            // 
-            this.Doppler35Textbox.Location = new System.Drawing.Point(109, 202);
-            this.Doppler35Textbox.Name = "Doppler35Textbox";
-            this.Doppler35Textbox.Size = new System.Drawing.Size(57, 20);
-            this.Doppler35Textbox.TabIndex = 10;
-            // 
-            // label88
-            // 
-            this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(16, 205);
-            this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(92, 13);
-            this.label88.TabIndex = 11;
-            this.label88.Text = "35 Doppler Power";
-            // 
-            // label78
-            // 
-            this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(30, 28);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(113, 13);
-            this.label78.TabIndex = 1;
-            this.label78.Text = "Parameters to Include:";
-            // 
-            // DataFilenameChecklist
-            // 
-            this.DataFilenameChecklist.CheckOnClick = true;
-            this.DataFilenameChecklist.FormattingEnabled = true;
-            this.DataFilenameChecklist.Items.AddRange(new object[] {
-            "Integration Time (Camera)",
-            "EM Gain",
-            "Integration Time (Correlator)",
-            "Pulse Programmer Period",
-            "Drive Frequency",
-            "Drive Amplitude",
-            "Drive State",
-            "Detuning",
-            "Sigma1 Power",
-            "Sigma2 Power",
-            "Sigma2 QWP",
-            "Pi Power",
-            "Sidebeam Power",
-            "Cavity Power",
-            "Bx",
-            "By",
-            "Bz",
-            "Lattice Depth",
-            "Lattice QWP",
-            "Array Voltage",
-            "Total Bias",
-            "DC Quad",
-            "DX",
-            "Quad Tilt",
-            "Quad Ratio",
-            "Array Ratio",
-            "Z Trap Frequency"});
-            this.DataFilenameChecklist.Location = new System.Drawing.Point(30, 48);
-            this.DataFilenameChecklist.Name = "DataFilenameChecklist";
-            this.DataFilenameChecklist.Size = new System.Drawing.Size(166, 409);
-            this.DataFilenameChecklist.TabIndex = 0;
             // 
             // CameraTab
             // 
@@ -1762,7 +1330,7 @@
             this.panel7.Controls.Add(this.label205);
             this.panel7.Controls.Add(this.label204);
             this.panel7.Controls.Add(this.recaplock_switch);
-            this.panel7.Location = new System.Drawing.Point(567, 328);
+            this.panel7.Location = new System.Drawing.Point(356, 328);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(350, 114);
             this.panel7.TabIndex = 188;
@@ -1915,7 +1483,6 @@
             this.CorrelatorTab.Controls.Add(this.groupBox76);
             this.CorrelatorTab.Controls.Add(this.groupBox75);
             this.CorrelatorTab.Controls.Add(this.groupBox74);
-            this.CorrelatorTab.Controls.Add(this.groupBox73);
             this.CorrelatorTab.Controls.Add(this.label178);
             this.CorrelatorTab.Controls.Add(this.correlatorQtext);
             this.CorrelatorTab.Controls.Add(this.correlatorBound1text);
@@ -1952,28 +1519,28 @@
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.button9);
             this.panel8.Controls.Add(this.label245);
-            this.panel8.Controls.Add(this.button8);
+            this.panel8.Controls.Add(this.pulseSaveFilenameButton);
             this.panel8.Controls.Add(this.label244);
-            this.panel8.Controls.Add(this.textBox7);
+            this.panel8.Controls.Add(this.pulseSaveFilenameBox);
             this.panel8.Controls.Add(this.label219);
-            this.panel8.Controls.Add(this.textBox6);
-            this.panel8.Controls.Add(this.button7);
+            this.panel8.Controls.Add(this.pulseFolderPathBox);
+            this.panel8.Controls.Add(this.LoadPulseSeqSettingsButton);
             this.panel8.Controls.Add(this.button6);
             this.panel8.Controls.Add(this.button5);
             this.panel8.Controls.Add(this.button4);
             this.panel8.Controls.Add(this.button3);
             this.panel8.Controls.Add(this.button2);
-            this.panel8.Controls.Add(this.textBox5);
+            this.panel8.Controls.Add(this.pulseSettingsBox5);
             this.panel8.Controls.Add(this.radioButton5);
-            this.panel8.Controls.Add(this.textBox4);
+            this.panel8.Controls.Add(this.pulseSettingsBox4);
             this.panel8.Controls.Add(this.radioButton4);
-            this.panel8.Controls.Add(this.textBox3);
+            this.panel8.Controls.Add(this.pulseSettingsBox3);
             this.panel8.Controls.Add(this.radioButton3);
-            this.panel8.Controls.Add(this.textBox2);
+            this.panel8.Controls.Add(this.pulseSettingsBox2);
             this.panel8.Controls.Add(this.radioButton2);
-            this.panel8.Controls.Add(this.textBox1);
+            this.panel8.Controls.Add(this.pulseSettingsBox1);
             this.panel8.Controls.Add(this.radioButton1);
-            this.panel8.Location = new System.Drawing.Point(946, 314);
+            this.panel8.Location = new System.Drawing.Point(712, 317);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(679, 134);
             this.panel8.TabIndex = 255;
@@ -1998,15 +1565,15 @@
             this.label245.TabIndex = 280;
             this.label245.Text = "Load file paths  ==>";
             // 
-            // button8
+            // pulseSaveFilenameButton
             // 
-            this.button8.Location = new System.Drawing.Point(234, 59);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(73, 20);
-            this.button8.TabIndex = 279;
-            this.button8.Text = "Save";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.pulseSaveFilenameButton.Location = new System.Drawing.Point(234, 59);
+            this.pulseSaveFilenameButton.Name = "pulseSaveFilenameButton";
+            this.pulseSaveFilenameButton.Size = new System.Drawing.Size(73, 20);
+            this.pulseSaveFilenameButton.TabIndex = 279;
+            this.pulseSaveFilenameButton.Text = "Save";
+            this.pulseSaveFilenameButton.UseVisualStyleBackColor = true;
+            this.pulseSaveFilenameButton.Click += new System.EventHandler(this.button8_Click);
             // 
             // label244
             // 
@@ -2018,13 +1585,13 @@
             this.label244.TabIndex = 278;
             this.label244.Text = "Save filename";
             // 
-            // textBox7
+            // pulseSaveFilenameBox
             // 
-            this.textBox7.Location = new System.Drawing.Point(86, 59);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(146, 20);
-            this.textBox7.TabIndex = 277;
-            this.textBox7.Text = "NewSequence";
+            this.pulseSaveFilenameBox.Location = new System.Drawing.Point(86, 59);
+            this.pulseSaveFilenameBox.Name = "pulseSaveFilenameBox";
+            this.pulseSaveFilenameBox.Size = new System.Drawing.Size(146, 20);
+            this.pulseSaveFilenameBox.TabIndex = 277;
+            this.pulseSaveFilenameBox.Text = "NewSequence";
             // 
             // label219
             // 
@@ -2036,23 +1603,23 @@
             this.label219.TabIndex = 276;
             this.label219.Text = "Folder Path";
             // 
-            // textBox6
+            // pulseFolderPathBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(11, 23);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(277, 20);
-            this.textBox6.TabIndex = 275;
-            this.textBox6.Text = "f:\\raw_data\\Array\\2014\\";
+            this.pulseFolderPathBox.Location = new System.Drawing.Point(11, 23);
+            this.pulseFolderPathBox.Name = "pulseFolderPathBox";
+            this.pulseFolderPathBox.Size = new System.Drawing.Size(277, 20);
+            this.pulseFolderPathBox.TabIndex = 275;
+            this.pulseFolderPathBox.Text = "f:\\raw_data\\Array\\PulseSequencerSettings\\";
             // 
-            // button7
+            // LoadPulseSeqSettingsButton
             // 
-            this.button7.Location = new System.Drawing.Point(55, 89);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(177, 25);
-            this.button7.TabIndex = 274;
-            this.button7.Text = "Load Pulse Sequencer Settings";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.LoadPulseSeqSettingsButton.Location = new System.Drawing.Point(55, 89);
+            this.LoadPulseSeqSettingsButton.Name = "LoadPulseSeqSettingsButton";
+            this.LoadPulseSeqSettingsButton.Size = new System.Drawing.Size(177, 25);
+            this.LoadPulseSeqSettingsButton.TabIndex = 274;
+            this.LoadPulseSeqSettingsButton.Text = "Load Pulse Sequencer Settings";
+            this.LoadPulseSeqSettingsButton.UseVisualStyleBackColor = true;
+            this.LoadPulseSeqSettingsButton.Click += new System.EventHandler(this.LoadPulseSeqSettingsButton_Click);
             // 
             // button6
             // 
@@ -2104,12 +1671,12 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // textBox5
+            // pulseSettingsBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(374, 109);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(262, 20);
-            this.textBox5.TabIndex = 268;
+            this.pulseSettingsBox5.Location = new System.Drawing.Point(374, 109);
+            this.pulseSettingsBox5.Name = "pulseSettingsBox5";
+            this.pulseSettingsBox5.Size = new System.Drawing.Size(262, 20);
+            this.pulseSettingsBox5.TabIndex = 268;
             // 
             // radioButton5
             // 
@@ -2120,12 +1687,12 @@
             this.radioButton5.TabIndex = 267;
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // pulseSettingsBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(374, 83);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(262, 20);
-            this.textBox4.TabIndex = 266;
+            this.pulseSettingsBox4.Location = new System.Drawing.Point(374, 83);
+            this.pulseSettingsBox4.Name = "pulseSettingsBox4";
+            this.pulseSettingsBox4.Size = new System.Drawing.Size(262, 20);
+            this.pulseSettingsBox4.TabIndex = 266;
             // 
             // radioButton4
             // 
@@ -2136,12 +1703,12 @@
             this.radioButton4.TabIndex = 265;
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // pulseSettingsBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(374, 57);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(262, 20);
-            this.textBox3.TabIndex = 264;
+            this.pulseSettingsBox3.Location = new System.Drawing.Point(374, 57);
+            this.pulseSettingsBox3.Name = "pulseSettingsBox3";
+            this.pulseSettingsBox3.Size = new System.Drawing.Size(262, 20);
+            this.pulseSettingsBox3.TabIndex = 264;
             // 
             // radioButton3
             // 
@@ -2152,12 +1719,12 @@
             this.radioButton3.TabIndex = 263;
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // pulseSettingsBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(374, 31);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(262, 20);
-            this.textBox2.TabIndex = 262;
+            this.pulseSettingsBox2.Location = new System.Drawing.Point(374, 31);
+            this.pulseSettingsBox2.Name = "pulseSettingsBox2";
+            this.pulseSettingsBox2.Size = new System.Drawing.Size(262, 20);
+            this.pulseSettingsBox2.TabIndex = 262;
             // 
             // radioButton2
             // 
@@ -2168,12 +1735,12 @@
             this.radioButton2.TabIndex = 261;
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // pulseSettingsBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(374, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(262, 20);
-            this.textBox1.TabIndex = 260;
+            this.pulseSettingsBox1.Location = new System.Drawing.Point(374, 5);
+            this.pulseSettingsBox1.Name = "pulseSettingsBox1";
+            this.pulseSettingsBox1.Size = new System.Drawing.Size(262, 20);
+            this.pulseSettingsBox1.TabIndex = 260;
             // 
             // radioButton1
             // 
@@ -2189,7 +1756,7 @@
             // updateAllSignalsButton
             // 
             this.updateAllSignalsButton.BackColor = System.Drawing.Color.Orange;
-            this.updateAllSignalsButton.Location = new System.Drawing.Point(394, 345);
+            this.updateAllSignalsButton.Location = new System.Drawing.Point(308, 270);
             this.updateAllSignalsButton.Name = "updateAllSignalsButton";
             this.updateAllSignalsButton.Size = new System.Drawing.Size(96, 43);
             this.updateAllSignalsButton.TabIndex = 10;
@@ -2454,7 +2021,7 @@
             this.groupBox78.Controls.Add(this.label107);
             this.groupBox78.Controls.Add(this.label108);
             this.groupBox78.Controls.Add(this.regSelectSw);
-            this.groupBox78.Location = new System.Drawing.Point(1180, 187);
+            this.groupBox78.Location = new System.Drawing.Point(1062, 190);
             this.groupBox78.Name = "groupBox78";
             this.groupBox78.Size = new System.Drawing.Size(76, 121);
             this.groupBox78.TabIndex = 232;
@@ -2472,7 +2039,7 @@
             // label108
             // 
             this.label108.AutoSize = true;
-            this.label108.Location = new System.Drawing.Point(6, 100);
+            this.label108.Location = new System.Drawing.Point(12, 90);
             this.label108.Name = "label108";
             this.label108.Size = new System.Drawing.Size(48, 13);
             this.label108.TabIndex = 158;
@@ -2494,7 +2061,7 @@
             this.groupBox77.Controls.Add(this.label125);
             this.groupBox77.Controls.Add(this.label128);
             this.groupBox77.Controls.Add(this.switchDisplayBases);
-            this.groupBox77.Location = new System.Drawing.Point(449, 27);
+            this.groupBox77.Location = new System.Drawing.Point(356, 26);
             this.groupBox77.Name = "groupBox77";
             this.groupBox77.Size = new System.Drawing.Size(78, 158);
             this.groupBox77.TabIndex = 231;
@@ -2555,7 +2122,7 @@
             this.groupBox76.Controls.Add(this.label119);
             this.groupBox76.Controls.Add(this.label120);
             this.groupBox76.Controls.Add(this.SaveCorrelatorToggle);
-            this.groupBox76.Location = new System.Drawing.Point(567, 186);
+            this.groupBox76.Location = new System.Drawing.Point(459, 191);
             this.groupBox76.Name = "groupBox76";
             this.groupBox76.Size = new System.Drawing.Size(77, 122);
             this.groupBox76.TabIndex = 230;
@@ -2591,32 +2158,86 @@
             // 
             // groupBox75
             // 
+            this.groupBox75.Controls.Add(this.binButton4);
+            this.groupBox75.Controls.Add(this.binButton3);
+            this.groupBox75.Controls.Add(this.binButton2);
+            this.groupBox75.Controls.Add(this.binButton1);
+            this.groupBox75.Controls.Add(this.ncorrbinsText4);
+            this.groupBox75.Controls.Add(this.ncorrbinsText3);
             this.groupBox75.Controls.Add(this.browseB2);
             this.groupBox75.Controls.Add(this.browseA2);
             this.groupBox75.Controls.Add(this.browseB1);
             this.groupBox75.Controls.Add(this.browseA1);
-            this.groupBox75.Controls.Add(this.correlatorBitFilePath_manybinsB);
+            this.groupBox75.Controls.Add(this.correlatorBitFilePath4);
             this.groupBox75.Controls.Add(this.label106);
-            this.groupBox75.Controls.Add(this.label135);
-            this.groupBox75.Controls.Add(this.label136);
-            this.groupBox75.Controls.Add(this.correlatorBitFilePath);
-            this.groupBox75.Controls.Add(this.correlatorBitFilePathB);
-            this.groupBox75.Controls.Add(this.ncorrbinsText);
-            this.groupBox75.Controls.Add(this.correlatorBitFilePath_manybins);
+            this.groupBox75.Controls.Add(this.correlatorBitFilePath1);
+            this.groupBox75.Controls.Add(this.correlatorBitFilePath2);
+            this.groupBox75.Controls.Add(this.ncorrbinsText1);
+            this.groupBox75.Controls.Add(this.correlatorBitFilePath3);
             this.groupBox75.Controls.Add(this.ncorrbinsText2);
-            this.groupBox75.Controls.Add(this.label185);
             this.groupBox75.Controls.Add(this.label187);
-            this.groupBox75.Controls.Add(this.label186);
-            this.groupBox75.Controls.Add(this.nbinSwitch);
-            this.groupBox75.Location = new System.Drawing.Point(533, 15);
+            this.groupBox75.Location = new System.Drawing.Point(446, 18);
             this.groupBox75.Name = "groupBox75";
-            this.groupBox75.Size = new System.Drawing.Size(935, 169);
+            this.groupBox75.Size = new System.Drawing.Size(935, 166);
             this.groupBox75.TabIndex = 229;
             this.groupBox75.TabStop = false;
             // 
+            // binButton4
+            // 
+            this.binButton4.AutoSize = true;
+            this.binButton4.Location = new System.Drawing.Point(45, 122);
+            this.binButton4.Name = "binButton4";
+            this.binButton4.Size = new System.Drawing.Size(14, 13);
+            this.binButton4.TabIndex = 231;
+            this.binButton4.UseVisualStyleBackColor = true;
+            // 
+            // binButton3
+            // 
+            this.binButton3.AutoSize = true;
+            this.binButton3.Location = new System.Drawing.Point(45, 96);
+            this.binButton3.Name = "binButton3";
+            this.binButton3.Size = new System.Drawing.Size(14, 13);
+            this.binButton3.TabIndex = 230;
+            this.binButton3.UseVisualStyleBackColor = true;
+            // 
+            // binButton2
+            // 
+            this.binButton2.AutoSize = true;
+            this.binButton2.Location = new System.Drawing.Point(45, 70);
+            this.binButton2.Name = "binButton2";
+            this.binButton2.Size = new System.Drawing.Size(14, 13);
+            this.binButton2.TabIndex = 229;
+            this.binButton2.UseVisualStyleBackColor = true;
+            // 
+            // binButton1
+            // 
+            this.binButton1.AutoSize = true;
+            this.binButton1.Checked = true;
+            this.binButton1.Location = new System.Drawing.Point(45, 44);
+            this.binButton1.Name = "binButton1";
+            this.binButton1.Size = new System.Drawing.Size(14, 13);
+            this.binButton1.TabIndex = 228;
+            this.binButton1.TabStop = true;
+            this.binButton1.UseVisualStyleBackColor = true;
+            // 
+            // ncorrbinsText4
+            // 
+            this.ncorrbinsText4.Location = new System.Drawing.Point(73, 119);
+            this.ncorrbinsText4.Name = "ncorrbinsText4";
+            this.ncorrbinsText4.Size = new System.Drawing.Size(57, 20);
+            this.ncorrbinsText4.TabIndex = 227;
+            // 
+            // ncorrbinsText3
+            // 
+            this.ncorrbinsText3.Location = new System.Drawing.Point(73, 93);
+            this.ncorrbinsText3.Name = "ncorrbinsText3";
+            this.ncorrbinsText3.Size = new System.Drawing.Size(57, 20);
+            this.ncorrbinsText3.TabIndex = 226;
+            this.ncorrbinsText3.Text = "300";
+            // 
             // browseB2
             // 
-            this.browseB2.Location = new System.Drawing.Point(902, 135);
+            this.browseB2.Location = new System.Drawing.Point(901, 119);
             this.browseB2.Name = "browseB2";
             this.browseB2.Size = new System.Drawing.Size(27, 19);
             this.browseB2.TabIndex = 225;
@@ -2626,7 +2247,7 @@
             // 
             // browseA2
             // 
-            this.browseA2.Location = new System.Drawing.Point(902, 109);
+            this.browseA2.Location = new System.Drawing.Point(901, 93);
             this.browseA2.Name = "browseA2";
             this.browseA2.Size = new System.Drawing.Size(27, 19);
             this.browseA2.TabIndex = 224;
@@ -2636,7 +2257,7 @@
             // 
             // browseB1
             // 
-            this.browseB1.Location = new System.Drawing.Point(902, 64);
+            this.browseB1.Location = new System.Drawing.Point(901, 67);
             this.browseB1.Name = "browseB1";
             this.browseB1.Size = new System.Drawing.Size(27, 19);
             this.browseB1.TabIndex = 223;
@@ -2646,7 +2267,7 @@
             // 
             // browseA1
             // 
-            this.browseA1.Location = new System.Drawing.Point(902, 42);
+            this.browseA1.Location = new System.Drawing.Point(901, 41);
             this.browseA1.Name = "browseA1";
             this.browseA1.Size = new System.Drawing.Size(27, 19);
             this.browseA1.TabIndex = 222;
@@ -2654,14 +2275,12 @@
             this.browseA1.UseVisualStyleBackColor = true;
             this.browseA1.Click += new System.EventHandler(this.browseA1_Click);
             // 
-            // correlatorBitFilePath_manybinsB
+            // correlatorBitFilePath4
             // 
-            this.correlatorBitFilePath_manybinsB.Location = new System.Drawing.Point(156, 132);
-            this.correlatorBitFilePath_manybinsB.Name = "correlatorBitFilePath_manybinsB";
-            this.correlatorBitFilePath_manybinsB.Size = new System.Drawing.Size(739, 20);
-            this.correlatorBitFilePath_manybinsB.TabIndex = 216;
-            this.correlatorBitFilePath_manybinsB.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC\\PSEC_fastLO_40bins_GitHub\\photoncounte" +
-                "r.bit";
+            this.correlatorBitFilePath4.Location = new System.Drawing.Point(156, 119);
+            this.correlatorBitFilePath4.Name = "correlatorBitFilePath4";
+            this.correlatorBitFilePath4.Size = new System.Drawing.Size(739, 20);
+            this.correlatorBitFilePath4.TabIndex = 216;
             // 
             // label106
             // 
@@ -2673,107 +2292,58 @@
             this.label106.TabIndex = 155;
             this.label106.Text = "BitFile Path";
             // 
-            // label135
+            // correlatorBitFilePath1
             // 
-            this.label135.AutoSize = true;
-            this.label135.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label135.Location = new System.Drawing.Point(136, 44);
-            this.label135.Name = "label135";
-            this.label135.Size = new System.Drawing.Size(14, 13);
-            this.label135.TabIndex = 192;
-            this.label135.Text = "A";
+            this.correlatorBitFilePath1.Location = new System.Drawing.Point(156, 41);
+            this.correlatorBitFilePath1.Name = "correlatorBitFilePath1";
+            this.correlatorBitFilePath1.Size = new System.Drawing.Size(739, 20);
+            this.correlatorBitFilePath1.TabIndex = 154;
+            this.correlatorBitFilePath1.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_multichannel\\PSEC_fastLO_10bins_recapl" +
+                "ock_GitHub_indepChannels_IAN\\photoncounter.bit";
             // 
-            // label136
+            // correlatorBitFilePath2
             // 
-            this.label136.AutoSize = true;
-            this.label136.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label136.Location = new System.Drawing.Point(136, 66);
-            this.label136.Name = "label136";
-            this.label136.Size = new System.Drawing.Size(14, 13);
-            this.label136.TabIndex = 193;
-            this.label136.Text = "B";
+            this.correlatorBitFilePath2.Location = new System.Drawing.Point(156, 67);
+            this.correlatorBitFilePath2.Name = "correlatorBitFilePath2";
+            this.correlatorBitFilePath2.Size = new System.Drawing.Size(739, 20);
+            this.correlatorBitFilePath2.TabIndex = 191;
+            this.correlatorBitFilePath2.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_multichannel\\PSEC_slowLO_100bins_recap" +
+                "lock_GitHub_indepChannels_IAN\\photoncounter.bit";
             // 
-            // correlatorBitFilePath
+            // ncorrbinsText1
             // 
-            this.correlatorBitFilePath.Location = new System.Drawing.Point(156, 41);
-            this.correlatorBitFilePath.Name = "correlatorBitFilePath";
-            this.correlatorBitFilePath.Size = new System.Drawing.Size(739, 20);
-            this.correlatorBitFilePath.TabIndex = 154;
-            this.correlatorBitFilePath.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_multichannel\\PSEC_slowLO_100bins_recap" +
-                "lock_GitHub_indepChannels\\photoncounter.bit";
+            this.ncorrbinsText1.Location = new System.Drawing.Point(73, 41);
+            this.ncorrbinsText1.Name = "ncorrbinsText1";
+            this.ncorrbinsText1.Size = new System.Drawing.Size(57, 20);
+            this.ncorrbinsText1.TabIndex = 195;
+            this.ncorrbinsText1.Text = "10";
             // 
-            // correlatorBitFilePathB
+            // correlatorBitFilePath3
             // 
-            this.correlatorBitFilePathB.Location = new System.Drawing.Point(156, 63);
-            this.correlatorBitFilePathB.Name = "correlatorBitFilePathB";
-            this.correlatorBitFilePathB.Size = new System.Drawing.Size(739, 20);
-            this.correlatorBitFilePathB.TabIndex = 191;
-            this.correlatorBitFilePathB.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC\\PSEC_fastLO_10bins_GitHub\\photoncounte" +
-                "r.bit";
-            // 
-            // ncorrbinsText
-            // 
-            this.ncorrbinsText.Location = new System.Drawing.Point(73, 49);
-            this.ncorrbinsText.Name = "ncorrbinsText";
-            this.ncorrbinsText.Size = new System.Drawing.Size(57, 20);
-            this.ncorrbinsText.TabIndex = 195;
-            this.ncorrbinsText.Text = "100";
-            // 
-            // correlatorBitFilePath_manybins
-            // 
-            this.correlatorBitFilePath_manybins.Location = new System.Drawing.Point(156, 109);
-            this.correlatorBitFilePath_manybins.Name = "correlatorBitFilePath_manybins";
-            this.correlatorBitFilePath_manybins.Size = new System.Drawing.Size(739, 20);
-            this.correlatorBitFilePath_manybins.TabIndex = 215;
-            this.correlatorBitFilePath_manybins.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC\\PSEC_slowLO_40bins_GitHub\\photoncounte" +
-                "r.bit";
+            this.correlatorBitFilePath3.Location = new System.Drawing.Point(156, 93);
+            this.correlatorBitFilePath3.Name = "correlatorBitFilePath3";
+            this.correlatorBitFilePath3.Size = new System.Drawing.Size(739, 20);
+            this.correlatorBitFilePath3.TabIndex = 215;
+            this.correlatorBitFilePath3.Text = "F:\\VIs\\PULSE_SEQUENCER_AND_CORRELATOR\\PSEC_multichannel\\PSEC_fastLO_300bins_recap" +
+                "lock_GitHub_indepChannels_IAN\\photoncounter.bit";
             // 
             // ncorrbinsText2
             // 
-            this.ncorrbinsText2.Location = new System.Drawing.Point(72, 120);
+            this.ncorrbinsText2.Location = new System.Drawing.Point(73, 67);
             this.ncorrbinsText2.Name = "ncorrbinsText2";
             this.ncorrbinsText2.Size = new System.Drawing.Size(57, 20);
             this.ncorrbinsText2.TabIndex = 220;
-            this.ncorrbinsText2.Text = "10";
-            // 
-            // label185
-            // 
-            this.label185.AutoSize = true;
-            this.label185.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label185.Location = new System.Drawing.Point(135, 112);
-            this.label185.Name = "label185";
-            this.label185.Size = new System.Drawing.Size(14, 13);
-            this.label185.TabIndex = 217;
-            this.label185.Text = "A";
+            this.ncorrbinsText2.Text = "100";
             // 
             // label187
             // 
             this.label187.AutoSize = true;
             this.label187.ForeColor = System.Drawing.Color.Coral;
-            this.label187.Location = new System.Drawing.Point(69, 25);
+            this.label187.Location = new System.Drawing.Point(70, 15);
             this.label187.Name = "label187";
             this.label187.Size = new System.Drawing.Size(42, 13);
             this.label187.TabIndex = 219;
             this.label187.Text = "# BINS";
-            // 
-            // label186
-            // 
-            this.label186.AutoSize = true;
-            this.label186.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label186.Location = new System.Drawing.Point(135, 135);
-            this.label186.Name = "label186";
-            this.label186.Size = new System.Drawing.Size(14, 13);
-            this.label186.TabIndex = 218;
-            this.label186.Text = "B";
-            // 
-            // nbinSwitch
-            // 
-            this.nbinSwitch.Location = new System.Drawing.Point(11, 41);
-            this.nbinSwitch.Name = "nbinSwitch";
-            this.nbinSwitch.Size = new System.Drawing.Size(64, 96);
-            this.nbinSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.nbinSwitch.TabIndex = 221;
-            this.nbinSwitch.Value = true;
             // 
             // groupBox74
             // 
@@ -2782,7 +2352,7 @@
             this.groupBox74.Controls.Add(this.label68);
             this.groupBox74.Controls.Add(this.correlatorIntTimetext1);
             this.groupBox74.Controls.Add(this.intTselector);
-            this.groupBox74.Location = new System.Drawing.Point(348, 18);
+            this.groupBox74.Location = new System.Drawing.Point(255, 17);
             this.groupBox74.Name = "groupBox74";
             this.groupBox74.Size = new System.Drawing.Size(95, 170);
             this.groupBox74.TabIndex = 228;
@@ -2836,54 +2406,11 @@
             this.intTselector.Value = true;
             this.intTselector.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.intTselector_StateChanged);
             // 
-            // groupBox73
-            // 
-            this.groupBox73.Controls.Add(this.label132);
-            this.groupBox73.Controls.Add(this.label133);
-            this.groupBox73.Controls.Add(this.chooseCode);
-            this.groupBox73.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox73.ForeColor = System.Drawing.Color.Black;
-            this.groupBox73.Location = new System.Drawing.Point(255, 167);
-            this.groupBox73.Name = "groupBox73";
-            this.groupBox73.Size = new System.Drawing.Size(87, 127);
-            this.groupBox73.TabIndex = 227;
-            this.groupBox73.TabStop = false;
-            this.groupBox73.Text = "Code Vers.";
-            // 
-            // label132
-            // 
-            this.label132.AutoSize = true;
-            this.label132.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label132.Location = new System.Drawing.Point(9, 108);
-            this.label132.Name = "label132";
-            this.label132.Size = new System.Drawing.Size(73, 13);
-            this.label132.TabIndex = 190;
-            this.label132.Text = "B: high freq";
-            // 
-            // label133
-            // 
-            this.label133.AutoSize = true;
-            this.label133.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label133.Location = new System.Drawing.Point(13, 20);
-            this.label133.Name = "label133";
-            this.label133.Size = new System.Drawing.Size(68, 13);
-            this.label133.TabIndex = 189;
-            this.label133.Text = "A: low freq";
-            // 
-            // chooseCode
-            // 
-            this.chooseCode.Location = new System.Drawing.Point(6, 25);
-            this.chooseCode.Name = "chooseCode";
-            this.chooseCode.Size = new System.Drawing.Size(64, 96);
-            this.chooseCode.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.chooseCode.TabIndex = 187;
-            this.chooseCode.Value = true;
-            // 
             // label178
             // 
             this.label178.AutoSize = true;
             this.label178.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label178.Location = new System.Drawing.Point(1574, 288);
+            this.label178.Location = new System.Drawing.Point(1446, 288);
             this.label178.Name = "label178";
             this.label178.Size = new System.Drawing.Size(65, 13);
             this.label178.TabIndex = 214;
@@ -2891,7 +2418,7 @@
             // 
             // correlatorQtext
             // 
-            this.correlatorQtext.Location = new System.Drawing.Point(1585, 9);
+            this.correlatorQtext.Location = new System.Drawing.Point(1465, 17);
             this.correlatorQtext.Name = "correlatorQtext";
             this.correlatorQtext.Size = new System.Drawing.Size(57, 20);
             this.correlatorQtext.TabIndex = 4;
@@ -2899,7 +2426,7 @@
             // 
             // correlatorBound1text
             // 
-            this.correlatorBound1text.Location = new System.Drawing.Point(1334, 212);
+            this.correlatorBound1text.Location = new System.Drawing.Point(1214, 211);
             this.correlatorBound1text.Name = "correlatorBound1text";
             this.correlatorBound1text.Size = new System.Drawing.Size(37, 20);
             this.correlatorBound1text.TabIndex = 160;
@@ -2907,7 +2434,7 @@
             // 
             // correlatorDiv1Ntext
             // 
-            this.correlatorDiv1Ntext.Location = new System.Drawing.Point(1585, 35);
+            this.correlatorDiv1Ntext.Location = new System.Drawing.Point(1465, 43);
             this.correlatorDiv1Ntext.Name = "correlatorDiv1Ntext";
             this.correlatorDiv1Ntext.Size = new System.Drawing.Size(57, 20);
             this.correlatorDiv1Ntext.TabIndex = 6;
@@ -2915,7 +2442,7 @@
             // 
             // correlatorDiv2Ntext
             // 
-            this.correlatorDiv2Ntext.Location = new System.Drawing.Point(1585, 61);
+            this.correlatorDiv2Ntext.Location = new System.Drawing.Point(1465, 69);
             this.correlatorDiv2Ntext.Name = "correlatorDiv2Ntext";
             this.correlatorDiv2Ntext.Size = new System.Drawing.Size(57, 20);
             this.correlatorDiv2Ntext.TabIndex = 8;
@@ -2923,7 +2450,7 @@
             // 
             // correlatorBound2text
             // 
-            this.correlatorBound2text.Location = new System.Drawing.Point(1431, 212);
+            this.correlatorBound2text.Location = new System.Drawing.Point(1311, 211);
             this.correlatorBound2text.Name = "correlatorBound2text";
             this.correlatorBound2text.Size = new System.Drawing.Size(37, 20);
             this.correlatorBound2text.TabIndex = 162;
@@ -2934,7 +2461,7 @@
             this.correlatorErrorMessages.BackColor = System.Drawing.SystemColors.Window;
             this.correlatorErrorMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.correlatorErrorMessages.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.correlatorErrorMessages.Location = new System.Drawing.Point(1681, 114);
+            this.correlatorErrorMessages.Location = new System.Drawing.Point(1561, 122);
             this.correlatorErrorMessages.Name = "correlatorErrorMessages";
             this.correlatorErrorMessages.ReadOnly = true;
             this.correlatorErrorMessages.Size = new System.Drawing.Size(204, 114);
@@ -2946,7 +2473,7 @@
             this.correlatorID.BackColor = System.Drawing.SystemColors.Window;
             this.correlatorID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.correlatorID.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.correlatorID.Location = new System.Drawing.Point(1681, 27);
+            this.correlatorID.Location = new System.Drawing.Point(1561, 35);
             this.correlatorID.Name = "correlatorID";
             this.correlatorID.ReadOnly = true;
             this.correlatorID.Size = new System.Drawing.Size(204, 69);
@@ -2959,7 +2486,7 @@
             this.groupBox58.Controls.Add(this.DataFilenameCommonRoot1Corr);
             this.groupBox58.Controls.Add(this.label122);
             this.groupBox58.Controls.Add(this.DataFilenameFolderPathCorr);
-            this.groupBox58.Location = new System.Drawing.Point(650, 191);
+            this.groupBox58.Location = new System.Drawing.Point(542, 194);
             this.groupBox58.Name = "groupBox58";
             this.groupBox58.Size = new System.Drawing.Size(512, 117);
             this.groupBox58.TabIndex = 172;
@@ -3005,7 +2532,7 @@
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(1539, 38);
+            this.label66.Location = new System.Drawing.Point(1419, 46);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(37, 13);
             this.label66.TabIndex = 7;
@@ -3014,7 +2541,7 @@
             // label101
             // 
             this.label101.AutoSize = true;
-            this.label101.Location = new System.Drawing.Point(1539, 12);
+            this.label101.Location = new System.Drawing.Point(1419, 20);
             this.label101.Name = "label101";
             this.label101.Size = new System.Drawing.Size(15, 13);
             this.label101.TabIndex = 5;
@@ -3023,7 +2550,7 @@
             // label115
             // 
             this.label115.AutoSize = true;
-            this.label115.Location = new System.Drawing.Point(1288, 215);
+            this.label115.Location = new System.Drawing.Point(1168, 214);
             this.label115.Name = "label115";
             this.label115.Size = new System.Drawing.Size(43, 13);
             this.label115.TabIndex = 161;
@@ -3032,7 +2559,7 @@
             // label104
             // 
             this.label104.AutoSize = true;
-            this.label104.Location = new System.Drawing.Point(1539, 64);
+            this.label104.Location = new System.Drawing.Point(1419, 72);
             this.label104.Name = "label104";
             this.label104.Size = new System.Drawing.Size(37, 13);
             this.label104.TabIndex = 9;
@@ -3041,7 +2568,7 @@
             // label116
             // 
             this.label116.AutoSize = true;
-            this.label116.Location = new System.Drawing.Point(1385, 215);
+            this.label116.Location = new System.Drawing.Point(1265, 214);
             this.label116.Name = "label116";
             this.label116.Size = new System.Drawing.Size(43, 13);
             this.label116.TabIndex = 163;
@@ -3051,7 +2578,7 @@
             // 
             this.CorrelatorButton.BackColor = System.Drawing.Color.Gray;
             this.CorrelatorButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.CorrelatorButton.Location = new System.Drawing.Point(377, 248);
+            this.CorrelatorButton.Location = new System.Drawing.Point(286, 192);
             this.CorrelatorButton.Name = "CorrelatorButton";
             this.CorrelatorButton.Size = new System.Drawing.Size(142, 66);
             this.CorrelatorButton.TabIndex = 153;
@@ -3062,7 +2589,7 @@
             // label103
             // 
             this.label103.AutoSize = true;
-            this.label103.Location = new System.Drawing.Point(1678, 98);
+            this.label103.Location = new System.Drawing.Point(1558, 106);
             this.label103.Name = "label103";
             this.label103.Size = new System.Drawing.Size(158, 13);
             this.label103.TabIndex = 23;
@@ -3071,7 +2598,7 @@
             // label102
             // 
             this.label102.AutoSize = true;
-            this.label102.Location = new System.Drawing.Point(1678, 11);
+            this.label102.Location = new System.Drawing.Point(1558, 19);
             this.label102.Name = "label102";
             this.label102.Size = new System.Drawing.Size(122, 13);
             this.label102.TabIndex = 10;
@@ -3087,7 +2614,7 @@
             this.groupBox52.Controls.Add(this.correlatorRefFreqtext);
             this.groupBox52.Controls.Add(this.label100);
             this.groupBox52.Controls.Add(this.correlatorVCOFreqtext);
-            this.groupBox52.Location = new System.Drawing.Point(1518, 92);
+            this.groupBox52.Location = new System.Drawing.Point(1398, 100);
             this.groupBox52.Name = "groupBox52";
             this.groupBox52.Size = new System.Drawing.Size(154, 136);
             this.groupBox52.TabIndex = 22;
@@ -3168,63 +2695,293 @@
             // 
             // groupBox51
             // 
+            this.groupBox51.Controls.Add(this.LockInFreqtextInt);
+            this.groupBox51.Controls.Add(this.label132);
+            this.groupBox51.Controls.Add(this.label133);
+            this.groupBox51.Controls.Add(this.LockInPertextInt);
+            this.groupBox51.Controls.Add(this.label99);
+            this.groupBox51.Controls.Add(this.label118);
+            this.groupBox51.Controls.Add(this.correlatorPtextInt);
+            this.groupBox51.Controls.Add(this.label63);
+            this.groupBox51.Controls.Add(this.label62);
+            this.groupBox51.Controls.Add(this.label56);
+            this.groupBox51.Controls.Add(this.label52);
             this.groupBox51.Controls.Add(this.label58);
             this.groupBox51.Controls.Add(this.ext2SrcButton);
             this.groupBox51.Controls.Add(this.label54);
             this.groupBox51.Controls.Add(this.ext1SrcButton);
             this.groupBox51.Controls.Add(this.intSrcButton);
-            this.groupBox51.Controls.Add(this.label137);
-            this.groupBox51.Controls.Add(this.label52);
-            this.groupBox51.Controls.Add(this.label138);
-            this.groupBox51.Controls.Add(this.LockInPertext2B);
-            this.groupBox51.Controls.Add(this.label140);
             this.groupBox51.Controls.Add(this.LockInPertext2);
             this.groupBox51.Controls.Add(this.LockInFreqtext1);
             this.groupBox51.Controls.Add(this.label55);
-            this.groupBox51.Controls.Add(this.label139);
-            this.groupBox51.Controls.Add(this.label56);
-            this.groupBox51.Controls.Add(this.LockInFreqtext2);
             this.groupBox51.Controls.Add(this.label51);
-            this.groupBox51.Controls.Add(this.correlatorPtextB);
-            this.groupBox51.Controls.Add(this.label99);
-            this.groupBox51.Controls.Add(this.LockInFreqtext2B);
+            this.groupBox51.Controls.Add(this.correlatorPtext2);
+            this.groupBox51.Controls.Add(this.LockInFreqtext2);
             this.groupBox51.Controls.Add(this.label44);
-            this.groupBox51.Controls.Add(this.correlatorPtext);
+            this.groupBox51.Controls.Add(this.correlatorPtext1);
             this.groupBox51.Controls.Add(this.label57);
             this.groupBox51.Controls.Add(this.LockInPertext1);
             this.groupBox51.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox51.ForeColor = System.Drawing.Color.Black;
             this.groupBox51.Location = new System.Drawing.Point(14, 11);
             this.groupBox51.Name = "groupBox51";
-            this.groupBox51.Size = new System.Drawing.Size(235, 342);
+            this.groupBox51.Size = new System.Drawing.Size(235, 359);
             this.groupBox51.TabIndex = 21;
             this.groupBox51.TabStop = false;
             this.groupBox51.Text = "SYNC SRC";
+            // 
+            // LockInFreqtextInt
+            // 
+            this.LockInFreqtextInt.Location = new System.Drawing.Point(33, 61);
+            this.LockInFreqtextInt.Name = "LockInFreqtextInt";
+            this.LockInFreqtextInt.Size = new System.Drawing.Size(51, 20);
+            this.LockInFreqtextInt.TabIndex = 233;
+            this.LockInFreqtextInt.LostFocus += new System.EventHandler(this.LockInFreqtextInt_TextChanged);
+            // 
+            // label132
+            // 
+            this.label132.AutoSize = true;
+            this.label132.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label132.Location = new System.Drawing.Point(204, 64);
+            this.label132.Name = "label132";
+            this.label132.Size = new System.Drawing.Size(20, 13);
+            this.label132.TabIndex = 236;
+            this.label132.Text = "us";
+            // 
+            // label133
+            // 
+            this.label133.AutoSize = true;
+            this.label133.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label133.Location = new System.Drawing.Point(84, 64);
+            this.label133.Name = "label133";
+            this.label133.Size = new System.Drawing.Size(51, 13);
+            this.label133.TabIndex = 235;
+            this.label133.Text = "kHz <->";
+            // 
+            // LockInPertextInt
+            // 
+            this.LockInPertextInt.Location = new System.Drawing.Point(138, 61);
+            this.LockInPertextInt.Name = "LockInPertextInt";
+            this.LockInPertextInt.Size = new System.Drawing.Size(66, 20);
+            this.LockInPertextInt.TabIndex = 234;
+            this.LockInPertextInt.LostFocus += new System.EventHandler(this.LockInPertextInt_TextChanged);
+            // 
+            // label99
+            // 
+            this.label99.AutoSize = true;
+            this.label99.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label99.Location = new System.Drawing.Point(27, 91);
+            this.label99.Name = "label99";
+            this.label99.Size = new System.Drawing.Size(15, 13);
+            this.label99.TabIndex = 232;
+            this.label99.Text = "P";
+            // 
+            // label118
+            // 
+            this.label118.AutoSize = true;
+            this.label118.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label118.Location = new System.Drawing.Point(84, 91);
+            this.label118.Name = "label118";
+            this.label118.Size = new System.Drawing.Size(32, 13);
+            this.label118.TabIndex = 231;
+            this.label118.Text = "MHz";
+            // 
+            // correlatorPtextInt
+            // 
+            this.correlatorPtextInt.Location = new System.Drawing.Point(48, 88);
+            this.correlatorPtextInt.Name = "correlatorPtextInt";
+            this.correlatorPtextInt.Size = new System.Drawing.Size(36, 20);
+            this.correlatorPtextInt.TabIndex = 230;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label63.Location = new System.Drawing.Point(27, 297);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(15, 13);
+            this.label63.TabIndex = 229;
+            this.label63.Text = "P";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label62.Location = new System.Drawing.Point(27, 203);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(15, 13);
+            this.label62.TabIndex = 228;
+            this.label62.Text = "P";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label56.Location = new System.Drawing.Point(84, 295);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(32, 13);
+            this.label56.TabIndex = 227;
+            this.label56.Text = "MHz";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label52.Location = new System.Drawing.Point(84, 203);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(32, 13);
+            this.label52.TabIndex = 226;
+            this.label52.Text = "MHz";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.ForeColor = System.Drawing.Color.Blue;
+            this.label58.Location = new System.Drawing.Point(14, 132);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(31, 13);
+            this.label58.TabIndex = 225;
+            this.label58.Text = "EXT";
+            // 
+            // ext2SrcButton
+            // 
+            this.ext2SrcButton.AutoSize = true;
+            this.ext2SrcButton.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.ext2SrcButton.Location = new System.Drawing.Point(20, 245);
+            this.ext2SrcButton.Name = "ext2SrcButton";
+            this.ext2SrcButton.Size = new System.Drawing.Size(93, 17);
+            this.ext2SrcButton.TabIndex = 222;
+            this.ext2SrcButton.Text = "Micromotion";
+            this.ext2SrcButton.UseVisualStyleBackColor = true;
             // 
             // label54
             // 
             this.label54.AutoSize = true;
             this.label54.ForeColor = System.Drawing.Color.Blue;
-            this.label54.Location = new System.Drawing.Point(17, 21);
+            this.label54.Location = new System.Drawing.Point(14, 21);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(28, 13);
             this.label54.TabIndex = 224;
             this.label54.Text = "INT";
             // 
+            // ext1SrcButton
+            // 
+            this.ext1SrcButton.AutoSize = true;
+            this.ext1SrcButton.Checked = true;
+            this.ext1SrcButton.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.ext1SrcButton.Location = new System.Drawing.Point(17, 150);
+            this.ext1SrcButton.Name = "ext1SrcButton";
+            this.ext1SrcButton.Size = new System.Drawing.Size(85, 17);
+            this.ext1SrcButton.TabIndex = 221;
+            this.ext1SrcButton.TabStop = true;
+            this.ext1SrcButton.Text = "Electrodes";
+            this.ext1SrcButton.UseVisualStyleBackColor = true;
+            // 
             // intSrcButton
             // 
             this.intSrcButton.AutoSize = true;
-            this.intSrcButton.Location = new System.Drawing.Point(20, 40);
+            this.intSrcButton.Location = new System.Drawing.Point(17, 40);
             this.intSrcButton.Name = "intSrcButton";
             this.intSrcButton.Size = new System.Drawing.Size(14, 13);
             this.intSrcButton.TabIndex = 220;
-            this.intSrcButton.TabStop = true;
             this.intSrcButton.UseVisualStyleBackColor = true;
+            // 
+            // LockInPertext2
+            // 
+            this.LockInPertext2.Location = new System.Drawing.Point(138, 270);
+            this.LockInPertext2.Name = "LockInPertext2";
+            this.LockInPertext2.Size = new System.Drawing.Size(66, 20);
+            this.LockInPertext2.TabIndex = 216;
+            this.LockInPertext2.Text = "0.06188";
+            this.LockInPertext2.LostFocus += new System.EventHandler(this.LockInPertext2_TextChanged);
+            // 
+            // LockInFreqtext1
+            // 
+            this.LockInFreqtext1.Location = new System.Drawing.Point(33, 174);
+            this.LockInFreqtext1.Name = "LockInFreqtext1";
+            this.LockInFreqtext1.Size = new System.Drawing.Size(51, 20);
+            this.LockInFreqtext1.TabIndex = 13;
+            this.LockInFreqtext1.Text = "5";
+            this.LockInFreqtext1.LostFocus += new System.EventHandler(this.LockInFreqtext1_TextChanged);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label55.Location = new System.Drawing.Point(84, 271);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(51, 13);
+            this.label55.TabIndex = 214;
+            this.label55.Text = "kHz <->";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label51.Location = new System.Drawing.Point(204, 177);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(20, 13);
+            this.label51.TabIndex = 212;
+            this.label51.Text = "us";
+            // 
+            // correlatorPtext2
+            // 
+            this.correlatorPtext2.Location = new System.Drawing.Point(48, 294);
+            this.correlatorPtext2.Name = "correlatorPtext2";
+            this.correlatorPtext2.Size = new System.Drawing.Size(36, 20);
+            this.correlatorPtext2.TabIndex = 194;
+            this.correlatorPtext2.Text = "324";
+            // 
+            // LockInFreqtext2
+            // 
+            this.LockInFreqtext2.Location = new System.Drawing.Point(33, 268);
+            this.LockInFreqtext2.Name = "LockInFreqtext2";
+            this.LockInFreqtext2.Size = new System.Drawing.Size(51, 20);
+            this.LockInFreqtext2.TabIndex = 194;
+            this.LockInFreqtext2.Text = "16160";
+            this.LockInFreqtext2.LostFocus += new System.EventHandler(this.LockInFreqtext2_TextChanged);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label44.Location = new System.Drawing.Point(84, 177);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(51, 13);
+            this.label44.TabIndex = 198;
+            this.label44.Text = "kHz <->";
+            // 
+            // correlatorPtext1
+            // 
+            this.correlatorPtext1.Location = new System.Drawing.Point(48, 200);
+            this.correlatorPtext1.Name = "correlatorPtext1";
+            this.correlatorPtext1.Size = new System.Drawing.Size(36, 20);
+            this.correlatorPtext1.TabIndex = 2;
+            this.correlatorPtext1.Text = "200";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label57.Location = new System.Drawing.Point(204, 275);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(20, 13);
+            this.label57.TabIndex = 218;
+            this.label57.Text = "us";
+            // 
+            // LockInPertext1
+            // 
+            this.LockInPertext1.Location = new System.Drawing.Point(138, 174);
+            this.LockInPertext1.Name = "LockInPertext1";
+            this.LockInPertext1.Size = new System.Drawing.Size(66, 20);
+            this.LockInPertext1.TabIndex = 197;
+            this.LockInPertext1.Text = "200";
+            this.LockInPertext1.LostFocus += new System.EventHandler(this.LockInPertext1_TextChanged);
             // 
             // label117
             // 
             this.label117.AutoSize = true;
-            this.label117.Location = new System.Drawing.Point(1708, 228);
+            this.label117.Location = new System.Drawing.Point(1588, 236);
             this.label117.Name = "label117";
             this.label117.Size = new System.Drawing.Size(160, 104);
             this.label117.TabIndex = 164;
@@ -3234,7 +2991,7 @@
             // 
             this.CorrelatorBinningPhaseSlider.AbsMax = 20;
             this.CorrelatorBinningPhaseSlider.AbsMin = 0;
-            this.CorrelatorBinningPhaseSlider.Location = new System.Drawing.Point(1272, 240);
+            this.CorrelatorBinningPhaseSlider.Location = new System.Drawing.Point(1144, 240);
             this.CorrelatorBinningPhaseSlider.Max = 20;
             this.CorrelatorBinningPhaseSlider.Min = 0;
             this.CorrelatorBinningPhaseSlider.Name = "CorrelatorBinningPhaseSlider";
@@ -3242,212 +2999,6 @@
             this.CorrelatorBinningPhaseSlider.SliderLabel = "Binning Phase";
             this.CorrelatorBinningPhaseSlider.TabIndex = 165;
             this.CorrelatorBinningPhaseSlider.Value = 0;
-            // 
-            // ext2SrcButton
-            // 
-            this.ext2SrcButton.AutoSize = true;
-            this.ext2SrcButton.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.ext2SrcButton.Location = new System.Drawing.Point(20, 177);
-            this.ext2SrcButton.Name = "ext2SrcButton";
-            this.ext2SrcButton.Size = new System.Drawing.Size(93, 17);
-            this.ext2SrcButton.TabIndex = 222;
-            this.ext2SrcButton.TabStop = true;
-            this.ext2SrcButton.Text = "Micromotion";
-            this.ext2SrcButton.UseVisualStyleBackColor = true;
-            this.ext2SrcButton.CheckedChanged += new System.EventHandler(this.ext2SrcButton_CheckedChanged);
-            // 
-            // ext1SrcButton
-            // 
-            this.ext1SrcButton.AutoSize = true;
-            this.ext1SrcButton.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.ext1SrcButton.Location = new System.Drawing.Point(20, 103);
-            this.ext1SrcButton.Name = "ext1SrcButton";
-            this.ext1SrcButton.Size = new System.Drawing.Size(85, 17);
-            this.ext1SrcButton.TabIndex = 221;
-            this.ext1SrcButton.TabStop = true;
-            this.ext1SrcButton.Text = "Electrodes";
-            this.ext1SrcButton.UseVisualStyleBackColor = true;
-            this.ext1SrcButton.CheckedChanged += new System.EventHandler(this.ext1SrcButton_CheckedChanged);
-            // 
-            // label137
-            // 
-            this.label137.AutoSize = true;
-            this.label137.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label137.Location = new System.Drawing.Point(17, 210);
-            this.label137.Name = "label137";
-            this.label137.Size = new System.Drawing.Size(15, 13);
-            this.label137.TabIndex = 194;
-            this.label137.Text = "A";
-            // 
-            // label138
-            // 
-            this.label138.AutoSize = true;
-            this.label138.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label138.Location = new System.Drawing.Point(17, 238);
-            this.label138.Name = "label138";
-            this.label138.Size = new System.Drawing.Size(15, 13);
-            this.label138.TabIndex = 195;
-            this.label138.Text = "B";
-            // 
-            // label140
-            // 
-            this.label140.AutoSize = true;
-            this.label140.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label140.Location = new System.Drawing.Point(152, 304);
-            this.label140.Name = "label140";
-            this.label140.Size = new System.Drawing.Size(15, 13);
-            this.label140.TabIndex = 196;
-            this.label140.Text = "B";
-            // 
-            // LockInFreqtext1
-            // 
-            this.LockInFreqtext1.Location = new System.Drawing.Point(33, 128);
-            this.LockInFreqtext1.Name = "LockInFreqtext1";
-            this.LockInFreqtext1.Size = new System.Drawing.Size(51, 20);
-            this.LockInFreqtext1.TabIndex = 13;
-            this.LockInFreqtext1.Text = "5";
-            this.LockInFreqtext1.LostFocus += new System.EventHandler(this.LockInFreqtext1_TextChanged);
-            // 
-            // label139
-            // 
-            this.label139.AutoSize = true;
-            this.label139.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label139.Location = new System.Drawing.Point(152, 280);
-            this.label139.Name = "label139";
-            this.label139.Size = new System.Drawing.Size(15, 13);
-            this.label139.TabIndex = 195;
-            this.label139.Text = "A";
-            // 
-            // LockInFreqtext2
-            // 
-            this.LockInFreqtext2.Location = new System.Drawing.Point(33, 207);
-            this.LockInFreqtext2.Name = "LockInFreqtext2";
-            this.LockInFreqtext2.Size = new System.Drawing.Size(51, 20);
-            this.LockInFreqtext2.TabIndex = 175;
-            this.LockInFreqtext2.Text = "20";
-            this.LockInFreqtext2.LostFocus += new System.EventHandler(this.LockInFreqtext2_TextChanged);
-            // 
-            // correlatorPtextB
-            // 
-            this.correlatorPtextB.Location = new System.Drawing.Point(115, 301);
-            this.correlatorPtextB.Name = "correlatorPtextB";
-            this.correlatorPtextB.Size = new System.Drawing.Size(36, 20);
-            this.correlatorPtextB.TabIndex = 194;
-            this.correlatorPtextB.Text = "324";
-            // 
-            // LockInFreqtext2B
-            // 
-            this.LockInFreqtext2B.Location = new System.Drawing.Point(33, 233);
-            this.LockInFreqtext2B.Name = "LockInFreqtext2B";
-            this.LockInFreqtext2B.Size = new System.Drawing.Size(51, 20);
-            this.LockInFreqtext2B.TabIndex = 194;
-            this.LockInFreqtext2B.Text = "16160";
-            this.LockInFreqtext2B.LostFocus += new System.EventHandler(this.LockInFreqtext2B_TextChanged);
-            // 
-            // correlatorPtext
-            // 
-            this.correlatorPtext.Location = new System.Drawing.Point(115, 275);
-            this.correlatorPtext.Name = "correlatorPtext";
-            this.correlatorPtext.Size = new System.Drawing.Size(36, 20);
-            this.correlatorPtext.TabIndex = 2;
-            this.correlatorPtext.Text = "200";
-            // 
-            // LockInPertext1
-            // 
-            this.LockInPertext1.Location = new System.Drawing.Point(138, 128);
-            this.LockInPertext1.Name = "LockInPertext1";
-            this.LockInPertext1.Size = new System.Drawing.Size(66, 20);
-            this.LockInPertext1.TabIndex = 197;
-            this.LockInPertext1.Text = "200";
-            this.LockInPertext1.LostFocus += new System.EventHandler(this.LockInPertext1_TextChanged);
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label57.Location = new System.Drawing.Point(204, 240);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(20, 13);
-            this.label57.TabIndex = 218;
-            this.label57.Text = "us";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label44.Location = new System.Drawing.Point(84, 131);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(51, 13);
-            this.label44.TabIndex = 198;
-            this.label44.Text = "kHz <->";
-            // 
-            // label99
-            // 
-            this.label99.AutoSize = true;
-            this.label99.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label99.Location = new System.Drawing.Point(57, 291);
-            this.label99.Name = "label99";
-            this.label99.Size = new System.Drawing.Size(52, 13);
-            this.label99.TabIndex = 3;
-            this.label99.Text = "P (MHz)";
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label51.Location = new System.Drawing.Point(204, 131);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(20, 13);
-            this.label51.TabIndex = 212;
-            this.label51.Text = "us";
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label56.Location = new System.Drawing.Point(204, 210);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(20, 13);
-            this.label56.TabIndex = 217;
-            this.label56.Text = "us";
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label52.Location = new System.Drawing.Point(84, 210);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(51, 13);
-            this.label52.TabIndex = 213;
-            this.label52.Text = "kHz <->";
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label55.Location = new System.Drawing.Point(84, 236);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(51, 13);
-            this.label55.TabIndex = 214;
-            this.label55.Text = "kHz <->";
-            // 
-            // LockInPertext2
-            // 
-            this.LockInPertext2.Location = new System.Drawing.Point(138, 207);
-            this.LockInPertext2.Name = "LockInPertext2";
-            this.LockInPertext2.Size = new System.Drawing.Size(66, 20);
-            this.LockInPertext2.TabIndex = 215;
-            this.LockInPertext2.Text = "50";
-            this.LockInPertext2.LostFocus += new System.EventHandler(this.LockInPerqtext2_TextChanged);
-            // 
-            // LockInPertext2B
-            // 
-            this.LockInPertext2B.Location = new System.Drawing.Point(138, 235);
-            this.LockInPertext2B.Name = "LockInPertext2B";
-            this.LockInPertext2B.Size = new System.Drawing.Size(66, 20);
-            this.LockInPertext2B.TabIndex = 216;
-            this.LockInPertext2B.Text = "0.06188";
-            this.LockInPertext2B.LostFocus += new System.EventHandler(this.LockInPertext2B_TextChanged);
             // 
             // FluorLogTab
             // 
@@ -4179,9 +3730,28 @@
             // 
             // MainControlTab
             // 
+            this.MainControlTab.Controls.Add(this.groupBox54);
+            this.MainControlTab.Controls.Add(this.LatticeSetpointSlider);
+            this.MainControlTab.Controls.Add(this.groupBox90);
+            this.MainControlTab.Controls.Add(this.groupBox89);
+            this.MainControlTab.Controls.Add(this.groupBox88);
+            this.MainControlTab.Controls.Add(this.groupBox87);
+            this.MainControlTab.Controls.Add(this.RamanS2PowerControl);
+            this.MainControlTab.Controls.Add(this.label140);
+            this.MainControlTab.Controls.Add(this.TimerSwitch);
+            this.MainControlTab.Controls.Add(this.label139);
+            this.MainControlTab.Controls.Add(this.label138);
+            this.MainControlTab.Controls.Add(this.QueueBox);
+            this.MainControlTab.Controls.Add(this.IntervalBox);
+            this.MainControlTab.Controls.Add(this.groupBox86);
+            this.MainControlTab.Controls.Add(this.label135);
+            this.MainControlTab.Controls.Add(this.LatticeLockSwitch);
+            this.MainControlTab.Controls.Add(this.groupBox85);
+            this.MainControlTab.Controls.Add(this.groupBox73);
+            this.MainControlTab.Controls.Add(this.groupBox72);
             this.MainControlTab.Controls.Add(this.label45);
             this.MainControlTab.Controls.Add(this.groupBox71);
-            this.MainControlTab.Controls.Add(this.ErrorOffset399Slider);
+            this.MainControlTab.Controls.Add(this.RamanS2ColorControl);
             this.MainControlTab.Controls.Add(this.TickleSlider);
             this.MainControlTab.Controls.Add(this.BxSlider);
             this.MainControlTab.Controls.Add(this.Sideband402Control);
@@ -4199,7 +3769,7 @@
             this.MainControlTab.Controls.Add(this.groupBox30);
             this.MainControlTab.Controls.Add(this.groupBox27);
             this.MainControlTab.Controls.Add(this.RepumperSlider);
-            this.MainControlTab.Controls.Add(this.RecapturePowerSlider);
+            this.MainControlTab.Controls.Add(this.RamanS1PowerControl);
             this.MainControlTab.Controls.Add(this.SideBeam370Power);
             this.MainControlTab.Controls.Add(this.ResetButton);
             this.MainControlTab.Controls.Add(this.groupBox26);
@@ -4221,6 +3791,419 @@
             this.MainControlTab.Text = "Control";
             this.MainControlTab.UseVisualStyleBackColor = true;
             // 
+            // groupBox54
+            // 
+            this.groupBox54.Controls.Add(this.label251);
+            this.groupBox54.Controls.Add(this.DetuneTextBox);
+            this.groupBox54.Controls.Add(this.DetuneButton);
+            this.groupBox54.Location = new System.Drawing.Point(1075, 577);
+            this.groupBox54.Name = "groupBox54";
+            this.groupBox54.Size = new System.Drawing.Size(255, 68);
+            this.groupBox54.TabIndex = 183;
+            this.groupBox54.TabStop = false;
+            this.groupBox54.Text = "Transfer Cavity, 370 Detuning Control Box";
+            // 
+            // label251
+            // 
+            this.label251.AutoSize = true;
+            this.label251.Location = new System.Drawing.Point(209, 33);
+            this.label251.Name = "label251";
+            this.label251.Size = new System.Drawing.Size(29, 13);
+            this.label251.TabIndex = 2;
+            this.label251.Text = "MHz";
+            // 
+            // DetuneTextBox
+            // 
+            this.DetuneTextBox.Location = new System.Drawing.Point(147, 30);
+            this.DetuneTextBox.Name = "DetuneTextBox";
+            this.DetuneTextBox.Size = new System.Drawing.Size(56, 20);
+            this.DetuneTextBox.TabIndex = 1;
+            this.DetuneTextBox.Text = "100";
+            this.DetuneTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // DetuneButton
+            // 
+            this.DetuneButton.Location = new System.Drawing.Point(23, 22);
+            this.DetuneButton.Name = "DetuneButton";
+            this.DetuneButton.Size = new System.Drawing.Size(106, 34);
+            this.DetuneButton.TabIndex = 0;
+            this.DetuneButton.Text = "Detune";
+            this.DetuneButton.UseVisualStyleBackColor = true;
+            this.DetuneButton.Click += new System.EventHandler(this.DetuneButton_Click);
+            // 
+            // LatticeSetpointSlider
+            // 
+            this.LatticeSetpointSlider.AbsMax = 80;
+            this.LatticeSetpointSlider.AbsMin = 0;
+            this.LatticeSetpointSlider.BackColor = System.Drawing.Color.White;
+            this.LatticeSetpointSlider.Location = new System.Drawing.Point(494, 377);
+            this.LatticeSetpointSlider.Max = 80;
+            this.LatticeSetpointSlider.Min = 0;
+            this.LatticeSetpointSlider.Name = "LatticeSetpointSlider";
+            this.LatticeSetpointSlider.Size = new System.Drawing.Size(376, 70);
+            this.LatticeSetpointSlider.SliderLabel = "Lattice Setpoint Control";
+            this.LatticeSetpointSlider.TabIndex = 182;
+            this.LatticeSetpointSlider.Value = 22;
+            this.LatticeSetpointSlider.Load += new System.EventHandler(this.LatticeSetpointSliderOut);
+            // 
+            // groupBox90
+            // 
+            this.groupBox90.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox90.Controls.Add(this.RS2Voltage);
+            this.groupBox90.Location = new System.Drawing.Point(1361, 155);
+            this.groupBox90.Name = "groupBox90";
+            this.groupBox90.Size = new System.Drawing.Size(94, 65);
+            this.groupBox90.TabIndex = 181;
+            this.groupBox90.TabStop = false;
+            this.groupBox90.Text = "RS2 Monitor Photodiode";
+            // 
+            // RS2Voltage
+            // 
+            this.RS2Voltage.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.RS2Voltage.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.RS2Voltage.Location = new System.Drawing.Point(5, 30);
+            this.RS2Voltage.Name = "RS2Voltage";
+            this.RS2Voltage.ReadOnly = true;
+            this.RS2Voltage.Size = new System.Drawing.Size(83, 23);
+            this.RS2Voltage.TabIndex = 123;
+            this.RS2Voltage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox89
+            // 
+            this.groupBox89.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox89.Controls.Add(this.RS1Voltage);
+            this.groupBox89.Location = new System.Drawing.Point(1363, 11);
+            this.groupBox89.Name = "groupBox89";
+            this.groupBox89.Size = new System.Drawing.Size(94, 65);
+            this.groupBox89.TabIndex = 180;
+            this.groupBox89.TabStop = false;
+            this.groupBox89.Text = "RS1 Monitor Photodiode";
+            // 
+            // RS1Voltage
+            // 
+            this.RS1Voltage.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.RS1Voltage.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.RS1Voltage.Location = new System.Drawing.Point(5, 30);
+            this.RS1Voltage.Name = "RS1Voltage";
+            this.RS1Voltage.ReadOnly = true;
+            this.RS1Voltage.Size = new System.Drawing.Size(83, 23);
+            this.RS1Voltage.TabIndex = 123;
+            this.RS1Voltage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox88
+            // 
+            this.groupBox88.Controls.Add(this.label246);
+            this.groupBox88.Controls.Add(this.label247);
+            this.groupBox88.Controls.Add(this.RamanS2Shutter);
+            this.groupBox88.Location = new System.Drawing.Point(839, 803);
+            this.groupBox88.Name = "groupBox88";
+            this.groupBox88.Size = new System.Drawing.Size(71, 140);
+            this.groupBox88.TabIndex = 179;
+            this.groupBox88.TabStop = false;
+            this.groupBox88.Text = "Raman S2 Shutter";
+            // 
+            // label246
+            // 
+            this.label246.AutoSize = true;
+            this.label246.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label246.Location = new System.Drawing.Point(21, 124);
+            this.label246.Name = "label246";
+            this.label246.Size = new System.Drawing.Size(23, 13);
+            this.label246.TabIndex = 117;
+            this.label246.Text = "ON";
+            // 
+            // label247
+            // 
+            this.label247.AutoSize = true;
+            this.label247.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label247.Location = new System.Drawing.Point(19, 38);
+            this.label247.Name = "label247";
+            this.label247.Size = new System.Drawing.Size(27, 13);
+            this.label247.TabIndex = 116;
+            this.label247.Text = "OFF";
+            // 
+            // RamanS2Shutter
+            // 
+            this.RamanS2Shutter.Cursor = System.Windows.Forms.Cursors.Default;
+            this.RamanS2Shutter.Location = new System.Drawing.Point(6, 36);
+            this.RamanS2Shutter.Name = "RamanS2Shutter";
+            this.RamanS2Shutter.Size = new System.Drawing.Size(52, 89);
+            this.RamanS2Shutter.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.RamanS2Shutter.TabIndex = 114;
+            this.RamanS2Shutter.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.RamanS2Shutter_StateChanged);
+            // 
+            // groupBox87
+            // 
+            this.groupBox87.Controls.Add(this.label186);
+            this.groupBox87.Controls.Add(this.label234);
+            this.groupBox87.Controls.Add(this.RamanS1Shutter);
+            this.groupBox87.Location = new System.Drawing.Point(762, 803);
+            this.groupBox87.Name = "groupBox87";
+            this.groupBox87.Size = new System.Drawing.Size(71, 140);
+            this.groupBox87.TabIndex = 178;
+            this.groupBox87.TabStop = false;
+            this.groupBox87.Text = "Raman S1 Shutter";
+            // 
+            // label186
+            // 
+            this.label186.AutoSize = true;
+            this.label186.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label186.Location = new System.Drawing.Point(21, 124);
+            this.label186.Name = "label186";
+            this.label186.Size = new System.Drawing.Size(23, 13);
+            this.label186.TabIndex = 117;
+            this.label186.Text = "ON";
+            // 
+            // label234
+            // 
+            this.label234.AutoSize = true;
+            this.label234.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label234.Location = new System.Drawing.Point(19, 38);
+            this.label234.Name = "label234";
+            this.label234.Size = new System.Drawing.Size(27, 13);
+            this.label234.TabIndex = 116;
+            this.label234.Text = "OFF";
+            // 
+            // RamanS1Shutter
+            // 
+            this.RamanS1Shutter.Cursor = System.Windows.Forms.Cursors.Default;
+            this.RamanS1Shutter.Location = new System.Drawing.Point(6, 36);
+            this.RamanS1Shutter.Name = "RamanS1Shutter";
+            this.RamanS1Shutter.Size = new System.Drawing.Size(52, 89);
+            this.RamanS1Shutter.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.RamanS1Shutter.TabIndex = 114;
+            this.RamanS1Shutter.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.RamanS1Shutter_StateChanged);
+            // 
+            // RamanS2PowerControl
+            // 
+            this.RamanS2PowerControl.AbsMax = 10;
+            this.RamanS2PowerControl.AbsMin = 0;
+            this.RamanS2PowerControl.BackColor = System.Drawing.Color.Gainsboro;
+            this.RamanS2PowerControl.Location = new System.Drawing.Point(978, 155);
+            this.RamanS2PowerControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RamanS2PowerControl.Max = 10;
+            this.RamanS2PowerControl.Min = 0;
+            this.RamanS2PowerControl.Name = "RamanS2PowerControl";
+            this.RamanS2PowerControl.Size = new System.Drawing.Size(376, 67);
+            this.RamanS2PowerControl.SliderLabel = "Raman S2 Power Control";
+            this.RamanS2PowerControl.TabIndex = 177;
+            this.RamanS2PowerControl.Value = 5;
+            this.RamanS2PowerControl.Load += new System.EventHandler(this.RamanS2PowerControlOut);
+            // 
+            // label140
+            // 
+            this.label140.AutoSize = true;
+            this.label140.ForeColor = System.Drawing.Color.Red;
+            this.label140.Location = new System.Drawing.Point(1484, 456);
+            this.label140.Name = "label140";
+            this.label140.Size = new System.Drawing.Size(69, 13);
+            this.label140.TabIndex = 176;
+            this.label140.Text = "Enable Timer";
+            // 
+            // TimerSwitch
+            // 
+            this.TimerSwitch.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TimerSwitch.Location = new System.Drawing.Point(1487, 456);
+            this.TimerSwitch.Name = "TimerSwitch";
+            this.TimerSwitch.Size = new System.Drawing.Size(52, 89);
+            this.TimerSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.TimerSwitch.TabIndex = 175;
+            // 
+            // label139
+            // 
+            this.label139.AutoSize = true;
+            this.label139.Location = new System.Drawing.Point(1258, 456);
+            this.label139.Name = "label139";
+            this.label139.Size = new System.Drawing.Size(93, 13);
+            this.label139.TabIndex = 174;
+            this.label139.Text = "Timer Interval (ms)";
+            // 
+            // label138
+            // 
+            this.label138.AutoSize = true;
+            this.label138.Location = new System.Drawing.Point(1377, 456);
+            this.label138.Name = "label138";
+            this.label138.Size = new System.Drawing.Size(62, 13);
+            this.label138.TabIndex = 173;
+            this.label138.Text = "Queue Size";
+            // 
+            // QueueBox
+            // 
+            this.QueueBox.Location = new System.Drawing.Point(1380, 481);
+            this.QueueBox.Name = "QueueBox";
+            this.QueueBox.Size = new System.Drawing.Size(92, 20);
+            this.QueueBox.TabIndex = 172;
+            this.QueueBox.Text = "10";
+            // 
+            // IntervalBox
+            // 
+            this.IntervalBox.Location = new System.Drawing.Point(1261, 481);
+            this.IntervalBox.Name = "IntervalBox";
+            this.IntervalBox.Size = new System.Drawing.Size(92, 20);
+            this.IntervalBox.TabIndex = 171;
+            this.IntervalBox.Text = "10";
+            // 
+            // groupBox86
+            // 
+            this.groupBox86.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox86.Controls.Add(this.label137);
+            this.groupBox86.Controls.Add(this.label136);
+            this.groupBox86.Controls.Add(this.IBox);
+            this.groupBox86.Controls.Add(this.PBox);
+            this.groupBox86.Location = new System.Drawing.Point(1133, 460);
+            this.groupBox86.Name = "groupBox86";
+            this.groupBox86.Size = new System.Drawing.Size(76, 77);
+            this.groupBox86.TabIndex = 170;
+            this.groupBox86.TabStop = false;
+            // 
+            // label137
+            // 
+            this.label137.AutoSize = true;
+            this.label137.ForeColor = System.Drawing.Color.DarkRed;
+            this.label137.Location = new System.Drawing.Point(10, 48);
+            this.label137.Name = "label137";
+            this.label137.Size = new System.Drawing.Size(10, 13);
+            this.label137.TabIndex = 128;
+            this.label137.Text = "I";
+            // 
+            // label136
+            // 
+            this.label136.AutoSize = true;
+            this.label136.ForeColor = System.Drawing.Color.DarkRed;
+            this.label136.Location = new System.Drawing.Point(8, 24);
+            this.label136.Name = "label136";
+            this.label136.Size = new System.Drawing.Size(14, 13);
+            this.label136.TabIndex = 126;
+            this.label136.Text = "P";
+            // 
+            // IBox
+            // 
+            this.IBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.IBox.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IBox.Location = new System.Drawing.Point(26, 43);
+            this.IBox.Name = "IBox";
+            this.IBox.Size = new System.Drawing.Size(40, 22);
+            this.IBox.TabIndex = 125;
+            this.IBox.Text = "-0.03";
+            this.IBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // PBox
+            // 
+            this.PBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.PBox.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PBox.Location = new System.Drawing.Point(26, 19);
+            this.PBox.Name = "PBox";
+            this.PBox.Size = new System.Drawing.Size(40, 22);
+            this.PBox.TabIndex = 124;
+            this.PBox.Text = "-0.03";
+            this.PBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label135
+            // 
+            this.label135.AutoSize = true;
+            this.label135.ForeColor = System.Drawing.Color.Red;
+            this.label135.Location = new System.Drawing.Point(1086, 460);
+            this.label135.Name = "label135";
+            this.label135.Size = new System.Drawing.Size(31, 13);
+            this.label135.TabIndex = 169;
+            this.label135.Text = "Lock";
+            // 
+            // LatticeLockSwitch
+            // 
+            this.LatticeLockSwitch.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LatticeLockSwitch.Location = new System.Drawing.Point(1075, 460);
+            this.LatticeLockSwitch.Name = "LatticeLockSwitch";
+            this.LatticeLockSwitch.Size = new System.Drawing.Size(52, 89);
+            this.LatticeLockSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.LatticeLockSwitch.TabIndex = 168;
+            // 
+            // groupBox85
+            // 
+            this.groupBox85.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox85.Controls.Add(this.LatticeSetpoint);
+            this.groupBox85.Location = new System.Drawing.Point(975, 460);
+            this.groupBox85.Name = "groupBox85";
+            this.groupBox85.Size = new System.Drawing.Size(94, 66);
+            this.groupBox85.TabIndex = 167;
+            this.groupBox85.TabStop = false;
+            this.groupBox85.Text = "Lattice Setpoint (mV)";
+            // 
+            // LatticeSetpoint
+            // 
+            this.LatticeSetpoint.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.LatticeSetpoint.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.LatticeSetpoint.Location = new System.Drawing.Point(5, 30);
+            this.LatticeSetpoint.Name = "LatticeSetpoint";
+            this.LatticeSetpoint.Size = new System.Drawing.Size(82, 23);
+            this.LatticeSetpoint.TabIndex = 124;
+            this.LatticeSetpoint.Text = "25";
+            this.LatticeSetpoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox73
+            // 
+            this.groupBox73.Controls.Add(this.CavityVoltage);
+            this.groupBox73.Location = new System.Drawing.Point(875, 233);
+            this.groupBox73.Name = "groupBox73";
+            this.groupBox73.Size = new System.Drawing.Size(94, 65);
+            this.groupBox73.TabIndex = 166;
+            this.groupBox73.TabStop = false;
+            this.groupBox73.Text = "Cavity Monitor Photodiode";
+            // 
+            // CavityVoltage
+            // 
+            this.CavityVoltage.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.CavityVoltage.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.CavityVoltage.Location = new System.Drawing.Point(5, 30);
+            this.CavityVoltage.Name = "CavityVoltage";
+            this.CavityVoltage.ReadOnly = true;
+            this.CavityVoltage.Size = new System.Drawing.Size(83, 23);
+            this.CavityVoltage.TabIndex = 123;
+            this.CavityVoltage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox72
+            // 
+            this.groupBox72.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox72.Controls.Add(this.label185);
+            this.groupBox72.Controls.Add(this.CalibLatticeVoltage);
+            this.groupBox72.Controls.Add(this.LatticeVoltage);
+            this.groupBox72.Location = new System.Drawing.Point(875, 460);
+            this.groupBox72.Name = "groupBox72";
+            this.groupBox72.Size = new System.Drawing.Size(94, 105);
+            this.groupBox72.TabIndex = 124;
+            this.groupBox72.TabStop = false;
+            this.groupBox72.Text = "Lattice Monitor Photodiode";
+            // 
+            // label185
+            // 
+            this.label185.AutoSize = true;
+            this.label185.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label185.Location = new System.Drawing.Point(6, 62);
+            this.label185.Name = "label185";
+            this.label185.Size = new System.Drawing.Size(53, 13);
+            this.label185.TabIndex = 180;
+            this.label185.Text = "calibrated";
+            // 
+            // CalibLatticeVoltage
+            // 
+            this.CalibLatticeVoltage.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.CalibLatticeVoltage.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.CalibLatticeVoltage.Location = new System.Drawing.Point(6, 77);
+            this.CalibLatticeVoltage.Name = "CalibLatticeVoltage";
+            this.CalibLatticeVoltage.Size = new System.Drawing.Size(82, 23);
+            this.CalibLatticeVoltage.TabIndex = 179;
+            this.CalibLatticeVoltage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // LatticeVoltage
+            // 
+            this.LatticeVoltage.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.LatticeVoltage.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LatticeVoltage.Location = new System.Drawing.Point(6, 30);
+            this.LatticeVoltage.Name = "LatticeVoltage";
+            this.LatticeVoltage.ReadOnly = true;
+            this.LatticeVoltage.Size = new System.Drawing.Size(82, 22);
+            this.LatticeVoltage.TabIndex = 123;
+            this.LatticeVoltage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // label45
             // 
             this.label45.AutoSize = true;
@@ -4237,7 +4220,7 @@
             this.groupBox71.Controls.Add(this.label231);
             this.groupBox71.Controls.Add(this.Repumper935Switch);
             this.groupBox71.ForeColor = System.Drawing.Color.Maroon;
-            this.groupBox71.Location = new System.Drawing.Point(899, 802);
+            this.groupBox71.Location = new System.Drawing.Point(1019, 803);
             this.groupBox71.Name = "groupBox71";
             this.groupBox71.Size = new System.Drawing.Size(76, 140);
             this.groupBox71.TabIndex = 163;
@@ -4275,27 +4258,27 @@
             this.Repumper935Switch.Value = true;
             this.Repumper935Switch.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.Repumper935Switch_StateChanged);
             // 
-            // ErrorOffset399Slider
+            // RamanS2ColorControl
             // 
-            this.ErrorOffset399Slider.AbsMax = 10;
-            this.ErrorOffset399Slider.AbsMin = 0;
-            this.ErrorOffset399Slider.BackColor = System.Drawing.Color.White;
-            this.ErrorOffset399Slider.Location = new System.Drawing.Point(494, 657);
-            this.ErrorOffset399Slider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ErrorOffset399Slider.Max = 10;
-            this.ErrorOffset399Slider.Min = 0;
-            this.ErrorOffset399Slider.Name = "ErrorOffset399Slider";
-            this.ErrorOffset399Slider.Size = new System.Drawing.Size(376, 67);
-            this.ErrorOffset399Slider.SliderLabel = "399 Error Offset";
-            this.ErrorOffset399Slider.TabIndex = 162;
-            this.ErrorOffset399Slider.Value = 5;
-            this.ErrorOffset399Slider.Load += new System.EventHandler(this.ErrorOffset399SliderOut);
+            this.RamanS2ColorControl.AbsMax = 150;
+            this.RamanS2ColorControl.AbsMin = 75;
+            this.RamanS2ColorControl.BackColor = System.Drawing.Color.White;
+            this.RamanS2ColorControl.Location = new System.Drawing.Point(977, 82);
+            this.RamanS2ColorControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RamanS2ColorControl.Max = 150;
+            this.RamanS2ColorControl.Min = 75;
+            this.RamanS2ColorControl.Name = "RamanS2ColorControl";
+            this.RamanS2ColorControl.Size = new System.Drawing.Size(376, 67);
+            this.RamanS2ColorControl.SliderLabel = "Raman S2 Color Control";
+            this.RamanS2ColorControl.TabIndex = 162;
+            this.RamanS2ColorControl.Value = 75;
+            this.RamanS2ColorControl.Load += new System.EventHandler(this.RamanS2ColorControlOut);
             // 
             // TickleSlider
             // 
             this.TickleSlider.AbsMax = 5;
             this.TickleSlider.AbsMin = -5;
-            this.TickleSlider.Location = new System.Drawing.Point(967, 309);
+            this.TickleSlider.Location = new System.Drawing.Point(974, 374);
             this.TickleSlider.Max = 5;
             this.TickleSlider.Min = -5;
             this.TickleSlider.Name = "TickleSlider";
@@ -4309,7 +4292,7 @@
             this.BxSlider.AbsMax = 5;
             this.BxSlider.AbsMin = -5;
             this.BxSlider.BackColor = System.Drawing.Color.Gainsboro;
-            this.BxSlider.Location = new System.Drawing.Point(967, 233);
+            this.BxSlider.Location = new System.Drawing.Point(977, 301);
             this.BxSlider.Max = 5;
             this.BxSlider.Min = -5;
             this.BxSlider.Name = "BxSlider";
@@ -4324,7 +4307,7 @@
             this.Sideband402Control.AbsMin = 0;
             this.Sideband402Control.BackColor = System.Drawing.Color.Transparent;
             this.Sideband402Control.ForeColor = System.Drawing.Color.Black;
-            this.Sideband402Control.Location = new System.Drawing.Point(967, 155);
+            this.Sideband402Control.Location = new System.Drawing.Point(977, 228);
             this.Sideband402Control.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Sideband402Control.Max = 300;
             this.Sideband402Control.Min = 200;
@@ -4373,8 +4356,8 @@
             // 
             this.RamanSlider.AbsMax = 10;
             this.RamanSlider.AbsMin = 0;
-            this.RamanSlider.BackColor = System.Drawing.Color.White;
-            this.RamanSlider.Location = new System.Drawing.Point(490, 374);
+            this.RamanSlider.BackColor = System.Drawing.Color.Gainsboro;
+            this.RamanSlider.Location = new System.Drawing.Point(494, 301);
             this.RamanSlider.Max = 10;
             this.RamanSlider.Min = 0;
             this.RamanSlider.Name = "RamanSlider";
@@ -4390,7 +4373,7 @@
             this.groupBox38.Controls.Add(this.label65);
             this.groupBox38.Controls.Add(this.Switch638);
             this.groupBox38.ForeColor = System.Drawing.Color.Crimson;
-            this.groupBox38.Location = new System.Drawing.Point(1004, 802);
+            this.groupBox38.Location = new System.Drawing.Point(1101, 803);
             this.groupBox38.Name = "groupBox38";
             this.groupBox38.Size = new System.Drawing.Size(78, 140);
             this.groupBox38.TabIndex = 122;
@@ -4432,8 +4415,8 @@
             // 
             this.groupBox31.Controls.Add(this.label38);
             this.groupBox31.Controls.Add(this.label39);
-            this.groupBox31.Controls.Add(this.Dev2DO3Switch);
-            this.groupBox31.Location = new System.Drawing.Point(665, 802);
+            this.groupBox31.Controls.Add(this.LatticeSwitch);
+            this.groupBox31.Location = new System.Drawing.Point(685, 802);
             this.groupBox31.Name = "groupBox31";
             this.groupBox31.Size = new System.Drawing.Size(71, 140);
             this.groupBox31.TabIndex = 126;
@@ -4460,15 +4443,15 @@
             this.label39.TabIndex = 116;
             this.label39.Text = "OFF";
             // 
-            // Dev2DO3Switch
+            // LatticeSwitch
             // 
-            this.Dev2DO3Switch.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Dev2DO3Switch.Location = new System.Drawing.Point(6, 36);
-            this.Dev2DO3Switch.Name = "Dev2DO3Switch";
-            this.Dev2DO3Switch.Size = new System.Drawing.Size(52, 89);
-            this.Dev2DO3Switch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.Dev2DO3Switch.TabIndex = 114;
-            this.Dev2DO3Switch.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.Dev2DO3Switch_StateChanged);
+            this.LatticeSwitch.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LatticeSwitch.Location = new System.Drawing.Point(6, 36);
+            this.LatticeSwitch.Name = "LatticeSwitch";
+            this.LatticeSwitch.Size = new System.Drawing.Size(52, 89);
+            this.LatticeSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.LatticeSwitch.TabIndex = 114;
+            this.LatticeSwitch.StateChanged += new NationalInstruments.UI.ActionEventHandler(this.LatticeSwitch_StateChanged);
             // 
             // CavityCoolingPowerControl
             // 
@@ -4487,9 +4470,9 @@
             // groupBox32
             // 
             this.groupBox32.Controls.Add(this.RepumperFrequency);
-            this.groupBox32.Location = new System.Drawing.Point(875, 557);
+            this.groupBox32.Location = new System.Drawing.Point(875, 577);
             this.groupBox32.Name = "groupBox32";
-            this.groupBox32.Size = new System.Drawing.Size(94, 61);
+            this.groupBox32.Size = new System.Drawing.Size(94, 65);
             this.groupBox32.TabIndex = 124;
             this.groupBox32.TabStop = false;
             this.groupBox32.Text = "Repumper Frequency";
@@ -4497,11 +4480,11 @@
             // RepumperFrequency
             // 
             this.RepumperFrequency.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.RepumperFrequency.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RepumperFrequency.Location = new System.Drawing.Point(15, 30);
+            this.RepumperFrequency.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.RepumperFrequency.Location = new System.Drawing.Point(6, 30);
             this.RepumperFrequency.Name = "RepumperFrequency";
             this.RepumperFrequency.ReadOnly = true;
-            this.RepumperFrequency.Size = new System.Drawing.Size(66, 26);
+            this.RepumperFrequency.Size = new System.Drawing.Size(82, 23);
             this.RepumperFrequency.TabIndex = 123;
             this.RepumperFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -4514,7 +4497,7 @@
             this.LatticePowerControl.Max = 10;
             this.LatticePowerControl.Min = 0;
             this.LatticePowerControl.Name = "LatticePowerControl";
-            this.LatticePowerControl.Size = new System.Drawing.Size(380, 70);
+            this.LatticePowerControl.Size = new System.Drawing.Size(376, 70);
             this.LatticePowerControl.SliderLabel = "Lattice Power Control";
             this.LatticePowerControl.TabIndex = 122;
             this.LatticePowerControl.Value = 10;
@@ -4525,7 +4508,7 @@
             this.groupBox30.Controls.Add(this.label36);
             this.groupBox30.Controls.Add(this.RepumperRFBroadenSwitch);
             this.groupBox30.ForeColor = System.Drawing.Color.Brown;
-            this.groupBox30.Location = new System.Drawing.Point(815, 802);
+            this.groupBox30.Location = new System.Drawing.Point(935, 803);
             this.groupBox30.Name = "groupBox30";
             this.groupBox30.Size = new System.Drawing.Size(78, 140);
             this.groupBox30.TabIndex = 121;
@@ -4612,7 +4595,7 @@
             this.RepumperSlider.AbsMin = 0;
             this.RepumperSlider.BackColor = System.Drawing.Color.Transparent;
             this.RepumperSlider.ForeColor = System.Drawing.Color.Black;
-            this.RepumperSlider.Location = new System.Drawing.Point(494, 555);
+            this.RepumperSlider.Location = new System.Drawing.Point(496, 577);
             this.RepumperSlider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.RepumperSlider.Max = 7;
             this.RepumperSlider.Min = 0;
@@ -4622,21 +4605,21 @@
             this.RepumperSlider.TabIndex = 105;
             this.RepumperSlider.Value = 3.5;
             // 
-            // RecapturePowerSlider
+            // RamanS1PowerControl
             // 
-            this.RecapturePowerSlider.AbsMax = 10;
-            this.RecapturePowerSlider.AbsMin = 0;
-            this.RecapturePowerSlider.BackColor = System.Drawing.Color.Gainsboro;
-            this.RecapturePowerSlider.Location = new System.Drawing.Point(494, 301);
-            this.RecapturePowerSlider.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RecapturePowerSlider.Max = 10;
-            this.RecapturePowerSlider.Min = 0;
-            this.RecapturePowerSlider.Name = "RecapturePowerSlider";
-            this.RecapturePowerSlider.Size = new System.Drawing.Size(376, 67);
-            this.RecapturePowerSlider.SliderLabel = "Recapture Power Control";
-            this.RecapturePowerSlider.TabIndex = 113;
-            this.RecapturePowerSlider.Value = 10;
-            this.RecapturePowerSlider.Load += new System.EventHandler(this.RecapturePowerSlider_Adjusted);
+            this.RamanS1PowerControl.AbsMax = 10;
+            this.RamanS1PowerControl.AbsMin = 0;
+            this.RamanS1PowerControl.BackColor = System.Drawing.Color.Gainsboro;
+            this.RamanS1PowerControl.Location = new System.Drawing.Point(980, 9);
+            this.RamanS1PowerControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RamanS1PowerControl.Max = 10;
+            this.RamanS1PowerControl.Min = 0;
+            this.RamanS1PowerControl.Name = "RamanS1PowerControl";
+            this.RamanS1PowerControl.Size = new System.Drawing.Size(376, 67);
+            this.RamanS1PowerControl.SliderLabel = "Raman S1 Power Control";
+            this.RamanS1PowerControl.TabIndex = 113;
+            this.RamanS1PowerControl.Value = 10;
+            this.RamanS1PowerControl.Load += new System.EventHandler(this.RamanS1PowerControl_Adjusted);
             // 
             // SideBeam370Power
             // 
@@ -4851,8 +4834,9 @@
             this.TabInterface.Controls.Add(this.RigolTab);
             this.TabInterface.Controls.Add(this.FluorLogTab);
             this.TabInterface.Controls.Add(this.ExperimentalSequencer);
-            this.TabInterface.Controls.Add(this.FilenameTab);
+            this.TabInterface.Controls.Add(this.tabPage1);
             this.TabInterface.Controls.Add(this.RecycleBin);
+            this.TabInterface.Controls.Add(this.Keithley);
             this.TabInterface.Location = new System.Drawing.Point(12, 12);
             this.TabInterface.Name = "TabInterface";
             this.TabInterface.SelectedIndex = 0;
@@ -5135,8 +5119,8 @@
             // 
             // ExperimentalSequencer
             // 
+            this.ExperimentalSequencer.Controls.Add(this.groupBox49);
             this.ExperimentalSequencer.Controls.Add(this.groupBox82);
-            this.ExperimentalSequencer.Controls.Add(this.groupBox54);
             this.ExperimentalSequencer.Controls.Add(this.groupBox70);
             this.ExperimentalSequencer.Controls.Add(this.label215);
             this.ExperimentalSequencer.Controls.Add(this.ExpSeqExtraPathnameText);
@@ -5150,6 +5134,347 @@
             this.ExperimentalSequencer.TabIndex = 17;
             this.ExperimentalSequencer.Text = "Experimental Sequencer";
             this.ExperimentalSequencer.UseVisualStyleBackColor = true;
+            // 
+            // groupBox49
+            // 
+            this.groupBox49.Controls.Add(this.groupBox48);
+            this.groupBox49.Controls.Add(this.label78);
+            this.groupBox49.Controls.Add(this.DataFilenameChecklist);
+            this.groupBox49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.groupBox49.Location = new System.Drawing.Point(1232, 193);
+            this.groupBox49.Name = "groupBox49";
+            this.groupBox49.Size = new System.Drawing.Size(442, 498);
+            this.groupBox49.TabIndex = 180;
+            this.groupBox49.TabStop = false;
+            this.groupBox49.Text = "Data Textfile Name Control";
+            // 
+            // groupBox48
+            // 
+            this.groupBox48.Controls.Add(this.label202);
+            this.groupBox48.Controls.Add(this.DriveAmplitudeTextbox);
+            this.groupBox48.Controls.Add(this.label203);
+            this.groupBox48.Controls.Add(this.DriveStateTextbox);
+            this.groupBox48.Controls.Add(this.label198);
+            this.groupBox48.Controls.Add(this.ZtrapfrequencyTextbox);
+            this.groupBox48.Controls.Add(this.label197);
+            this.groupBox48.Controls.Add(this.LatticeQWPTextbox);
+            this.groupBox48.Controls.Add(this.label196);
+            this.groupBox48.Controls.Add(this.S2QWPTextbox);
+            this.groupBox48.Controls.Add(this.label95);
+            this.groupBox48.Controls.Add(this.LatticeDepthTextbox);
+            this.groupBox48.Controls.Add(this.label86);
+            this.groupBox48.Controls.Add(this.label92);
+            this.groupBox48.Controls.Add(this.DetuningTextbox);
+            this.groupBox48.Controls.Add(this.BzTextbox);
+            this.groupBox48.Controls.Add(this.label79);
+            this.groupBox48.Controls.Add(this.label91);
+            this.groupBox48.Controls.Add(this.S1PowerTextbox);
+            this.groupBox48.Controls.Add(this.ByTextbox);
+            this.groupBox48.Controls.Add(this.label85);
+            this.groupBox48.Controls.Add(this.label90);
+            this.groupBox48.Controls.Add(this.S2PowerTextbox);
+            this.groupBox48.Controls.Add(this.BxTextbox);
+            this.groupBox48.Controls.Add(this.PiPowerTextbox);
+            this.groupBox48.Controls.Add(this.label89);
+            this.groupBox48.Controls.Add(this.label87);
+            this.groupBox48.Controls.Add(this.CavityPowerTextbox);
+            this.groupBox48.Controls.Add(this.Doppler35Textbox);
+            this.groupBox48.Controls.Add(this.label88);
+            this.groupBox48.Location = new System.Drawing.Point(236, 53);
+            this.groupBox48.Name = "groupBox48";
+            this.groupBox48.Size = new System.Drawing.Size(182, 411);
+            this.groupBox48.TabIndex = 20;
+            this.groupBox48.TabStop = false;
+            this.groupBox48.Text = "Parameter Values";
+            // 
+            // label202
+            // 
+            this.label202.AutoSize = true;
+            this.label202.Location = new System.Drawing.Point(16, 76);
+            this.label202.Name = "label202";
+            this.label202.Size = new System.Drawing.Size(60, 13);
+            this.label202.TabIndex = 31;
+            this.label202.Text = "Drive State";
+            // 
+            // DriveAmplitudeTextbox
+            // 
+            this.DriveAmplitudeTextbox.Location = new System.Drawing.Point(109, 47);
+            this.DriveAmplitudeTextbox.Name = "DriveAmplitudeTextbox";
+            this.DriveAmplitudeTextbox.Size = new System.Drawing.Size(57, 20);
+            this.DriveAmplitudeTextbox.TabIndex = 28;
+            // 
+            // label203
+            // 
+            this.label203.AutoSize = true;
+            this.label203.Location = new System.Drawing.Point(16, 50);
+            this.label203.Name = "label203";
+            this.label203.Size = new System.Drawing.Size(81, 13);
+            this.label203.TabIndex = 29;
+            this.label203.Text = "Drive Amplitude";
+            // 
+            // DriveStateTextbox
+            // 
+            this.DriveStateTextbox.Location = new System.Drawing.Point(109, 73);
+            this.DriveStateTextbox.Name = "DriveStateTextbox";
+            this.DriveStateTextbox.Size = new System.Drawing.Size(57, 20);
+            this.DriveStateTextbox.TabIndex = 30;
+            // 
+            // label198
+            // 
+            this.label198.AutoSize = true;
+            this.label198.Location = new System.Drawing.Point(16, 384);
+            this.label198.Name = "label198";
+            this.label198.Size = new System.Drawing.Size(83, 13);
+            this.label198.TabIndex = 27;
+            this.label198.Text = "z-trap frequency";
+            // 
+            // ZtrapfrequencyTextbox
+            // 
+            this.ZtrapfrequencyTextbox.Location = new System.Drawing.Point(109, 381);
+            this.ZtrapfrequencyTextbox.Name = "ZtrapfrequencyTextbox";
+            this.ZtrapfrequencyTextbox.Size = new System.Drawing.Size(57, 20);
+            this.ZtrapfrequencyTextbox.TabIndex = 26;
+            // 
+            // label197
+            // 
+            this.label197.AutoSize = true;
+            this.label197.Location = new System.Drawing.Point(16, 360);
+            this.label197.Name = "label197";
+            this.label197.Size = new System.Drawing.Size(68, 13);
+            this.label197.TabIndex = 25;
+            this.label197.Text = "Lattice QWP";
+            // 
+            // LatticeQWPTextbox
+            // 
+            this.LatticeQWPTextbox.Location = new System.Drawing.Point(109, 357);
+            this.LatticeQWPTextbox.Name = "LatticeQWPTextbox";
+            this.LatticeQWPTextbox.Size = new System.Drawing.Size(57, 20);
+            this.LatticeQWPTextbox.TabIndex = 24;
+            // 
+            // label196
+            // 
+            this.label196.AutoSize = true;
+            this.label196.Location = new System.Drawing.Point(16, 153);
+            this.label196.Name = "label196";
+            this.label196.Size = new System.Drawing.Size(71, 13);
+            this.label196.TabIndex = 23;
+            this.label196.Text = "Sigma2 QWP";
+            // 
+            // S2QWPTextbox
+            // 
+            this.S2QWPTextbox.Location = new System.Drawing.Point(109, 150);
+            this.S2QWPTextbox.Name = "S2QWPTextbox";
+            this.S2QWPTextbox.Size = new System.Drawing.Size(57, 20);
+            this.S2QWPTextbox.TabIndex = 22;
+            // 
+            // label95
+            // 
+            this.label95.AutoSize = true;
+            this.label95.Location = new System.Drawing.Point(16, 335);
+            this.label95.Name = "label95";
+            this.label95.Size = new System.Drawing.Size(71, 13);
+            this.label95.TabIndex = 21;
+            this.label95.Text = "Lattice Depth";
+            // 
+            // LatticeDepthTextbox
+            // 
+            this.LatticeDepthTextbox.Location = new System.Drawing.Point(109, 332);
+            this.LatticeDepthTextbox.Name = "LatticeDepthTextbox";
+            this.LatticeDepthTextbox.Size = new System.Drawing.Size(57, 20);
+            this.LatticeDepthTextbox.TabIndex = 20;
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(16, 127);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(75, 13);
+            this.label86.TabIndex = 7;
+            this.label86.Text = "Sigma2 Power";
+            // 
+            // label92
+            // 
+            this.label92.AutoSize = true;
+            this.label92.Location = new System.Drawing.Point(16, 309);
+            this.label92.Name = "label92";
+            this.label92.Size = new System.Drawing.Size(19, 13);
+            this.label92.TabIndex = 19;
+            this.label92.Text = "Bz";
+            // 
+            // DetuningTextbox
+            // 
+            this.DetuningTextbox.Location = new System.Drawing.Point(109, 23);
+            this.DetuningTextbox.Name = "DetuningTextbox";
+            this.DetuningTextbox.Size = new System.Drawing.Size(57, 20);
+            this.DetuningTextbox.TabIndex = 2;
+            this.DetuningTextbox.Text = "100";
+            // 
+            // BzTextbox
+            // 
+            this.BzTextbox.Location = new System.Drawing.Point(109, 306);
+            this.BzTextbox.Name = "BzTextbox";
+            this.BzTextbox.Size = new System.Drawing.Size(57, 20);
+            this.BzTextbox.TabIndex = 18;
+            this.BzTextbox.Text = "0";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(16, 26);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(50, 13);
+            this.label79.TabIndex = 3;
+            this.label79.Text = "Detuning";
+            // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.Location = new System.Drawing.Point(16, 283);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(19, 13);
+            this.label91.TabIndex = 17;
+            this.label91.Text = "By";
+            // 
+            // S1PowerTextbox
+            // 
+            this.S1PowerTextbox.Location = new System.Drawing.Point(109, 98);
+            this.S1PowerTextbox.Name = "S1PowerTextbox";
+            this.S1PowerTextbox.Size = new System.Drawing.Size(57, 20);
+            this.S1PowerTextbox.TabIndex = 4;
+            // 
+            // ByTextbox
+            // 
+            this.ByTextbox.Location = new System.Drawing.Point(109, 280);
+            this.ByTextbox.Name = "ByTextbox";
+            this.ByTextbox.Size = new System.Drawing.Size(57, 20);
+            this.ByTextbox.TabIndex = 16;
+            this.ByTextbox.Text = "0.85";
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(16, 101);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(75, 13);
+            this.label85.TabIndex = 5;
+            this.label85.Text = "Sigma1 Power";
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(16, 257);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(19, 13);
+            this.label90.TabIndex = 15;
+            this.label90.Text = "Bx";
+            // 
+            // S2PowerTextbox
+            // 
+            this.S2PowerTextbox.Location = new System.Drawing.Point(109, 124);
+            this.S2PowerTextbox.Name = "S2PowerTextbox";
+            this.S2PowerTextbox.Size = new System.Drawing.Size(57, 20);
+            this.S2PowerTextbox.TabIndex = 6;
+            // 
+            // BxTextbox
+            // 
+            this.BxTextbox.Location = new System.Drawing.Point(109, 254);
+            this.BxTextbox.Name = "BxTextbox";
+            this.BxTextbox.Size = new System.Drawing.Size(57, 20);
+            this.BxTextbox.TabIndex = 14;
+            // 
+            // PiPowerTextbox
+            // 
+            this.PiPowerTextbox.Location = new System.Drawing.Point(109, 176);
+            this.PiPowerTextbox.Name = "PiPowerTextbox";
+            this.PiPowerTextbox.Size = new System.Drawing.Size(57, 20);
+            this.PiPowerTextbox.TabIndex = 8;
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(16, 231);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(69, 13);
+            this.label89.TabIndex = 13;
+            this.label89.Text = "Cavity Power";
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Location = new System.Drawing.Point(16, 179);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(49, 13);
+            this.label87.TabIndex = 9;
+            this.label87.Text = "Pi Power";
+            // 
+            // CavityPowerTextbox
+            // 
+            this.CavityPowerTextbox.Location = new System.Drawing.Point(109, 228);
+            this.CavityPowerTextbox.Name = "CavityPowerTextbox";
+            this.CavityPowerTextbox.Size = new System.Drawing.Size(57, 20);
+            this.CavityPowerTextbox.TabIndex = 12;
+            // 
+            // Doppler35Textbox
+            // 
+            this.Doppler35Textbox.Location = new System.Drawing.Point(109, 202);
+            this.Doppler35Textbox.Name = "Doppler35Textbox";
+            this.Doppler35Textbox.Size = new System.Drawing.Size(57, 20);
+            this.Doppler35Textbox.TabIndex = 10;
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.Location = new System.Drawing.Point(16, 205);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(92, 13);
+            this.label88.TabIndex = 11;
+            this.label88.Text = "35 Doppler Power";
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(25, 35);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(113, 13);
+            this.label78.TabIndex = 1;
+            this.label78.Text = "Parameters to Include:";
+            // 
+            // DataFilenameChecklist
+            // 
+            this.DataFilenameChecklist.CheckOnClick = true;
+            this.DataFilenameChecklist.FormattingEnabled = true;
+            this.DataFilenameChecklist.Items.AddRange(new object[] {
+            "Integration Time (Camera)",
+            "EM Gain",
+            "Integration Time (Correlator)",
+            "Pulse Programmer Period",
+            "Drive Frequency",
+            "Drive Amplitude",
+            "Drive State",
+            "Detuning",
+            "Sigma1 Power",
+            "Sigma2 Power",
+            "Sigma2 QWP",
+            "Pi Power",
+            "Sidebeam Power",
+            "Cavity Power",
+            "Bx",
+            "By",
+            "Bz",
+            "Lattice Depth",
+            "Lattice QWP",
+            "Array Voltage",
+            "Total Bias",
+            "DC Quad",
+            "DX",
+            "Quad Tilt",
+            "Quad Ratio",
+            "Array Ratio",
+            "Z Trap Frequency"});
+            this.DataFilenameChecklist.Location = new System.Drawing.Point(25, 55);
+            this.DataFilenameChecklist.Name = "DataFilenameChecklist";
+            this.DataFilenameChecklist.Size = new System.Drawing.Size(166, 409);
+            this.DataFilenameChecklist.TabIndex = 0;
             // 
             // groupBox82
             // 
@@ -5192,24 +5517,6 @@
             this.ExpSeqFluorInterruptCheck.Text = "Use?";
             this.ExpSeqFluorInterruptCheck.UseVisualStyleBackColor = true;
             // 
-            // groupBox54
-            // 
-            this.groupBox54.Controls.Add(this.ExpSeqTimeDelay);
-            this.groupBox54.Location = new System.Drawing.Point(982, 380);
-            this.groupBox54.Name = "groupBox54";
-            this.groupBox54.Size = new System.Drawing.Size(108, 74);
-            this.groupBox54.TabIndex = 166;
-            this.groupBox54.TabStop = false;
-            this.groupBox54.Text = "Time Delay (ms)";
-            // 
-            // ExpSeqTimeDelay
-            // 
-            this.ExpSeqTimeDelay.Location = new System.Drawing.Point(21, 39);
-            this.ExpSeqTimeDelay.Name = "ExpSeqTimeDelay";
-            this.ExpSeqTimeDelay.Size = new System.Drawing.Size(43, 20);
-            this.ExpSeqTimeDelay.TabIndex = 131;
-            this.ExpSeqTimeDelay.Text = "50";
-            // 
             // groupBox70
             // 
             this.groupBox70.Controls.Add(this.ExpSeqPresetScanBox);
@@ -5226,8 +5533,9 @@
             this.ExpSeqPresetScanBox.Items.AddRange(new object[] {
             "Bx Slider",
             "Electrode Scan",
+            "Electrode Scan 15V",
             "Repumper Slider",
-            "DX Slider"});
+            "Lattice Setpoint Slider"});
             this.ExpSeqPresetScanBox.Location = new System.Drawing.Point(16, 19);
             this.ExpSeqPresetScanBox.Name = "ExpSeqPresetScanBox";
             this.ExpSeqPresetScanBox.Size = new System.Drawing.Size(120, 95);
@@ -5238,7 +5546,7 @@
             // 
             this.label215.AutoSize = true;
             this.label215.ForeColor = System.Drawing.Color.Coral;
-            this.label215.Location = new System.Drawing.Point(66, 51);
+            this.label215.Location = new System.Drawing.Point(1245, 137);
             this.label215.Name = "label215";
             this.label215.Size = new System.Drawing.Size(418, 13);
             this.label215.TabIndex = 177;
@@ -5247,7 +5555,7 @@
             // 
             // ExpSeqExtraPathnameText
             // 
-            this.ExpSeqExtraPathnameText.Location = new System.Drawing.Point(66, 67);
+            this.ExpSeqExtraPathnameText.Location = new System.Drawing.Point(1245, 153);
             this.ExpSeqExtraPathnameText.Name = "ExpSeqExtraPathnameText";
             this.ExpSeqExtraPathnameText.Size = new System.Drawing.Size(418, 20);
             this.ExpSeqExtraPathnameText.TabIndex = 176;
@@ -5361,10 +5669,13 @@
             "RightFingersSlider",
             "LeftFingersSlider",
             "SnakeOnlySlider",
-            "RecapturePowerSlider",
             "SideBeam370Power",
             "LatticePowerControl",
+            "LatticeSetpointSlider",
             "CavityCoolingPowerControl",
+            "RamanS1PowerControl",
+            "RamanS2PowerControl",
+            "RamanS2ColorControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
             this.ExpSeqInt2Slider2.Location = new System.Drawing.Point(10, 19);
@@ -5413,7 +5724,7 @@
             // 
             this.ExpSeqIntScan2ProgressLabel.AutoSize = true;
             this.ExpSeqIntScan2ProgressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExpSeqIntScan2ProgressLabel.Location = new System.Drawing.Point(768, 65);
+            this.ExpSeqIntScan2ProgressLabel.Location = new System.Drawing.Point(753, 65);
             this.ExpSeqIntScan2ProgressLabel.Name = "ExpSeqIntScan2ProgressLabel";
             this.ExpSeqIntScan2ProgressLabel.Size = new System.Drawing.Size(62, 20);
             this.ExpSeqIntScan2ProgressLabel.TabIndex = 172;
@@ -5433,7 +5744,7 @@
             // 
             this.groupBox63.Controls.Add(this.label220);
             this.groupBox63.Controls.Add(this.ExpSeqIntSlider2NumPointsText);
-            this.groupBox63.Location = new System.Drawing.Point(633, 38);
+            this.groupBox63.Location = new System.Drawing.Point(620, 38);
             this.groupBox63.Name = "groupBox63";
             this.groupBox63.Size = new System.Drawing.Size(108, 74);
             this.groupBox63.TabIndex = 165;
@@ -5505,10 +5816,13 @@
             "RightFingersSlider",
             "LeftFingersSlider",
             "SnakeOnlySlider",
-            "RecapturePowerSlider",
             "SideBeam370Power",
             "LatticePowerControl",
+            "LatticeSetpointSlider",
             "CavityCoolingPowerControl",
+            "RamanS1PowerControl",
+            "RamanS2PowerControl",
+            "RamanS2ColorControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
             this.ExpSeqInt2Slider1.Location = new System.Drawing.Point(10, 19);
@@ -5662,10 +5976,13 @@
             "RightFingersSlider",
             "LeftFingersSlider",
             "SnakeOnlySlider",
-            "RecapturePowerSlider",
             "SideBeam370Power",
             "LatticePowerControl",
+            "LatticeSetpointSlider",
             "CavityCoolingPowerControl",
+            "RamanS1PowerControl",
+            "RamanS2PowerControl",
+            "RamanS2ColorControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
             this.ExpSeqInt1Slider2.Location = new System.Drawing.Point(10, 19);
@@ -5714,7 +6031,7 @@
             // 
             this.ExpSeqIntScan1ProgressLabel.AutoSize = true;
             this.ExpSeqIntScan1ProgressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExpSeqIntScan1ProgressLabel.Location = new System.Drawing.Point(768, 63);
+            this.ExpSeqIntScan1ProgressLabel.Location = new System.Drawing.Point(753, 68);
             this.ExpSeqIntScan1ProgressLabel.Name = "ExpSeqIntScan1ProgressLabel";
             this.ExpSeqIntScan1ProgressLabel.Size = new System.Drawing.Size(62, 20);
             this.ExpSeqIntScan1ProgressLabel.TabIndex = 170;
@@ -5734,7 +6051,7 @@
             // 
             this.groupBox57.Controls.Add(this.label216);
             this.groupBox57.Controls.Add(this.ExpSeqIntSlider1NumPointsText);
-            this.groupBox57.Location = new System.Drawing.Point(633, 35);
+            this.groupBox57.Location = new System.Drawing.Point(620, 31);
             this.groupBox57.Name = "groupBox57";
             this.groupBox57.Size = new System.Drawing.Size(108, 74);
             this.groupBox57.TabIndex = 165;
@@ -5806,10 +6123,13 @@
             "RightFingersSlider",
             "LeftFingersSlider",
             "SnakeOnlySlider",
-            "RecapturePowerSlider",
             "SideBeam370Power",
             "LatticePowerControl",
+            "LatticeSetpointSlider",
             "CavityCoolingPowerControl",
+            "RamanS1PowerControl",
+            "RamanS2PowerControl",
+            "RamanS2ColorControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
             this.ExpSeqInt1Slider1.Location = new System.Drawing.Point(10, 19);
@@ -5856,6 +6176,7 @@
             // 
             // groupBox64
             // 
+            this.groupBox64.Controls.Add(this.groupBox91);
             this.groupBox64.Controls.Add(this.label201);
             this.groupBox64.Controls.Add(this.groupBox84);
             this.groupBox64.Controls.Add(this.groupBox67);
@@ -5871,6 +6192,55 @@
             this.groupBox64.TabIndex = 173;
             this.groupBox64.TabStop = false;
             this.groupBox64.Text = "Main Thread";
+            // 
+            // groupBox91
+            // 
+            this.groupBox91.Controls.Add(this.label250);
+            this.groupBox91.Controls.Add(this.label249);
+            this.groupBox91.Controls.Add(this.ExpSeqPointTimeDelay);
+            this.groupBox91.Controls.Add(this.ExpSeqScanTimeDelay);
+            this.groupBox91.Location = new System.Drawing.Point(620, 89);
+            this.groupBox91.Name = "groupBox91";
+            this.groupBox91.Size = new System.Drawing.Size(105, 116);
+            this.groupBox91.TabIndex = 181;
+            this.groupBox91.TabStop = false;
+            this.groupBox91.Text = "Time Delays (ms)";
+            // 
+            // label250
+            // 
+            this.label250.AutoSize = true;
+            this.label250.ForeColor = System.Drawing.Color.YellowGreen;
+            this.label250.Location = new System.Drawing.Point(6, 69);
+            this.label250.Name = "label250";
+            this.label250.Size = new System.Drawing.Size(79, 13);
+            this.label250.TabIndex = 134;
+            this.label250.Text = "between scans";
+            // 
+            // label249
+            // 
+            this.label249.AutoSize = true;
+            this.label249.ForeColor = System.Drawing.Color.Orange;
+            this.label249.Location = new System.Drawing.Point(5, 20);
+            this.label249.Name = "label249";
+            this.label249.Size = new System.Drawing.Size(79, 13);
+            this.label249.TabIndex = 133;
+            this.label249.Text = "between points";
+            // 
+            // ExpSeqPointTimeDelay
+            // 
+            this.ExpSeqPointTimeDelay.Location = new System.Drawing.Point(8, 36);
+            this.ExpSeqPointTimeDelay.Name = "ExpSeqPointTimeDelay";
+            this.ExpSeqPointTimeDelay.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqPointTimeDelay.TabIndex = 132;
+            this.ExpSeqPointTimeDelay.Text = "0";
+            // 
+            // ExpSeqScanTimeDelay
+            // 
+            this.ExpSeqScanTimeDelay.Location = new System.Drawing.Point(9, 85);
+            this.ExpSeqScanTimeDelay.Name = "ExpSeqScanTimeDelay";
+            this.ExpSeqScanTimeDelay.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqScanTimeDelay.TabIndex = 131;
+            this.ExpSeqScanTimeDelay.Text = "500";
             // 
             // label201
             // 
@@ -5941,10 +6311,13 @@
             "RightFingersSlider",
             "LeftFingersSlider",
             "SnakeOnlySlider",
-            "RecapturePowerSlider",
             "SideBeam370Power",
             "LatticePowerControl",
+            "LatticeSetpointSlider",
             "CavityCoolingPowerControl",
+            "RamanS1PowerControl",
+            "RamanS2PowerControl",
+            "RamanS2ColorControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
             this.ExpSeqNestingSlider.Location = new System.Drawing.Point(10, 19);
@@ -6038,10 +6411,13 @@
             "RightFingersSlider",
             "LeftFingersSlider",
             "SnakeOnlySlider",
-            "RecapturePowerSlider",
             "SideBeam370Power",
             "LatticePowerControl",
+            "LatticeSetpointSlider",
             "CavityCoolingPowerControl",
+            "RamanS1PowerControl",
+            "RamanS2PowerControl",
+            "RamanS2ColorControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
             this.ExpSeqMainSlider2.Location = new System.Drawing.Point(10, 19);
@@ -6081,7 +6457,8 @@
             // 
             this.ExpSeqScanNumberLabel.AutoSize = true;
             this.ExpSeqScanNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExpSeqScanNumberLabel.Location = new System.Drawing.Point(678, 123);
+            this.ExpSeqScanNumberLabel.ForeColor = System.Drawing.Color.YellowGreen;
+            this.ExpSeqScanNumberLabel.Location = new System.Drawing.Point(753, 172);
             this.ExpSeqScanNumberLabel.Name = "ExpSeqScanNumberLabel";
             this.ExpSeqScanNumberLabel.Size = new System.Drawing.Size(63, 20);
             this.ExpSeqScanNumberLabel.TabIndex = 169;
@@ -6091,7 +6468,7 @@
             // 
             this.ExpSeqPauseButton.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ExpSeqPauseButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.ExpSeqPauseButton.Location = new System.Drawing.Point(812, 28);
+            this.ExpSeqPauseButton.Location = new System.Drawing.Point(813, 67);
             this.ExpSeqPauseButton.Name = "ExpSeqPauseButton";
             this.ExpSeqPauseButton.Size = new System.Drawing.Size(113, 31);
             this.ExpSeqPauseButton.TabIndex = 168;
@@ -6103,7 +6480,7 @@
             // 
             this.ExpSeqStartButton.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ExpSeqStartButton.ForeColor = System.Drawing.Color.IndianRed;
-            this.ExpSeqStartButton.Location = new System.Drawing.Point(672, 28);
+            this.ExpSeqStartButton.Location = new System.Drawing.Point(813, 26);
             this.ExpSeqStartButton.Name = "ExpSeqStartButton";
             this.ExpSeqStartButton.Size = new System.Drawing.Size(113, 31);
             this.ExpSeqStartButton.TabIndex = 167;
@@ -6114,12 +6491,14 @@
             // groupBox53
             // 
             this.groupBox53.Controls.Add(this.label211);
+            this.groupBox53.Controls.Add(this.label248);
+            this.groupBox53.Controls.Add(this.ExpSeqMainSliderNumTakesText);
             this.groupBox53.Controls.Add(this.ExpSeqMainSliderNumScansText);
             this.groupBox53.Controls.Add(this.label212);
             this.groupBox53.Controls.Add(this.ExpSeqMainSliderNumPointsText);
             this.groupBox53.Location = new System.Drawing.Point(497, 24);
             this.groupBox53.Name = "groupBox53";
-            this.groupBox53.Size = new System.Drawing.Size(120, 127);
+            this.groupBox53.Size = new System.Drawing.Size(104, 181);
             this.groupBox53.TabIndex = 164;
             this.groupBox53.TabStop = false;
             this.groupBox53.Text = "Scan Parameters";
@@ -6128,25 +6507,43 @@
             // 
             this.label211.AutoSize = true;
             this.label211.ForeColor = System.Drawing.Color.YellowGreen;
-            this.label211.Location = new System.Drawing.Point(17, 79);
+            this.label211.Location = new System.Drawing.Point(16, 134);
             this.label211.Name = "label211";
-            this.label211.Size = new System.Drawing.Size(89, 13);
+            this.label211.Size = new System.Drawing.Size(42, 13);
             this.label211.TabIndex = 140;
-            this.label211.Text = "Number of Scans";
+            this.label211.Text = "#scans";
+            // 
+            // label248
+            // 
+            this.label248.AutoSize = true;
+            this.label248.ForeColor = System.Drawing.Color.DarkViolet;
+            this.label248.Location = new System.Drawing.Point(16, 27);
+            this.label248.Name = "label248";
+            this.label248.Size = new System.Drawing.Size(68, 13);
+            this.label248.TabIndex = 181;
+            this.label248.Text = "#takes/point";
+            // 
+            // ExpSeqMainSliderNumTakesText
+            // 
+            this.ExpSeqMainSliderNumTakesText.Location = new System.Drawing.Point(19, 43);
+            this.ExpSeqMainSliderNumTakesText.Name = "ExpSeqMainSliderNumTakesText";
+            this.ExpSeqMainSliderNumTakesText.Size = new System.Drawing.Size(43, 20);
+            this.ExpSeqMainSliderNumTakesText.TabIndex = 131;
+            this.ExpSeqMainSliderNumTakesText.Text = "1";
             // 
             // ExpSeqMainSliderNumScansText
             // 
-            this.ExpSeqMainSliderNumScansText.Location = new System.Drawing.Point(20, 95);
+            this.ExpSeqMainSliderNumScansText.Location = new System.Drawing.Point(19, 150);
             this.ExpSeqMainSliderNumScansText.Name = "ExpSeqMainSliderNumScansText";
             this.ExpSeqMainSliderNumScansText.Size = new System.Drawing.Size(43, 20);
             this.ExpSeqMainSliderNumScansText.TabIndex = 139;
-            this.ExpSeqMainSliderNumScansText.Text = "100";
+            this.ExpSeqMainSliderNumScansText.Text = "1";
             // 
             // label212
             // 
             this.label212.AutoSize = true;
             this.label212.ForeColor = System.Drawing.Color.Orange;
-            this.label212.Location = new System.Drawing.Point(19, 22);
+            this.label212.Location = new System.Drawing.Point(14, 85);
             this.label212.Name = "label212";
             this.label212.Size = new System.Drawing.Size(70, 13);
             this.label212.TabIndex = 134;
@@ -6154,7 +6551,7 @@
             // 
             // ExpSeqMainSliderNumPointsText
             // 
-            this.ExpSeqMainSliderNumPointsText.Location = new System.Drawing.Point(20, 38);
+            this.ExpSeqMainSliderNumPointsText.Location = new System.Drawing.Point(19, 101);
             this.ExpSeqMainSliderNumPointsText.Name = "ExpSeqMainSliderNumPointsText";
             this.ExpSeqMainSliderNumPointsText.Size = new System.Drawing.Size(43, 20);
             this.ExpSeqMainSliderNumPointsText.TabIndex = 131;
@@ -6234,10 +6631,13 @@
             "RightFingersSlider",
             "LeftFingersSlider",
             "SnakeOnlySlider",
-            "RecapturePowerSlider",
             "SideBeam370Power",
             "LatticePowerControl",
+            "LatticeSetpointSlider",
             "CavityCoolingPowerControl",
+            "RamanS1PowerControl",
+            "RamanS2PowerControl",
+            "RamanS2ColorControl",
             "RamanSlider",
             "CorrelatorBinningPhaseSlider"});
             this.ExpSeqMainSlider1.Location = new System.Drawing.Point(10, 19);
@@ -6283,15 +6683,330 @@
             this.label213.TabIndex = 133;
             this.label213.Text = "End Value";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox40);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1892, 984);
+            this.tabPage1.TabIndex = 21;
+            this.tabPage1.Text = "Common Routines";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox40
+            // 
+            this.groupBox40.Controls.Add(this.checkBox1);
+            this.groupBox40.Controls.Add(this.LatticeFeedbackLatticeSetpointText);
+            this.groupBox40.Controls.Add(this.LatticeFeedbackLatticeSetpointCheck);
+            this.groupBox40.Controls.Add(this.label199);
+            this.groupBox40.Controls.Add(this.label200);
+            this.groupBox40.Controls.Add(this.LatticePositionFeedbackSwitch);
+            this.groupBox40.Controls.Add(this.LatticePositionSetSuggestedButton);
+            this.groupBox40.Controls.Add(this.label195);
+            this.groupBox40.Controls.Add(this.LatticePositionNewValue2Text);
+            this.groupBox40.Controls.Add(this.label194);
+            this.groupBox40.Controls.Add(this.LatticePositionNewValueText);
+            this.groupBox40.Controls.Add(this.label193);
+            this.groupBox40.Controls.Add(this.LatticePositionFeedbackText);
+            this.groupBox40.Controls.Add(this.label192);
+            this.groupBox40.Controls.Add(this.label190);
+            this.groupBox40.Controls.Add(this.label189);
+            this.groupBox40.Controls.Add(this.label191);
+            this.groupBox40.Controls.Add(this.LatticePositionRampArrayValue);
+            this.groupBox40.Controls.Add(this.LatticePositionDC2TextBox);
+            this.groupBox40.Controls.Add(this.LatticePositionRampArrayCheckbox);
+            this.groupBox40.Controls.Add(this.LatticePositionDC1TextBox);
+            this.groupBox40.Controls.Add(this.LatticePositionStart);
+            this.groupBox40.Controls.Add(this.groupBox47);
+            this.groupBox40.Controls.Add(this.label141);
+            this.groupBox40.Controls.Add(this.LatticePositionAmplitudeText);
+            this.groupBox40.Controls.Add(this.label188);
+            this.groupBox40.Controls.Add(this.LatticePositionNumAveText);
+            this.groupBox40.Location = new System.Drawing.Point(22, 21);
+            this.groupBox40.Name = "groupBox40";
+            this.groupBox40.Size = new System.Drawing.Size(659, 372);
+            this.groupBox40.TabIndex = 227;
+            this.groupBox40.TabStop = false;
+            this.groupBox40.Text = "Lattice Position Feedback";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(201, 273);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(179, 17);
+            this.checkBox1.TabIndex = 215;
+            this.checkBox1.Text = "Load Cool Only Pulse Sequence";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // LatticeFeedbackLatticeSetpointText
+            // 
+            this.LatticeFeedbackLatticeSetpointText.Location = new System.Drawing.Point(335, 247);
+            this.LatticeFeedbackLatticeSetpointText.Name = "LatticeFeedbackLatticeSetpointText";
+            this.LatticeFeedbackLatticeSetpointText.Size = new System.Drawing.Size(33, 20);
+            this.LatticeFeedbackLatticeSetpointText.TabIndex = 214;
+            this.LatticeFeedbackLatticeSetpointText.Text = "10";
+            // 
+            // LatticeFeedbackLatticeSetpointCheck
+            // 
+            this.LatticeFeedbackLatticeSetpointCheck.AutoSize = true;
+            this.LatticeFeedbackLatticeSetpointCheck.Checked = true;
+            this.LatticeFeedbackLatticeSetpointCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.LatticeFeedbackLatticeSetpointCheck.Location = new System.Drawing.Point(201, 250);
+            this.LatticeFeedbackLatticeSetpointCheck.Name = "LatticeFeedbackLatticeSetpointCheck";
+            this.LatticeFeedbackLatticeSetpointCheck.Size = new System.Drawing.Size(131, 17);
+            this.LatticeFeedbackLatticeSetpointCheck.TabIndex = 213;
+            this.LatticeFeedbackLatticeSetpointCheck.Text = "Set Lattice Setpoint to";
+            this.LatticeFeedbackLatticeSetpointCheck.UseVisualStyleBackColor = true;
+            // 
+            // label199
+            // 
+            this.label199.AutoSize = true;
+            this.label199.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label199.Location = new System.Drawing.Point(221, 149);
+            this.label199.Name = "label199";
+            this.label199.Size = new System.Drawing.Size(49, 13);
+            this.label199.TabIndex = 212;
+            this.label199.Text = "Antinode";
+            // 
+            // label200
+            // 
+            this.label200.AutoSize = true;
+            this.label200.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.label200.Location = new System.Drawing.Point(229, 57);
+            this.label200.Name = "label200";
+            this.label200.Size = new System.Drawing.Size(33, 13);
+            this.label200.TabIndex = 211;
+            this.label200.Text = "Node";
+            // 
+            // LatticePositionFeedbackSwitch
+            // 
+            this.LatticePositionFeedbackSwitch.Location = new System.Drawing.Point(213, 57);
+            this.LatticePositionFeedbackSwitch.Name = "LatticePositionFeedbackSwitch";
+            this.LatticePositionFeedbackSwitch.Size = new System.Drawing.Size(64, 96);
+            this.LatticePositionFeedbackSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
+            this.LatticePositionFeedbackSwitch.TabIndex = 210;
+            // 
+            // LatticePositionSetSuggestedButton
+            // 
+            this.LatticePositionSetSuggestedButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.LatticePositionSetSuggestedButton.ForeColor = System.Drawing.Color.White;
+            this.LatticePositionSetSuggestedButton.Location = new System.Drawing.Point(418, 152);
+            this.LatticePositionSetSuggestedButton.Name = "LatticePositionSetSuggestedButton";
+            this.LatticePositionSetSuggestedButton.Size = new System.Drawing.Size(146, 31);
+            this.LatticePositionSetSuggestedButton.TabIndex = 172;
+            this.LatticePositionSetSuggestedButton.Text = "Set Suggested Values";
+            this.LatticePositionSetSuggestedButton.UseVisualStyleBackColor = false;
+            // 
+            // label195
+            // 
+            this.label195.AutoSize = true;
+            this.label195.ForeColor = System.Drawing.Color.Blue;
+            this.label195.Location = new System.Drawing.Point(493, 100);
+            this.label195.Name = "label195";
+            this.label195.Size = new System.Drawing.Size(97, 13);
+            this.label195.TabIndex = 171;
+            this.label195.Text = "New value for DC2";
+            // 
+            // LatticePositionNewValue2Text
+            // 
+            this.LatticePositionNewValue2Text.Location = new System.Drawing.Point(521, 116);
+            this.LatticePositionNewValue2Text.Name = "LatticePositionNewValue2Text";
+            this.LatticePositionNewValue2Text.Size = new System.Drawing.Size(43, 20);
+            this.LatticePositionNewValue2Text.TabIndex = 170;
+            this.LatticePositionNewValue2Text.Text = "5";
+            // 
+            // label194
+            // 
+            this.label194.AutoSize = true;
+            this.label194.ForeColor = System.Drawing.Color.Blue;
+            this.label194.Location = new System.Drawing.Point(390, 100);
+            this.label194.Name = "label194";
+            this.label194.Size = new System.Drawing.Size(97, 13);
+            this.label194.TabIndex = 169;
+            this.label194.Text = "New value for DC1";
+            // 
+            // LatticePositionNewValueText
+            // 
+            this.LatticePositionNewValueText.Location = new System.Drawing.Point(418, 116);
+            this.LatticePositionNewValueText.Name = "LatticePositionNewValueText";
+            this.LatticePositionNewValueText.Size = new System.Drawing.Size(43, 20);
+            this.LatticePositionNewValueText.TabIndex = 168;
+            this.LatticePositionNewValueText.Text = "5";
+            // 
+            // label193
+            // 
+            this.label193.AutoSize = true;
+            this.label193.ForeColor = System.Drawing.Color.Blue;
+            this.label193.Location = new System.Drawing.Point(376, 57);
+            this.label193.Name = "label193";
+            this.label193.Size = new System.Drawing.Size(131, 13);
+            this.label193.TabIndex = 167;
+            this.label193.Text = "Feedback to apply to DC1";
+            // 
+            // LatticePositionFeedbackText
+            // 
+            this.LatticePositionFeedbackText.Location = new System.Drawing.Point(418, 73);
+            this.LatticePositionFeedbackText.Name = "LatticePositionFeedbackText";
+            this.LatticePositionFeedbackText.Size = new System.Drawing.Size(43, 20);
+            this.LatticePositionFeedbackText.TabIndex = 166;
+            this.LatticePositionFeedbackText.Text = "5";
+            // 
+            // label192
+            // 
+            this.label192.AutoSize = true;
+            this.label192.Location = new System.Drawing.Point(153, 17);
+            this.label192.Name = "label192";
+            this.label192.Size = new System.Drawing.Size(485, 13);
+            this.label192.TabIndex = 165;
+            this.label192.Text = "The scan has a default of 3 points.* It scans around the current value of each DC" +
+                " pair by +- amplitude";
+            // 
+            // label190
+            // 
+            this.label190.AutoSize = true;
+            this.label190.ForeColor = System.Drawing.Color.Red;
+            this.label190.Location = new System.Drawing.Point(95, 20);
+            this.label190.Name = "label190";
+            this.label190.Size = new System.Drawing.Size(28, 13);
+            this.label190.TabIndex = 148;
+            this.label190.Text = "DC2";
+            // 
+            // label189
+            // 
+            this.label189.AutoSize = true;
+            this.label189.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label189.Location = new System.Drawing.Point(14, 152);
+            this.label189.Name = "label189";
+            this.label189.Size = new System.Drawing.Size(61, 13);
+            this.label189.TabIndex = 152;
+            this.label189.Text = "Array Value";
+            // 
+            // label191
+            // 
+            this.label191.AutoSize = true;
+            this.label191.ForeColor = System.Drawing.Color.Red;
+            this.label191.Location = new System.Drawing.Point(24, 20);
+            this.label191.Name = "label191";
+            this.label191.Size = new System.Drawing.Size(28, 13);
+            this.label191.TabIndex = 147;
+            this.label191.Text = "DC1";
+            // 
+            // LatticePositionRampArrayValue
+            // 
+            this.LatticePositionRampArrayValue.Location = new System.Drawing.Point(17, 168);
+            this.LatticePositionRampArrayValue.Name = "LatticePositionRampArrayValue";
+            this.LatticePositionRampArrayValue.Size = new System.Drawing.Size(43, 20);
+            this.LatticePositionRampArrayValue.TabIndex = 151;
+            this.LatticePositionRampArrayValue.Text = "1";
+            // 
+            // LatticePositionDC2TextBox
+            // 
+            this.LatticePositionDC2TextBox.Location = new System.Drawing.Point(88, 37);
+            this.LatticePositionDC2TextBox.Name = "LatticePositionDC2TextBox";
+            this.LatticePositionDC2TextBox.Size = new System.Drawing.Size(43, 20);
+            this.LatticePositionDC2TextBox.TabIndex = 146;
+            this.LatticePositionDC2TextBox.Text = "7";
+            // 
+            // LatticePositionRampArrayCheckbox
+            // 
+            this.LatticePositionRampArrayCheckbox.AutoSize = true;
+            this.LatticePositionRampArrayCheckbox.Location = new System.Drawing.Point(17, 132);
+            this.LatticePositionRampArrayCheckbox.Name = "LatticePositionRampArrayCheckbox";
+            this.LatticePositionRampArrayCheckbox.Size = new System.Drawing.Size(87, 17);
+            this.LatticePositionRampArrayCheckbox.TabIndex = 150;
+            this.LatticePositionRampArrayCheckbox.Text = "Ramp Array?";
+            this.LatticePositionRampArrayCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // LatticePositionDC1TextBox
+            // 
+            this.LatticePositionDC1TextBox.Location = new System.Drawing.Point(17, 37);
+            this.LatticePositionDC1TextBox.Name = "LatticePositionDC1TextBox";
+            this.LatticePositionDC1TextBox.Size = new System.Drawing.Size(43, 20);
+            this.LatticePositionDC1TextBox.TabIndex = 145;
+            this.LatticePositionDC1TextBox.Text = "0";
+            // 
+            // LatticePositionStart
+            // 
+            this.LatticePositionStart.BackColor = System.Drawing.Color.Gainsboro;
+            this.LatticePositionStart.Location = new System.Drawing.Point(17, 314);
+            this.LatticePositionStart.Name = "LatticePositionStart";
+            this.LatticePositionStart.Size = new System.Drawing.Size(158, 31);
+            this.LatticePositionStart.TabIndex = 149;
+            this.LatticePositionStart.Text = "Start *Lattice* Scan";
+            this.LatticePositionStart.UseVisualStyleBackColor = false;
+            this.LatticePositionStart.Click += new System.EventHandler(this.LatticePositionStart_Click);
+            // 
+            // groupBox47
+            // 
+            this.groupBox47.Controls.Add(this.LatticePositionComboBox);
+            this.groupBox47.Location = new System.Drawing.Point(17, 241);
+            this.groupBox47.Name = "groupBox47";
+            this.groupBox47.Size = new System.Drawing.Size(146, 54);
+            this.groupBox47.TabIndex = 146;
+            this.groupBox47.TabStop = false;
+            this.groupBox47.Text = "Data Steam";
+            // 
+            // LatticePositionComboBox
+            // 
+            this.LatticePositionComboBox.FormattingEnabled = true;
+            this.LatticePositionComboBox.Items.AddRange(new object[] {
+            "PMT",
+            "Camera",
+            "PMT & Camera",
+            "Dev3AI2",
+            "Correlator:Sum"});
+            this.LatticePositionComboBox.Location = new System.Drawing.Point(10, 19);
+            this.LatticePositionComboBox.Name = "LatticePositionComboBox";
+            this.LatticePositionComboBox.Size = new System.Drawing.Size(121, 21);
+            this.LatticePositionComboBox.TabIndex = 0;
+            this.LatticePositionComboBox.Text = "Correlator:Sum";
+            // 
+            // label141
+            // 
+            this.label141.AutoSize = true;
+            this.label141.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label141.Location = new System.Drawing.Point(14, 77);
+            this.label141.Name = "label141";
+            this.label141.Size = new System.Drawing.Size(53, 13);
+            this.label141.TabIndex = 144;
+            this.label141.Text = "Amplitude";
+            // 
+            // LatticePositionAmplitudeText
+            // 
+            this.LatticePositionAmplitudeText.Location = new System.Drawing.Point(17, 93);
+            this.LatticePositionAmplitudeText.Name = "LatticePositionAmplitudeText";
+            this.LatticePositionAmplitudeText.Size = new System.Drawing.Size(43, 20);
+            this.LatticePositionAmplitudeText.TabIndex = 143;
+            this.LatticePositionAmplitudeText.Text = "1";
+            // 
+            // label188
+            // 
+            this.label188.AutoSize = true;
+            this.label188.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label188.Location = new System.Drawing.Point(78, 77);
+            this.label188.Name = "label188";
+            this.label188.Size = new System.Drawing.Size(106, 13);
+            this.label188.TabIndex = 142;
+            this.label188.Text = "# of point to average";
+            // 
+            // LatticePositionNumAveText
+            // 
+            this.LatticePositionNumAveText.Location = new System.Drawing.Point(105, 93);
+            this.LatticePositionNumAveText.Name = "LatticePositionNumAveText";
+            this.LatticePositionNumAveText.Size = new System.Drawing.Size(43, 20);
+            this.LatticePositionNumAveText.TabIndex = 141;
+            this.LatticePositionNumAveText.Text = "5";
+            // 
             // RecycleBin
             // 
             this.RecycleBin.Controls.Add(this.TickleResetBox);
             this.RecycleBin.Controls.Add(this.ArrayResetBox);
             this.RecycleBin.Controls.Add(this.ReadConfigurationFileTextbox);
             this.RecycleBin.Controls.Add(this.ReadElectrodeConfig);
-            this.RecycleBin.Controls.Add(this.groupBox40);
-            this.RecycleBin.Controls.Add(this.groupBox34);
-            this.RecycleBin.Controls.Add(this.groupBox80);
             this.RecycleBin.Controls.Add(this.groupBox36);
             this.RecycleBin.Controls.Add(this.tableLayoutPanel4);
             this.RecycleBin.Controls.Add(this.tableLayoutPanel3);
@@ -6403,704 +7118,6 @@
             this.ReadElectrodeConfig.Text = "Read Old Configuration file:";
             this.ReadElectrodeConfig.UseVisualStyleBackColor = false;
             // 
-            // groupBox40
-            // 
-            this.groupBox40.Controls.Add(this.label199);
-            this.groupBox40.Controls.Add(this.label200);
-            this.groupBox40.Controls.Add(this.LatticePositionFeedbackSwitch);
-            this.groupBox40.Controls.Add(this.LatticePositionSetSuggestedButton);
-            this.groupBox40.Controls.Add(this.label195);
-            this.groupBox40.Controls.Add(this.LatticePositionNewValue2Text);
-            this.groupBox40.Controls.Add(this.label194);
-            this.groupBox40.Controls.Add(this.LatticePositionNewValueText);
-            this.groupBox40.Controls.Add(this.label193);
-            this.groupBox40.Controls.Add(this.LatticePositionFeedbackText);
-            this.groupBox40.Controls.Add(this.label192);
-            this.groupBox40.Controls.Add(this.label190);
-            this.groupBox40.Controls.Add(this.label189);
-            this.groupBox40.Controls.Add(this.label191);
-            this.groupBox40.Controls.Add(this.LatticePositionRampArrayValue);
-            this.groupBox40.Controls.Add(this.LatticePositionDC2TextBox);
-            this.groupBox40.Controls.Add(this.LatticePositionRampArrayCheckbox);
-            this.groupBox40.Controls.Add(this.LatticePositionDC1TextBox);
-            this.groupBox40.Controls.Add(this.LatticePositionStart);
-            this.groupBox40.Controls.Add(this.groupBox47);
-            this.groupBox40.Controls.Add(this.label141);
-            this.groupBox40.Controls.Add(this.LatticePositionAmplitudeText);
-            this.groupBox40.Controls.Add(this.label188);
-            this.groupBox40.Controls.Add(this.LatticePositionNumAveText);
-            this.groupBox40.Location = new System.Drawing.Point(881, 396);
-            this.groupBox40.Name = "groupBox40";
-            this.groupBox40.Size = new System.Drawing.Size(659, 372);
-            this.groupBox40.TabIndex = 226;
-            this.groupBox40.TabStop = false;
-            this.groupBox40.Text = "Lattice Position Feedback";
-            // 
-            // label199
-            // 
-            this.label199.AutoSize = true;
-            this.label199.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label199.Location = new System.Drawing.Point(221, 149);
-            this.label199.Name = "label199";
-            this.label199.Size = new System.Drawing.Size(49, 13);
-            this.label199.TabIndex = 212;
-            this.label199.Text = "Antinode";
-            // 
-            // label200
-            // 
-            this.label200.AutoSize = true;
-            this.label200.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label200.Location = new System.Drawing.Point(229, 57);
-            this.label200.Name = "label200";
-            this.label200.Size = new System.Drawing.Size(33, 13);
-            this.label200.TabIndex = 211;
-            this.label200.Text = "Node";
-            // 
-            // LatticePositionFeedbackSwitch
-            // 
-            this.LatticePositionFeedbackSwitch.Location = new System.Drawing.Point(213, 57);
-            this.LatticePositionFeedbackSwitch.Name = "LatticePositionFeedbackSwitch";
-            this.LatticePositionFeedbackSwitch.Size = new System.Drawing.Size(64, 96);
-            this.LatticePositionFeedbackSwitch.SwitchStyle = NationalInstruments.UI.SwitchStyle.VerticalToggle3D;
-            this.LatticePositionFeedbackSwitch.TabIndex = 210;
-            // 
-            // LatticePositionSetSuggestedButton
-            // 
-            this.LatticePositionSetSuggestedButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.LatticePositionSetSuggestedButton.ForeColor = System.Drawing.Color.White;
-            this.LatticePositionSetSuggestedButton.Location = new System.Drawing.Point(418, 152);
-            this.LatticePositionSetSuggestedButton.Name = "LatticePositionSetSuggestedButton";
-            this.LatticePositionSetSuggestedButton.Size = new System.Drawing.Size(146, 31);
-            this.LatticePositionSetSuggestedButton.TabIndex = 172;
-            this.LatticePositionSetSuggestedButton.Text = "Set Suggested Values";
-            this.LatticePositionSetSuggestedButton.UseVisualStyleBackColor = false;
-            // 
-            // label195
-            // 
-            this.label195.AutoSize = true;
-            this.label195.ForeColor = System.Drawing.Color.Blue;
-            this.label195.Location = new System.Drawing.Point(493, 100);
-            this.label195.Name = "label195";
-            this.label195.Size = new System.Drawing.Size(97, 13);
-            this.label195.TabIndex = 171;
-            this.label195.Text = "New value for DC2";
-            // 
-            // LatticePositionNewValue2Text
-            // 
-            this.LatticePositionNewValue2Text.Location = new System.Drawing.Point(521, 116);
-            this.LatticePositionNewValue2Text.Name = "LatticePositionNewValue2Text";
-            this.LatticePositionNewValue2Text.Size = new System.Drawing.Size(43, 20);
-            this.LatticePositionNewValue2Text.TabIndex = 170;
-            this.LatticePositionNewValue2Text.Text = "5";
-            // 
-            // label194
-            // 
-            this.label194.AutoSize = true;
-            this.label194.ForeColor = System.Drawing.Color.Blue;
-            this.label194.Location = new System.Drawing.Point(390, 100);
-            this.label194.Name = "label194";
-            this.label194.Size = new System.Drawing.Size(97, 13);
-            this.label194.TabIndex = 169;
-            this.label194.Text = "New value for DC1";
-            // 
-            // LatticePositionNewValueText
-            // 
-            this.LatticePositionNewValueText.Location = new System.Drawing.Point(418, 116);
-            this.LatticePositionNewValueText.Name = "LatticePositionNewValueText";
-            this.LatticePositionNewValueText.Size = new System.Drawing.Size(43, 20);
-            this.LatticePositionNewValueText.TabIndex = 168;
-            this.LatticePositionNewValueText.Text = "5";
-            // 
-            // label193
-            // 
-            this.label193.AutoSize = true;
-            this.label193.ForeColor = System.Drawing.Color.Blue;
-            this.label193.Location = new System.Drawing.Point(376, 57);
-            this.label193.Name = "label193";
-            this.label193.Size = new System.Drawing.Size(131, 13);
-            this.label193.TabIndex = 167;
-            this.label193.Text = "Feedback to apply to DC1";
-            // 
-            // LatticePositionFeedbackText
-            // 
-            this.LatticePositionFeedbackText.Location = new System.Drawing.Point(418, 73);
-            this.LatticePositionFeedbackText.Name = "LatticePositionFeedbackText";
-            this.LatticePositionFeedbackText.Size = new System.Drawing.Size(43, 20);
-            this.LatticePositionFeedbackText.TabIndex = 166;
-            this.LatticePositionFeedbackText.Text = "5";
-            // 
-            // label192
-            // 
-            this.label192.AutoSize = true;
-            this.label192.Location = new System.Drawing.Point(158, 20);
-            this.label192.Name = "label192";
-            this.label192.Size = new System.Drawing.Size(485, 13);
-            this.label192.TabIndex = 165;
-            this.label192.Text = "The scan has a default of 3 points.* It scans around the current value of each DC" +
-                " pair by +- amplitude";
-            // 
-            // label190
-            // 
-            this.label190.AutoSize = true;
-            this.label190.ForeColor = System.Drawing.Color.Red;
-            this.label190.Location = new System.Drawing.Point(95, 20);
-            this.label190.Name = "label190";
-            this.label190.Size = new System.Drawing.Size(28, 13);
-            this.label190.TabIndex = 148;
-            this.label190.Text = "DC2";
-            // 
-            // label189
-            // 
-            this.label189.AutoSize = true;
-            this.label189.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label189.Location = new System.Drawing.Point(14, 152);
-            this.label189.Name = "label189";
-            this.label189.Size = new System.Drawing.Size(61, 13);
-            this.label189.TabIndex = 152;
-            this.label189.Text = "Array Value";
-            // 
-            // label191
-            // 
-            this.label191.AutoSize = true;
-            this.label191.ForeColor = System.Drawing.Color.Red;
-            this.label191.Location = new System.Drawing.Point(24, 20);
-            this.label191.Name = "label191";
-            this.label191.Size = new System.Drawing.Size(28, 13);
-            this.label191.TabIndex = 147;
-            this.label191.Text = "DC1";
-            // 
-            // LatticePositionRampArrayValue
-            // 
-            this.LatticePositionRampArrayValue.Location = new System.Drawing.Point(17, 168);
-            this.LatticePositionRampArrayValue.Name = "LatticePositionRampArrayValue";
-            this.LatticePositionRampArrayValue.Size = new System.Drawing.Size(43, 20);
-            this.LatticePositionRampArrayValue.TabIndex = 151;
-            this.LatticePositionRampArrayValue.Text = "1";
-            // 
-            // LatticePositionDC2TextBox
-            // 
-            this.LatticePositionDC2TextBox.Location = new System.Drawing.Point(88, 37);
-            this.LatticePositionDC2TextBox.Name = "LatticePositionDC2TextBox";
-            this.LatticePositionDC2TextBox.Size = new System.Drawing.Size(43, 20);
-            this.LatticePositionDC2TextBox.TabIndex = 146;
-            this.LatticePositionDC2TextBox.Text = "7";
-            // 
-            // LatticePositionRampArrayCheckbox
-            // 
-            this.LatticePositionRampArrayCheckbox.AutoSize = true;
-            this.LatticePositionRampArrayCheckbox.Location = new System.Drawing.Point(17, 132);
-            this.LatticePositionRampArrayCheckbox.Name = "LatticePositionRampArrayCheckbox";
-            this.LatticePositionRampArrayCheckbox.Size = new System.Drawing.Size(87, 17);
-            this.LatticePositionRampArrayCheckbox.TabIndex = 150;
-            this.LatticePositionRampArrayCheckbox.Text = "Ramp Array?";
-            this.LatticePositionRampArrayCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // LatticePositionDC1TextBox
-            // 
-            this.LatticePositionDC1TextBox.Location = new System.Drawing.Point(17, 37);
-            this.LatticePositionDC1TextBox.Name = "LatticePositionDC1TextBox";
-            this.LatticePositionDC1TextBox.Size = new System.Drawing.Size(43, 20);
-            this.LatticePositionDC1TextBox.TabIndex = 145;
-            this.LatticePositionDC1TextBox.Text = "0";
-            // 
-            // LatticePositionStart
-            // 
-            this.LatticePositionStart.BackColor = System.Drawing.Color.Gainsboro;
-            this.LatticePositionStart.Location = new System.Drawing.Point(17, 314);
-            this.LatticePositionStart.Name = "LatticePositionStart";
-            this.LatticePositionStart.Size = new System.Drawing.Size(158, 31);
-            this.LatticePositionStart.TabIndex = 149;
-            this.LatticePositionStart.Text = "Start *Lattice* Scan";
-            this.LatticePositionStart.UseVisualStyleBackColor = false;
-            // 
-            // groupBox47
-            // 
-            this.groupBox47.Controls.Add(this.LatticePositionComboBox);
-            this.groupBox47.Location = new System.Drawing.Point(17, 241);
-            this.groupBox47.Name = "groupBox47";
-            this.groupBox47.Size = new System.Drawing.Size(146, 54);
-            this.groupBox47.TabIndex = 146;
-            this.groupBox47.TabStop = false;
-            this.groupBox47.Text = "Data Steam";
-            // 
-            // LatticePositionComboBox
-            // 
-            this.LatticePositionComboBox.FormattingEnabled = true;
-            this.LatticePositionComboBox.Items.AddRange(new object[] {
-            "PMT",
-            "Camera",
-            "PMT & Camera",
-            "Dev3AI2",
-            "Correlator:Sum"});
-            this.LatticePositionComboBox.Location = new System.Drawing.Point(10, 19);
-            this.LatticePositionComboBox.Name = "LatticePositionComboBox";
-            this.LatticePositionComboBox.Size = new System.Drawing.Size(121, 21);
-            this.LatticePositionComboBox.TabIndex = 0;
-            this.LatticePositionComboBox.Text = "PMT";
-            // 
-            // label141
-            // 
-            this.label141.AutoSize = true;
-            this.label141.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label141.Location = new System.Drawing.Point(14, 77);
-            this.label141.Name = "label141";
-            this.label141.Size = new System.Drawing.Size(53, 13);
-            this.label141.TabIndex = 144;
-            this.label141.Text = "Amplitude";
-            // 
-            // LatticePositionAmplitudeText
-            // 
-            this.LatticePositionAmplitudeText.Location = new System.Drawing.Point(17, 93);
-            this.LatticePositionAmplitudeText.Name = "LatticePositionAmplitudeText";
-            this.LatticePositionAmplitudeText.Size = new System.Drawing.Size(43, 20);
-            this.LatticePositionAmplitudeText.TabIndex = 143;
-            this.LatticePositionAmplitudeText.Text = "1";
-            // 
-            // label188
-            // 
-            this.label188.AutoSize = true;
-            this.label188.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label188.Location = new System.Drawing.Point(78, 77);
-            this.label188.Name = "label188";
-            this.label188.Size = new System.Drawing.Size(106, 13);
-            this.label188.TabIndex = 142;
-            this.label188.Text = "# of point to average";
-            // 
-            // LatticePositionNumAveText
-            // 
-            this.LatticePositionNumAveText.Location = new System.Drawing.Point(105, 93);
-            this.LatticePositionNumAveText.Name = "LatticePositionNumAveText";
-            this.LatticePositionNumAveText.Size = new System.Drawing.Size(43, 20);
-            this.LatticePositionNumAveText.TabIndex = 141;
-            this.LatticePositionNumAveText.Text = "5";
-            // 
-            // groupBox34
-            // 
-            this.groupBox34.Controls.Add(this.ElectrodeScanSaveCheckbox);
-            this.groupBox34.Controls.Add(this.ElectrodeScanStart);
-            this.groupBox34.Controls.Add(this.groupBox41);
-            this.groupBox34.Controls.Add(this.groupBox29);
-            this.groupBox34.Location = new System.Drawing.Point(474, 384);
-            this.groupBox34.Name = "groupBox34";
-            this.groupBox34.Size = new System.Drawing.Size(365, 395);
-            this.groupBox34.TabIndex = 225;
-            this.groupBox34.TabStop = false;
-            this.groupBox34.Text = "Electrode Scan";
-            // 
-            // ElectrodeScanSaveCheckbox
-            // 
-            this.ElectrodeScanSaveCheckbox.AutoSize = true;
-            this.ElectrodeScanSaveCheckbox.Checked = true;
-            this.ElectrodeScanSaveCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ElectrodeScanSaveCheckbox.Location = new System.Drawing.Point(37, 315);
-            this.ElectrodeScanSaveCheckbox.Name = "ElectrodeScanSaveCheckbox";
-            this.ElectrodeScanSaveCheckbox.Size = new System.Drawing.Size(85, 17);
-            this.ElectrodeScanSaveCheckbox.TabIndex = 224;
-            this.ElectrodeScanSaveCheckbox.Text = "Save Scan?";
-            this.ElectrodeScanSaveCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // ElectrodeScanStart
-            // 
-            this.ElectrodeScanStart.BackColor = System.Drawing.Color.Gainsboro;
-            this.ElectrodeScanStart.Location = new System.Drawing.Point(27, 340);
-            this.ElectrodeScanStart.Name = "ElectrodeScanStart";
-            this.ElectrodeScanStart.Size = new System.Drawing.Size(158, 31);
-            this.ElectrodeScanStart.TabIndex = 223;
-            this.ElectrodeScanStart.Text = "Start *Electrode* Scan";
-            this.ElectrodeScanStart.UseVisualStyleBackColor = false;
-            this.ElectrodeScanStart.Click += new System.EventHandler(this.ElectrodeScanStart_Click);
-            // 
-            // groupBox41
-            // 
-            this.groupBox41.Controls.Add(this.ElectrodeScanComboBox);
-            this.groupBox41.Location = new System.Drawing.Point(27, 227);
-            this.groupBox41.Name = "groupBox41";
-            this.groupBox41.Size = new System.Drawing.Size(146, 54);
-            this.groupBox41.TabIndex = 222;
-            this.groupBox41.TabStop = false;
-            this.groupBox41.Text = "Data Steam";
-            // 
-            // ElectrodeScanComboBox
-            // 
-            this.ElectrodeScanComboBox.FormattingEnabled = true;
-            this.ElectrodeScanComboBox.Items.AddRange(new object[] {
-            "PMT",
-            "Camera",
-            "CameraImage",
-            "Dev3AI2",
-            "Correlator:Sum",
-            "Correlator:Channels"});
-            this.ElectrodeScanComboBox.Location = new System.Drawing.Point(10, 19);
-            this.ElectrodeScanComboBox.Name = "ElectrodeScanComboBox";
-            this.ElectrodeScanComboBox.Size = new System.Drawing.Size(121, 21);
-            this.ElectrodeScanComboBox.TabIndex = 0;
-            this.ElectrodeScanComboBox.Text = "PMT";
-            // 
-            // groupBox29
-            // 
-            this.groupBox29.Controls.Add(this.label73);
-            this.groupBox29.Controls.Add(this.label74);
-            this.groupBox29.Controls.Add(this.ElectrodeScanEndValue2Textbox);
-            this.groupBox29.Controls.Add(this.ElectrodeScanStartValue2Textbox);
-            this.groupBox29.Controls.Add(this.label43);
-            this.groupBox29.Controls.Add(this.ElectrodeScanPMTAveragingTextbox);
-            this.groupBox29.Controls.Add(this.label42);
-            this.groupBox29.Controls.Add(this.label41);
-            this.groupBox29.Controls.Add(this.ElectrodeScanDC2TextBox);
-            this.groupBox29.Controls.Add(this.ElectrodeScanDC1TextBox);
-            this.groupBox29.Controls.Add(this.label40);
-            this.groupBox29.Controls.Add(this.label35);
-            this.groupBox29.Controls.Add(this.label34);
-            this.groupBox29.Controls.Add(this.ElectrodeScanNumPointsTextbox);
-            this.groupBox29.Controls.Add(this.ElectrodeScanEndValue1Textbox);
-            this.groupBox29.Controls.Add(this.ElectrodeScanStartValue1Textbox);
-            this.groupBox29.Location = new System.Drawing.Point(27, 30);
-            this.groupBox29.Name = "groupBox29";
-            this.groupBox29.Size = new System.Drawing.Size(288, 169);
-            this.groupBox29.TabIndex = 221;
-            this.groupBox29.TabStop = false;
-            this.groupBox29.Text = "Scan Parameters";
-            // 
-            // label73
-            // 
-            this.label73.AutoSize = true;
-            this.label73.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label73.Location = new System.Drawing.Point(230, 64);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(32, 13);
-            this.label73.TabIndex = 144;
-            this.label73.Text = "Vend";
-            // 
-            // label74
-            // 
-            this.label74.AutoSize = true;
-            this.label74.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label74.Location = new System.Drawing.Point(167, 64);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(34, 13);
-            this.label74.TabIndex = 143;
-            this.label74.Text = "Vstart";
-            // 
-            // ElectrodeScanEndValue2Textbox
-            // 
-            this.ElectrodeScanEndValue2Textbox.Location = new System.Drawing.Point(226, 80);
-            this.ElectrodeScanEndValue2Textbox.Name = "ElectrodeScanEndValue2Textbox";
-            this.ElectrodeScanEndValue2Textbox.Size = new System.Drawing.Size(43, 20);
-            this.ElectrodeScanEndValue2Textbox.TabIndex = 142;
-            this.ElectrodeScanEndValue2Textbox.Text = "7";
-            // 
-            // ElectrodeScanStartValue2Textbox
-            // 
-            this.ElectrodeScanStartValue2Textbox.Location = new System.Drawing.Point(164, 80);
-            this.ElectrodeScanStartValue2Textbox.Name = "ElectrodeScanStartValue2Textbox";
-            this.ElectrodeScanStartValue2Textbox.Size = new System.Drawing.Size(43, 20);
-            this.ElectrodeScanStartValue2Textbox.TabIndex = 141;
-            this.ElectrodeScanStartValue2Textbox.Text = "11";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label43.Location = new System.Drawing.Point(16, 120);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(115, 13);
-            this.label43.TabIndex = 140;
-            this.label43.Text = "PMT points to average";
-            // 
-            // ElectrodeScanPMTAveragingTextbox
-            // 
-            this.ElectrodeScanPMTAveragingTextbox.Location = new System.Drawing.Point(19, 136);
-            this.ElectrodeScanPMTAveragingTextbox.Name = "ElectrodeScanPMTAveragingTextbox";
-            this.ElectrodeScanPMTAveragingTextbox.Size = new System.Drawing.Size(43, 20);
-            this.ElectrodeScanPMTAveragingTextbox.TabIndex = 139;
-            this.ElectrodeScanPMTAveragingTextbox.Text = "1";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.ForeColor = System.Drawing.Color.Red;
-            this.label42.Location = new System.Drawing.Point(171, 20);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(28, 13);
-            this.label42.TabIndex = 138;
-            this.label42.Text = "DC2";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.ForeColor = System.Drawing.Color.Red;
-            this.label41.Location = new System.Drawing.Point(26, 20);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(28, 13);
-            this.label41.TabIndex = 137;
-            this.label41.Text = "DC1";
-            // 
-            // ElectrodeScanDC2TextBox
-            // 
-            this.ElectrodeScanDC2TextBox.Location = new System.Drawing.Point(164, 37);
-            this.ElectrodeScanDC2TextBox.Name = "ElectrodeScanDC2TextBox";
-            this.ElectrodeScanDC2TextBox.Size = new System.Drawing.Size(43, 20);
-            this.ElectrodeScanDC2TextBox.TabIndex = 136;
-            this.ElectrodeScanDC2TextBox.Text = "7";
-            // 
-            // ElectrodeScanDC1TextBox
-            // 
-            this.ElectrodeScanDC1TextBox.Location = new System.Drawing.Point(19, 37);
-            this.ElectrodeScanDC1TextBox.Name = "ElectrodeScanDC1TextBox";
-            this.ElectrodeScanDC1TextBox.Size = new System.Drawing.Size(43, 20);
-            this.ElectrodeScanDC1TextBox.TabIndex = 135;
-            this.ElectrodeScanDC1TextBox.Text = "0";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label40.Location = new System.Drawing.Point(145, 119);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(42, 13);
-            this.label40.TabIndex = 134;
-            this.label40.Text = "#points";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label35.Location = new System.Drawing.Point(85, 64);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(32, 13);
-            this.label35.TabIndex = 133;
-            this.label35.Text = "Vend";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label34.Location = new System.Drawing.Point(22, 64);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(34, 13);
-            this.label34.TabIndex = 132;
-            this.label34.Text = "Vstart";
-            // 
-            // ElectrodeScanNumPointsTextbox
-            // 
-            this.ElectrodeScanNumPointsTextbox.Location = new System.Drawing.Point(144, 135);
-            this.ElectrodeScanNumPointsTextbox.Name = "ElectrodeScanNumPointsTextbox";
-            this.ElectrodeScanNumPointsTextbox.Size = new System.Drawing.Size(43, 20);
-            this.ElectrodeScanNumPointsTextbox.TabIndex = 131;
-            this.ElectrodeScanNumPointsTextbox.Text = "20";
-            // 
-            // ElectrodeScanEndValue1Textbox
-            // 
-            this.ElectrodeScanEndValue1Textbox.Location = new System.Drawing.Point(81, 80);
-            this.ElectrodeScanEndValue1Textbox.Name = "ElectrodeScanEndValue1Textbox";
-            this.ElectrodeScanEndValue1Textbox.Size = new System.Drawing.Size(43, 20);
-            this.ElectrodeScanEndValue1Textbox.TabIndex = 130;
-            this.ElectrodeScanEndValue1Textbox.Text = "14";
-            // 
-            // ElectrodeScanStartValue1Textbox
-            // 
-            this.ElectrodeScanStartValue1Textbox.Location = new System.Drawing.Point(19, 80);
-            this.ElectrodeScanStartValue1Textbox.Name = "ElectrodeScanStartValue1Textbox";
-            this.ElectrodeScanStartValue1Textbox.Size = new System.Drawing.Size(43, 20);
-            this.ElectrodeScanStartValue1Textbox.TabIndex = 129;
-            this.ElectrodeScanStartValue1Textbox.Text = "10";
-            // 
-            // groupBox80
-            // 
-            this.groupBox80.Controls.Add(this.SliderScanSaveCheckbox);
-            this.groupBox80.Controls.Add(this.SliderScanStart);
-            this.groupBox80.Controls.Add(this.groupBox62);
-            this.groupBox80.Controls.Add(this.groupBox33);
-            this.groupBox80.Controls.Add(this.groupBox61);
-            this.groupBox80.Location = new System.Drawing.Point(38, 372);
-            this.groupBox80.Name = "groupBox80";
-            this.groupBox80.Size = new System.Drawing.Size(379, 416);
-            this.groupBox80.TabIndex = 220;
-            this.groupBox80.TabStop = false;
-            this.groupBox80.Text = "Slider Scan";
-            // 
-            // SliderScanSaveCheckbox
-            // 
-            this.SliderScanSaveCheckbox.AutoSize = true;
-            this.SliderScanSaveCheckbox.Checked = true;
-            this.SliderScanSaveCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.SliderScanSaveCheckbox.Location = new System.Drawing.Point(49, 342);
-            this.SliderScanSaveCheckbox.Name = "SliderScanSaveCheckbox";
-            this.SliderScanSaveCheckbox.Size = new System.Drawing.Size(85, 17);
-            this.SliderScanSaveCheckbox.TabIndex = 219;
-            this.SliderScanSaveCheckbox.Text = "Save Scan?";
-            this.SliderScanSaveCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // SliderScanStart
-            // 
-            this.SliderScanStart.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.SliderScanStart.ForeColor = System.Drawing.Color.IndianRed;
-            this.SliderScanStart.Location = new System.Drawing.Point(39, 365);
-            this.SliderScanStart.Name = "SliderScanStart";
-            this.SliderScanStart.Size = new System.Drawing.Size(113, 31);
-            this.SliderScanStart.TabIndex = 218;
-            this.SliderScanStart.Text = "Start *Slider* Scan";
-            this.SliderScanStart.UseVisualStyleBackColor = false;
-            this.SliderScanStart.Click += new System.EventHandler(this.SliderScanStart_Click);
-            // 
-            // groupBox62
-            // 
-            this.groupBox62.Controls.Add(this.SliderScanSelection);
-            this.groupBox62.Location = new System.Drawing.Point(39, 253);
-            this.groupBox62.Name = "groupBox62";
-            this.groupBox62.Size = new System.Drawing.Size(146, 54);
-            this.groupBox62.TabIndex = 217;
-            this.groupBox62.TabStop = false;
-            this.groupBox62.Text = "Slider";
-            // 
-            // SliderScanSelection
-            // 
-            this.SliderScanSelection.FormattingEnabled = true;
-            this.SliderScanSelection.Items.AddRange(new object[] {
-            "BxSlider",
-            "TickleSlider",
-            "Sideband402Control",
-            "TransferCavity",
-            "RepumperSlider",
-            "DXSlider",
-            "ArrayTotalSlider",
-            "DCVertDipoleSlider",
-            "DCVertQuadSlider",
-            "TotalBiasSlider",
-            "TrapHeightSlider",
-            "QuadrupoleTilt",
-            "QuadTiltRatioSlider",
-            "SnakeRatioSlider",
-            "RightFingersSlider",
-            "LeftFingersSlider",
-            "SnakeOnlySlider",
-            "RecapturePowerSlider",
-            "SideBeam370Power",
-            "LatticePowerControl",
-            "CavityCoolingPowerControl",
-            "RamanSlider",
-            "CorrelatorBinningPhaseSlider"});
-            this.SliderScanSelection.Location = new System.Drawing.Point(10, 19);
-            this.SliderScanSelection.Name = "SliderScanSelection";
-            this.SliderScanSelection.Size = new System.Drawing.Size(121, 21);
-            this.SliderScanSelection.TabIndex = 0;
-            this.SliderScanSelection.Text = "PMT";
-            // 
-            // groupBox33
-            // 
-            this.groupBox33.Controls.Add(this.SliderScanComboBox);
-            this.groupBox33.Location = new System.Drawing.Point(39, 178);
-            this.groupBox33.Name = "groupBox33";
-            this.groupBox33.Size = new System.Drawing.Size(146, 54);
-            this.groupBox33.TabIndex = 216;
-            this.groupBox33.TabStop = false;
-            this.groupBox33.Text = "Data Steam";
-            // 
-            // SliderScanComboBox
-            // 
-            this.SliderScanComboBox.FormattingEnabled = true;
-            this.SliderScanComboBox.Items.AddRange(new object[] {
-            "PMT",
-            "Camera",
-            "CameraImage",
-            "Dev3AI2",
-            "Correlator:Sum",
-            "Correlator:Channels"});
-            this.SliderScanComboBox.Location = new System.Drawing.Point(10, 19);
-            this.SliderScanComboBox.Name = "SliderScanComboBox";
-            this.SliderScanComboBox.Size = new System.Drawing.Size(121, 21);
-            this.SliderScanComboBox.TabIndex = 0;
-            this.SliderScanComboBox.Text = "PMT";
-            // 
-            // groupBox61
-            // 
-            this.groupBox61.Controls.Add(this.label160);
-            this.groupBox61.Controls.Add(this.SliderScanPMTAveragingTextbox);
-            this.groupBox61.Controls.Add(this.label161);
-            this.groupBox61.Controls.Add(this.label162);
-            this.groupBox61.Controls.Add(this.label163);
-            this.groupBox61.Controls.Add(this.SliderScanNumPointsTextbox);
-            this.groupBox61.Controls.Add(this.SliderScanEndValueTextbox);
-            this.groupBox61.Controls.Add(this.SliderScanStartValueTextbox);
-            this.groupBox61.Location = new System.Drawing.Point(39, 25);
-            this.groupBox61.Name = "groupBox61";
-            this.groupBox61.Size = new System.Drawing.Size(316, 127);
-            this.groupBox61.TabIndex = 215;
-            this.groupBox61.TabStop = false;
-            this.groupBox61.Text = "Scan Parameters";
-            // 
-            // label160
-            // 
-            this.label160.AutoSize = true;
-            this.label160.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label160.Location = new System.Drawing.Point(9, 75);
-            this.label160.Name = "label160";
-            this.label160.Size = new System.Drawing.Size(115, 13);
-            this.label160.TabIndex = 140;
-            this.label160.Text = "PMT points to average";
-            // 
-            // SliderScanPMTAveragingTextbox
-            // 
-            this.SliderScanPMTAveragingTextbox.Location = new System.Drawing.Point(12, 91);
-            this.SliderScanPMTAveragingTextbox.Name = "SliderScanPMTAveragingTextbox";
-            this.SliderScanPMTAveragingTextbox.Size = new System.Drawing.Size(43, 20);
-            this.SliderScanPMTAveragingTextbox.TabIndex = 139;
-            this.SliderScanPMTAveragingTextbox.Text = "2";
-            // 
-            // label161
-            // 
-            this.label161.AutoSize = true;
-            this.label161.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label161.Location = new System.Drawing.Point(210, 25);
-            this.label161.Name = "label161";
-            this.label161.Size = new System.Drawing.Size(42, 13);
-            this.label161.TabIndex = 134;
-            this.label161.Text = "#points";
-            // 
-            // label162
-            // 
-            this.label162.AutoSize = true;
-            this.label162.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label162.Location = new System.Drawing.Point(115, 25);
-            this.label162.Name = "label162";
-            this.label162.Size = new System.Drawing.Size(56, 13);
-            this.label162.TabIndex = 133;
-            this.label162.Text = "End Value";
-            // 
-            // label163
-            // 
-            this.label163.AutoSize = true;
-            this.label163.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label163.Location = new System.Drawing.Point(7, 25);
-            this.label163.Name = "label163";
-            this.label163.Size = new System.Drawing.Size(59, 13);
-            this.label163.TabIndex = 132;
-            this.label163.Text = "Start Value";
-            // 
-            // SliderScanNumPointsTextbox
-            // 
-            this.SliderScanNumPointsTextbox.Location = new System.Drawing.Point(211, 41);
-            this.SliderScanNumPointsTextbox.Name = "SliderScanNumPointsTextbox";
-            this.SliderScanNumPointsTextbox.Size = new System.Drawing.Size(43, 20);
-            this.SliderScanNumPointsTextbox.TabIndex = 131;
-            this.SliderScanNumPointsTextbox.Text = "50";
-            // 
-            // SliderScanEndValueTextbox
-            // 
-            this.SliderScanEndValueTextbox.Location = new System.Drawing.Point(118, 41);
-            this.SliderScanEndValueTextbox.Name = "SliderScanEndValueTextbox";
-            this.SliderScanEndValueTextbox.Size = new System.Drawing.Size(43, 20);
-            this.SliderScanEndValueTextbox.TabIndex = 130;
-            this.SliderScanEndValueTextbox.Text = "1";
-            // 
-            // SliderScanStartValueTextbox
-            // 
-            this.SliderScanStartValueTextbox.Location = new System.Drawing.Point(13, 41);
-            this.SliderScanStartValueTextbox.Name = "SliderScanStartValueTextbox";
-            this.SliderScanStartValueTextbox.Size = new System.Drawing.Size(43, 20);
-            this.SliderScanStartValueTextbox.TabIndex = 129;
-            this.SliderScanStartValueTextbox.Text = "-1";
-            // 
             // groupBox36
             // 
             this.groupBox36.Controls.Add(this.label67);
@@ -7190,7 +7207,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.68687F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 464F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 546F));
             this.tableLayoutPanel4.Controls.Add(this.label112, 4, 0);
             this.tableLayoutPanel4.Controls.Add(this.panel5, 4, 2);
             this.tableLayoutPanel4.Controls.Add(this.slow_in2DelayText, 3, 2);
@@ -7220,7 +7237,7 @@
             // 
             this.label112.AutoSize = true;
             this.label112.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label112.Location = new System.Drawing.Point(94, 4);
+            this.label112.Location = new System.Drawing.Point(12, 4);
             this.label112.Name = "label112";
             this.label112.Size = new System.Drawing.Size(71, 24);
             this.label112.TabIndex = 181;
@@ -7231,7 +7248,7 @@
             this.panel5.Controls.Add(this.c2si2);
             this.panel5.Controls.Add(this.Indsi2);
             this.panel5.Controls.Add(this.c1si2);
-            this.panel5.Location = new System.Drawing.Point(94, 91);
+            this.panel5.Location = new System.Drawing.Point(12, 91);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(164, 21);
             this.panel5.TabIndex = 180;
@@ -7270,7 +7287,7 @@
             // 
             // slow_in2DelayText
             // 
-            this.slow_in2DelayText.Location = new System.Drawing.Point(-2, 91);
+            this.slow_in2DelayText.Location = new System.Drawing.Point(-84, 91);
             this.slow_in2DelayText.Name = "slow_in2DelayText";
             this.slow_in2DelayText.Size = new System.Drawing.Size(78, 20);
             this.slow_in2DelayText.TabIndex = 11;
@@ -7278,7 +7295,7 @@
             // 
             // slow_in2OnTimeText
             // 
-            this.slow_in2OnTimeText.Location = new System.Drawing.Point(-91, 91);
+            this.slow_in2OnTimeText.Location = new System.Drawing.Point(-173, 91);
             this.slow_in2OnTimeText.Name = "slow_in2OnTimeText";
             this.slow_in2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_in2OnTimeText.TabIndex = 10;
@@ -7286,7 +7303,7 @@
             // 
             // slow_in1DelayText
             // 
-            this.slow_in1DelayText.Location = new System.Drawing.Point(-2, 62);
+            this.slow_in1DelayText.Location = new System.Drawing.Point(-84, 62);
             this.slow_in1DelayText.Name = "slow_in1DelayText";
             this.slow_in1DelayText.Size = new System.Drawing.Size(78, 20);
             this.slow_in1DelayText.TabIndex = 9;
@@ -7294,7 +7311,7 @@
             // 
             // slow_in1OnTimeText
             // 
-            this.slow_in1OnTimeText.Location = new System.Drawing.Point(-91, 62);
+            this.slow_in1OnTimeText.Location = new System.Drawing.Point(-173, 62);
             this.slow_in1OnTimeText.Name = "slow_in1OnTimeText";
             this.slow_in1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_in1OnTimeText.TabIndex = 8;
@@ -7304,7 +7321,7 @@
             // 
             this.label113.AutoSize = true;
             this.label113.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label113.Location = new System.Drawing.Point(-2, 4);
+            this.label113.Location = new System.Drawing.Point(-84, 4);
             this.label113.Name = "label113";
             this.label113.Size = new System.Drawing.Size(87, 24);
             this.label113.TabIndex = 7;
@@ -7314,7 +7331,7 @@
             // 
             this.label114.AutoSize = true;
             this.label114.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label114.Location = new System.Drawing.Point(-91, 4);
+            this.label114.Location = new System.Drawing.Point(-173, 4);
             this.label114.Name = "label114";
             this.label114.Size = new System.Drawing.Size(79, 48);
             this.label114.TabIndex = 6;
@@ -7322,7 +7339,7 @@
             // 
             // slow_in2SigName
             // 
-            this.slow_in2SigName.Location = new System.Drawing.Point(-23, 91);
+            this.slow_in2SigName.Location = new System.Drawing.Point(-49, 91);
             this.slow_in2SigName.Name = "slow_in2SigName";
             this.slow_in2SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_in2SigName.TabIndex = 5;
@@ -7331,7 +7348,7 @@
             // 
             this.label165.AutoSize = true;
             this.label165.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label165.Location = new System.Drawing.Point(-23, 4);
+            this.label165.Location = new System.Drawing.Point(-49, 4);
             this.label165.Name = "label165";
             this.label165.Size = new System.Drawing.Size(1, 24);
             this.label165.TabIndex = 2;
@@ -7369,7 +7386,7 @@
             // 
             // slow_in1SigName
             // 
-            this.slow_in1SigName.Location = new System.Drawing.Point(-23, 62);
+            this.slow_in1SigName.Location = new System.Drawing.Point(-49, 62);
             this.slow_in1SigName.Name = "slow_in1SigName";
             this.slow_in1SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_in1SigName.TabIndex = 4;
@@ -7380,7 +7397,7 @@
             this.panel6.Controls.Add(this.c2si1);
             this.panel6.Controls.Add(this.c1si1);
             this.panel6.Controls.Add(this.Indsi1);
-            this.panel6.Location = new System.Drawing.Point(94, 62);
+            this.panel6.Location = new System.Drawing.Point(12, 62);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(164, 21);
             this.panel6.TabIndex = 179;
@@ -7425,7 +7442,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.19231F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 464F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 546F));
             this.tableLayoutPanel3.Controls.Add(this.slow_out3DelayText, 3, 3);
             this.tableLayoutPanel3.Controls.Add(this.slow_out4OnTimeText, 2, 4);
             this.tableLayoutPanel3.Controls.Add(this.slow_out3OnTimeText, 2, 3);
@@ -7463,7 +7480,7 @@
             // slow_out3DelayText
             // 
             this.slow_out3DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out3DelayText.Location = new System.Drawing.Point(-3, 121);
+            this.slow_out3DelayText.Location = new System.Drawing.Point(-85, 121);
             this.slow_out3DelayText.Name = "slow_out3DelayText";
             this.slow_out3DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out3DelayText.TabIndex = 180;
@@ -7472,7 +7489,7 @@
             // slow_out4OnTimeText
             // 
             this.slow_out4OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out4OnTimeText.Location = new System.Drawing.Point(-91, 150);
+            this.slow_out4OnTimeText.Location = new System.Drawing.Point(-173, 150);
             this.slow_out4OnTimeText.Name = "slow_out4OnTimeText";
             this.slow_out4OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out4OnTimeText.TabIndex = 181;
@@ -7481,7 +7498,7 @@
             // slow_out3OnTimeText
             // 
             this.slow_out3OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out3OnTimeText.Location = new System.Drawing.Point(-91, 121);
+            this.slow_out3OnTimeText.Location = new System.Drawing.Point(-173, 121);
             this.slow_out3OnTimeText.Name = "slow_out3OnTimeText";
             this.slow_out3OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out3OnTimeText.TabIndex = 180;
@@ -7509,7 +7526,7 @@
             // 
             // slow_out4SigName
             // 
-            this.slow_out4SigName.Location = new System.Drawing.Point(-22, 150);
+            this.slow_out4SigName.Location = new System.Drawing.Point(-46, 150);
             this.slow_out4SigName.Name = "slow_out4SigName";
             this.slow_out4SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_out4SigName.TabIndex = 182;
@@ -7520,7 +7537,7 @@
             this.panel4.Controls.Add(this.notc1so2);
             this.panel4.Controls.Add(this.c1so2);
             this.panel4.Controls.Add(this.Indso2);
-            this.panel4.Location = new System.Drawing.Point(94, 91);
+            this.panel4.Location = new System.Drawing.Point(12, 91);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(147, 21);
             this.panel4.TabIndex = 178;
@@ -7559,7 +7576,7 @@
             // 
             // slow_out3SigName
             // 
-            this.slow_out3SigName.Location = new System.Drawing.Point(-22, 121);
+            this.slow_out3SigName.Location = new System.Drawing.Point(-46, 121);
             this.slow_out3SigName.Name = "slow_out3SigName";
             this.slow_out3SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_out3SigName.TabIndex = 181;
@@ -7568,7 +7585,7 @@
             // slow_out2DelayText
             // 
             this.slow_out2DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out2DelayText.Location = new System.Drawing.Point(-3, 91);
+            this.slow_out2DelayText.Location = new System.Drawing.Point(-85, 91);
             this.slow_out2DelayText.Name = "slow_out2DelayText";
             this.slow_out2DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out2DelayText.TabIndex = 8;
@@ -7577,7 +7594,7 @@
             // slow_out2OnTimeText
             // 
             this.slow_out2OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out2OnTimeText.Location = new System.Drawing.Point(-91, 91);
+            this.slow_out2OnTimeText.Location = new System.Drawing.Point(-173, 91);
             this.slow_out2OnTimeText.Name = "slow_out2OnTimeText";
             this.slow_out2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out2OnTimeText.TabIndex = 6;
@@ -7585,7 +7602,7 @@
             // 
             // slow_out1OnTimeText
             // 
-            this.slow_out1OnTimeText.Location = new System.Drawing.Point(-91, 65);
+            this.slow_out1OnTimeText.Location = new System.Drawing.Point(-173, 65);
             this.slow_out1OnTimeText.Name = "slow_out1OnTimeText";
             this.slow_out1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.slow_out1OnTimeText.TabIndex = 5;
@@ -7595,7 +7612,7 @@
             // 
             this.label69.AutoSize = true;
             this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label69.Location = new System.Drawing.Point(-3, 4);
+            this.label69.Location = new System.Drawing.Point(-85, 4);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(90, 48);
             this.label69.TabIndex = 6;
@@ -7603,7 +7620,7 @@
             // 
             // slow_out2SigName
             // 
-            this.slow_out2SigName.Location = new System.Drawing.Point(-22, 91);
+            this.slow_out2SigName.Location = new System.Drawing.Point(-46, 91);
             this.slow_out2SigName.Name = "slow_out2SigName";
             this.slow_out2SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_out2SigName.TabIndex = 5;
@@ -7613,7 +7630,7 @@
             // 
             this.label70.AutoSize = true;
             this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label70.Location = new System.Drawing.Point(-22, 4);
+            this.label70.Location = new System.Drawing.Point(-46, 4);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(1, 24);
             this.label70.TabIndex = 2;
@@ -7651,7 +7668,7 @@
             // 
             // slow_out1SigName
             // 
-            this.slow_out1SigName.Location = new System.Drawing.Point(-22, 65);
+            this.slow_out1SigName.Location = new System.Drawing.Point(-46, 65);
             this.slow_out1SigName.Name = "slow_out1SigName";
             this.slow_out1SigName.Size = new System.Drawing.Size(1, 20);
             this.slow_out1SigName.TabIndex = 4;
@@ -7661,7 +7678,7 @@
             // 
             this.label97.AutoSize = true;
             this.label97.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label97.Location = new System.Drawing.Point(-91, 4);
+            this.label97.Location = new System.Drawing.Point(-173, 4);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(79, 24);
             this.label97.TabIndex = 5;
@@ -7669,7 +7686,7 @@
             // 
             // slow_out1DelayText
             // 
-            this.slow_out1DelayText.Location = new System.Drawing.Point(-3, 65);
+            this.slow_out1DelayText.Location = new System.Drawing.Point(-85, 65);
             this.slow_out1DelayText.Name = "slow_out1DelayText";
             this.slow_out1DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out1DelayText.TabIndex = 7;
@@ -7679,7 +7696,7 @@
             // 
             this.label111.AutoSize = true;
             this.label111.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label111.Location = new System.Drawing.Point(94, 4);
+            this.label111.Location = new System.Drawing.Point(12, 4);
             this.label111.Name = "label111";
             this.label111.Size = new System.Drawing.Size(71, 24);
             this.label111.TabIndex = 9;
@@ -7688,7 +7705,7 @@
             // slow_out4DelayText
             // 
             this.slow_out4DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.slow_out4DelayText.Location = new System.Drawing.Point(-3, 150);
+            this.slow_out4DelayText.Location = new System.Drawing.Point(-85, 150);
             this.slow_out4DelayText.Name = "slow_out4DelayText";
             this.slow_out4DelayText.Size = new System.Drawing.Size(79, 20);
             this.slow_out4DelayText.TabIndex = 183;
@@ -7702,7 +7719,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.29703F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 470F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 552F));
             this.tableLayoutPanel2.Controls.Add(this.label174, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel3, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.in2DelayText, 3, 2);
@@ -7732,7 +7749,7 @@
             // 
             this.label174.AutoSize = true;
             this.label174.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label174.Location = new System.Drawing.Point(96, 4);
+            this.label174.Location = new System.Drawing.Point(14, 4);
             this.label174.Name = "label174";
             this.label174.Size = new System.Drawing.Size(71, 24);
             this.label174.TabIndex = 181;
@@ -7743,7 +7760,7 @@
             this.panel3.Controls.Add(this.c2fi2);
             this.panel3.Controls.Add(this.Indfi2);
             this.panel3.Controls.Add(this.c1fi2);
-            this.panel3.Location = new System.Drawing.Point(96, 91);
+            this.panel3.Location = new System.Drawing.Point(14, 91);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(164, 21);
             this.panel3.TabIndex = 180;
@@ -7783,7 +7800,7 @@
             // in2DelayText
             // 
             this.in2DelayText.ForeColor = System.Drawing.Color.Gray;
-            this.in2DelayText.Location = new System.Drawing.Point(8, 91);
+            this.in2DelayText.Location = new System.Drawing.Point(-74, 91);
             this.in2DelayText.Name = "in2DelayText";
             this.in2DelayText.Size = new System.Drawing.Size(78, 20);
             this.in2DelayText.TabIndex = 11;
@@ -7792,7 +7809,7 @@
             // in2OnTimeText
             // 
             this.in2OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.in2OnTimeText.Location = new System.Drawing.Point(-85, 91);
+            this.in2OnTimeText.Location = new System.Drawing.Point(-167, 91);
             this.in2OnTimeText.Name = "in2OnTimeText";
             this.in2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in2OnTimeText.TabIndex = 10;
@@ -7801,7 +7818,7 @@
             // in1DelayText
             // 
             this.in1DelayText.ForeColor = System.Drawing.Color.DimGray;
-            this.in1DelayText.Location = new System.Drawing.Point(8, 62);
+            this.in1DelayText.Location = new System.Drawing.Point(-74, 62);
             this.in1DelayText.Name = "in1DelayText";
             this.in1DelayText.Size = new System.Drawing.Size(78, 20);
             this.in1DelayText.TabIndex = 9;
@@ -7810,7 +7827,7 @@
             // in1OnTimeText
             // 
             this.in1OnTimeText.ForeColor = System.Drawing.Color.Gray;
-            this.in1OnTimeText.Location = new System.Drawing.Point(-85, 62);
+            this.in1OnTimeText.Location = new System.Drawing.Point(-167, 62);
             this.in1OnTimeText.Name = "in1OnTimeText";
             this.in1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.in1OnTimeText.TabIndex = 8;
@@ -7820,7 +7837,7 @@
             // 
             this.label154.AutoSize = true;
             this.label154.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label154.Location = new System.Drawing.Point(8, 4);
+            this.label154.Location = new System.Drawing.Point(-74, 4);
             this.label154.Name = "label154";
             this.label154.Size = new System.Drawing.Size(54, 48);
             this.label154.TabIndex = 7;
@@ -7830,7 +7847,7 @@
             // 
             this.label152.AutoSize = true;
             this.label152.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label152.Location = new System.Drawing.Point(-85, 4);
+            this.label152.Location = new System.Drawing.Point(-167, 4);
             this.label152.Name = "label152";
             this.label152.Size = new System.Drawing.Size(83, 48);
             this.label152.TabIndex = 6;
@@ -7838,7 +7855,7 @@
             // 
             // in2SigName
             // 
-            this.in2SigName.Location = new System.Drawing.Point(-20, 91);
+            this.in2SigName.Location = new System.Drawing.Point(-44, 91);
             this.in2SigName.Name = "in2SigName";
             this.in2SigName.Size = new System.Drawing.Size(1, 20);
             this.in2SigName.TabIndex = 5;
@@ -7847,7 +7864,7 @@
             // 
             this.label147.AutoSize = true;
             this.label147.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label147.Location = new System.Drawing.Point(-20, 4);
+            this.label147.Location = new System.Drawing.Point(-44, 4);
             this.label147.Name = "label147";
             this.label147.Size = new System.Drawing.Size(1, 24);
             this.label147.TabIndex = 2;
@@ -7885,7 +7902,7 @@
             // 
             // in1SigName
             // 
-            this.in1SigName.Location = new System.Drawing.Point(-20, 62);
+            this.in1SigName.Location = new System.Drawing.Point(-44, 62);
             this.in1SigName.Name = "in1SigName";
             this.in1SigName.Size = new System.Drawing.Size(1, 20);
             this.in1SigName.TabIndex = 4;
@@ -7896,7 +7913,7 @@
             this.panel2.Controls.Add(this.c2fi1);
             this.panel2.Controls.Add(this.c1fi1);
             this.panel2.Controls.Add(this.Indfi1);
-            this.panel2.Location = new System.Drawing.Point(96, 62);
+            this.panel2.Location = new System.Drawing.Point(14, 62);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(164, 21);
             this.panel2.TabIndex = 179;
@@ -7941,7 +7958,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.71717F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 469F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 551F));
             this.tableLayoutPanel1.Controls.Add(this.out3DelayText, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.out4OnTimeText, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.out3OnTimeText, 2, 3);
@@ -7978,7 +7995,7 @@
             // 
             // out3DelayText
             // 
-            this.out3DelayText.Location = new System.Drawing.Point(3, 120);
+            this.out3DelayText.Location = new System.Drawing.Point(-79, 120);
             this.out3DelayText.Name = "out3DelayText";
             this.out3DelayText.Size = new System.Drawing.Size(79, 20);
             this.out3DelayText.TabIndex = 180;
@@ -7986,7 +8003,7 @@
             // 
             // out4OnTimeText
             // 
-            this.out4OnTimeText.Location = new System.Drawing.Point(-86, 149);
+            this.out4OnTimeText.Location = new System.Drawing.Point(-168, 149);
             this.out4OnTimeText.Name = "out4OnTimeText";
             this.out4OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out4OnTimeText.TabIndex = 181;
@@ -7994,7 +8011,7 @@
             // 
             // out3OnTimeText
             // 
-            this.out3OnTimeText.Location = new System.Drawing.Point(-86, 120);
+            this.out3OnTimeText.Location = new System.Drawing.Point(-168, 120);
             this.out3OnTimeText.Name = "out3OnTimeText";
             this.out3OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out3OnTimeText.TabIndex = 180;
@@ -8002,7 +8019,7 @@
             // 
             // out4SigName
             // 
-            this.out4SigName.Location = new System.Drawing.Point(-19, 149);
+            this.out4SigName.Location = new System.Drawing.Point(-42, 149);
             this.out4SigName.Name = "out4SigName";
             this.out4SigName.Size = new System.Drawing.Size(1, 20);
             this.out4SigName.TabIndex = 181;
@@ -8020,7 +8037,7 @@
             // 
             // out3SigName
             // 
-            this.out3SigName.Location = new System.Drawing.Point(-19, 120);
+            this.out3SigName.Location = new System.Drawing.Point(-42, 120);
             this.out3SigName.Name = "out3SigName";
             this.out3SigName.Size = new System.Drawing.Size(1, 20);
             this.out3SigName.TabIndex = 180;
@@ -8041,7 +8058,7 @@
             this.panel1.Controls.Add(this.notc1fo2);
             this.panel1.Controls.Add(this.c1fo2);
             this.panel1.Controls.Add(this.Indfo2);
-            this.panel1.Location = new System.Drawing.Point(96, 91);
+            this.panel1.Location = new System.Drawing.Point(14, 91);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(147, 21);
             this.panel1.TabIndex = 178;
@@ -8080,7 +8097,7 @@
             // 
             // out2DelayText
             // 
-            this.out2DelayText.Location = new System.Drawing.Point(3, 91);
+            this.out2DelayText.Location = new System.Drawing.Point(-79, 91);
             this.out2DelayText.Name = "out2DelayText";
             this.out2DelayText.Size = new System.Drawing.Size(79, 20);
             this.out2DelayText.TabIndex = 8;
@@ -8088,7 +8105,7 @@
             // 
             // out2OnTimeText
             // 
-            this.out2OnTimeText.Location = new System.Drawing.Point(-86, 91);
+            this.out2OnTimeText.Location = new System.Drawing.Point(-168, 91);
             this.out2OnTimeText.Name = "out2OnTimeText";
             this.out2OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out2OnTimeText.TabIndex = 6;
@@ -8096,7 +8113,7 @@
             // 
             // out1OnTimeText
             // 
-            this.out1OnTimeText.Location = new System.Drawing.Point(-86, 62);
+            this.out1OnTimeText.Location = new System.Drawing.Point(-168, 62);
             this.out1OnTimeText.Name = "out1OnTimeText";
             this.out1OnTimeText.Size = new System.Drawing.Size(79, 20);
             this.out1OnTimeText.TabIndex = 5;
@@ -8106,7 +8123,7 @@
             // 
             this.label153.AutoSize = true;
             this.label153.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label153.Location = new System.Drawing.Point(3, 4);
+            this.label153.Location = new System.Drawing.Point(-79, 4);
             this.label153.Name = "label153";
             this.label153.Size = new System.Drawing.Size(85, 48);
             this.label153.TabIndex = 6;
@@ -8114,7 +8131,7 @@
             // 
             // out2SigName
             // 
-            this.out2SigName.Location = new System.Drawing.Point(-19, 91);
+            this.out2SigName.Location = new System.Drawing.Point(-42, 91);
             this.out2SigName.Name = "out2SigName";
             this.out2SigName.Size = new System.Drawing.Size(1, 20);
             this.out2SigName.TabIndex = 5;
@@ -8124,7 +8141,7 @@
             // 
             this.label144.AutoSize = true;
             this.label144.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label144.Location = new System.Drawing.Point(-19, 4);
+            this.label144.Location = new System.Drawing.Point(-42, 4);
             this.label144.Name = "label144";
             this.label144.Size = new System.Drawing.Size(1, 24);
             this.label144.TabIndex = 2;
@@ -8162,7 +8179,7 @@
             // 
             // out1SigName
             // 
-            this.out1SigName.Location = new System.Drawing.Point(-19, 62);
+            this.out1SigName.Location = new System.Drawing.Point(-42, 62);
             this.out1SigName.Name = "out1SigName";
             this.out1SigName.Size = new System.Drawing.Size(1, 20);
             this.out1SigName.TabIndex = 4;
@@ -8172,7 +8189,7 @@
             // 
             this.label151.AutoSize = true;
             this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label151.Location = new System.Drawing.Point(-86, 4);
+            this.label151.Location = new System.Drawing.Point(-168, 4);
             this.label151.Name = "label151";
             this.label151.Size = new System.Drawing.Size(79, 24);
             this.label151.TabIndex = 5;
@@ -8180,7 +8197,7 @@
             // 
             // out1DelayText
             // 
-            this.out1DelayText.Location = new System.Drawing.Point(3, 62);
+            this.out1DelayText.Location = new System.Drawing.Point(-79, 62);
             this.out1DelayText.Name = "out1DelayText";
             this.out1DelayText.Size = new System.Drawing.Size(79, 20);
             this.out1DelayText.TabIndex = 7;
@@ -8190,7 +8207,7 @@
             // 
             this.label173.AutoSize = true;
             this.label173.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label173.Location = new System.Drawing.Point(96, 4);
+            this.label173.Location = new System.Drawing.Point(14, 4);
             this.label173.Name = "label173";
             this.label173.Size = new System.Drawing.Size(71, 24);
             this.label173.TabIndex = 9;
@@ -8198,21 +8215,42 @@
             // 
             // out4DelayText
             // 
-            this.out4DelayText.Location = new System.Drawing.Point(3, 149);
+            this.out4DelayText.Location = new System.Drawing.Point(-79, 149);
             this.out4DelayText.Name = "out4DelayText";
             this.out4DelayText.Size = new System.Drawing.Size(79, 20);
             this.out4DelayText.TabIndex = 182;
             this.out4DelayText.Text = "0";
             // 
-            // label58
+            // Keithley
             // 
-            this.label58.AutoSize = true;
-            this.label58.ForeColor = System.Drawing.Color.Blue;
-            this.label58.Location = new System.Drawing.Point(17, 85);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(31, 13);
-            this.label58.TabIndex = 225;
-            this.label58.Text = "EXT";
+            this.Keithley.Controls.Add(this.button7);
+            this.Keithley.Location = new System.Drawing.Point(4, 22);
+            this.Keithley.Name = "Keithley";
+            this.Keithley.Padding = new System.Windows.Forms.Padding(3);
+            this.Keithley.Size = new System.Drawing.Size(1892, 984);
+            this.Keithley.TabIndex = 20;
+            this.Keithley.Text = "Keithley";
+            this.Keithley.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(24, 21);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(92, 28);
+            this.button7.TabIndex = 43;
+            this.button7.Text = "Send";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form1
             // 
@@ -8224,13 +8262,6 @@
             this.Text = "Ion Array Controller";
             this.Disposed += new System.EventHandler(this.Form1_Disposed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_Closing);
-            this.FilenameTab.ResumeLayout(false);
-            this.FilenameTab.PerformLayout();
-            this.groupBox49.ResumeLayout(false);
-            this.groupBox49.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CommonFilenameSwitch)).EndInit();
-            this.groupBox48.ResumeLayout(false);
-            this.groupBox48.PerformLayout();
             this.CameraTab.ResumeLayout(false);
             this.CameraTab.PerformLayout();
             this.groupBox39.ResumeLayout(false);
@@ -8265,13 +8296,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.SaveCorrelatorToggle)).EndInit();
             this.groupBox75.ResumeLayout(false);
             this.groupBox75.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nbinSwitch)).EndInit();
             this.groupBox74.ResumeLayout(false);
             this.groupBox74.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intTselector)).EndInit();
-            this.groupBox73.ResumeLayout(false);
-            this.groupBox73.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chooseCode)).EndInit();
             this.groupBox58.ResumeLayout(false);
             this.groupBox58.PerformLayout();
             this.groupBox52.ResumeLayout(false);
@@ -8337,6 +8364,28 @@
             this.groupBox16.PerformLayout();
             this.MainControlTab.ResumeLayout(false);
             this.MainControlTab.PerformLayout();
+            this.groupBox54.ResumeLayout(false);
+            this.groupBox54.PerformLayout();
+            this.groupBox90.ResumeLayout(false);
+            this.groupBox90.PerformLayout();
+            this.groupBox89.ResumeLayout(false);
+            this.groupBox89.PerformLayout();
+            this.groupBox88.ResumeLayout(false);
+            this.groupBox88.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RamanS2Shutter)).EndInit();
+            this.groupBox87.ResumeLayout(false);
+            this.groupBox87.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RamanS1Shutter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TimerSwitch)).EndInit();
+            this.groupBox86.ResumeLayout(false);
+            this.groupBox86.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LatticeLockSwitch)).EndInit();
+            this.groupBox85.ResumeLayout(false);
+            this.groupBox85.PerformLayout();
+            this.groupBox73.ResumeLayout(false);
+            this.groupBox73.PerformLayout();
+            this.groupBox72.ResumeLayout(false);
+            this.groupBox72.PerformLayout();
             this.groupBox71.ResumeLayout(false);
             this.groupBox71.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Repumper935Switch)).EndInit();
@@ -8345,7 +8394,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Switch638)).EndInit();
             this.groupBox31.ResumeLayout(false);
             this.groupBox31.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Dev2DO3Switch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LatticeSwitch)).EndInit();
             this.groupBox32.ResumeLayout(false);
             this.groupBox32.PerformLayout();
             this.groupBox30.ResumeLayout(false);
@@ -8366,10 +8415,12 @@
             this.RigOptGroupBox.PerformLayout();
             this.ExperimentalSequencer.ResumeLayout(false);
             this.ExperimentalSequencer.PerformLayout();
+            this.groupBox49.ResumeLayout(false);
+            this.groupBox49.PerformLayout();
+            this.groupBox48.ResumeLayout(false);
+            this.groupBox48.PerformLayout();
             this.groupBox82.ResumeLayout(false);
             this.groupBox82.PerformLayout();
-            this.groupBox54.ResumeLayout(false);
-            this.groupBox54.PerformLayout();
             this.groupBox70.ResumeLayout(false);
             this.groupBox66.ResumeLayout(false);
             this.groupBox66.PerformLayout();
@@ -8395,6 +8446,8 @@
             this.groupBox55.PerformLayout();
             this.groupBox64.ResumeLayout(false);
             this.groupBox64.PerformLayout();
+            this.groupBox91.ResumeLayout(false);
+            this.groupBox91.PerformLayout();
             this.groupBox84.ResumeLayout(false);
             this.groupBox84.PerformLayout();
             this.groupBox67.ResumeLayout(false);
@@ -8404,27 +8457,17 @@
             this.groupBox28.ResumeLayout(false);
             this.groupBox25.ResumeLayout(false);
             this.groupBox25.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.groupBox40.ResumeLayout(false);
+            this.groupBox40.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LatticePositionFeedbackSwitch)).EndInit();
+            this.groupBox47.ResumeLayout(false);
             this.RecycleBin.ResumeLayout(false);
             this.RecycleBin.PerformLayout();
             this.TickleResetBox.ResumeLayout(false);
             this.TickleResetBox.PerformLayout();
             this.ArrayResetBox.ResumeLayout(false);
             this.ArrayResetBox.PerformLayout();
-            this.groupBox40.ResumeLayout(false);
-            this.groupBox40.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.LatticePositionFeedbackSwitch)).EndInit();
-            this.groupBox47.ResumeLayout(false);
-            this.groupBox34.ResumeLayout(false);
-            this.groupBox34.PerformLayout();
-            this.groupBox41.ResumeLayout(false);
-            this.groupBox29.ResumeLayout(false);
-            this.groupBox29.PerformLayout();
-            this.groupBox80.ResumeLayout(false);
-            this.groupBox80.PerformLayout();
-            this.groupBox62.ResumeLayout(false);
-            this.groupBox33.ResumeLayout(false);
-            this.groupBox61.ResumeLayout(false);
-            this.groupBox61.PerformLayout();
             this.groupBox36.ResumeLayout(false);
             this.groupBox36.PerformLayout();
             this.groupBox35.ResumeLayout(false);
@@ -8449,6 +8492,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.Keithley.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -8466,40 +8510,6 @@
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor toolStripPropertyEditor1;
-        private System.Windows.Forms.TabPage FilenameTab;
-        private System.Windows.Forms.Label label164;
-        private System.Windows.Forms.TextBox DataFilenameNotes;
-        private System.Windows.Forms.GroupBox groupBox49;
-        private NationalInstruments.UI.WindowsForms.Switch CommonFilenameSwitch;
-        private System.Windows.Forms.Label label143;
-        private System.Windows.Forms.TextBox DataFilenameCommonRoot2;
-        private System.Windows.Forms.Label label94;
-        private System.Windows.Forms.TextBox DataFilenameCommonRoot1;
-        private System.Windows.Forms.Label label93;
-        private System.Windows.Forms.TextBox DataFilenameFolderPath;
-        private System.Windows.Forms.GroupBox groupBox48;
-        private System.Windows.Forms.Label label95;
-        private System.Windows.Forms.TextBox LatticeDepthTextbox;
-        private System.Windows.Forms.Label label86;
-        private System.Windows.Forms.Label label92;
-        private System.Windows.Forms.TextBox DetuningTextbox;
-        private System.Windows.Forms.TextBox BzTextbox;
-        private System.Windows.Forms.Label label79;
-        private System.Windows.Forms.Label label91;
-        private System.Windows.Forms.TextBox S1PowerTextbox;
-        private System.Windows.Forms.TextBox ByTextbox;
-        private System.Windows.Forms.Label label85;
-        private System.Windows.Forms.Label label90;
-        private System.Windows.Forms.TextBox S2PowerTextbox;
-        private System.Windows.Forms.TextBox BxTextbox;
-        private System.Windows.Forms.TextBox PiPowerTextbox;
-        private System.Windows.Forms.Label label89;
-        private System.Windows.Forms.Label label87;
-        private System.Windows.Forms.TextBox CavityPowerTextbox;
-        private System.Windows.Forms.TextBox Doppler35Textbox;
-        private System.Windows.Forms.Label label88;
-        private System.Windows.Forms.Label label78;
-        private System.Windows.Forms.CheckedListBox DataFilenameChecklist;
         private System.Windows.Forms.TabPage CameraTab;
         private System.Windows.Forms.Label label124;
         private System.Windows.Forms.CheckBox DebugCheckbox;
@@ -8529,9 +8539,8 @@
         private System.Windows.Forms.TextBox CameraHbin;
         private System.Windows.Forms.Button CameraStartButton;
         private System.Windows.Forms.TabPage CorrelatorTab;
-        private System.Windows.Forms.TextBox ncorrbinsText;
-        private System.Windows.Forms.TextBox correlatorBitFilePathB;
-        private NationalInstruments.UI.WindowsForms.Switch chooseCode;
+        private System.Windows.Forms.TextBox ncorrbinsText1;
+        private System.Windows.Forms.TextBox correlatorBitFilePath2;
         private System.Windows.Forms.TextBox textBoxPMT1back;
         private NationalInstruments.UI.WindowsForms.Switch switchDisplayBases;
         private NationalInstruments.UI.WindowsForms.Switch SaveCorrelatorToggle;
@@ -8541,13 +8550,9 @@
         private System.Windows.Forms.TextBox correlatorDiv2Ntext;
         private System.Windows.Forms.TextBox correlatorBound2text;
         private NationalInstruments.UI.WindowsForms.Switch regSelectSw;
-        private System.Windows.Forms.TextBox correlatorBitFilePath;
+        private System.Windows.Forms.TextBox correlatorBitFilePath1;
         public System.Windows.Forms.RichTextBox correlatorErrorMessages;
         public System.Windows.Forms.RichTextBox correlatorID;
-        private System.Windows.Forms.Label label136;
-        private System.Windows.Forms.Label label135;
-        private System.Windows.Forms.Label label132;
-        private System.Windows.Forms.Label label133;
         private System.Windows.Forms.Label label128;
         private System.Windows.Forms.Label label127;
         private System.Windows.Forms.Label label125;
@@ -8667,7 +8672,7 @@
         private System.Windows.Forms.GroupBox groupBox31;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label39;
-        private NationalInstruments.UI.WindowsForms.Switch Dev2DO3Switch;
+        private NationalInstruments.UI.WindowsForms.Switch LatticeSwitch;
         private AdjustableSlider CavityCoolingPowerControl;
         private System.Windows.Forms.GroupBox groupBox32;
         private System.Windows.Forms.TextBox RepumperFrequency;
@@ -8681,7 +8686,7 @@
         private System.Windows.Forms.Label label33;
         private NationalInstruments.UI.WindowsForms.Switch CavityBeam370Switch;
         private AdjustableSlider RepumperSlider;
-        private AdjustableSlider RecapturePowerSlider;
+        private AdjustableSlider RamanS1PowerControl;
         private AdjustableSlider SideBeam370Power;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.GroupBox groupBox26;
@@ -8712,23 +8717,10 @@
         private System.Windows.Forms.Label label177;
         public System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label178;
-        private System.Windows.Forms.TextBox correlatorBitFilePath_manybinsB;
-        private System.Windows.Forms.TextBox correlatorBitFilePath_manybins;
-        private System.Windows.Forms.Label label186;
-        private System.Windows.Forms.Label label185;
-        private NationalInstruments.UI.WindowsForms.Switch nbinSwitch;
+        private System.Windows.Forms.TextBox correlatorBitFilePath4;
+        private System.Windows.Forms.TextBox correlatorBitFilePath3;
         private System.Windows.Forms.TextBox ncorrbinsText2;
         private System.Windows.Forms.Label label187;
-        private System.Windows.Forms.Label label197;
-        private System.Windows.Forms.TextBox LatticeQWPTextbox;
-        private System.Windows.Forms.Label label196;
-        private System.Windows.Forms.TextBox S2QWPTextbox;
-        private System.Windows.Forms.Label label198;
-        private System.Windows.Forms.TextBox ZtrapfrequencyTextbox;
-        private System.Windows.Forms.Label label202;
-        private System.Windows.Forms.TextBox DriveAmplitudeTextbox;
-        private System.Windows.Forms.Label label203;
-        private System.Windows.Forms.TextBox DriveStateTextbox;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label207;
         protected System.Windows.Forms.Label label206;
@@ -8736,7 +8728,7 @@
         private System.Windows.Forms.Label label205;
         private System.Windows.Forms.Label label204;
         private NationalInstruments.UI.WindowsForms.Switch recaplock_switch;
-        private AdjustableSlider ErrorOffset399Slider;
+        private AdjustableSlider RamanS2ColorControl;
         private System.Windows.Forms.TextBox recaplock_thresholdfrac_textbox;
         private System.Windows.Forms.Label label209;
         private System.Windows.Forms.Label label208;
@@ -8943,7 +8935,6 @@
         private System.Windows.Forms.Label label241;
         private System.Windows.Forms.Label label242;
         private System.Windows.Forms.Label label243;
-        private System.Windows.Forms.GroupBox groupBox73;
         private System.Windows.Forms.GroupBox groupBox74;
         private System.Windows.Forms.GroupBox groupBox75;
         private System.Windows.Forms.GroupBox groupBox76;
@@ -8987,66 +8978,175 @@
         protected System.Windows.Forms.Label label134;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox pulseSettingsBox3;
         private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox pulseSettingsBox2;
         private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox pulseSettingsBox1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox pulseSettingsBox5;
         private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox pulseSettingsBox4;
         private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button pulseSaveFilenameButton;
         private System.Windows.Forms.Label label244;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox pulseSaveFilenameBox;
         private System.Windows.Forms.Label label219;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TextBox pulseFolderPathBox;
+        private System.Windows.Forms.Button LoadPulseSeqSettingsButton;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label245;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.GroupBox groupBox80;
-        private System.Windows.Forms.CheckBox SliderScanSaveCheckbox;
-        private System.Windows.Forms.Button SliderScanStart;
-        private System.Windows.Forms.GroupBox groupBox62;
-        private System.Windows.Forms.ComboBox SliderScanSelection;
-        private System.Windows.Forms.GroupBox groupBox33;
-        private System.Windows.Forms.ComboBox SliderScanComboBox;
-        private System.Windows.Forms.GroupBox groupBox61;
-        private System.Windows.Forms.Label label160;
-        private System.Windows.Forms.TextBox SliderScanPMTAveragingTextbox;
-        private System.Windows.Forms.Label label161;
-        private System.Windows.Forms.Label label162;
-        private System.Windows.Forms.Label label163;
-        private System.Windows.Forms.TextBox SliderScanNumPointsTextbox;
-        private System.Windows.Forms.TextBox SliderScanEndValueTextbox;
-        private System.Windows.Forms.TextBox SliderScanStartValueTextbox;
-        private System.Windows.Forms.GroupBox groupBox34;
-        private System.Windows.Forms.CheckBox ElectrodeScanSaveCheckbox;
-        private System.Windows.Forms.Button ElectrodeScanStart;
-        private System.Windows.Forms.GroupBox groupBox41;
-        private System.Windows.Forms.ComboBox ElectrodeScanComboBox;
-        private System.Windows.Forms.GroupBox groupBox29;
-        private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.Label label74;
-        private System.Windows.Forms.TextBox ElectrodeScanEndValue2Textbox;
-        private System.Windows.Forms.TextBox ElectrodeScanStartValue2Textbox;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.TextBox ElectrodeScanPMTAveragingTextbox;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.TextBox ElectrodeScanDC2TextBox;
-        private System.Windows.Forms.TextBox ElectrodeScanDC1TextBox;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox ElectrodeScanNumPointsTextbox;
-        private System.Windows.Forms.TextBox ElectrodeScanEndValue1Textbox;
-        private System.Windows.Forms.TextBox ElectrodeScanStartValue1Textbox;
+        private System.Windows.Forms.GroupBox groupBox81;
+        private System.Windows.Forms.ComboBox ExpSeqInt2DataSream;
+        private System.Windows.Forms.GroupBox groupBox50;
+        private System.Windows.Forms.ComboBox ExpSeqInt1DataSream;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox ReadConfigurationFileTextbox;
+        private System.Windows.Forms.Button ReadElectrodeConfig;
+        private System.Windows.Forms.GroupBox TickleResetBox;
+        private System.Windows.Forms.CheckBox TickleReset;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox TickleResetDelayText;
+        private System.Windows.Forms.GroupBox ArrayResetBox;
+        private System.Windows.Forms.CheckBox ArrayReset;
+        private System.Windows.Forms.Label ArrayResetDelayLabel;
+        private System.Windows.Forms.TextBox ArrayResetDelayText;
+        private System.Windows.Forms.TextBox ExpSeqScanTimeDelay;
+        private System.Windows.Forms.GroupBox groupBox82;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox ExpSeqFluorInterruptThreshold;
+        private System.Windows.Forms.CheckBox ExpSeqFluorInterruptCheck;
+        private System.Windows.Forms.GroupBox ExpSeqIntScan2PeriodGroupbox;
+        private System.Windows.Forms.TextBox ExpSeqIntScan2Period;
+        private System.Windows.Forms.GroupBox groupBox83;
+        private System.Windows.Forms.TextBox ExpSeqIntScan1Period;
+        private System.Windows.Forms.GroupBox groupBox84;
+        private System.Windows.Forms.Label label157;
+        private System.Windows.Forms.ComboBox ExpSeqNestingSlider;
+        private System.Windows.Forms.TextBox ExpSeqNestingSliderEndText;
+        private System.Windows.Forms.Label label159;
+        private System.Windows.Forms.TextBox ExpSeqNestingSliderStartText;
+        private System.Windows.Forms.Label label201;
+        public System.Windows.Forms.RadioButton ext2SrcButton;
+        public System.Windows.Forms.RadioButton ext1SrcButton;
+        private System.Windows.Forms.TextBox LockInFreqtext1;
+        private System.Windows.Forms.TextBox correlatorPtext2;
+        private System.Windows.Forms.TextBox LockInFreqtext2;
+        private System.Windows.Forms.TextBox correlatorPtext1;
+        private System.Windows.Forms.TextBox LockInPertext1;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TextBox LockInPertext2;
+        private System.Windows.Forms.RadioButton intSrcButton;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.TextBox ncorrbinsText4;
+        private System.Windows.Forms.TextBox ncorrbinsText3;
+        private System.Windows.Forms.RadioButton binButton4;
+        private System.Windows.Forms.RadioButton binButton3;
+        private System.Windows.Forms.RadioButton binButton2;
+        private System.Windows.Forms.RadioButton binButton1;
+        private System.Windows.Forms.Label label99;
+        private System.Windows.Forms.Label label118;
+        private System.Windows.Forms.TextBox correlatorPtextInt;
+        private System.Windows.Forms.TextBox LockInFreqtextInt;
+        private System.Windows.Forms.Label label132;
+        private System.Windows.Forms.Label label133;
+        private System.Windows.Forms.TextBox LockInPertextInt;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.GroupBox groupBox72;
+        private System.Windows.Forms.TextBox LatticeVoltage;
+        private System.Windows.Forms.GroupBox groupBox73;
+        private System.Windows.Forms.TextBox CavityVoltage;
+        private System.Windows.Forms.GroupBox groupBox85;
+        private System.Windows.Forms.TextBox LatticeSetpoint;
+        private System.Windows.Forms.Label label135;
+        private NationalInstruments.UI.WindowsForms.Switch LatticeLockSwitch;
+        private System.Windows.Forms.GroupBox groupBox86;
+        private System.Windows.Forms.Label label137;
+        private System.Windows.Forms.Label label136;
+        private System.Windows.Forms.TextBox IBox;
+        private System.Windows.Forms.TextBox PBox;
+        private System.Windows.Forms.Label label140;
+        private NationalInstruments.UI.WindowsForms.Switch TimerSwitch;
+        private System.Windows.Forms.Label label139;
+        private System.Windows.Forms.Label label138;
+        private System.Windows.Forms.TextBox QueueBox;
+        private System.Windows.Forms.TextBox IntervalBox;
+        private System.Windows.Forms.Label label185;
+        private System.Windows.Forms.TextBox CalibLatticeVoltage;
+        private AdjustableSlider RamanS2PowerControl;
+        private System.Windows.Forms.GroupBox groupBox88;
+        private System.Windows.Forms.Label label246;
+        private System.Windows.Forms.Label label247;
+        private NationalInstruments.UI.WindowsForms.Switch RamanS2Shutter;
+        private System.Windows.Forms.GroupBox groupBox87;
+        private System.Windows.Forms.Label label186;
+        private System.Windows.Forms.Label label234;
+        private NationalInstruments.UI.WindowsForms.Switch RamanS1Shutter;
+        private System.Windows.Forms.GroupBox groupBox90;
+        private System.Windows.Forms.TextBox RS2Voltage;
+        private System.Windows.Forms.GroupBox groupBox89;
+        private System.Windows.Forms.TextBox RS1Voltage;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.TabPage Keithley;
+        private System.Windows.Forms.Button button7;
+        private AdjustableSlider LatticeSetpointSlider;
+        private System.Windows.Forms.GroupBox groupBox91;
+        private System.Windows.Forms.TextBox ExpSeqMainSliderNumTakesText;
+        private System.Windows.Forms.Label label248;
+        private System.Windows.Forms.Label label249;
+        private System.Windows.Forms.TextBox ExpSeqPointTimeDelay;
+        private System.Windows.Forms.Label label250;
+        private System.Windows.Forms.GroupBox groupBox54;
+        private System.Windows.Forms.TextBox DetuneTextBox;
+        private System.Windows.Forms.Button DetuneButton;
+        private System.Windows.Forms.Label label251;
+        private System.Windows.Forms.GroupBox groupBox49;
+        private System.Windows.Forms.GroupBox groupBox48;
+        private System.Windows.Forms.Label label202;
+        private System.Windows.Forms.TextBox DriveAmplitudeTextbox;
+        private System.Windows.Forms.Label label203;
+        private System.Windows.Forms.TextBox DriveStateTextbox;
+        private System.Windows.Forms.Label label198;
+        private System.Windows.Forms.TextBox ZtrapfrequencyTextbox;
+        private System.Windows.Forms.Label label197;
+        private System.Windows.Forms.TextBox LatticeQWPTextbox;
+        private System.Windows.Forms.Label label196;
+        private System.Windows.Forms.TextBox S2QWPTextbox;
+        private System.Windows.Forms.Label label95;
+        private System.Windows.Forms.TextBox LatticeDepthTextbox;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label label92;
+        private System.Windows.Forms.TextBox DetuningTextbox;
+        private System.Windows.Forms.TextBox BzTextbox;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label91;
+        private System.Windows.Forms.TextBox S1PowerTextbox;
+        private System.Windows.Forms.TextBox ByTextbox;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.Label label90;
+        private System.Windows.Forms.TextBox S2PowerTextbox;
+        private System.Windows.Forms.TextBox BxTextbox;
+        private System.Windows.Forms.TextBox PiPowerTextbox;
+        private System.Windows.Forms.Label label89;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.TextBox CavityPowerTextbox;
+        private System.Windows.Forms.TextBox Doppler35Textbox;
+        private System.Windows.Forms.Label label88;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.CheckedListBox DataFilenameChecklist;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupBox40;
         private System.Windows.Forms.Label label199;
         private System.Windows.Forms.Label label200;
@@ -9073,62 +9173,9 @@
         private System.Windows.Forms.TextBox LatticePositionAmplitudeText;
         private System.Windows.Forms.Label label188;
         private System.Windows.Forms.TextBox LatticePositionNumAveText;
-        private System.Windows.Forms.GroupBox groupBox81;
-        private System.Windows.Forms.ComboBox ExpSeqInt2DataSream;
-        private System.Windows.Forms.GroupBox groupBox50;
-        private System.Windows.Forms.ComboBox ExpSeqInt1DataSream;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.TextBox ReadConfigurationFileTextbox;
-        private System.Windows.Forms.Button ReadElectrodeConfig;
-        private System.Windows.Forms.GroupBox TickleResetBox;
-        private System.Windows.Forms.CheckBox TickleReset;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.TextBox TickleResetDelayText;
-        private System.Windows.Forms.GroupBox ArrayResetBox;
-        private System.Windows.Forms.CheckBox ArrayReset;
-        private System.Windows.Forms.Label ArrayResetDelayLabel;
-        private System.Windows.Forms.TextBox ArrayResetDelayText;
-        private System.Windows.Forms.GroupBox groupBox54;
-        private System.Windows.Forms.TextBox ExpSeqTimeDelay;
-        private System.Windows.Forms.GroupBox groupBox82;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.TextBox ExpSeqFluorInterruptThreshold;
-        private System.Windows.Forms.CheckBox ExpSeqFluorInterruptCheck;
-        private System.Windows.Forms.GroupBox ExpSeqIntScan2PeriodGroupbox;
-        private System.Windows.Forms.TextBox ExpSeqIntScan2Period;
-        private System.Windows.Forms.GroupBox groupBox83;
-        private System.Windows.Forms.TextBox ExpSeqIntScan1Period;
-        private System.Windows.Forms.GroupBox groupBox84;
-        private System.Windows.Forms.Label label157;
-        private System.Windows.Forms.ComboBox ExpSeqNestingSlider;
-        private System.Windows.Forms.TextBox ExpSeqNestingSliderEndText;
-        private System.Windows.Forms.Label label159;
-        private System.Windows.Forms.TextBox ExpSeqNestingSliderStartText;
-        private System.Windows.Forms.Label label201;
-        public System.Windows.Forms.RadioButton ext2SrcButton;
-        public System.Windows.Forms.RadioButton ext1SrcButton;
-        private System.Windows.Forms.Label label137;
-        private System.Windows.Forms.Label label138;
-        private System.Windows.Forms.Label label140;
-        private System.Windows.Forms.TextBox LockInFreqtext1;
-        private System.Windows.Forms.Label label139;
-        private System.Windows.Forms.TextBox LockInFreqtext2;
-        private System.Windows.Forms.TextBox correlatorPtextB;
-        private System.Windows.Forms.TextBox LockInFreqtext2B;
-        private System.Windows.Forms.TextBox correlatorPtext;
-        private System.Windows.Forms.TextBox LockInPertext1;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label99;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.TextBox LockInPertext2;
-        private System.Windows.Forms.TextBox LockInPertext2B;
-        private System.Windows.Forms.RadioButton intSrcButton;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.CheckBox LatticeFeedbackLatticeSetpointCheck;
+        private System.Windows.Forms.TextBox LatticeFeedbackLatticeSetpointText;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

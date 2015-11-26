@@ -7,10 +7,9 @@ using NationalInstruments.VisaNS;
 
 namespace ArrayDACControl
 {
-    //Class: Rigol
+    //Class: Keithley
     //------------
-    //represents a Rigol DG4000 function generator
-    //straight outta China
+    //represents a Keithley 2100 multimeter
     //------------
     public class Rigol
     {
@@ -38,14 +37,15 @@ namespace ArrayDACControl
         //Methods
         //--------------------------------------------------------------------------------------
 
-        //Method: GenerateWaveform
+        //Method: GenerateUserWaveform
         //------------------------
-        //proper call: rigol.GenerateWaveform(1, 400, 5, 0, 180, "waveform.txt");
+        //proper call: rigol.GenerateUserWaveform(true, 1, 400, 5, 0, 180, "waveform.txt");
         //------------------------
         //generates an arbitrary waveform on the RIGOL machine
         //turns on BURST mode, with type infinity and external trigger source
         //------------------------
         //Argument notes:
+        //10MHz clock source- true for external, false for internal
         //channel must be 1 or 2
         //frequency in Hz
         //amplitude in Vpp
@@ -53,24 +53,36 @@ namespace ArrayDACControl
         //phase in degrees
         //text file with ASCII datapoints, one per line
         //-------------------------
-        public void GenerateWaveform(int channel, double frequency, double amplitude,
+        public void GenerateUserWaveform(bool clockSrcExt, int channel, double frequency, double amplitude,
             double offset, double phase, string filename)
         {
-            GenerateWaveform(channel, frequency, amplitude, offset, phase, ReadWaveformFromFile(filename));
+            GenerateUserWaveform(clockSrcExt, channel, frequency, amplitude, offset, phase, ReadWaveformFromFile(filename));
         }
 
 
-        //Method: GenerateWaveform
+        //Method: GenerateUserWaveform
         //------------------------
-        //proper call: rigol.GenerateWaveform(1, 400, 5, 0, 180, waveform);
+        //proper call: rigol.GenerateUserWaveform(true, 1, 400, 5, 0, 180, waveform);
         //------------------------
         //overloaded method: takes a user-defined waveform array (max length is 16384) instead of a text file
         //-------------------------
-        public void GenerateWaveform(int channel, double frequency, double amplitude,
+        public void GenerateUserWaveform(bool clockSrcExt, int channel, double frequency, double amplitude,
             double offset, double phase, double[] waveform)
         {
             //establish VISA connection
             MessageBasedSession mbSession = Configure();
+
+            //set clock source
+            if (clockSrcExt)
+            {
+                string commandClock = ":system:roscillator:source external";
+                mbSession.Write(commandClock);
+            }
+            else
+            {
+                string commandClock = ":system:roscillator:source internal";
+                mbSession.Write(commandClock);
+            }
 
             //convert input parameters to strings
             string stringChannel = Convert.ToString(channel);
@@ -87,7 +99,6 @@ namespace ArrayDACControl
             //turn on linear interpolation
             string commandInterp = "data:points:interpolate linear";
             mbSession.Write(commandInterp);
-
 
             //re-scale input waveform array so it fits between -1 and 1
             double max = waveform[0];
@@ -126,18 +137,52 @@ namespace ArrayDACControl
             mbSession.Write(commandBurstMode);
 
             //set burst trigger source to external
-            string commandBurstTrig = "source" + stringChannel + ":burst:trigger:source external";
-            mbSession.Write(commandBurstTrig);
+            string commandBurstTrigExt = "source" + stringChannel + ":burst:trigger:source external";
+            mbSession.Write(commandBurstTrigExt);
 
-            //set clock to external
-            string commandClock = ":system:roscillator:source external";
+            //turn output ON
+            string commandOutput = "output" + stringChannel + " ON";
+            mbSession.Write(commandOutput);
+
+            //set burst trigger source to manual
+            string commandBurstTrigMan = "source" + stringChannel + ":burst:trigger:source manual";
+            mbSession.Write(commandBurstTrigMan);
+
+            //set burst trigger source to external
+            mbSession.Write(commandBurstTrigExt);
+        }
+
+        //Method: GenerateSync
+        //------------------------
+        //proper call: rigol.GenerateSync(1, 400, 5, 0, 180, waveform);
+        //------------------------
+        //generates a sync signal- square wave with LO at 0V and HI at 5V- on the RIGOL machine
+        //-------------------------
+        //Argument notes:
+        //channel must be 1 or 2
+        //frequency in Hz
+        //-------------------------
+        public void GenerateSync(int channel, double frequency)
+        {
+            //establish VISA connection
+            MessageBasedSession mbSession = Configure();
+
+            //set clock source to internal
+            string commandClock = ":system:roscillator:source internal";
             mbSession.Write(commandClock);
+          
+            //convert input parameters to strings
+            string stringChannel = Convert.ToString(channel);
+            string stringFrequency = Convert.ToString(frequency);
+
+            //set basic parameters
+            string commandParameters = "source" + stringChannel + ":apply:square " + stringFrequency + ",5,2.5,0";
+            mbSession.Write(commandParameters);
 
             //turn output ON
             string commandOutput = "output" + stringChannel + " ON";
             mbSession.Write(commandOutput);
         }
-
 
         //Method: GetAddress
         //------------------
