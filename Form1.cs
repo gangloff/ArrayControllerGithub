@@ -89,13 +89,16 @@ namespace ArrayDACControl
         //thread helper classes
         ThreadHelperClass CameraThreadHelper, CameraTimeOutThreadHelper, IntensityGraphUpdateThreadHelper;
         ThreadHelperClass CorrelatorThreadHelper, SinglePMTReadThreadHelper, FluorLogThreadHelper;
-        ThreadHelperClass LatticePositionThreadHelper;
+        ThreadHelperClass LatticePositionThreadHelper, Find370ResonanceThreadHelper;
         public ThreadHelperClass ExperimentalSequencerThreadHelper;
         ThreadHelperClass InterlockedScan1ThreadHelper, InterlockedScan2ThreadHelper;
         ThreadHelperClass TransferCavityDetunerThreadHelper;
         //delegate methods for cross-thread calls
         delegate void MyDelegate();
+        delegate void MyDelegateString(string theString);
         delegate void MyDelegateAdjustableSliderDouble(AdjustableSlider theSlider, double theValue);
+        delegate void MyDelegateSwitchBoolean(NationalInstruments.UI.WindowsForms.Switch theSwitch, bool theBool);
+        delegate void MyDelegateTextboxString(System.Windows.Forms.TextBox theTextbox, string theString);
         delegate void MyDelegateButtonStringColor(System.Windows.Forms.Button theButton, string theString, System.Drawing.Color theColor);
         delegate void MyDelegateThreadHelper(ThreadHelperClass theThreadHelper);
         delegate void MyDelegateLabelUpdate(string theString, System.Windows.Forms.Label theLabel);
@@ -353,6 +356,7 @@ namespace ArrayDACControl
             InterlockedScan1ThreadHelper = new ThreadHelperClass("InterlockedScan1");
             InterlockedScan2ThreadHelper = new ThreadHelperClass("InterlockedScan2");
             TransferCavityDetunerThreadHelper = new ThreadHelperClass("TransferCavityDetuner");
+            Find370ResonanceThreadHelper = new ThreadHelperClass("Find370Resonance");
 
             stopwatch = new Stopwatch();
         }
@@ -2248,6 +2252,23 @@ namespace ArrayDACControl
         // FORM EVENTS, BUTTON CLICKS ETC.
         //
 
+        private void Find370ResonanceSettoPreviousResButton_Click(object sender, EventArgs e)
+        {
+            double newDetuning = double.Parse(TransferCavity370ResonanceText.Text) - 30;
+            Find370ResonanceThreadCurrentDetuningBox.Text = newDetuning.ToString();
+        }
+
+        private void DetuneButton_Click(object sender, EventArgs e)
+        {
+            TransferCavity.Value = double.Parse(TransferCavity370ResonanceText.Text) - double.Parse(DetuneTextBox.Text);
+            UpdateAll();
+        }
+
+        private void Find370ResonanceThreadGetCurrentDetuningButton_Click(object sender, EventArgs e)
+        {
+            Find370ResonanceThreadCurrentDetuningBox.Text = TransferCavity.Value.ToString();
+        }
+
         private void LatticePositionSetSuggestedButton_Click(object sender, EventArgs e)
         {
             //reset to original values
@@ -2481,6 +2502,9 @@ namespace ArrayDACControl
                 tw.WriteLine(DateTime.Now);
 
                 //In order of appearance, top left, to bottom right
+                tw.WriteLine("correlatorIntTimetext1" + "\t" + correlatorIntTimetext1.Text);
+                tw.WriteLine("correlatorIntTimetext2" + "\t" + correlatorIntTimetext2.Text);
+                tw.WriteLine("LockInFreqtext1" + "\t" + LockInFreqtext1.Text);
                 tw.WriteLine("Sync period" + "\t" + LockInPertext1.Text);
                 tw.WriteLine("Fast Overall Period" + "\t" + pulsePeriodVal.ToString());
                 tw.WriteLine("Slow Overall Period" + "\t" + slow_pulsePeriodVal.ToString());
@@ -2565,9 +2589,19 @@ namespace ArrayDACControl
         // FORM CALLBACK FUNCTIONS
         //
 
+        private void UpdateSwitchCallbackFn(NationalInstruments.UI.WindowsForms.Switch theSwitch, bool theBool)
+        {
+            theSwitch.Value = theBool;
+        }
+
         private void UpdateLabelCallbackFn(string theString, System.Windows.Forms.Label theLabel)
         {
             theLabel.Text = theString;
+        }
+
+        private void UpdateTextboxCallbackFn(System.Windows.Forms.TextBox theTextbox, string theString)
+        {
+            theTextbox.Text = theString;
         }
 
         private void GetComboBoxTextCallbackFn(ThreadHelperClass theThreadHelper, ComboBox theComboBox)
@@ -2600,7 +2634,10 @@ namespace ArrayDACControl
 
         private void SliderUpdateCallbackFn(AdjustableSlider theSlider, double theValue)
         {
-            theSlider.Value = theValue;
+            //if array slider, ramp
+            if (theSlider == ArrayTotalSlider) { RampSlider(ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, theValue); }
+            else { theSlider.Value = theValue; }
+
             //call to update
             UpdateAll();
         }
@@ -3792,6 +3829,200 @@ namespace ArrayDACControl
             }
         }
 
+        //
+        //
+        // FIND 370 RESONANCE THREAD
+        // 
+        //
+        private void Find370ResonanceThreadStart_Click(object sender, EventArgs e)
+        {
+            if (!Find370ResonanceThreadHelper.ShouldBeRunningFlag)
+            {
+                Find370ResonanceThreadHelper.ShouldBeRunningFlag = true;
+                Find370ResonanceThreadHelper.theThread = new Thread(new ThreadStart(Find370ResonanceExecute));
+                Find370ResonanceThreadHelper.theThread.Name = "Lattice Scan thread";
+                Find370ResonanceThreadHelper.theThread.Priority = ThreadPriority.Normal;
+                //get scan parameters and declare data arrays
+                Find370ResonanceThreadHelper.pointIndex = 0;
+                //get Stream type from combo box
+                Find370ResonanceThreadHelper.message = Find370ResonanceThreadDataStream.Text;
+
+                //need to update three sliders
+                Find370ResonanceThreadHelper.initTheSliderArray(2);
+                //get Sliders whose values will be changed
+                Find370ResonanceThreadHelper.sliderNames[0] = "TransferCavity";
+                Find370ResonanceThreadHelper.sliderNames[1] = "CavityCoolingPowerControl";
+                for (int i = 0; i < 2; i++) { Find370ResonanceThreadHelper.theSliderArray[i] = getSliderfromText(Find370ResonanceThreadHelper.sliderNames[i]); }
+                //get start scan value
+                Find370ResonanceThreadHelper.min[0] = double.Parse(Find370ResonanceThreadCurrentDetuningBox.Text);
+                //initialize number of doubles that will be passed around during thread operations
+                Find370ResonanceThreadHelper.initPassedDoubles(2);
+                //get step size
+                Find370ResonanceThreadHelper.PassedDoubles[0] = double.Parse(Find370ResonanceStepSizeText.Text);
+                //get start button
+                Find370ResonanceThreadHelper.theButton = Find370ResonanceThreadStart;
+                //initialize fluorescence increase/decrease flag
+                Find370ResonanceThreadHelper.flag = false;
+
+                //Get initial slider values
+                Find370ResonanceThreadHelper.initKeepDoubles(2);
+                for (int i = 0; i < 2; i++) { Find370ResonanceThreadHelper.KeepDoubles[i] = (double)Find370ResonanceThreadHelper.theSliderArray[i].Value; }
+
+                //Define Keep Booleans array for lattice and cavity switches
+                Find370ResonanceThreadHelper.initKeepBools(3);
+                Find370ResonanceThreadHelper.KeepBools[0] = LatticeSwitch.Value;
+                Find370ResonanceThreadHelper.KeepBools[1] = CavityBeam370Switch.Value;
+                Find370ResonanceThreadHelper.KeepBools[2] = LatticeLockSwitch.Value;
+                //Switch lattice off and cavity beam on (switch logic is inverted)
+                if (Find370ResonanceLatticeOffCheckbox.Checked) { LatticeSwitch.Value = true; LatticeLockSwitch.Value = false; }
+                if (Find370ResonanceCavityOnCheckbox.Checked)
+                {
+                    CavityBeam370Switch.Value = false;
+                    CavityCoolingPowerControl.Value = double.Parse(Find370ResonanceCavitySetpointText.Text);
+                }
+                else { CavityBeam370Switch.Value = true; }
+                //initialize 100-point array
+                Find370ResonanceThreadHelper.initDoubleData(100, 2, 1);
+
+                //if pulse sequencer change selected
+                if (Find370ResonanceLoadPulseSeqCheckbox.Checked)
+                {
+                    //save current config in text file
+                    SavePulseSequencerSettings(pulseFolderPathBox.Text + "\\" + "find370restemp");
+                    //load config next to radio button 1 in pulse sequencer
+                    ReadConfigurationFull(Find370ResonancePulseSeqText.Text);
+                }
+
+                // if camera or correlator is running stop it
+                StopDataStreams();
+
+
+                //start scan thread
+                try
+                {
+                    Find370ResonanceThreadHelper.theThread.Start();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+            else
+            {
+                Find370ResonanceThreadHelper.ShouldBeRunningFlag = false;
+            }
+
+        }
+
+        private void Find370ResonanceExecute()
+        {
+            //clear graph
+            CameraForm.ScanResultsGraph.ClearData();
+            //initialize camera or correlator depending on desired data stream
+            initializeDataStreams(Find370ResonanceThreadHelper);
+            //run scans
+            while (Find370ResonanceThreadHelper.ShouldBeRunningFlag)
+            {
+                Find370ResonanceThreadHelper.DoubleScanVariable[0, Find370ResonanceThreadHelper.pointIndex] = Find370ResonanceThreadHelper.min[0] + Find370ResonanceThreadHelper.pointIndex * Find370ResonanceThreadHelper.PassedDoubles[0];
+                //call to change field value
+                try
+                {
+                    this.Invoke(new MyDelegateAdjustableSliderDouble(SliderUpdateCallbackFn), Find370ResonanceThreadHelper.theSliderArray[0], Find370ResonanceThreadHelper.DoubleScanVariable[0, Find370ResonanceThreadHelper.pointIndex]);
+                    int updateInt = Find370ResonanceThreadHelper.pointIndex + 1;
+                    this.Invoke(new MyDelegateButtonStringColor(ButtonTextColorUpdateCallbackFn), Find370ResonanceThreadHelper.theButton, "Scanning..." + updateInt.ToString(), System.Drawing.Color.White);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                if (Find370ResonanceThreadHelper.message == "Correlator:Sum")
+                {
+                    //Get results into correlator object
+                    CorrelatorGetResultsHelper();
+                    //Correlator Plots
+                    try
+                    {
+                        this.Invoke(new MyDelegate(CorrelatorExecuteFrmCallbackCh1));
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+                    //load result in array
+                    Find370ResonanceThreadHelper.DoubleData[0, Find370ResonanceThreadHelper.pointIndex] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+                    try
+                    {
+                        this.Invoke(new MyDelegateThreadHelper(PMTPlotCallbackFn), Find370ResonanceThreadHelper);
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    
+                    lock (Find370ResonanceThreadHelper)
+                    {
+                        //display count, plot
+                        try
+                        {
+                            this.BeginInvoke(new MyDelegateThreadHelper(ScanResultsGraphCallbackFn), Find370ResonanceThreadHelper);
+                        }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        Monitor.Wait(Find370ResonanceThreadHelper);
+                    }
+                    
+
+                    //check whether fluorescence is decreasing, second-order check
+                    if (Find370ResonanceThreadHelper.pointIndex > 0)
+                    {
+                        if (Find370ResonanceThreadHelper.flag)
+                        {
+                            if (Find370ResonanceThreadHelper.DoubleData[0, Find370ResonanceThreadHelper.pointIndex] < Find370ResonanceThreadHelper.DoubleData[0, Find370ResonanceThreadHelper.pointIndex - 1])
+                            {
+                                Find370ResonanceThreadHelper.ShouldBeRunningFlag = false;
+                            }
+                            else { Find370ResonanceThreadHelper.flag = false; }
+                        }
+                    }
+                    //check whether fluorescence is decreasing, first-order check
+                    if (Find370ResonanceThreadHelper.pointIndex > 0)
+                    {
+                        if (Find370ResonanceThreadHelper.DoubleData[0, Find370ResonanceThreadHelper.pointIndex] < Find370ResonanceThreadHelper.DoubleData[0, Find370ResonanceThreadHelper.pointIndex - 1])
+                        {
+                            Find370ResonanceThreadHelper.flag = true;
+                        }
+                        else { Find370ResonanceThreadHelper.flag = false; }
+                    }
+
+                    //increase index
+                    Find370ResonanceThreadHelper.pointIndex++;
+                }
+            }
+
+            lock (Find370ResonanceThreadHelper)
+            {
+                //reset button and reset to initial slider and switch values
+                try
+                {
+                    this.Invoke(new MyDelegateAdjustableSliderDouble(SliderUpdateCallbackFn), Find370ResonanceThreadHelper.theSliderArray[0], Find370ResonanceThreadHelper.KeepDoubles[0]);
+                    this.Invoke(new MyDelegateAdjustableSliderDouble(SliderUpdateCallbackFn), Find370ResonanceThreadHelper.theSliderArray[1], Find370ResonanceThreadHelper.KeepDoubles[1]);
+                    this.Invoke(new MyDelegateButtonStringColor(ButtonTextColorUpdateCallbackFn), Find370ResonanceThreadHelper.theButton, "Start Routine", System.Drawing.Color.Gainsboro);
+                    this.Invoke(new MyDelegateSwitchBoolean(UpdateSwitchCallbackFn),LatticeSwitch,Find370ResonanceThreadHelper.KeepBools[0]);
+                    this.Invoke(new MyDelegateSwitchBoolean(UpdateSwitchCallbackFn),CavityBeam370Switch, Find370ResonanceThreadHelper.KeepBools[1]);
+                    this.Invoke(new MyDelegateSwitchBoolean(UpdateSwitchCallbackFn), LatticeLockSwitch, Find370ResonanceThreadHelper.KeepBools[2]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+
+            //if pulse sequencer was changed
+            //if pulse sequencer change selected
+            if (Find370ResonanceLoadPulseSeqCheckbox.Checked)
+            {
+                this.Invoke(new MyDelegateString(ReadConfigurationFull), pulseFolderPathBox.Text + "\\" + "find370restemp.txt");
+            }
+
+            lock (Find370ResonanceThreadHelper)
+            {
+                try
+                {
+                    this.Invoke(new MyDelegateLabelUpdate(UpdateLabelCallbackFn), Find370ResonanceThreadHelper.DoubleScanVariable[0, Find370ResonanceThreadHelper.pointIndex - 1].ToString(), Find370ResonanceNewResonanceLabel);
+                    this.Invoke(new MyDelegateTextboxString(UpdateTextboxCallbackFn), TransferCavity370ResonanceText, Find370ResonanceThreadHelper.DoubleScanVariable[0, Find370ResonanceThreadHelper.pointIndex - 1].ToString());
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+            
+            //reset scan boolean
+            Find370ResonanceThreadHelper.ShouldBeRunningFlag = false;
+        }
 
         //
         //
@@ -3821,6 +4052,10 @@ namespace ArrayDACControl
                 LatticePositionThreadHelper.sliderNames[1] = "DC" + LatticePositionDC2TextBox.Text;
                 LatticePositionThreadHelper.sliderNames[2] = "LatticeSetpointSlider";
                 for (int i = 0; i < 3; i++) { LatticePositionThreadHelper.theSliderArray[i] = getSliderfromText(LatticePositionThreadHelper.sliderNames[i]); }
+                //initialize number of doubles that will be passed around during thread operations
+                LatticePositionThreadHelper.initPassedDoubles(4);
+                //get lattice setpoint
+                LatticePositionThreadHelper.PassedDoubles[0] = double.Parse(LatticeFeedbackLatticeSetpointText.Text);
                 //get start button
                 LatticePositionThreadHelper.theButton = LatticePositionStart;
 
@@ -3845,8 +4080,17 @@ namespace ArrayDACControl
                 //if ramp array selected
                 if (LatticePositionRampArrayCheckbox.Checked)
                 {
-                    LatticePositionThreadHelper.SingleDouble2 = ArrayTotalSlider.Value;
+                    LatticePositionThreadHelper.PassedDoubles[1] = ArrayTotalSlider.Value;
                     RampSlider(this.ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, double.Parse(LatticePositionRampArrayValue.Text));
+                }
+
+                //if pulse sequencer change selected
+                if (LatticeFeedbackPulseSequenceCheck.Checked)
+                {
+                    //save current config in text file
+                    SavePulseSequencerSettings(pulseFolderPathBox.Text + "\\" + "latticefeedbacktemp");
+                    //load config next to radio button 1 in pulse sequencer
+                    ReadConfigurationFull(pulseSettingsBox1.Text);
                 }
 
                 // if camera or correlator is running stop it
@@ -3871,6 +4115,15 @@ namespace ArrayDACControl
             CameraForm.ScanResultsGraph.ClearData();
             //initialize camera or correlator depending on desired data stream
             initializeDataStreams(LatticePositionThreadHelper);
+            //if lattice setpoint needs to be adjusted
+            if (LatticeFeedbackLatticeSetpointCheck.Checked)
+            {
+                try
+                {
+                    this.Invoke(new MyDelegateAdjustableSliderDouble(SliderUpdateCallbackFn), LatticePositionThreadHelper.theSliderArray[2], LatticePositionThreadHelper.PassedDoubles[0]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
             //run scans
             while (LatticePositionThreadHelper.pointIndex < (LatticePositionThreadHelper.numPoints) && LatticePositionThreadHelper.ShouldBeRunningFlag)
             { 
@@ -3898,16 +4151,16 @@ namespace ArrayDACControl
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
 
                         //get total counts
-                        LatticePositionThreadHelper.SingleDouble = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+                        LatticePositionThreadHelper.PassedDoubles[2] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
                         //load result in array
-                        LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.pointIndex] += LatticePositionThreadHelper.SingleDouble;
+                        LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.pointIndex] += LatticePositionThreadHelper.PassedDoubles[2];
                         try
                         {
                             this.Invoke(new MyDelegateThreadHelper(PMTPlotCallbackFn),LatticePositionThreadHelper);
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //update Sigma array
-                        LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.pointIndex] += Math.Pow(LatticePositionThreadHelper.SingleDouble, 2);
+                        LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.pointIndex] += Math.Pow(LatticePositionThreadHelper.PassedDoubles[2], 2);
                     }
                     //finalize single point average and standard deviation
                     LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.pointIndex] = LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.pointIndex] / LatticePositionThreadHelper.numScans;
@@ -3918,7 +4171,7 @@ namespace ArrayDACControl
                         //display count, plot
                         try
                         {
-                            this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback4));
+                            this.BeginInvoke(new MyDelegateThreadHelper(ScanResultsGraphCallbackFn), LatticePositionThreadHelper);
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         Monitor.Wait(LatticePositionThreadHelper);
@@ -3985,16 +4238,16 @@ namespace ArrayDACControl
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //get total counts
-                        LatticePositionThreadHelper.SingleDouble = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
+                        LatticePositionThreadHelper.PassedDoubles[2] = theCorrelator.totalCountsCh1 + theCorrelator.totalCountsCh2;
                         //load result in array
-                        LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.pointIndex] += LatticePositionThreadHelper.SingleDouble;
+                        LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.pointIndex] += LatticePositionThreadHelper.PassedDoubles[2];
                         try
                         {
                             this.Invoke(new MyDelegateThreadHelper(PMTPlotCallbackFn), LatticePositionThreadHelper);
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         //update Sigma array
-                        LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.pointIndex] += Math.Pow(LatticePositionThreadHelper.SingleDouble, 2);
+                        LatticePositionThreadHelper.DoubleData[1, LatticePositionThreadHelper.pointIndex] += Math.Pow(LatticePositionThreadHelper.PassedDoubles[2], 2);
                     }
                     //finalize single point average and standard deviation
                     LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.pointIndex] = LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.pointIndex] / LatticePositionThreadHelper.numScans;
@@ -4005,7 +4258,7 @@ namespace ArrayDACControl
                         //display count, plot
                         try
                         {
-                            this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback4));
+                            this.BeginInvoke(new MyDelegateThreadHelper(ScanResultsGraphCallbackFn), LatticePositionThreadHelper);
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                         Monitor.Wait(LatticePositionThreadHelper);
@@ -4022,9 +4275,9 @@ namespace ArrayDACControl
             //Now from the two diff values, infer position where diff = 0
             if (LatticePositionFeedbackSwitch.Value)
             {
-                LatticePositionThreadHelper.SingleDouble3 = diff / (diff - diff2) * Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
+                LatticePositionThreadHelper.PassedDoubles[3] = diff / (diff - diff2) * Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
             }
-            else { LatticePositionThreadHelper.SingleDouble3 = diff / (diff2 - diff) * Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2; }
+            else { LatticePositionThreadHelper.PassedDoubles[3] = diff / (diff2 - diff) * Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2; }
 
             //Reset to original scan variables for center
             LatticePositionThreadHelper.DoubleScanVariable[0, 1] = LatticePositionThreadHelper.DoubleScanVariable[0, 1] - Math.Sign(diff) * double.Parse(LatticePositionAmplitudeText.Text) / 2;
@@ -4035,76 +4288,51 @@ namespace ArrayDACControl
                 //reset button and reset to initial slider values
                 try
                 {
-                    this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback2));
+                    this.Invoke(new MyDelegateAdjustableSliderDouble(SliderUpdateCallbackFn), LatticePositionThreadHelper.theSliderArray[0], LatticePositionThreadHelper.KeepDoubles[0]);
+                    this.Invoke(new MyDelegateAdjustableSliderDouble(SliderUpdateCallbackFn), LatticePositionThreadHelper.theSliderArray[1], LatticePositionThreadHelper.KeepDoubles[1]);
+                    this.Invoke(new MyDelegateAdjustableSliderDouble(SliderUpdateCallbackFn), ArrayTotalSlider, LatticePositionThreadHelper.PassedDoubles[1]);
+                    this.Invoke(new MyDelegateButtonStringColor(ButtonTextColorUpdateCallbackFn), LatticePositionThreadHelper.theButton, "Start *Lattice* Scan", System.Drawing.Color.Gainsboro);
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
-                Monitor.Wait(LatticePositionThreadHelper);
             }
 
+            //if lattice setpoint was adjusted
+            if (LatticeFeedbackLatticeSetpointCheck.Checked)
+            {
+                try
+                {
+                    this.Invoke(new MyDelegateAdjustableSliderDouble(SliderUpdateCallbackFn), LatticePositionThreadHelper.theSliderArray[2], LatticePositionThreadHelper.KeepDoubles[2]);
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+
+            //if pulse sequencer was changed
+            //if pulse sequencer change selected
+            if (LatticeFeedbackPulseSequenceCheck.Checked)
+            {
+                this.Invoke(new MyDelegateString(ReadConfigurationFull), pulseFolderPathBox.Text + "\\" + "latticefeedbacktemp.txt");
+            }
+                
+            //post feedback values
             if (LatticePositionThreadHelper.ShouldBeRunningFlag)
             {
                 lock (LatticePositionThreadHelper)
                 {
-                    //post feedback values
                     try
                     {
-                        this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback6));
+                        //this.BeginInvoke(new MyDelegate(LatticePositionFrmCallback6));
+                        this.Invoke(new MyDelegateTextboxString(UpdateTextboxCallbackFn), LatticePositionFeedbackText, LatticePositionThreadHelper.PassedDoubles[3].ToString("F3"));
+                        double DC1 = LatticePositionThreadHelper.theSliderArray[0].Value + LatticePositionThreadHelper.PassedDoubles[3];
+                        double DC2 = LatticePositionThreadHelper.theSliderArray[1].Value - LatticePositionThreadHelper.PassedDoubles[3];
+                        this.Invoke(new MyDelegateTextboxString(UpdateTextboxCallbackFn), LatticePositionNewValueText, DC1.ToString("F3"));
+                        this.Invoke(new MyDelegateTextboxString(UpdateTextboxCallbackFn), LatticePositionNewValue2Text, DC2.ToString("F3"));
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
-                    Monitor.Wait(LatticePositionThreadHelper);
                 }
-
             }
             
             //reset scan boolean
             LatticePositionThreadHelper.ShouldBeRunningFlag = false;
-        }
-        private void LatticePositionFrmCallback2()
-        {
-            lock (LatticePositionThreadHelper)
-            {
-                LatticePositionStart.BackColor = System.Drawing.Color.Gainsboro;
-                LatticePositionStart.Text = "Start *Lattice* Scan";
-                //reset to original values
-                LatticePositionThreadHelper.theSliderArray[0].Value = LatticePositionThreadHelper.KeepDoubles[0];
-                LatticePositionThreadHelper.theSliderArray[1].Value = LatticePositionThreadHelper.KeepDoubles[1];
-                //update DAC
-                compensationAdjustedHelper();
-                //if ramp array selected, ramp it back to initial value
-                if (LatticePositionRampArrayCheckbox.Checked)
-                {
-                    RampSlider(ArrayTotalSlider, 100, 10, ArrayTotalSlider.Value, LatticePositionThreadHelper.SingleDouble2);
-                }
-                Monitor.PulseAll(LatticePositionThreadHelper);
-            }
-        }
-        private void LatticePositionFrmCallback4()
-        {
-            lock (LatticePositionThreadHelper)
-            {
-                try
-                {
-                    //plot
-                    CameraForm.ScanResultsGraph.PlotXYAppend(LatticePositionThreadHelper.DoubleScanVariable[0, LatticePositionThreadHelper.pointIndex], LatticePositionThreadHelper.DoubleData[0, LatticePositionThreadHelper.pointIndex]);
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                Monitor.PulseAll(LatticePositionThreadHelper);
-            }
-        }
-
-        private void LatticePositionFrmCallback6()
-        {
-            lock (LatticePositionThreadHelper)
-            {
-                //post feedback values
-                LatticePositionFeedbackText.Text = LatticePositionThreadHelper.SingleDouble3.ToString("F3");
-                double DC1 = LatticePositionThreadHelper.theSliderArray[0].Value + LatticePositionThreadHelper.SingleDouble3;
-                double DC2 = LatticePositionThreadHelper.theSliderArray[1].Value - LatticePositionThreadHelper.SingleDouble3;
-                LatticePositionNewValueText.Text = DC1.ToString("F3");
-                LatticePositionNewValue2Text.Text = DC2.ToString("F3");
-                Monitor.PulseAll(LatticePositionThreadHelper);
-            }
         }
         
 
@@ -4131,6 +4359,9 @@ namespace ArrayDACControl
                 }
                 //get Stream type from combo box
                 FluorLogThreadHelper.message = FluorLogComboBox.Text;
+
+                //Get button
+                FluorLogThreadHelper.theButton = FluorLogStart;
 
                 //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
                 //if camera is running stop it
@@ -4159,8 +4390,6 @@ namespace ArrayDACControl
         }
         private void FluorLogExecute()
         {
-            //update button
-            FluorLogStart.BackColor = System.Drawing.Color.White;
             //clear graph
             CameraForm.ScanResultsGraph.ClearData();
             //initialize data stream
@@ -4173,7 +4402,7 @@ namespace ArrayDACControl
                 //call to change button
                 try
                 {
-                    this.Invoke(new MyDelegate(FluorLogFrmCallback3));
+                    this.Invoke(new MyDelegateButtonStringColor(ButtonTextColorUpdateCallbackFn), FluorLogThreadHelper.theButton, "Logging..." + FluorLogThreadHelper.pointIndex.ToString(), System.Drawing.Color.White);
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -4188,34 +4417,6 @@ namespace ArrayDACControl
                 SaveScanData(FluorLogThreadHelper);
             }
             //calculate mean and standard error on the mean for the data
-            try
-            {
-                this.Invoke(new MyDelegate(FluorLogFrmCallback5));
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-            //reset button
-            try
-            {
-                this.Invoke(new MyDelegate(FluorLogFrmCallback2));
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-            //reset scan boolean
-            FluorLogThreadHelper.ShouldBeRunningFlag = false;
-        }
-        
-        private void FluorLogFrmCallback2()
-        {
-            FluorLogStart.BackColor = System.Drawing.Color.WhiteSmoke;
-            FluorLogStart.Text = "Start LOG";
-        }
-        private void FluorLogFrmCallback3()
-        {
-            //Button Indicator
-            FluorLogStart.Text = "Logging..." + FluorLogThreadHelper.pointIndex.ToString();
-        }
-        private void FluorLogFrmCallback5()
-        {
             double mean = 0;
             for (int i = 0; i < FluorLogThreadHelper.numPoints; i++)
                 mean += FluorLogThreadHelper.DoubleData[0, i];
@@ -4225,9 +4426,22 @@ namespace ArrayDACControl
             for (int i = 0; i < FluorLogThreadHelper.numPoints; i++)
                 std += (FluorLogThreadHelper.DoubleData[0, i] - mean) * (FluorLogThreadHelper.DoubleData[0, i] - mean);
             std = Math.Sqrt(std) / FluorLogThreadHelper.numPoints;
+            //post mean and standard deviation
+            try
+            {
+                this.Invoke(new MyDelegateTextboxString(UpdateTextboxCallbackFn), FluorLogLiveAverageTextbox, mean.ToString("F1"));
+                this.Invoke(new MyDelegateTextboxString(UpdateTextboxCallbackFn), FluorLogLiveStdTextbox, std.ToString("F1"));
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-            FluorLogLiveAverageTextbox.Text = mean.ToString("F1");
-            FluorLogLiveStdTextbox.Text = std.ToString("F1");
+            //reset button
+            try
+            {
+                this.Invoke(new MyDelegateButtonStringColor(ButtonTextColorUpdateCallbackFn), FluorLogThreadHelper.theButton, "Start LOG", System.Drawing.Color.WhiteSmoke);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            //reset scan boolean
+            FluorLogThreadHelper.ShouldBeRunningFlag = false;
         }
 
         //
@@ -6512,119 +6726,6 @@ namespace ArrayDACControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
-
-        //----------------------------------------------------------------------------------
-        // Transfer Cavity Detuner Thread
-        //----------------------------------------------------------------------------------
-
-        private void DetuneButton_Click(object sender, EventArgs e)
-        {
-            /*
-            int scan_range = 1000;
-
-            if (!TransferCavityDetunerThreadHelper.ShouldBeRunningFlag)
-            {
-                TransferCavityDetunerThreadHelper.ShouldBeRunningFlag = true;
-                TransferCavityDetunerThreadHelper.theThread = new Thread(new ThreadStart(TransferCavityDetunerExecute));
-                TransferCavityDetunerThreadHelper.theThread.Name = "Transfer Cavity Detuner thread";
-                TransferCavityDetunerThreadHelper.theThread.Priority = ThreadPriority.Normal;
-                TransferCavityDetunerThreadHelper.pointIndex = 0;
-                TransferCavityDetunerThreadHelper.numScanVar = 1;
-                //get Slider to scan
-                TransferCavityDetunerThreadHelper.theSlider = getSliderfromText("TransferCavity");
-                //get scan parameters and declare data arrays
-                TransferCavityDetunerThreadHelper.min = ;
-                TransferCavityDetunerThreadHelper.max = double.Parse(SliderScanEndValueTextbox.Text);
-                TransferCavityDetunerThreadHelper.numScans = int.Parse(SliderScanPMTAveragingTextbox.Text);
-                TransferCavityDetunerThreadHelper.numPoints = int.Parse(SliderScanNumPointsTextbox.Text);
-                TransferCavityDetunerThreadHelper.theButton = SliderScanStart;
-                
-                //Keep initial slider value
-                TransferCavityDetunerThreadHelper.KeepDoubles = new double[1];
-                TransferCavityDetunerThreadHelper.KeepDoubles[0] = TransferCavityDetunerThreadHelper.theSlider.Value;
-                //modify thread name for file saving
-                TransferCavityDetunerThreadHelper.threadName = TransferCavityDetunerThreadHelper.theSlider.Name;
-
-                if (TransferCavityDetunerThreadHelper.numPoints < 2)
-                {
-                    TransferCavityDetunerThreadHelper.numPoints = 2;
-                    SliderScanNumPointsTextbox.Text = "2";
-                }
-                //get Stream type from combo box
-                TransferCavityDetunerThreadHelper.message = SliderScanComboBox.Text;
-
-                //define dim 2 array for PMT average and PMT sigma, and for Camera Fluorescence Data
-                if (TransferCavityDetunerThreadHelper.message == "PMT")
-                {
-                    TransferCavityDetunerThreadHelper.initDoubleData(TransferCavityDetunerThreadHelper.numPoints, 2, 1);
-                }
-                else
-                {
-                    TransferCavityDetunerThreadHelper.initDoubleData(TransferCavityDetunerThreadHelper.numPoints, 1, 1);
-                    // if camera or correlator is running stop it
-                    StopDataStreams();
-                }
-
-                //start scan thread
-                try
-                {
-                    TransferCavityDetunerThreadHelper.theThread.Start();
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-            }
-            else
-            {
-                TransferCavityDetunerThreadHelper.ShouldBeRunningFlag = false;
-            }
-             */
-        }
-        
-        /*
-        private void TransferCavityDetunerExecute()
-        {
-            //update button
-            SliderScanStart.BackColor = System.Drawing.Color.White;
-            //clear graph
-            CameraForm.ScanResultsGraph.ClearData();
-            //init data stream
-            initializeDataStreams(TransferCavityDetunerThreadHelper);
-
-            //run scans
-            while (TransferCavityDetunerThreadHelper.pointIndex < (TransferCavityDetunerThreadHelper.numPoints) && TransferCavityDetunerThreadHelper.ShouldBeRunningFlag)
-            {
-                //Compute new field values
-                TransferCavityDetunerThreadHelper.DoubleScanVariable[0, TransferCavityDetunerThreadHelper.pointIndex] = (double)(TransferCavityDetunerThreadHelper.min[0] + (TransferCavityDetunerThreadHelper.max[0] - TransferCavityDetunerThreadHelper.min[0]) * TransferCavityDetunerThreadHelper.pointIndex / (TransferCavityDetunerThreadHelper.numPoints - 1));
-                //call to change field value
-                try
-                {
-                    this.Invoke(new MyDelegateThreadHelper(ScanUpdateCallbackFn), TransferCavityDetunerThreadHelper);
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-                //get data
-                getDatafromStream(TransferCavityDetunerThreadHelper);
-                //index++
-                TransferCavityDetunerThreadHelper.pointIndex++;
-            }
-            if (TransferCavityDetunerThreadHelper.ShouldBeRunningFlag && SliderScanSaveCheckbox.Checked)
-            {
-                //save Scan Data
-                SaveScanData(TransferCavityDetunerThreadHelper);
-            }
-            //go back to initial value
-            //reset button
-            try
-            {
-                this.Invoke(new MyDelegateThreadHelper(ScanResetCallbackFn), TransferCavityDetunerThreadHelper);
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-            //reset scan boolean
-            TransferCavityDetunerThreadHelper.ShouldBeRunningFlag = false;
-        }
-        */
-
-
 
     }
 

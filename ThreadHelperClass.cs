@@ -37,6 +37,7 @@ namespace ArrayDACControl
         public bool ShouldBeRunningFlag;
         public bool IsRunningFlag;
         public bool flag;
+        public bool[] KeepBools;
         public double ScanVariableBefore;
         public string message;
         public string message2;
@@ -47,6 +48,7 @@ namespace ArrayDACControl
         public double SingleDouble;
         public double SingleDouble2;
         public double SingleDouble3;
+        public double[] PassedDoubles;
         public double[] KeepDoubles;
         public double KeepNestingDoubles;
         public double[] DoubleArray;
@@ -103,10 +105,20 @@ namespace ArrayDACControl
             KeepDoubles = new double[datalength];
         }
 
+        public void initPassedDoubles(int datalength)
+        {
+            PassedDoubles = new double[datalength];
+        }
+
         public void initTheSliderArray(int datalength)
         {
             theSliderArray = new AdjustableSlider[datalength];
             sliderNames = new string[datalength];
+        }
+
+        public void initKeepBools(int datalength)
+        {
+            KeepBools = new bool[datalength];
         }
 
     };
